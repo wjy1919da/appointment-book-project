@@ -1,0 +1,9 @@
+.user-info {
+    display: flex;
+    width: 100%;
+}
+
+.page-content {
+    display: flex;
+    justify-content: center;
+}

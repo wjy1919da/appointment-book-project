@@ -1,0 +1,78 @@
+.procedure-section-v1-container {
+    width: 100%;
+    background: #EFFAFD;
+    position: relative;
+    padding-bottom: 10px;
+
+    @media (min-width: 576px) {
+        .procedure-section-v1-pic {
+            width: 55.1%;
+            height: 300px;
+            object-fit: cover;
+            margin: 41px 0 86px 9.4%;
+            border-radius: 10px;
+        }
+
+        .procedure-section-v1-card-container {
+            width: 400px;
+            position: absolute;
+            top: 120px;
+            right: 140px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .procedure-section-v1-pic {
+            width: 70%;
+            height: 200px;
+            object-fit: cover;
+            margin: 21px 0 10px 30px;
+            border-radius: 10px;
+        }
+
+        .procedure-section-v1-card-container {
+            width: 350px;
+            margin: 0 auto 46px;
+        }
+    }
+    
+}
+
+.procedure-section-v2-container {
+    width: 100%;
+    background: #ffffff;
+    position: relative;
+    padding-bottom: 10px;
+
+    @media (min-width: 576px) {
+        .procedure-section-v2-pic {
+            width: 55.1%;
+            height: 300px;
+            object-fit: cover;
+            margin: 41px 0 86px 35.3%;
+            border-radius: 10px;
+        }
+
+        .procedure-section-v2-card-container {
+            width: 400px;
+            position: absolute;
+            top: 120px;
+            left: 140px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .procedure-section-v2-pic {
+            width: 70%;
+            height: 200px;
+            object-fit: cover;
+            margin: 21px 30px 10px calc(30% - 30px);
+            border-radius: 10px;
+        }
+
+        .procedure-section-v2-card-container {
+            width: 350px;
+            margin: 0 auto 46px;
+        }
+    }
+}

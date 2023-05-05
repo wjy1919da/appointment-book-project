@@ -1,0 +1,23 @@
+.sub-instrument-photos-container {
+
+    .sub-instrument-photos-title {
+        width: 82%;
+        font-size: 18px;
+        font-weight: 500;
+        color: #00688B;
+        text-transform: uppercase;
+        margin: 10px auto;
+        padding: 0 4%;
+    }
+
+    .sub-instrument-photos-container {
+        width: 74%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .sub-instrument-photos-photo {
+        width: 49%;
+    }
+}

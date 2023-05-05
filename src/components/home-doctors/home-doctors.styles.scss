@@ -1,0 +1,65 @@
+@media (min-width: 576px) {
+    .home-doctors-container {
+        width: 100%;
+        height: 818px;
+        background: url('../../assets/home/home-doctors.png') no-repeat;
+        background-size: cover;
+    
+        .home-title {
+            padding-top: 5%;
+        }
+    
+        .carousel-inner {
+            width: 81%;
+            margin: 0 auto;
+        }
+    
+        .indicator {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            margin: 0 10px;
+            background: #B0B0B0;
+            border: 1.5px solid #B0B0B0;
+        }
+    
+        .indicator.active {
+            background: white;
+            border: 1.5px solid #55A3BA;
+        }
+    
+    }
+}
+
+@media (max-width: 576px) {
+    .home-doctors-container {
+        width: 100%;
+        height: 718px;
+        background: url('../../assets/home/home-doctors.png') no-repeat;
+        background-size: cover;
+    
+        .home-title {
+            padding-top: 5%;
+        }
+    
+        .carousel-inner {
+            width: 81%;
+            margin: 0 auto;
+        }
+    
+        .indicator {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            margin: 0 10px;
+            background: #B0B0B0;
+            border: 1.5px solid #B0B0B0;
+        }
+    
+        .indicator.active {
+            background: white;
+            border: 1.5px solid #55A3BA;
+        }
+    
+    }
+}
