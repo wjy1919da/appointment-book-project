@@ -14,9 +14,8 @@ const Footer = () => {
                 <div className='col-md-4 col-sm-12'>
                     <div className='footer-nav-container'>
                         <p className='footer-nav-title'>
-                            Sitemap
+                            About Us
                         </p>
-                        <hr className='footer-nav-divider'/>
                         <Link className='footer-nav-link' to='/procedure/facial'>
                             Procedures
                         </Link>
@@ -33,7 +32,6 @@ const Footer = () => {
                         <p className='footer-nav-title'>
                             Contact Us
                         </p>
-                        <hr className='footer-nav-divider' />
                         <p className='footer-nav-contact-title'>
                             Address:
                         </p>
@@ -53,7 +51,6 @@ const Footer = () => {
                         <p className='footer-nav-title'>
                             Follow Us
                         </p>
-                        <hr className='footer-nav-divider'/>
                         <a className='social-media-link' href='https://www.instagram.com/charm_life_official/?igshid=YmMyMTA2M2Y%3D' target='_blank' rel='noreferrer'>
                             <img className='social-media-icon' src={Instagram} alt='instagram' />
                         </a>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import './sign-up-form.styles.scss';
 
+
 const defaultFormContent = {
     username: '',
     email: '',
@@ -114,6 +115,7 @@ const SignUpForm = () => {
                     <button className='sign-up-btn' type='submit' >Sign up</button>
                 </div>
             </form>
+
         </div>
     )
 }

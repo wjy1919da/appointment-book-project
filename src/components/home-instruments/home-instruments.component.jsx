@@ -1,19 +1,19 @@
-import { Fragment } from 'react';
 import InstrumentGrid from '../instrument-grid/instrument-grid.component';
-
 import './home-instruments.styles.scss';
+import HomeSection5Titles from './home-section5-titles/home-section5-titles.component';
 
 const HomeInstruments = () => {
     return (
-        <Fragment>
-            <h2 className='home-title'>
-                FEATURED INSTRUMENTS
-            </h2>
-            <hr className='home-divider'/>
-            <div className='home-instrument-container'>
-                    <InstrumentGrid />
+        <div className = 'home-section-container'>
+            <div className = 'home-instrument-container'>
+                <HomeSection5Titles heading="Popular Cosmetic Procedures" link = "View All Procedures"/>
+                <InstrumentGrid names={['botox-injections', 'breast-augmentation','chemical-peels','lip-augmentation','teeth-whitening','fox-eyes','laser-hair-removal']} option="procedure" />
             </div>
-        </Fragment>
+            <div className = 'home-instrument-container'>
+                <HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />
+                <InstrumentGrid names={['thermage', 'inmode', 'coolsculpting', 'fraxel-laser']} option="instrument" />
+            </div>
+        </div>   
     )
 }
 

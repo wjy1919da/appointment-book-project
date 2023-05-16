@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import { Form, Button } from 'react-bootstrap';
 
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
@@ -13,6 +14,7 @@ import { useState } from 'react';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 
 const Header = () => {
+    const loginIcon = require('../../assets/home/login-icon.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
@@ -41,7 +43,7 @@ const Header = () => {
             <Navbar className='header-navbar' expand="lg" expanded={expanded}>
                 <Container>
                     <Link className='header-logo-container' to='/'>
-                        <img className='logo' src={Logo} alt='logo' />
+                        {/* <img className='logo' src={Logo} alt='logo' /> */}
                     </Link>
                     <Navbar.Toggle className='toggle-button' aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : 'expanded')}/>
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -85,7 +87,7 @@ const Header = () => {
                 </Link>
                 <div className='header-nav-container' id='#navbarTogglerDemo02'>
                     <span className='dropdown-center'>
-                        <Link className='header-nav-link' data-bs-toggle='dropdown disabled' aria-expanded='false'>
+                        <Link className='header-nav-link1' data-bs-toggle='dropdown disabled' aria-expanded='false'>
                             Procedure
                         </Link>
                         <ul className='dropdown-menu'>
@@ -93,21 +95,26 @@ const Header = () => {
                         </ul>
                     </span>
                     <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link' to='/doctor'>
+                    <Link className='header-nav-link2' to='/doctor'>
                         Doctors
                     </Link>
                     <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link' to='/instrument'>
+                    <Link className='header-nav-link3' to='/instrument'>
                         Instruments
                     </Link>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link' to='/sign-in'>
-                        <b>Sign in</b>
-                    </Link>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link' to='/user-info'>
-                        <b>username</b>
-                    </Link>
+                    
+                </div>
+                <div className='header-login'>
+                    {/* <div className="header-search">
+                        <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                        </input>
+                    </div> */}
+                    <div className="header-login-logo">
+                        <img src={loginIcon} alt="login Image" ></img>
+                    </div>
+                    <div className="header-login-text">
+                        <p>login</p>
+                    </div>
                 </div>
             </div>
             <Outlet />

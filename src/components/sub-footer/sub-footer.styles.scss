@@ -1,8 +1,13 @@
 .sub-footer-container {
-    text-align: center;
-    background: rgba($color: #51A3BF, $alpha: 0.06);
-    padding: 53px 0 33px;
-    width: 100%;
+   
+    height: 365px;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    
+    /* 深巧 */
+    
+    background: #352C29;
 
     @media (min-width: 768px) {
         .sub-footer-title {
