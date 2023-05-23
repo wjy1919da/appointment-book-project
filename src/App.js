@@ -11,6 +11,7 @@ import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
+import DoctorSearch from './components/doctor-search/doctor-search.component';
 // do I need to add it into routes?
 
 const App = () => {
@@ -24,9 +25,11 @@ const App = () => {
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
         <Route path='doctor' element={<Doctor />} />
+        <Route path='doctor-search' element={<DoctorSearch />} />
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
+        
 
         <Route path='user-info' element={<UserInfo />} />
       </Route>

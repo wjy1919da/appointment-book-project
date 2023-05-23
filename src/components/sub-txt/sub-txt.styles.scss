@@ -2,22 +2,57 @@
     margin: 40px 0;
 
     .sub-txt-title {
-        width: 82%;
-        background: rgba($color: #51A3BF, $alpha: 0.06);
-        font-size: 16px;
-        font-weight: 600;
-        color: #00688B;
-        margin: auto;
-        padding: 5px 4%;
+        width: 500px;
+        height: 32px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        /* Heading 4 */
+
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 135%;
+        /* or 32px */
+
+        display: flex;
+        align-items: center;
+
+        color: #000000;
+
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 0;
+        flex-grow: 0;
     }
     
     .sub-txt-text {
-        width: 73.8%;
-        font-size: 14px;
+        width: 800px;
+        height: 87px;
+        
+        /* Body 2
+        
+        Playfair Display
+        */
+        font-family: 'Lora';
+        font-style: normal;
         font-weight: 500;
-        color: #333333;
-        line-height: 30px;
-        margin: 10px auto;
-        white-space: pre-line;
+        font-size: 19px;
+        line-height: 160%;
+        /* or 29px */
+        
+        
+        color: #000000;
+        
+        
+        /* Inside auto layout */
+        
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
     }
 }

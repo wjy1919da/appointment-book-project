@@ -1,16 +1,20 @@
-import SearchIcon from '../../assets/doctor/doctor-search-icon.png';
-
 import './doctor-search.styles.scss';
+import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-const DoctorSearch = ({ q, setQ, setKeywords, setPage, setPageFilterParam }) => {
+const DoctorSearch = () => {
+    const [searchParams] = useSearchParams();
+    const [keywords, setKeywords] = useState("");
+    const [city, setCity] = useState("");
+
+    useEffect(() => {
+        setKeywords(searchParams.get('searchCondition'));
+        setCity(searchParams.get('city'));
+    }, [searchParams]);
+
     return (
         <div className="doctor-search-container">
-            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-            <input type='search' 
-                   className='doctor-search-text' 
-                   placeholder='Search for the keyword'
-                   value={q}
-                   onChange={(e) => {setQ(e.target.value); setKeywords(e.target.value); setPage(1); setPageFilterParam(1);}}/>
+            Search Condition: {keywords}, City: {city}  
         </div>
     )
 }
