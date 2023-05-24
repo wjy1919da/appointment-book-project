@@ -1,77 +1,42 @@
 .home {
     width: 100%;
-    background:white;
-    position: absolute;
-    width: 1440px;
     height: 800px;
-    left: 0px;
-    // top: 30px;
+    background:white;
+    display: flex;
+    justify-content: space-between;
     position: relative;
-
-
-    .home-pic {
-        position: absolute;
-        width: 654px;
-        height: 800px;
-        left: 786px;
-        top: 0;
-        margin-top: 70px;
-        background: url('../../assets/home/home-pic1.png');
-        border-radius: 0px 0px 0px 1000px;
-        
-        
-    }
+    margin-top: 64px;
 
     @media (min-width: 768px) {
-        .home-title-container {
-            width: 1440px;
+        .home-pic {
+            position: absolute;
+            width: 654px;
             height: 800px;
-            left: 0px;
-            top: 64px;
-            text-align: left;
-            object-fit: cover;
-            .home-title-text
-            {
+            right: 0;
+            top: 0;
+            background: url('../../assets/home/home-pic1.png');
+            border-radius: 0px 0px 0px 1000px;
+        }
+
+        .home-title-container {
+
+            .home-title-text {
                 text-align: left;
                 display: flex;
                 flex-direction: column;
                 position:absolute;
                 left: 40px;
-                top:160px;
-                margin-top: 70px;
-                
-                .home-title-text1
-                {
-                    
-                    font-family: 'Playfair Display';
-                    font-style: normal;
-                    font-weight: 700;
-                    // width: 643px;
-                    // height: 97px;
-                    font-size: 72px;
-                    line-height: 135%;
-                    color: #000000;
-                    flex: none;
-                    order: 0;
-                    flex-grow: 0;
-                
-                }
-                .home-title-text2
-                {
-                    font-family: 'Playfair Display';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 72px;
-                    line-height: 135%;
-                    color: #000000;
-                    // width: 703px;
-                    // height: 97px;
-                    flex: none;
-                    order: 1;
-                    flex-grow: 0;
-                    
-                }
+                top: 160px;
+                font-family: 'Playfair Display';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 72px;
+                line-height: 135%;
+                color: #000000;
+                flex: none;
+                flex-grow: 0;
             }
+            
             .home-title-subText
             {
                 position: absolute;
@@ -79,7 +44,6 @@
                 height: 116px;
                 left: 48px;
                 top: 402px;
-                margin-top: 70px;
                 
                 .pText{
                     font-family: 'Lora';
@@ -90,7 +54,7 @@
                     color: #000000;
                 }
             }
-            .home-title-button
+            .home-title-buttons
             {
                 position: absolute;     
                 flex: none;
@@ -131,15 +95,17 @@
                 font-weight: 600;
                 font-size: 22px;
                 line-height: 140%;
-                color: #352C29;
                 margin-right: 10px;
+                border: 2px solid #352C29;
+
                 .button-text {
                     margin-left: 20px;
                 }
                 .button-image {
                     width: 17px; /* Adjust the width and height as needed */
                     height: 17px;
-                  }
+                    margin-bottom: 4px;
+                }
             }
             
             }

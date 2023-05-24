@@ -1,17 +1,14 @@
 .Home-post
 {
     width: 100%;
-    background:white;
-    position: relative;
-    width: 1440px;
     height: 800px;
-    left: 0px;
-    // top: 30px;
+    background:white;
     display: flex;
     flex-direction: row;
+    position: relative;
+
     .home-post-pic
     {
-        order: 0;
         width: 560px;
         height:800px;
         left: 0px;
@@ -92,7 +89,7 @@
             left:800px;
             height: 64px;
             .home-post-text1{
-                width:800px;
+                width: max-content;
                 font-family: 'Playfair Display';
                 font-style: normal;
                 font-weight: 700;

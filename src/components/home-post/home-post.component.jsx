@@ -1,6 +1,3 @@
-import ConsultingIcon from '../../assets/home/consulting-icon.gif';
-import SharingIcon from '../../assets/home/sharing-icon.gif';
-import SavingIcon from '../../assets/home/saving-icon.gif';
 import PostContainer from '../../assets/home/post-container.png';
 import Decoration from '../../assets/home/decoration-post.png';
 import vector from '../../assets/home/Vector.png'
@@ -37,7 +34,7 @@ const HomePost = () => {
                 <div className='home-post-link'>
                     {/* <span className="underline-link">View More Posts</span> */}
                     <HomeLink title="View More Posts" href="/procedure/facial-rejuvenation"/>
-                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"5px",marginLeft:"-40px"}}></img>
+                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"-40px"}}></img>
                     
                 </div>
             </div>

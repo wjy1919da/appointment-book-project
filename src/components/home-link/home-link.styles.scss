@@ -21,6 +21,11 @@
     order: 0;
     flex-grow: 0;
 
+    text-decoration: none;
+}
+
+.home-link:hover {
     /* Add underline */
     text-decoration: underline;
+    color: #352C29;
 }

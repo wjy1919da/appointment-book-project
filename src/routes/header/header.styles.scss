@@ -17,7 +17,7 @@
         z-index: 999;
         position:fixed;
         align-items: center;
-        
+
     
         .header-logo-container {
             order:0;
@@ -145,7 +145,7 @@
         .dropdown-center:hover .dropdown-menu {
             display: block;
             position: absolute;
-            right: -710px;
+            left: 0;
             top: 32px;
             animation: fadeIn;
             animation-duration: 0.6s;
@@ -305,8 +305,9 @@
     
         .dropdown-center:hover .dropdown-menu {
             display: block;
+            width: max-content;
             position: absolute;
-            right: -710px;
+            left: 0;
             top: 32px;
             animation: fadeIn;
             animation-duration: 0.6s;
