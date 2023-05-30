@@ -1,0 +1,12 @@
+.my-appointments {
+  display: flex;
+  flex-direction: column;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+  justify-content: space-between;
+  margin-left: 100px;
+}

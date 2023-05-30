@@ -1,0 +1,42 @@
+.benefit-card-container {
+    text-align: center;
+
+    @media (min-width: 768px) {
+        .benefit-card-icon {
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .benefit-card-icon {
+            width: 20%;
+        }
+    }
+
+    .benefit-card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333333;
+        text-transform: uppercase;
+        text-transform: uppercase;
+        margin: 23px 10px 0;
+    }
+
+    .benefit-card-divider {
+        width: 13%;
+        height: 2px;
+        background: #51A3BF;
+        opacity: 1;
+        border-radius: 2px;
+        border: 0;
+        margin: 10px auto;
+    }
+
+    .benefit-card-content {
+        width: 90%;
+        font-size: 12px;
+        font-weight: 500;
+        color: #666666;
+        margin: 0 auto 50px;
+    }
+}

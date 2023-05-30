@@ -1,0 +1,101 @@
+.sub-instrument-container {
+    position: absolute;
+    top: 42px;
+    position: relative;
+
+    .sub-instrument-pic {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        opacity: 0.7;
+    }
+
+    @media (min-width: 768px) {
+        .sub-instrument-title-container {
+            position: absolute;
+            top: 180px;
+            left: 9.5%;
+            opacity: 1;
+            z-index: 1;
+    
+            .sub-instrument-title-text {
+                line-height: 60px;
+                text-transform: capitalize;
+                font-size: 50px;
+                font-family: 'Merienda', cursive, sans-serif;
+                font-weight: 900;
+                color: #3397B9;
+                text-transform: capitalize;
+                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+            }
+    
+            .sub-instrument-title-button-link {
+                text-decoration: none;
+            }
+    
+            .sub-instrument-title-button-container {
+                width: 200px;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .sub-instrument-title-container {
+            position: absolute;
+            top: 180px;
+            opacity: 1;
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+    
+            .sub-instrument-title-text {
+                line-height: 60px;
+                font-size: 45px;
+                font-family: 'Merienda', cursive, sans-serif;
+                font-weight: 900;
+                color: #3397B9;
+                text-transform: capitalize;
+                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+            }
+    
+            .sub-instrument-title-button-link {
+                text-decoration: none;
+            }
+    
+            .sub-instrument-title-button-container {
+                width: 200px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sub-instrument-title-container {
+            position: absolute;
+            top: 180px;
+            opacity: 1;
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+    
+            .sub-instrument-title-text {
+                line-height: 60px;
+                font-size: 45px;
+                font-family: 'Merienda', cursive, sans-serif;
+                font-weight: 900;
+                color: #3397B9;
+                text-transform: capitalize;
+                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+            }
+    
+            .sub-instrument-title-button-link {
+                text-decoration: none;
+            }
+    
+            .sub-instrument-title-button-container {
+                width: 200px;
+                margin: 0 auto;
+            }
+        }
+    }
+}

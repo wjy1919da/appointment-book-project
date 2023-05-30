@@ -1,66 +1,187 @@
+
+import axios from 'axios';
+import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
-// import { getData } from '../../utils/apiService.js';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import HomeButton from '../../components/home-button/home-button.component';
+import DoctorSearch from '../../components/doctor-search/doctor-search.component';
+import DoctorFilterLocation from '../../components/doctor-filter/doctor-filter-location.component';
+import DoctorFilterField from '../../components/doctor-filter/doctor-filter-field.component';
+import { useState } from 'react';
+import DoctorSearchName from './../../components/doctor-search-name/doctor-search-name.component';
+import DoctorSearchPopup from '../../components/doctor-search-popup/doctor-search-popup.component';
+import { useRef, useEffect } from 'react';
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import HomeTitle from '../../components/home-title/home-title.component';
+import DoctorSearchBackground from '../../assets/doctor/doctor-search-background.png';
+import DoctorSearchPhone from '../../assets/doctor/doctor-search-phone.png';
+import DoctorSearchButton from '../../components/doctor-search-button/doctor-search-button.component';
+import { useSearchDoctors, useSearchSpecialization, useSearchLocation,useSearchMultiConditions,useSearchMultiConditionsPopUp } from '../../hooks/useSearchDoctors';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
+import Modal from 'react-bootstrap/Modal';
 const Doctor = () => {
-  const [searchCondition, setSearchCondition] = useState('');
-  const [city, setCity] = useState('');
-  const navigate = useNavigate();
+  const [q, setQ] = useState([]);
+  const [location, setLocation] = useState([]);
+  const [field, setField] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [searchResults, setSearchResults] = useState([]);
+  const [searchClick,setSearchClick] = useState(false);
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSpecializationOpen, setIsSpecializationOpen] = useState(false);
+  const [isNameOpen, setIsNameOpen] = useState(false);
+
+  const searchRef = useRef();
+  const specializationRef = useRef();
+  const nameRef = useRef();
+  const { isLoading, data, error, refetch } = useSearchMultiConditions(location,field,q);
+  // const { 
+  //   isLoading, 
+  //   data, 
+  //   error, 
+  //   refetch,
+  //   isFetchingNextPage,
+  //   fetchNextPage,
+  //   hasNextPage 
+  //  } = useSearchMultiConditionsPopUp();
+  // const {isLoading,data,error} = useSearchMultiConditionsPopUp();
   
-  const handleSearch = async () => {
-      if (!searchCondition) {
-          alert('input can not be empty');
-          return;
-      }
-      if (!city) {
-          alert('city can not be empty');
-          return;
-      }
-      
-      try {
-       
-        
-        // 搜索不到信息也是200 成功，页面显示找到0个结果
-        // 登录状态管理
-        
-        // 后台异常
-        // const response = await getData(
-        //   'https://run.mocky.io/v3/1ed0be25-97e5-416f-8404-53a1cb71a69d', 
-        //   { searchCondition, city }
-        // );
-        // console.log(response);
-        // if(response.status !== 200){
-        //    // 显示错误信息:404,505....
-        //     console.log(response.status);
-        // }
-      } catch (error) {
-        if(error.response.status){
-          // 前台处理错误 弹出错误信息
-          alert(error.response.status);
-        }
-    }
-     
+  
+  const closeAllDropdowns = () => {
+    setIsModalOpen(false);
+    setIsSearchOpen(false);
+    setIsSpecializationOpen(false);
+    setIsNameOpen(false);
   };
+
+  const handleButtonClick = () => {
+    if (!q && !location && !field) {
+      alert("Error: All parameters are empty. Please enter at least one parameter.");
+    } else {
+      setIsModalOpen(true);
+      console.log("Modal Opened",isModalOpen);
+      refetch()
+    }
+  };
+  const modalRef = useRef();
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        !modalRef.current?.contains(event.target) &&
+        !searchRef.current?.contains(event.target) &&
+        !specializationRef.current?.contains(event.target)&&
+        !nameRef.current?.contains(event.target)
+      ) {
+          closeAllDropdowns();
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      window.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   return (
-     <div>
-           <input
-              type="text"
-              placeholder="search treatment or doctor"
-              value={searchCondition}
-              onChange={(e) => setSearchCondition(e.target.value)}
-          />
-          <input
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-          />
-          <HomeButton title="search" onClick={handleSearch} />
-     </div> 
-  )
+    <div className='doctor-container animate__animated animate__fadeIn'>
+      {error ? (
+        <h2>Error: {error.message}</h2>
+      ) : (
+        <div>
+          <div className='doctor-search-outer-container'>
+            <div className='doctor-search-header-container'>
+                 <div className='doctor-search-header-title-container'>
+                    <HomeTitle title='Find the Right Doctor
+                                        At Your Fingertip' />
+                 </div>
+                 <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
+                      {<img src={DoctorSearchBackground} alt='doctor-search-background' className='doctor-search-header-pic'></img>}
+                      {<img src={DoctorSearchPhone} alt='doctor-search-phone' className='doctor-search-header-phone-pic'></img>}
+                 </div>
+            </div>
+              <div className='doctor-search-search-bar-outer-container'>
+                    <InputGroup className="mb-3">
+                      <div className='doctor-input-container'>
+                          <DoctorSearch 
+                              q={location} 
+                              setQ={setLocation} 
+                              title = "ZIP or City, State"
+                              searchF = {useSearchLocation}
+                              setIsSearchOpen={setIsSearchOpen} 
+                              isSearchOpen={isSearchOpen}
+                              closeOthers={() => {
+                                setIsSpecializationOpen(false);
+                                setIsNameOpen(false);
+                                setIsModalOpen(false);
+                              }} 
+                              ref={searchRef}
+                            />
+                      </div>
+                      <div className='doctor-input-container'>
+                          <DoctorSearchName 
+                            q={field} 
+                            setQ={setField} 
+                            title = "Specialization"
+                            searchF = {useSearchSpecialization}
+                            setIsNameOpen={setIsSpecializationOpen} 
+                            isNameOpen={isSpecializationOpen}
+                            closeOthers={() => {
+                              setIsSearchOpen(false);
+                              setIsNameOpen(false);
+                              setIsModalOpen(false);
+                            }} 
+                            ref={specializationRef}
+                          />
+                      </div>
+                      <div className='doctor-input-container'>
+                          <DoctorSearchName 
+                            q={q} 
+                            setQ={setQ} 
+                            title = "Doctor Name"
+                            searchF = {useSearchDoctors}
+                            setIsNameOpen={setIsNameOpen} 
+                            isNameOpen={isNameOpen}
+                            closeOthers={() => {
+                              setIsSearchOpen(false);
+                              setIsSpecializationOpen(false);
+                              setIsModalOpen(false);
+                            }} 
+                            ref={nameRef}
+                          />
+                      </div>
+                      <DoctorSearchButton title = "search" onClick={handleButtonClick} />
+                    </InputGroup>
+                </div>
+            
+          </div>
+          {isLoading ? (
+            <div className="spinner-container">
+              <div className="d-flex justify-content-center">
+                <div className="spinner-grow" role="status"></div>
+              </div>
+              <div className="spinner-text">Loading...</div>
+            </div>
+          ) : isModalOpen && data && (
+            <div ref={modalRef}> 
+              <DoctorSearchPopup 
+                  name={q} 
+                  field={field} 
+                  location={location} 
+                  searchResults={data.result} 
+                  show={isModalOpen}
+                  onHide={() => setIsModalOpen(false)}
+               />
+            </div>
+          )}
+          <Footer />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Doctor;

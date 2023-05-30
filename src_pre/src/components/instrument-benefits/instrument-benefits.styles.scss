@@ -1,0 +1,62 @@
+.instrument-benefits-container {
+    width: 100%;
+    text-align: center;
+    background: #EFFAFD;
+    padding: 43px 0;
+    margin: 33px 0 0;
+    
+
+    .instrument-benefits-title {
+        font-size: 30px;
+        font-weight: 600;
+        color: #333333;
+        text-transform: uppercase;
+    }
+
+    .instrument-benefits-divider {
+        width: 6.2%;
+        height: 3px;
+        background: #3397B9;
+        opacity: 1;
+        border: 0;
+        border-radius: 3px;
+        margin: 23px auto 43px;
+    }
+
+    @media (min-width: 768px) {
+        .instrument-benefits-cards {
+            width: 80.6%;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .instrument-benefits-cards {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .instrument-benefits-title {
+            width: 80%;
+            font-size: 30px;
+            font-weight: 600;
+            color: #333333;
+            text-transform: uppercase;
+            margin: 0 auto;
+        }
+
+        .instrument-benefits-divider {
+            width: 10%;
+            height: 3px;
+            background: #3397B9;
+            opacity: 1;
+            border: 0;
+            border-radius: 3px;
+            margin: 13px auto 33px;
+        }
+    }
+    
+}

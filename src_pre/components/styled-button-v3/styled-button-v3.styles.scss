@@ -1,0 +1,14 @@
+.styled-button-v3-container {
+    text-align: center;
+    background: linear-gradient(90deg, #B89ECA, #3397B9); 
+    border-radius: 34px; 
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 40px;
+    text-transform: uppercase;
+}
+
+.styled-button-v3-container:hover {
+    filter: brightness(1.1);
+}

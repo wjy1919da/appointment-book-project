@@ -1,0 +1,39 @@
+.procedure-section-card-container {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 35px 0px rgba(216,216,216,0.51);
+    text-align: center;
+    padding: 30px 5px;
+    border-radius: 10px;
+
+    @media (min-width: 576px) {
+        .procedure-section-card-title {
+            font-size: 50px;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            color: #333333;
+            line-height: 70px;
+            text-transform: uppercase;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .procedure-section-card-title {
+            font-size: 45px;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            color: #333333;
+            line-height: 70px;
+            text-transform: uppercase;
+        }
+    }
+
+    .procedure-section-card-btn-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .procedure-section-card-btn {
+        margin: 0 auto;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,25 @@
+.doctor-search-button{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 140%;
+    color: #FFFFFF;
+    width: 176px;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    background: #352C29;
+    border-radius: 8px;
+    display: flex; 
+}
+.doctor-search-icon {
+    left: 12.5%;
+    right: 12.5%;
+    top: 12.5%;
+    bottom: 12.5%;
+    //border: 2.4px solid #FFFFFF;
+    width: 15px; /* 或其他你希望的尺寸 */
+    height: 15px; /* 或其他你希望的尺寸 */
+    margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+}

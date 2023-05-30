@@ -1,0 +1,59 @@
+.home-procedure-card {
+    width: 200px;
+    height: 310px;
+    margin: 15px auto;
+    border: 0;
+    background-color: transparent;
+
+    .home-procedure-card-link {
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+
+    .card-pic {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 5px 15px 15px 0 rgba(216,216,216,0.8);
+    }
+
+    @media (min-width: 576px) {
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333333;
+            line-height: 65px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            line-height: 50px;
+            padding-top: 5px;
+        }
+    }
+    
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.home-procedure-card:hover {
+    animation-name: pulse;
+    animation-duration: 2s;
+
+    .card-title {
+        color: #3397B9;
+    }
+}
