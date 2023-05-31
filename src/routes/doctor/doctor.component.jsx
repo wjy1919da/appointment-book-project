@@ -19,8 +19,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-
 import Modal from 'react-bootstrap/Modal';
+import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.component';
+import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
 const Doctor = () => {
   const [q, setQ] = useState([]);
   const [location, setLocation] = useState([]);
@@ -50,7 +51,6 @@ const Doctor = () => {
   
   
   const closeAllDropdowns = () => {
-    setIsModalOpen(false);
     setIsSearchOpen(false);
     setIsSpecializationOpen(false);
     setIsNameOpen(false);
@@ -156,7 +156,10 @@ const Doctor = () => {
                       <DoctorSearchButton title = "search" onClick={handleButtonClick} />
                     </InputGroup>
                 </div>
-            
+               <div className='doctor-intro-container'>
+                  <IntroDoctor />
+               </div>
+             <FeatureDoctor />
           </div>
           {isLoading ? (
             <div className="spinner-container">
@@ -177,6 +180,7 @@ const Doctor = () => {
                />
             </div>
           )}
+          
           <Footer />
         </div>
       )}

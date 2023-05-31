@@ -130,7 +130,7 @@ export function useSearchMultiConditions(location, specialization, doctorName){
 
 export function useSearchMultiConditionsPopUp(location, specialization, doctorName) {
   const fetchAllCondition = () => {
-    return axios.get(base.multiConditionPagingUrl, {
+    return axios.get(base.multiConditionSearchUrl, {
       params: {
         location: location !== "all" ? location : undefined, 
         specialization: specialization !== "all" ? specialization : undefined,
@@ -142,6 +142,7 @@ export function useSearchMultiConditionsPopUp(location, specialization, doctorNa
       return res.data;
     });
   };
+  return useQuery('doctors', fetchAllCondition, { enabled: false });
 
   // return useInfiniteQuery('doctors', fetchAllCondition, {
   //   enabled: false,
@@ -150,29 +151,7 @@ export function useSearchMultiConditionsPopUp(location, specialization, doctorNa
   //     }
   //    }
   // );
-  // Split data into pages
-  const [page, setPage] = useState(1);
-  const data = fetchAllCondition();
-  const pageSize = 10; // Set the number of items per page
-  const pages = [];
-  for (let i = 0; i < data.length; i += pageSize) {
-    pages.push(data.slice(i, i + pageSize));
-  }
-
-  // Function to get next page
-  const fetchNextPage = () => {
-    if (page < pages.length) {
-      setPage(page + 1);
-      return pages[page];
-    } else {
-      return null;  // No more pages
-    }
-  };
-  return {
-    data: pages[0],
-    fetchNextPage,
-    hasNextPage: page < pages.length
-  };
+ 
 
 
 }

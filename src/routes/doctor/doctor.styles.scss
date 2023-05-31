@@ -13,12 +13,13 @@
     background: #FBFCFF;
     display: flex;
     flex-direction: column;
-    padding:0px 50px;
+    
     .doctor-search-header-container{
         width: 100%;
         height: 400px;
         display: flex;
         flex-direction: row;
+        padding:0px 50px;
         .doctor-search-header-title-container{
             width:50%;
             height: 100%;
@@ -53,6 +54,11 @@
         }
     }
     
+}
+.doctor-intro-container{
+    width:100%;
+    display: flex;
+    flex-direction: row;
 }
 .doctor-search-search-bar-outer-container{
     width:100%;

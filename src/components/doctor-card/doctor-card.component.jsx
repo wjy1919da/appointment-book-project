@@ -19,7 +19,7 @@ const DoctorCard = () => {
                 </span>
                 <span className='search-card-text '>
                     <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
-                    Specialization in Field Field
+                    Specialization in Field
                 </span>
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>

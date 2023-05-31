@@ -59,8 +59,35 @@
     flex-grow: 1;
 
 }
+.form-floating {
+    position: relative;
+}
+
+.form-floating > .form-label {
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+    padding: .375rem 0;
+    transition: all 200ms;
+    opacity: 0.6;
+    pointer-events: none; /* To ensure the label doesn't interfere with the input */
+    font-size: 0.65rem; /* Default font size */
+}
+
+.form-floating > .form-control {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem; /* As Bootstrap's floating label design has more padding at the bottom */
+}
+
+.form-floating > .form-control:focus + .form-label,
+.form-floating > .form-control:not(:placeholder-shown) + .form-label {
+    padding-top: .3rem;
+    padding-bottom: 0; /* Same here, reduce padding at the bottom */
+    font-size: .5rem; /* Smaller font size when input is focused or has value */
+    opacity: 1;
+}
 .custom-form-control {
-    height: 58px;
+    height: 56px !important;
     border-radius: 0px;
 }
-// doctor search part
+

@@ -58,7 +58,7 @@
 .doctor-search-input-frame{
     width: 100%;
     display: flex;
-    padding: 0px 20px;
+    padding: 0px 118px;
     align-items: center;
     justify-content: center; /* 水平居中 */
     margin-top:30px;
@@ -104,6 +104,7 @@
 }
 .doctor-search-grid-container{
     margin-bottom: 40px;
+    padding:0px 25px;
     
 }
 .form-control:focus {
@@ -112,4 +113,31 @@
 }
 .doctor-search-modals .modal-dialog {
     width: 1200px !important; // Adding !important to override other styles
+}
+// input bar
+.form-floating {
+    position: relative;
+}
+
+.form-floating > .form-label {
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+    padding: .375rem 0;
+    transition: all 200ms;
+    opacity: 0.6;
+    pointer-events: none; /* To ensure the label doesn't interfere with the input */
+}
+
+.form-floating > .form-control {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem; /* As Bootstrap's floating label design has more padding at the bottom */
+}
+
+.form-floating > .form-control:focus + .form-label,
+.form-floating > .form-control:not(:placeholder-shown) + .form-label {
+    padding-top: .3rem;
+    padding-bottom: 0; /* Same here, reduce padding at the bottom */
+    font-size: .75rem;
+    opacity: 1;
 }

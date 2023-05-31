@@ -58,16 +58,20 @@ const DoctorSearch = forwardRef(({ q,setQ, title, searchF,setIsSearchOpen,isSear
 
   return (
     <div ref={ref}>
-      <Form.Control
-        className="custom-form-control"
-        type="text"
-        class="form-control"
-        placeholder={title}
-        value={q}
-        onClick={toggle}
-        onChange={handleInputChange}
-        onKeyDown={handleEnterPress}
-       />
+      <Form.Group controlId="formBasicEmail" className="form-floating">
+        <Form.Label htmlFor="floatingInput">{title}</Form.Label>
+        <Form.Control
+          className="custom-form-control"
+          type="text"
+          class="form-control"
+          id="floatingInput"
+         // placeholder={title}
+          value={q}
+          onClick={toggle}
+          onChange={handleInputChange}
+          onKeyDown={handleEnterPress}
+        />
+      </Form.Group>
       {isSearchOpen  && (
         data && <SearchResult data={data.result} onClick={handleOnClick} isLoading={isLoading}/>
       )}

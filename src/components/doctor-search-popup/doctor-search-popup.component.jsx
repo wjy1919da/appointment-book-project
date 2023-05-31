@@ -27,12 +27,13 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
   //   hasNextPage 
   // } = useSearchMultiConditionsPopUp();
   // const {isLoading,data,error} = useSearchMultiConditionsPopUp();
-  const { isLoading, data, error, refetch } = useSearchMultiConditions(internalLocation,internalField,internalName);
+  const { isLoading, data, error, refetch } = useSearchMultiConditionsPopUp(internalLocation,internalField,internalName);
   
   useEffect(() => {
       if (data) {
           // setFetchedDoctorCount(data.pages.reduce((acc, page) => acc + page.results.length, 0));
           setInternalResults(data.result);
+          console.log("data refresh ",internalResults);
       }
   }, [data]);
   
@@ -45,7 +46,7 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
             field: internalField,
             name: internalName
         });
-        console.log("button clicked");
+        console.log("button clicked",internalLocation,internalField,internalName); 
       }
   };
   const handleNameChange = (event) => {
@@ -75,26 +76,36 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
            >
          <div className='doctor-search-input-frame'>
             <InputGroup className="mb-3">
+              <Form.Group className="form-floating">
+                 <Form.Label htmlFor="floatingInput">ZIP or City, State</Form.Label>
+                 <Form.Control 
+                        aria-label="Location"
+                        //placeholder={internalLocation}
+                        value={internalLocation}
+                        onChange={handleLocationChange} 
+                 />
+              </Form.Group>
+              <Form.Group className="form-floating">
+                    <Form.Label htmlFor="floatingInput">Field</Form.Label>
+                    <Form.Control 
+                        aria-label="Field"
+                        //placeholder={internalField}
+                        value={internalField}
+                        onChange={handleFieldChange} 
+                    />
+              </Form.Group>
+             <Form.Group className="form-floating">
+                <Form.Label htmlFor="floatingInput">Name</Form.Label>
                 <Form.Control 
-                    aria-label="Location"
-                    placeholder={internalLocation}
-                    value={internalLocation}
-                    onChange={handleLocationChange} 
+                        aria-label="Name"
+                       // placeholder={internalName}
+                        value={internalName}
+                        onChange={handleNameChange} 
                 />
-                <Form.Control 
-                    aria-label="Field"
-                    placeholder={internalField}
-                    value={internalField}
-                    onChange={handleFieldChange} 
-                />
-                <Form.Control 
-                    aria-label="Name"
-                    placeholder={internalName}
-                    value={internalName}
-                    onChange={handleNameChange} 
-                />
-                <DoctorSearchButton title='Search' onClick={handleOnClick} />
-            </InputGroup>
+             </Form.Group>
+               
+             <DoctorSearchButton title='Search' onClick={handleOnClick} />
+           </InputGroup>
           </div>
           <div className='doctor-search-grid-container'>
               <SimpleGrid columns={3} spacing={10}>
