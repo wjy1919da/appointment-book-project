@@ -20,7 +20,7 @@ function SearchResult({data,onClick,isLoading}){
   )
 }
 const DoctorSearchName = forwardRef(({ q, setQ, title, searchF,setIsNameOpen, isNameOpen, closeOthers },ref) => {
-    const {data, isLoading, error} = searchF(q);
+    //const {data, isLoading, error} = searchF(q);
 
     const toggle = () => {
       setIsNameOpen(!isNameOpen);
@@ -43,10 +43,10 @@ const DoctorSearchName = forwardRef(({ q, setQ, title, searchF,setIsNameOpen, is
     return (
       <div ref={ref}>
         <Form.Group className="form-floating">
-            <Form.Label htmlFor="floatingInput">{title}</Form.Label>
+            <Form.Label>{title}</Form.Label>
             <Form.Control
               className="custom-form-control"
-              id="floatingInput"
+              Id="floatingInput"
               //placeholder={title}
               type="text" 
               class="form-control"
@@ -56,8 +56,8 @@ const DoctorSearchName = forwardRef(({ q, setQ, title, searchF,setIsNameOpen, is
               onKeyDown={handleEnterPress}
             />
         </Form.Group>
-        {isNameOpen && (data && <SearchResult data={data.result} onClick={handleOnClick} isLoading={isLoading}/>
-         )}
+        {/* {isNameOpen && (data && <SearchResult data={data.result} onClick={handleOnClick} isLoading={isLoading}/>
+         )} */}
       </div>
     )
 });

@@ -79,6 +79,7 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
               <Form.Group className="form-floating">
                  <Form.Label htmlFor="floatingInput">ZIP or City, State</Form.Label>
                  <Form.Control 
+                        className="custom-form-control"
                         aria-label="Location"
                         //placeholder={internalLocation}
                         value={internalLocation}
@@ -88,6 +89,7 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
               <Form.Group className="form-floating">
                     <Form.Label htmlFor="floatingInput">Field</Form.Label>
                     <Form.Control 
+                        className="custom-form-control"
                         aria-label="Field"
                         //placeholder={internalField}
                         value={internalField}
@@ -97,6 +99,7 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
              <Form.Group className="form-floating">
                 <Form.Label htmlFor="floatingInput">Name</Form.Label>
                 <Form.Control 
+                        className="custom-form-control"
                         aria-label="Name"
                        // placeholder={internalName}
                         value={internalName}
