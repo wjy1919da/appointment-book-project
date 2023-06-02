@@ -104,6 +104,10 @@ const Header = () => {
                     <Link className='header-nav-link3' to='/instrument'>
                         Instruments
                     </Link>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/posts'>
+                        Posts
+                    </Link>
                     
                 </div>
                 <div className='header-login'>

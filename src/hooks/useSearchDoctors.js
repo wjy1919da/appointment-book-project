@@ -11,8 +11,8 @@ const base = {
     locationDefaultUrl: 'https://run.mocky.io/v3/f023b3fd-88bf-4fa8-98c1-9384027c74ab',
     locationSearchUrl: 'https://run.mocky.io/v3/66a8fae6-24b6-43d3-bedc-09904ef1255b',
     multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
-    multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd'
-//2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd
+    multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
+    postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550'
   }
 export function useSearchDoctors(doctorName){
     const debouncedSearchTerm = useDebounce(doctorName, 200);
@@ -151,7 +151,22 @@ export function useSearchMultiConditionsPopUp(location, specialization, doctorNa
   //     }
   //    }
   // );
- 
+}
 
-
+export function useGetPost(Facial,Breast,Body){
+  const fetchPost = () => {
+    return axios.get(base.postUrl,
+      {
+        params: {
+          Facial: Facial !== "all" ? Facial : undefined,
+          Breast: Breast !== "all" ? Breast : undefined,
+          Body: Body !== "all" ? Body : undefined
+        }
+      }
+      ).then(res => {
+        console.log("get post dataInSearchAPI:", res.data);
+        return res.data;
+    });
+  };
+   return useQuery(['post',Facial,Breast,Body], fetchPost);
 }
