@@ -8,8 +8,8 @@ import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from 'react-query-devtools'
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 Amplify.configure(awsExports);
 
@@ -31,9 +31,10 @@ ReactDOM.render(
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
           <App />
+          
         </QueryParamProvider>
       </BrowserRouter>
-      {/* <ReactQueryDevtools/> */}
+      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
