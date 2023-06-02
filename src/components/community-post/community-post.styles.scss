@@ -1,0 +1,125 @@
+.community-post-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 0px 5px;
+    gap: 10px;
+    
+    width: 240px;
+    
+    /* 白 */
+    
+    background: #FBFCFF;
+    /* Strong Shadow */
+    
+    box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 8px 16px rgba(32, 32, 33, 0.1), 0px 16px 40px rgba(32, 32, 33, 0.2);
+    border-radius: 10px;
+    .post-image-url
+    {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+    
+    /* Inside auto layout */
+    .postImage{
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .post-information{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px 10px;
+        gap: 5px;
+        
+        width: 240px;
+        height: 70px;
+        
+        
+        /* Inside auto layout */
+        
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        .post-text
+        {
+            width: 211px;
+            
+            /* Interactive 2 wide */
+            
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 130%;
+            /* or 23px */
+            
+            display: flex;
+            justify-content: center;
+            color: #000000;
+            /* Inside auto layout */
+            
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        .profile{
+            display: flex;
+            justify-content: space-between;
+        .profileImage
+        {
+            display: flex;
+            gap:7px;
+            margin-left: -100px;
+            flex:none;
+            order:0;
+            flex-grow:0;
+        }
+        .gray-text
+        {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 100%;
+            /* identical to box height, or 16px */
+            
+            display: flex;
+            align-items: center;
+            
+            /* 灰 */
+            
+            color: #A5A6A8;
+        }
+        .likeNumber
+        {
+            position: relative;
+            flex:none;
+            order:1;
+            flex-grow:0;
+            margin-right: -100px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap:6px;
+            .heartIcon
+            {
+                width: 19px;
+                height: 17px;
+                
+                
+                /* Inside auto layout */
+                
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+                
+            }
+        }
+
+    }
+    }
+}
