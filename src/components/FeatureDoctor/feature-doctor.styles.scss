@@ -1,7 +1,7 @@
 .featured-doctor-container
 {
     //position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 560px;
     left: 0px;
     top: 1024px;
@@ -26,6 +26,7 @@
     }
     .feature-doctor-list
     {
+        width: 100%;
         margin-top: 70px;
         display: flex;
         flex-direction: row;

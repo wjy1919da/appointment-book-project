@@ -7,7 +7,7 @@
     z-index: 9999; /* 保证在其他内容之上 */
 }
 .doctor-search-outer-container {
-    width: 1440px;
+    width: 100%;
     left: 0px;
     /* 白 */
     background: #FBFCFF;
@@ -19,8 +19,8 @@
         width: 100%;
         height: 400px;
         display: flex;
-        flex-direction: row;
-        padding:0px 50px;
+        justify-content: space-between;
+        padding-left: 50px;
         .doctor-search-header-title-container{
             width:50%;
             height: 100%;
