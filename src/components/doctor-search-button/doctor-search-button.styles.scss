@@ -1,17 +1,24 @@
+.doctor-search-button-container {
+    height: 56px;
+    background-color: #FFFFFF;
+    border: rgb(206, 212, 218) solid 1px;
+    border-left: none;
+}
+
 .doctor-search-button{
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 22px;
-    line-height: 140%;
+    font-size: 18px;
     color: #FFFFFF;
-    width: 176px;
-    height: 56px;
+    width: 106px;
+    height: 40px;
     justify-content: center;
     align-items: center;
     background: #352C29;
     border-radius: 8px;
     display: flex; 
+    margin: 7px 5px;
 }
 .doctor-search-icon {
     left: 12.5%;
