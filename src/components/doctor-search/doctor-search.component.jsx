@@ -44,6 +44,7 @@ const DoctorSearch = forwardRef(({ q,setQ, title, searchF,setIsSearchOpen,isSear
 
   const handleOnClick = (item) => {
     setQ(item);
+    setIsSearchOpen(false);
   };
 
   const handleInputChange = (e) => {

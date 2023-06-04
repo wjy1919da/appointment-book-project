@@ -1,11 +1,33 @@
 .intro-doctor-container
 {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 1440px;
-    height: 400px;
-    left: 0px;
-    gap:80px;
-    padding-right: 60px;
+    justify-content: space-between;
+    width: 90%;
+    margin: 20px auto;
+
+    .intro-card {
+        width: 30%;
+        margin: 50px;
+
+        img {
+            width: 64px;
+            margin-bottom: 15px;
+        }
+
+        .intro-card-title {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 135%;
+        }
+
+        .intro-card-text {
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 160%;
+        }
+    }
 }
