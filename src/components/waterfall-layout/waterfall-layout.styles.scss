@@ -1,0 +1,59 @@
+.waterfall-layout{
+  position: absolute;
+  width: 1360px;
+  height: 1092px;
+  left: 40px;
+  top: 1050px;
+
+.item {
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: aliceblue;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  position: absolute;
+  width:240px;
+
+  &.item-1 {
+    height: 453px;
+  }
+  &.item-2 {
+    height: 279px;
+  }
+  &.item-3 {
+    height: 476px;
+  }
+  &.item-4 {
+    height: 256px;
+  }
+  &.item-5 {
+    height: 476px;
+  }
+  &.item-6 {
+    height: 279px;
+  }
+  &.item-7 {
+    height: 453px;
+  }
+  &.item-8 {
+    height: 476px;
+  }
+  &.item-9 {
+    height: 476px;
+
+  }
+  &.item-10 {
+    height: 453px;
+  }
+  &.item-11 {
+    height: 279px;
+  }
+  &.item-12 {
+    height: 279px;
+  }
+}
+}

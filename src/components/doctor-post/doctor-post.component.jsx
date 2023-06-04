@@ -3,6 +3,7 @@ import './doctor-post.styles.scss'
 import { useGetPost } from '../../hooks/useSearchDoctors';
 import { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
+import WaterfallLayout from '../waterfall-layout/waterfall-layout';
 
 
 const DoctorPost = () => {
@@ -72,7 +73,14 @@ const DoctorPost = () => {
             <div className='doctor-post-content-container'>
                 <DoctorPostGrid posts={filteredPosts} />
             </div>
+            {/* <div className="community-area">
+                <Community />
+            </div> */}
+            <div className="waterfall-layout">
+                <WaterfallLayout/>
+            </div>
         </div>
+        
     )
 }
 
