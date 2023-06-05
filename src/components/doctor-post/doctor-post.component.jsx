@@ -3,6 +3,7 @@ import './doctor-post.styles.scss'
 import { useGetPost } from '../../hooks/useSearchDoctors';
 import { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
+import Footer from '../footer/footer.component';
 
 
 const DoctorPost = () => {
@@ -15,13 +16,13 @@ const DoctorPost = () => {
         { value: "Breast", label: "Breast" },
         { value: "Body", label: "Body" }
     ];
-    
 
     // 初始值设为 []，稍后在 useEffect 中处理数据加载
     const [filteredPosts, setFilteredPosts] = useState([]);
     // 获取选中的genres
-    const [selectedGenres, setSelectedGenres] = useState({Facial: 'all', Breast: 'all', Body: 'all'});
-    const { isLoading, data, error } = useGetPost(selectedGenres.Facial, selectedGenres.Breast, selectedGenres.Body);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState([]);
+    const { isLoading, data, error } = useGetPost();
 
     useEffect(() => {
         // data 加载完成后，将其设置为 filteredPosts 的值
@@ -30,34 +31,33 @@ const DoctorPost = () => {
         }
     }, [data, isLoading]);
 
-    const handleFilters = (filters) => {
-        if (filters.includes("All")) {
-            console.log('"All" selected');
-            return data.result;
+    const handleFilters = (filters, genre) => {
+        let filteredResult = data.result;
+    
+        if (filters.length !== 0) {
+            filteredResult = filteredResult.filter(post => filters.includes(post.PostBy));
+            console.log("by user", filteredResult);
+        }
+        if (genre.length !== 0) {
+            filteredResult = filteredResult.filter(post => genre.includes(post.type));
+            console.log("by genre", filteredResult);
         }
     
-        if (filters.length === 0) {
-            console.log('no filters');
-            return data.result;
-        }
-    
-        const filteredResult = data.result.filter(post => filters.includes(post.PostBy));
-        console.log('filtered result: ', filteredResult);
         return filteredResult;
     };
-  
-
+    
     const onFilterChange = (filters) => {
-        const filteredResult = handleFilters(filters);
+        setSelectedFilters(filters);
+        const filteredResult = handleFilters(filters, selectedGenres);
         setFilteredPosts(filteredResult);
     };
-    const onGenreChange = (genre) => {
-        setSelectedGenres((prevGenres) => ({
-            ...prevGenres,  // 复制旧状态
-            [genre]: prevGenres[genre] === "all" ? genre : "all" // 修改需要变动的部分
-        }));
-    }
     
+    const onGenreChange = (genres) => {
+        setSelectedGenres(genres);
+        const filteredResult = handleFilters(selectedFilters, genres);
+        setFilteredPosts(filteredResult);
+    };
+
     // 提前返回，防止在 data 尚未加载完成时渲染组件
     if (isLoading || !data || !data.result) {
         return <div>Loading...</div>;
@@ -66,17 +66,19 @@ const DoctorPost = () => {
     return (
         <div className='doctor-post-outer-container'>
             <div className='doctor-post-header-container'>
-                <PostDropDown handleFilters={onGenreChange} options={postGenres} />
-                <PostDropDown handleFilters={onFilterChange} options={filterOptions} />
+                <PostDropDown handleFilters={onGenreChange} options={postGenres} title = "Category" />
+                <PostDropDown handleFilters={onFilterChange} options={filterOptions} title = "Post By"/>
             </div>
             <div className='doctor-post-content-container'>
-                <DoctorPostGrid posts={filteredPosts} />
+                <DoctorPostGrid posts = {filteredPosts}/>
             </div>
+            <Footer />
         </div>
     )
 }
 
 export default DoctorPost;
+
 
 
   

@@ -22,7 +22,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.component';
 import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
-
+import DoctorPostGrid from '../../components/doctor-post-grid/doctor-post-grid.component';
 
 const Doctor = () => {
   const [q, setQ] = useState([]);
@@ -64,7 +64,7 @@ const Doctor = () => {
     } else {
       setIsModalOpen(true);
       console.log("Modal Opened",isModalOpen);
-      refetch()
+      refetch();
     }
   };
   const modalRef = useRef();
@@ -161,6 +161,9 @@ const Doctor = () => {
                   <IntroDoctor />
                </div>
              <FeatureDoctor />
+            {/* <div className='doctor-post-container'>
+              <DoctorPostGrid /> 
+             </div>  */}
           </div>
           {isLoading ? (
             <div className="spinner-container">
