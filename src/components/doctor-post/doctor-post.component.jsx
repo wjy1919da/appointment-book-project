@@ -4,6 +4,7 @@ import { useGetPost } from '../../hooks/useSearchDoctors';
 import { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
 import Footer from '../footer/footer.component';
+import WaterfallLayout from '../waterfall-layout/waterfall-layout';
 
 
 const DoctorPost = () => {
@@ -69,10 +70,12 @@ const DoctorPost = () => {
                 <PostDropDown handleFilters={onGenreChange} options={postGenres} title = "Category" />
                 <PostDropDown handleFilters={onFilterChange} options={filterOptions} title = "Post By"/>
             </div>
-            <div className='doctor-post-content-container'>
-                <DoctorPostGrid posts = {filteredPosts}/>
-            </div>
-            <Footer />
+            {/* <div className='doctor-post-content-container'> */}
+                
+                    <WaterfallLayout posts = {filteredPosts}/>
+               
+            {/* </div> */}
+            {/* <Footer /> */}
         </div>
     )
 }
