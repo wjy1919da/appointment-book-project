@@ -13,7 +13,7 @@ const Download = () => {
                 <div className='decorator'></div>
                 <img className='phone-pic' src={iPhone}></img>
             </div>
-            <div className='QR-codes'>
+            <div className='QR-codes-div'>
                 <p className='QR-title'>Get the Charm App</p>
                 <p className='QR-subtitle'>Your Charming Life Starts Here</p>
                 <div className='QR-codes'>

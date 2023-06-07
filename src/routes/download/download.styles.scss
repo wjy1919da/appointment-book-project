@@ -26,8 +26,9 @@
         }
     }
 
-    .QR-codes {
-        margin-right: 80px;
+    .QR-codes-div {
+        margin-right: 99px;
+        margin-top: 20px;
         z-index: 1;
 
         .QR-title {
@@ -41,8 +42,7 @@
             line-height: 135%;
             /* or 86px */
 
-            display: flex;
-            align-items: center;
+            text-align: center;
 
             color: #000000;
         }
@@ -58,8 +58,7 @@
             line-height: 135%;
             /* identical to box height, or 54px */
 
-            display: flex;
-            align-items: center;
+            text-align: center;
 
             color: #000000;
         }
@@ -68,7 +67,7 @@
             display: flex;
             justify-content: space-between;
             width: 85%;
-            margin: 80px auto 0;
+            margin: 40px auto 0;
 
             .QR-code {
                 width: 200px;
