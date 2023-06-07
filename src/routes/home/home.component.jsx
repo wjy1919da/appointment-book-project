@@ -39,7 +39,7 @@ const Home = () => {
                     </div>
                     <div className='home-title-buttons'>
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
-                        <HomeButton title = "Start Charm life" href = '/instrument/thermage'/>
+                        <HomeButton title = "Start Charm life" href = '/download'/>
                         <button type="button" onClick={handleClick} className='button home-title-button2'>
                             <img src={arrow} alt="Button Image" className="button-image"></img>
                             <span className="button-text">Video</span>

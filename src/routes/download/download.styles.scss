@@ -1,0 +1,87 @@
+.download-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 64px;
+
+    .download-pics {
+        width: 30%;
+
+        .decorator {
+            display: block;
+            position: absolute;
+            width: 40%;
+            height: 600px;
+            left: 0;
+            background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+            border-radius: 0px 0px 1000px 0px;
+            border: black;
+        }
+
+        .phone-pic {
+            position: absolute;
+            width: 350px;
+            left: 80px;
+            bottom: 0;
+        }
+    }
+
+    .QR-codes {
+        margin-right: 80px;
+        z-index: 1;
+
+        .QR-title {
+            width: 581px;
+            height: 86px;
+
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 64px;
+            line-height: 135%;
+            /* or 86px */
+
+            display: flex;
+            align-items: center;
+
+            color: #000000;
+        }
+
+        .QR-subtitle {
+            width: 581px;
+            height: 54px;
+
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 135%;
+            /* identical to box height, or 54px */
+
+            display: flex;
+            align-items: center;
+
+            color: #000000;
+        }
+
+        .QR-codes {
+            display: flex;
+            justify-content: space-between;
+            width: 85%;
+            margin: 80px auto 0;
+
+            .QR-code {
+                width: 200px;
+    
+                .QR-code-pic {
+                    width: 200px;
+                    margin-bottom: 40px;
+                }
+        
+                .download-btn {
+                    width: 200px;
+                }
+            }
+        }
+    }
+}

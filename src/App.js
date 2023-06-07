@@ -13,6 +13,7 @@ import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
 import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
+import Download from './routes/download/download.component';
 // do I need to add it into routes?
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         <Route path = 'posts' element={<DoctorPost />} />
 
         <Route path='user-info' element={<UserInfo />} />
+        <Route path='download' element={<Download />} />
       </Route>
     </Routes>
   );
