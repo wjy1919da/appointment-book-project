@@ -49,9 +49,9 @@ const Home = () => {
             </div>
             <HomePost/>
             <HomeDoctorPage/>
-            {/* <HomeDoctors /> */}
-            {/* <HomeInstruments /> */}
-            {/* <Footer /> */}
+            <HomeDoctors />
+            <HomeInstruments />
+            <Footer /> 
         </Fragment>
     )
 }

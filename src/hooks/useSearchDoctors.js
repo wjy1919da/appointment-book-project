@@ -2,8 +2,10 @@ import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useState } from "react";
 import { useQuery, useQueryClient,useInfiniteQuery } from "react-query";
+import { useGetPorcedures } from './useSearchDoctors';
 const base = {
-    baseUrl: 'https://run.mocky.io/v3/47bbc07b-9a50-4f04-b34a-aafdb074318c',
+    baseUrl: 'http://localhost:8080',
+    procedureUrl:'http://localhost:8080/procedure',
     doctorDefaultUrl: 'https://run.mocky.io/v3/4fed0bea-6c05-4f57-9936-deae2f691f16',
     doctorSearchUrl: 'https://run.mocky.io/v3/3bca72f6-9e31-4efc-9fe2-bfe040879a54',
     specializationDefaultUrl: 'https://run.mocky.io/v3/becf0a1c-4279-472f-bd26-eff6cac83223',
@@ -15,6 +17,7 @@ const base = {
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
     postCategoryUrl:'https://run.mocky.io/v3/6e9b4724-7b5f-4570-aa22-e04a973004cd',
   }
+
 export function useSearchDoctors(doctorName){
     const debouncedSearchTerm = useDebounce(doctorName, 200);
     const fetchDoctors = () => {
@@ -63,6 +66,8 @@ export function useSearchSpecialization(specialization){
       }
       return axios.get(url, 
         {
+          // body ?
+          // 请求方法
           params: {
               specialization : debouncedSearchTerm
           }
@@ -170,4 +175,24 @@ export function useGetPost(){
     });
   };
    return useQuery(['post'], fetchPost);
+}
+export default function useGetProcedures(category, page) {
+  var processedCategory;
+  const fetchProcedures = () => {
+    // Replace all '-' with '_'
+    processedCategory = category.replace(/-/g, "_");
+    let url = `${base.procedureUrl}/${processedCategory}`;
+
+    return axios.get(url, {
+      params: {
+        page: page
+      }
+    })
+    .then(res => {
+      console.log('dataInSearchAPI:', res.data);
+      return res.data;
+    });
+  }
+
+  return useQuery(['procedures', processedCategory, page], fetchProcedures);
 }
