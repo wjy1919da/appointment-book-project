@@ -4,7 +4,9 @@ import heartIcon from "../../assets/doctor/heartIcon.png"
 
 
 const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
-
+    if (!imageURL && !text && !profileImage && !authorName && !likes) {
+        return null; // Return null for empty rendering when there are no props
+      }
     return (
         <div className='community-post-container'>
             {/* <img src={imageURL} alt="postImage" className="post-Image"></img> */}

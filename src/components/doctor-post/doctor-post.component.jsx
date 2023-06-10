@@ -7,6 +7,7 @@ import WaterfallLayout from '../waterfall-layout/waterfall-layout';
 import IconDown from '../../assets/post/icon_down.svg';
 import { Link } from 'react-router-dom';
 import HomeButton from '../home-button/home-button.component';
+import Community from '../community/community';
 
 
 const DoctorPost = () => {
@@ -76,12 +77,12 @@ const DoctorPost = () => {
             {/* <div className='doctor-post-content-container'>
                 <DoctorPostGrid posts={filteredPosts} />
             </div> */}
-            {/* <div className="community-area">
+              <div className="community-area">
                 <Community />
-            </div> */}
-            <div className="waterfall-layout">
-                <WaterfallLayout/>
             </div>
+            {/* <div className="waterfall-layout">
+                <WaterfallLayout/>
+            </div> */}
             <div className='post-download-div'>
                 <img className='post-download-icon' src={IconDown}></img>
                 <p className='post-download-txt'>
