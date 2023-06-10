@@ -5,7 +5,6 @@ import postImage from '../../assets/doctor/post4.png';
 //src\assets\doctor\post1.png
 
 const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
-    console.log("community post",imageURL,text,profileImage,authorName,likes);
 
     return (
         <div className='community-post-container'>

@@ -48,7 +48,7 @@ const PostDropDown = (props) => {
                 </Panel>
             </Collapse> */}
              <div className='post-drop-button-container'>
-                <div
+                <button
                     onClick={handleOpen}
                     className='post-drop-button'
                 >
@@ -61,7 +61,7 @@ const PostDropDown = (props) => {
                    <div className='post-drop-button-icon'>
                         <img src={Icon} alt="dropdownIcon" />
                    </div>
-                </div>
+                </button>
              </div>
             {Open && <div className='post-drop-down-container'>
                    {CheckboxList()}

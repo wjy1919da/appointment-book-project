@@ -176,7 +176,8 @@ export function useGetPost(){
   };
    return useQuery(['post'], fetchPost);
 }
-export default function useGetProcedures(category, page) {
+export default function useGetProcedures(category, page, reFetchCount) {
+  console.log("useGetProcedures", category, page);
   var processedCategory;
   const fetchProcedures = () => {
     // Replace all '-' with '_'
@@ -194,5 +195,8 @@ export default function useGetProcedures(category, page) {
     });
   }
 
-  return useQuery(['procedures', processedCategory, page], fetchProcedures);
+  // The last parameter in the dependency array is reFetchCount, which makes sure
+  // that the query is refetched whenever reFetchCount changes.
+  return useQuery(['procedures', processedCategory, page, reFetchCount], fetchProcedures);
 }
+

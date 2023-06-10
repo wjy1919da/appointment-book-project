@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
       cacheTime: 1000 * 60 * 60 * 24 * 7, // 7 days
       staleTime: 1000 * 60 * 60 * 1,
       refetchOnWindowFocus: false,
-      refetchOnReconnect: false
+      refetchOnReconnect: true
     }
   }
 });
