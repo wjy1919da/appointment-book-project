@@ -4,6 +4,9 @@ import { useGetPost } from '../../hooks/useSearchDoctors';
 import { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
 import WaterfallLayout from '../waterfall-layout/waterfall-layout';
+import IconDown from '../../assets/post/icon_down.svg';
+import { Link } from 'react-router-dom';
+import HomeButton from '../home-button/home-button.component';
 
 
 const DoctorPost = () => {
@@ -70,14 +73,21 @@ const DoctorPost = () => {
                 <PostDropDown handleFilters={onGenreChange} options={postGenres} />
                 <PostDropDown handleFilters={onFilterChange} options={filterOptions} />
             </div>
-            <div className='doctor-post-content-container'>
+            {/* <div className='doctor-post-content-container'>
                 <DoctorPostGrid posts={filteredPosts} />
-            </div>
+            </div> */}
             {/* <div className="community-area">
                 <Community />
             </div> */}
             <div className="waterfall-layout">
                 <WaterfallLayout/>
+            </div>
+            <div className='post-download-div'>
+                <img className='post-download-icon' src={IconDown}></img>
+                <p className='post-download-txt'>
+                    Join Charm community to view more
+                </p>
+                <HomeButton title = "Download App" href = '/download'></HomeButton>
             </div>
         </div>
         
