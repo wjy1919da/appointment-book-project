@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { forwardRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import FormInput from '../form-input/form-input.component';
+
 function SearchResult({data,onClick,isLoading}){
   return(
     <div className = 'doctor-search-drop-down-name-container' > 
@@ -44,7 +46,16 @@ const DoctorSearchName = forwardRef(({ q, setQ, title, searchF,setIsNameOpen, is
       <div ref={ref}>
         <Form.Group className="form-floating">
             <Form.Label>{title}</Form.Label>
-            <Form.Control
+            <FormInput
+              label={title}
+              name='location'
+              value={q}
+              onClick={toggle}
+              onChange={handleInputChange}
+              onKeyDown={handleEnterPress}
+              type="text"
+            />
+            {/* <Form.Control
               className="custom-form-control"
               Id="floatingInput"
               //placeholder={title}
@@ -54,7 +65,7 @@ const DoctorSearchName = forwardRef(({ q, setQ, title, searchF,setIsNameOpen, is
               onClick={toggle}
               onChange={handleInputChange}
               onKeyDown={handleEnterPress}
-            />
+            /> */}
         </Form.Group>
         {/* {isNameOpen && (data && <SearchResult data={data.result} onClick={handleOnClick} isLoading={isLoading}/>
          )} */}

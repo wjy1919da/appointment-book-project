@@ -105,6 +105,12 @@
 
 .form-floating {
     position: relative;
+    border: 1px solid rgb(165, 166, 168);
+}
+
+.form-floating:hover {
+    border: 2px solid #FAB25E !important;
+    box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 8px 16px rgba(32, 32, 33, 0.1), 0px 16px 40px rgba(32, 32, 33, 0.2) !important;
 }
 
 .form-floating > .form-label {
