@@ -1,8 +1,9 @@
 import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useState } from "react";
-import { useQuery, useQueryClient,useInfiniteQuery } from "react-query";
+import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-query";
 import { useGetPorcedures } from './useSearchDoctors';
+
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -15,7 +16,7 @@ const base = {
     multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
     multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
-    postCategoryUrl:'https://run.mocky.io/v3/6e9b4724-7b5f-4570-aa22-e04a973004cd',
+    postCategoryUrl:'http://localhost:8080/post/posts:page',
   }
 
 export function useSearchDoctors(doctorName){
@@ -159,23 +160,35 @@ export function useSearchMultiConditionsPopUp(location, specialization, doctorNa
   // );
 }
 
-export function useGetPost(){
-  const fetchPost = () => {
-    return axios.get(base.postCategoryUrl,
-      // {
-      //   params: {
-      //     Facial: Facial !== "all" ? Facial : undefined,
-      //     Breast: Breast !== "all" ? Breast : undefined,
-      //     Body: Body !== "all" ? Body : undefined
-      //   }
-      // }
-      ).then(res => {
-        console.log("get post dataInSearchAPI:", res.data);
-        return res.data;
+export function useGetPost(pageSize, filterType) {
+  // data.data need to be changed ???????
+  const fetchPost = ({ pageParam = 1 }) => {
+    return axios.post('http://localhost:8080/post/posts:page', {
+      currentPage: pageParam,
+      ppageSize: pageSize,
+      filterType: filterType
+    }).then(res => {
+      console.log("fetch Data:", res.data, "pageParam:", pageParam);
+      return res.data.data;
     });
   };
-   return useQuery(['post'], fetchPost);
+  return useInfiniteQuery(
+   ['posts', pageSize, filterType], 
+   fetchPost, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+    keepPreviousData: true,
+    // lastPage is an array of posts
+    // allPages is an array of pages
+    getNextPageParam: (lastPage, allPages) => {
+      // if lastPage.length =- 0, then there is no more data
+      return lastPage.length > 0 ? allPages.length + 1 : undefined;  
+    }
+   }   
+  );
 }
+
+
+
 export default function useGetProcedures(category, page, reFetchCount) {
   console.log("useGetProcedures", category, page);
   var processedCategory;

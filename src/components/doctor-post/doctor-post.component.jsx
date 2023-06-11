@@ -1,10 +1,11 @@
 import DoctorPostGrid from '../doctor-post-grid/doctor-post-grid.component';
 import './doctor-post.styles.scss'
 import { useGetPost } from '../../hooks/useSearchDoctors';
-import { useState , useEffect} from 'react';
+import React, { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
 import Footer from '../footer/footer.component';
 import WaterfallLayout from '../waterfall-layout/waterfall-layout';
+import HomeSpinner from '../home-spinner/home-spinner.component';
 
 
 const DoctorPost = () => {
@@ -17,66 +18,45 @@ const DoctorPost = () => {
         { value: "Breast", label: "Breast" },
         { value: "Body", label: "Body" }
     ];
-
-    // 初始值设为 []，稍后在 useEffect 中处理数据加载
-    const [filteredPosts, setFilteredPosts] = useState([]);
-    // 获取选中的genres
+    const [currentPage, setCurrentPage] = useState(1);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [selectedFilters, setSelectedFilters] = useState([]);
-    const { isLoading, data, error } = useGetPost();
+    const [filterType, setFilterType] = useState(2);
+    const pageSize = 20;
 
-    useEffect(() => {
-        // data 加载完成后，将其设置为 filteredPosts 的值
-        if (!isLoading && data && data.result) {
-            setFilteredPosts(data.result);
-        }
-    }, [data, isLoading]);
-
-    const handleFilters = (filters, genre) => {
-        let filteredResult = data.result;
-    
-        if (filters.length !== 0) {
-            filteredResult = filteredResult.filter(post => filters.includes(post.PostBy));
-            console.log("by user", filteredResult);
-        }
-        if (genre.length !== 0) {
-            filteredResult = filteredResult.filter(post => genre.includes(post.type));
-            console.log("by genre", filteredResult);
-        }
-    
-        return filteredResult;
-    };
-    
-    const onFilterChange = (filters) => {
-        setSelectedFilters(filters);
-        const filteredResult = handleFilters(filters, selectedGenres);
-        setFilteredPosts(filteredResult);
-    };
-    
-    const onGenreChange = (genres) => {
-        setSelectedGenres(genres);
-        const filteredResult = handleFilters(selectedFilters, genres);
-        setFilteredPosts(filteredResult);
-    };
-
-    // 提前返回，防止在 data 尚未加载完成时渲染组件
-    if (isLoading || !data || !data.result) {
-        return <div>Loading...</div>;
-    }
-
+    const {
+      data, 
+      error, 
+      isLoading,
+      fetchNextPage,
+      isFetchingNextPage
+    } = useGetPost(pageSize, filterType);
+    if (isLoading) return <HomeSpinner />;
+    if (error) return <div className='error'>{error.Message}</div>;
     return (
-        <div className='doctor-post-outer-container'>
-            <div className='doctor-post-header-container'>
-                <PostDropDown handleFilters={onGenreChange} options={postGenres} title = "Category" />
-                <PostDropDown handleFilters={onFilterChange} options={filterOptions} title = "Post By"/>
-            </div>
-            {/* <div className='doctor-post-content-container'> */}
-                
-                    <WaterfallLayout posts = {filteredPosts}/>
-               
-            {/* </div> */}
-            {/* <Footer /> */}
-        </div>
+    <div className='doctor-post-outer-container'>
+        <>
+                {data && data.pages.map((page, index) => 
+                    <React.Fragment key={index}>
+                        {/* {page.map((post) =>
+                            <li key={post.id} className='list-group-item'>
+                                {post.title}
+                            </li>
+                        )} */}
+                        <DoctorPostGrid posts={page} />
+                        {/* <WaterfallLayout posts={page} /> */}
+                    </React.Fragment>
+                )}
+               <button
+                    className='btn btn-primary my-3 ms-1'
+                    onClick={() => fetchNextPage()}
+                    disabled={!data || isFetchingNextPage}
+                >
+                  {isFetchingNextPage ? 'Loading ...' :'Load More'}
+                </button>     
+        </>
+          
+    </div>
     )
 }
 

@@ -9,14 +9,13 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
     return (
         <div className='community-post-container'>
             <div className="post-Image">
-                <img src={require(`../../assets/doctor/${imageURL}.png`)} className="post-image-url"></img>
-                {/* <img src={postImage} className="post-image-url"></img> */}
+                <img src={imageURL[0]} className="postImage"></img>
             </div>
             <div className="post-information">
                 <span className="post-text">{text}</span>
                 <div className="profile">
                     <div className="profileImage">
-                        <img src={require(`../../assets/doctor/${profileImage}.png`)}></img>
+                        <img src={profileImage}></img>
                         <span className="gray-text">{authorName}</span>
                     </div>
                     <div className="likeNumber">
