@@ -22,11 +22,10 @@ const DoctorPost = () => {
         { value: "Body", label: "Body" }
     ];
     const [currentPage, setCurrentPage] = useState(1);
-    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filterType, setFilterType] = useState(2);
     const pageSize = 20;
-
     const {
       data, 
       error, 
@@ -34,24 +33,23 @@ const DoctorPost = () => {
       fetchNextPage,
       isFetchingNextPage
     } = useGetPost(pageSize, filterType);
+    console.log("isFetching",isFetchingNextPage);
     const fetchPostsCount = data?.pages.reduce((total,page)=>total + page.length, 0) || 0;
     if (isLoading) return <HomeSpinner />;
     if (error) return <div className='error'>{error.Message}</div>;
     return (
         <div className='doctor-post-outer-container'>
-            {data && data.pages.map((page, index) => 
-                <InfiniteScroll
-                    key={index}
-                    dataLength={page.length}
-                    next={()=>fetchNextPage()}
-                    hasMore={true}
-                    scrollThreshold={0.5} 
-                    //loader={isFetchingNextPage && <h4>Loading...</h4>}
-                >
-                   <WaterfallLayout posts={page} />
-                     {/* <DoctorPostGrid posts={page} /> */}
-                </InfiniteScroll>  
-            )}     
+        {data &&
+            <InfiniteScroll
+                dataLength={data.pages.flat().length}
+                next={()=>fetchNextPage()}
+                hasMore={true}
+                scrollThreshold={0.3} 
+               // loader={isFetchingNextPage && <HomeSpinner />}
+            >
+                <DoctorPostGrid posts={data.pages.flat()} />
+            </InfiniteScroll>  
+        }     
         </div>
         )
     }

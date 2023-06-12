@@ -165,7 +165,7 @@ export function useGetPost(pageSize, filterType) {
   const fetchPost = ({ pageParam = 1 }) => {
     return axios.post('http://localhost:8080/post/posts:page', {
       currentPage: pageParam,
-      ppageSize: pageSize,
+      pageSize: pageSize,
       filterType: filterType
     }).then(res => {
       console.log("fetch Data:", res.data, "pageParam:", pageParam);
