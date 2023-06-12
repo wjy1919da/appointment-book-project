@@ -31,28 +31,29 @@ const DoctorPost = () => {
       error, 
       isLoading,
       fetchNextPage,
-      isFetchingNextPage
+      isFetchingNextPage,
+      hasNextPage
     } = useGetPost(pageSize, filterType);
-    console.log("isFetching",isFetchingNextPage);
-    const fetchPostsCount = data?.pages.reduce((total,page)=>total + page.length, 0) || 0;
+    
+    const flatData = data ? data.pages.flatMap(page => page.data) : [];
+
     if (isLoading) return <HomeSpinner />;
     if (error) return <div className='error'>{error.Message}</div>;
     return (
         <div className='doctor-post-outer-container'>
         {data &&
             <InfiniteScroll
-                dataLength={data.pages.flat().length}
-                next={()=>fetchNextPage()}
-                hasMore={true}
+                dataLength={flatData.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
                 scrollThreshold={0.3} 
-               // loader={isFetchingNextPage && <HomeSpinner />}
             >
-                <DoctorPostGrid posts={data.pages.flat()} />
+                <DoctorPostGrid posts={flatData} />
             </InfiniteScroll>  
         }     
         </div>
-        )
-    }
+    )
+}
 
 export default DoctorPost;
 

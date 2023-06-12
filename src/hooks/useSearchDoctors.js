@@ -169,10 +169,10 @@ export function useGetPost(pageSize, filterType) {
       filterType: filterType
     }).then(res => {
       console.log("fetch Data:", res.data, "pageParam:", pageParam);
-      return res.data.data;
+      return { data: res.data.data, pageInfo: res.data.pageInfo };
     });
   };
-  const query =  useInfiniteQuery(
+  return useInfiniteQuery(
    ['posts', pageSize, filterType], 
    fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
@@ -180,15 +180,12 @@ export function useGetPost(pageSize, filterType) {
     // lastPage is an array of posts
     // allPages is an array of pages
     getNextPageParam: (lastPage, allPages) => {
-      // if lastPage.length =- 0, then there is no more data
-      return lastPage.length > 0 ? allPages.length + 1 : undefined;  
+      // hasNextPage
+      console.log("lastPage data",lastPage.pageInfo)
+      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
     }
    }   
   );
-  const hasNextPage = query.isFetchingNextPage;
-
-  // Return query and custom hasNextPage
-  return {...query, hasNextPage};
 }
 
 
