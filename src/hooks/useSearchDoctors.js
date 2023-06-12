@@ -172,7 +172,7 @@ export function useGetPost(pageSize, filterType) {
       return res.data.data;
     });
   };
-  return useInfiniteQuery(
+  const query =  useInfiniteQuery(
    ['posts', pageSize, filterType], 
    fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
@@ -185,6 +185,10 @@ export function useGetPost(pageSize, filterType) {
     }
    }   
   );
+  const hasNextPage = query.isFetchingNextPage;
+
+  // Return query and custom hasNextPage
+  return {...query, hasNextPage};
 }
 
 

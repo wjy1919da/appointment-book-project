@@ -3,7 +3,6 @@ import "./waterfall-layout.styles.scss"
 import CommunityPost from '../community-post/community-post.component';
 import profileImage from '../../assets/doctor/profile1.png'
 function WaterfallLayout({posts}) {
-  console.log("waterfall",posts);
   useEffect(() => {
     const items = document.getElementsByClassName('item');
     const gap = 40;

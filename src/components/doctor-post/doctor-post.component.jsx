@@ -4,10 +4,13 @@ import { useGetPost } from '../../hooks/useSearchDoctors';
 import React, { useState , useEffect} from 'react';
 import PostDropDown from '../post-drop-down/post-drop-down.component';
 import Footer from '../footer/footer.component';
-import WaterfallLayout from '../waterfall-layout/waterfall-layout';
 import HomeSpinner from '../home-spinner/home-spinner.component';
-
-
+import { SimpleGrid } from '@chakra-ui/react';
+import CommunityPost from '../community-post/community-post.component';
+import profileImage from '../../assets/doctor/profile1.png'
+import InfiniteScroll from 'react-infinite-scroll-component';
+import MasonryInfiniteScroller from 'react-masonry-infinite';
+import WaterfallLayout from './../waterfall-layout/waterfall-layout';
 const DoctorPost = () => {
     const filterOptions = [
         { value: "User", label: "By User" },
@@ -31,34 +34,27 @@ const DoctorPost = () => {
       fetchNextPage,
       isFetchingNextPage
     } = useGetPost(pageSize, filterType);
+    const fetchPostsCount = data?.pages.reduce((total,page)=>total + page.length, 0) || 0;
     if (isLoading) return <HomeSpinner />;
     if (error) return <div className='error'>{error.Message}</div>;
     return (
-    <div className='doctor-post-outer-container'>
-        <>
-                {data && data.pages.map((page, index) => 
-                    <React.Fragment key={index}>
-                        {/* {page.map((post) =>
-                            <li key={post.id} className='list-group-item'>
-                                {post.title}
-                            </li>
-                        )} */}
-                        <DoctorPostGrid posts={page} />
-                        {/* <WaterfallLayout posts={page} /> */}
-                    </React.Fragment>
-                )}
-               <button
-                    className='btn btn-primary my-3 ms-1'
-                    onClick={() => fetchNextPage()}
-                    disabled={!data || isFetchingNextPage}
+        <div className='doctor-post-outer-container'>
+            {data && data.pages.map((page, index) => 
+                <InfiniteScroll
+                    key={index}
+                    dataLength={page.length}
+                    next={()=>fetchNextPage()}
+                    hasMore={true}
+                    scrollThreshold={0.5} 
+                    //loader={isFetchingNextPage && <h4>Loading...</h4>}
                 >
-                  {isFetchingNextPage ? 'Loading ...' :'Load More'}
-                </button>     
-        </>
-          
-    </div>
-    )
-}
+                   <WaterfallLayout posts={page} />
+                     {/* <DoctorPostGrid posts={page} /> */}
+                </InfiniteScroll>  
+            )}     
+        </div>
+        )
+    }
 
 export default DoctorPost;
 
