@@ -1,5 +1,4 @@
 
-import axios from 'axios';
 import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
 import DoctorSearch from '../../components/doctor-search/doctor-search.component';
@@ -17,76 +16,44 @@ import DoctorSearchButton from '../../components/doctor-search-button/doctor-sea
 import { useSearchDoctors, useSearchSpecialization, useSearchLocation,useSearchMultiConditions,useSearchMultiConditionsPopUp } from '../../hooks/useSearchDoctors';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+//import Form from 'react-bootstrap/Form';
+//import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.component';
 import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
 import DoctorPostGrid from '../../components/doctor-post-grid/doctor-post-grid.component';
+import useDoctorQueryStore from '../../store.ts';
+import {Input,InputGroup,InputLeftElement,Button,InputRightElement} from "@chakra-ui/react";
 
 const Doctor = () => {
-  const [q, setQ] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [field, setField] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  //const [searchResults, setSearchResults] = useState([]);
-  const [searchClick,setSearchClick] = useState(false);
-
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isSpecializationOpen, setIsSpecializationOpen] = useState(false);
-  const [isNameOpen, setIsNameOpen] = useState(false);
-
-  const searchRef = useRef();
-  const specializationRef = useRef();
-  const nameRef = useRef();
-  const { isLoading, data, error, refetch } = useSearchMultiConditions(location,field,q);
-  // const { 
-  //   isLoading, 
-  //   data, 
-  //   error, 
-  //   refetch,
-  //   isFetchingNextPage,
-  //   fetchNextPage,
-  //   hasNextPage 
-  //  } = useSearchMultiConditionsPopUp();
-  // const {isLoading,data,error} = useSearchMultiConditionsPopUp();
+  // useRef
+  const locationRef = useRef(null);
+  const specializationRef = useRef(null);
+  const doctorNameRef = useRef(null);
+  const { setDoctorName, setLocation, setField } = useDoctorQueryStore();
+  const { isLoading, data, error, refetch } = useSearchMultiConditions('','','');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let isFormEmpty = true;
   
-  
-  const closeAllDropdowns = () => {
-    setIsSearchOpen(false);
-    setIsSpecializationOpen(false);
-    setIsNameOpen(false);
-  };
-
-  const handleButtonClick = () => {
-    if (!q && !location && !field) {
-      alert("Error: All parameters are empty. Please enter at least one parameter.");
-    } else {
-      setIsModalOpen(true);
-      console.log("Modal Opened",isModalOpen);
-      refetch();
+    if(locationRef.current && locationRef.current.value !== "") {
+      setLocation(locationRef.current.value);
+      isFormEmpty = false;
     }
-  };
-  const modalRef = useRef();
-
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        !modalRef.current?.contains(event.target) &&
-        !searchRef.current?.contains(event.target) &&
-        !specializationRef.current?.contains(event.target)&&
-        !nameRef.current?.contains(event.target)
-      ) {
-          closeAllDropdowns();
-      }
-    };
-    window.addEventListener('mousedown', handleOutsideClick);
-
-    return () => {
-      window.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, []);
-
+    
+    if(specializationRef.current && specializationRef.current.value !== "") {
+      setField(specializationRef.current.value);
+      isFormEmpty = false;
+    }
+    if(doctorNameRef.current && doctorNameRef.current.value !== "") {
+      setDoctorName(doctorNameRef.current.value);
+      isFormEmpty = false;
+    }
+    
+    if(isFormEmpty){
+      alert("Please enter a valid search query");
+    }
+  }
   return (
     <div className='doctor-container animate__animated animate__fadeIn'>
       {error ? (
@@ -105,57 +72,29 @@ const Doctor = () => {
                  </div>
             </div>
               <div className='doctor-search-search-bar-outer-container'>
-                    <InputGroup className="mb-3">
-                      <div className='doctor-input-container'>
-                          <DoctorSearch 
-                              q={location} 
-                              setQ={setLocation} 
-                              title = "ZIP or City, State"
-                              searchF = {useSearchLocation}
-                              setIsSearchOpen={setIsSearchOpen} 
-                              isSearchOpen={isSearchOpen}
-                              closeOthers={() => {
-                                setIsSpecializationOpen(false);
-                                setIsNameOpen(false);
-                                setIsModalOpen(false);
-                              }} 
-                              ref={searchRef}
-                            />
-                      </div>
-                      <div className='doctor-input-container'>
-                          <DoctorSearchName 
-                            q={field} 
-                            setQ={setField} 
-                            title = "Specialization"
-                            searchF = {useSearchSpecialization}
-                            setIsNameOpen={setIsSpecializationOpen} 
-                            isNameOpen={isSpecializationOpen}
-                            closeOthers={() => {
-                              setIsSearchOpen(false);
-                              setIsNameOpen(false);
-                              setIsModalOpen(false);
-                            }} 
-                            ref={specializationRef}
-                          />
-                      </div>
-                      <div className='doctor-input-container'>
-                          <DoctorSearchName 
-                            q={q} 
-                            setQ={setQ} 
-                            title = "Doctor Name"
-                            searchF = {useSearchDoctors}
-                            setIsNameOpen={setIsNameOpen} 
-                            isNameOpen={isNameOpen}
-                            closeOthers={() => {
-                              setIsSearchOpen(false);
-                              setIsSpecializationOpen(false);
-                              setIsModalOpen(false);
-                            }} 
-                            ref={nameRef}
-                          />
-                      </div>
-                      <DoctorSearchButton title = "search" onClick={handleButtonClick} />
+                 <form onSubmit={handleSubmit}>
+                      <InputGroup>
+                      {/* locationRef */}
+                          <Input 
+                            ref = {locationRef} 
+                            type = "text" 
+                            focusBorderColor="orange.200"
+                            placeholder = "ZIP Code"  />
+                          <Input 
+                            ref = {specializationRef} 
+                            type = "text" 
+                            focusBorderColor="orange.200"
+                            placeholder = "Specialization"  />
+                          <Input 
+                            ref = {doctorNameRef} 
+                            type = "text" 
+                            focusBorderColor="orange.200"
+                            placeholder = "Doctor Name"  />
+                          <InputRightElement children = {<DoctorSearchButton type = "submit" title = "Search"/>} /> 
                     </InputGroup>
+                </form>
+               
+                   
                 </div>
                <div className='doctor-intro-container'>
                   <IntroDoctor />
@@ -165,26 +104,7 @@ const Doctor = () => {
               <DoctorPostGrid /> 
              </div>  */}
           </div>
-          {isLoading ? (
-            <div className="spinner-container">
-              <div className="d-flex justify-content-center">
-                <div className="spinner-grow" role="status"></div>
-              </div>
-              <div className="spinner-text">Loading...</div>
-            </div>
-          ) : isModalOpen && data && (
-            <div ref={modalRef}> 
-              <DoctorSearchPopup 
-                  name={q} 
-                  field={field} 
-                  location={location} 
-                  searchResults={data.result} 
-                  show={isModalOpen}
-                  onHide={() => setIsModalOpen(false)}
-               />
-            </div>
-          )}
-          
+         
           <Footer />
         </div>
       )}
