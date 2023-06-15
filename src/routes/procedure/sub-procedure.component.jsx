@@ -19,7 +19,7 @@ import useGetProcedures from '../../hooks/useSearchDoctors';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 const SubProcedure = () => { 
    // Mingqi
-   console.log("sub-procedure");
+   //console.log("sub-procedure");
    const n =50;
    //Jingyi
    const { name } = useParams();
@@ -68,7 +68,7 @@ const SubProcedure = () => {
        return <HomeSpinner />;
     }
     if (!localData || !localData.subcategories) {
-        return <div>Error: Data is not available</div>;
+        return <div className='error'>Error: Data is not available</div>;
     }    
     const prosAndCons = JSON.parse(localData.subcategories[1].other);
     const optionsContent = JSON.parse(localData.subcategories[2].other);
@@ -76,7 +76,7 @@ const SubProcedure = () => {
     const reference = JSON.parse(localData.subcategories[4].other);
     const alternativeTreatmentForm = JSON.parse(localData.subcategories[5].other);
     const cardInfo = JSON.parse(localData.subcategories[7].other);
-    console.log("cardInfo",cardInfo.Cost);
+    //console.log("cardInfo",cardInfo.Cost);
     
     return (
      <div className='home-container'>

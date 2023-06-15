@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from "react";
 import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-query";
 import { useGetPorcedures } from './useSearchDoctors';
-
+import useDoctorQueryStore from '../store.ts';
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -11,6 +11,7 @@ const base = {
     doctorSearchUrl: 'https://run.mocky.io/v3/3bca72f6-9e31-4efc-9fe2-bfe040879a54',
     specializationDefaultUrl: 'https://run.mocky.io/v3/becf0a1c-4279-472f-bd26-eff6cac83223',
     specializationSearchUrl: 'https://run.mocky.io/v3/5206ee0c-7f8e-4e65-9b83-8ff193920ccb',
+    // location default 先保留
     locationDefaultUrl: 'https://run.mocky.io/v3/f023b3fd-88bf-4fa8-98c1-9384027c74ab',
     locationSearchUrl: 'https://run.mocky.io/v3/66a8fae6-24b6-43d3-bedc-09904ef1255b',
     multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
@@ -85,33 +86,34 @@ export function useSearchSpecialization(specialization){
         queryFn: fetchProjects 
     });
 }
-export function useSearchLocation(location){
-    const debouncedSearchTerm = useDebounce(location, 200);
+export function useSearchLocation(){
+    const location = useDoctorQueryStore(s => s.doctorQuery.location);
+    console.log("useSearchLocation",location)
+    const debouncedSearchTerm = useDebounce(location, 700);
     const fetchLocations = () => {
-        let url;
-        console.log("LocationQuery")
-        if (location == undefined || debouncedSearchTerm == "" || location == "") {
-            console.log("default Location")
-            url = base.locationDefaultUrl;
-        }
-        else{
-            console.log("search Location")
-            console.log("params",debouncedSearchTerm)
-            url = base.locationSearchUrl;
-        }
-        return axios.get(url, 
-          {
-            params: {
-                location : debouncedSearchTerm
-            }
-          })
-          .then(
-            res => {
-              console.log('dataInSearchAPI:', res.data);
-              return res.data;
-            }
-          )
-    }
+      let url;
+      console.log("LocationQuery");
+      if (!location || !debouncedSearchTerm) {
+          console.log("default Location");
+          url = base.locationDefaultUrl;
+      } else {
+          console.log("search Location");
+          console.log("params", debouncedSearchTerm);
+          url = base.locationSearchUrl;
+      }
+      return axios.get(url, 
+        {
+          params: {
+              location : debouncedSearchTerm || ''
+          }
+        })
+        .then(
+          res => {
+            console.log('dataInSearchAPI:', res.data);
+            return res.data;
+          }
+        )
+  }
     return useQuery({
         queryKey: ['location', debouncedSearchTerm],
         queryFn: fetchLocations
@@ -134,30 +136,44 @@ export function useSearchMultiConditions(location, specialization, doctorName){
   return useQuery('doctors', fetchAllCondition, { enabled: false });
 }
 
-
-export function useSearchMultiConditionsPopUp(location, specialization, doctorName) {
-  const fetchAllCondition = () => {
-    return axios.get(base.multiConditionSearchUrl, {
-      params: {
-        location: location !== "all" ? location : undefined, 
-        specialization: specialization !== "all" ? specialization : undefined,
-        doctorName: doctorName !== "" ? doctorName : undefined, 
-        // page: pageParam
+// search doctor part
+export function useSearchMultiConditionsPopUp() {
+   const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
+   //console.log("useSearchMultiConditionsPopUp:", doctorQuery);
+   const fetchDoctors = ({pageParam = 1}) => {
+      return axios.post('http://localhost:8080/doctor/search',
+       {
+          // "address": doctorQuery.location,
+          // "nickname": doctorQuery.doctorName,
+          // "programTitle": doctorQuery.field,
+          // "filterType": [1, 2],
+          // "page": pageParam,
+          // "pageSize": doctorQuery.pageSize
+            "address": "",
+            "nickname": "",
+            "programTitle": "项目名称1",
+            "filterType": [1, 2],
+            "page": 1,
+            "pageSize": 20
+        }
+      ).then(res => {
+        console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
+        return { data: res.data.data, pageInfo: res.data.pageInfo };
+      })
+   }
+   return useInfiniteQuery(
+      ['doctors', doctorQuery],
+      fetchDoctors,
+      {
+        staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+        keepPreviousData: true,
+        getNextPageParam: (lastPage, allPages) => {
+          // hasNextPage
+         // console.log("doctor search lastPage data",lastPage.pageInfo)
+          return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+        }
       }
-    }).then(res => {
-      console.log('dataInSearchAPI:', res.data.pages);
-      return res.data;
-    });
-  };
-  return useQuery('doctors', fetchAllCondition, { enabled: false });
-
-  // return useInfiniteQuery('doctors', fetchAllCondition, {
-  //   enabled: false,
-  //   getNextPageParam: (lastPage, allPages) => {
-  //     return lastPage.next ? allPages.length + 1 : undefined;  
-  //     }
-  //    }
-  // );
+   )
 }
 
 export function useGetPost(pageSize, filterType) {
@@ -168,7 +184,7 @@ export function useGetPost(pageSize, filterType) {
       pageSize: pageSize,
       filterType: filterType
     }).then(res => {
-      console.log("fetch Data:", res.data, "pageParam:", pageParam);
+     // console.log("fetch Data:", res.data, "pageParam:", pageParam);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     });
   };
@@ -181,7 +197,7 @@ export function useGetPost(pageSize, filterType) {
     // allPages is an array of pages
     getNextPageParam: (lastPage, allPages) => {
       // hasNextPage
-      console.log("lastPage data",lastPage.pageInfo)
+      //console.log("lastPage data",lastPage.pageInfo)
       return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
     }
    }   
@@ -191,7 +207,7 @@ export function useGetPost(pageSize, filterType) {
 
 
 export default function useGetProcedures(category, page, reFetchCount) {
-  console.log("useGetProcedures", category, page);
+  //console.log("useGetProcedures", category, page);
   var processedCategory;
   const fetchProcedures = () => {
     // Replace all '-' with '_'
@@ -204,7 +220,7 @@ export default function useGetProcedures(category, page, reFetchCount) {
       }
     })
     .then(res => {
-      console.log('dataInSearchAPI:', res.data);
+     // console.log('dataInSearchAPI:', res.data);
       return res.data;
     });
   }

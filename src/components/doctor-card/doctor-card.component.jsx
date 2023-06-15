@@ -5,25 +5,26 @@ import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
-const DoctorCard = () => {
+const DoctorCard = ({doctor}) => {
+    console.log("doctor card: ",doctor);
     return (
          <div className='search-doctor-card-container'>
             <div className='doctor-profile-img'>
                 <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..."></img>
             </div>
             <div className="search-card-body">
-                <span className="search-card-title">Dr. Name Name</span>
+                <span className="search-card-title">{doctor.nickname}</span>
                 <span className='search-card-text '>
                 <img src={locationIcon} style={{width:"18px",height:"18px"}}></img>
-                    City, State
+                    {doctor.address}
                 </span>
                 <span className='search-card-text '>
                     <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
-                    Specialization in Field
+                    {doctor.programTitle}
                 </span>
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>
-                    License or Verification
+                    {doctor.mechName}
                 </span>
                 <span className='search-card-text'>
                     <span className={"stars-container stars-40"}>★★★★★</span>
