@@ -15,7 +15,7 @@ interface doctorQueryStore{
     setIsModelOpen: (isModelOpen: boolean) => void;
 }
 const useDoctorQueryStore = create<doctorQueryStore>((set) => ({ 
-    doctorQuery: {pageSize: 20, isModelOpen:false}, // pageSize default value 20
+    doctorQuery: {pageSize: 20, isModelOpen:false, field:"", location:"",doctorName:""}, // pageSize default value 20
     setDoctorName: (doctorName) => 
         set((store) => ({ doctorQuery: {...store.doctorQuery, doctorName} })),
     setLocation: (location) =>

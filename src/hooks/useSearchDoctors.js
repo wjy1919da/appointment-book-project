@@ -143,18 +143,12 @@ export function useSearchMultiConditionsPopUp() {
    const fetchDoctors = ({pageParam = 1}) => {
       return axios.post('http://localhost:8080/doctor/search',
        {
-          // "address": doctorQuery.location,
-          // "nickname": doctorQuery.doctorName,
-          // "programTitle": doctorQuery.field,
-          // "filterType": [1, 2],
-          // "page": pageParam,
-          // "pageSize": doctorQuery.pageSize
-            "address": "",
-            "nickname": "",
-            "programTitle": "项目名称1",
-            "filterType": [1, 2],
-            "page": 1,
-            "pageSize": 20
+          "address": doctorQuery.location,
+          "nickname": doctorQuery.doctorName,
+          "programTitle": doctorQuery.field,
+          "filterType": [1, 2],
+          "page": pageParam,
+          "pageSize": doctorQuery.pageSize
         }
       ).then(res => {
         console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
@@ -168,10 +162,8 @@ export function useSearchMultiConditionsPopUp() {
         staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
         keepPreviousData: true,
         getNextPageParam: (lastPage, allPages) => {
-          // hasNextPage
-         // console.log("doctor search lastPage data",lastPage.pageInfo)
-          return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
-        }
+          return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+        } 
       }
    )
 }

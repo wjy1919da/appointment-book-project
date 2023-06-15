@@ -34,6 +34,9 @@ const DoctorSearchMultiInput = () => {
             <InputGroup>
                     <Input 
                         ref = {locationRef} 
+                        h="50px"   // 设置高度
+                        w="320px"
+                        borderRadius="5px"   // 设置宽度
                         type = "text" 
                         onClick = {()=> {
                             dispatchDropdown({type: 'TOGGLE_DROPDOWN'});
@@ -45,6 +48,9 @@ const DoctorSearchMultiInput = () => {
                         placeholder = "ZIP Code"  />
                         {dropdownIsOpen && <DoctorSearchDropDown/>} 
                     <Input 
+                        h="50px"   // 设置高度
+                        w="320px"
+                        borderRadius="5px" 
                         ref = {specializationRef} 
                         type = "text" 
                         value={doctorQuery.field}
@@ -52,6 +58,9 @@ const DoctorSearchMultiInput = () => {
                         focusBorderColor="orange.200"
                         placeholder = "Specialization"  />
                     <Input 
+                        h="50px"   // 设置高度
+                        w="320px"
+                        borderRadius="5px" 
                         ref = {doctorNameRef} 
                         type = "text" 
                         value={doctorQuery.doctorName}

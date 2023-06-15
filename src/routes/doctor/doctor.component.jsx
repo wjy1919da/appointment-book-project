@@ -22,12 +22,8 @@ import useDoctorQueryStore from '../../store.ts';
 import {Input,InputGroup,InputLeftElement,Button,InputRightElement} from "@chakra-ui/react";
 import DoctorSearchMultiInput from '../../components/doctor-search-multiInput/doctor-search-multiInput.component';
 const Doctor = () => {
-  const doctorQuery = useDoctorQueryStore(state=>state.doctorQuery); 
+   
   // const setIsModelOpen = useDoctorQueryStore(state=>state.setIsModelOpen);
-
-  
-  
-  
   
   return (
         <div>

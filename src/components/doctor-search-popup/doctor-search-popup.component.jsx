@@ -33,31 +33,32 @@ const DoctorSearchPopup = ({show,onHide}) => {
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
    const doctorQuery  = useDoctorQueryStore(state=>state.doctorQuery);
+
    const setDoctorName = useDoctorQueryStore(state=>state.setDoctorName);
    const setField = useDoctorQueryStore(state=>state.setField);
    const setLocation = useDoctorQueryStore(state=>state.setLocation);
    const [internalLocation,setInternalLocation] = useState(doctorQuery.location);
    const [internalField,setInternalField] = useState(doctorQuery.field);
    const [internalName,setInternalName] = useState(doctorQuery.doctorName);
+   
+  
    if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
       // 校验输入是否全部为空
       if(locationRef.current){
-        setLocation(internalLocation);
+        setLocation(locationRef.current.value);
       }
       if(specializationRef.current){
-        setField(internalField);
+        setField(specializationRef.current.value);
       }
      if(doctorNameRef.current){
-        setDoctorName(internalName);       
+        setDoctorName(doctorNameRef.current.value);       
      }
      // 用户输入为空
-     if(!locationRef.current && specializationRef.current && doctorNameRef.current){
-        alert("please input at least one condition");
-     }
-
+     console.log("doctor-search-popup.component.jsx: doctorQuery",doctorQuery);
     }
+    
    
     const fetchDoctorCount = 
         data?.pages.reduce(
@@ -73,8 +74,11 @@ const DoctorSearchPopup = ({show,onHide}) => {
             aria-labelledby="example-custom-modal-styling-title"
         >
         <div className='doctor-search-input-frame'>
-           <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
+            <div className='doctor-search-input-container'>
                 <Input
+                    h="50px"   // 设置高度
+                    w="300px"  // 设置宽度
                     ref = {locationRef}
                     type = "text"
                     placeholder = "ZIP Code"
@@ -83,41 +87,47 @@ const DoctorSearchPopup = ({show,onHide}) => {
                     focusBorderColor="orange.200"
                 />
                 <Input
+                    htmlSize={28} width='auto'
                     ref = {specializationRef}
                     type = "text"
                     placeholder = "Specialization"
                     value={internalField}
                     onChange={(e)=>setInternalField(e.target.value)}
+                    focusBorderColor="orange.200"
                 />
                 <Input
+                    htmlSize={28} width='auto'
                     ref = {doctorNameRef}
                     type = "text"
                     placeholder = "Doctor Name"
                     value={internalName}
                     onChange={(e)=>setInternalName(e.target.value)}
+                    focusBorderColor="orange.200"
                 />
-                <button type = 'submit'>search</button>
+                  <button type = 'submit'>search</button>
+                </div>
            </form>
-        </div>
+        </div> 
+        
         <div className='doctor-search-grid-container'>
         {data &&  
-                <InfiniteScroll
-                    dataLength={fetchDoctorCount}
-                    next={fetchNextPage}
-                    hasMore={hasNextPage}
-                    loader={<Spinner/>}
-                >
-                    {data.pages.map((page, index) => (
-                    <SimpleGrid key={index} columns={3} spacing={10}>
-                        {page.data.map((item, i) => (
-                        <div key={i} className='doctor-search-card-container'>
-                            <DoctorCard doctor={item} />
-                        </div>
-                        ))}
-                    </SimpleGrid>
+            <InfiniteScroll
+                dataLength={fetchDoctorCount}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                loader={<Spinner/>}
+            >
+                {data.pages.map((page, index) => (
+                <SimpleGrid key={index} columns={3} spacing={10}>
+                    {page.data && page.data.map((item, i) => (
+                    <div key={i} className='doctor-search-card-container'>
+                        <DoctorCard doctor={item} />
+                    </div>
                     ))}
-                </InfiniteScroll>
-            }
+                </SimpleGrid>
+                ))}
+            </InfiniteScroll>
+        }
         </div>   
         </Modal>  
     )
