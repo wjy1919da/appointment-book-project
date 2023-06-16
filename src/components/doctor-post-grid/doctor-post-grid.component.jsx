@@ -1,26 +1,12 @@
 import Masonry from 'react-masonry-css'
 import './doctor-post-grid.styles.scss'
-import CommunityPost from '../community-post/community-post.component'
-import profileImage from '../../assets/doctor/profile1.png'
 import DoctorPostCard from '../doctor-post-card/doctor-post-card.component'
-
-
 const DoctorPostGrid = ({posts}) => {
-   
-    const postCardList =posts.map(post => (
-        <CommunityPost 
-            key={post.id}
-            imageURL={post.pictures}
-            text={post.title}
-            profileImage={profileImage}
-            authorName="test user"
-            likes= '5'
-            //imageURL,text,profileImage,authorName,likes
-        />
-    ));
+   console.log("posts",posts);
+   const postCardList = posts.map(post => <DoctorPostCard key={post.id} postImg={post.Img} description={post.description} />);
    const breakpointColumnsObj = {
-      default: 5,
-        1100: 4,
+      default: 3,
+        1100: 2,
         700: 1,
    }
    return(

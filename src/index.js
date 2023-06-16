@@ -9,8 +9,6 @@ import awsExports from './aws-exports';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./theme"
 //import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
 
 Amplify.configure(awsExports);
@@ -22,7 +20,7 @@ const queryClient = new QueryClient({
       cacheTime: 1000 * 60 * 60 * 24 * 7, // 7 days
       staleTime: 1000 * 60 * 60 * 1,
       refetchOnWindowFocus: false,
-      refetchOnReconnect: true
+      refetchOnReconnect: false
     }
   }
 });
@@ -32,9 +30,8 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-         <ChakraProvider theme={theme}>
           <App />
-          </ChakraProvider>
+          
         </QueryParamProvider>
       </BrowserRouter>
       {/* <ReactQueryDevtools /> */}
