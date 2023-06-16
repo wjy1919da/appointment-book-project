@@ -1,4 +1,3 @@
-import { Auth } from 'aws-amplify';
 import React, { useCallback,useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";

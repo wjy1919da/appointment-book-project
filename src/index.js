@@ -4,14 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import { QueryClient, QueryClientProvider } from 'react-query';
 //import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
-
-Amplify.configure(awsExports);
 
 const queryClient = new QueryClient({
   defaultOptions: {

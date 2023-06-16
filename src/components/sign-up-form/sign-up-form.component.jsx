@@ -1,4 +1,3 @@
-import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import './sign-up-form.styles.scss';
@@ -26,39 +25,39 @@ const SignUpForm = () => {
     }
 
     const handleSendVerificationCodeSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
+        // if (password !== confirmPassword) {
+        //     alert('Passwords do not match');
+        //     return;
+        // }
 
-        try {
-            const { user } = await Auth.signUp({
-                username,
-                password,
-                attributes: {
-                    email
-                },
-                autoSignIn: {
-                    enabled: true,
-                }
-            });
-            console.log(user);
-        } catch (error) {
-            console.log('error signing up: ', error);
-        }
+        // try {
+        //     const { user } = await Auth.signUp({
+        //         username,
+        //         password,
+        //         attributes: {
+        //             email
+        //         },
+        //         autoSignIn: {
+        //             enabled: true,
+        //         }
+        //     });
+        //     console.log(user);
+        // } catch (error) {
+        //     console.log('error signing up: ', error);
+        // }
     }
 
     const handleSignUpSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
-        try {
-            await Auth.confirmSignUp(username, verificationCode);
-            resetFormContent();
-        } catch (error) {
-            console.log('error confirming sign up: ', error);
-        }
+        // try {
+        //     await Auth.confirmSignUp(username, verificationCode);
+        //     resetFormContent();
+        // } catch (error) {
+        //     console.log('error confirming sign up: ', error);
+        // }
     }
 
     return (
