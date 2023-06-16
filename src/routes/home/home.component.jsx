@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <Fragment>
             <div className='home'>
-                <div className='home-pic animate__animated animate__slideInUp'></div>
+                <div className='home-pic animate__animated animate__slideInDown'></div>
                 <div className='home-title-container'>
                     <div className='home-title-text'>
                         Charm Community 

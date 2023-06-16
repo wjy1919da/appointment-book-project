@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import './sub-procedure-reference.styles.scss';
 
 const SubProcedureReference = (props) => {
     const { reference } = props;

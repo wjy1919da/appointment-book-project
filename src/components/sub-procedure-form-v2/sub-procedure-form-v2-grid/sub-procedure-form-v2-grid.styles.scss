@@ -51,3 +51,13 @@
     
 }
 
+img {
+    /* 白 */
+
+    border: 1px solid #FBFCFF;
+    /* Soft Shadow */
+
+    filter: drop-shadow(0px 0px 40px rgba(255, 164, 163, 0.1)) drop-shadow(0px 12px 16px rgba(226, 227, 231, 0.25));
+    border-radius: 100px;
+}
+

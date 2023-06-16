@@ -37,9 +37,9 @@ const SubProcedureFormV2 = (props) => {
                 <tbody>
                     {body.map((item, index) => (
                         <tr key={index}>
-                            <td style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle' }}>{item.name}</td>
+                            <td style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>{item.name}</td>
                             {item.value.map((val, idx) => (
-                                <td key={idx} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle' }}>{val}</td>
+                                <td key={idx} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>{val}</td>
                             ))}
                         </tr>
                     ))}

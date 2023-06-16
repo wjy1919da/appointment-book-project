@@ -148,8 +148,11 @@
         flex-grow: 0;
 
         /* Add underline */
-        text-decoration: underline;
+        text-decoration: none;
 
+    }
+    .watch-video:hover {
+        text-decoration: underline;
     }
     .consider-section {
         display: flex;
@@ -271,7 +274,7 @@
         flex:none;
         position:fixed;
         right:3px;
-        top:400px;
+        top:380px;
         .introduction-icon{
             position: absolute;
             width: 24px;
@@ -331,7 +334,8 @@
             }
         }
 
-    }  
+    }
+
 }
   
  // Jingyi sub title   

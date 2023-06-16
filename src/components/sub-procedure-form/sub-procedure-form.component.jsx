@@ -38,7 +38,7 @@ const SubProcedureForm = (props) => {
           <thead>
               <tr>
                   {header.map((item, index) => (
-                      <th key={index} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <th key={index} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>
                           {item.name}
                       </th>
                   ))}
@@ -47,11 +47,11 @@ const SubProcedureForm = (props) => {
           <tbody>
               {body.map((item, index) => (
                   <tr key={index}>
-                      <td style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <td style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>
                           {item.name}
                       </td>
                       {item.value.map((value, valueIndex) => (
-                          <td key={valueIndex} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
+                          <td key={valueIndex} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>
                               {value}
                           </td>
                       ))}

@@ -16,6 +16,26 @@ import SubProcedureFormV2 from '../../components/sub-procedure-form-v2/sub-proce
 import HomeLink from '../../components/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
 const SubProcedure = () => { 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    });
+
+    const handleScroll = () => {
+        if (window.scrollY >= 290) {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '60px';
+            }
+        } else {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '380px';
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    });
+
     // Mingqi
     const n =50;
     //Jingyi
@@ -27,7 +47,6 @@ const SubProcedure = () => {
         return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
     useEffect(() => {
-        window.scrollTo(0, 0);
         const fetchData = async () => {
             // utils/apiService.js
             const response = await getProcedures({ name });
@@ -83,7 +102,8 @@ const SubProcedure = () => {
         console.log('data.reasonContent is not valid');
         // you may return here or render some fallback UI
         return null;
-    }
+    }   
+
     return (
     <div className='home-container'>
         <div className='section-container'>
@@ -105,13 +125,13 @@ const SubProcedure = () => {
                     {/* Minqi what section */}
                     <div className='what-section'>
                         <SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.reasonContent} />
-                        <Link className="watch-video" to = {videoUrl}>Watch Video</Link>
+                        <Link className="watch-video" to = {videoUrl}>Watch Video</Link> 
                     </div>
                     {/* consider section */}
                     <div className='consider-section'>
                     <SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.reasonContent} />
                         {/* pros and cons */}
-                       <ol className='pros-and-cons'>
+                        <ol className='pros-and-cons'>
                             {/*list-group-item  */}
                             <li class="list-group-item d-flex justify-content-between align-items-start" >
                                 <div style={{color: "#A5A6A8"}}>Pros:</div>
@@ -122,12 +142,12 @@ const SubProcedure = () => {
                                 </div>
                             </li> 
                             <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
-                                        <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                <div style={{color: "#A5A6A8"}}>Cons:</div>
+                                <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                                 </div>
                             </li> 
-                       </ol>
+                        </ol>
                     </div>
                 </div>
          
@@ -156,7 +176,7 @@ const SubProcedure = () => {
                
                 {/* Minqi part FQA */}
                 <div className="FQA-collapside">
-                        <Collapsible/>
+                    <Collapsible/>
                 </div>
                 <div className='sub-procedure-reference'>
                     <div className='sub-title'>
@@ -167,7 +187,7 @@ const SubProcedure = () => {
                 </div>     
             </div>
                {/* Minqi part - right side page*/}
-            <div className='sub-procedure-right-container'>
+            <div className='sub-procedure-right-container' onScroll={handleScroll}>
                 <div className='sub-procedure-right-content'>
                     <div className='sub-procedure-right-board'>
                         <div className="right-board-text">
@@ -194,11 +214,11 @@ const SubProcedure = () => {
                         </div> 
                     </div>
                     {/*Minqi - introduction-slide */}
-                        <div className="introduction-slide">
-                            <div className="introduction-icon"></div>
+                    <div className="introduction-slide" id='slide' >
+                        <div className="introduction-icon"></div>
                             <div className="introduction-catalog">
                                 <span className='introduction-title'>Introduction</span>
-                                <span className='introduction-section'>why consider facial rejuvenation</span>
+                                <span className='introduction-section'>Why consider facial rejuvenation</span>
                                 <span className='introduction-section'>Procedure options</span>
                                 <span className='introduction-section'>Potential Side Effects</span>
                                 <span className='introduction-section'>Before and After</span>
@@ -207,7 +227,7 @@ const SubProcedure = () => {
                                 <span className='introduction-section'>Reference</span>
                             </div>
                         </div>
-                  </div>    
+                    </div>    
                 </div>
            </div>
         <Footer />
