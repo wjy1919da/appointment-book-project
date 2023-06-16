@@ -25,10 +25,12 @@ import './sub-procedure-form.styles.scss'
 //     "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
 //   }
 //  ];
-const SubProcedureForm = (props) => {
- 
-    const headerObj = props.data.find(item => item.header);
-    const bodyObj = props.data.find(item => item.body);
+const SubProcedureForm = (props) => {   
+    console.log("props in sub procedure-form", props.data);
+    const optionsForm = props.data.optionsForm;
+    
+    const headerObj = optionsForm.find(item => item.header);
+    const bodyObj = optionsForm.find(item => item.body);
 
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];

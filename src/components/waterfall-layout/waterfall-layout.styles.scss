@@ -1,11 +1,11 @@
 .waterfall-layout{
   position: absolute;
-  width: 90%;
+  margin-top: 64px;
+  width: 1360px;
   height: 1092px;
-  // top: 1050px;
+  left: 40px;
   top: 100px;
-  margin: 0 auto;
-
+  z-index: -1 !important;
 .item {
   float: left;
   display: flex;

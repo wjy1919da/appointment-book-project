@@ -14,6 +14,7 @@ import Doctor from './routes/doctor/doctor.component';
 import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
 import Download from './routes/download/download.component';
+
 // do I need to add it into routes?
 
 const App = () => {
