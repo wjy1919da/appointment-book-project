@@ -24,10 +24,12 @@ const SubProcedure = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
                 document.getElementById("slide").style.top = '60px';
+                document.getElementById("slide").style.position = 'fixed';
             }
         } else {
             if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '340px';
+                document.getElementById("slide").style.top = '350px';
+                document.getElementById("slide").style.position = 'absolute';
             }
         }
     }

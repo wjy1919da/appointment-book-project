@@ -34,7 +34,7 @@ const HomePost = () => {
                 <div className='home-post-link'>
                     {/* <span className="underline-link">View More Posts</span> */}
                     <HomeLink title="View More Posts" href="/procedure/facial-rejuvenation"/>
-                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"-40px"}}></img>
+                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"-30px", border: "None"}}></img>
                     
                 </div>
             </div>

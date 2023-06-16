@@ -1,155 +1,161 @@
+// .sub-doctor-container {
+//     width: 100%;
+//     background: #EFFAFD;
+//     position: relative;
+
+//     .sub-doctor-pic {
+//         width: 100%;
+//         height: 450px;
+//         object-fit: cover;
+//         opacity: 0.8;
+//     }
+
+//     @media (min-width: 992px) {
+//         .sub-doctor-title {
+//             position: absolute;
+//             top: 170px;
+//             left: 9.5%;
+    
+//             .sub-doctor-name {
+//                 font-size: 60px;
+//                 font-family: 'Merienda', cursive, sans-serif;
+//                 font-weight: 900;
+//                 color: #3397B9;
+//                 text-transform: uppercase;
+//                 text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+//             }
+        
+//             .sub-doctor-label {
+//                 font-size: 16px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 background: #3394B6;
+//                 width: max-content;
+//                 padding: 5px 20px;
+//                 text-transform: capitalize;
+//                 margin: 20px 0;
+//             }
+        
+//             .sub-doctor-intro {
+//                 width: 60%;
+//                 font-size: 12px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 line-height: 20px;
+//                 height: 100px;
+//                 overflow: scroll;
+//             }
+//         }
+
+//         .sub-doctor-detail-container {
+//             width: 84%;
+//             margin: 88px auto;
+//         }
+//     }
+
+//     @media (max-width: 992px) {
+//         .sub-doctor-title {
+//             position: absolute;
+//             top: 150px;
+//             left: 0;
+//             right: 0;
+//             opacity: 1;
+//             z-index: 1;
+//             text-align: center;
+    
+//             .sub-doctor-name {
+//                 font-size: 50px;
+//                 font-family: 'Merienda', cursive, sans-serif;
+//                 font-weight: 900;
+//                 color: #3397B9;
+//                 text-transform: uppercase;
+//                 text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+//                 margin: 0 20px;
+//             }
+        
+//             .sub-doctor-label {
+//                 font-size: 16px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 background: #3394B6;
+//                 width: max-content;
+//                 padding: 5px 20px;
+//                 margin: 20px auto 0;
+//                 text-transform: capitalize;
+//             }
+        
+//             .sub-doctor-intro {
+//                 width: 80%;
+//                 font-size: 12px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 line-height: 20px;
+//                 margin: 20px auto;
+//                 text-align: left;
+//                 height: 100px;
+//                 overflow: scroll;
+//             }
+//         }
+
+//         .sub-doctor-detail-container {
+//             width: 84%;
+//             margin: 48px auto;
+//         }
+//     }
+
+//     @media (max-width: 576px) {
+//         .sub-doctor-title {
+//             position: absolute;
+//             top: 110px;
+//             left: 0;
+//             right: 0;
+//             opacity: 1;
+//             z-index: 1;
+//             text-align: center;
+    
+//             .sub-doctor-name {
+//                 font-size: 48px;
+//                 font-family: 'Merienda', cursive, sans-serif;
+//                 font-weight: 900;
+//                 color: #3397B9;
+//                 text-transform: uppercase;
+//                 text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
+//                 margin: 0 10px;
+//             }
+        
+//             .sub-doctor-label {
+//                 font-size: 15px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 background: #3394B6;
+//                 width: max-content;
+//                 padding: 5px 20px;
+//                 margin: 20px auto 0;
+//                 text-transform: capitalize;
+//             }
+        
+//             .sub-doctor-intro {
+//                 width: 80%;
+//                 font-size: 12px;
+//                 font-weight: 500;
+//                 color: #FFFFFF;
+//                 line-height: 20px;
+//                 margin: 20px auto;
+//                 text-align: left;
+//                 height: 140px;
+//                 overflow: scroll;
+//             }
+//         }
+
+//         .sub-doctor-detail-container {
+//             width: 84%;
+//             margin: 10px auto;
+//         }
+//     }
+// }
+
 .sub-doctor-container {
     width: 100%;
-    background: #EFFAFD;
     position: relative;
-
-    .sub-doctor-pic {
-        width: 100%;
-        height: 450px;
-        object-fit: cover;
-        opacity: 0.8;
-    }
-
-    @media (min-width: 992px) {
-        .sub-doctor-title {
-            position: absolute;
-            top: 170px;
-            left: 9.5%;
-    
-            .sub-doctor-name {
-                font-size: 60px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: uppercase;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-            }
-        
-            .sub-doctor-label {
-                font-size: 16px;
-                font-weight: 500;
-                color: #FFFFFF;
-                background: #3394B6;
-                width: max-content;
-                padding: 5px 20px;
-                text-transform: capitalize;
-                margin: 20px 0;
-            }
-        
-            .sub-doctor-intro {
-                width: 60%;
-                font-size: 12px;
-                font-weight: 500;
-                color: #FFFFFF;
-                line-height: 20px;
-                height: 100px;
-                overflow: scroll;
-            }
-        }
-
-        .sub-doctor-detail-container {
-            width: 84%;
-            margin: 88px auto;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .sub-doctor-title {
-            position: absolute;
-            top: 150px;
-            left: 0;
-            right: 0;
-            opacity: 1;
-            z-index: 1;
-            text-align: center;
-    
-            .sub-doctor-name {
-                font-size: 50px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: uppercase;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-                margin: 0 20px;
-            }
-        
-            .sub-doctor-label {
-                font-size: 16px;
-                font-weight: 500;
-                color: #FFFFFF;
-                background: #3394B6;
-                width: max-content;
-                padding: 5px 20px;
-                margin: 20px auto 0;
-                text-transform: capitalize;
-            }
-        
-            .sub-doctor-intro {
-                width: 80%;
-                font-size: 12px;
-                font-weight: 500;
-                color: #FFFFFF;
-                line-height: 20px;
-                margin: 20px auto;
-                text-align: left;
-                height: 100px;
-                overflow: scroll;
-            }
-        }
-
-        .sub-doctor-detail-container {
-            width: 84%;
-            margin: 48px auto;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .sub-doctor-title {
-            position: absolute;
-            top: 110px;
-            left: 0;
-            right: 0;
-            opacity: 1;
-            z-index: 1;
-            text-align: center;
-    
-            .sub-doctor-name {
-                font-size: 48px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: uppercase;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-                margin: 0 10px;
-            }
-        
-            .sub-doctor-label {
-                font-size: 15px;
-                font-weight: 500;
-                color: #FFFFFF;
-                background: #3394B6;
-                width: max-content;
-                padding: 5px 20px;
-                margin: 20px auto 0;
-                text-transform: capitalize;
-            }
-        
-            .sub-doctor-intro {
-                width: 80%;
-                font-size: 12px;
-                font-weight: 500;
-                color: #FFFFFF;
-                line-height: 20px;
-                margin: 20px auto;
-                text-align: left;
-                height: 140px;
-                overflow: scroll;
-            }
-        }
-
-        .sub-doctor-detail-container {
-            width: 84%;
-            margin: 10px auto;
-        }
-    }
+    top: 64px;
 }

@@ -45,7 +45,7 @@
                 left: 48px;
                 top: 402px;
                 
-                .pText{
+                .ptext{
                     font-family: 'Lora';
                     font-style: normal;
                     font-weight: 400;
@@ -202,7 +202,7 @@
                 top: 402px;
                 margin-top: 70px;
                 
-                .pText{
+                .ptext{
                     font-family: 'Lora';
                     font-style: normal;
                     font-weight: 400;
@@ -442,4 +442,13 @@
                 }
             }
         }
+}
+
+.pText{
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 160%;
+    color: #000000;
 }

@@ -1,0 +1,44 @@
+.about-container {
+    margin-bottom: 30px;
+    
+    .about-title {
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 135%;
+        /* or 32px */
+
+        display: flex;
+        align-items: center;
+
+        color: #000000;
+    }
+
+    .about-items {
+        display: flex;
+        justify-content: left;
+
+        .about-item-grid {
+            margin-right: 30px;
+            text-align: center;
+
+            .about-item-pic {
+                width: 60px;
+                border-radius: 8px;
+            }
+
+            .about-item-name {
+                font-family: 'Lora';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 160%;
+                /* or 26px */
+
+
+                color: #000000;
+            }
+        }
+    }
+}

@@ -14,6 +14,7 @@ import Doctor from './routes/doctor/doctor.component';
 import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
 import Download from './routes/download/download.component';
+import SubDoctor from './routes/doctor/sub-doctor.component';
 // do I need to add it into routes?
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
         <Route path='doctor' element={<Doctor />} />
+        <Route path='sub-doctor' element={<SubDoctor />} />
         <Route path='doctor-search' element={<DoctorSearch />} />
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
