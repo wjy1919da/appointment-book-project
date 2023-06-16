@@ -21,13 +21,13 @@ const SubProcedure = () => {
     });
 
     const handleScroll = () => {
-        if (window.scrollY >= 290) {
+        if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
                 document.getElementById("slide").style.top = '60px';
             }
         } else {
             if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '380px';
+                document.getElementById("slide").style.top = '340px';
             }
         }
     }

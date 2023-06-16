@@ -25,7 +25,8 @@
             margin-left: 200px;
             overflow: hidden;
             z-index: 1;
-
+            border: none;
+            border-radius: 0;
         }
         .decoration-pic1
         {
@@ -35,6 +36,8 @@
             width:160px;
             height:180px;
             object-fit: cover;
+            border: none;
+            border-radius: 0;
         }
         .decoration-pic2
         {
@@ -44,7 +47,8 @@
             width:240px;
             height:240px;
             object-fit: cover;
-
+            border: none;
+            border-radius: 0;
         }
         .p-topic{
             position: relative;
