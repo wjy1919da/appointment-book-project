@@ -17,122 +17,122 @@ import HomeLink from '../../components/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
 import useGetProcedures from '../../hooks/useSearchDoctors';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
+import useProcedureQueryStore from '../../procedureStore.ts'
+function safeJsonParse(str) {
+    try {
+        return JSON.parse(str);
+    } catch (e) {
+        return undefined;
+    }
+}
 const SubProcedure = () => { 
    // Mingqi
    //console.log("sub-procedure");
    const n =50;
    //Jingyi
    const { name } = useParams();
+   const setCategories = useProcedureQueryStore(state=>state.setCategories);
    const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
    // data from remote
-   const [localData, setLocalData] = useState(null);
-   const [page] = useState(1); // Set your desired initial page here
-   const [reFetchCount, setReFetchCount] = useState(0);
-
-   
-
-   const { data, isLoading, error } = useGetProcedures(name,page);
+   const { data, isLoading, error } = useGetProcedures();
+   console.log("sub-procedure.component.jsx: data",data);
+   useEffect(() => {
+     setCategories(name);
+   }, [name]);
 
    const formatTitle = (title) => {
        return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
    }
-   const reFetchData = () => {
-    if (reFetchCount >= 1) {
-      // We have tried enough, stop here
-      return <div className='error'>No available data</div>;
-    }
-    setReFetchCount(reFetchCount + 1);
-  };
-  // 这部分的处理可以简化吗？
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    // Here you set localData when data is updated
-    if (data && data.data) {
-        setLocalData(data.data);
+   
+    var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
 
-        if(!data.data.subcategories || 
-           !data.data.subcategories[2] || !data.data.subcategories[2].other ||
-           !data.data.subcategories[3] || !data.data.subcategories[3].other ||
-           !data.data.subcategories[4] || !data.data.subcategories[4].other||
-           !data.data.subcategories[5] || !data.data.subcategories[5].other||
-           !data.data.subcategories[7] || !data.data.subcategories[7].other||
-            !data.data.subcategories[6] || !data.data.subcategories[6].other) {
-            reFetchData();
-        }
-    } else {
-        reFetchData();
-    }
-   }, [name, data, reFetchCount]);  // Added data as a dependency here// Added data as a dependency here
-   //console.log(localData);
-   if (isLoading) {
+    if (isLoading) {
        return <HomeSpinner />;
     }
-    if (!localData || !localData.subcategories) {
-        return <div className='error'>Error: Data is not available</div>;
-    }    
-    const prosAndCons = JSON.parse(localData.subcategories[1].other);
-    const optionsContent = JSON.parse(localData.subcategories[2].other);
-    const beforeAndAfterImage = JSON.parse(localData.subcategories[3].other).beforeAndAfterImage;
-    const reference = JSON.parse(localData.subcategories[4].other);
-    const alternativeTreatmentForm = JSON.parse(localData.subcategories[5].other);
-    const cardInfo = JSON.parse(localData.subcategories[7].other);
-    //console.log("cardInfo",cardInfo.Cost);
+    if (data.data && data.data.subcategories) {
+        if (data.data.subcategories[1]) {
+            prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
+
+
+        }
+        if (data.data.subcategories[2]) {
+            optionsContent = data.data.subcategories[2].other ? safeJsonParse(data.data.subcategories[2].other) : undefined;
+
+        }
+        if (data.data.subcategories[3]) {
+            const parsed = safeJsonParse(data.data.subcategories[3].other);
+            beforeAndAfterImage = parsed ? parsed.beforeAndAfterImage : undefined;  
+        }
+        if (data.data.subcategories[4]) {
+            reference = data.data.subcategories[4].other ? safeJsonParse(data.data.subcategories[4].other) : undefined;
+           
+        }
+        if (data.data.subcategories[5]) {
+            alternativeTreatmentForm = data.data.subcategories[5].other ? safeJsonParse(data.data.subcategories[5].other) : undefined;
+          
+        }
+        if (data.data.subcategories[7]) {
+            cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
+        }
+    }else{
+        return <div className='error'>{data.msg}</div>;
+    }
     
     return (
      <div className='home-container'>
         <div className='section-container'>
-           
-           
-          
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' >{formatTitle(name)}</h1>
                 <br/>
-                <p className='sub-procedure-normal-text'>
-                        {localData.description}
-                </p>
+                {data.data.description &&
+                    <p className='sub-procedure-normal-text'>
+                        {data.data.description}
+                    </p>}
             </div>
             
             <div className='sub-text'> 
-              
+            {data.data?.subcategories[0] &&
                 <div className='what-section'> 
-                    <SubTxt title={'What is ' + formatTitle(name) + '?'} text={localData.subcategories[0].explanation} />   
-                    <Link className="watch-video" to={localData.subcategories[0].other}>Watch Video</Link>
-                </div>
+                { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
+                { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
+               </div>
+            } 
                 {/* consider section */}
                 <div className='consider-section'>
-                <SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={localData.subcategories[1].explanation} />
+                {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
                     {/* pros and cons */}
-                   <ol className='pros-and-cons'>
+                    {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
-                        <li class="list-group-item d-flex justify-content-between align-items-start" >
+                        { prosAndCons[0]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" >
                             <div style={{color: "#A5A6A8"}}>Pros:</div>
-                            <div className="ms-2 me-auto" style={{}}>
-                                {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
-                            </div>
-                        </li> 
-                        <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
-                                    <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                    <div class="ms-2 me-auto" style={{color:"#000000"}}>
-                                {prosAndCons[1]} 
-                            </div>
-                        </li> 
-                   </ol>
+                                <div className="ms-2 me-auto" style={{}}>
+                                    {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
+                                </div>
+                            </li> 
+                        }
+                        {prosAndCons[1]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                                        <div style={{color: "#A5A6A8"}}>Cons:</div>
+                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                    {prosAndCons[1]} 
+                                </div>
+                            </li> }
+                   </ol>}
                 </div>
             </div>
         <div className='sub-procedure-option-form-container'>
-                <SubTxt title={'Procedure options'} text={localData.subcategories[2].explanation}/>
-                {/* option form */}
-                <SubProcedureForm data={optionsContent} />  
+              {data.data?.subcategories[2].explanation &&<SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/>}  
+                {optionsContent &&<SubProcedureForm data={optionsContent} />  }
             </div>
             <div className='sub-procedure-side-effect'>
-                <SubTxt title={'Potential Side Effects'} text={localData.subcategories[6].explanation}/>
+              {data.data?.subcategories[6].explanation && <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>}
             </div>
             <div className='sub-procedure-scroll-container'>
-                <SubTxt title={'Before and After'} text={localData.subcategories[3].explanation}/>
-                {/* scroll bar */}
-                <SubProcedureScroll data={beforeAndAfterImage} />
+                {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
+                {beforeAndAfterImage && <SubProcedureScroll data={beforeAndAfterImage} />}
                 <HomeLink title = "View More Post" href = '/instrument/thermage'/>  
             </div>
             <div className='sub-procedure-form-ver'>
@@ -140,7 +140,7 @@ const SubProcedure = () => {
                     Alternative treatments
                 </div>
                 {/* alternative treatment form */}
-                <SubProcedureFormV2 data  = {alternativeTreatmentForm}/>
+                {alternativeTreatmentForm &&<SubProcedureFormV2 data  = {alternativeTreatmentForm}/>}
             </div>
            
             {/* Minqi part FQA */}
@@ -152,13 +152,13 @@ const SubProcedure = () => {
                     References and resources
                 </div>
                 {/* reference */}
-                <SubProcedureReference reference = {reference}/>
+                {reference && <SubProcedureReference reference = {reference}/>}
             </div>     
              </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'>
                 <div className='sub-procedure-right-content'>
-                    <div className='sub-procedure-right-board'>
+                {cardInfo &&<div className='sub-procedure-right-board'>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Cost:</span>
                             <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
@@ -181,7 +181,7 @@ const SubProcedure = () => {
                             <span style={{color:"#A5A6A8"}}>Pain:</span>
                             <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
                         </div> 
-                    </div>
+                    </div>}
                     {/*Minqi - introduction-slide */}
                         <div className="introduction-slide">
                             <div className="introduction-icon"></div>

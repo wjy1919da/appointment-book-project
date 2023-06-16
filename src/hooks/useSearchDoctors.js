@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-query";
 import { useGetPorcedures } from './useSearchDoctors';
 import useDoctorQueryStore from '../store.ts';
+import useProcedureQueryStore from "../procedureStore.ts";
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -152,7 +153,7 @@ export function useSearchMultiConditionsPopUp() {
         }
       ).then(res => {
         console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
-        return { data: res.data.data, pageInfo: res.data.pageInfo };
+        return { data: res.data.data || [], pageInfo: res.data.pageInfo };
       })
    }
    return useInfiniteQuery(
@@ -198,27 +199,33 @@ export function useGetPost(pageSize, filterType) {
 
 
 
-export default function useGetProcedures(category, page, reFetchCount) {
-  //console.log("useGetProcedures", category, page);
+export default function useGetProcedures() {
+  const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
   var processedCategory;
+
   const fetchProcedures = () => {
     // Replace all '-' with '_'
-    processedCategory = category.replace(/-/g, "_");
+    processedCategory = procedureQuery.categories.replace(/-/g, "_");
     let url = `${base.procedureUrl}/${processedCategory}`;
 
+    // use default pageSize
+    // no page info 
     return axios.get(url, {
       params: {
-        page: page
+        page: 1,
       }
     })
     .then(res => {
-     // console.log('dataInSearchAPI:', res.data);
+      // console.log('dataInSearchAPI:', res.data);
       return res.data;
+    })
+    .catch(error => {
+      console.error("Failed to fetch procedures", error);
+      return { data: {} }; // return a default object if fetching fails
     });
   }
 
-  // The last parameter in the dependency array is reFetchCount, which makes sure
-  // that the query is refetched whenever reFetchCount changes.
-  return useQuery(['procedures', processedCategory, page, reFetchCount], fetchProcedures);
+  return useQuery(['procedures', procedureQuery], fetchProcedures, {
+    placeholderData: { data: {} }, // default object to use before fetching completes
+  });
 }
-

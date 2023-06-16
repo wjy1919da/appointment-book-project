@@ -17,6 +17,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import useDoctorQueryStore from '../../store.ts';
+import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.componment';
+import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 const DoctorSearchPopup = ({show,onHide}) => {
    const {
         data,
@@ -65,6 +67,7 @@ const DoctorSearchPopup = ({show,onHide}) => {
             (total, page) => total + (page.data?.length || 0),
             0
         ) || 0;
+   
     return(
         <Modal
             dialogClassName="doctor-search-modals"
@@ -74,43 +77,58 @@ const DoctorSearchPopup = ({show,onHide}) => {
             aria-labelledby="example-custom-modal-styling-title"
         >
         <div className='doctor-search-input-frame'>
+            <div className='doctor-search-outter-box'>
             <form onSubmit={handleSubmit}>
-            <div className='doctor-search-input-container'>
+               <InputGroup display="flex" alignItems="center">
                 <Input
-                    h="50px"   // 设置高度
-                    w="300px"  // 设置宽度
-                    ref = {locationRef}
-                    type = "text"
-                    placeholder = "ZIP Code"
-                    value={internalLocation}
-                    onChange={(e)=>setInternalLocation(e.target.value)}
-                    focusBorderColor="orange.200"
-                />
-                <Input
-                    htmlSize={28} width='auto'
-                    ref = {specializationRef}
-                    type = "text"
-                    placeholder = "Specialization"
-                    value={internalField}
-                    onChange={(e)=>setInternalField(e.target.value)}
-                    focusBorderColor="orange.200"
-                />
-                <Input
-                    htmlSize={28} width='auto'
-                    ref = {doctorNameRef}
-                    type = "text"
-                    placeholder = "Doctor Name"
-                    value={internalName}
-                    onChange={(e)=>setInternalName(e.target.value)}
-                    focusBorderColor="orange.200"
-                />
-                  <button type = 'submit'>search</button>
-                </div>
+                        h="50px"   // 设置高度
+                        w="250px" // 设置宽度
+                        borderRadius="5px"
+                        ref = {locationRef}
+                        type = "text"
+                        placeholder = "ZIP Code"
+                        value={internalLocation}
+                        onChange={(e)=>setInternalLocation(e.target.value)}
+                        focusBorderColor="orange.200"
+                    />
+                     <VerticalDivider/>
+                    <Input
+                        h="50px"   // 设置高度
+                        w="250px" // 设置宽度
+                        borderRadius="5px"
+                        ref = {specializationRef}
+                        type = "text"
+                        placeholder = "Specialization"
+                        value={internalField}
+                        onChange={(e)=>setInternalField(e.target.value)}
+                        focusBorderColor="orange.200"
+                    />
+                     <VerticalDivider/>
+                    <Input
+                        h="50px"   // 设置高度
+                        w="250px" // 设置宽度
+                        borderRadius="5px"
+                        ref = {doctorNameRef}
+                        type = "text"
+                        placeholder = "Doctor Name"
+                        value={internalName}
+                        onChange={(e)=>setInternalName(e.target.value)}
+                        focusBorderColor="orange.200"
+                    />
+                     <VerticalDivider/>
+                      <button className='doctor-search-button' type = 'submit'>
+                            <img src={SearchIcon} className='doctor-search-icon' />
+                            search
+                     </button>
+                </InputGroup> 
            </form>
+            </div>
         </div> 
         
         <div className='doctor-search-grid-container'>
-        {data &&  
+        {isLoading ?
+            <div ><p>is Loading</p></div> :
+            (data && 
             <InfiniteScroll
                 dataLength={fetchDoctorCount}
                 next={fetchNextPage}
@@ -127,8 +145,9 @@ const DoctorSearchPopup = ({show,onHide}) => {
                 </SimpleGrid>
                 ))}
             </InfiniteScroll>
+            )
         }
-        </div>   
+        </div>  
         </Modal>  
     )
 }

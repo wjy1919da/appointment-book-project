@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState,useReducer } from 'react'
-import {Input,InputGroup,InputLeftElement,Button,InputRightElement} from "@chakra-ui/react";
+import {Input,InputGroup,InputLeftElement,Button,InputRightElement,Divider} from "@chakra-ui/react";
 import useDoctorQueryStore from '../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component'
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component';
 import searchReducer from '../../reducer/searchReducer.ts';
+import VerticalDivider from './doctor-search-divider.componment'
+import DoctorSearchButton from '../doctor-search-button/doctor-search-button.component.jsx';
+import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 const DoctorSearchMultiInput = () => {
     const locationRef = useRef(null);
     const specializationRef = useRef(null);
@@ -31,11 +34,11 @@ const DoctorSearchMultiInput = () => {
     }
     return (
     <div>
-            <InputGroup>
+            <InputGroup display="flex" alignItems="center">
                     <Input 
                         ref = {locationRef} 
                         h="50px"   // 设置高度
-                        w="320px"
+                        w="280px"
                         borderRadius="5px"   // 设置宽度
                         type = "text" 
                         onClick = {()=> {
@@ -46,10 +49,11 @@ const DoctorSearchMultiInput = () => {
                         onChange = {(event) => setLocation(event.target.value)}
                         focusBorderColor="orange.200"
                         placeholder = "ZIP Code"  />
-                        {dropdownIsOpen && <DoctorSearchDropDown/>} 
+                        {dropdownIsOpen && <DoctorSearchDropDown/>}
+                      <VerticalDivider/>
                     <Input 
                         h="50px"   // 设置高度
-                        w="320px"
+                        w="280px"
                         borderRadius="5px" 
                         ref = {specializationRef} 
                         type = "text" 
@@ -57,9 +61,10 @@ const DoctorSearchMultiInput = () => {
                         onChange = {(event) => setField(event.target.value)}
                         focusBorderColor="orange.200"
                         placeholder = "Specialization"  />
+                         <VerticalDivider/>
                     <Input 
                         h="50px"   // 设置高度
-                        w="320px"
+                        w="280px"
                         borderRadius="5px" 
                         ref = {doctorNameRef} 
                         type = "text" 
@@ -67,7 +72,11 @@ const DoctorSearchMultiInput = () => {
                         onChange = {(event) => setDoctorName(event.target.value)}
                         focusBorderColor="orange.200"
                         placeholder = "Doctor Name"  />
-                        <button onClick={handleOnClick} >search</button>
+                         <VerticalDivider/>
+                         <button className='doctor-search-button' onClick = {handleOnClick}>
+                            <img src={SearchIcon} className='doctor-search-icon' />
+                            search
+                         </button>
             </InputGroup>
            {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)}/>}
             

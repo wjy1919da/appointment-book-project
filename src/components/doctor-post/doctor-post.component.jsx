@@ -9,8 +9,6 @@ import { SimpleGrid } from '@chakra-ui/react';
 import CommunityPost from '../community-post/community-post.component';
 import profileImage from '../../assets/doctor/profile1.png'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import MasonryInfiniteScroller from 'react-masonry-infinite';
-import WaterfallLayout from './../waterfall-layout/waterfall-layout';
 const DoctorPost = () => {
     const filterOptions = [
         { value: "User", label: "By User" },
