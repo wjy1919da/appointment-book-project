@@ -5,6 +5,7 @@ import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-quer
 import { useGetPorcedures } from './useSearchDoctors';
 import useDoctorQueryStore from '../store.ts';
 import useProcedureQueryStore from "../procedureStore.ts";
+import usePostQueryStore from "../postStore.ts";
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -169,20 +170,20 @@ export function useSearchMultiConditionsPopUp() {
    )
 }
 
-export function useGetPost(pageSize, filterType) {
-  // data.data need to be changed ???????
+export function useGetPost() {
+  const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = ({ pageParam = 1 }) => {
     return axios.post('http://localhost:8080/post/posts:page', {
       currentPage: pageParam,
-      pageSize: pageSize,
-      filterType: filterType
+      pageSize: postQuery.pageSize,
+      filterType: postQuery.filterType,
     }).then(res => {
      // console.log("fetch Data:", res.data, "pageParam:", pageParam);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     });
   };
   return useInfiniteQuery(
-   ['posts', pageSize, filterType], 
+   ['posts', postQuery], 
    fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
