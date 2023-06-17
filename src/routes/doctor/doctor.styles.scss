@@ -138,3 +138,31 @@
     border-radius: 5px;
     align-items: center;
 }
+.doctor-post-grid-container{
+    width: 100%;
+    height: 50%;
+    background: #FBFCFF;
+}
+.doctor-post-grid-box{
+    margin-left: -60px;
+    margin-right: 35px;
+}
+.doctor-title
+{
+    margin-left: 30%;
+    width: 555px;
+    height: 54px;
+    left: calc(50% - 555px/2 + 0.5px);
+    top: 40px;
+    
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 135%;
+    
+    text-align: center;
+    
+    color: #000000;
+
+}

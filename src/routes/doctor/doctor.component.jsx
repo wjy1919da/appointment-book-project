@@ -44,14 +44,17 @@ const Doctor = () => {
                       <DoctorSearchMultiInput />
                   </div>
               </div>
-            
+              
               <div className='doctor-intro-container'>
                 <IntroDoctor />
               </div>
              <FeatureDoctor />
-            {/* <div className='doctor-post-container'>
-              <DoctorPostGrid /> 
-             </div>  */}
+             <span className="doctor-title">Post by doctor</span>
+             <div className='doctor-post-grid-container'>
+                <div className='doctor-post-grid-box'>
+                  <DoctorPostGrid />
+                </div>
+             </div>
           </div>
          
           <Footer />
