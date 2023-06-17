@@ -15,12 +15,12 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
                 <span className="post-text">{text}</span>
                 <div className="profile">
                     <div className="profileImage">
-                        <img src={profileImage}></img>
+                        <img className = 'profile-pic' src={profileImage}></img>
                         <span className="gray-text">{authorName}</span>
                     </div>
                     <div className="likeNumber">
                        <img src={heartIcon} className="heartIcon"></img>
-                        <span className="gray-text" style={{marginTop:"-8px"}}>{likes}</span>
+                        <span className="gray-text">{likes}</span>
                     </div>
                 </div>
             </div>
