@@ -10,6 +10,7 @@ import DoctorSearchButton from '../doctor-search-button/doctor-search-button.com
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
 const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) => {
   const [internalName,setInternalName] = useState(name);
@@ -61,7 +62,9 @@ const DoctorSearchPopup = ({name , field, location, searchResults,show,onHide}) 
   const generateCardList = (items) => {
     return items.map(item => (
         <div key={item.id} className='doctor-search-card-container'>
-            <DoctorCard doctor={item} />
+            <Link to={`/doctor/${item.name}`} style={{textDecoration:"none"}}>
+                <DoctorCard doctor={item} />
+            </Link>
         </div>
     ));
   }

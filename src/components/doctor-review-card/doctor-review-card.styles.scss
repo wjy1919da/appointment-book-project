@@ -1,0 +1,112 @@
+.doctor-review-card-container
+{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 0px 24px;
+    gap: 12px;
+    width: 800px;
+    height: 199px;
+    border-bottom: 1px solid #E2E3E7;
+    
+    .reviewer-starRate
+    {
+        .stars-container {
+            position: relative;
+            display: inline-block;
+            color: transparent;
+          }
+          
+          .stars-container:before {
+            position: absolute;
+            left: 0%;
+            right: 8.34%;
+            top: 10.42%;
+            bottom: 10.42%;
+            content: '★★★★★';
+            color: lightgray;
+          }
+          
+          .stars-container:after {
+            position: absolute;
+            left: 0%;
+            right: 8.34%;
+            top: 10.42%;
+            bottom: 10.42%;
+            content: '★★★★★';
+            color: #FFA4A3;
+            overflow: hidden;
+          }
+          .stars-10:after { width: 20%; }
+          .stars-15:after { width: 30%; }
+          .stars-20:after { width: 40%; }
+          .stars-25:after { width: 50%; }
+          .stars-30:after { width: 60%; }
+          .stars-35:after { width: 70%; }
+          .stars-40:after { width: 80%; }
+          .stars-45:after { width: 90%; }
+          .stars-50:after { width: 100%; }
+    }
+    .reviewer-information-date
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .reviewer-information
+        {
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap:16px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 160%;
+            .verified-symbol
+            {
+                // margin-left: 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                color: #A5A6A8;
+            
+            .verified-Icon
+            {
+                background-image: url('../../assets/doctor/verified-Icon.png');
+                background-repeat: no-repeat;
+                background-position: left center;
+                margin-right: 5px; 
+                display: inline-block;
+                width: 20px; /* Adjust the width and height as needed */
+                height: 20px;
+            }
+            }
+        }
+        .review-date{
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            align-items: right;
+            width: 88px;
+            height: 26px;
+            color: #A5A6A8;
+            font-weight: 500;
+           left:700px;
+           position: absolute;
+        
+        }
+    }
+}
