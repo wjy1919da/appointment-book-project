@@ -1,8 +1,11 @@
 import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useState } from "react";
-import { useQuery, useQueryClient,useInfiniteQuery } from "react-query";
+import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-query";
 import { useGetPorcedures } from './useSearchDoctors';
+import useDoctorQueryStore from '../store.ts';
+import useProcedureQueryStore from "../procedureStore.ts";
+import usePostQueryStore from "../postStore.ts";
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -10,12 +13,13 @@ const base = {
     doctorSearchUrl: 'https://run.mocky.io/v3/3bca72f6-9e31-4efc-9fe2-bfe040879a54',
     specializationDefaultUrl: 'https://run.mocky.io/v3/becf0a1c-4279-472f-bd26-eff6cac83223',
     specializationSearchUrl: 'https://run.mocky.io/v3/5206ee0c-7f8e-4e65-9b83-8ff193920ccb',
+    // location default 先保留
     locationDefaultUrl: 'https://run.mocky.io/v3/f023b3fd-88bf-4fa8-98c1-9384027c74ab',
     locationSearchUrl: 'https://run.mocky.io/v3/66a8fae6-24b6-43d3-bedc-09904ef1255b',
     multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
     multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
-    postCategoryUrl:'https://run.mocky.io/v3/6e9b4724-7b5f-4570-aa22-e04a973004cd',
+    postCategoryUrl:'http://localhost:8080/post/posts:page',
   }
 
 export function useSearchDoctors(doctorName){
@@ -84,33 +88,34 @@ export function useSearchSpecialization(specialization){
         queryFn: fetchProjects 
     });
 }
-export function useSearchLocation(location){
-    const debouncedSearchTerm = useDebounce(location, 200);
+export function useSearchLocation(){
+    const location = useDoctorQueryStore(s => s.doctorQuery.location);
+    console.log("useSearchLocation",location)
+    const debouncedSearchTerm = useDebounce(location, 700);
     const fetchLocations = () => {
-        let url;
-        console.log("LocationQuery")
-        if (location == undefined || debouncedSearchTerm == "" || location == "") {
-            console.log("default Location")
-            url = base.locationDefaultUrl;
-        }
-        else{
-            console.log("search Location")
-            console.log("params",debouncedSearchTerm)
-            url = base.locationSearchUrl;
-        }
-        return axios.get(url, 
-          {
-            params: {
-                location : debouncedSearchTerm
-            }
-          })
-          .then(
-            res => {
-              console.log('dataInSearchAPI:', res.data);
-              return res.data;
-            }
-          )
-    }
+      let url;
+      console.log("LocationQuery");
+      if (!location || !debouncedSearchTerm) {
+          console.log("default Location");
+          url = base.locationDefaultUrl;
+      } else {
+          console.log("search Location");
+          console.log("params", debouncedSearchTerm);
+          url = base.locationSearchUrl;
+      }
+      return axios.get(url, 
+        {
+          params: {
+              location : debouncedSearchTerm || ''
+          }
+        })
+        .then(
+          res => {
+            console.log('dataInSearchAPI:', res.data);
+            return res.data;
+          }
+        )
+  }
     return useQuery({
         queryKey: ['location', debouncedSearchTerm],
         queryFn: fetchLocations
@@ -133,70 +138,95 @@ export function useSearchMultiConditions(location, specialization, doctorName){
   return useQuery('doctors', fetchAllCondition, { enabled: false });
 }
 
-
-export function useSearchMultiConditionsPopUp(location, specialization, doctorName) {
-  const fetchAllCondition = () => {
-    return axios.get(base.multiConditionSearchUrl, {
-      params: {
-        location: location !== "all" ? location : undefined, 
-        specialization: specialization !== "all" ? specialization : undefined,
-        doctorName: doctorName !== "" ? doctorName : undefined, 
-        // page: pageParam
-      }
-    }).then(res => {
-      console.log('dataInSearchAPI:', res.data.pages);
-      return res.data;
-    });
-  };
-  return useQuery('doctors', fetchAllCondition, { enabled: false });
-
-  // return useInfiniteQuery('doctors', fetchAllCondition, {
-  //   enabled: false,
-  //   getNextPageParam: (lastPage, allPages) => {
-  //     return lastPage.next ? allPages.length + 1 : undefined;  
-  //     }
-  //    }
-  // );
-}
-
-export function useGetPost(){
-  const fetchPost = () => {
-    return axios.get(base.postCategoryUrl,
-      // {
-      //   params: {
-      //     Facial: Facial !== "all" ? Facial : undefined,
-      //     Breast: Breast !== "all" ? Breast : undefined,
-      //     Body: Body !== "all" ? Body : undefined
-      //   }
-      // }
+// search doctor part
+export function useSearchMultiConditionsPopUp() {
+   const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
+   //console.log("useSearchMultiConditionsPopUp:", doctorQuery);
+   const fetchDoctors = ({pageParam = 1}) => {
+      return axios.post('http://localhost:8080/doctor/search',
+       {
+          "address": doctorQuery.location,
+          "nickname": doctorQuery.doctorName,
+          "programTitle": doctorQuery.field,
+          "filterType": [1, 2],
+          "page": pageParam,
+          "pageSize": doctorQuery.pageSize
+        }
       ).then(res => {
-        console.log("get post dataInSearchAPI:", res.data);
-        return res.data;
+        console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
+        return { data: res.data.data || [], pageInfo: res.data.pageInfo };
+      })
+   }
+   return useInfiniteQuery(
+      ['doctors', doctorQuery],
+      fetchDoctors,
+      {
+        staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+        keepPreviousData: true,
+        getNextPageParam: (lastPage, allPages) => {
+          return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+        } 
+      }
+   )
+}
+
+export function useGetPost() {
+  const postQuery = usePostQueryStore(s => s.postQuery);
+  const fetchPost = ({ pageParam = 1 }) => {
+    return axios.post('http://localhost:8080/post/posts:page', {
+      currentPage: pageParam,
+      pageSize: postQuery.pageSize,
+      filterType: postQuery.filterType,
+    }).then(res => {
+     // console.log("fetch Data:", res.data, "pageParam:", pageParam);
+      return { data: res.data.data, pageInfo: res.data.pageInfo };
     });
   };
-   return useQuery(['post'], fetchPost);
+  return useInfiniteQuery(
+   ['posts', postQuery], 
+   fetchPost, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+    keepPreviousData: true,
+    // lastPage is an array of posts
+    // allPages is an array of pages
+    getNextPageParam: (lastPage, allPages) => {
+      // hasNextPage
+      //console.log("lastPage data",lastPage.pageInfo)
+      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+    }
+   }   
+  );
 }
-export default function useGetProcedures(category, page, reFetchCount) {
-  console.log("useGetProcedures", category, page);
+
+
+
+export default function useGetProcedures() {
+  const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
   var processedCategory;
+
   const fetchProcedures = () => {
     // Replace all '-' with '_'
-    processedCategory = category.replace(/-/g, "_");
+    processedCategory = procedureQuery.categories.replace(/-/g, "_");
     let url = `${base.procedureUrl}/${processedCategory}`;
 
+    // use default pageSize
+    // no page info 
     return axios.get(url, {
       params: {
-        page: page
+        page: 1,
       }
     })
     .then(res => {
-      console.log('dataInSearchAPI:', res.data);
+      // console.log('dataInSearchAPI:', res.data);
       return res.data;
+    })
+    .catch(error => {
+      console.error("Failed to fetch procedures", error);
+      return { data: {} }; // return a default object if fetching fails
     });
   }
 
-  // The last parameter in the dependency array is reFetchCount, which makes sure
-  // that the query is refetched whenever reFetchCount changes.
-  return useQuery(['procedures', processedCategory, page, reFetchCount], fetchProcedures);
+  return useQuery(['procedures', procedureQuery], fetchProcedures, {
+    placeholderData: { data: {} }, // default object to use before fetching completes
+  });
 }
-

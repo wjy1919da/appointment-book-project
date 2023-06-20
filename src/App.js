@@ -13,6 +13,7 @@ import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
 import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
+
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 // do I need to add it into routes?
 

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import "./waterfall-layout.styles.scss"
 import CommunityPost from '../community-post/community-post.component';
-
+import profileImage from '../../assets/doctor/profile1.png'
 function WaterfallLayout({posts}) {
-  console.log("waterfall",posts);
   useEffect(() => {
     const items = document.getElementsByClassName('item');
     const gap = 40;
@@ -72,14 +71,15 @@ function WaterfallLayout({posts}) {
       {posts.length === 0 && <div>No post yet</div>}
       {posts && posts.map((post, index) => (
         <div key={index} className={`item item-${index + 1}`}>
-          <CommunityPost
+           <CommunityPost 
             key={post.id}
-            imageURL={post.post}
-            text={post.description}
-            profileImage={post.profileImage}
-            authorName={post.authorName}
-            likes={post.likes}
-          />
+            imageURL={post.pictures}
+            text={post.title}
+            profileImage={profileImage}
+            authorName="test user"
+            likes= '5'
+            //imageURL,text,profileImage,authorName,likes
+         />
         </div>
       ))}
     </div>
