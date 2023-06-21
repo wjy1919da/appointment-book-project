@@ -1,11 +1,12 @@
 import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useState } from "react";
-import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-query";
+import { useQuery, useEffect,useQueryClient,useInfiniteQuery,useMutation} from "react-query";
 import { useGetPorcedures } from './useSearchDoctors';
 import useDoctorQueryStore from '../store.ts';
 import useProcedureQueryStore from "../procedureStore.ts";
 import usePostQueryStore from "../postStore.ts";
+import useDoctorReviewQueryStore from '../reviewStore.ts';
 const base = {
     baseUrl: 'http://localhost:8080',
     procedureUrl:'http://localhost:8080/procedure',
@@ -229,4 +230,33 @@ export default function useGetProcedures() {
   return useQuery(['procedures', procedureQuery], fetchProcedures, {
     placeholderData: { data: {} }, // default object to use before fetching completes
   });
+}
+
+export function useGetDoctorReviews() {
+  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+
+  const fetchDoctorReviews = async ({ pageParam = 1 }) => {
+      const response = await axios.post('http://localhost:8080/evaluate/evaluations:page', {
+        currentPage: pageParam,
+        memberId: 0,
+        pageSize: doctorQuery.pageSize,
+        nickname:doctorQuery.doctorName,
+      }).then(res => {
+        // console.log("fetch Data:", res.data, "pageParam:", pageParam);
+         return { data: res.data.record, pageInfo: res.data.pageInfo };
+       });
+     };
+
+  return useInfiniteQuery([ 'doctor-reviews',doctorQuery.doctorName,doctorQuery.pageSize], fetchDoctorReviews, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+    keepPreviousData: true,
+    // lastPage is an array of posts
+    // allPages is an array of pages
+    getNextPageParam: (lastPage, allPages) => {
+      // hasNextPage
+      //console.log("lastPage data",lastPage.pageInfo)
+      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+    }
+   }  // Default empty array to use before fetching completes
+  );
 }
