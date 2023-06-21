@@ -8,7 +8,6 @@ phases:
       - npm install
   pre_build:
     commands:
-     - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION --no-include-email)
@@ -19,6 +18,7 @@ phases:
     commands:
     - echo Build started on `date`
       - echo Building the Docker image...
+      - npm run build
       - docker build -t $REPOSITORY_URI:latest -f Dockerfile.prod .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
