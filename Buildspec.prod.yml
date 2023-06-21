@@ -3,9 +3,9 @@ phases:
   install:
     runtime-versions:
       nodejs: 14
-      commands:
-        - echo Installing source NPM dependencies...
-        - npm install
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
