@@ -234,29 +234,36 @@ export default function useGetProcedures() {
 
 export function useGetDoctorReviews() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-
+  console.log(doctorQuery)
+  const clearnickName=doctorQuery.nickName.replace(":", "")
   const fetchDoctorReviews = async ({ pageParam = 1 }) => {
-      const response = await axios.post('http://localhost:8080/evaluate/evaluations:page', {
-        currentPage: pageParam,
-        memberId: 0,
-        pageSize: doctorQuery.pageSize,
-        nickname:doctorQuery.doctorName,
-      }).then(res => {
-        // console.log("fetch Data:", res.data, "pageParam:", pageParam);
-         return { data: res.data.record, pageInfo: res.data.pageInfo };
-       });
-     };
-
-  return useInfiniteQuery([ 'doctor-reviews',doctorQuery.doctorName,doctorQuery.pageSize], fetchDoctorReviews, {
-    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-    keepPreviousData: true,
-    // lastPage is an array of posts
-    // allPages is an array of pages
-    getNextPageParam: (lastPage, allPages) => {
-      // hasNextPage
-      //console.log("lastPage data",lastPage.pageInfo)
-      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/evaluate/evaluations:page',
+        {
+          "currentPage": pageParam,
+          "memberId": 45,
+          "nickname": clearnickName,
+          "pageSize": doctorQuery.pageSize,
+          
+        }
+      );
+      
+      console.log("reviewdata",response.data);
+      return { data: response.data.data, pageInfo: response.data.pageInfo };
+    } catch (error) {
+      throw new Error('Failed to fetch doctor reviews');
     }
-   }  // Default empty array to use before fetching completes
+  };
+
+  return useInfiniteQuery(
+    ['doctor-reviews', doctorQuery.nickName, doctorQuery.pageSize],
+    fetchDoctorReviews,
+    {
+      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
+      keepPreviousData: true,
+      getNextPageParam: (lastPage, allPages) =>
+        lastPage.data.length > 0 ? allPages.length + 1 : undefined,
+    }
   );
 }

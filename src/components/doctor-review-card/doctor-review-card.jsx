@@ -4,6 +4,7 @@ import verifiedIcon from '../../assets/doctor/verified-Icon.png'
 
 
 const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
+    let starRateTimeTen = starRate * 10;
     if(!profileImage&&!name&&!starRate&&!reviewText&&!date)
     {
         return null
@@ -17,7 +18,7 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
                     <span className="verified-symbol">
                         <span className="verified-Icon"></span>
                         <span className="verified-Text">verified customer</span>
-                    </span>)
+                    </span>
                     
                     </div>
                     <div className="review-date">
@@ -26,7 +27,7 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
                 
             </div>
             <div className="reviewer-starRate">
-                <span className={`stars-container stars-${starRate}`}>★★★★★</span>
+                <span className={`stars-container stars-${starRateTimeTen}`}>★★★★★</span>
             </div>
             <div className="reviewer-text">
                 {reviewText}
