@@ -13,6 +13,7 @@ import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
 import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
+import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import SubDoctor from './routes/doctor/sub-doctor.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -34,7 +35,8 @@ const App = () => {
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
-        <Route path = 'posts' element={<DoctorPost />} />
+        <Route path='posts' element={<DoctorPost />} />
+        <Route path='/doctor/:name' element={<IndividualDoctor />} />
 
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
