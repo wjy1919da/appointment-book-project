@@ -13,9 +13,9 @@ const FeatureDoctor = () => {
             <span className="featured-doctor-title">Featured Doctor in your Area</span>
             <div className="feature-doctor-list">
                 <FeatureDoctorCard imageURL={image1} starRate={50}/>
-                <FeatureDoctorCard imageURL={image2} starRate={50}/>
-                <FeatureDoctorCard imageURL={image3} starRate={40}/> 
-                <FeatureDoctorCard imageURL={image4} starRate={40}/>
+                <FeatureDoctorCard imageURL={image2} starRate={40}/>
+                <FeatureDoctorCard imageURL={image3} starRate={50}/> 
+                <FeatureDoctorCard imageURL={image4} starRate={50}/>
             </div>
         </div>
     )

@@ -1,0 +1,33 @@
+.stars-container {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+  }
+  
+  .stars-container:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '★★★★★';
+    color: lightgray;
+  }
+  
+  .stars-container:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '★★★★★';
+    background: linear-gradient(90deg, #FAB25E 0%, #FFA4A3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    overflow: hidden;
+  }
+  .stars-10:after { width: 20%; }
+  
+  .stars-20:after { width: 40%; }
+  
+  .stars-30:after { width: 60%; }
+  
+  .stars-40:after { width: 80%; }
+  
+  .stars-50:after { width: 100%; }

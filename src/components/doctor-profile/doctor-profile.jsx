@@ -7,6 +7,7 @@ import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import ConsultDoctorButton from '../consult-doctor-button/consult-doctor-button';
 import FollowButton from '../follow-button/follow-button';
+import StarRate from '../starRate/starRate';
 
 const DoctorProfile = () => {
     const { name } = useParams();
@@ -29,7 +30,7 @@ const DoctorProfile = () => {
                         License or Verification
                     </span>
                     <span className='starRate'>
-                        <span className={"stars-container stars-40"}>★★★★★</span>
+                        <StarRate rateScore = "50"/>
                     </span>
                 </div>
                 <div className="post-follower-following">

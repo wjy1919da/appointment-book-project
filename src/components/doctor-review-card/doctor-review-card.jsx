@@ -1,6 +1,7 @@
 import React from 'react';
 import "./doctor-review-card.styles.scss";
 import verifiedIcon from '../../assets/doctor/verified-Icon.png'
+import StarRate from '../starRate/starRate';
 
 
 const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
@@ -27,7 +28,7 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
                 
             </div>
             <div className="reviewer-starRate">
-                <span className={`stars-container stars-${starRateTimeTen}`}>★★★★★</span>
+                <StarRate rateScore={starRate}/>
             </div>
             <div className="reviewer-text">
                 {reviewText}
