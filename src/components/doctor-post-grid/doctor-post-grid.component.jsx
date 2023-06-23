@@ -7,9 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useGetPost } from '../../hooks/useSearchDoctors';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import React, { useState } from 'react';
-const DoctorPostGrid = () => {
-  const pageSize = 20;
-  const [filterType, setFilterType] = useState(2);
+const DoctorPostGrid = () => {  
     const {
       data, 
       error, 
@@ -17,8 +15,7 @@ const DoctorPostGrid = () => {
       fetchNextPage,
       isFetchingNextPage,
       hasNextPage
-    } = useGetPost(pageSize, filterType);
-    console.log("doctor-post.component.jsx: data",data);
+    } = useGetPost();
     const flatData = data ? data.pages.flatMap(page => page.data) : [];
 
     if (isLoading) return <HomeSpinner />;

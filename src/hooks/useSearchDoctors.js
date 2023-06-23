@@ -5,6 +5,8 @@ import { useQuery, useQueryClient,useInfiniteQuery,useMutation} from "react-quer
 import { useGetPorcedures } from './useSearchDoctors';
 import useDoctorQueryStore from '../store.ts';
 import useProcedureQueryStore from "../procedureStore.ts";
+import usePostQueryStore from "../postStore.ts";
+
 const base = {
     baseUrl: 'http://api.charm-life.com/',
     procedureUrl:'http://api.charm-life.com/procedure',
@@ -169,24 +171,24 @@ export function useSearchMultiConditionsPopUp() {
    )
 }
 
-export function useGetPost(pageSize, filterType) {
-  // data.data need to be changed ???????
+export function useGetPost() {
+  const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
     const res = await axios.post('http://api.charm-life.com/post/posts:page', {
       currentPage: pageParam,
-      pageSize: pageSize,
-      filterType: filterType
+      pageSize: postQuery.pageSize,
+      filterType: postQuery.filterType,
     });
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
   return useInfiniteQuery(
-   ['posts', pageSize, filterType], 
-   fetchPost, {
-    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-    keepPreviousData: true,
-    // lastPage is an array of posts
-    // allPages is an array of pages
-    getNextPageParam: (lastPage, allPages) => {
+    ['posts', postQuery],
+    fetchPost, {
+      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+      keepPreviousData: true,
+      // lastPage is an array of posts
+      // allPages is an array of pages
+      getNextPageParam: (lastPage, allPages) => {
       // hasNextPage
       //console.log("lastPage data",lastPage.pageInfo)
       return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
