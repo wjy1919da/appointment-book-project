@@ -22,6 +22,7 @@ import Modal from 'react-bootstrap/Modal';
 import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.component';
 import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
 import DoctorSearchMultiInput from '../../components/doctor-search-multiInput/doctor-search-multiInput.component';
+import DoctorPostGrid from '../../components/doctor-post-grid/doctor-post-grid.component';
 
 
 const Doctor = () => {
@@ -166,6 +167,12 @@ const Doctor = () => {
                 <IntroDoctor />
               </div>
              <FeatureDoctor />
+             <span className="doctor-title">Post by doctor</span>
+             <div className='doctor-post-grid-container'>
+                <div className='doctor-post-grid-box'>
+                  <DoctorPostGrid />
+                </div>
+             </div>
           </div>
           {isLoading ? (
             <div className="spinner-container">

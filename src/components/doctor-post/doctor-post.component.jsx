@@ -9,26 +9,9 @@ import { SimpleGrid } from '@chakra-ui/react';
 import CommunityPost from '../community-post/community-post.component';
 import profileImage from '../../assets/doctor/profile1.png'
 const DoctorPost = () => {
-    const filterOptions = [
-        { value: "User", label: "By User" },
-        { value: "Doctor", label: "By Doctor" }
-    ];
-    const postGenres = [
-        { value: "Facial", label: "Facial" },
-        { value: "Breast", label: "Breast" },
-        { value: "Body", label: "Body" }
-    ];
-    const [currentPage, setCurrentPage] = useState(1);
-    const [selectedGenres, setSelectedGenres] = useState({});
-    const [selectedFilters, setSelectedFilters] = useState([]);
-    const [filterType, setFilterType] = useState(2);
-   
     return (
         <div className='doctor-post-outer-container'>
-        
             <DoctorPostGrid />
-            
-    
         </div>
     )
 }
