@@ -39,18 +39,18 @@ const DoctorProfile = () => {
                     {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
                     {profileData.address &&
                         <span className='search-card-text '>
-                            <img src={locationIcon} style={{width:"18px",height:"18px"}}></img>
+                            <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}}></img>
                             {profileData.address}
                         </span>
                     }
                     {profileData.programTitle &&
                         <span className='search-card-text '>
-                            <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
+                            <img src={glassIcon} style={{height:"18px", marginTop:"4px"}}></img>
                             {profileData.programTitle}
                         </span>
                     }
                     <span className='search-card-text '>
-                        <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>
+                        <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}}></img>
                         License or Verification
                     </span>
                     <span className='starRate'>

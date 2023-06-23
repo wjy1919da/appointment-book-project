@@ -1,4 +1,4 @@
-import React,{ useEffect }from 'react';
+import React,{ useEffect, useLayoutEffect }from 'react';
 import "./individual-doctor.styles.scss";
 import DoctorProfile from '../doctor-profile/doctor-profile';
 import DoctorReviewCard from '../doctor-review-card/doctor-review-card';
@@ -46,6 +46,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 //     )
 // }
 const IndividualDoctor = () => {
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   const profileImage1 = DoctorProfileImage;
   const { nickname } = useParams(); // Assuming "nickname" is the parameter in the URL
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
