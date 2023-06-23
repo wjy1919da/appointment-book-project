@@ -1,50 +1,39 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useGetProcedureCategories } from '../../hooks/useSearchDoctors';
 import './dropdown-menu.scss';
+const capitalize = (str) => {
+    return str.split(' ').map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+}
 
 const DropdownMenu = () => {
-    const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
-    const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
-    const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
-    const facialDropDownMenu = facialProcedures.map((procedure) => 
-        <Link className='dropdown-item' to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} key={procedure}>
-            <div className='dropdown-item-container'>
-                <span>{procedure}</span>
-            </div>
-        </Link>
-    );
-    const breastDropDownMenu = breastProcedures.map((procedure) => 
-        <Link className='dropdown-item' to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} key={procedure}>
-            <div className='dropdown-item-container'>
-                <span>{procedure}</span>
-            </div>
-        </Link>
-    );
-    const bodyDropDownMenu = bodyProcedures.map((procedure) => 
-        <Link className='dropdown-item' to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} key={procedure}>
-            <div className='dropdown-item-container'>
-                <span>{procedure}</span>
-            </div>
-        </Link>
-    );
+    const {data, isLoading, isError} = useGetProcedureCategories();
+    const location = useLocation();  // 获取当前的路由
 
     return (
         <div className='container dropdown-menu-container'>
             <div className='row'>
-                <div className='col-4'>
-                    <Link className='dropdown-item dropdown-item-header' to='/procedure/facial'>Facial</Link>
-                    {facialDropDownMenu}
-                </div>
-                <div className='col-4'>
-                    <Link className='dropdown-item dropdown-item-header' to='/procedure/breast'>Breast</Link>
-                    {breastDropDownMenu}
-                </div>
-                <div className='col-4'>
-                    <Link className='dropdown-item dropdown-item-header' to='/procedure/body'>Body</Link>
-                    {bodyDropDownMenu}
+                <div>
+                    <Link className='dropdown-item dropdown-item-header' to='/procedure/botox_injections'>Categories</Link>
+                    {data && data.data.map((procedure, index) => {
+                        const procedureUrl = '/procedure/' + procedure.categoryName.toLowerCase().replaceAll(' ', '-');
+                        if (location.pathname === procedureUrl) {  // 检查当前的 procedure 是否匹配当前的 URL
+                            // 如果匹配则返回 null，不创建链接
+                            return null;
+                        } else {
+                            return (
+                                <Link className='dropdown-item' to={procedureUrl} key={index}>
+                                    <div className='dropdown-item-container'>
+                                        <span>{capitalize(procedure.categoryName.replace(/_/g, ' '))}</span>
+                                    </div>
+                                </Link>
+                            );
+                        }
+                    })}
                 </div>
             </div>
         </div>
     )
 }
+
 
 export default DropdownMenu;

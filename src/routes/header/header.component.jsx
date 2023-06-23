@@ -89,7 +89,7 @@ const Header = () => {
                 </Link>
                 <div className='header-nav-container' id='#navbarTogglerDemo02'>
                     <span className='dropdown-center'>
-                        <Link className='header-nav-link1' data-bs-toggle='dropdown disabled' aria-expanded='false'>
+                        <Link className='header-nav-link1' to = '/procedure/botox_injections'data-bs-toggle='dropdown disabled' aria-expanded='false'>
                             Procedure
                         </Link>
                         <ul className='dropdown-menu'>
@@ -100,6 +100,10 @@ const Header = () => {
                     <Link className='header-nav-link2' to='/doctor'>
                         Doctors
                     </Link>
+                    {/* <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/instrument'>
+                        Instruments
+                    </Link> */}
                     <span className='header-nav-divider'>|</span>
                     <Link className='header-nav-link3' to='/posts'>
                         Posts
@@ -111,12 +115,12 @@ const Header = () => {
                         <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                         </input>
                     </div> */}
-                    <div className="header-login-logo">
+                    {/* <div className="header-login-logo">
                         <img src={loginIcon} alt="login Image" ></img>
                     </div>
                     <div className="header-login-text">
                         <p>login</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Outlet />

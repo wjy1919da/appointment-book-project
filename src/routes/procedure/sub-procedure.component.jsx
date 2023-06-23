@@ -63,6 +63,7 @@ const SubProcedure = () => {
     }, [name]);
 
     const formatTitle = (title) => {
+        title = title.replace(/_/g, ' ');
         return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
    
@@ -155,13 +156,12 @@ const SubProcedure = () => {
             <div className='sub-procedure-scroll-container'>
                 {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
                 {beforeAndAfterImage && <SubProcedureScroll data={beforeAndAfterImage} />}
-                <HomeLink title = "View More Post" href = '/instrument/thermage'/>  
+                <HomeLink title = "View More Post" href = '/posts'/>
             </div>
             <div className='sub-procedure-form-ver'>
-                <div className='sub-title'>
+                {alternativeTreatmentForm &&<div className='sub-title'>
                     Alternative treatments
-                </div>
-                {/* alternative treatment form */}
+                </div> }
                 {alternativeTreatmentForm &&<SubProcedureFormV2 data  = {alternativeTreatmentForm}/>}
             </div>
            
@@ -170,9 +170,9 @@ const SubProcedure = () => {
                     <Collapsible/>
             </div>
             <div className='sub-procedure-reference'>
-                <div className='sub-title'>
+                {reference &&<div className='sub-title'>
                     References and resources
-                </div>
+                </div>}
                 {/* reference */}
                 {reference && <SubProcedureReference reference = {reference}/>}
             </div>     

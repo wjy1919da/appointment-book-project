@@ -22,6 +22,7 @@ const base = {
     multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
     postCategoryUrl:'http://api.charm-life.com/post/posts:page',
+    procedureCategoriesUrl:'http://api.charm-life.com/procedure'
   }
 
 export function useSearchDoctors(doctorName){
@@ -182,6 +183,15 @@ export function useGetPost() {
     }
    }   
   );
+}
+
+export function useGetProcedureCategories(){
+  const fetchProcedureCategories = async () => {
+    const res = await axios.get(base.procedureCategoriesUrl);
+    console.log("fetch Data:", res.data);
+    return res.data;
+  };
+  return useQuery('procedureCategories', fetchProcedureCategories);
 }
 
 export default function useGetProcedures() {

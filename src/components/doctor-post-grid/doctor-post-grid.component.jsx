@@ -43,7 +43,7 @@ const DoctorPostGrid = () => {
                 dataLength={flatData.length}
                 next={fetchNextPage}
                 hasMore={hasNextPage}
-                scrollThreshold={0.1} 
+                scrollThreshold={0.8} 
             >
               <Masonry
                 breakpointCols = {breakpointColumnsObj}
