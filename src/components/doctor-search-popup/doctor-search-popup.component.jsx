@@ -6,6 +6,7 @@ import {
     Text
   } from '@chakra-ui/react';
 import './doctor-search-popup.styles.scss'
+import { Link } from 'react-router-dom';
 import React,{ useRef, useEffect,useState } from 'react';
 import {useSearchMultiConditionsPopUp ,useSearchMultiConditions} from '../../hooks/useSearchDoctors';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -137,13 +138,17 @@ const DoctorSearchPopup = ({show,onHide}) => {
                 loader={<Spinner/>}
             >
                 {data.pages.map((page, index) => (
-                <SimpleGrid key={index} columns={3} spacing={10}>
-                    {page.data && page.data.map((item, i) => (
-                    <div key={i} className='doctor-search-card-container'>
-                        <DoctorCard doctor={item} />
-                    </div>
-                    ))}
-                </SimpleGrid>
+                        <SimpleGrid key={index} columns={3} spacing={10}>
+                            {page.data && page.data.map((item, i) => (
+                            <div key={i} className='doctor-search-card-container'>
+                                <Link to={`/doctor/${item.nickname}`}>
+                                    <DoctorCard doctor={item} />
+                                </Link>
+                            </div>
+                            ))}
+                            
+                        </SimpleGrid>
+                    
                 ))}
             </InfiniteScroll>
             )
