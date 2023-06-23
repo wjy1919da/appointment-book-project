@@ -57,10 +57,18 @@ const SubProcedure = () => {
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     // data from remote
     const { data, isLoading, error } = useGetProcedures();
-    console.log("sub-procedure.component.jsx: data",data);
+    const setCategoryId = useProcedureQueryStore(state=>state.setCategoryId);
+    const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
+
     useEffect(() => {
         setCategories(name);
+
     }, [name]);
+    useEffect(() => {
+        if (data?.data?.subcategories?.[0]?.categoryId) {
+            setCategoryId(data.data.subcategories[0].categoryId);
+        }
+    }, [data]);
 
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
@@ -146,37 +154,36 @@ const SubProcedure = () => {
                    </ol>}
                 </div>
             </div>
-        <div className='sub-procedure-option-form-container'>
-              {data.data?.subcategories[2].explanation &&<SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/>}  
+            {data.data?.subcategories[2].explanation&&<div className='sub-procedure-option-form-container'>
+                <SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/> 
                 {optionsContent &&<SubProcedureForm data={optionsContent} />  }
-            </div>
-            <div className='sub-procedure-side-effect'>
-              {data.data?.subcategories[6].explanation && <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>}
-            </div>
-            <div className='sub-procedure-scroll-container'>
+            </div> }
+            {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect'>
+              <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>
+            </div>}
+            {data.data?.subcategories[3] &&<div className='sub-procedure-scroll-container'>
                 {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
                 {beforeAndAfterImage && <SubProcedureScroll data={beforeAndAfterImage} />}
-                <HomeLink title = "View More Post" href = '/posts'/>
-            </div>
-            <div className='sub-procedure-form-ver'>
-                {alternativeTreatmentForm &&<div className='sub-title'>
+                {/* <HomeLink title = "View More Post" href = '/posts'/>   */}
+            </div>}
+            {alternativeTreatmentForm &&<div className='sub-procedure-form-ver'>
+                <div className='sub-title'>
                     Alternative treatments
-                </div> }
-                {alternativeTreatmentForm &&<SubProcedureFormV2 data  = {alternativeTreatmentForm}/>}
-            </div>
+                </div> 
+                <SubProcedureFormV2 data  = {alternativeTreatmentForm}/>
+            </div>}
            
             {/* Minqi part FQA */}
             <div className="FQA-collapside">
                     <Collapsible/>
             </div>
-            <div className='sub-procedure-reference'>
-                {reference &&<div className='sub-title'>
+            {reference &&<div className='sub-procedure-reference'>
+                 <div className='sub-title'>
                     References and resources
-                </div>}
-                {/* reference */}
-                {reference && <SubProcedureReference reference = {reference}/>}
-            </div>     
-             </div>
+                </div>
+             <SubProcedureReference reference = {reference}/>
+            </div>}    
+            </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
                 <div className='sub-procedure-right-content'>

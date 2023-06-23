@@ -22,7 +22,8 @@ const base = {
     multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
     postCategoryUrl:'http://api.charm-life.com/post/posts:page',
-    procedureCategoriesUrl:'http://api.charm-life.com/procedure'
+    procedureCategoriesUrl:'http://api.charm-life.com/procedure',
+    faqUrl:'http://api.charm-life.com/faq'
   }
 
 export function useSearchDoctors(doctorName){
@@ -130,33 +131,42 @@ export function useSearchMultiConditions(location, specialization, doctorName){
 
 // search doctor part
 export function useSearchMultiConditionsPopUp() {
-   const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
-   //console.log("useSearchMultiConditionsPopUp:", doctorQuery);
-   const fetchDoctors = async ({pageParam = 1}) => {
-      const res = await axios.post('http://api.charm-life.com/doctor/search',
-       {
-         "address": doctorQuery.location,
-         "nickname": doctorQuery.doctorName,
-         "programTitle": doctorQuery.field,
-         "filterType": [1, 2],
-         "page": pageParam,
-         "pageSize": doctorQuery.pageSize
-       }
-     );
-     console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
-     return { data: res.data.data || [], pageInfo: res.data.pageInfo };
-   }
-   return useInfiniteQuery(
+  const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
+
+  const fetchDoctors = ({pageParam = 1}) => {
+      let filterType = [];  // 初始化 filterType 为一个空数组
+
+      // 根据 doctorQuery 对象的属性是否为空来添加不同的值
+      if (doctorQuery.location !== "") filterType.push(1);
+      if (doctorQuery.field !== "") filterType.push(2);
+      if (doctorQuery.doctorName !== "") filterType.push(3);
+
+      return axios.post('http://api.charm-life.com/doctor/search',
+          {
+              "address": doctorQuery.location,
+              "nickname": doctorQuery.doctorName,
+              "programTitle": doctorQuery.field,
+              "filterType": filterType,
+              "page": pageParam,
+              "pageSize": doctorQuery.pageSize
+          }
+      ).then(res => {
+          console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
+          return { data: res.data.data || [], pageInfo: res.data.pageInfo };
+      })
+  }
+
+  return useInfiniteQuery(
       ['doctors', doctorQuery],
       fetchDoctors,
       {
-        staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-        keepPreviousData: true,
-        getNextPageParam: (lastPage, allPages) => {
-          return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
-        } 
+          staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+          keepPreviousData: true,
+          getNextPageParam: (lastPage, allPages) => {
+              return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+          } 
       }
-   )
+  )
 }
 
 export function useGetPost() {
@@ -194,6 +204,18 @@ export function useGetProcedureCategories(){
   return useQuery('procedureCategories', fetchProcedureCategories);
 }
 
+export function useGetFAQ() {
+  const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
+  console.log("useGetFAQ",procedureQuery.categoryId)
+  const fetchFAQ = () => {
+    return axios.get(`${base.faqUrl}/${procedureQuery.categoryId}`).then(res => {
+      console.log("fetch Data:", res.data);
+      return res.data;
+    });
+  };
+  return useQuery(['faq',procedureQuery.categoryId], fetchFAQ);
+}
+
 export default function useGetProcedures() {
   const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
   var processedCategory;
@@ -218,7 +240,7 @@ export default function useGetProcedures() {
     }
   }
 
-  return useQuery(['procedures', procedureQuery], fetchProcedures, {
+  return useQuery(['procedures', procedureQuery.categories], fetchProcedures, {
     placeholderData: { data: {} }, // default object to use before fetching completes
   });
 }

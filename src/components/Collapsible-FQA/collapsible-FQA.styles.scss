@@ -52,24 +52,20 @@
     
             color: #000000;
         }
-
-        .collapsible.active {
-            background-image: url("../../assets/procedure/iconoir_nav-arrow-down.png");
-        }
         
         .active,
         .collapsible:hover {
+    
         }
         
         .content {
             padding: 0 18px;
-            margin-left: 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
             background-color: transparent;
             width: 758px;
-            height: 182px;
+            //height: 182px;
             font-family: 'Lora';
             font-style: normal;
             font-weight: 500;
