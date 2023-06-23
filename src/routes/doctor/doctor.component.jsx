@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
@@ -22,6 +21,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.component';
 import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
+import DoctorSearchMultiInput from '../../components/doctor-search-multiInput/doctor-search-multiInput.component';
 
 
 const Doctor = () => {
@@ -156,10 +156,15 @@ const Doctor = () => {
                       </div>
                       <DoctorSearchButton title = "search" onClick={handleButtonClick} />
                     </InputGroup>
+              </div>
+              <div className='doctor-search-search-bar-outer-container'>
+                <div className = 'doctor-search-outter-box'>
+                  <DoctorSearchMultiInput />
                 </div>
-               <div className='doctor-intro-container'>
-                  <IntroDoctor />
-               </div>
+              </div>
+              <div className='doctor-intro-container'>
+                <IntroDoctor />
+              </div>
              <FeatureDoctor />
           </div>
           {isLoading ? (

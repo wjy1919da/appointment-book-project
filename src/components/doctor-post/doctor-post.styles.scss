@@ -16,42 +16,25 @@
    border-bottom: 1px solid #E2E3E7;
    display: flex;
    flex-direction: row;
-   padding-top: 20px;
-   padding-left: 40px;
+   padding: 20px 40px;
    gap:32px;
 }
 .doctor-post-content-container{
     width:100%;
     height: 70%;
-    margin-left:140px;
+    padding-left: 10px;
+    padding-right: 10px;
     z-index: -1;
 }
-.community-area
-{
-    height:1092px;
-}
-
-.post-download-div {
-    position: absolute;
+.waterfall-layout-container{
     width: 100%;
-    top: 1592px;
-    text-align: center;
-    padding-bottom: 40px;
-
-    .post-download-icon {
-        width: 32px;
-        height: 43.43px;
-        margin-bottom: 20px;
-    }
-
-    .post-download-txt {
-        font-family: 'Open Sans';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 100%;
-        /* identical to box height, or 16px */
-        color: #A5A6A8;
-        margin-bottom: 40px;
-    }
+   
+   
+    margin-top: 200px !important;
+}
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
 }

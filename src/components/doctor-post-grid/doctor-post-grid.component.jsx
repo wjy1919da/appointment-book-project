@@ -1,26 +1,62 @@
 import Masonry from 'react-masonry-css'
 import './doctor-post-grid.styles.scss'
+import CommunityPost from '../community-post/community-post.component'
+import profileImage from '../../assets/doctor/profile1.png'
 import DoctorPostCard from '../doctor-post-card/doctor-post-card.component'
-const DoctorPostGrid = ({posts}) => {
-   console.log("posts",posts);
-   const postCardList = posts.map(post => <DoctorPostCard key={post.id} postImg={post.Img} description={post.description} />);
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useGetPost } from '../../hooks/useSearchDoctors';
+import HomeSpinner from '../home-spinner/home-spinner.component';
+import React, { useState } from 'react';
+const DoctorPostGrid = () => {  
+    const {
+      data, 
+      error, 
+      isLoading,
+      fetchNextPage,
+      isFetchingNextPage,
+      hasNextPage
+    } = useGetPost();
+    const flatData = data ? data.pages.flatMap(page => page.data) : [];
+
+    if (isLoading) return <HomeSpinner />;
+    if (error) return <div className='error'>{error.message}</div>; // 将Message改为message
+   
+    const postCardList =flatData.map(post => (
+        <CommunityPost 
+            key={post.id}
+            imageURL={post.pictures}
+            text={post.title}
+            profileImage={post.avatar}
+            authorName={post.username}
+            likes= {post.likeCount}
+        />
+    ));
    const breakpointColumnsObj = {
-      default: 3,
-        1100: 2,
+      default: 5,
+        1100: 4,
         700: 1,
    }
    return(
     <div className='doctor-post-grid-container'>
-          <Masonry
-           breakpointCols = {breakpointColumnsObj}
-           className="my-masonry-grid"
-           columnClassName="my-masonry-grid_column"
-          >
-           {postCardList}
-         </Masonry>
+       {data &&
+            <InfiniteScroll
+                dataLength={flatData.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                scrollThreshold={0.1} 
+            >
+              <Masonry
+                breakpointCols = {breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column">
+               {postCardList}
+             </Masonry>
+          </InfiniteScroll>}
+         
     </div>
           
    )
    
 }
+
 export default DoctorPostGrid;

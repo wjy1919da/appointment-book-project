@@ -7,6 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from './theme';
+
 //import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
 
 const queryClient = new QueryClient({
@@ -26,7 +29,9 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-          <App />
+          <ChakraProvider theme={theme}>
+            <App />
+          </ChakraProvider>
           
         </QueryParamProvider>
       </BrowserRouter>

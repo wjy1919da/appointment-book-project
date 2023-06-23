@@ -15,6 +15,16 @@ import SubProcedureScroll from '../../components/sub-procedure-scroll/sub-proced
 import SubProcedureFormV2 from '../../components/sub-procedure-form-v2/sub-procedure-form-v2.component';
 import HomeLink from '../../components/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
+import useGetProcedures from '../../hooks/useSearchDoctors';
+import HomeSpinner from '../../components/home-spinner/home-spinner.component';
+import useProcedureQueryStore from '../../procedureStore.ts'
+function safeJsonParse(str) {
+    try {
+        return JSON.parse(str);
+    } catch (e) {
+        return undefined;
+    }
+}
 const SubProcedure = () => { 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -39,170 +49,149 @@ const SubProcedure = () => {
     });
 
     // Mingqi
+    //console.log("sub-procedure");
     const n =50;
     //Jingyi
     const { name } = useParams();
+    const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     // data from remote
-    const [data, setData] = useState(null);
+    const { data, isLoading, error } = useGetProcedures();
+    console.log("sub-procedure.component.jsx: data",data);
+    useEffect(() => {
+        setCategories(name);
+    }, [name]);
+
     const formatTitle = (title) => {
         return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            // utils/apiService.js
-            const response = await getProcedures({ name });
-            setData(response); 
-        };
-        fetchData();
-    }, [name]);  
-    if (!data) {
-        console.log('data is not valid');
-        // you may return here or render some fallback UI
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.optionsForm){
-        console.log('data.optionsForm is not valid');
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.beforeAndAfter){
-        console.log('data.beforeAndAfter is not valid');
-        // you may return here or render some fallback UI
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.optionsContent){
-        console.log('data.optionsContent is not valid');
-        // you may return here or render some fallback UI
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.sideEffect){
-        console.log('data.sideEffect is not valid');
-        // you may return here or render some fallback UI
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.reference){
-        console.log('data.reference is not valid');
-        // you may return here or render some fallback UI
-        return null; // or <div>Data is not valid</div> or any other fallback UI
-    }
-    if(!data.beforeAndAfterImage){
-        console.log('data.beforeAndAfterImage is not valid');
-        // you may return here or render some fallback UI
-        return null; 
-    }
-    if(!data.optionsForm){
-        console.log('data.optionsForm is not valid');
-        // you may return here or render some fallback UI
-        return null;
-    }
-    if(!data.alternativeTreatmentForm){
-        console.log('data.optionsForm is not valid');
-        // you may return here or render some fallback UI
-        return null;
-    }
-    if(!data.reasonContent){
-        console.log('data.reasonContent is not valid');
-        // you may return here or render some fallback UI
-        return null;
-    }   
+   
+    var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
 
+    if (isLoading) {
+       return <HomeSpinner />;
+    }
+    if (data.data && data.data.subcategories) {
+        if (data.data.subcategories[1]) {
+            prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
+
+
+        }
+        if (data.data.subcategories[2]) {
+            optionsContent = data.data.subcategories[2].other ? safeJsonParse(data.data.subcategories[2].other) : undefined;
+
+        }
+        if (data.data.subcategories[3]) {
+            const parsed = safeJsonParse(data.data.subcategories[3].other);
+            beforeAndAfterImage = parsed ? parsed.beforeAndAfterImage : undefined;  
+        }
+        if (data.data.subcategories[4]) {
+            reference = data.data.subcategories[4].other ? safeJsonParse(data.data.subcategories[4].other) : undefined;
+           
+        }
+        if (data.data.subcategories[5]) {
+            alternativeTreatmentForm = data.data.subcategories[5].other ? safeJsonParse(data.data.subcategories[5].other) : undefined;
+          
+        }
+        if (data.data.subcategories[7]) {
+            cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
+        }
+    }else{
+        return <div className='error'>{data.msg}</div>;
+    }
+    
     return (
-    <div className='home-container'>
+     <div className='home-container'>
         <div className='section-container'>
-            {/* Minqi part */}
             <div className='sub-procedure-left-container'>
-                <div className='sub-procedure-title-container'>
-                    <h3 className="sub-procedure-top-text">Procedure</h3>
-                    <h1 className='sub-procedure-title-text' >{formatTitle(name)}</h1>
-                    <br/>
+            <div className='sub-procedure-title-container'>
+                <h3 className="sub-procedure-top-text">Procedure</h3>
+                <h1 className='sub-procedure-title-text' >{formatTitle(name)}</h1>
+                <br/>
+                {data.data.description &&
                     <p className='sub-procedure-normal-text'>
-                            Various means to restore a youthful appearance to an aging face. 
-                            A high-safety procedure that helps patients regain their best youthful 
-                            appearance by removing excess or sagging skin, smoothing deep folds, 
-                            and lifting and tightening deep facial tissues.
-                    </p>
-                </div>
-                {/* Ming qi sub text  */}
-                <div className='sub-text'> 
-                    {/* Minqi what section */}
-                    <div className='what-section'>
-                        <SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.reasonContent} />
-                        <Link className="watch-video" to = {videoUrl}>Watch Video</Link> 
-                    </div>
-                    {/* consider section */}
-                    <div className='consider-section'>
-                    <SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.reasonContent} />
-                        {/* pros and cons */}
-                        <ol className='pros-and-cons'>
-                            {/*list-group-item  */}
-                            <li class="list-group-item d-flex justify-content-between align-items-start" >
-                                <div style={{color: "#A5A6A8"}}>Pros:</div>
-                                <div className="ms-2 me-auto" style={{}}>
-                                Lorem ipsum dolor sit amet, consectetur 
-                                adipiscing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua
-                                </div>
-                            </li> 
-                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
-                                <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                <div class="ms-2 me-auto" style={{color:"#000000"}}>
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                </div>
-                            </li> 
-                        </ol>
-                    </div>
-                </div>
-         
-            {/*Jingyi part  */}
-            <div className='sub-procedure-option-form-container'>
-                    <SubTxt title={'Procedure options'} text={data.optionsContent}/>
-                    {/* option form */}
-                    <SubProcedureForm data={data.optionsForm} />  
-                </div>
-                <div className='sub-procedure-side-effect'>
-                    <SubTxt title={'Potential Side Effects'} text={data.sideEffect}/>
-                </div>
-                <div className='sub-procedure-scroll-container'>
-                    <SubTxt title={'Before and After'} text={data.beforeAndAfter}/>
-                    {/* scroll bar */}
-                    <SubProcedureScroll data={data.beforeAndAfterImage} />
-                    <HomeLink title = "View More Post" href = '/instrument/thermage'/>  
-                </div>
-                <div className='sub-procedure-form-ver'>
-                    <div className='sub-title'>
-                        Alternative treatments
-                    </div>
-                    {/* alternative treatment form */}
-                    <SubProcedureFormV2 data  = {data.alternativeTreatmentForm}/>
-                </div>
-               
-                {/* Minqi part FQA */}
-                <div className="FQA-collapside">
-                    <Collapsible/>
-                </div>
-                <div className='sub-procedure-reference'>
-                    <div className='sub-title'>
-                        References and resources
-                    </div>
-                    {/* reference */}
-                    <SubProcedureReference reference = {data.reference}/>
-                </div>     
+                        {data.data.description}
+                    </p>}
             </div>
-               {/* Minqi part - right side page*/}
-            <div className='sub-procedure-right-container' onScroll={handleScroll}>
+            
+            <div className='sub-text'> 
+            {data.data?.subcategories[0] &&
+                <div className='what-section'> 
+                { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
+                { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
+               </div>
+            } 
+                {/* consider section */}
+                <div className='consider-section'>
+                {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
+                    {/* pros and cons */}
+                    {prosAndCons && <ol className='pros-and-cons'>
+                        {/*list-group-item  */}
+                        { prosAndCons[0]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" >
+                            <div style={{color: "#A5A6A8"}}>Pros:</div>
+                                <div className="ms-2 me-auto" style={{}}>
+                                    {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
+                                </div>
+                            </li> 
+                        }
+                        {prosAndCons[1]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                                        <div style={{color: "#A5A6A8"}}>Cons:</div>
+                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                    {prosAndCons[1]} 
+                                </div>
+                            </li> }
+                   </ol>}
+                </div>
+            </div>
+        <div className='sub-procedure-option-form-container'>
+              {data.data?.subcategories[2].explanation &&<SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/>}  
+                {optionsContent &&<SubProcedureForm data={optionsContent} />  }
+            </div>
+            <div className='sub-procedure-side-effect'>
+              {data.data?.subcategories[6].explanation && <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>}
+            </div>
+            <div className='sub-procedure-scroll-container'>
+                {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
+                {beforeAndAfterImage && <SubProcedureScroll data={beforeAndAfterImage} />}
+                <HomeLink title = "View More Post" href = '/instrument/thermage'/>  
+            </div>
+            <div className='sub-procedure-form-ver'>
+                <div className='sub-title'>
+                    Alternative treatments
+                </div>
+                {/* alternative treatment form */}
+                {alternativeTreatmentForm &&<SubProcedureFormV2 data  = {alternativeTreatmentForm}/>}
+            </div>
+           
+            {/* Minqi part FQA */}
+            <div className="FQA-collapside">
+                    <Collapsible/>
+            </div>
+            <div className='sub-procedure-reference'>
+                <div className='sub-title'>
+                    References and resources
+                </div>
+                {/* reference */}
+                {reference && <SubProcedureReference reference = {reference}/>}
+            </div>     
+             </div>
+            {/* end of left side */}
+            <div className='sub-procedure-right-container'  onScroll={handleScroll}>
                 <div className='sub-procedure-right-content'>
-                    <div className='sub-procedure-right-board'>
+                {cardInfo &&<div className='sub-procedure-right-board'>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>1k-2k</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
                         </div>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>30 minutes</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
                         </div>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>Non-invasive</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
                         </div>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
@@ -212,12 +201,12 @@ const SubProcedure = () => {
                         </div>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>Pain-Free</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
                         </div> 
-                    </div>
+                    </div>}
                     {/*Minqi - introduction-slide */}
-                    <div className="introduction-slide" id='slide' >
-                        <div className="introduction-icon"></div>
+                        <div className="introduction-slide" id='slide'>
+                            <div className="introduction-icon"></div>
                             <div className="introduction-catalog">
                                 <span className='introduction-title'>Introduction</span>
                                 <span className='introduction-section'>Why consider facial rejuvenation</span>
@@ -229,9 +218,12 @@ const SubProcedure = () => {
                                 <span className='introduction-section'>Reference</span>
                             </div>
                         </div>
-                    </div>    
+                  </div>    
                 </div>
-           </div>
+              </div>
+            
+            
+               
         <Footer />
       
     </div>
@@ -239,4 +231,3 @@ const SubProcedure = () => {
     )
 }
 export default SubProcedure;
-
