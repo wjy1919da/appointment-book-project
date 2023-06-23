@@ -172,7 +172,7 @@ export function useSearchMultiConditionsPopUp() {
 export function useGetPost(pageSize, filterType) {
   // data.data need to be changed ???????
   const fetchPost = async ({ pageParam = 1 }) => {
-    const res = await axios.post('http://localhost:8080/post/posts:page', {
+    const res = await axios.post('http://api.charm-life.com/post/posts:page', {
       currentPage: pageParam,
       pageSize: pageSize,
       filterType: filterType
