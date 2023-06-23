@@ -15,7 +15,7 @@ import SubProcedureScroll from '../../components/sub-procedure-scroll/sub-proced
 import SubProcedureFormV2 from '../../components/sub-procedure-form-v2/sub-procedure-form-v2.component';
 import HomeLink from '../../components/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
-import useGetProcedures from '../../hooks/useSearchDoctors';
+import useGetProcedures from '../../hooks/useGetProcedures';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import useProcedureQueryStore from '../../procedureStore.ts'
 function safeJsonParse(str) {

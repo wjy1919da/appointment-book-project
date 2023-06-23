@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useGetProcedureCategories } from '../../hooks/useSearchDoctors';
+import { useGetProcedureCategories } from '../../hooks/useGetProcedures';
 import './dropdown-menu.scss';
 const capitalize = (str) => {
     return str.split(' ').map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');

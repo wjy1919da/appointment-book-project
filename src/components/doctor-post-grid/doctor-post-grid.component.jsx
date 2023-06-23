@@ -4,7 +4,7 @@ import CommunityPost from '../community-post/community-post.component'
 import profileImage from '../../assets/doctor/profile1.png'
 import DoctorPostCard from '../doctor-post-card/doctor-post-card.component'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useGetPost } from '../../hooks/useSearchDoctors';
+import { useGetPost } from '../../hooks/useGetPosts';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import React, { useState } from 'react';
 const DoctorPostGrid = () => {  

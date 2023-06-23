@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './collapsible-FQA.styles.scss';
-import { useGetFAQ } from '../../hooks/useSearchDoctors';
+import { useGetFAQ } from '../../hooks/useGetProcedures';
 
 const CollapsibleSet = () => {
   const [activeIndexes, setActiveIndexes] = useState([]);
