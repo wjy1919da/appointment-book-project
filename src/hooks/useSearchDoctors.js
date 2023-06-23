@@ -20,12 +20,12 @@ const base = {
     multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
     multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
     postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
-    postCategoryUrl:'http://localhost:8080/post/posts:page',
+    postCategoryUrl:'http://api.charm-life.com/post/posts:page',
   }
 
 export function useSearchDoctors(doctorName){
     const debouncedSearchTerm = useDebounce(doctorName, 200);
-    const fetchDoctors = () => {
+    const fetchDoctors = async () => {
         let url;  
         console.log("useQuery")
         if (doctorName == undefined || debouncedSearchTerm == "" || doctorName == "") {
@@ -36,18 +36,14 @@ export function useSearchDoctors(doctorName){
           console.log("params",debouncedSearchTerm)
           url = base.doctorSearchUrl;
         }
-        return axios.get(url,
-          {
-            params: {
-                doctor : debouncedSearchTerm
-            }
-          })
-          .then(
-            res => {
-              console.log('dataInSearchAPI:', res.data);
-              return res.data;
-            }
-          )
+        const res = await axios.get(url,
+        {
+          params: {
+            doctor: debouncedSearchTerm
+          }
+        });
+      console.log('dataInSearchAPI:', res.data);
+      return res.data;
     }
     return useQuery({      
         queryKey: ['doctorName', debouncedSearchTerm],
@@ -57,7 +53,7 @@ export function useSearchDoctors(doctorName){
 
 export function useSearchSpecialization(specialization){
    const debouncedSearchTerm = useDebounce(specialization, 200);
-   const fetchProjects = () => {
+   const fetchProjects = async () => {
       let url;
       console.log("SpecializationQuery")
       if (specialization == undefined || debouncedSearchTerm == "" || specialization == "") {
@@ -69,20 +65,16 @@ export function useSearchSpecialization(specialization){
           console.log("params",debouncedSearchTerm)
           url = base.specializationSearchUrl;
       }
-      return axios.get(url, 
-        {
-          // body ?
-          // 请求方法
-          params: {
-              specialization : debouncedSearchTerm
-          }
-        })
-        .then(
-          res => {
-            console.log('dataInSearchAPI:', res.data);
-            return res.data;
-          }
-        )
+      const res = await axios.get(url,
+       {
+         // body ?
+         // 请求方法
+         params: {
+           specialization: debouncedSearchTerm
+         }
+       });
+     console.log('dataInSearchAPI:', res.data);
+     return res.data;
    }
     return useQuery({
         queryKey: ['specialization', debouncedSearchTerm],
@@ -93,7 +85,7 @@ export function useSearchLocation(){
     const location = useDoctorQueryStore(s => s.doctorQuery.location);
     console.log("useSearchLocation",location)
     const debouncedSearchTerm = useDebounce(location, 700);
-    const fetchLocations = () => {
+    const fetchLocations = async () => {
       let url;
       console.log("LocationQuery");
       if (!location || !debouncedSearchTerm) {
@@ -104,18 +96,14 @@ export function useSearchLocation(){
           console.log("params", debouncedSearchTerm);
           url = base.locationSearchUrl;
       }
-      return axios.get(url, 
+      const res = await axios.get(url,
         {
           params: {
-              location : debouncedSearchTerm || ''
+            location: debouncedSearchTerm || ''
           }
-        })
-        .then(
-          res => {
-            console.log('dataInSearchAPI:', res.data);
-            return res.data;
-          }
-        )
+        });
+      console.log('dataInSearchAPI:', res.data);
+      return res.data;
   }
     return useQuery({
         queryKey: ['location', debouncedSearchTerm],
@@ -123,18 +111,17 @@ export function useSearchLocation(){
     });
 }
 export function useSearchMultiConditions(location, specialization, doctorName){
-  const fetchAllCondition = () => {
+  const fetchAllCondition = async () => {
     console.log("fetching in all condition");
-    return axios.get(base.multiConditionPagingUrl, {
+    const res = await axios.get(base.multiConditionPagingUrl, {
       params: {
-        location: Array.isArray(location) ? location.join(",") : location !== "all" ? location : undefined, 
+        location: Array.isArray(location) ? location.join(",") : location !== "all" ? location : undefined,
         specialization: Array.isArray(specialization) ? specialization.join(",") : specialization !== "all" ? specialization : undefined,
-        doctorName: Array.isArray(doctorName) ? doctorName.join(",") : doctorName !== "" ? doctorName : undefined  
+        doctorName: Array.isArray(doctorName) ? doctorName.join(",") : doctorName !== "" ? doctorName : undefined
       }
-    }).then(res => {
-      console.log('dataInSearchAPI:', res.data);
-      return res.data;
-    })
+    });
+    console.log('dataInSearchAPI:', res.data);
+    return res.data;
   };
   return useQuery('doctors', fetchAllCondition, { enabled: false });
 }
@@ -143,20 +130,19 @@ export function useSearchMultiConditions(location, specialization, doctorName){
 export function useSearchMultiConditionsPopUp() {
    const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
    //console.log("useSearchMultiConditionsPopUp:", doctorQuery);
-   const fetchDoctors = ({pageParam = 1}) => {
-      return axios.post('http://localhost:8080/doctor/search',
+   const fetchDoctors = async ({pageParam = 1}) => {
+      const res = await axios.post('http://api.charm-life.com/doctor/search',
        {
-          "address": doctorQuery.location,
-          "nickname": doctorQuery.doctorName,
-          "programTitle": doctorQuery.field,
-          "filterType": [1, 2],
-          "page": pageParam,
-          "pageSize": doctorQuery.pageSize
-        }
-      ).then(res => {
-        console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
-        return { data: res.data.data || [], pageInfo: res.data.pageInfo };
-      })
+         "address": doctorQuery.location,
+         "nickname": doctorQuery.doctorName,
+         "programTitle": doctorQuery.field,
+         "filterType": [1, 2],
+         "page": pageParam,
+         "pageSize": doctorQuery.pageSize
+       }
+     );
+     console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
+     return { data: res.data.data || [], pageInfo: res.data.pageInfo };
    }
    return useInfiniteQuery(
       ['doctors', doctorQuery],
@@ -182,13 +168,13 @@ export function useGetPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
   return useInfiniteQuery(
-    ['posts', postQuery],
-    fetchPost, {
-      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-      keepPreviousData: true,
-      // lastPage is an array of posts
-      // allPages is an array of pages
-      getNextPageParam: (lastPage, allPages) => {
+   ['posts', postQuery], 
+   fetchPost, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+    keepPreviousData: true,
+    // lastPage is an array of posts
+    // allPages is an array of pages
+    getNextPageParam: (lastPage, allPages) => {
       // hasNextPage
       //console.log("lastPage data",lastPage.pageInfo)
       return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
@@ -196,8 +182,6 @@ export function useGetPost() {
    }   
   );
 }
-
-
 
 export default function useGetProcedures() {
   const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);

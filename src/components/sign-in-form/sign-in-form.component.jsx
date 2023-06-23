@@ -1,12 +1,12 @@
 import React, { useCallback,useState } from 'react';
 import FormInput from '../form-input/form-input.component';
-import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
-import { GoogleLoginButton,FacebookLoginButton } from "react-social-login-buttons";
+//import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
+//import { GoogleLoginButton,FacebookLoginButton } from "react-social-login-buttons";
 import './sign-in-form.styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Image } from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
-import FacebookLogin from "react-facebook-login";
+//import FacebookLogin from "react-facebook-login";
 
 
 
@@ -136,7 +136,7 @@ const SignInForm = () => {
 
             </form>
             <div>
-             <LoginSocialFacebook
+             {/* <LoginSocialFacebook
                             appId="206755055457088"
                             onLoginStart={onLoginStart}
                             redirect_uri={REDIRECT_URI}
@@ -158,7 +158,7 @@ const SignInForm = () => {
                       }}
                 >
                     <GoogleLoginButton/>
-                </LoginSocialGoogle>      
+                </LoginSocialGoogle>       */}
             </div>
         </div>
 
