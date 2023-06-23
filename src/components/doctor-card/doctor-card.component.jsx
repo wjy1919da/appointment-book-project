@@ -5,6 +5,8 @@ import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
+import StarRate from '../starRate/starRate';
+
 const DoctorCard = ({doctor}) => {
     console.log("doctor card: ",doctor);
     return (
@@ -27,7 +29,7 @@ const DoctorCard = ({doctor}) => {
                     {doctor.mechName}
                 </span>
                 <span className='search-card-text'>
-                    <span className={"stars-container stars-40"}>★★★★★</span>
+                    <StarRate rateScore ='40'/>
                 </span>
             </div>
         </div>

@@ -244,7 +244,7 @@ export function useGetDoctorReviews() {
       staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
       keepPreviousData: true,
       getNextPageParam: (lastPage, allPages) =>
-        lastPage.data.length > 0 ? allPages.length + 1 : undefined,
+      lastPage.data.length > 0 ? allPages.length + 1 : undefined,
     }
   );
 }

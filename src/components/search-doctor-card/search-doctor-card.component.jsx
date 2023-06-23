@@ -4,6 +4,7 @@ import DoctorProfileImage from '../../assets/doctor/search-doctor-card-profile.p
 import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
+import StarRate from '../starRate/starRate';
 const SearchDoctorCard = () => {
     return (
         <div className='search-doctor-card-container'>

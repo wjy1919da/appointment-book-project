@@ -85,7 +85,7 @@ const IndividualDoctor = () => {
             key={index}
             profileImage={review.img}
             name={review.nickname}
-            starRate={review.score*10}
+            starRate={review.score}
             reviewText={review.text}
             date={new Date(review.addTime*1000).toLocaleDateString()}
           />

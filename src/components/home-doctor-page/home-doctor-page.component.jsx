@@ -5,7 +5,7 @@ import DoctorImg from '../../assets/home/doctor-img.png';
 import vector from '../../assets/home/Vector.png';
 import './home-doctor-page.styles.scss'
 import HomeLink from '../home-link/home-link.component';
-
+import StarRate from '../starRate/starRate';
 
 const HomeDoctorPage = () => {
     return(
@@ -15,14 +15,9 @@ const HomeDoctorPage = () => {
                 <div className = 'doctor-page-name-card'>
                     <h5>Dr. Amir Karam</h5>
                     <p >Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                    <span className='starRate'>
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                    </span> 
+                    <span className='starRatePart'>
+                        <StarRate rateScore='50'/>
+                    </span>
               </div>
            </div>
             <div className='home-doctor-page-container'>
