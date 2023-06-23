@@ -30,5 +30,78 @@
         right: 80px;
         top: 104px;
 
+        .individual-doctor-tabs {
+            display: flex;
+            flex-direction: row;
+
+            .individual-doctor-tab {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: 'Open Sans';
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+
+            .individual-doctor-tab {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: 'Open Sans';
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+
+                .individual-doctor-tab-underline {
+                    height: 3px;
+                    background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+                    border-bottom: 3px;
+                    border-radius: 50px;
+                    margin-top: 5px;
+                    display: none;
+                }
+            }
+
+            .individual-doctor-tab:hover {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: Inter;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+                cursor: pointer;
+
+                .individual-doctor-tab-underline {
+                    display: block;
+                }
+            }
+
+            .individual-doctor-tab:hover,.active {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: Inter;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+
+                .individual-doctor-tab-underline {
+                    display: block;
+                }
+            }
+        }
+
+        .individual-doctor-posts {
+            position: relative;
+            top: -100px;
+            left: -30px;
+            width: 900px;
+        }
     }
 }

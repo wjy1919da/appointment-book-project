@@ -2,6 +2,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    position: relative;
     .profile-card-body
     {
         top:200px;
@@ -129,5 +130,20 @@
         display: flex;
         flex-direction: column;
         gap:24px;
+    }
+    .doctor-profile-back {
+        position: relative;
+        top: 650px;
+        
+        color: #352C29;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 100%;
+    }
+    .back-link:hover {
+        color: #352C29;
+        text-decoration: underline;
     }
 }

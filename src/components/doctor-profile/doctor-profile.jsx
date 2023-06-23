@@ -1,15 +1,16 @@
 import React from 'react';
 import "./doctor-profile.styles.scss";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
-import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
-import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
-import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
+import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png';
+import locationIcon from '../../assets/doctor/search-card-locationIcon.png';
+import glassIcon from '../../assets/doctor/search-card-glassIcon.png';
+import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png';
 import ConsultDoctorButton from '../consult-doctor-button/consult-doctor-button.component';
 import FollowButton from '../follow-button/follow-button.component';
 import useDoctorQueryStore from '../../store.ts';
 import {useSearchMultiConditionsPopUp} from '../../hooks/useSearchDoctors';
+import backIcon from '../../assets/doctor/left_back.png';
 const DoctorProfile = () => {
     const { nickname } = useParams();
     console.log("name in profile",nickname)
@@ -75,6 +76,12 @@ const DoctorProfile = () => {
             <div className="consult-follow-button">
                 <ConsultDoctorButton title='Consult Doctor'/>
                 <FollowButton title='Follow'/>
+            </div>
+            <div className='doctor-profile-back'>
+                <Link to='/doctor'>
+                    <img src={backIcon} style={{height:"24px", display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} />
+                    <span className='back-link'>All Doctors</span>
+                </Link>
             </div>
         </div>
     )

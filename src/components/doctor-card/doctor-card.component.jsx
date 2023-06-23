@@ -17,15 +17,15 @@ const DoctorCard = ({doctor}) => {
             <div className="search-card-body">
                 <span className="search-card-title">{doctor.nickname}</span>
                 <span className='search-card-text '>
-                <img src={locationIcon} style={{width:"18px",height:"18px"}}></img>
+                    <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}}></img>
                     {doctor.address}
                 </span>
                 <span className='search-card-text '>
-                    <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
+                    <img src={glassIcon} style={{height:"18px", marginTop:"4px"}}></img>
                     {doctor.programTitle}
                 </span>
                 <span className='search-card-text '>
-                    <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>
+                    <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}}></img>
                     {doctor.mechName}
                 </span>
                 <span className='search-card-text'>
