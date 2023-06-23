@@ -5,7 +5,7 @@ interface DoctorQuery{
     field?: string;
     pageSize?: number;
     isModelOpen?: boolean;
-    memberID:number;
+    nickName:string;
 }
 interface doctorQueryStore{
     doctorQuery: DoctorQuery;
@@ -14,10 +14,10 @@ interface doctorQueryStore{
     setField: (field: string) => void;
     setPageSize: (pageSize: number) => void;
     setIsModelOpen: (isModelOpen: boolean) => void;
-    setMemberID: (memberID:number) => void;
+    setNickName: (setNickName:string) => void;
 }
 const useDoctorQueryStore = create<doctorQueryStore>((set) => ({ 
-    doctorQuery: {pageSize: 20, isModelOpen:false, field:"", location:"",doctorName:"",memberID:0}, // pageSize default value 20
+    doctorQuery: {pageSize: 20, isModelOpen:false, field:"", location:"",doctorName:"",nickName:""}, // pageSize default value 20
     setDoctorName: (doctorName) => 
         set((store) => ({ doctorQuery: {...store.doctorQuery, doctorName} })),
     setLocation: (location) =>
@@ -28,7 +28,7 @@ const useDoctorQueryStore = create<doctorQueryStore>((set) => ({
         set((store) => ({ doctorQuery: {...store.doctorQuery, pageSize} })),
     setIsModelOpen: (isModelOpen) =>
         set((store) => ({ doctorQuery: {...store.doctorQuery, isModelOpen} })),
-    setMemberID: (memberID) =>
-        set((store) => ({ doctorQuery: { ...store.doctorQuery, memberID } })),
+    setNickName: (nickName) =>
+        set((store) => ({ doctorQuery: { ...store.doctorQuery, nickName } })),
 }));  
 export default useDoctorQueryStore;

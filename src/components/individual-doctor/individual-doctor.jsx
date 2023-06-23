@@ -8,6 +8,7 @@ import { useGetDoctorReviews } from '../../hooks/useSearchDoctors';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import { useParams } from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
+import InfiniteScroll from 'react-infinite-scroll-component';
 // const IndividualDoctor = () => {
 
 //     const review = [{profileImage:DoctorProfileImage,name:"reviewer Name",starRate:40,
@@ -48,14 +49,15 @@ const IndividualDoctor = () => {
   const profileImage1 = DoctorProfileImage;
   const { nickname } = useParams(); // Assuming "nickname" is the parameter in the URL
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
-  const { reviews, error, isLoading } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
-
+  const setNickName = useDoctorQueryStore((state) => state.setNickName);
+  const { data, error, isLoading,isFetchingNextPage, fetchNextPage,hasNextPage} = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
+  const flatData = data ? data.pages.flatMap(page => page.data) : [];
+  console.log("data",data)
+  console.log("setNickName",nickname)
   useEffect(() => {
-    if (nickname) {
-      setDoctorName(nickname);
-    }
-  }, [nickname, setDoctorName]);
+      
+      setNickName(nickname);
+  }, [nickname]);
 
   if (isLoading) {
     return <HomeSpinner />;
@@ -71,16 +73,24 @@ const IndividualDoctor = () => {
         <DoctorProfile />
       </div>
       <div className="individual-doctor-right-container">
-        {reviews?.data?.map((review, index) => (
+      <InfiniteScroll
+                dataLength={flatData.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                scrollThreshold={0.1} 
+            >
+        {flatData?.map((review, index) => (
+          
           <DoctorReviewCard
             key={index}
-            profileImage={profileImage1}
-            name={review.name}
-            starRate={review.starRate}
-            reviewText={review.reviewText}
-            date={review.date}
+            profileImage={review.img}
+            name={review.nickname}
+            starRate={review.score*10}
+            reviewText={review.text}
+            date={new Date(review.addTime*1000).toLocaleDateString()}
           />
         ))}
+        </InfiniteScroll>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ const App = () => {
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
-        <Route path='/doctor/:name' element={<IndividualDoctor />} />
+        <Route path='/doctor/:nickname' element={<IndividualDoctor />} />
 
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
