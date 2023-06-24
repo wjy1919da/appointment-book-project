@@ -51,12 +51,12 @@ const IndividualDoctor = () => {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
   const { data, error, isLoading,isFetchingNextPage, fetchNextPage,hasNextPage} = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
-  const flatData = data ? data.pages.flatMap(page => page.data) : [];
+  const flatData = data ? data.pages.flatMap(page => page.data.evaRespPage.records) : [];
   console.log("data",data)
   console.log("setNickName",nickname)
   useEffect(() => {
       
-      setNickName(nickname);
+  setNickName(nickname);
   }, [nickname]);
 
   if (isLoading) {
@@ -79,7 +79,7 @@ const IndividualDoctor = () => {
                 hasMore={hasNextPage}
                 scrollThreshold={0.1} 
             >
-        {flatData?.map((review, index) => (
+        {flatData.map((review, index) => (
           
           <DoctorReviewCard
             key={index}

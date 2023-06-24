@@ -21,7 +21,7 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
                         <span className="verified-Text">verified customer</span>
                     </span>
                     
-                    </div>
+                </div>
                     <div className="review-date">
                         <span className="post-date">{date}</span>
                     </div>

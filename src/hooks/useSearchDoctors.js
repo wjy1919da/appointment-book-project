@@ -267,3 +267,29 @@ export function useGetDoctorReviews() {
     }
   );
 }
+export function usePostDetail() {
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  console.log("postQuery",postQuery);
+  
+  const fetchPostDetail = () => {
+    let url = `http://localhost:8080/post/web/posts/${postQuery.userID}`;
+    console.log('Before axios.get');
+    console.log('url:', url);
+    return axios.get(url)
+    .then(res => {
+      console.log('Inside axios.get success');
+      console.log("userIDdata", res.data);
+      return res.data;
+    })
+    .catch(error => {
+      console.log('Inside axios.get error');
+      console.error("Failed to fetch procedures", error);
+      return { data: {} };
+    });
+
+  };
+
+  return useQuery(['postDetail', postQuery.userID], fetchPostDetail, {
+    placeholderData: { data: {} }, // Default object to use before fetching completes
+  });
+}
