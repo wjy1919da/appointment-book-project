@@ -105,6 +105,7 @@ const Doctor = () => {
                       {<img src={DoctorSearchPhone} alt='doctor-search-phone' className='doctor-search-header-phone-pic'></img>}
                  </div>
             </div>
+           
               <div className='doctor-search-search-bar-outer-container'>
                     <InputGroup className="mb-3">
                       <div className='doctor-input-container'>

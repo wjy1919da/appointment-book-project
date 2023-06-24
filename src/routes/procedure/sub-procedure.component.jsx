@@ -25,6 +25,14 @@ function safeJsonParse(str) {
         return undefined;
     }
 }
+import useProcedureQueryStore from '../../procedureStore.ts'
+function safeJsonParse(str) {
+    try {
+        return JSON.parse(str);
+    } catch (e) {
+        return undefined;
+    }
+}
 const SubProcedure = () => { 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -108,6 +116,34 @@ const SubProcedure = () => {
     }else{
         return <div className='error'>{data.msg}</div>;
     }
+    if (data.data && data.data.subcategories) {
+        if (data.data.subcategories[1]) {
+            prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
+
+
+        }
+        if (data.data.subcategories[2]) {
+            optionsContent = data.data.subcategories[2].other ? safeJsonParse(data.data.subcategories[2].other) : undefined;
+
+        }
+        if (data.data.subcategories[3]) {
+            const parsed = safeJsonParse(data.data.subcategories[3].other);
+            beforeAndAfterImage = parsed ? parsed.beforeAndAfterImage : undefined;  
+        }
+        if (data.data.subcategories[4]) {
+            reference = data.data.subcategories[4].other ? safeJsonParse(data.data.subcategories[4].other) : undefined;
+           
+        }
+        if (data.data.subcategories[5]) {
+            alternativeTreatmentForm = data.data.subcategories[5].other ? safeJsonParse(data.data.subcategories[5].other) : undefined;
+          
+        }
+        if (data.data.subcategories[7]) {
+            cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
+        }
+    }else{
+        return <div className='error'>{data.msg}</div>;
+    }
     
     return (
      <div className='home-container'>
@@ -121,11 +157,20 @@ const SubProcedure = () => {
                     <p className='sub-procedure-normal-text'>
                         {data.data.description}
                     </p>}
+                {data.data.description &&
+                    <p className='sub-procedure-normal-text'>
+                        {data.data.description}
+                    </p>}
             </div>
             
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
+            {data.data?.subcategories[0] &&
                 <div className='what-section'> 
+                { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
+                { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
+               </div>
+            } 
                 { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
                 { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
                </div>
@@ -133,12 +178,29 @@ const SubProcedure = () => {
                 {/* consider section */}
                 <div className='consider-section'>
                 {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
+                {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
                     {/* pros and cons */}
+                    {prosAndCons && <ol className='pros-and-cons'>
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
                         { prosAndCons[0]&&
                             <li class="list-group-item d-flex justify-content-between align-items-start" >
+                        { prosAndCons[0]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" >
                             <div style={{color: "#A5A6A8"}}>Pros:</div>
+                                <div className="ms-2 me-auto" style={{}}>
+                                    {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
+                                </div>
+                            </li> 
+                        }
+                        {prosAndCons[1]&&
+                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                                        <div style={{color: "#A5A6A8"}}>Cons:</div>
+                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                    {prosAndCons[1]} 
+                                </div>
+                            </li> }
+                   </ol>}
                                 <div className="ms-2 me-auto" style={{}}>
                                     {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
                                 </div>
@@ -188,6 +250,7 @@ const SubProcedure = () => {
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
                 <div className='sub-procedure-right-content'>
                 {cardInfo &&<div className='sub-procedure-right-board'>
+                {cardInfo &&<div className='sub-procedure-right-board'>
                         <div className="right-board-text">
                             <span style={{color:"#A5A6A8"}}>Cost:</span>
                             <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
@@ -210,6 +273,7 @@ const SubProcedure = () => {
                             <span style={{color:"#A5A6A8"}}>Pain:</span>
                             <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
                         </div> 
+                    </div>}
                     </div>}
                     {/*Minqi - introduction-slide */}
                         <div className="introduction-slide" id='slide'>

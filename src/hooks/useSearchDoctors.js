@@ -2,7 +2,9 @@ import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
-
+import useProcedureQueryStore from "../procedureStore.ts";
+import usePostQueryStore from "../postStore.ts";
+import useDoctorReviewQueryStore from '../reviewStore.ts';
 const base = {
     baseUrl: 'http://api.charm-life.com/',
     procedureUrl:'http://api.charm-life.com/procedure',
@@ -162,4 +164,127 @@ export function useSearchMultiConditionsPopUp() {
           } 
       }
   )
+}
+
+export function useGetPost() {
+  const postQuery = usePostQueryStore(s => s.postQuery);
+  const fetchPost = ({ pageParam = 1 }) => {
+    return axios.post('http://localhost:8080/post/posts:page', {
+      currentPage: pageParam,
+      pageSize: postQuery.pageSize,
+      filterType: postQuery.filterType,
+    }).then(res => {
+     // console.log("fetch Data:", res.data, "pageParam:", pageParam);
+      return { data: res.data.data, pageInfo: res.data.pageInfo };
+    });
+  };
+  return useInfiniteQuery(
+   ['posts', postQuery], 
+   fetchPost, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+    keepPreviousData: true,
+    // lastPage is an array of posts
+    // allPages is an array of pages
+    getNextPageParam: (lastPage, allPages) => {
+      // hasNextPage
+      //console.log("lastPage data",lastPage.pageInfo)
+      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+    }
+   }   
+  );
+}
+
+
+
+export default function useGetProcedures() {
+  const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
+  var processedCategory;
+
+  const fetchProcedures = () => {
+    // Replace all '-' with '_'
+    processedCategory = procedureQuery.categories.replace(/-/g, "_");
+    let url = `${base.procedureUrl}/${processedCategory}`;
+
+    // use default pageSize
+    // no page info 
+    return axios.get(url, {
+      params: {
+        page: 1,
+      }
+    })
+    .then(res => {
+      // console.log('dataInSearchAPI:', res.data);
+      return res.data;
+    })
+    .catch(error => {
+      console.error("Failed to fetch procedures", error);
+      return { data: {} }; // return a default object if fetching fails
+    });
+  }
+
+  return useQuery(['procedures', procedureQuery], fetchProcedures, {
+    placeholderData: { data: {} }, // default object to use before fetching completes
+  });
+}
+
+export function useGetDoctorReviews() {
+  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+  console.log(doctorQuery)
+  const clearnickName=doctorQuery.nickName.replace(":", "")
+  const fetchDoctorReviews = async ({ pageParam = 1 }) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/evaluate/evaluations:page',
+        {
+          "currentPage": pageParam,
+          "memberId": 45,
+          "nickname": clearnickName,
+          "pageSize": doctorQuery.pageSize,
+          
+        }
+      );
+      
+      console.log("reviewdata",response.data);
+      return { data: response.data.data, pageInfo: response.data.pageInfo };
+    } catch (error) {
+      throw new Error('Failed to fetch doctor reviews');
+    }
+  };
+
+  return useInfiniteQuery(
+    ['doctor-reviews', doctorQuery.nickName, doctorQuery.pageSize],
+    fetchDoctorReviews,
+    {
+      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
+      keepPreviousData: true,
+      getNextPageParam: (lastPage, allPages) =>
+      lastPage.data.length > 0 ? allPages.length + 1 : undefined,
+    }
+  );
+}
+export function usePostDetail() {
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  console.log("postQuery",postQuery);
+  
+  const fetchPostDetail = () => {
+    let url = `http://localhost:8080/post/web/posts/${postQuery.userID}`;
+    console.log('Before axios.get');
+    console.log('url:', url);
+    return axios.get(url)
+    .then(res => {
+      console.log('Inside axios.get success');
+      console.log("userIDdata", res.data);
+      return res.data;
+    })
+    .catch(error => {
+      console.log('Inside axios.get error');
+      console.error("Failed to fetch procedures", error);
+      return { data: {} };
+    });
+
+  };
+
+  return useQuery(['postDetail', postQuery.userID], fetchPostDetail, {
+    placeholderData: { data: {} }, // Default object to use before fetching completes
+  });
 }

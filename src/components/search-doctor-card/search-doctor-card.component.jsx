@@ -26,7 +26,7 @@ const SearchDoctorCard = () => {
                         License or Verification
                     </span>
                     <span className='search-card-text'>
-                        <span className={"stars-container stars-40"}>★★★★★</span>
+                        <StarRate rateScore='40'/>
                     </span>
                 </div>
         </div>

@@ -69,7 +69,7 @@
     display: flex;
     justify-content: center; /* 添加这个属性让子元素在水平方向上居中 */
     align-items: center; /* 添加这个属性让子元素在垂直方向上居中 */
-    padding: 56px 146px; /* 设置内部上下左右的间距 */
+    padding: 56px 250px 56px 150px; //如果你希望左右的填充不一致，你可以提供四个值，它们分别应用于顶部、右侧、底部和左侧的填充
 }
 .doctor-search-container {
     display: flex;
@@ -157,13 +157,13 @@
     height: 54px;
     left: calc(50% - 555px/2 + 0.5px);
     top: 40px;
-
     font-family: 'Playfair Display';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
     line-height: 135%;
 
+    
     text-align: center;
 
     color: #000000;

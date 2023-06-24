@@ -1,0 +1,54 @@
+.comment-card-container
+{
+    display: flex;
+    flex-direction: row;
+    width:429px;
+    height:80px;
+    gap:10px;
+    .reviewer-progile-avatar{
+        position: absolute;
+        left:0%;
+        justify-content: center;
+        .reviewer-avatar
+        {
+            width:35.84px;
+            height:35.84px;
+            border-radius: 50%;
+        }
+    }
+    .reviewer-information
+    {
+        position: absolute;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        left:8%;
+        width:400px;
+        gap:5px;
+        .userName-date
+        {
+            display: flex;
+            flex-direction: row;
+            gap:20px;
+            align-items: center;
+            
+        }
+        .detail-comment-text
+        {
+           
+            font-family:  'Open Sans';
+            font-weight: 400;
+            font-size:16px;
+            line-height: 20.8px;
+        }
+    }
+    .likeCount-commentCount
+    {
+        justify-self: center;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        gap:5px;
+        left:70%;
+    }
+}

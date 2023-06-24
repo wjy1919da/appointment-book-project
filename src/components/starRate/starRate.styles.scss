@@ -3,7 +3,7 @@
     display: inline-block;
     color: transparent;
   }
-
+  
   .stars-container:before {
     position: absolute;
     top: 0;
@@ -11,7 +11,7 @@
     content: '★★★★★';
     color: lightgray;
   }
-
+  
   .stars-container:after {
     position: absolute;
     top: 0;
@@ -23,11 +23,11 @@
     overflow: hidden;
   }
   .stars-10:after { width: 20%; }
-
+  
   .stars-20:after { width: 40%; }
-
+  
   .stars-30:after { width: 60%; }
-
+  
   .stars-40:after { width: 80%; }
-
+  
   .stars-50:after { width: 100%; }
