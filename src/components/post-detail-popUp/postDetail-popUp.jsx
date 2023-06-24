@@ -1,10 +1,10 @@
-import React,{ useEffect, useRef} from 'react';
+import React,{ useEffect, useRef,useState} from 'react';
 import "./postDetail-popUp.styles.scss";
 import CommentCard from '../comment-card/comment-card';
-import heartIcon from '../../assets/doctor/heartIcon.png'
-import commentIcon from '../../assets/post/comment-icon.png'
-import shareIcon from '../../assets/post/shareIcon.png'
-import collectIcon from '../../assets/post/collectIcon.png'
+import heartIcon from '../../assets/doctor/heartIcon.png';
+import commentIcon from '../../assets/post/comment-icon.png';
+import shareIcon from '../../assets/post/shareIcon.png';
+import collectIcon from '../../assets/post/collectIcon.png';
 
 const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount}) => {
     const containerRef = useRef(null);
@@ -34,6 +34,10 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
         return formattedDate;
       };
       const ndate=formatDate(postDate)
+      const handleIconClick = () => {
+        window.location.href = '/download';
+      };
+    
       
     
     if(!picture&&!tag&&!postDate&&!likeCount&&!collectCount&&!comments&&!commentCount&&!brief)
@@ -43,7 +47,7 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
     return (
         <div className='post-detail-popUp-container'ref={containerRef}>
             <div className="postdetail-popUp-left-container" >
-                {picture&&<img src ={picture} ref={imageRef} onLoad={handleImageLoad} className="post-detail-image"></img>}
+                {picture&&<img src ={picture} ref={imageRef} onLoad={handleImageLoad}className="post-detail-image"></img>}
             </div>
             <div className="postdetail-popUp-right-container">
                 <div className="detail-top-content">
@@ -63,7 +67,7 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
                     <div className="post-popUp-comments">
                         <span className="detail-gray-font">{commentCount} comments</span>
                         {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}
-                        <div className="comment-detail">
+                        <div className="comment-detail" onClick={handleIconClick}>
                             {comments&&comments.map((comment,index)=>
                                 <CommentCard
                                     key={index}
@@ -71,6 +75,7 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
                                     name={comment.userName}
                                     commentText={comment.content}
                                     date={formatDate(comment.commentDate)}
+                                    
                                 />
 
                                 )};
@@ -79,11 +84,11 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
             </div>
                     <div className='fixed-input-box' >
                        <div className="Icon-display">
-                            <span className="Icon-count"><img src = {heartIcon} alt="Icon"  className="Icon-size"/>{likeCount}</span>
-                            <span className="Icon-count"><img src = {collectIcon} alt="Icon" className="Icon-size"/>{collectCount}</span>
-                            <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size"/>{commentCount}</span>
+                            <span className="Icon-count"><img src = {heartIcon} alt="Icon"  className="Icon-size" onClick={handleIconClick} />{likeCount}</span>
+                            <span className="Icon-count"><img src = {collectIcon} alt="Icon" className="Icon-size"onClick={handleIconClick}/>{collectCount}</span>
+                            <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size"onClick={handleIconClick}/>{commentCount}</span>
                        </div>
-                       <div className="new-comment-input">
+                       <div className="new-comment-input" onClick={handleIconClick}>
                            <input type="text" placeholder="Enter your comment" className="input-blank"/>
                        </div>
                     </div>
