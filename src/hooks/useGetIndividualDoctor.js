@@ -38,6 +38,7 @@ export function useGetDoctorReviews() {
     );
 }
 
+//TODO: need data to test
 export function useGetDoctorAbout() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   console.log(doctorQuery)
