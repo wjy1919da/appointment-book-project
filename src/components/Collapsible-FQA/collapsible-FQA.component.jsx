@@ -33,13 +33,14 @@ const CollapsibleSet = () => {
           <table className="collapsible-list table">
               <tbody>
               {data.data.map((item, index) => (
+                  item.content && 
                   <tr key={index}>
                       <th>
                           <button
                               className={`collapsible ${activeIndexes.includes(index) ? 'active' : ''}`}
                               onClick={() => toggleCollapsible(index)}
                           >
-                              <li>{item.title}</li>
+                             <li>{item.title}</li>
                           </button>
                           <div
                               className="content"
@@ -60,7 +61,6 @@ const CollapsibleSet = () => {
       }
     </div>
 );}
-
 
 
 export default CollapsibleSet;

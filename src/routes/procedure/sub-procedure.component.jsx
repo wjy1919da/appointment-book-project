@@ -4,8 +4,6 @@ import { Link} from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import Collapsible from '../../components/Collapsible-FQA/collapsible-FQA.component';
 import SubTxt from '../../components/sub-txt/sub-txt.component';
-// import SubProcedurePhotos from '../../components/sub-procedure-photos/sub-procedure-photos.component';
-import SubFooter from '../../components/sub-footer/sub-footer.component';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './sub-procedure.styles.scss';
@@ -29,7 +27,6 @@ const SubProcedure = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-
     const handleScroll = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
@@ -43,23 +40,16 @@ const SubProcedure = () => {
             }
         }
     }
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
-
-    // Mingqi
-    //console.log("sub-procedure");
     const n =50;
-    //Jingyi
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
-    // data from remote
     const { data, isLoading, error } = useGetProcedures();
     const setCategoryId = useProcedureQueryStore(state=>state.setCategoryId);
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
-
     useEffect(() => {
         setCategories(name);
 
@@ -161,9 +151,9 @@ const SubProcedure = () => {
             {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect'>
               <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>
             </div>}
-            {data.data?.subcategories[3] &&<div className='sub-procedure-scroll-container'>
+            {beforeAndAfterImage &&<div className='sub-procedure-scroll-container'>
                 {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
-                {beforeAndAfterImage && <SubProcedureScroll data={beforeAndAfterImage} />}
+                <SubProcedureScroll data={beforeAndAfterImage} />
                 {/* <HomeLink title = "View More Post" href = '/posts'/>   */}
             </div>}
             {alternativeTreatmentForm &&<div className='sub-procedure-form-ver'>
@@ -173,7 +163,6 @@ const SubProcedure = () => {
                 <SubProcedureFormV2 data  = {alternativeTreatmentForm}/>
             </div>}
            
-            {/* Minqi part FQA */}
             <div className="FQA-collapside">
                     <Collapsible/>
             </div>
@@ -211,8 +200,7 @@ const SubProcedure = () => {
                             <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
                         </div> 
                     </div>}
-                    {/*Minqi - introduction-slide */}
-                        <div className="introduction-slide" id='slide'>
+                    <div className="introduction-slide" id='slide'>
                             <div className="introduction-icon"></div>
                             <div className="introduction-catalog">
                                 <span className='introduction-title'>Introduction</span>

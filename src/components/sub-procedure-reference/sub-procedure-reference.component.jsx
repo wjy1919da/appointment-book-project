@@ -6,7 +6,7 @@ const SubProcedureReference = (props) => {
     const referenceList = reference.map((ref, index) => { 
         return(
             <li key={index}>
-                <Link className = 'sub-procedure-reference' to={ref} >{ref}</Link>
+                <Link className = 'sub-procedure-reference-inner' to={ref} >{ref}</Link>
             </li>
         );
     });

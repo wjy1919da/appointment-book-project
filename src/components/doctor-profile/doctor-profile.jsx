@@ -2,18 +2,19 @@ import React from 'react';
 import "./doctor-profile.styles.scss";
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png';
-import locationIcon from '../../assets/doctor/search-card-locationIcon.png';
-import glassIcon from '../../assets/doctor/search-card-glassIcon.png';
-import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png';
+import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
+import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
+import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
+import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import ConsultDoctorButton from '../consult-doctor-button/consult-doctor-button.component';
 import FollowButton from '../follow-button/follow-button.component';
 import useDoctorQueryStore from '../../store.ts';
 import {useSearchMultiConditionsPopUp} from '../../hooks/useSearchDoctors';
+import StarRate from '../starRate/starRate';
 import backIcon from '../../assets/doctor/left_back.png';
-const DoctorProfile = () => {
+const DoctorProfile = ({posts, follower, following,doctorStars}) => {
+    
     const { nickname } = useParams();
-    console.log("name in profile",nickname)
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
     useEffect(() => {
         setDoctorName(nickname);
@@ -40,36 +41,36 @@ const DoctorProfile = () => {
                     {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
                     {profileData.address &&
                         <span className='search-card-text '>
-                            <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}}></img>
+                            <img src={locationIcon} style={{width:"18px",height:"18px"}}></img>
                             {profileData.address}
                         </span>
                     }
                     {profileData.programTitle &&
                         <span className='search-card-text '>
-                            <img src={glassIcon} style={{height:"18px", marginTop:"4px"}}></img>
+                            <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
                             {profileData.programTitle}
                         </span>
                     }
                     <span className='search-card-text '>
-                        <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}}></img>
-                        License or Verification
+                        <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>
+                         Charm Verified
                     </span>
                     <span className='starRate'>
-                        <span className={"stars-container stars-40"}>★★★★★</span>
+                        <StarRate rate={doctorStars || 4}/>
                     </span>
                 </div>
             }
             <div className="post-follower-following">
                 <div className="info-showlist">
-                    <span className="infor-number">3</span>
+                    <span className="infor-number">{posts || 0}</span>
                     <span className="infor-text">Posts</span>
                 </div>
                 <div className="info-showlist">
-                    <span className="infor-number">320</span>
+                    <span className="infor-number">{follower|| 0}</span>
                     <span className="infor-text">Follower</span>
                 </div>
                 <div className="info-showlist">
-                    <span className="infor-number">52</span>
+                    <span className="infor-number">{following ||0}</span>
                     <span className="infor-text">Following</span>
                 </div>
             </div>

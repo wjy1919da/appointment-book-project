@@ -54,7 +54,7 @@
     height: 300px;
     .sub-procedure-top-text{
         position: absolute;
-        width: 600px;
+        width: 700px;
         height: 29px;
         font-family: 'Open Sans';
         font-style: normal;
@@ -71,7 +71,7 @@
     .sub-procedure-title-text {
         position: absolute;
         margin-top: 40px;
-        width: 600px;
+        width: 700px;
         height: 86px;
         font-family: 'Playfair Display';
         font-style: normal;
@@ -384,7 +384,7 @@
             left: 9.5%;
             opacity: 1;
             z-index: 1;
-    
+            
             .sub-procedure-title-text {
                 line-height: 60px;
                 text-transform: capitalize;
@@ -468,4 +468,3 @@
         }
     }
 }
-

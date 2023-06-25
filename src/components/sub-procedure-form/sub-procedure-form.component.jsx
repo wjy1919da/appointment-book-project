@@ -1,34 +1,10 @@
 import './sub-procedure-form.styles.scss'
- //const { data } = props;
-  //console.log("data in sub procedure-form", data);
-//   const header = [{}, {
-// 		"name": "Option 1"
-// 	}, {
-// 		"name": "Option 2"
-// 	}, {
-// 		"name": "Option 3"
-// 	}];
-//   const body = [{
-//     "name": "Lorem ipsum dolor sit amet consectetur",
-//     "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-//   },
-//   {
-//     "name": "Lorem ipsum dolor sit amet consectetur",
-//     "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-//   },
-//   {
-//     "name": "Lorem ipsum dolor sit amet consectetur",
-//     "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-//   },
-//   {
-//     "name": "Lorem ipsum dolor sit amet consectetur",
-//     "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-//   }
-//  ];
-const SubProcedureForm = (props) => {
  
-    const headerObj = props.data.find(item => item.header);
-    const bodyObj = props.data.find(item => item.body);
+const SubProcedureForm = (props) => {
+    const optionsForm = props.data.optionsForm;
+    
+    const headerObj = optionsForm.find(item => item.header);
+    const bodyObj = optionsForm.find(item => item.body);
 
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];

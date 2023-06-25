@@ -29,7 +29,7 @@ const DoctorCard = ({doctor}) => {
                     {doctor.mechName}
                 </span>
                 <span className='search-card-text'>
-                    <StarRate rateScore ='40'/>
+                    <StarRate rateScore ='4'/>
                 </span>
             </div>
         </div>

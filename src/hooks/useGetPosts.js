@@ -22,7 +22,7 @@ export function useGetPost() {
       getNextPageParam: (lastPage, allPages) => {
         // hasNextPage
         //console.log("lastPage data",lastPage.pageInfo)
-        return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+        return lastPage.pageInfo.totalPage > lastPage.pageInfo.currentPage ? allPages.length + 1 : undefined;
       }
      }   
     );

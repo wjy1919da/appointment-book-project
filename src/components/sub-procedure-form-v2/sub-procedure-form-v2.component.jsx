@@ -1,33 +1,12 @@
 import './sub-procedure-form-v2.styles.scss'
 import SubProcedureFormV2Grid from './sub-procedure-form-v2-grid/sub-procedure-form-v2-grid.component';
 const SubProcedureFormV2 = (props) => {
-    // const header = [
-    //     {},
-    //     { "Facial Rejuvenation": "lip-augmentation" },
-    //     { "Facelift": "lip-augmentation" },
-    //     { "Botox Injection": "lip-augmentation" }
-    // ];
-    // const body = [
-    //     {
-    //         "name": "Lorem ipsum dolor sit amet consectetur",
-    //         "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-    //     },
-    //     {
-    //         "name": "Lorem ipsum dolor sit amet consectetur",
-    //         "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-    //     },
-    //     {
-    //         "name": "Lorem ipsum dolor sit amet consectetur",
-    //         "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-    //     },
-    //     {
-    //         "name": "Lorem ipsum dolor sit amet consectetur",
-    //         "value": ["Lorem ipsum", "Lorem ipsum", "Lorem ipsum"]
-    //     }
-    // ];
-    const headerObj = props.data.find(item => item.header);
-    const bodyObj = props.data.find(item => item.body);
+   
+    const alternativeTreatmentForm = props.data.alternativeTreatmentForm;
     
+    const headerObj = alternativeTreatmentForm.find(item => item.header);
+    const bodyObj = alternativeTreatmentForm.find(item => item.body);
+
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];
     return (

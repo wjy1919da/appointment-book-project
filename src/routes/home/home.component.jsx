@@ -7,6 +7,7 @@ import HomePost from '../../components/home-post/home-post.component';
 import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.component';
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
+import SubFooter from '../../components/sub-footer/sub-footer.component';
 
 
 const Home = () => {
@@ -49,9 +50,9 @@ const Home = () => {
             </div>
             <HomePost/>
             <HomeDoctorPage/>
-            {/* <HomeDoctors /> */}
-            {/* <HomeInstruments /> */}
-            {/* <Footer /> */}
+            <HomeDoctors />
+            <HomeInstruments />
+            <Footer />
         </Fragment>
     )
 }

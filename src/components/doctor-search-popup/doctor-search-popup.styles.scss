@@ -50,7 +50,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999; /* 保证在其他内容之上 */
+    z-index: 999999; /* 保证在其他内容之上 */
     display: flex;
     flex-direction: column;
     
