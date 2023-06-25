@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import useProcedureQueryStore from "../procedureStore.ts";
 
 const base = {
-    baseUrl: 'http://api.charm-life.com/',
     procedureUrl:'http://api.charm-life.com/procedure',
     procedureCategoriesUrl:'http://api.charm-life.com/procedure',
     faqUrl:'http://api.charm-life.com/faq'

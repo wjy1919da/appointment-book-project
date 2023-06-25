@@ -1,11 +1,16 @@
 import axios from 'axios';
-import { useInfiniteQuery } from "react-query";
+import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
+
+const base = {
+  postUrl: 'http://api.charm-life.com/post/posts:page',
+  postDetailUrl: 'http://api.charm-life.com/post/web/posts/'
+}
 
 export function useGetPost() {
     const postQuery = usePostQueryStore(s => s.postQuery);
     const fetchPost = async ({ pageParam = 1 }) => {
-      const res = await axios.post('http://api.charm-life.com/post/posts:page', {
+      const res = await axios.post(base.postUrl, {
         currentPage: pageParam,
         pageSize: postQuery.pageSize,
         filterType: postQuery.filterType,
@@ -26,4 +31,30 @@ export function useGetPost() {
       }
      }   
     );
+}
+
+export function usePostDetail() {
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  console.log("postQuery",postQuery);
+  
+  const fetchPostDetail = async () => {
+    let url = `${base.postDetailUrl}${postQuery.userID}`;
+    console.log('Before axios.get');
+    console.log('url:', url);
+    try {
+      const res = await axios.get(url);
+      console.log('Inside axios.get success');
+      console.log("userIDdata", res.data);
+      return res.data;
+    } catch (error) {
+      console.log('Inside axios.get error');
+      console.error("Failed to fetch procedures", error);
+      return { data: {} };
+    }
+
+  };
+
+  return useQuery(['postDetail', postQuery.userID], fetchPostDetail, {
+    placeholderData: { data: {} }, // Default object to use before fetching completes
+  });
 }

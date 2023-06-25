@@ -2,26 +2,18 @@ import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
-import useProcedureQueryStore from "../procedureStore.ts";
-import usePostQueryStore from "../postStore.ts";
-import useDoctorReviewQueryStore from '../reviewStore.ts';
+
 const base = {
-    baseUrl: 'http://api.charm-life.com/',
-    procedureUrl:'http://api.charm-life.com/procedure',
-    doctorDefaultUrl: 'https://run.mocky.io/v3/4fed0bea-6c05-4f57-9936-deae2f691f16',
-    doctorSearchUrl: 'https://run.mocky.io/v3/3bca72f6-9e31-4efc-9fe2-bfe040879a54',
-    specializationDefaultUrl: 'https://run.mocky.io/v3/becf0a1c-4279-472f-bd26-eff6cac83223',
-    specializationSearchUrl: 'https://run.mocky.io/v3/5206ee0c-7f8e-4e65-9b83-8ff193920ccb',
-    // location default 先保留
-    locationDefaultUrl: 'https://run.mocky.io/v3/f023b3fd-88bf-4fa8-98c1-9384027c74ab',
-    locationSearchUrl: 'https://run.mocky.io/v3/66a8fae6-24b6-43d3-bedc-09904ef1255b',
-    multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
-    multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
-    postUrl:'https://run.mocky.io/v3/f6c5bae6-2fcf-4fba-ade8-45b5d8f2a550',
-    postCategoryUrl:'http://api.charm-life.com/post/posts:page',
-    procedureCategoriesUrl:'http://api.charm-life.com/procedure',
-    faqUrl:'http://api.charm-life.com/faq'
-  }
+  doctorDefaultUrl: 'https://run.mocky.io/v3/4fed0bea-6c05-4f57-9936-deae2f691f16',
+  doctorSearchUrl: 'https://run.mocky.io/v3/3bca72f6-9e31-4efc-9fe2-bfe040879a54',
+  specializationDefaultUrl: 'https://run.mocky.io/v3/becf0a1c-4279-472f-bd26-eff6cac83223',
+  specializationSearchUrl: 'https://run.mocky.io/v3/5206ee0c-7f8e-4e65-9b83-8ff193920ccb',
+  // location default 先保留
+  locationDefaultUrl: 'https://run.mocky.io/v3/f023b3fd-88bf-4fa8-98c1-9384027c74ab',
+  locationSearchUrl: 'https://run.mocky.io/v3/66a8fae6-24b6-43d3-bedc-09904ef1255b',
+  multiConditionSearchUrl: `https://run.mocky.io/v3/aec15ab0-97db-4dc3-91c7-5820145b7000`,
+  multiConditionPagingUrl:'https://run.mocky.io/v3/2dacdc9f-0fa4-4e4a-bddc-9c1b8ee81efd',
+}
 
 export function useSearchDoctors(doctorName){
     const debouncedSearchTerm = useDebounce(doctorName, 200);
@@ -81,6 +73,7 @@ export function useSearchSpecialization(specialization){
         queryFn: fetchProjects 
     });
 }
+
 export function useSearchLocation(){
     const location = useDoctorQueryStore(s => s.doctorQuery.location);
     console.log("useSearchLocation",location)
@@ -110,6 +103,7 @@ export function useSearchLocation(){
         queryFn: fetchLocations
     });
 }
+
 export function useSearchMultiConditions(location, specialization, doctorName){
   const fetchAllCondition = async () => {
     console.log("fetching in all condition");
@@ -130,7 +124,7 @@ export function useSearchMultiConditions(location, specialization, doctorName){
 export function useSearchMultiConditionsPopUp() {
   const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
 
-  const fetchDoctors = ({pageParam = 1}) => {
+  const fetchDoctors = async ({pageParam = 1}) => {
       let filterType = [];  // 初始化 filterType 为一个空数组
 
       // 根据 doctorQuery 对象的属性是否为空来添加不同的值
@@ -138,153 +132,29 @@ export function useSearchMultiConditionsPopUp() {
       if (doctorQuery.field !== "") filterType.push(2);
       if (doctorQuery.doctorName !== "") filterType.push(3);
 
-      return axios.post('http://api.charm-life.com/doctor/search',
-          {
-              "address": doctorQuery.location,
-              "nickname": doctorQuery.doctorName,
-              "programTitle": doctorQuery.field,
-              "filterType": filterType,
-              "page": pageParam,
-              "pageSize": doctorQuery.pageSize
-          }
-      ).then(res => {
-          console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
-          return { data: res.data.data || [], pageInfo: res.data.pageInfo };
-      })
-  }
-
-  return useInfiniteQuery(
-      ['doctors', doctorQuery],
-      fetchDoctors,
+      const res = await axios.post('http://api.charm-life.com/doctor/search',
       {
-          staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-          keepPreviousData: true,
-          getNextPageParam: (lastPage, allPages) => {
-              return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
-          } 
+        "address": doctorQuery.location,
+        "nickname": doctorQuery.doctorName,
+        "programTitle": doctorQuery.field,
+        "filterType": filterType,
+        "page": pageParam,
+        "pageSize": doctorQuery.pageSize
       }
-  )
-}
-
-export function useGetPost() {
-  const postQuery = usePostQueryStore(s => s.postQuery);
-  const fetchPost = ({ pageParam = 1 }) => {
-    return axios.post('http://localhost:8080/post/posts:page', {
-      currentPage: pageParam,
-      pageSize: postQuery.pageSize,
-      filterType: postQuery.filterType,
-    }).then(res => {
-     // console.log("fetch Data:", res.data, "pageParam:", pageParam);
-      return { data: res.data.data, pageInfo: res.data.pageInfo };
-    });
-  };
-  return useInfiniteQuery(
-   ['posts', postQuery], 
-   fetchPost, {
-    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-    keepPreviousData: true,
-    // lastPage is an array of posts
-    // allPages is an array of pages
-    getNextPageParam: (lastPage, allPages) => {
-      // hasNextPage
-      //console.log("lastPage data",lastPage.pageInfo)
-      return lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
-    }
-   }   
-  );
-}
-
-
-
-export default function useGetProcedures() {
-  const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
-  var processedCategory;
-
-  const fetchProcedures = () => {
-    // Replace all '-' with '_'
-    processedCategory = procedureQuery.categories.replace(/-/g, "_");
-    let url = `${base.procedureUrl}/${processedCategory}`;
-
-    // use default pageSize
-    // no page info 
-    return axios.get(url, {
-      params: {
-        page: 1,
-      }
-    })
-    .then(res => {
-      // console.log('dataInSearchAPI:', res.data);
-      return res.data;
-    })
-    .catch(error => {
-      console.error("Failed to fetch procedures", error);
-      return { data: {} }; // return a default object if fetching fails
-    });
+    );
+    console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
+    return { data: res.data.data || [], pageInfo: res.data.pageInfo };
   }
 
-  return useQuery(['procedures', procedureQuery], fetchProcedures, {
-    placeholderData: { data: {} }, // default object to use before fetching completes
-  });
-}
-
-export function useGetDoctorReviews() {
-  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  console.log(doctorQuery)
-  const clearnickName=doctorQuery.nickName.replace(":", "")
-  const fetchDoctorReviews = async ({ pageParam = 1 }) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/evaluate/evaluations:page',
-        {
-          "currentPage": pageParam,
-          "memberId": 45,
-          "nickname": clearnickName,
-          "pageSize": doctorQuery.pageSize,
-          
-        }
-      );
-      
-      console.log("reviewdata",response.data);
-      return { data: response.data.data, pageInfo: response.data.pageInfo };
-    } catch (error) {
-      throw new Error('Failed to fetch doctor reviews');
-    }
-  };
-
   return useInfiniteQuery(
-    ['doctor-reviews', doctorQuery.nickName, doctorQuery.pageSize],
-    fetchDoctorReviews,
-    {
-      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
+    ['doctors', doctorQuery],
+     fetchDoctors,
+     {
+      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
       keepPreviousData: true,
-      getNextPageParam: (lastPage, allPages) =>
-      lastPage.data.length > 0 ? allPages.length + 1 : undefined,
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
+      } 
     }
-  );
-}
-export function usePostDetail() {
-  const postQuery = usePostQueryStore((state) => state.postQuery);
-  console.log("postQuery",postQuery);
-  
-  const fetchPostDetail = () => {
-    let url = `http://localhost:8080/post/web/posts/${postQuery.userID}`;
-    console.log('Before axios.get');
-    console.log('url:', url);
-    return axios.get(url)
-    .then(res => {
-      console.log('Inside axios.get success');
-      console.log("userIDdata", res.data);
-      return res.data;
-    })
-    .catch(error => {
-      console.log('Inside axios.get error');
-      console.error("Failed to fetch procedures", error);
-      return { data: {} };
-    });
-
-  };
-
-  return useQuery(['postDetail', postQuery.userID], fetchPostDetail, {
-    placeholderData: { data: {} }, // Default object to use before fetching completes
-  });
+  )
 }
