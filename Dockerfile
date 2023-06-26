@@ -19,7 +19,7 @@
 
 
 # Stage 1 - the build process
-FROM node:14 as build-deps
+FROM node:16 as build-deps
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
