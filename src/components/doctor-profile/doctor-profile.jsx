@@ -41,18 +41,18 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                     {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
                     {profileData.address &&
                         <span className='search-card-text '>
-                            <img src={locationIcon} style={{width:"18px",height:"18px"}}></img>
+                            <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
                             {profileData.address}
                         </span>
                     }
                     {profileData.programTitle &&
                         <span className='search-card-text '>
-                            <img src={glassIcon} style={{width:"18px",height:"18px"}}></img>
+                            <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
                             {profileData.programTitle}
                         </span>
                     }
                     <span className='search-card-text '>
-                        <img src={badgeIcon} style={{width:"18px",height:"18px"}}></img>
+                        <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                          Charm Verified
                     </span>
                     <span className='starRate'>
@@ -80,7 +80,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             </div>
             <div className='doctor-profile-back'>
                 <Link to='/doctor'>
-                    <img src={backIcon} style={{height:"24px", display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} />
+                    <img src={backIcon} style={{height:"24px", display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
                     <span className='back-link'>All Doctors</span>
                 </Link>
             </div>

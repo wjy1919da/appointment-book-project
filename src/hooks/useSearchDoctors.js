@@ -20,7 +20,7 @@ export function useSearchDoctors(doctorName){
     const fetchDoctors = async () => {
         let url;  
         console.log("useQuery")
-        if (doctorName == undefined || debouncedSearchTerm == "" || doctorName == "") {
+        if (doctorName === undefined || debouncedSearchTerm === "" || doctorName === "") {
           console.log("default doctorName")
           url = base.doctorDefaultUrl;   
         }else{
@@ -48,7 +48,7 @@ export function useSearchSpecialization(specialization){
    const fetchProjects = async () => {
       let url;
       console.log("SpecializationQuery")
-      if (specialization == undefined || debouncedSearchTerm == "" || specialization == "") {
+      if (specialization === undefined || debouncedSearchTerm === "" || specialization === "") {
           console.log("default Specialization")
           url = base.specializationDefaultUrl;
       }

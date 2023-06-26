@@ -7,7 +7,6 @@ import HomePost from '../../components/home-post/home-post.component';
 import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.component';
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
-import SubFooter from '../../components/sub-footer/sub-footer.component';
 
 
 const Home = () => {
@@ -42,7 +41,7 @@ const Home = () => {
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         <HomeButton title = "Start Charm life" href = '/download'/>
                         <button type="button" onClick={handleClick} className='button home-title-button2'>
-                            <img src={arrow} alt="Button Image" className="button-image"></img>
+                            <img src={arrow} alt="Button" className="button-image"></img>
                             <span className="button-text">Video</span>
                         </button>
                     </div>

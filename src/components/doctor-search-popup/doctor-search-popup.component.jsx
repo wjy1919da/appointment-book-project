@@ -1,22 +1,14 @@
 import {
-    Input,
     InputGroup,
     SimpleGrid,
-    Spinner,
     Text
   } from '@chakra-ui/react';
 import './doctor-search-popup.styles.scss'
 import { Link } from 'react-router-dom';
-import React,{ useRef, useEffect,useState } from 'react';
+import React,{ useRef, useState } from 'react';
 import {useSearchMultiConditionsPopUp ,useSearchMultiConditions} from '../../hooks/useSearchDoctors';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorCard from '../doctor-card/doctor-card.component';
-import DoctorSearchButton from '../doctor-search-button/doctor-search-button.component';
 import Modal from 'react-bootstrap/Modal';
-import DoctorSearchMultiInput from '../doctor-search-multiInput/doctor-search-multiInput.component';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import HomeSpinner from '../home-spinner/home-spinner.component';
 import useDoctorQueryStore from '../../store.ts';
 import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.component';
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
@@ -94,7 +86,7 @@ const DoctorSearchPopup = ({show,onHide}) => {
                     />
                      <VerticalDivider/>
                       <button className='doctor-search-button' type = 'submit'>
-                            <img src={SearchIcon} className='doctor-search-icon' />
+                            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             search
                      </button>
                 </InputGroup> 

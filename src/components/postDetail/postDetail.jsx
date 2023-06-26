@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { usePostDetail } from "../../hooks/useGetPosts";
-import usePostQueryStore from "../../postStore.ts";
 import Modal from 'react-bootstrap/Modal';
 import PostDetailPopUP from "../post-detail-popUp/postDetail-popUp";
 const PostDetail = ({show,onHide}) =>

@@ -1,17 +1,14 @@
-import StyledButtonV3 from '../../components/styled-button-v3/styled-button-v3.component';
 import Footer from "../../components/footer/footer.component";
 import { Link} from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import Collapsible from '../../components/Collapsible-FQA/collapsible-FQA.component';
 import SubTxt from '../../components/sub-txt/sub-txt.component';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './sub-procedure.styles.scss';
-import { getProcedures } from '../../utils/apiService';
 import SubProcedureForm from '../../components/sub-procedure-form/sub-procedure-form.component';
 import SubProcedureScroll from '../../components/sub-procedure-scroll/sub-procedure-scroll.component';
 import SubProcedureFormV2 from '../../components/sub-procedure-form-v2/sub-procedure-form-v2.component';
-import HomeLink from '../../components/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
 import useGetProcedures from '../../hooks/useGetProcedures';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';

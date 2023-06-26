@@ -1,15 +1,13 @@
-import './doctor-post-grid.styles.scss'
-import CommunityPost from '../community-post/community-post.component'
-import profileImage from '../../assets/doctor/profile1.png'
-import DoctorPostCard from '../doctor-post-card/doctor-post-card.component'
+import './doctor-post-grid.styles.scss';
+import CommunityPost from '../community-post/community-post.component';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useGetPost } from '../../hooks/useGetPosts';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-import React, { useState,useId,useEffect } from 'react';
+import React, { useState } from 'react';
 import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
-import Arrow from '../../assets/post/arrow_grid.png';
+
 const DoctorPostGridV2 = () => {
     const {
         data, 

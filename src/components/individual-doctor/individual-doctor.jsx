@@ -4,14 +4,11 @@ import DoctorProfile from '../doctor-profile/doctor-profile';
 import DoctorAbout from '../doctor-about/doctor-about.component';
 import DoctorReviewCard from '../doctor-review-card/doctor-review-card';
 import DoctorProfileImage from '../../assets/doctor/profile2.png'
-import DoctorProfileImage2 from '../../assets/doctor/profile3.png'
 import { useGetDoctorReviews } from '../../hooks/useGetIndividualDoctor';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import { useParams } from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import DoctorPost from '../doctor-post/doctor-post.component';
-import DoctorPostGrid from '../doctor-post-grid/doctor-post-grid.component';
 import DoctorPostGridV2 from '../doctor-post-grid/doctor-post-grid-V2.component';
 
 const IndividualDoctor = () => {

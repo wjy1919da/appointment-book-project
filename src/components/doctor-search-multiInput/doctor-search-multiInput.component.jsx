@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState,useReducer } from 'react'
-import {InputGroup, Divider} from "@chakra-ui/react";
+import React, { useRef, useState,useReducer } from 'react'
+import { InputGroup } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component'
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component';
@@ -53,7 +53,7 @@ const DoctorSearchMultiInput = () => {
                     onChange = {(event) => setDoctorName(event.target.value)}
                     label = "Doctor Name"  />
                 <button className='doctor-search-button' onClick = {handleOnClick}>
-                    <img src={SearchIcon} className='doctor-search-icon' />
+                    <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                     search
                 </button>
             </InputGroup>

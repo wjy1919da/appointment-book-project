@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './doctor-card.styles.scss';
 import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
@@ -17,15 +16,15 @@ const DoctorCard = ({doctor}) => {
             <div className="search-card-body">
                 <span className="search-card-title">{doctor.nickname}</span>
                 <span className='search-card-text '>
-                    <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}}></img>
+                    <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
                     {doctor.address}
                 </span>
                 <span className='search-card-text '>
-                    <img src={glassIcon} style={{height:"18px", marginTop:"4px"}}></img>
+                    <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
                     {doctor.programTitle}
                 </span>
                 <span className='search-card-text '>
-                    <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}}></img>
+                    <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                     {doctor.mechName}
                 </span>
                 <span className='search-card-text'>
