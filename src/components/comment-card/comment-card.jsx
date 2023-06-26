@@ -21,7 +21,7 @@ const CommentCard = ({avatar,name,date,commentText}) => {
     return (
         <div className='comment-card-container'>
             <div className="reviewer-progile-avatar">
-                <img src= {avatar} className="reviewer-avatar"></img>
+                <img src= {avatar} className="reviewer-avatar" alt='avatar'></img>
             </div>
             <div className="reviewer-information">
                 <div className="userName-date">

@@ -10,7 +10,7 @@ const HomeDoctors = () => {
         <div className = 'home-doctors-container'>
             <div  className='home-doctors-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
                 <div className = 'home-doctor-apple-section'>
-                    <img className='phone-image' src={PhoneImage} alt="Phone Image" />
+                    <img className='phone-image' src={PhoneImage} alt="Phone" />
                     <div className = 'home-doctor-apple-screen'>
                         <img className='phone-screen' src={PhoneScreen} alt="Phone Screen" />
                     </div>

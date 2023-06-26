@@ -1,6 +1,6 @@
-import Home from '../../../routes/home/home.component';
 import HomeLink from '../../home-link/home-link.component';
-import './home-section5-titles.styles.scss'
+import './home-section5-titles.styles.scss';
+
 // link 需要加link
 const HomeSectionTitles = (props) => {
     return (

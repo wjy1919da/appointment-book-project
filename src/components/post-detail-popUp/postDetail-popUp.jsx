@@ -1,4 +1,4 @@
-import React,{ useEffect, useRef,useState} from 'react';
+import React,{ useRef} from 'react';
 import "./postDetail-popUp.styles.scss";
 import CommentCard from '../comment-card/comment-card';
 import heartIcon from '../../assets/post/heart.png';
@@ -47,7 +47,7 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
     return (
         <div className='post-detail-popUp-container'ref={containerRef}>
             <div className="postdetail-popUp-left-container" >
-                {picture&&<img src ={picture} ref={imageRef} onLoad={handleImageLoad}className="post-detail-image"></img>}
+                {picture&&<img src ={picture} ref={imageRef} onLoad={handleImageLoad}className="post-detail-image" alt='detail-pic'></img>}
             </div>
             <div className="postdetail-popUp-right-container">
                 <div className="detail-top-content">
