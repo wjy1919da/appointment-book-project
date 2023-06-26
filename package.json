@@ -36,6 +36,7 @@
     "react-social-login-buttons": "^3.6.1",
     "react-stack-grid": "^0.7.1",
     "react-waterfall": "^4.0.4",
+    "react-responsive-masonry": "2.1.7",
     "reactjs-social-login": "^2.6.2",
     "sass": "^1.55.0",
     "use-query-params": "^2.2.0",
