@@ -50,5 +50,10 @@
         flex-direction: row;
         gap:5px;
         left:70%;
+
+        .post-detail-icon {
+            width: 18px;
+            border-radius: 0;
+        }
     }
 }

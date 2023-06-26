@@ -10,8 +10,8 @@ const HomePost = () => {
         <div className="Home-post">
             <div className='home-post-pic animate__animated animate__slideInUp'>
                     <img src={PostContainer} alt="postcontainer" className='post-pic'></img>
-                    <img src={Decoration} className="decoration-pic1"></img>
-                    <img src={Decoration} className="decoration-pic2"></img>
+                    <img src={Decoration} className="decoration-pic1" alt=''></img>
+                    <img src={Decoration} className="decoration-pic2" alt=''></img>
                     <div className="p-topic">
                         <span className="post-topic"style={{marginTop:"130px",marginLeft:"180px"}}>#Occaecat</span>
                         <span className="post-topic"style={{marginTop:"250px",marginLeft:"80px"}}>#Adipiscing</span>
@@ -33,8 +33,8 @@ const HomePost = () => {
                 </div>
                 <div className='home-post-link'>
                     {/* <span className="underline-link">View More Posts</span> */}
-                    <HomeLink title="View More Posts" href="/procedure/facial-rejuvenation"/>
-                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"-30px", border: "None"}}></img>
+                    <HomeLink title="View More Posts" href="/posts" />
+                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img>
                     
                 </div>
             </div>

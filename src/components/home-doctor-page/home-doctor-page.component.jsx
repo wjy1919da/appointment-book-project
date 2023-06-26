@@ -35,8 +35,8 @@ const HomeDoctorPage = () => {
                 </div>
                 <div className='home-doctor-page-link'>
                 {/* <h3 className="underline-link">View More Posts</h3> */}
-                <HomeLink title= "View More Posts" href = "procedure/facial-rejuvenation"/>
-                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"-30px", border: "None"}}></img>
+                <HomeLink title= "View More Doctors" href = "/doctor"/>
+                    <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img>
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
 import React,{ useEffect, useRef,useState} from 'react';
 import "./postDetail-popUp.styles.scss";
 import CommentCard from '../comment-card/comment-card';
-import heartIcon from '../../assets/doctor/heartIcon.png';
-import commentIcon from '../../assets/post/comment-icon.png';
+import heartIcon from '../../assets/post/heart.png';
+import commentIcon from '../../assets/post/chat_bubble.png';
 import shareIcon from '../../assets/post/shareIcon.png';
-import collectIcon from '../../assets/post/collectIcon.png';
+import collectIcon from '../../assets/post/star.png';
 
 const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount}) => {
     const containerRef = useRef(null);
@@ -78,7 +78,7 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
                                     
                                 />
 
-                                )};
+                                )}
                     </div>
                     </div>
             </div>

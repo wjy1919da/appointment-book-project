@@ -22,7 +22,7 @@ const HomeDoctors = () => {
                     Join us today and connect with like-minded individuals who share your passion for personal care.`}
                     />
                     <div className='home-doctors-button'>
-                        <HomeButton title="Download App" href = "/procedure/facial-rejuvenation"/>
+                        <HomeButton title="Download App" href = "/download"/>
                     </div>
                 </div>
             </div>

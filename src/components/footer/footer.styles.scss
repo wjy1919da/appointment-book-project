@@ -44,6 +44,12 @@
         margin: 15px 0;
     }
 
+    .social-media-icons {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+
     .social-media-icon {
         width: 20px;
         height: 20px;
@@ -56,5 +62,6 @@
 
     .social-media-link {
         margin: 0 20px 0 0;
+        width: fit-content;
     }
 }

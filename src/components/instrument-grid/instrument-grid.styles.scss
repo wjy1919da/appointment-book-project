@@ -42,8 +42,9 @@
         /* Thermage */
 
 
-        width: 300px;
+        // width: 300px;
         height: 120px;
+        border-radius: 0;
        
         /* Inside auto layout */
         flex: none;
@@ -61,8 +62,8 @@
         height: 155px;  
     } 
     .title{
-        width: 160px;
-        height: 29px;
+        // width: 160px;
+        // height: 29px;
         padding: 20px;
         font-family: 'Lora';
         font-style: normal;

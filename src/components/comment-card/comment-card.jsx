@@ -1,7 +1,7 @@
 import React from 'react';
 import "./comment-card.styles.scss";
-import HeartIcon from '../../assets/doctor/heartIcon.png';
-import commentIcon from '../../assets/post/comment-icon.png';
+import HeartIcon from '../../assets/post/heart.png';
+import commentIcon from '../../assets/post/chat_bubble.png';
 import '../post-detail-popUp/postDetail-popUp.styles.scss'
 
 const CommentCard = ({avatar,name,date,commentText}) => {
@@ -32,10 +32,10 @@ const CommentCard = ({avatar,name,date,commentText}) => {
             </div>
             <div className="likeCount-commentCount">
                 <span>
-                    <img src ={HeartIcon}></img>
+                    <img className='post-detail-icon' src ={HeartIcon} alt='like'></img>
                 </span>
                 <span>
-                    <img src={commentIcon}></img>
+                    <img className='post-detail-icon' src={commentIcon} alt='comment'></img>
                 </span>
             </div>
         </div>

@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
 import Arrow from '../../assets/post/arrow_grid.png';
+import { Link } from 'react-router-dom';
 
 const DoctorPostGrid = () => {  
     const {
@@ -79,11 +80,13 @@ const DoctorPostGrid = () => {
         <div className='download-text'>
             Join Charm community to view more
         </div>
-        <button className='download-button'>
-          <div className = 'download-button-text'>
+        <Link to='/download'>
+          <button className='download-button'>
+            <div className = 'download-button-text'>
               DownLoad APP
-          </div>
-        </button>
+            </div>
+          </button>
+        </Link>
      </div>
          
     </div>

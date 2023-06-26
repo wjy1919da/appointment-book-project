@@ -7,9 +7,13 @@ import FeatureDoctor from '../../components/FeatureDoctor/feature-doctor.compone
 import IntroDoctor from '../../components/intro-doctor/intro-doctor.component';
 import DoctorSearchMultiInput from '../../components/doctor-search-multiInput/doctor-search-multiInput.component';
 import DoctorPostGrid from '../../components/doctor-post-grid/doctor-post-grid.component';
+import { useLayoutEffect } from 'react';
 
 
 const Doctor = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
   
   return (
     <div className='doctor-container animate__animated animate__fadeIn'>

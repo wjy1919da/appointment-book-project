@@ -51,18 +51,20 @@ const Footer = () => {
                         <p className='footer-nav-title'>
                             Follow Us
                         </p>
-                        <a className='social-media-link' href='https://www.instagram.com/charm_life_official/?igshid=YmMyMTA2M2Y%3D' target='_blank' rel='noreferrer'>
-                            <img className='social-media-icon' src={Instagram} alt='instagram' />
-                        </a>
-                        <a className='social-media-link' href='https://www.tiktok.com/@charmlifecl?_t=8YEeyJyGDjm&_r=1https://www.tiktok.com/@charmlifecl?_t=8YEeyJyGDjm&_r=1' target='_blank' rel='noreferrer'>
-                            <img className='social-media-icon' src={TikTok} alt='tiktok' />
-                        </a>
-                        <a className='social-media-link' href='https://www.facebook.com/profile.php?id=100063997782773&mibextid=LQQJ4d' target='_blank' rel='noreferrer'>
-                            <img className='social-media-icon' src={Facebook} alt='facebook' />
-                        </a>
-                        <a className='social-media-link' href='https://www.linkedin.com/company/charm-life' target='_blank' rel='noreferrer'>
-                            <img className='social-media-icon' src={Linkedin} alt='linkedin' />
-                        </a>
+                        <div className='social-media-icons'>
+                            <a className='social-media-link' href='https://www.instagram.com/charm_life_official/?igshid=YmMyMTA2M2Y%3D' target='_blank' rel='noreferrer'>
+                                <img className='social-media-icon' src={Instagram} alt='instagram' />
+                            </a>
+                            <a className='social-media-link' href='https://www.tiktok.com/@charmlifecl?_t=8YEeyJyGDjm&_r=1https://www.tiktok.com/@charmlifecl?_t=8YEeyJyGDjm&_r=1' target='_blank' rel='noreferrer'>
+                                <img className='social-media-icon' src={TikTok} alt='tiktok' />
+                            </a>
+                            <a className='social-media-link' href='https://www.facebook.com/profile.php?id=100063997782773&mibextid=LQQJ4d' target='_blank' rel='noreferrer'>
+                                <img className='social-media-icon' src={Facebook} alt='facebook' />
+                            </a>
+                            <a className='social-media-link' href='https://www.linkedin.com/company/charm-life' target='_blank' rel='noreferrer'>
+                                <img className='social-media-icon' src={Linkedin} alt='linkedin' />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
