@@ -1,7 +1,7 @@
 import React from 'react';
 import "./community-post.styles.scss";
-import heartIcon from "../../assets/doctor/heartIcon.png"
-import postImage from '../../assets/doctor/post4.png';
+import heartIcon from "../../assets/post/heart.png"
+
 //src\assets\doctor\post1.png
 
 const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
