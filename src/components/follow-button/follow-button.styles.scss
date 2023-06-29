@@ -1,0 +1,30 @@
+.Follow-button
+{
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 32px;
+    gap: 12px;
+
+    width: 133px;
+    height: 56px;
+
+    /* 深巧 */
+
+    border: 2px solid #352C29;
+    border-radius: 8px;
+    background-color: white;
+    color: #352C29;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 100%;
+
+
+}

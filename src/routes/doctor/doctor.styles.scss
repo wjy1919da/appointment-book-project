@@ -1,0 +1,169 @@
+.model{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* 保证在其他内容之上 */
+}
+.doctor-search-outer-container {
+    width: 100%;
+    left: 0px;
+    /* 白 */
+    background: #FBFCFF;
+    display: flex;
+    flex-direction: column;
+    
+    .doctor-search-header-container{
+        margin-top: 70px;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50px;
+        .doctor-search-header-title-container{
+            width:50%;
+            height: 100%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center;
+        }
+        .doctor-search-header-pic-container{
+            width:50%;
+            height: 100%;
+            background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+            border-radius: 1000px 0px 0px 1000px;
+            position: relative; 
+            overflow: hidden; /* 添加这个属性，隐藏超出边界的部分 */
+        
+            .doctor-search-header-pic{
+                width: 55%;
+                height: 100%;
+                position: absolute;
+                right: 5px;
+                top: 0;
+                z-index: 2; 
+                border: none;
+                border-radius: 0;
+            }
+            .doctor-search-header-phone-pic{
+                width:400px;
+                height:390px;
+                position: absolute;
+                right: 30%; 
+                bottom: 0px; 
+                z-index: 1;
+                border: none;
+                border-radius: 0;
+            } 
+        }
+    }
+    
+}
+.doctor-intro-container{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+}
+.doctor-search-search-bar-outer-container{
+    width:100%;
+    display: flex;
+    z-index: 9999;
+    justify-content: center; /* 添加这个属性让子元素在水平方向上居中 */
+    align-items: center; /* 添加这个属性让子元素在垂直方向上居中 */
+    padding: 56px 146px; /* 设置内部上下左右的间距 */
+}
+.doctor-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // align-items: center; /* Align items vertically in the center */
+    position: relative;  /* Important for positioning the dropdown */
+    background: #ffffff;
+    width: 1400px;
+    height: 80px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 10px;
+
+    .doctor-search-text {
+        border: 0;
+        background-color: transparent;
+        width: 220px;
+        height: 60px;
+        padding: 3px 10px;
+    }
+    .doctor-search-button-container{
+        width:25%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+}
+.doctor-input-container{
+    width:25%;
+    
+}
+.doctor-search-icon {
+    width: 20px;
+    margin: 2px 6px;
+}
+.custom-home-button {
+    width: 176px;
+    height: 56px;
+}
+.doctor-post-container{
+    width: 100%;
+    background: #FBFCFF;
+    width: 100%;
+    background: #FBFCFF;
+    padding-left: 31px;
+    padding-right: 120px;
+    
+}
+.doctor-search-outter-box{
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    padding: 0px 12px 0px 0px;
+
+    width: 800px ;
+    height: 60px ;
+
+    /* 白 */
+
+    background: #FBFCFF;
+    /* 灰 */
+
+    border: 1px solid #A5A6A8;
+
+    border-radius: 5px;
+    align-items: center;
+}
+.doctor-post-grid-container{
+    width: 100%;
+    height: 50%;
+    background: #FBFCFF;
+}
+
+.doctor-title
+{
+    margin-left: 30%;
+    width: 555px;
+    height: 54px;
+    left: calc(50% - 555px/2 + 0.5px);
+    top: 40px;
+
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 135%;
+
+    text-align: center;
+
+    color: #000000;
+
+}

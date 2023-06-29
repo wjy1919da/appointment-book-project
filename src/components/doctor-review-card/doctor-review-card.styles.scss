@@ -1,0 +1,63 @@
+.doctor-review-card-container
+{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 24px;
+    gap: 12px;
+    width: 800px;
+    height: 199px;
+    border-bottom: 1px solid #E2E3E7;
+
+    .reviewer-information-date
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .reviewer-information
+        {
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap:16px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 160%;
+            .verified-symbol
+            {
+                // margin-left: 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                color: #A5A6A8;
+            }
+        }
+        .review-date{
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            align-items: right;
+            width: 88px;
+            height: 26px;
+            color: #A5A6A8;
+            font-weight: 500;
+           left:700px;
+           position: absolute;
+
+        }
+    }
+}

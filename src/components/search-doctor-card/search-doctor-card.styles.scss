@@ -1,0 +1,64 @@
+.search-doctor-card-container
+{
+    margin-top: 200px;
+    width: 400px;
+    height: 163px;
+    display: flex;
+    flex-direction: row;
+    gap:24px;
+    background: #FBFCFF;
+    /* Strong Shadow */
+    
+    box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 8px 16px rgba(32, 32, 33, 0.1), 0px 16px 40px rgba(32, 32, 33, 0.2);
+    border-radius: 16px;
+
+   .doctor-profile-img
+   {
+    margin-top: 20px;
+    order:0;
+    flex:none;
+    width:100px;
+    height:100px;
+    margin-left: 16px;
+   }
+   .search-card-body
+   {
+    margin-top: 20px;
+    order:1;
+    flex:none;
+    display: flex;
+    flex-direction: column;
+    .search-card-title
+    {
+     width: 244px;
+     height: 29px;
+     font-family: 'Lora';
+     font-style: normal;
+     font-weight: 500;
+     font-size: 18px;
+     line-height: 160%;
+     /* identical to box height, or 29px */
+     color: #000000;
+    }
+    .search-card-text
+    {
+        display: flex;
+        flex-direction: row;
+        width: 220px;
+        height: 26px;
+        gap:6px;
+        
+        /* Body 3
+        
+        Lora
+        */
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+        /* identical to box height, or 26px */
+        color: rgba(0, 0, 0, 0.82);
+    }
+   }
+}

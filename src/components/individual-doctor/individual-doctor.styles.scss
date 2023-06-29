@@ -1,0 +1,112 @@
+.individual-doctor-container
+{
+    display: flex;
+    flex-direction: row;
+    .individual-doctor-left-container
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0px 0px 64px;
+
+        position: absolute;
+        width: 320px;
+        height: 920px;
+        left: 80px;
+        top: 104px;
+    }
+    .individual-doctor-right-container
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 40px;
+
+        position: absolute;
+        width: 800px;
+        height: 920px;
+        right: 80px;
+        top: 104px;
+
+        .individual-doctor-tabs {
+            display: flex;
+            flex-direction: row;
+
+            .individual-doctor-tab {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: 'Open Sans';
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+
+            .individual-doctor-tab {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: 'Open Sans';
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+
+                .individual-doctor-tab-underline {
+                    height: 3px;
+                    background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+                    border-bottom: 3px;
+                    border-radius: 50px;
+                    margin-top: 5px;
+                    display: none;
+                }
+            }
+
+            .individual-doctor-tab:hover {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: Inter;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+                cursor: pointer;
+
+                .individual-doctor-tab-underline {
+                    display: block;
+                }
+            }
+
+            .individual-doctor-tab:hover,.active {
+                margin-right: 40px;
+                //styleName: Interactive 3 Bold;
+                font-family: Inter;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+
+                .individual-doctor-tab-underline {
+                    display: block;
+                }
+            }
+        }
+
+        .individual-doctor-posts {
+            position: relative;
+            top: -30px;
+            left: -30px;
+            width: 900px;
+        }
+
+       
+    }
+}
+.doctor-post-container{
+    transform: scale(0.7) !important;
+}

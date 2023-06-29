@@ -1,0 +1,80 @@
+.Collapsible-list{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    // left:40px;
+        .FAQ-title
+        {
+            width: 48px;
+            height: 32px;
+            
+            /* Heading 4 */
+            
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 135%;
+            /* or 32px */
+            
+            display: flex;
+            align-items: center;
+            
+            color: #000000;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        table, td, th {
+            border-top: 1px solid grey;
+            border-bottom:  1px solid grey;
+          }
+        .collapsible {
+            background-color: transparent;
+            color: black;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            background-image: url("../../assets/procedure/collapsible-arrow.png");
+            background-position: right;
+            background-repeat: no-repeat;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 160%;
+            /* identical to box height, or 29px */
+    
+    
+            color: #000000;
+        }
+        
+        .active,
+        .collapsible:hover {
+    
+        }
+        
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: transparent;
+            width: 758px;
+            //height: 182px;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 160%;
+            /* or 26px */
+            left:40px;
+            
+            
+            color: #000000;
+        }
+    }
