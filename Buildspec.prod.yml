@@ -35,7 +35,7 @@ version: 0.2
 
 env:
   variables:
-     ECR_REPOSITORY: "447009629772.dkr.ecr.us-west-1.amazonaws.com/charm-ui-v1"
+     ECR_REPOSITORY: "447009629772.dkr.ecr.us-west-1.amazonaws.com/charm-ui-dev"
      IMAGE_TAG: "latest"
 
 phases:
