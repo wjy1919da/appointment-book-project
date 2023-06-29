@@ -2,6 +2,7 @@ import React from 'react';
 import "./doctor-review-card.styles.scss";
 import verifiedIcon from '../../assets/doctor/verified-Icon.png'
 import StarRate from '../starRate/starRate';
+import { reverseEasing } from 'framer-motion';
 
 
 const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
@@ -10,6 +11,12 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
     {
         return null
     }
+
+    function convertUnicode(input) {
+        return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
+            String.fromCharCode(parseInt(b, 16)));
+    }
+
     return (
         <div className='doctor-review-card-container'>
             <div className="reviewer-information-date">
@@ -31,7 +38,7 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
                 <StarRate rateScore={starRate}/>
             </div>
             <div className="reviewer-text">
-                {reviewText}
+                {convertUnicode(reviewText)}
             </div>
         </div>
     )
