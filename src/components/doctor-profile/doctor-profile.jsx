@@ -42,9 +42,12 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     const { nickname } = useParams();
     
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
-    
+    const setField = useDoctorQueryStore((state) => state.setField);
+    const setLocation = useDoctorQueryStore((state) => state.setLocation);
     useEffect(() => {
         setDoctorName(nickname);
+        setField("");
+        setLocation("");
     }, [nickname]);
     const {
         data,
