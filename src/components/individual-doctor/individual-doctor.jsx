@@ -56,21 +56,21 @@ const IndividualDoctor = () => {
             </div>
           ))}
         </div>
-        <InfiniteScroll
+        {activeTab === 0 && 
+          <DoctorAbout />}
+        {activeTab === 1 &&
+          <div className="individual-doctor-posts scale-down">
+            {/* <div className='doctor-post-container'> */}
+              <DoctorPostGridV2 />
+            {/* </div> */}
+          </div>}
+        {activeTab === 2 && <InfiniteScroll
           dataLength={fetchedReviewsCount}
           next={fetchNextPage}
           hasMore={hasNextPage}
           scrollThreshold={0.1} 
         >
-          {activeTab === 0 && 
-            <DoctorAbout />}
-          {activeTab === 1 &&
-            <div className="individual-doctor-posts scale-down">
-              {/* <div className='doctor-post-container'> */}
-               <DoctorPostGridV2 />
-              {/* </div> */}
-            </div>}
-          {activeTab === 2 && data?.pages.map((page, index) => (
+          {data?.pages.map((page, index) => (
             <React.Fragment key={index}>
              {
               page.data.evaRespPage.records.map((review, index) => (
@@ -83,9 +83,9 @@ const IndividualDoctor = () => {
                   date={new Date(review.addTime*1000).toLocaleDateString()}
                 />))
              }
-          </React.Fragment>
+            </React.Fragment>
           ))}
-        </InfiniteScroll>
+        </InfiniteScroll>}
       </div>
     </div>
   );
