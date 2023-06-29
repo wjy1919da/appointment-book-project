@@ -7,9 +7,7 @@
     
    // padding: 20px;  
     flex-direction: row;
-    //justify-content: center;
     justify-content: space-around; 
-    align-items: center;
     
     grid-gap: 40px;
     flex: none;
@@ -60,11 +58,12 @@
         border-radius: 100%; // 圆角
         width: 155px;
         height: 155px;  
+        margin: 0 auto;
     } 
     .title{
         // width: 160px;
         // height: 29px;
-        padding: 20px;
+        padding: 20px 0;
         font-family: 'Lora';
         font-style: normal;
         font-weight: 500;
