@@ -44,6 +44,12 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
     {
         return null
     }
+
+    function convertUnicode(input) {
+      return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
+          String.fromCharCode(parseInt(b, 16)));
+    }
+    
     return (
         <div className='post-detail-popUp-container'ref={containerRef}>
             <div className="postdetail-popUp-left-container" >

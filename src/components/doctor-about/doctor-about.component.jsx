@@ -11,13 +11,11 @@ const DoctorAbout = () => {
         {'title': 'Highlights',
             'items': [
                 {'content': '',
-                'title': 'highlight1'},
+                'title': data?.pages[0].data.isAuth},
                 {'content': '',
-                'title': 'highlight2'},
+                'title': data?.pages[0].data.actual},
                 {'content': '',
-                'title': 'highlight3'},
-                {'content': '',
-                'title': 'highlight4'}
+                'title': data?.pages[0].data.method}
         ]},
         {'title': 'Specializations',
             'items': data?.pages[0].data.interesteds},

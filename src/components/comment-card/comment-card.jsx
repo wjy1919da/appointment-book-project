@@ -17,7 +17,13 @@ const CommentCard = ({avatar,name,date,commentText}) => {
         const formattedDate = `${month}/${day}`;
         return formattedDate;
       };
-      const newDate=formatDate(date)
+    const newDate=formatDate(date)
+
+    function convertUnicode(input) {
+        return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
+            String.fromCharCode(parseInt(b, 16)));
+    }
+
     return (
         <div className='comment-card-container'>
             <div className="reviewer-progile-avatar">
@@ -25,10 +31,10 @@ const CommentCard = ({avatar,name,date,commentText}) => {
             </div>
             <div className="reviewer-information">
                 <div className="userName-date">
-                    <span className="detail-gray-font">{name}</span>
+                    <span className="detail-gray-font">{convertUnicode(name)}</span>
                     <span className="detail-gray-font">{newDate}</span>
                 </div>
-                <span className="detail-comment-text">{commentText}</span>
+                <span className="detail-comment-text">{convertUnicode(commentText)}</span>
             </div>
             <div className="likeCount-commentCount">
                 <span>
