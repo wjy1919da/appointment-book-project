@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
 import Arrow from '../../assets/post/arrow_grid.png';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 
 const DoctorPostGrid = () => {  
@@ -47,8 +48,6 @@ const DoctorPostGrid = () => {
         
         
     ));
-    console.log("playLIst",postCardList)
-
    return(
     <div className='doctor-post-grid-container' >
        {data &&
@@ -67,7 +66,7 @@ const DoctorPostGrid = () => {
                 gutter="25px"
               >
                 <Masonry
-                  gutter="25px"
+                  gutter="5px"
                 >
                     {postCardList}
                 </Masonry>

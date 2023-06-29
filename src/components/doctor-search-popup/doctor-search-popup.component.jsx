@@ -13,6 +13,31 @@ import useDoctorQueryStore from '../../store.ts';
 import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.component';
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../form-input/form-input.component';
+import { useMemo } from 'react';
+const mergeDoctorsByNickname = (pages) => {
+    const mergedDoctors = {};
+  
+    // Flatten the data into a single array
+    const flatData = pages.flatMap(page => page.data || []);
+  
+    flatData.forEach(doctor => {
+      const { nickname, programTitle } = doctor;
+  
+      if (mergedDoctors[nickname]) {
+        // If doctor already exists, add the new programTitle to the existing one
+        mergedDoctors[nickname].programTitle.push(programTitle);
+      } else {
+        // If doctor doesn't exist, add them to the object
+        mergedDoctors[nickname] = {
+          ...doctor,
+          programTitle: [programTitle],  // Use an array to store programTitles
+        };
+      }
+    });
+  
+    // Convert the object back into an array
+    return Object.values(mergedDoctors);
+  };
 const DoctorSearchPopup = ({show,onHide}) => {
    const {
         data,
@@ -22,9 +47,9 @@ const DoctorSearchPopup = ({show,onHide}) => {
         fetchNextPage,
         hasNextPage
    } = useSearchMultiConditionsPopUp();
-   if(data){
-     console.log("doctor component search popup data: ",data);
-   }
+   const mergedData = useMemo(() => {
+    return data ? mergeDoctorsByNickname(data.pages) : [];
+   }, [data]);
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
@@ -38,19 +63,13 @@ const DoctorSearchPopup = ({show,onHide}) => {
    const [internalField,setInternalField] = useState(doctorQuery.field);
    const [internalName,setInternalName] = useState(doctorQuery.doctorName);
    if (error) return <Text>{error.message}</Text>;
-
    const handleSubmit = (event) => {
       event.preventDefault();
       setLocation(internalLocation);
       setField(internalField);
       setDoctorName(internalName);
     }
-    
-    const fetchDoctorCount = 
-        data?.pages.reduce(
-            (total, page) => total + (page.data?.length || 0),
-            0
-        ) || 0;
+   
    
     return(
         <Modal
@@ -95,31 +114,20 @@ const DoctorSearchPopup = ({show,onHide}) => {
         </div> 
         
         <div className='doctor-search-grid-container'>
-    {isLoading ?
-        <div ><p>is Loading</p></div> :
-        (data && 
-            // <InfiniteScroll
-            //     dataLength={fetchDoctorCount}
-            //     next={fetchNextPage}
-            //     hasMore={hasNextPage}
-            //     loader={<Spinner/>}
-            // >
-                (
-                    data.pages.map((page, index) => (
-                        <SimpleGrid key={index} columns={3} spacing={10}>
-                            {page.data && page.data.map((item, i) => (
-                            <div key={i} className='doctor-search-card-container'>
-                                <Link to={`/doctor/${item.nickname}`}>
-                                    <DoctorCard doctor={item} />
-                                </Link>
-                            </div>
-                            ))}
-                        </SimpleGrid>
-                    ))
-                )
-            // </InfiniteScroll>
-        )
-    }
+        {isLoading ?
+            <div ><p>is Loading</p></div> :
+            (data && 
+                <SimpleGrid columns={3} spacing={10}>
+                    {mergedData && mergedData.map((item, i) => (
+                        <div key={i} className='doctor-search-card-container'>
+                            <Link to={`/doctor/${item.nickname}`}>
+                                <DoctorCard doctor={item} />
+                            </Link>
+                        </div>
+                    ))}
+                </SimpleGrid>
+            )
+        }
      </div>
         </Modal>  
     )

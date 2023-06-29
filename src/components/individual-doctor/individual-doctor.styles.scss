@@ -110,3 +110,10 @@
 .doctor-post-container{
     transform: scale(0.7) !important;
 }
+.individual-page-container{
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    width: 100%;
+}

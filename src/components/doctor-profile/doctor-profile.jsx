@@ -1,6 +1,6 @@
 import React from 'react';
 import "./doctor-profile.styles.scss";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
@@ -12,10 +12,37 @@ import useDoctorQueryStore from '../../store.ts';
 import {useSearchMultiConditionsPopUp} from '../../hooks/useSearchDoctors';
 import StarRate from '../starRate/starRate';
 import backIcon from '../../assets/doctor/left_back.png';
+import { useMemo } from 'react';
+const mergeDoctorsByNickname = (pages) => {
+    const mergedDoctors = {};
+  
+    // Flatten the data into a single array
+    const flatData = pages.flatMap(page => page.data || []);
+  
+    flatData.forEach(doctor => {
+      const { nickname, programTitle } = doctor;
+  
+      if (mergedDoctors[nickname]) {
+        // If doctor already exists, add the new programTitle to the existing one
+        mergedDoctors[nickname].programTitle.push(programTitle);
+      } else {
+        // If doctor doesn't exist, add them to the object
+        mergedDoctors[nickname] = {
+          ...doctor,
+          programTitle: [programTitle],  // Use an array to store programTitles
+        };
+      }
+    });
+  
+    // Convert the object back into an array
+    return Object.values(mergedDoctors);
+};
 const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     
     const { nickname } = useParams();
+    
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
+    
     useEffect(() => {
         setDoctorName(nickname);
     }, [nickname]);
@@ -27,28 +54,28 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
         fetchNextPage,
         hasNextPage
    } = useSearchMultiConditionsPopUp();
-   if(data && data.pages){
-     console.log("doctor-profile.component.jsx: data",data.pages[0].data[0].nickname);
-   }
-
+   const mergedData = useMemo(() => {
+    return data ? mergeDoctorsByNickname(data.pages) : [];
+   }, [data]);
+    console.log("mergeData",mergedData[0]);
     const profileData = data?.pages[0]?.data[0];
     
     return (
         <div className='doctor-profile-container'>
             <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..." style={{width:"160px",height:"160px"}}></img>
-            {profileData && 
+            {mergedData && mergedData[0] && 
                 <div className="profile-card-body">
-                    {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
-                    {profileData.address &&
+                    {mergedData[0].nickname && <span className="search-card-title">{mergedData[0].nickname}</span>}
+                    {mergedData[0].address &&
                         <span className='search-card-text '>
                             <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
-                            {profileData.address}
+                            {mergedData[0].address}
                         </span>
                     }
-                    {profileData.programTitle &&
+                    {mergedData[0].programTitle &&
                         <span className='search-card-text '>
                             <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                            {profileData.programTitle}
+                            {mergedData[0].programTitle.join(", ")}
                         </span>
                     }
                     <span className='search-card-text '>

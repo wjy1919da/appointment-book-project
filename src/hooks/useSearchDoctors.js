@@ -59,8 +59,6 @@ export function useSearchSpecialization(specialization){
       }
       const res = await axios.get(url,
        {
-         // body ?
-         // 请求方法
          params: {
            specialization: debouncedSearchTerm
          }
@@ -142,7 +140,6 @@ export function useSearchMultiConditionsPopUp() {
         "pageSize": doctorQuery.pageSize
       }
     );
-    console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
     return { data: res.data.data || [], pageInfo: res.data.pageInfo };
   }
 

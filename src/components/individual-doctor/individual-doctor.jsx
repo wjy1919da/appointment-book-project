@@ -10,15 +10,15 @@ import { useParams } from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorPostGridV2 from '../doctor-post-grid/doctor-post-grid-V2.component';
+import Footer from '../footer/footer.component';
 
 const IndividualDoctor = () => {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
-  const profileImage1 = DoctorProfileImage;
+
   const { nickname } = useParams(); // Assuming "nickname" is the parameter in the URL
-  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
   const { data, error, isLoading,isFetchingNextPage, fetchNextPage,hasNextPage} = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
   const [activeTab, setActiveTab] = useState(0);
@@ -41,6 +41,7 @@ const IndividualDoctor = () => {
   }
 
   return (
+    <div className='individual-page-container'>
     <div className="individual-doctor-container">
       <div className="individual-doctor-left-container">
         {data.pages[0].data && <DoctorProfile posts = {data.pages[0].data.postNumber} follower={data.pages[0].data.followers} following={data.pages[0].data.followings} doctorStars = {data.pages[0].data.doctorStars}/>}
@@ -86,8 +87,12 @@ const IndividualDoctor = () => {
           </React.Fragment>
           ))}
         </InfiniteScroll>
-      </div>
+       
+      </div>  
+     </div>
+      {/* <Footer /> */}
     </div>
+   
   );
 };
 

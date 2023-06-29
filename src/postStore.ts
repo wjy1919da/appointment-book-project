@@ -11,7 +11,7 @@ interface postQueryStore {
     setUserID:(userID:number)=>void;
 }
 const usePostQueryStore = create<postQueryStore>((set) => ({
-    postQuery: {pageSize: 20, filterType: 2,userID:0},
+    postQuery: {pageSize: 35, filterType: 2,userID:0},
     setFilterType: (filterType) => 
       set(state => ({postQuery: {...state.postQuery, filterType}})),
     setPageSize: (pageSize) =>
