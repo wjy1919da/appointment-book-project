@@ -1,42 +1,28 @@
 import './doctor-about.styles.scss';
 import DoctorAboutSection from '../doctor-about-section/doctor-about-section.component';
+import { useGetDoctorAbout } from '../../hooks/useGetIndividualDoctor';
 
 const DoctorAbout = () => {
+    const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
+
     const abouts = [
         {'title': 'Coupons',
-            'items': [
-                {'pic': '',
-                'name': 'coupon1'},
-                {'pic': '',
-                'name': 'coupon2'}
-        ]},
+            'items': data?.pages[0].data.programs},
         {'title': 'Highlights',
             'items': [
-                {'pic': '',
-                'name': 'highlight1'},
-                {'pic': '',
-                'name': 'highlight2'},
-                {'pic': '',
-                'name': 'highlight3'},
-                {'pic': '',
-                'name': 'highlight4'}
+                {'content': '',
+                'title': 'highlight1'},
+                {'content': '',
+                'title': 'highlight2'},
+                {'content': '',
+                'title': 'highlight3'},
+                {'content': '',
+                'title': 'highlight4'}
         ]},
         {'title': 'Specializations',
-            'items': [
-                {'pic': '',
-                'name': 's1'},
-                {'pic': '',
-                'name': 's2'},
-                {'pic': '',
-                'name': 's3'},
-        ]},
+            'items': data?.pages[0].data.interesteds},
         {'title': 'Consult',
-            'items': [
-                {'pic': '',
-                'name': 'c1'},
-                {'pic': '',
-                'name': 'c2'}
-        ]},
+            'items': data?.pages[0].data.methods}
     ]
 
     return (
