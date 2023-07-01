@@ -38,6 +38,7 @@ const Header = () => {
         </NavDropdown.Item>
     );
 
+    const [IsModalOpen, setIsModelOpen] = useState(false);
 //   Save: old navbar    
 //     <Navbar className='header-navbar' expand="lg" expanded={expanded}>
 //     <Container>
@@ -89,11 +90,21 @@ const Header = () => {
                 </Link>
                 <div className='header-nav-container' id='#navbarTogglerDemo02'>
                     <span className='dropdown-center'>
-                        <Link className='header-nav-link1' to = '/procedure/botox_injections'data-bs-toggle='dropdown disabled' aria-expanded='false'>
+                        <Link 
+                            className='header-nav-link1' 
+                            // to = '/procedure/botox_injections'
+                            data-bs-toggle='dropdown disabled' 
+                            aria-expanded='false'
+                            onMouseOver={() => setIsModelOpen(true)}>
                             Procedure
                         </Link>
                         <ul className='dropdown-menu'>
-                            <DropdownMenu />
+                            {IsModalOpen && 
+                                <DropdownMenu
+                                    show={IsModalOpen}
+                                    onHide={() => setIsModelOpen(false)}
+                                />} 
+                            {/* <DropdownMenu /> */}
                         </ul>
                     </span>
                     <span className='header-nav-divider'>|</span>

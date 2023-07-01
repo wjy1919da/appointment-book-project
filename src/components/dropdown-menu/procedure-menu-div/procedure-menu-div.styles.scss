@@ -1,0 +1,38 @@
+.procedure-menu-div {
+    width: 90%;
+    margin: 10px auto;
+
+    .procedure-menu-div-title {
+        font-family: Lora;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 40px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 0;
+    }
+
+    .procedure-menu-div-item {
+        font-family: Lora;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 40px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 0;
+    }
+
+    .procedure-menu-div-item:hover {
+        color: black;
+        text-decoration: underline;
+    }
+
+    .procedure-menu-div-more-link {
+        text-decoration: underline;
+    }
+
+    .procedure-menu-div-more-link:hover {
+        color: black;
+        text-decoration: underline;
+    }
+}
