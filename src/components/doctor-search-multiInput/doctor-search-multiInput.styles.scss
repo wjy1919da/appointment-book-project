@@ -173,15 +173,16 @@
     background: #352C29;
     border-radius: 8px;
     display: flex; 
-}
-.doctor-search-icon {
-    left: 12.5%;
-    right: 12.5%;
-    top: 12.5%;
-    bottom: 12.5%;
-    border-radius: 0;
-    //border: 2.4px solid #FFFFFF;
-    width: 15px; /* 或其他你希望的尺寸 */
-    height: 15px; /* 或其他你希望的尺寸 */
-    margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+
+    .doctor-search-icon {
+        left: 12.5%;
+        right: 12.5%;
+        top: 12.5%;
+        bottom: 12.5%;
+        border-radius: 0;
+        //border: 2.4px solid #FFFFFF;
+        width: 15px; /* 或其他你希望的尺寸 */
+        height: 15px; /* 或其他你希望的尺寸 */
+        margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+    }
 }
