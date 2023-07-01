@@ -4,7 +4,7 @@
     justify-content: flex-end;
     align-items: flex-start;
     width: 800px;
-    height: 230px;
+    height: 185px;
    
 }
 .sub-procedure-form-v2-grid-card{
@@ -16,18 +16,14 @@
     padding: 0px;
     width: 25%;
     height: 80%;
+    justify-content: center;
 
 
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 1;
 }
 .sub-procedure-form-v2-grid-pic{
     //border-radius: 100%; // 圆角
     width: 148px;
-    height: 148px; 
+    height: 165px; 
 }
 .sub-procedure-form-v2-grid-title{
     padding:10px;

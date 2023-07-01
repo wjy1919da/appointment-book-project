@@ -49,7 +49,7 @@ const DoctorPostGrid = () => {
         
     ));
    return(
-    <div className='doctor-post-grid-container' >
+    <div className='doctor-post-grid-inner-container' >
        {data &&
             // <InfiniteScroll
             //     dataLength={flatData.length}

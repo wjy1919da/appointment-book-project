@@ -10,10 +10,8 @@ const DoctorPost = () => {
 
     return (
         <div className='doctor-post-outer-container'>
-            {/* <div className='doctor-post-header-container'>
-            </div> */}
             <DoctorPostGrid />
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

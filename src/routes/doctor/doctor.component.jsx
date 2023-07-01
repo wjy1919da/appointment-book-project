@@ -27,6 +27,7 @@ import DoctorPostGrid from '../../components/doctor-post-grid/doctor-post-grid.c
 
 const Doctor = () => {
   
+  
   return (
     <div className='doctor-container animate__animated animate__fadeIn'>
         <div>
@@ -55,7 +56,7 @@ const Doctor = () => {
                   <DoctorPostGrid />
              </div>
           </div>    
-          {/* <Footer /> */}
+          <Footer />
         </div>
      
     </div>

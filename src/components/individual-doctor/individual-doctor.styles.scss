@@ -1,7 +1,8 @@
 .individual-doctor-container
 {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* This ensures that the left and right containers are side by side */
+    flex: 1;
     .individual-doctor-left-container
     {
         display: flex;
@@ -12,7 +13,7 @@
 
         position: absolute;
         width: 320px;
-        height: 920px;
+       // height: 920px;
         left: 80px;
         top: 104px;
     }
@@ -26,7 +27,7 @@
 
         position: absolute;
         width: 800px;
-        height: 920px;
+        //height: 920px;
         right: 80px;
         top: 104px;
 
@@ -110,10 +111,8 @@
 .doctor-post-container{
     transform: scale(0.7) !important;
 }
-.individual-page-container{
-    display: flex;
+.individual-page-container {
+    display: flex; 
     flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
-    width: 100%;
+    min-height: 240vh; /* This allows the footer to be sticked at the bottom if there's not enough content */
 }

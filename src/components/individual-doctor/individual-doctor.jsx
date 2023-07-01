@@ -90,7 +90,7 @@ const IndividualDoctor = () => {
        
       </div>  
      </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
    
   );
