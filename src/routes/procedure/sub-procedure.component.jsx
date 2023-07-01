@@ -102,23 +102,23 @@ const SubProcedure = () => {
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
-                <h1 className='sub-procedure-title-text' >{formatTitle(name)}</h1>
+                <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
                 <br/>
                 {data.data.description &&
-                    <p className='sub-procedure-normal-text'>
+                    <p className='sub-procedure-normal-text' >
                         {data.data.description}
                     </p>}
             </div>
             
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
-                <div className='what-section'> 
+                <div className='what-section'id = 'consider'> 
                 { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
                 { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
                </div>
             } 
                 {/* consider section */}
-                <div className='consider-section'>
+                <div className='consider-section' >
                 {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
                     {/* pros and cons */}
                     {prosAndCons && <ol className='pros-and-cons'>
@@ -141,33 +141,33 @@ const SubProcedure = () => {
                    </ol>}
                 </div>
             </div>
-            {data.data?.subcategories[2].explanation&&<div className='sub-procedure-option-form-container'>
+            {data.data?.subcategories[2].explanation&&<div className='sub-procedure-option-form-container' id = 'options'>
                 <SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/> 
                 {optionsContent &&<SubProcedureForm data={optionsContent} />  }
             </div> }
-            {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect'>
+            {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect' id = 'sideEffects'>
               <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>
             </div>}
-            {beforeAndAfterImage &&<div className='sub-procedure-scroll-container'>
+            {beforeAndAfterImage &&<div className='sub-procedure-scroll-container' id = 'beforeAndAfter'>
                 {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
                 <SubProcedureScroll data={beforeAndAfterImage} />
                 {/* <HomeLink title = "View More Post" href = '/posts'/>   */}
             </div>}
-            {alternativeTreatmentForm &&<div className='sub-procedure-form-ver'>
+            {alternativeTreatmentForm &&<div className='sub-procedure-form-ver' id = 'alternative'>
                 <div className='sub-title'>
                     Alternative treatments
                 </div> 
                 <SubProcedureFormV2 data  = {alternativeTreatmentForm}/>
             </div>}
            
-            <div className="FQA-collapside">
+            <div className="FQA-collapside" id = 'faq'>
                     <Collapsible/>
             </div>
-            {reference &&<div className='sub-procedure-reference'>
+            {reference &&<div className='sub-procedure-reference' > 
                  <div className='sub-title'>
                     References and resources
                 </div>
-             <SubProcedureReference reference = {reference}/>
+             <SubProcedureReference reference = {reference} id = ''/>
             </div>}    
             </div>
             {/* end of left side */}
@@ -200,15 +200,16 @@ const SubProcedure = () => {
                     <div className="introduction-slide" id='slide'>
                             <div className="introduction-icon"></div>
                             <div className="introduction-catalog">
-                                <span className='introduction-title'>Introduction</span>
-                                <span className='introduction-section'>Why consider facial rejuvenation</span>
-                                <span className='introduction-section'>Procedure options</span>
-                                <span className='introduction-section'>Potential Side Effects</span>
-                                <span className='introduction-section'>Before and After</span>
-                                <span className='introduction-section'>Alternative Treatments</span>
-                                <span className='introduction-section'>FAQ</span>
-                                <span className='introduction-section'>Reference</span>
+                                <a href="#description" className='introduction-title'>Introduction</a>
+                                <a href="#consider" className='introduction-section'>Why consider facial rejuvenation</a>
+                                <a href="#options" className='introduction-section'>Procedure options</a>
+                                <a href="#sideEffects" className='introduction-section'>Potential Side Effects</a>
+                                <a href="#beforeAndAfter" className='introduction-section'>Before and After</a>
+                                <a href="#alternative" className='introduction-section'>Alternative Treatments</a>
+                                <a href="#faq" className='introduction-section'>FAQ</a>
+                                <a className='introduction-section'>Reference</a>
                             </div>
+
                         </div>
                   </div>    
                 </div>
