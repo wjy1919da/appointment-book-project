@@ -25,11 +25,13 @@ const DropdownMenu = ({show, onHide}) => {
             onHide={onHide}
             size='xl'
             >
-                <ProcedureMenuSearch />
-                <ProcedureMenuDiv category='Breast' items={breastProcedures} onHide={onHide}/>
-                <ProcedureMenuDiv category='Body' items={bodyProcedures} onHide={onHide}/>
-                <ProcedureMenuDiv category='Face' items={faceProcedures} onHide={onHide}/>
-                <ProcedureMenuDiv category='Skin' items={skinProcedures} onHide={onHide}/>
+                <div style={{padding: '15px'}}>
+                    <ProcedureMenuSearch />
+                    <ProcedureMenuDiv category='Breast' items={breastProcedures} onHide={onHide}/>
+                    <ProcedureMenuDiv category='Body' items={bodyProcedures} onHide={onHide}/>
+                    <ProcedureMenuDiv category='Face' items={faceProcedures} onHide={onHide}/>
+                    <ProcedureMenuDiv category='Skin' items={skinProcedures} onHide={onHide}/>
+                </div>
                 {/* {data && data.data.map((procedure, index) => {
                     const procedureUrl = '/procedure/' + procedure.categoryName.toLowerCase().replaceAll(' ', '-');
                     if (location.pathname === procedureUrl) {  // 检查当前的 procedure 是否匹配当前的 URL
