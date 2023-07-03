@@ -43,6 +43,7 @@ export default function useGetProcedures() {
   
     return useQuery(['procedures', procedureQuery.categories], fetchProcedures, {
       placeholderData: { data: {} }, // default object to use before fetching completes
+      cacheTime: 1000, // 1 second
     });
 }
 

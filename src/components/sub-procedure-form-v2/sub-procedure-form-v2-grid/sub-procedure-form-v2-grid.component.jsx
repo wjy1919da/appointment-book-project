@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './sub-procedure-form-v2-grid.styles.scss';
 import IMG from '../../../assets/procedure/Breast_Augmentation.png';
 //src/assets/procedure/Breast_Augmentation.png
 const SubProcedureFormV2Grid = (props) => {
-    console.log("subproceudureFormV2Grid",props);
+    const { name } = useParams();
+    console.log("subproceudureFormV2Grid",props,name);
     const gridItems = props.names.map((item, index) => {
         const title = Object.keys(item)[0];
 
@@ -18,7 +19,8 @@ const SubProcedureFormV2Grid = (props) => {
         return (
             <div className='sub-procedure-form-v2-grid-card' key={title}>
                 <Link to={`/procedure/${title}`}>
-                    <img src={IMG} className='sub-procedure-form-v2-grid-pic' alt={title} />
+                    <img src={imgSrc} className='sub-procedure-form-v2-grid-pic' alt={title} />
+                    <div className='sub-procedure-form-v2-grid-title'>{title}</div>
                 </Link>
             </div>    
         )
