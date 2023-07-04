@@ -17,9 +17,19 @@
         width: 1280px;
         height: 1200px;
         padding: 102px 383px; 
+        .home-doctor-video
+        {
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right:5%;
+            left:0%;
+            top:200px;
+
+        }
         .home-doctor-apple-section {
-            width: 514px;
-            height: 996px;
+            // width: 514px;
+            // height: 996px;
             display: flex;
             justify-content: center;
             align-items: center;

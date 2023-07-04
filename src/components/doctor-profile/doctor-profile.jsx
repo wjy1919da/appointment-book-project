@@ -56,7 +56,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                          Charm Verified
                     </span>
                     <span className='starRate'>
-                        <StarRate rate={doctorStars || 4}/>
+                        <StarRate rateScore= {doctorStars || 4}/>
                     </span>
                 </div>
             }
