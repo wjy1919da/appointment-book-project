@@ -18,10 +18,10 @@ const SubProcedureFormV2Grid = (props) => {
 
         return (
             <div className='sub-procedure-form-v2-grid-card' key={title}>
-                <Link to={`/procedure/${title}`}>
+                {/* <Link to={`/procedure/${title}`}> */}
                     <img src={imgSrc} className='sub-procedure-form-v2-grid-pic' alt={title} />
                     <div className='sub-procedure-form-v2-grid-title'>{title}</div>
-                </Link>
+                {/* </Link> */}
             </div>    
         )
     });
