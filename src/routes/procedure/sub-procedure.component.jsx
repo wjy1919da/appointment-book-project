@@ -49,7 +49,6 @@ const SubProcedure = () => {
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
     useEffect(() => {
         setCategories(name);
-
     }, [name]);
     useEffect(() => {
         if (data?.data?.subcategories?.[0]?.categoryId) {
@@ -201,11 +200,11 @@ const SubProcedure = () => {
                             <div className="introduction-icon"></div>
                             <div className="introduction-catalog">
                                 <a href="#description" className='introduction-title'>Introduction</a>
-                                <a href="#consider" className='introduction-section'>Why consider facial rejuvenation</a>
-                                <a href="#options" className='introduction-section'>Procedure options</a>
+                                <a href="#consider" className='introduction-section'>Why consider {formatTitle(name)}</a>
+                                {optionsContent && <a href="#options" className='introduction-section'>Procedure options</a>}
                                 <a href="#sideEffects" className='introduction-section'>Potential Side Effects</a>
-                                <a href="#beforeAndAfter" className='introduction-section'>Before and After</a>
-                                <a href="#alternative" className='introduction-section'>Alternative Treatments</a>
+                                {beforeAndAfterImage && <a href="#beforeAndAfter" className='introduction-section'>Before and After</a>}
+                                {alternativeTreatmentForm && <a href="#alternative" className='introduction-section'>Alternative Treatments</a>}
                                 <a href="#faq" className='introduction-section'>FAQ</a>
                                 <a className='introduction-section'>Reference</a>
                             </div>

@@ -51,12 +51,12 @@ const DoctorPostGrid = () => {
    return(
     <div className='doctor-post-grid-inner-container' >
        {data &&
-            // <InfiniteScroll
-            //     dataLength={flatData.length}
-            //     next={fetchNextPage}
-            //     hasMore={hasNextPage}
-            //     scrollThreshold={0.8} 
-            // >
+            <InfiniteScroll
+                dataLength={flatData.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                scrollThreshold={0.8} 
+            >
              <ResponsiveMasonry
                 columnsCountBreakPoints={{default: 5,
                   1100: 5,
@@ -71,7 +71,7 @@ const DoctorPostGrid = () => {
                     {postCardList}
                 </Masonry>
             </ResponsiveMasonry>
-          // </InfiniteScroll>
+          </InfiniteScroll>
       }
      {IsModalOpen && <PostDetail show={IsModalOpen} onHide={()=>setIsModelOpen(false)}/>}
      <div className='down-load-more-container'>
