@@ -20,16 +20,16 @@ const mergeDoctorsByNickname = (pages) => {
     const flatData = pages.flatMap(page => page.data || []);
   
     flatData.forEach(doctor => {
-      const { nickname, programTitle } = doctor;
+      const { nickname, name } = doctor;
   
       if (mergedDoctors[nickname]) {
         // If doctor already exists, add the new programTitle to the existing one
-        mergedDoctors[nickname].programTitle.push(programTitle);
+        mergedDoctors[nickname].name.push(name);
       } else {
         // If doctor doesn't exist, add them to the object
         mergedDoctors[nickname] = {
           ...doctor,
-          programTitle: [programTitle],  // Use an array to store programTitles
+          name: [name],  // Use an array to store programTitles
         };
       }
     });
@@ -75,10 +75,10 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                             {mergedData[0].address}
                         </span>
                     }
-                    {mergedData[0].programTitle &&
+                    {mergedData[0].name &&
                         <span className='search-card-text '>
                             <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                            {mergedData[0].programTitle.join(", ")}
+                            {mergedData[0].name.join(', ')}
                         </span>
                     }
                     <span className='search-card-text '>

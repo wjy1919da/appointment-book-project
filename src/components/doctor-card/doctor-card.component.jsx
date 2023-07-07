@@ -20,7 +20,7 @@ const DoctorCard = ({doctor}) => {
                 </span>
                 <span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {doctor.programTitle.join(', ')} {/* Use .join() method here */}
+                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
                 </span>
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
