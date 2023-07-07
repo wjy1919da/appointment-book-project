@@ -15,7 +15,7 @@ const DropdownMenu = ({show, onHide}) => {
 
     const breastProcedures = ['Breast Augmentation', 'Breast Reduction', 'Fat Transfer', 'Breast Lift', 'Inverted Nipple Correction']
     const bodyProcedures = ['Non-Surgical Butt Lift', 'Liposuction', 'Arm Lift', 'Lipoma Removal', 'Brazilian Butt Lift']
-    const faceProcedures = ['Facelift', 'Eyelid Lift', 'Ear Surgery', 'Necklift', 'Rhinoplasty Revision', 'Botox Injections']
+    const faceProcedures = ['Facelift', 'Eyelid Lift', 'Ear Surgery', 'Necklift', 'Botox Injections']
     const skinProcedures = ['BOTOX Cosmetic', 'ZO Skincare', 'Microneedling', 'Dermal Fillers', 'Venus Legacy']
 
     return (

@@ -9,6 +9,9 @@ const SubProcedureFormV2 = (props) => {
 
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];
+
+    console.log(body)
+
     return (
         <div>
             <SubProcedureFormV2Grid names={header} />
