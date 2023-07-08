@@ -18,9 +18,10 @@
     .about-items {
         display: flex;
         justify-content: left;
+        gap: 30px;
+        overflow-x: scroll;
 
         .about-item-grid {
-            margin-right: 30px;
             text-align: center;
 
             .about-item-pic {
@@ -42,5 +43,13 @@
                 color: #000000;
             }
         }
+    }
+}
+
+@media (max-width: 576px) {
+    .about-title {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

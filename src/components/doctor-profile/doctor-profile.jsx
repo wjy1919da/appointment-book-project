@@ -35,7 +35,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     
     return (
         <div className='doctor-profile-container'>
-            <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..." style={{width:"160px",height:"160px"}}></img>
+            <img src={DoctorProfileImage} class="img-fluid rounded-start individual-doctor-pic" alt="..." style={{width:"160px",height:"160px"}}></img>
             {profileData && 
                 <div className="profile-card-body">
                     {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
@@ -80,7 +80,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             </div>
             <div className='doctor-profile-back'>
                 <Link to='/doctor'>
-                    <img src={backIcon} style={{height:"24px", display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
+                    <img src={backIcon} className='back-link-icon' style={{display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
                     <span className='back-link'>All Doctors</span>
                 </Link>
             </div>

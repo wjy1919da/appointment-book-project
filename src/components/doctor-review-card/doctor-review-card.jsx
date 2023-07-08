@@ -22,17 +22,17 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
             <div className="reviewer-information-date">
                 <div className="reviewer-information">
                     <img src ={profileImage} alt="reviewer-image" style={{width:"40px",height:"40px",objectFit:"cover"}}></img>
-                    <span className="reviewer-Name" style={{width:"117px"}}>{name}</span>
-                    <span className="verified-symbol">
-                        <img src={verifiedIcon} style={{height:"20px", width:"20px", marginInlineEnd:"2px", marginTop:"2px"}}></img>
-                        <span className="verified-Text">verified customer</span>
-                    </span>
-                    
+                    <div className='reviewer-info-div'>
+                        <span className="reviewer-Name">{name}</span>
+                        <span className="verified-symbol">
+                            <img src={verifiedIcon} style={{height:"20px", width:"20px", marginInlineEnd:"2px", marginTop:"2px"}}></img>
+                            <span className="verified-Text">verified customer</span>
+                        </span>
                     </div>
-                    <div className="review-date">
-                        <span className="post-date">{date}</span>
-                    </div>
-                
+                </div>
+                 <div className="review-date">
+                    <span className="post-date">{date}</span>
+                </div>
             </div>
             <div className="reviewer-starRate">
                 <StarRate rateScore={starRate}/>
