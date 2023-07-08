@@ -1,0 +1,64 @@
+.home-header-tabs{
+    display: flex;
+    flex-direction: row;
+    //align-items: center;
+    justify-content: center;
+    height:66.048px;
+    padding-top: 35px;
+    .home-header-tab{
+        margin-right: 40px;
+        //styleName: Interactive 3 Bold;
+        font-family: 'Open Sans';
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    .home-header-tab{
+        margin-right: 40px;
+        //styleName: Interactive 3 Bold;
+        font-family: 'Open Sans';
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        .home-header-tab-underline{
+            height: 3px;
+            background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+            border-bottom: 3px;
+            border-radius: 50px;
+            margin-top: 5px;
+            display: none;
+        }
+    }
+    .home-header-tab:hover{
+        margin-right: 40px;
+        //styleName: Interactive 3 Bold;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        cursor: pointer;
+        .home-header-tab-underline{
+            display: block;
+        }
+    }
+    .home-header-tab:hover,.active{
+        margin-right: 40px;
+        //styleName: Interactive 3 Bold;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+
+        .home-header-tab-underline{
+            display: block;
+        }
+    }
+} 

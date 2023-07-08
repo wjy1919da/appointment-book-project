@@ -9,6 +9,7 @@ import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 
 
+
 const Home = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -38,6 +39,7 @@ const Home = () => {
                         </p>
                     </div>
                     <div className='home-title-buttons'>
+                   
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         <HomeButton title = "Start Charm life" href = '/download'/>
                         <button type="button" onClick={handleClick} className='button home-title-button2'>

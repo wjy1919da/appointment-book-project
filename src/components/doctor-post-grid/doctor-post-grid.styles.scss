@@ -73,3 +73,11 @@
     font-weight: 600;
     line-height: 100%;
   }
+  .doctor-post-grid--inner-container-mobile{
+    width: 100%;
+    padding: 10px 10px;
+    height:800px;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    //background-color: #FFF;
+  }

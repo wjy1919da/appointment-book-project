@@ -6,6 +6,8 @@
     "@chakra-ui/react": "^2.7.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.13.7",
+    "@mui/material": "^5.13.7",
     "@reduxjs/toolkit": "^1.9.1",
     "@tanstack/react-query": "4.28",
     "@tanstack/react-query-devtools": "4.28",
@@ -26,10 +28,14 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-masonry-css": "^1.0.16",
     "react-multi-carousel": "^2.8.3",
+    "react-native": "^0.72.1",
+    "react-native-masonry-list": "^2.16.1",
+    "react-native-web": "^0.19.6",
     "react-page-loading-v2": "^1.0.16",
     "react-query": "^3.39.3",
     "react-query-devtools": "^2.6.3",
     "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.2",
     "react-responsive-masonry": "2.1.7",
     "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
@@ -67,5 +73,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.7",
+    "@babel/preset-react": "^7.22.5"
   }
 }
