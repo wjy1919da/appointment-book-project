@@ -3,8 +3,8 @@ import { useInfiniteQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
 
 const base = {
-  reviewsUrl: 'http://api.charm-life.com/evaluate/evaluations:page',
-  aboutUrl: 'http://api.charm-life.com/info/doctor-details'
+  reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
+  aboutUrl: 'https://api.charm-life.com/info/doctor-details'
 }
 
 export function useGetDoctorReviews() {
@@ -43,7 +43,6 @@ export function useGetDoctorReviews() {
   );
 }
 
-//TODO: need data to test
 export function useGetDoctorAbout() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   console.log(doctorQuery)
