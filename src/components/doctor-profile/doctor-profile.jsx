@@ -39,6 +39,9 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             {profileData && 
                 <div className="profile-card-body">
                     {profileData.nickname && <span className="search-card-title">{profileData.nickname}</span>}
+                    <span className='starRate'>
+                        <StarRate rateScore= {doctorStars || 4}/>
+                    </span>
                     {profileData.address &&
                         <span className='search-card-text '>
                             <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
@@ -54,9 +57,6 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                     <span className='search-card-text '>
                         <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                          Charm Verified
-                    </span>
-                    <span className='starRate'>
-                        <StarRate rateScore= {doctorStars || 4}/>
                     </span>
                 </div>
             }

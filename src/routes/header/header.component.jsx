@@ -95,7 +95,7 @@ const Header = () => {
                             // to = '/procedure/botox_injections'
                             data-bs-toggle='dropdown disabled' 
                             aria-expanded='false'
-                            onMouseOver={() => setIsModelOpen(true)}>
+                            onClick={() => setIsModelOpen(true)}>
                             Procedure
                         </Link>
                         <ul className='dropdown-menu'>
