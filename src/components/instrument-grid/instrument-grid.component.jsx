@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import './instrument-grid.styles.scss';
-// 格式化标题
-// 图片需要按照固定格式命名，如：face_lift.png 标题为 Face Lift
+
 const formatTitle = (title) => {
     return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }

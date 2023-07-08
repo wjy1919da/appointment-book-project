@@ -11,9 +11,11 @@ import ArrowIcon from '../../assets/home/arrow-icon.png';
 
 import './header.styles.scss';
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 
 const Header = () => {
+    const isMobile = useMediaQuery({ query: `(max-width: 1000px)` });
     const loginIcon = require('../../assets/home/login-icon.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
@@ -80,6 +82,9 @@ const Header = () => {
 //         </Navbar.Collapse>
 //     </Container>
 // </Navbar>
+    if (isMobile) {
+        return <Outlet />;
+    }
 
     return (
         <Fragment>

@@ -1,7 +1,7 @@
 import './sub-procedure-form-v2.styles.scss'
 import SubProcedureFormV2Grid from './sub-procedure-form-v2-grid/sub-procedure-form-v2-grid.component';
 const SubProcedureFormV2 = (props) => {
-   
+    console.log("subproceudureForm",props);
     const alternativeTreatmentForm = props.data.alternativeTreatmentForm;
     
     const headerObj = alternativeTreatmentForm.find(item => item.header);
@@ -9,9 +9,8 @@ const SubProcedureFormV2 = (props) => {
 
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];
-
-    console.log(body)
-
+    console.log("header",header);
+    console.log("body",body);
     return (
         <div>
             <SubProcedureFormV2Grid names={header} />

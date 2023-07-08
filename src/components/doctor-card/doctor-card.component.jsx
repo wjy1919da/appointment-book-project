@@ -7,7 +7,6 @@ import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import StarRate from '../starRate/starRate';
 
 const DoctorCard = ({doctor}) => {
-    console.log("doctor card: ",doctor);
     return (
          <div className='search-doctor-card-container'>
             <div className='doctor-profile-img'>
@@ -21,7 +20,7 @@ const DoctorCard = ({doctor}) => {
                 </span>
                 <span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {doctor.programTitle}
+                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
                 </span>
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
@@ -34,4 +33,5 @@ const DoctorCard = ({doctor}) => {
         </div>
     )
 }
+
 export default DoctorCard;
