@@ -13,7 +13,9 @@ import useDoctorQueryStore from '../../store.ts';
 import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.component';
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../form-input/form-input.component';
-const DoctorSearchPopup = ({show,onHide}) => {
+import { Button, Dropdown, Form } from 'react-bootstrap';
+import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const {
         data,
         error,
@@ -53,6 +55,80 @@ const DoctorSearchPopup = ({show,onHide}) => {
         ) || 0;
    
     return(
+        <div>
+            {isMobile?(
+                <div>
+                    <Modal
+                    dialogClassName='doctor-search-modals'
+                    show={show}
+                    onHide={onHide}
+                    size='lg'
+                    aria-labelledby="example-custom-modal-styling-title"
+                    >
+                    
+                    <div className='doctor-search-multiInput-button'>
+                    <Dropdown>
+                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                            Los Angeles, CA
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                            <Form className="p-4">
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                <Form.Control type="email" placeholder="search..." />
+                            </Form.Group>
+                            </Form>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                            Facial, Botox, ....
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                            <Form className="p-4">
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                <Form.Control type="email" placeholder="search..." />
+                            </Form.Group>
+                            </Form>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                            Doctor Name
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                            <Form className="p-4">
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                <Form.Control type="email" placeholder="search..." />
+                            </Form.Group>
+                            </Form>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    
+                    {isLoading ?
+                        <div ><p>is Loading</p></div> :
+                        (data && 
+                                (
+                                    data.pages.map((page, index) => (
+                                        <SimpleGrid key={index} columns={1} spacing={10} className='doctor-search-card-container-mobile'>
+                                            {page.data && page.data.map((item, i) => (
+                                            <div key={i} className=''>
+                                                <Link to={`/doctor/${item.nickname}`}>
+                                                    <DoctorCard doctor={item} />
+                                                </Link>
+                                            </div>
+                                            ))}
+                                        </SimpleGrid>
+                                    ))
+                                )
+                        )
+                    }
+                    </div>
+                    </Modal>
+                </div>
+            ):(
         <Modal
             dialogClassName="doctor-search-modals"
             show={show}
@@ -106,7 +182,7 @@ const DoctorSearchPopup = ({show,onHide}) => {
             // >
                 (
                     data.pages.map((page, index) => (
-                        <SimpleGrid key={index} columns={3} spacing={10}>
+                        <SimpleGrid key={index} columns={3} spacing={0}>
                             {page.data && page.data.map((item, i) => (
                             <div key={i} className='doctor-search-card-container'>
                                 <Link to={`/doctor/${item.nickname}`}>
@@ -121,7 +197,9 @@ const DoctorSearchPopup = ({show,onHide}) => {
         )
     }
      </div>
-        </Modal>  
+        </Modal> 
+        )}
+        </div> 
     )
 }
 export default DoctorSearchPopup;

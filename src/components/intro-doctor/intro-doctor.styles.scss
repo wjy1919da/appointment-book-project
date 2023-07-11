@@ -1,3 +1,46 @@
+.intro-doctor-container-mobile
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:430px;
+    .intro-card-mobile
+    {
+        width:30%;
+        margin:10px;
+        
+    .intro-card-title-mobile
+    {
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 54px;
+        width:430px;
+    }
+    .intro-card-img-text-mobile
+    {
+        width:430px;
+        display: flex;
+        gap:30px;
+        img
+        {
+            width: 64px;
+            height: 88px;
+            margin-bottom: 15px;
+        }
+    }
+    .intro-card-text-mobile
+    {
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 25px;
+        width:229px;
+    }
+}
+}
 .intro-doctor-container
 {
     display: flex;

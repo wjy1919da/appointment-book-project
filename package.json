@@ -19,7 +19,7 @@
     "framer-motion": "^10.12.16",
     "nodemailer": "^6.9.1",
     "react": "^18.0.2",
-    "react-bootstrap": "^2.7.4",
+    "react-bootstrap": "^2.8.0",
     "react-dom": "^18.0.2",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",

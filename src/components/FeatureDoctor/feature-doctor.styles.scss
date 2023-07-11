@@ -1,3 +1,41 @@
+.featured-doctor-container-mobile
+{
+    left:90px;
+    position: absolute;
+    .featured-doctor-title-mobile
+    {
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 135%;
+        
+        text-align: center;
+        
+        color: #000000;
+        
+    }
+    .feature-doctor-list-mobile
+    {
+        // width:200px;
+        // height:280px;
+        margin-top: 30px;
+        margin-left: -10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-self: center;
+        gap:30px;
+    .next-arrow
+    {
+        width:20px;
+        height:40px;
+    }
+       
+    }
+}
+
+
 .featured-doctor-container
 {
     //position: absolute;
