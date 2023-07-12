@@ -30,6 +30,7 @@ const HeaderMobileDropDownV2 = () => {
               <Link
                 to={item.path}
                 onClick={() => setClick(false)}
+                className='home-mobile-dropdownV2-link'
               >
                 {item.title}
               </Link>

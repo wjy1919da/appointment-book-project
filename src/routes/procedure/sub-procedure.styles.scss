@@ -301,17 +301,16 @@
         align-items: center;
         color: #000000;
     }
-    
+    // 点击后的效果
     .introduction-slide .introduction-catalog .introduction-section {
         font-family: 'Open Sans';
         font-style: normal;
-        font-weight: bold;
+        font-weight: 800;
         font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
         color: #000000;
-        //margin-right: 20px;
     }
     
     .introduction-slide .introduction-catalog .introduction-section::before {
@@ -325,9 +324,9 @@
         transform: rotate(90deg);
     }
     
-    /* Add styles for active state */
+    // 点击前的效果
     .introduction-slide .introduction-catalog .introduction-section.active {
-        font-weight: 600 !important;
+        font-weight: 400;
     }
     
     .introduction-slide .introduction-catalog .introduction-section.active::before {

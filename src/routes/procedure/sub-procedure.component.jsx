@@ -42,7 +42,7 @@ const SubProcedure = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
     const n =50;
-    const [selectedSection, setSelectedSection] = useState("");
+    const [selectedSection, setSelectedSection] = useState("description");
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";

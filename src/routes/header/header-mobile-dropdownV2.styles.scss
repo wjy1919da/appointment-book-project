@@ -26,6 +26,22 @@
     .home-mobile-dropdownV2.clicked {
       display: none;
     }
+    .home-mobile-dropdownV2-link{
+        display: flex;
+        width: 115.789px;
+        height: 17.465px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #352C29;
+        text-align: center;
+        /* Interactive 2 */
+        font-family: Open Sans;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+    }
     
     
   }
