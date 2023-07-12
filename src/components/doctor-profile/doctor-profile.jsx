@@ -60,7 +60,6 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
    const mergedData = useMemo(() => {
     return data ? mergeDoctorsByNickname(data.pages) : [];
    }, [data]);
-    console.log("mergeData",mergedData[0]);
     const profileData = data?.pages[0]?.data[0];
     
     return (
@@ -69,6 +68,9 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             {mergedData && mergedData[0] && 
                 <div className="profile-card-body">
                     {mergedData[0].nickname && <span className="search-card-title">{mergedData[0].nickname}</span>}
+                    <span className='starRate'>
+                        <StarRate rate={doctorStars || 4}/>
+                    </span>
                     {mergedData[0].address &&
                         <span className='search-card-text '>
                             <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
@@ -85,9 +87,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                         <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                          Charm Verified
                     </span>
-                    <span className='starRate'>
-                        <StarRate rate={doctorStars || 4}/>
-                    </span>
+                   
                 </div>
             }
             <div className="post-follower-following">

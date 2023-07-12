@@ -17,7 +17,7 @@ import HealthCheck from './routes/health-check/health-check.component';
 import HomeMobile from './routes/home/home-mobile.component';
 import { useMediaQuery } from 'react-responsive';
 const App = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 1000px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
 
   return (
     <Routes>

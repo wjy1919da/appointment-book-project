@@ -1,0 +1,22 @@
+<svg width="264" height="247" viewBox="0 0 264 247" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1949_1672" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="264" height="247">
+<circle cx="123.5" cy="123.5" r="121.5" stroke="white" stroke-width="4"/>
+<circle cx="123.5" cy="123.5" r="78.3333" stroke="white" stroke-width="8"/>
+<circle cx="123.5" cy="123.5" r="53.8667" stroke="white" stroke-width="24"/>
+<circle cx="11.5267" cy="72.2477" r="10.2917" fill="white"/>
+<circle cx="17.7017" cy="190.19" r="16.4667" fill="white"/>
+<circle cx="247" cy="123.5" r="16.4667" fill="white"/>
+</mask>
+<g mask="url(#mask0_1949_1672)">
+<rect x="-24.6999" y="-24.7002" width="296.4" height="296.4" fill="url(#paint0_linear_1949_1672)"/>
+<circle cx="11.5266" cy="72.2476" r="9.46833" fill="white"/>
+<circle cx="17.7016" cy="190.19" r="15.6433" fill="white"/>
+<circle cx="247" cy="123.5" r="15.6433" fill="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1949_1672" x1="-24.6999" y1="-24.7002" x2="203.74" y2="317.118" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FAB25E"/>
+<stop offset="0.584281" stop-color="#FFA4A3"/>
+</linearGradient>
+</defs>
+</svg>

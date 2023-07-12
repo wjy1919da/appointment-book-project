@@ -1,6 +1,6 @@
-import backgroundImage from '../../assets/home/home-apple-section-ring.png'
-import  PhoneImage from '../../assets/home/home-apple-section.png'
-import PhoneScreen from '../../assets/home/home-apple-section-screen.png'
+import backgroundImage from '../../assets/home/ring.svg'
+import  PhoneImage from '../../assets/home/iphone.svg'
+import PhoneScreen from '../../assets/home/iphoneScreen.svg'
 import HomeText from '../home-text/home-text.component';
 import HomeButton from '../home-button/home-button.component';
 import './home-doctors.styles.scss'

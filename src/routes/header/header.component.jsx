@@ -5,22 +5,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Form, Button } from 'react-bootstrap';
-
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
-
+import HeaderMobileDropDownV2 from './header-mobile-dropDownV2.component';
 import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-
+import HeaderMobileDropDown from './header-mobile-dropDown.component';
 const Header = () => {
-    const isMobile = useMediaQuery({ query: `(max-width: 1000px)` });
     const loginIcon = require('../../assets/home/login-icon.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
+   
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}
@@ -41,6 +40,30 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
+    const [click, setClick] = useState(false);
+    const [loginClick, setLoginClick] = useState(false);
+    const [dropdown, setDropdown] = useState(false);
+  
+    const handleClick = () => setClick(!click);
+    const handleLoginClick = () => setLoginClick(!loginClick);
+    const MenuItems = [
+      {
+          title: 'Login',
+          path: 'sign-in',
+          cName: 'dropdown-link'
+      },
+      {
+          title: 'Doctor',
+          path: 'doctor',
+          cName: 'dropdown-link'
+      },
+      {
+          title: 'Post',
+          path: 'posts',
+          cName: 'dropdown-link'
+      }
+    ];
+
 //   Save: old navbar    
 //     <Navbar className='header-navbar' expand="lg" expanded={expanded}>
 //     <Container>
@@ -82,10 +105,14 @@ const Header = () => {
 //         </Navbar.Collapse>
 //     </Container>
 // </Navbar>
-    if (isMobile) {
-        return <Outlet />;
-    }
-
+    // if (isMobile) {
+    //     return (
+    //         <Fragment>
+    //             <HeaderMobile />
+    //             <Outlet />
+    //         </Fragment>
+    //     );
+    // }
     return (
         <Fragment>
             {/* desktop */}
@@ -137,6 +164,15 @@ const Header = () => {
                     <div className="header-login-text">
                         <p>login</p>
                     </div> */}
+                   
+                    <div className={loginClick ? 'login-icon active' : 'login-icon'} onClick={handleLoginClick}>
+                        <i className={loginClick ? 'fas fa-user active' : 'fas fa-user'} />
+                        {loginClick && < HeaderMobileDropDownV2/>}
+                    </div>
+                </div>
+                <div className={click ? 'menu-icon active' : 'menu-icon'} onClick={handleClick} style={{position: 'relative'}}>
+                        <i className={click ? 'fas fa-bars active' : 'fas fa-bars'} />
+                       {click && < HeaderMobileDropDown/>}
                 </div>
             </div>
             <Outlet />

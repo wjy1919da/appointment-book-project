@@ -129,7 +129,6 @@
         /* Link Button */
         width: 210px;
         height: 22px;
-        // link 字体好像没生效
         font-family: 'Open Sans';
         font-weight: 600;
         font-size: 22px;
@@ -266,76 +265,75 @@
             .stars-50:after { width: 100%; }
         }   
     } 
-    .introduction-slide{
+    .introduction-slide {
         display: flex;
         flex-direction: row;
-        background: #FFFFFF;  
+        background: #FFFFFF;
         order:1;
-        flex:none;
-        position:absolute;
-        right:3px;
-        top:350px;
-        .introduction-icon{
-            position: absolute;
-            width: 24px;
-            height: 3px;
-            // top:370px;
-            flex: none;
-            order:0;
-            right: 380px;
-            margin-top:30px;
-            margin-left: 20px;
-            border-radius: 10px;
-            /* 橙红渐变 */
-            background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
-            transform: rotate(90deg);
-        }
-        .introduction-catalog{
-            flex:none;
-            order:1;
-            box-sizing: border-box;
-            /* Auto layout */
-
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 24px 16px;
-            gap: 24px;
-
-            position: absolute;
-            width: 352px;
-            height: 240px;
-            right: 40px;
-            .introduction-title
-            {
-                font-family:'Inter';
-                font-style: normal;
-                font-weight: 800;
-                font-size: 18px;
-                line-height: 100%;
-                /* identical to box height, or 18px */
-
-                display: flex;
-                align-items: center;
-
-                color: #000000;
-            } 
-            .introduction-section
-            {
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 18px;
-                line-height: 100%;
-                /* identical to box height, or 18px */
-                display: flex;
-                align-items: center;
-                color: #000000;
-            }
-        }
-
+        flex: none;
+        position: absolute;
+        right: 3px;
+        top: 350px;
     }
-
+    
+    .introduction-slide .introduction-catalog {
+        flex: none;
+        order: 1;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+        position: absolute;
+        width: 380px;
+        height: 240px;
+        right: 40px;
+    }
+    
+    .introduction-slide .introduction-catalog .introduction-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    
+    .introduction-slide .introduction-catalog .introduction-section {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        color: #000000;
+        //margin-right: 20px;
+    }
+    
+    .introduction-slide .introduction-catalog .introduction-section::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        margin-right: 5px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+        transform: rotate(90deg);
+    }
+    
+    /* Add styles for active state */
+    .introduction-slide .introduction-catalog .introduction-section.active {
+        font-weight: 600 !important;
+    }
+    
+    .introduction-slide .introduction-catalog .introduction-section.active::before {
+        visibility: hidden; /* Change this from 'display: none' */
+    }
+    
 }
   
  // Jingyi sub title   
