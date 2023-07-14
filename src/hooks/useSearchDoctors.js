@@ -124,7 +124,6 @@ export function useSearchMultiConditionsPopUp() {
 
   const fetchDoctors = async ({pageParam = 1}) => {
       let filterType = [];  // 初始化 filterType 为一个空数组
-
       // 根据 doctorQuery 对象的属性是否为空来添加不同的值
       if (doctorQuery.location !== "") filterType.push(1);
       if (doctorQuery.field !== "") filterType.push(2);

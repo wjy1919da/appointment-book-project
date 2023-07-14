@@ -303,16 +303,24 @@
     }
     // 点击后的效果
     .introduction-slide .introduction-catalog .introduction-section {
+        // font-family: 'Open Sans';
+        // font-style: normal;
+        // font-weight: 800;
+        // font-size: 18px;
+        // line-height: 100%;
+        // display: flex;
+        // align-items: center;
+        // color: #000000;
         font-family: 'Open Sans';
         font-style: normal;
-        font-weight: 800;
+        font-weight: 600;
         font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
         color: #000000;
     }
-    
+    // icon
     .introduction-slide .introduction-catalog .introduction-section::before {
         content: "";
         display: inline-block;
@@ -322,15 +330,20 @@
         border-radius: 10px;
         background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
         transform: rotate(90deg);
+        // 点击前hidden
+        visibility: hidden;
     }
     
     // 点击前的效果
     .introduction-slide .introduction-catalog .introduction-section.active {
-        font-weight: 400;
+        font-weight: 800;
     }
     
     .introduction-slide .introduction-catalog .introduction-section.active::before {
-        visibility: hidden; /* Change this from 'display: none' */
+        visibility: visible;
+    }
+    .introduction-slide .introduction-catalog .introduction-section.hover {
+        font-weight: 800;
     }
     
 }
