@@ -6,7 +6,6 @@
     justify-content: space-between;
     position: relative;
     margin-top: 64px;
-
     @media (min-width: 768px) {
         .home-pic {
             position: absolute;
@@ -17,9 +16,7 @@
             background: url('../../assets/home/home-pic1.png');
             border-radius: 0px 0px 0px 1000px;
         }
-
         .home-title-container {
-
             .home-title-text {
                 text-align: left;
                 display: flex;
@@ -36,7 +33,6 @@
                 flex: none;
                 flex-grow: 0;
             }
-            
             .home-title-subText
             {
                 position: absolute;
@@ -44,7 +40,6 @@
                 height: 116px;
                 left: 48px;
                 top: 402px;
-                
                 .ptext{
                     font-family: 'Lora';
                     font-style: normal;
@@ -408,12 +403,8 @@
                     line-height: 140%;
                     color: #352C29;
                 }
-                
-                
-                
+            
                 }
-    
-    
                 
             }
     
@@ -445,7 +436,7 @@
                     height: 450px;
                 }
             }
-        }
+        }  
 }
 
 .pText{
@@ -455,4 +446,39 @@
     font-size: 18px;
     line-height: 160%;
     color: #000000;
+}
+@media (max-width: 576px){
+    .home{
+        width : 100%;
+        background:white;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-top: 44px;
+    }
+    .home-title-container{
+        .home-title-text {
+            position:absolute;
+            left: 40px;
+            top: 160px;
+        }
+        .home-title-text .main-title::after {
+            content: "Charm";
+        }
+    }
+    .Home-post{
+        display: none !important;
+    }
+    .home{
+        display: none;
+    }
+    .Home-doctor-page{
+        display: none !important;
+    }
+    .home-section-container{
+        display: none;
+    }
+    .home-doctors-container{
+        display: none;
+    }
 }

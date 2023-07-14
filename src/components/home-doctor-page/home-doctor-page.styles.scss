@@ -88,57 +88,52 @@
         }
     }
     }
-    .home-doctor-page-pic
-    {
+    .home-doctor-page-pic {
         order: 1;
-        width: 1000px;
-        height:650px;
-        left:0;
-        top: 6%;
+        width: 100vw;
+        height: 80vh;
+        left: 0;
+        top: 6vh;
         bottom: 0%;
         position: relative;
         background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
-        border-radius: 1000px 0px 0px 1000px;
-
-        .doctor-page-img
-        {
+        border-radius: 50vw 0px 0px 50vw;
+    
+        .doctor-page-img {
             position: absolute;
-            width: 498px;
-            height: 720px;
-            left: 0px;
-            top: 80px;  
+            width: 50vw;
+            height: 90vh;
+           // margin-right: vh;
+            top: 5vh;
             border: none;
             // background-image: url('../../assets/home/doctor-img.png');
             // mask-image: linear-gradient(to top, transparent, black);
-           
-            
         }
-
-
-        .doctor-page-name-card
-        {
+    
+        .doctor-page-name-card {
             position:absolute;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: 8px 80px 8px 16px;
-            gap: 8px;
+            padding: 1vh 4vw 1vh 1vw;
+            gap: 1vh;
             position: absolute;
-            width: 416px;
-            height: 149px;
-            right: 0px;
-            top: 690px;
+            width: 400px;
+            height: 212px;
+            right: 0;
+            top: 80vh;
             background: rgba(254, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 1vw;
+    
             .starRatePart{
                 display: flex;
                 flex-direction: row;
-                gap:10px;
-                margin-top:-10px;
+                gap: 1vw;
+                margin-top: -1vh;
             }
-        }
-        
+        }   
     }
+    
 
 
 }

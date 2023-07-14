@@ -13,6 +13,7 @@ import SubProcedureReference from '../../components/sub-procedure-reference/sub-
 import useGetProcedures from '../../hooks/useGetProcedures';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import useProcedureQueryStore from '../../procedureStore.ts'
+import { useState } from 'react';
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -41,6 +42,7 @@ const SubProcedure = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
     const n =50;
+    const [selectedSection, setSelectedSection] = useState("description");
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -94,7 +96,7 @@ const SubProcedure = () => {
     }else{
         return <div className='error'>{data.msg}</div>;
     }
-    
+   
     return (
      <div className='home-container'>
         <div className='section-container'>
@@ -118,7 +120,7 @@ const SubProcedure = () => {
             } 
                 {/* consider section */}
                 <div className='consider-section' >
-                {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
+                {data.data?.subcategories[1].explanation &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
                     {/* pros and cons */}
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
@@ -197,19 +199,28 @@ const SubProcedure = () => {
                         </div> 
                     </div>}
                     <div className="introduction-slide" id='slide'>
-                            <div className="introduction-icon"></div>
-                            <div className="introduction-catalog">
-                                <a href="#description" className='introduction-title'>Introduction</a>
-                                <a href="#consider" className='introduction-section'>Why consider {formatTitle(name)}</a>
-                                {optionsContent && <a href="#options" className='introduction-section'>Procedure options</a>}
-                                <a href="#sideEffects" className='introduction-section'>Potential Side Effects</a>
-                                {beforeAndAfterImage && <a href="#beforeAndAfter" className='introduction-section'>Before and After</a>}
-                                {alternativeTreatmentForm && <a href="#alternative" className='introduction-section'>Alternative Treatments</a>}
-                                <a href="#faq" className='introduction-section'>FAQ</a>
-                                <a className='introduction-section'>Reference</a>
-                            </div>
-
+                        <div className="introduction-icon"></div>
+                        <div className="introduction-catalog">
+                            <a href="#description" className={selectedSection === "description" ? 'introduction-section' : 'introduction-section active'} 
+                            onClick={() => setSelectedSection("description")}>Introduction</a>
+                            <a href="#consider" 
+                            className={selectedSection === "consider" ? 'introduction-section' : 'introduction-section active'} 
+                            onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                            {optionsContent && <a href="#options" className={selectedSection === "options" ? 'introduction-section'  : 'introduction-section active'} 
+                                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                            <a href="#sideEffects" className={selectedSection === "sideEffects" ? 'introduction-section' : 'introduction-section active'} 
+                            onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
+                            {beforeAndAfterImage && <a href="#beforeAndAfter" className={selectedSection === "beforeAndAfter" ? 'introduction-section' : 'introduction-section active'} 
+                                                    onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>}
+                            {alternativeTreatmentForm && <a href="#alternative" className={selectedSection === "alternative" ?  'introduction-section' :'introduction-section active'} 
+                                                            onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
+                            <a href="#faq" className={selectedSection === "faq" ? 'introduction-section' :'introduction-section active'} 
+                            onClick={() => setSelectedSection("faq")}>FAQ</a>
+                            <a className={selectedSection === "reference" ? 'introduction-section' : 'introduction-section active'} 
+                            onClick={() => setSelectedSection("reference")}>Reference</a>
                         </div>
+                    </div>
+
                   </div>    
                 </div>
               </div>

@@ -2,7 +2,6 @@ import { Link, useParams } from 'react-router-dom';
 import './sub-procedure-form-v2-grid.styles.scss';
 const SubProcedureFormV2Grid = (props) => {
     const { name } = useParams();
-    console.log("subproceudureFormV2Grid",props,name);
     const gridItems = props.names.map((item, index) => {
         const title = Object.keys(item)[0];
 

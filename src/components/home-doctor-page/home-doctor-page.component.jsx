@@ -1,7 +1,7 @@
 import ConsultingIcon from '../../assets/home/consulting-icon.gif';
 import SharingIcon from '../../assets/home/sharing-icon.gif';
 import SavingIcon from '../../assets/home/saving-icon.gif';
-import DoctorImg from '../../assets/home/doctor-img.png';
+import DoctorImg from '../../assets/home/doctor_mobile.svg';
 import vector from '../../assets/home/Vector.png';
 import './home-doctor-page.styles.scss'
 import HomeLink from '../home-link/home-link.component';

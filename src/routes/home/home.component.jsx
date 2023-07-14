@@ -9,9 +9,6 @@ import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.c
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 import Modal from 'react-bootstrap/Modal';
-// import videoUrl from '../../assets/home/App-Demo-V10.mp4';
-
-
 
 const Home = () => {
     useLayoutEffect(() => {

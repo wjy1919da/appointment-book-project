@@ -9,8 +9,6 @@ const SubProcedureFormV2 = (props) => {
 
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];
-    console.log("header",header);
-    console.log("body",body);
     return (
         <div>
             <SubProcedureFormV2Grid names={header} />
@@ -20,7 +18,7 @@ const SubProcedureFormV2 = (props) => {
                         <tr key={index}>
                             <td style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>{item.name}</td>
                             {item.value.map((val, idx) => (
-                                <td key={idx} style={{ width: '25%', height: '60px', textAlign: 'center', verticalAlign: 'middle', border: 'none' }}>{val}</td>
+                                <td key={idx} style={{ width: '25%', height: '60px', textAlign: 'left', verticalAlign: 'middle', border: 'none' }}>{val}</td>
                             ))}
                         </tr>
                     ))}
