@@ -303,14 +303,6 @@
     }
     // 点击后的效果
     .introduction-slide .introduction-catalog .introduction-section {
-        // font-family: 'Open Sans';
-        // font-style: normal;
-        // font-weight: 800;
-        // font-size: 18px;
-        // line-height: 100%;
-        // display: flex;
-        // align-items: center;
-        // color: #000000;
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 600;
@@ -342,8 +334,12 @@
     .introduction-slide .introduction-catalog .introduction-section.active::before {
         visibility: visible;
     }
-    .introduction-slide .introduction-catalog .introduction-section.hover {
+    .introduction-slide .introduction-catalog .introduction-section:hover {
         font-weight: 800;
+    }
+    
+    .introduction-slide .introduction-catalog .introduction-section:hover::before {
+        visibility: visible;
     }
     
 }
