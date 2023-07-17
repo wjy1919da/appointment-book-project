@@ -16,6 +16,7 @@ import DoctorPost from './components/doctor-post/doctor-post.component';
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
+import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 // do I need to add it into routes?
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
+        <Route path='/procedureMobile' element={< DoctorProcudreMobile/>} />
         <Route path='doctor' element={<Doctor />} />
         <Route path='doctor-search' element={<DoctorSearch />} />
         <Route path='instrument' element={<Instrument />} />
@@ -35,7 +37,6 @@ const App = () => {
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
         <Route path='/doctor/:nickname' element={<IndividualDoctor />} />
-
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />

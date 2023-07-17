@@ -23,7 +23,7 @@ const Doctor = () => {
             <div className='doctor-search-outer-continer-mobile'>
                 <div className='doctor-search-hearder-container-mobile'>
                     <div className='doctor-search-header-title-and-bar'>
-                        <HomeTitle title='Find Your Doctor' isMobile={isMobile}/>
+                        <HomeTitle title='Find Your Doctor' isMobile={isMobile} />
                         <DoctorSearchMultiInput isMobile={isMobile}/>
                     </div>
                     <div className='doctor-search-header-pic-container-mobile animate_animated animated_slideInUp'>
@@ -31,7 +31,7 @@ const Doctor = () => {
                     </div>
                 </div>
                 <div className="doctor-intro-container-mobile">
-                  <IntroDoctor isMobile={isMobile}/>
+                  <IntroDoctor isMobile={isMobile}/> 
                 </div>
                 <div className="doctor-feature-doctor-container-mobile">
                   <FeatureDoctor isMobile={isMobile}/>
@@ -39,7 +39,7 @@ const Doctor = () => {
                 <div className='doctor-post-part-mobile'>
                   <span className="doctor-post-title-mobile">Post by doctor</span>
                   <div className='doctor-post-grid-container-mobile'>
-                        <DoctorPostGrid />
+                         <DoctorPostGrid /> 
                   </div>
                 </div>
                 <Footer/>

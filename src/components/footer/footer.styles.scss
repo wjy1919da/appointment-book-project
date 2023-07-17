@@ -1,3 +1,45 @@
+.footer-mobile-container
+{
+    background-color:rgba(53, 44, 41, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    margin-top: 10%;
+    .footer-mobile-text
+    {
+        margin-top: 5%;;
+        color:white;
+        display: flex;
+        justify-content: space-between;
+        gap:10px;
+        font-family: 'Open Sans';
+    }
+    .footer-mobile-subtext
+    {
+        color:white;
+        width:300px;
+        margin-top: 5%;
+        text-align: center;
+        font-family: 'Open Sans';
+    }
+    .social-media-icons
+    {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 15px;  
+        gap:40px;
+        margin-bottom:15%;
+        .social-media-icon {
+        width: 20px;
+        height: 20px;
+        border: none;
+    }
+    }
+
+}
+
 .footer-container {
     opacity: 1.0;
     width: 100%;

@@ -1,0 +1,45 @@
+.procedure-search-menu-mobile-container
+{
+    align-items: center;
+    justify-content: center;
+    padding:10px 15px;
+    gap:30px;
+    
+    .procedure-search-menu-mobile-category
+    {
+        margin-top: 5%;
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+        .procedure-category-title
+        {
+            text-align: left;
+            font-weight:600px;
+            font-family:'Lora';
+            size:38px;
+            line-height: 38.4px;
+            margin-left: 4%;
+        }
+        .procedure-category-text
+        {
+            margin-left: 10%;
+            // align-items: center;
+            size:30px;
+            display: flex;
+            flex-direction: column;
+            gap:20px;
+            size:20px;
+            font-family:'lora';
+            line-height:32px;
+
+
+            .procedure-category-subtext
+            {
+                display: flex;
+                justify-content: space-between;
+
+            }
+        }
+        
+}
+}

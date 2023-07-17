@@ -22,14 +22,17 @@
             align-items: center;
             justify-content: center;
             position: absolute;
-            right:5%;
-            left:0%;
-            top:200px;
+            right:6%;
+            left:6%;
+            top:40px;
+            
+            border-radius:5px;
+            
 
         }
         .home-doctor-apple-section {
-            // width: 514px;
-            // height: 996px;
+             width: 514px;
+             height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,9 +42,9 @@
         }
         .home-doctor-apple-screen {
             display: flex;
-            
+            // margin-left: -200px;
             align-items: center;
-            width: 414px;
+            // width: 414px;
             height: 896px;
             /* 白 */
             background: #FBFCFF;
@@ -56,6 +59,10 @@
             position: absolute;
             top: 0;
             left: 0;
+            // height:1050px;
+            z-index: 2;
+            pointer-events: none;
+            
         }
     }
     .home-doctors-text{

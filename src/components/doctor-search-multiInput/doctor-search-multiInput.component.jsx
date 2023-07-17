@@ -43,7 +43,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
 
                         <Dropdown.Menu  className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px',marginTop:'-10px'}}>
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px',marginTop:'-10px'}}>
                                 <Form.Control 
                                     type="input" 
                                     placeholder="search..." 
@@ -71,7 +71,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
 
                         <Dropdown.Menu className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}>
                                 <Form.Control type="input" placeholder="search..." />
                             </Form.Group>
                             </Form>
@@ -85,7 +85,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
 
                         <Dropdown.Menu className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}>
                                 <Form.Control type="email" placeholder="search..." />
                             </Form.Group>
                             </Form>
@@ -93,7 +93,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                         </Dropdown>
                         <button className='doctor-search-button' 
                                 style={{
-                                    width:'186px',
+                                    width:'150px',
                                     marginLeft:'-1px'
                                     }}
                                 onClick = {handleOnClick}
