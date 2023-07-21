@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import useProcedureQueryStore from "../procedureStore.ts";
 
 const base = {
-    procedureUrl:'http://api.charm-life.com/procedure',
-    procedureCategoriesUrl:'http://api.charm-life.com/procedure',
-    faqUrl:'http://api.charm-life.com/faq'
+    procedureUrl:'https://api.charm-life.com/procedure',
+    procedureCategoriesUrl:'https://api.charm-life.com/procedure',
+    faqUrl:'https://api.charm-life.com/faq'
 }
 
 export function useGetProcedureCategories(){
@@ -43,6 +43,7 @@ export default function useGetProcedures() {
   
     return useQuery(['procedures', procedureQuery.categories], fetchProcedures, {
       placeholderData: { data: {} }, // default object to use before fetching completes
+      cacheTime: 1000, // 1 second
     });
 }
 

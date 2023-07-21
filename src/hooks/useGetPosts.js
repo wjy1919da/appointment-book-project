@@ -3,8 +3,8 @@ import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
 
 const base = {
-  postUrl: 'http://api.charm-life.com/post/posts:page',
-  postDetailUrl: 'http://api.charm-life.com/post/web/posts/'
+  postUrl: 'https://api.charm-life.com/post/posts:page',
+  postDetailUrl: 'https://api.charm-life.com/post/web/posts/'
 }
 
 export function useGetPost() {

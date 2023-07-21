@@ -1,4 +1,4 @@
-import React, { useRef, useState,useReducer } from 'react'
+import React, { useRef, useState,useReducer,useEffect} from 'react'
 import { InputGroup } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component'
@@ -20,6 +20,13 @@ const DoctorSearchMultiInput = ({isMobile}) => {
     const setLocation = useDoctorQueryStore(state=>state.setLocation);
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
+    useEffect(() => {
+        if (!IsModalOpen) {
+            setDoctorName('');
+            setField('');
+            setLocation('');
+        }
+    }, [IsModalOpen]);
     const handleOnClick = () => {
         setIsModelOpen(true);
     }

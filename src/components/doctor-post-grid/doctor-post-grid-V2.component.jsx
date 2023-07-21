@@ -50,7 +50,7 @@ const DoctorPostGridV2 = () => {
           
     //   ));
     return (
-        <div className='doctor-post-grid-container'>
+        <div className='doctor-post-grid-inner-container-V2'>
             {data &&
                 <InfiniteScroll
                     dataLength={fetchPostCount}

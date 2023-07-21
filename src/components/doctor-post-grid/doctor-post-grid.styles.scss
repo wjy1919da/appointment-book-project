@@ -1,9 +1,17 @@
-.doctor-post-grid-container{
+.doctor-post-grid-inner-container{
     width: 100%;
-    height: 100%;
     padding: 40px 20px;
     align-items: center; /* 水平居中 */
     justify-content: center; /* 垂直居中 */
+    margin-bottom: 40px;
+}
+.doctor-post-grid-inner-container-V2{
+  width: 100%;
+  padding: 40px 20px;
+  height:800px;
+  align-items: center; /* 水平居中 */
+  justify-content: center; /* 垂直居中 */
+  margin-bottom: 40px;
 }
 .my-masonry-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
@@ -64,4 +72,12 @@
     font-family: Open Sans;
     font-weight: 600;
     line-height: 100%;
+  }
+  .doctor-post-grid--inner-container-mobile{
+    width: 100%;
+    padding: 10px 10px;
+    height:800px;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    //background-color: #FFF;
   }

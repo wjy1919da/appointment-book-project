@@ -45,6 +45,7 @@ const Home = () => {
                         </p>
                     </div>
                     <div className='home-title-buttons'>
+                   
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         <HomeButton title = "Start Charm life" href = '/download'/>
                         <button type="button" onClick={handleShow} className='button home-title-button2'>

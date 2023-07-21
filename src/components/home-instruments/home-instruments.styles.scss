@@ -1,5 +1,4 @@
 
-// 需要补充适应屏幕大小
 .home-section-container{
     /* Home 1.2 Section 5 */
     transform: scale(0.9);
@@ -30,3 +29,36 @@
     flex-grow: 0;
     margin: 0 auto;
 }
+
+
+.home-instrument{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+
+    width: 25%;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.home-instrument-pic{
+     //border-radius: 100%; // 圆角
+     height: 160px;
+     align-self: stretch;
+     margin: 0 auto;
+}
+.home-instrument-grid{
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    justify-content: space-around; 
+    
+    grid-gap: 40px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+

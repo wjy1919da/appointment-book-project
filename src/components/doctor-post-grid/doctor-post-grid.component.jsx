@@ -7,6 +7,7 @@ import React, { useState,useEffect } from 'react';
 import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
 import Arrow from '../../assets/post/arrow_grid.png';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 
 const DoctorPostGrid = () => {  
@@ -57,17 +58,15 @@ const DoctorPostGrid = () => {
         
         
     ));
-    console.log("playLIst",postCardList)
-
    return(
-    <div className='doctor-post-grid-container' >
+    <div className='doctor-post-grid-inner-container' >
        {data &&
-            // <InfiniteScroll
-            //     dataLength={flatData.length}
-            //     next={fetchNextPage}
-            //     hasMore={hasNextPage}
-            //     scrollThreshold={0.8} 
-            // >
+            <InfiniteScroll
+                dataLength={flatData.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                scrollThreshold={0.8} 
+            >
              <ResponsiveMasonry
                 columnsCountBreakPoints={{default: 5,
                   1100: 5,
@@ -83,7 +82,7 @@ const DoctorPostGrid = () => {
                     {postCardList}
                 </Masonry>
             </ResponsiveMasonry>
-          // </InfiniteScroll>
+          </InfiniteScroll>
       }
      {IsModalOpen && <PostDetail show={IsModalOpen} onHide={()=>setIsModelOpen(false)}/>}
      <div className='down-load-more-container'>

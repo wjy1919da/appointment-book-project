@@ -1,0 +1,46 @@
+@media screen and (max-width: 576px) {
+
+  .home-mobile-dropdown {
+    z-index: 999;
+    position: fixed;
+    top: 50px;
+    right: 47%;
+    width: 63%;  /* 设置宽度为页面的 63% */
+    height: 199px;
+    flex-shrink: 0;
+    //border: 1px solid grey;
+    border-radius: 10px;  /* 修改这里 */
+  }
+  
+  .home-mobile-dropdown li {
+    background: white;
+    cursor: pointer;
+    list-style: none; /* add this to remove the bullet points */
+    height: 83px;
+    border: 1px solid grey;  
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+  }
+  
+  .home-mobile-dropdown.clicked {
+    display: none;
+  }
+  
+  .home-mobile-dropdown-link{
+    display: flex;
+    width: 115.789px;
+    height: 17.465px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #352C29;
+    text-align: center;
+    /* Interactive 2 */
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+  }
+}

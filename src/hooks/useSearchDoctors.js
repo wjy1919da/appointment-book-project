@@ -59,8 +59,6 @@ export function useSearchSpecialization(specialization){
       }
       const res = await axios.get(url,
        {
-         // body ?
-         // 请求方法
          params: {
            specialization: debouncedSearchTerm
          }
@@ -126,23 +124,21 @@ export function useSearchMultiConditionsPopUp() {
 
   const fetchDoctors = async ({pageParam = 1}) => {
       let filterType = [];  // 初始化 filterType 为一个空数组
-
       // 根据 doctorQuery 对象的属性是否为空来添加不同的值
       if (doctorQuery.location !== "") filterType.push(1);
       if (doctorQuery.field !== "") filterType.push(2);
       if (doctorQuery.doctorName !== "") filterType.push(3);
-
-      const res = await axios.post('http://api.charm-life.com/doctor/search',
+//http://api.charm-life.com/doctor/search
+      const res = await axios.post('http://localhost:8080/doctor/search',
       {
         "address": doctorQuery.location,
         "nickname": doctorQuery.doctorName,
-        "programTitle": doctorQuery.field,
+        "name": doctorQuery.field,
         "filterType": filterType,
         "page": pageParam,
         "pageSize": doctorQuery.pageSize
       }
     );
-    console.log("useSearchMultiConditionsPopUp Data:", res.data.data, "pageParam:", pageParam);
     return { data: res.data.data || [], pageInfo: res.data.pageInfo };
   }
 

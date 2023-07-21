@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
@@ -11,27 +10,29 @@ import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
-import DoctorSearch from './components/doctor-search/doctor-search.component';
 import DoctorPost from './components/doctor-post/doctor-post.component';
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
+
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
-// do I need to add it into routes?
+
+import HomeMobile from './routes/home/home-mobile.component';
+import { useMediaQuery } from 'react-responsive';
 
 const App = () => {
+  const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
 
   return (
     <Routes>
       <Route path='/' element={<Header />}>
-        <Route index element={<Home />} />
+        <Route index element={isMobile ? <HomeMobile /> : <Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
         <Route path='/procedureMobile' element={< DoctorProcudreMobile/>} />
         <Route path='doctor' element={<Doctor />} />
-        <Route path='doctor-search' element={<DoctorSearch />} />
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
@@ -40,6 +41,7 @@ const App = () => {
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />
+        {/* <Route path='home-mobile' element={<HomeMobile/>} /> */}
       </Route>
     </Routes>
   );

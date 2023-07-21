@@ -13,6 +13,7 @@ import SubProcedureReference from '../../components/sub-procedure-reference/sub-
 import useGetProcedures from '../../hooks/useGetProcedures';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import useProcedureQueryStore from '../../procedureStore.ts'
+import { useState } from 'react';
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -41,6 +42,7 @@ const SubProcedure = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
     const n =50;
+    const [selectedSection, setSelectedSection] = useState("description");
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -49,7 +51,6 @@ const SubProcedure = () => {
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
     useEffect(() => {
         setCategories(name);
-
     }, [name]);
     useEffect(() => {
         if (data?.data?.subcategories?.[0]?.categoryId) {
@@ -95,31 +96,31 @@ const SubProcedure = () => {
     }else{
         return <div className='error'>{data.msg}</div>;
     }
-    
+   
     return (
      <div className='home-container'>
         <div className='section-container'>
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
-                <h1 className='sub-procedure-title-text' >{formatTitle(name)}</h1>
+                <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
                 <br/>
                 {data.data.description &&
-                    <p className='sub-procedure-normal-text'>
+                    <p className='sub-procedure-normal-text' >
                         {data.data.description}
                     </p>}
             </div>
             
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
-                <div className='what-section'> 
+                <div className='what-section'id = 'consider'> 
                 { data.data?.subcategories[0].explanation &&<SubTxt title={'What is ' + formatTitle(name) + '?'} text={data.data.subcategories[0].explanation} />}   
                 { data.data?.subcategories[0].other &&<Link className="watch-video" to={data.data.subcategories[0].other}>Watch Video</Link>}
                </div>
             } 
                 {/* consider section */}
-                <div className='consider-section'>
-                {data.data?.subcategories[1].explanatio &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
+                <div className='consider-section' >
+                {data.data?.subcategories[1].explanation &&<SubTxt title={'Why consider the ' + formatTitle(name) + '?'} text={data.data.subcategories[1].explanation} />}
                     {/* pros and cons */}
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
@@ -141,33 +142,33 @@ const SubProcedure = () => {
                    </ol>}
                 </div>
             </div>
-            {data.data?.subcategories[2].explanation&&<div className='sub-procedure-option-form-container'>
+            {data.data?.subcategories[2].explanation&&<div className='sub-procedure-option-form-container' id = 'options'>
                 <SubTxt title={'Procedure options'} text={data.data.subcategories[2].explanation}/> 
                 {optionsContent &&<SubProcedureForm data={optionsContent} />  }
             </div> }
-            {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect'>
+            {data.data?.subcategories[6].explanation &&<div className='sub-procedure-side-effect' id = 'sideEffects'>
               <SubTxt title={'Potential Side Effects'} text={data.data.subcategories[6].explanation}/>
             </div>}
-            {beforeAndAfterImage &&<div className='sub-procedure-scroll-container'>
+            {beforeAndAfterImage &&<div className='sub-procedure-scroll-container' id = 'beforeAndAfter'>
                 {data.data?.subcategories[3].explanation && <SubTxt title={'Before and After'} text={data.data.subcategories[3].explanation}/>}
                 <SubProcedureScroll data={beforeAndAfterImage} />
                 {/* <HomeLink title = "View More Post" href = '/posts'/>   */}
             </div>}
-            {alternativeTreatmentForm &&<div className='sub-procedure-form-ver'>
+            {alternativeTreatmentForm &&<div className='sub-procedure-form-ver' id = 'alternative'>
                 <div className='sub-title'>
                     Alternative treatments
                 </div> 
                 <SubProcedureFormV2 data  = {alternativeTreatmentForm}/>
             </div>}
            
-            <div className="FQA-collapside">
+            <div className="FQA-collapside" id = 'faq'>
                     <Collapsible/>
             </div>
-            {reference &&<div className='sub-procedure-reference'>
+            {reference &&<div className='sub-procedure-reference' > 
                  <div className='sub-title'>
                     References and resources
                 </div>
-             <SubProcedureReference reference = {reference}/>
+             <SubProcedureReference reference = {reference} id = ''/>
             </div>}    
             </div>
             {/* end of left side */}
@@ -198,18 +199,28 @@ const SubProcedure = () => {
                         </div> 
                     </div>}
                     <div className="introduction-slide" id='slide'>
-                            <div className="introduction-icon"></div>
-                            <div className="introduction-catalog">
-                                <span className='introduction-title'>Introduction</span>
-                                <span className='introduction-section'>Why consider facial rejuvenation</span>
-                                <span className='introduction-section'>Procedure options</span>
-                                <span className='introduction-section'>Potential Side Effects</span>
-                                <span className='introduction-section'>Before and After</span>
-                                <span className='introduction-section'>Alternative Treatments</span>
-                                <span className='introduction-section'>FAQ</span>
-                                <span className='introduction-section'>Reference</span>
-                            </div>
+                        <div className="introduction-icon"></div>
+                        <div className="introduction-catalog">
+                            <a href="#description" className={selectedSection === "description" ? ' introduction-section active' : 'introduction-section'} 
+                            onClick={() => setSelectedSection("description")}>Introduction</a>
+                            <a href="#consider" 
+                            className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'} 
+                            onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                            {optionsContent && <a href="#options" className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'} 
+                                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                            <a href="#sideEffects" className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'} 
+                            onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
+                            {beforeAndAfterImage && <a href="#beforeAndAfter" className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'} 
+                                                    onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>}
+                            {alternativeTreatmentForm && <a href="#alternative" className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'} 
+                                                            onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
+                            <a href="#faq" className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'} 
+                            onClick={() => setSelectedSection("faq")}>FAQ</a>
+                            <a className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'} 
+                            onClick={() => setSelectedSection("reference")}>Reference</a>
                         </div>
+                    </div>
+
                   </div>    
                 </div>
               </div>
