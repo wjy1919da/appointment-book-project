@@ -4,17 +4,21 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import { Form, Button } from 'react-bootstrap';
+
+import { Button, Dropdown, Form } from 'react-bootstrap';
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
+import menuBar from '../../assets/home/menu-bar.png'
+
 import HeaderMobileDropDownV2 from './header-mobile-dropDownV2.component';
+
 import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 import HeaderMobileDropDown from './header-mobile-dropDown.component';
 const Header = () => {
-    const loginIcon = require('../../assets/home/login-icon.png');
+    const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
@@ -40,6 +44,8 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
@@ -63,6 +69,7 @@ const Header = () => {
           cName: 'dropdown-link'
       }
     ];
+
 
 //   Save: old navbar    
 //     <Navbar className='header-navbar' expand="lg" expanded={expanded}>
@@ -114,7 +121,47 @@ const Header = () => {
     //     );
     // }
     return (
-        <Fragment>
+        <div>
+            {isMobile?(
+                <>
+                <div className='header-container-mobile'>
+                    <div className='header-menuBarIcon-container-mobile'>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic"style={{ backgroundColor: 'transparent', borderColor: 'transparent',height:'36px',padding:'10px 20px'}}>
+                        <img src={menuBar}alt="your alt text" style={{width: "36px", height: "36px"}}/>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className='header-menu-bar-mobile-container' >
+                        <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>Post</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
+                    <div className='header-logo-container-mobile'>
+                        <img className='logo' src={Logo} alt='logo' style={{width:'36px',height:'36px'}}/>
+                    </div>
+                    <div className='header-login-container-mobile'>
+                    <Dropdown style={{marginTop:'-9px'}}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic"style={{ backgroundColor: 'transparent', borderColor: 'transparent',height:'36px',padding:'10px 20px' }}>
+                        <img src={loginIcon} alt="login-Image" style={{width:'34px',height:'36px',marginTop:'-15%'}}></img>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className='header-menu-bar-mobile-container'>
+                        <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>login</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>register</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
+                </div>
+                {/* <div className='header-conatiner-mobile'
+                     style={{borderBottom:'1px solid grey',marginTop:'-10px'}}
+                        >
+
+                </div> */}
+                    <Outlet />
+                </>
+            ):(
+            <Fragment>
             {/* desktop */}
             <div className='header-container'>
                 <Link className='header-logo-container' to='/'>
@@ -177,6 +224,8 @@ const Header = () => {
             </div>
             <Outlet />
         </Fragment>
+        )}
+        </div>
     )
 }
 

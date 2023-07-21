@@ -9,6 +9,8 @@ import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.c
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 import Modal from 'react-bootstrap/Modal';
+import videoUrl from '../../assets/home/App-Demo-V10.mp4';
+
 
 const Home = () => {
     useLayoutEffect(() => {
@@ -18,7 +20,8 @@ const Home = () => {
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
 
-    const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
+    // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
+    
     
     function handleClick() {
         window.open(videoUrl, "_blank");

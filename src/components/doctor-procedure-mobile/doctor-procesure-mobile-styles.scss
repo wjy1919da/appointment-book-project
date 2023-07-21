@@ -1,0 +1,39 @@
+
+.procedure-mobile-container
+{
+    display: flex;
+    flex-direction: column;
+    .custom-toggle::after {
+        display: none !important;
+        
+      }
+    .procedure-mobile-dropdown-menu
+    {
+        border-radius: 0px;
+        margin-top: -8%;
+        width:100%;
+        align-content: center;
+        justify-content: center;
+        
+        
+    }
+    .procedure-search-mobile
+    {
+        height:60px;
+        width:100%;
+        border-radius: 8px;
+        color:rgba(165, 166, 168, 1);
+        font-family: 'lora';
+        size:18px;
+        font-weight:500px;
+        background-color:rgba(251, 252, 255, 1);
+    }
+    .procedure-search-container
+    {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        margin-top: -20px;
+    }
+}

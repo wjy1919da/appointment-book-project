@@ -4,7 +4,7 @@ import PhoneScreen from '../../assets/home/iphoneScreen.svg'
 import HomeText from '../home-text/home-text.component';
 import HomeButton from '../home-button/home-button.component';
 import './home-doctors.styles.scss'
-import videoURL from '../../assets/home/App-Demo-V10.mp4';
+import videoURL from '../../assets/home/vertical-video.mp4';
 import React, { useRef, useEffect } from 'react';
 // phone image
 const HomeDoctors = () => {
@@ -39,17 +39,18 @@ const HomeDoctors = () => {
     return (
         <div className = 'home-doctors-container'>
             <div  className='home-doctors-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                {/* <div className = 'home-doctor-apple-section'>
+                <div className = 'home-doctor-apple-section'>
                      <img className='phone-image' src={PhoneImage} alt="Phone" />
-                    <div className = 'home-doctor-apple-screen'>
-                        <img className='phone-screen' src={PhoneScreen} alt="Phone Screen" />
-                    </div> 
                     
-                </div> */}
-                <div className='home-doctor-video'>
-                    <video ref={videoRef} src = {videoURL} style={{width:'1280px',height:'800px'}} controls autoPlay muted/>
+                    <div className='home-doctor-video'>
+                      <video ref={videoRef} src = {videoURL}  controls autoPlay muted/>
+                    </div>
+                    
                 </div>
-                <div className='home-doctors-text'>
+                {/* <div className='home-doctor-video'>
+                    <video ref={videoRef} src = {videoURL} style={{height:'800px'}} controls autoPlay muted/>
+                </div> */}
+                {/* <div className='home-doctors-text'>
                     <HomeText 
                         title="Community" 
                         content={`Our app is a welcoming community of beauty lovers like you.
@@ -58,7 +59,7 @@ const HomeDoctors = () => {
                     <div className='home-doctors-button'>
                         <HomeButton title="Download App" href = "/download"/>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

@@ -1,5 +1,86 @@
 
 @media (max-width: 992px) {
+    .header-container-mobile
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width:100%;
+        height:50px;
+        border-bottom:1px solid rgba(53, 44, 41, 1);
+        background-color: rgba(251, 252, 255, 1);
+
+        .header-menuBarIcon-container-mobile
+        {
+            align-items: center;
+            width:33%;
+            order:0;
+            position: relative;
+            order:1;
+
+        }
+        .header-menu-bar-mobile-container
+        {
+            border-radius: 0px;
+            margin-top: 11%;
+            width:190%;
+            align-content: center;
+            
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            padding: 0px;
+            position: absolute;
+            background-color: rgba(251, 252, 255, 1);
+
+
+        }
+        .header-menu-bar-item-mobile
+        {
+            
+            text-align: center;
+            height:50px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            border-Bottom: 1px solid black;
+            font-family:'Open Sans';
+            font-weight:600;
+            size:18px;
+            line-height: 18px;
+        }
+        .header-logo-container-mobile
+        {
+            order:1;
+            width: 33%;
+            
+            align-items: center;
+            
+            // left: 90px;
+            // top:100px;
+            margin-left: 18%;
+            margin-top: 2%;
+            position: relative;
+            .logo { 
+                height: 40px;
+                width:37.83px;
+                object-fit: contain;
+            }
+            
+        }
+        .header-login-container-mobile
+        {
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            width:33%;
+            order:2;
+            // margin-top: -20px;
+            
+        }
+       
+    }
+
     .header-navbar {
         display: none;
     }

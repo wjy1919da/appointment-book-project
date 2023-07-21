@@ -3,7 +3,7 @@ import CommunityPost from '../community-post/community-post.component';
 import { useGetPost } from '../../hooks/useGetPosts';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
 import Arrow from '../../assets/post/arrow_grid.png';
@@ -23,6 +23,15 @@ const DoctorPostGrid = () => {
     const [IsModalOpen,setIsModelOpen] = useState(false);
     const setUserID = usePostQueryStore((state) => state.setUserID);
     const flatData = data ? data.pages.flatMap(page => page.data) : [];
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const [gutterwidth,setGutterWidth]=useState('');
+    useEffect(() => {
+        if (isMobile) {
+          setGutterWidth('5px');
+        } else {
+          setGutterWidth('25px');
+        }
+      }, [isMobile]);
     
     if (isLoading) return <HomeSpinner />;
     if (error) return <div className='error'>{error.message}</div>; // 将Message改为message
@@ -33,6 +42,7 @@ const DoctorPostGrid = () => {
       setUserID(ID)
 
     }
+
    
     const postCardList =flatData.map(post => (
       <div className='btn'onClick={() => setPostID(post.id)}>
@@ -62,11 +72,12 @@ const DoctorPostGrid = () => {
                   1100: 5,
                   1000: 4,
                   800: 3,
+                  430:2,
                 }}
-                gutter="25px"
+                gutter={gutterwidth}
               >
                 <Masonry
-                  gutter="5px"
+                  gutter={gutterwidth}
                 >
                     {postCardList}
                 </Masonry>
