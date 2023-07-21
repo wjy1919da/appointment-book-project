@@ -16,7 +16,6 @@ import FormInput from '../form-input/form-input.component';
 
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
-const DoctorSearchPopup = ({show,onHide,isMobile}) => {
 
 import { useMemo } from 'react';
 const mergeDoctorsByNickname = (pages) => {
@@ -43,7 +42,7 @@ const mergeDoctorsByNickname = (pages) => {
     // Convert the object back into an array
     return Object.values(mergedDoctors);
   };
-const DoctorSearchPopup = ({show,onHide}) => {
+const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const {
         data,
         error,

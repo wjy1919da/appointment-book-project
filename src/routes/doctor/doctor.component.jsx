@@ -72,9 +72,10 @@ const Doctor = () => {
                 <div className='doctor-post-grid-container'>
                       <DoctorPostGrid />
                 </div>
+                <Footer isMobile={isMobile}/> 
               </div> 
               )}   
-               <Footer isMobile={isMobile}/> 
+               
             </div>
             
       </div>
