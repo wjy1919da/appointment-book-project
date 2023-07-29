@@ -6,7 +6,7 @@
     justify-content: space-between;
     position: relative;
     margin-top: 64px;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         .home-pic {
             position: absolute;
             width: 654px;
@@ -139,8 +139,11 @@
                 height: 450px;
             }
         }
+        .home-mobile-app-container{
+            display: none;
+        }
     }
-
+// mobile 
     @media (max-width: 768px) {
         .home-title-container {
             width: 1440px;
@@ -291,7 +294,7 @@
         }
     }
     
-    @media (max-width: 576px) {
+    @media (min-width: 576px) {
             .home-title-container {
                 width: 1440px;
                 height: 800px;
@@ -481,4 +484,5 @@
     .home-doctors-container{
         display: none;
     }
+   
 }

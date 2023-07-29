@@ -1,4 +1,4 @@
-@media (min-width: 576px) {
+@media (min-width: 992px) {
     .home-doctors-container {
         
         margin-top: -350px;
@@ -62,7 +62,7 @@
             // height:1050px;
             z-index: 2;
             pointer-events: none;
-            
+            width:110vh;       
         }
     }
     .home-doctors-text{

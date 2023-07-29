@@ -12,8 +12,12 @@ import SubProcedureFormV2 from '../../components/sub-procedure-form-v2/sub-proce
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
 import useGetProcedures from '../../hooks/useGetProcedures';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
+import SubProcedureMobileExtraBottom from '../../components/sub-procedure-mobile-extra-bottom/sub-procedure-mobile-extra-bottom.component';
 import useProcedureQueryStore from '../../procedureStore.ts'
+import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
+
+
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -49,6 +53,8 @@ const SubProcedure = () => {
     const { data, isLoading, error } = useGetProcedures();
     const setCategoryId = useProcedureQueryStore(state=>state.setCategoryId);
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
+    const isWeb = useMediaQuery({ query: `(min-width: 768px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
     useEffect(() => {
         setCategories(name);
     }, [name]);
@@ -60,7 +66,13 @@ const SubProcedure = () => {
 
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
-        return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        
+        if (isWeb) {
+            return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+        if (isMobile) {
+            return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
+        }
     }
    
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
@@ -104,12 +116,36 @@ const SubProcedure = () => {
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
-                <br/>
                 {data.data.description &&
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
                     </p>}
             </div>
+
+            {cardInfo &&<div className='sub-procedure-right-board-mobile'>
+                        <div className="right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Cost:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
+                        </div>
+                        <div className="right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Duration:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
+                        </div>
+                        <div className="right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Safety:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
+                        </div>
+                        <div className="right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
+                            <div>
+                               <span className={`stars-container stars-${n}`}>★★★★★</span>
+                            </div>
+                        </div>
+                        <div className="right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Pain:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
+                        </div> 
+                    </div>}
             
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
@@ -164,12 +200,12 @@ const SubProcedure = () => {
             <div className="FQA-collapside" id = 'faq'>
                     <Collapsible/>
             </div>
-            {reference &&<div className='sub-procedure-reference' > 
+            {reference &&<div className='sub-procedure-reference' id = 'reference'> 
                  <div className='sub-title'>
                     References and resources
                 </div>
              <SubProcedureReference reference = {reference} id = ''/>
-            </div>}    
+            </div>}   
             </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
@@ -201,7 +237,7 @@ const SubProcedure = () => {
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
-                            <a href="#description" className={selectedSection === "description" ? ' introduction-section active' : 'introduction-section'} 
+                            <a href="#description" className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'} 
                             onClick={() => setSelectedSection("description")}>Introduction</a>
                             <a href="#consider" 
                             className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'} 
@@ -216,21 +252,16 @@ const SubProcedure = () => {
                                                             onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
                             <a href="#faq" className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'} 
                             onClick={() => setSelectedSection("faq")}>FAQ</a>
-                            <a className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'} 
+                            <a href="#reference" className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'} 
                             onClick={() => setSelectedSection("reference")}>Reference</a>
                         </div>
                     </div>
-
-                  </div>    
-                </div>
-              </div>
-            
-            
-               
+                </div>    
+            </div>
+        </div> 
+        <SubProcedureMobileExtraBottom />   
         <Footer />
-      
     </div>
-        
     )
 }
 export default SubProcedure;

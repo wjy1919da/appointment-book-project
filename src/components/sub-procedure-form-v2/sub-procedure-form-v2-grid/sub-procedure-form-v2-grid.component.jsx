@@ -10,7 +10,7 @@ const SubProcedureFormV2Grid = (props) => {
 
         // If title or imgSrc is empty, render an empty div
         if (!title || !imgSrc) {
-            return <div className='sub-procedure-form-v2-grid-card' key={index}></div>;
+            return <div className='sub-procedure-form-v2-grid-card v2-none' key={index}></div>;
         }
 
         return (

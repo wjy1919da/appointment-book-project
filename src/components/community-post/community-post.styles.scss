@@ -15,6 +15,7 @@
     
     box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 8px 16px rgba(32, 32, 33, 0.1), 0px 16px 40px rgba(32, 32, 33, 0.2);
     border-radius: 10px;
+    width:240px;
     .post-image-url
     {
         
@@ -81,7 +82,7 @@
             /* Auto layout */
 
             display: flex;
-            flex-direction: row;
+            // flex-direction: row;
             justify-content: space-between;
             align-items: center;
             width: 100%;
@@ -137,11 +138,10 @@
             flex:none;
             order:1;
             flex-grow:0;
+            right:0px;
             margin-top: 5px;
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            gap:6px;
+            gap:5px;
             .heartIcon
             {
                 width: 18px;

@@ -8,6 +8,9 @@ import PostDetail from '../postDetail/postDetail'
 import usePostQueryStore from "../../postStore.ts";
 import './doctor-post-grid.styles.scss';
 import CommunityPostMobile from '../community-post/community-post-mobile.component';
+import { Link } from 'react-router-dom';
+import Arrow1 from '../../assets/post/arrow1_grid.png';
+
 const DoctorPostGridMobile = () => {
     const {
         data, 
@@ -29,7 +32,7 @@ const DoctorPostGridMobile = () => {
         ) || 0;
       const setPostID = (ID) =>
       {
-        console.log("ID",{ID})
+        //console.log("ID",{ID})
         setIsModelOpen(true)
         setUserID(ID)
   
@@ -47,7 +50,7 @@ const DoctorPostGridMobile = () => {
                         columnsCountBreakPoints={{ default: 3,1000:4,800:3, 500:2}}
                         gutter="5px"
                     >
-                        <Masonry gutter="8px">
+                        <Masonry gutter="0px">
                             {data?.pages.map((page, pageIndex) => 
                                 page.data.map((post, postIndex) => (
                                     <div className='btn' onClick={() => setPostID(post.id)} key={`${pageIndex}-${postIndex}`}>
@@ -66,6 +69,21 @@ const DoctorPostGridMobile = () => {
                 </InfiniteScroll>
             }
             {IsModalOpen && <PostDetail show={IsModalOpen} onHide={() => setIsModelOpen(false)} />}
+            <div className='down-load-more-container'>
+                <img src={Arrow1} alt='arrow1' className='arrow1-containter' />
+
+                <div className='download-text'>
+                    Join Charm community to view more
+                </div>
+
+                <Link to='/download'>
+                    <button className='download-button'>
+                        <div className = 'download-button-text'>
+                            DownLoad APP
+                        </div>
+                    </button>
+                </Link>
+            </div>
         </div>
     )    
 }

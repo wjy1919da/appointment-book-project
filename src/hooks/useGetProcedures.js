@@ -11,7 +11,7 @@ const base = {
 export function useGetProcedureCategories(){
     const fetchProcedureCategories = async () => {
       const res = await axios.get(base.procedureCategoriesUrl);
-      console.log("fetch Data:", res.data);
+    //  console.log("fetch Data:", res.data);
       return res.data;
     };
     return useQuery('procedureCategories', fetchProcedureCategories);

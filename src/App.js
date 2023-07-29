@@ -15,13 +15,15 @@ import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 
+
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 
 import HomeMobile from './routes/home/home-mobile.component';
 import { useMediaQuery } from 'react-responsive';
 
+
 const App = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
 
   return (
     <Routes>
@@ -31,7 +33,7 @@ const App = () => {
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
-        <Route path='/procedureMobile' element={< DoctorProcudreMobile/>} />
+        <Route path='/procedureMobile' element={isMobile ? < DoctorProcudreMobile/>: <Download />} />
         <Route path='doctor' element={<Doctor />} />
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
@@ -41,7 +43,6 @@ const App = () => {
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />
-        {/* <Route path='home-mobile' element={<HomeMobile/>} /> */}
       </Route>
     </Routes>
   );

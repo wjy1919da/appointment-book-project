@@ -4,11 +4,13 @@ import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
 import Facebook from '../../assets/home/facebook.svg';
 import Linkedin from '../../assets/home/linkedin.svg';
+import { useMediaQuery } from 'react-responsive';
 
 import './footer.styles.scss';
 
 const Footer = () => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
     return (
         <div>
         {isMobile?(
@@ -101,7 +103,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        )};
+        )}
         </div>
     )
 }

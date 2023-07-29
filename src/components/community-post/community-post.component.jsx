@@ -16,12 +16,12 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
       }, [isMobile]);
 
 
-    return (
+      return (
         <div className='community-post-container'>
             <div className="post-Image">
-                <img src={imageURL[0]} className="postImage" style={{width}}></img>
+                <img src={imageURL[0]} className="postImage" style={{width:'240px'}}></img>
             </div>
-            <div className="post-information" style={{width:{width}}}>
+            <div className="post-information" style={{width:'240px'}}>
                 <span className="post-text">{text}</span>
                 <div className="profile">
                     <div className="profileImage">

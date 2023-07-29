@@ -26,15 +26,17 @@ const CommentCard = ({avatar,name,date,commentText}) => {
 
     return (
         <div className='comment-card-container'>
-            <div className="reviewer-progile-avatar">
-                <img src= {avatar} className="reviewer-avatar" alt='avatar'></img>
-            </div>
-            <div className="reviewer-information">
-                <div className="userName-date">
-                    <span className="detail-gray-font">{convertUnicode(name)}</span>
-                    <span className="detail-gray-font">{newDate}</span>
+            <div className='reviewer-profile-information'>
+                <div className="reviewer-progile-avatar">
+                    <img src= {avatar} className="reviewer-avatar" alt='avatar'></img>
                 </div>
-                <span className="detail-comment-text">{convertUnicode(commentText)}</span>
+                <div className="reviewer-information">
+                    <div className="userName-date">
+                        <span className="detail-gray-font">{name ? convertUnicode(name) : ""}</span>
+                        <span className="detail-comment-text">{commentText ? convertUnicode(commentText) : ""}</span>
+                    </div>
+                    <span className="detail-comment-text">{convertUnicode(commentText)}</span>
+                </div>
             </div>
             <div className="likeCount-commentCount">
                 <span>

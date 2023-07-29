@@ -1,4 +1,19 @@
-.carousel-container {
-    width: 800px; // 调整宽度
-    margin-bottom:20px; 
+@media (min-width: 768px) {
+    .carousel-container {
+        width: 800px; // 调整宽度
+        margin-bottom:20px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        width: 100%; // 调整宽度
+        margin-bottom:20px; 
+    }
+
+    .pic-container-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 }

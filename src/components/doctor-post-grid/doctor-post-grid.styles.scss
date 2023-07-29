@@ -45,6 +45,11 @@
     height: 43.428px;
     flex-shrink: 0;
   }
+  .arrow1-containter{
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
   .download-button{
     display: inline-flex;
     height: 56px;
@@ -73,11 +78,13 @@
     font-weight: 600;
     line-height: 100%;
   }
+  /*
   .doctor-post-grid--inner-container-mobile{
     width: 100%;
     padding: 10px 10px;
     height:800px;
-    align-items: center; /* 水平居中 */
-    justify-content: center; /* 垂直居中 */
+    align-items: center; // 水平居中 
+    justify-content: center; // 垂直居中 
     //background-color: #FFF;
   }
+  */

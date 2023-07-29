@@ -43,25 +43,7 @@
             max-width: 450px;
 
         }
-        .detail-gray-font
-        {
-            font-family: 'Open Sans';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 16px;
-            color: #A5A6A8;
 
-        }
-        .detail-red-font
-        {
-            font-family: 'Open Sans';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20.8px;
-            color:rgba(130, 78, 61, 1);
-        }
         .post-popUp-break-lines
         {
             margin-top: 20px;
@@ -133,4 +115,23 @@
 
     }
 }
+}
+.detail-gray-font
+{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #A5A6A8;
+
+}
+.detail-red-font
+{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.8px;
+    color:rgba(130, 78, 61, 1);
 }

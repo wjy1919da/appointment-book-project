@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Checkbox, Collapse } from 'antd';
+import { Checkbox, Collapse} from 'antd';
+import "./post-drop-down.styles.scss";
+// import { Icon } from '@ant-design/icons';
+import closeCollapseIcon from "../../assets/post/post-drop-down-icon.png"
+import openCollapseIcon from "../../assets/post/post-drop-down-icon.png"
+
 const { Panel } = Collapse
 
 const PostDropDown = (props) => {
-  
-
   const [Checked, setChecked] = useState([]);
 
   const handleToggle = (value) => {
@@ -18,12 +21,12 @@ const PostDropDown = (props) => {
     }
 
     setChecked(newChecked);
-    props.handleFilters(value);  // 这里只传递了当前切换的选项
+    props.handleFilters(newChecked);
   }
 
   const CheckboxList = () => props.options && props.options.map((value, index) =>(
     <React.Fragment key={index}>
-        <div>
+         <div>
             <Checkbox
                 onChange={() => handleToggle(value.value)}
                 type="checkbox"
@@ -31,21 +34,20 @@ const PostDropDown = (props) => {
             />&nbsp;&nbsp;
             <span>{value.label}</span>
         </div>
-</React.Fragment>
+    </React.Fragment> 
   )) 
 
   return(
-    <div>
-        <div> 
-            <Collapse defaultActiveKey={['0']}>
-                
-                    <Panel header="All" key = "1">
-                        {CheckboxList()}
+    
+            <Collapse className='post-drop-down' defaultActiveKey={['0']}>
+                    <Panel className='post-drop-down-button' header="All" key = "1">
+                      <div className='post-drop-down-menu'>
+                          {CheckboxList()}
+                      </div>
                     </Panel>
-                
             </Collapse>
-        </div>
-    </div>
+        
+    
   )
 }
 

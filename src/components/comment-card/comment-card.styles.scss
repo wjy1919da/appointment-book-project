@@ -2,13 +2,22 @@
 {
     display: flex;
     flex-direction: row;
-    width:429px;
-    height:80px;
+    width:80%;
+    height:70px;
     gap:10px;
+    align-items: center;
+    .reviewer-profile-information
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap:10px;
     .reviewer-progile-avatar{
-        position: absolute;
+        position: relative;
         left:0%;
         justify-content: center;
+        
+        
         .reviewer-avatar
         {
             width:35.84px;
@@ -19,18 +28,18 @@
     }
     .reviewer-information
     {
-        position: absolute;
+        position: relative;
         justify-content: center;
         display: flex;
         flex-direction: column;
-        left:8%;
+        left:0%;
         width:400px;
         gap:5px;
         .userName-date
         {
             display: flex;
             flex-direction: row;
-            gap:20px;
+            gap:4%;
             align-items: center;
             
         }
@@ -43,6 +52,7 @@
             line-height: 20.8px;
         }
     }
+}
     .likeCount-commentCount
     {
         justify-self: center;
@@ -50,7 +60,7 @@
         display: flex;
         flex-direction: row;
         gap:5px;
-        left:70%;
+        left:80%;
 
         .post-detail-icon {
             width: 18px;

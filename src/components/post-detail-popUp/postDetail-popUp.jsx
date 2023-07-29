@@ -9,13 +9,6 @@ import collectIcon from '../../assets/post/star.png';
 const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
-    // useEffect(() => {
-    //     adjustContainerHeight();
-    //     window.addEventListener('resize', adjustContainerHeight);
-    //     return () => {
-    //       window.removeEventListener('resize', adjustContainerHeight);
-    //     };
-    //   }, []);
 
       const adjustContainerHeight = () => {
         const container = containerRef.current;
@@ -46,9 +39,10 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
     }
 
     function convertUnicode(input) {
-      return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
-          String.fromCharCode(parseInt(b, 16)));
+      if (!input) return '';  // Return an empty string if input is null, undefined, or empty string
+      return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) => String.fromCharCode(parseInt(b, 16)));
     }
+  
     
     return (
         <div className='post-detail-popUp-container'ref={containerRef}>
@@ -74,17 +68,20 @@ const PostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectC
                         <span className="detail-gray-font">{commentCount} comments</span>
                         {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}
                         <div className="comment-detail" onClick={handleIconClick}>
-                            {comments&&comments.map((comment,index)=>
-                                <CommentCard
-                                    key={index}
-                                    avatar={comment.avatar}
-                                    name={comment.userName}
-                                    commentText={comment.content}
-                                    date={formatDate(comment.commentDate)}
-                                    
-                                />
-
-                                )}
+                        {comments && comments.map((comment,index) => {
+                            if (comment && comment.content) {
+                                return (
+                                    <CommentCard
+                                        key={index}
+                                        avatar={comment.avatar || ''}
+                                        name={comment.userName||''}
+                                        commentText={convertUnicode(comment.content)}
+                                        date={formatDate(comment.commentDate)}
+                                    />
+                                );
+                            }
+                            return null;  // Or handle this case differently
+                        })}
                     </div>
                     </div>
             </div>

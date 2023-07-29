@@ -4,7 +4,8 @@ import useDoctorQueryStore from '../store.ts';
 
 const base = {
   reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
-  aboutUrl: 'https://api.charm-life.com/info/doctor-details'
+  //aboutUrl: 'https://api.charm-life.com/info/doctor-details'
+  aboutUrl: 'http://localhost:8080/info/doctor-details'
 }
 
 export function useGetDoctorReviews() {
@@ -60,7 +61,7 @@ export function useGetDoctorAbout() {
         }
       );
 
-      console.log("doctor about data",response.data);
+      //console.log("doctor about data",response.data);
       return { data: response.data.data, pageInfo: response.data.pageInfo };
     } catch (error) {
       throw new Error('Failed to fetch doctor about');
@@ -73,8 +74,7 @@ export function useGetDoctorAbout() {
     {
       staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
       keepPreviousData: true,
-      getNextPageParam: (lastPage, allPages) =>
-      lastPage.data.length > 0 ? allPages.length + 1 : undefined,
+      getNextPageParam: (lastPage, allPages) => lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined,
     }
   );
 }

@@ -8,42 +8,54 @@ import highlightAppointment from '../../assets/doctor/highlight-appointment.png'
 const DoctorAbout = () => {
     const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+      
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    // 在数据加载完成且无错误时，判断数据是否存在，不存在则渲染一个空的组件或消息
+    if (!data || !data.pages[0]?.data) {
+        return <div>No data available</div>;
+    }
+
+    // 如果数据存在，我们可以安全地进行解构
+    const { programs, interesteds, methods, actual, isAuth, method } = data.pages[0].data;
+
     const abouts = [
-        {'title': 'Coupons',
-            'items': data?.pages[0].data.programs},
-        {'title': 'Highlights',
-            'items': []},
-        {'title': 'Specializations',
-            'items': data?.pages[0].data.interesteds},
-        {'title': 'Consult',
-            'items': data?.pages[0].data.methods}
+        {'title': 'Coupons', 'items': programs},
+        {'title': 'Highlights', 'items': []},
+        {'title': 'Specializations', 'items': interesteds},
+        {'title': 'Consult', 'items': methods}
     ]
 
-    if (data?.pages[0].data.actual !== null) {
+    if (actual !== null) {
         abouts[1].items.push(
             {'content': highlightYear,
-             'title': data?.pages[0].data.actual + ' years in business'}
+             'title': actual + ' years in business'}
         )
     }
-    if (data?.pages[0].data.isAuth !== null) {
+    if (isAuth !== null) {
         abouts[1].items.push(
             {'content': highlightVerified,
-             'title': data?.pages[0].data.isAuth !== null ? 'Licence verified by Charm' : ''}
+             'title': isAuth !== null ? 'Licence verified by Charm' : ''}
         )
     }
-    if (data?.pages[0].data.method !== null) {
+    if (method !== null) {
         abouts[1].items.push(
             {'content': highlightAppointment,
-             'title': data?.pages[0].data.method !== null ? 'To make an appointment' : ''}
+             'title': method !== null ? 'To make an appointment' : ''}
         )
     }
 
     return (
         <div className='doctor-about-container'>
-            <DoctorAboutSection title={abouts[0].title} items={abouts[0].items}></DoctorAboutSection>
-            <DoctorAboutSection title={abouts[1].title} items={abouts[1].items}></DoctorAboutSection>
-            <DoctorAboutSection title={abouts[2].title} items={abouts[2].items}></DoctorAboutSection>
-            <DoctorAboutSection title={abouts[3].title} items={abouts[3].items}></DoctorAboutSection>
+            {abouts[0]?.items && <DoctorAboutSection title={abouts[0].title} items={abouts[0].items}></DoctorAboutSection>}
+            {abouts[1]?.items && <DoctorAboutSection title={abouts[1].title} items={abouts[1].items}></DoctorAboutSection>}
+            {abouts[2]?.items && <DoctorAboutSection title={abouts[2].title} items={abouts[2].items}></DoctorAboutSection>}
+            {abouts[3]?.items && <DoctorAboutSection title={abouts[3].title} items={abouts[3].items}></DoctorAboutSection>}
         </div>
     )
 }

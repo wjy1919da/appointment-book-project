@@ -37,3 +37,12 @@
         margin-top: -20px;
     }
 }
+/* 修改输入框的文本颜色 */
+.procedure-search-mobile.custom-input {
+    color: black; /* 你可以使用其他颜色值 */
+}
+
+/* 修改placeholder的颜色 */
+.procedure-search-mobile.custom-input::placeholder { 
+    color: grey; /* 使用灰色或其他颜色值 */
+}

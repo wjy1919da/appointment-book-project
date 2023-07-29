@@ -13,11 +13,12 @@ const DoctorSearchDropDown = () => {
   //if(isLoading) return <Spinner/>
   if (error) return <Text>{error.message}</Text>;
   if (!data || !data.result) return null;
-  console.log("search drop down data: ");
+  //console.log("search drop down data: ");
   const groupedData = [];
   const handleClick = (item) => {
      setLocation(item);
   }
+  // 每三个分成一组，为了显示方便
   for (let i = 0; i < data.result.length; i += 3) { // Here 'data.result' instead of 'data'
     groupedData.push(data.result.slice(i, i + 3));
 }

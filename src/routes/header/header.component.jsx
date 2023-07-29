@@ -4,26 +4,23 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
-
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
 import menuBar from '../../assets/home/menu-bar.png'
-
 import HeaderMobileDropDownV2 from './header-mobile-dropDownV2.component';
 
 import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-import HeaderMobileDropDown from './header-mobile-dropDown.component';
+
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
-   
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}
@@ -44,7 +41,9 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+    //   Save: old navbar    
 
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
@@ -112,14 +111,7 @@ const Header = () => {
 //         </Navbar.Collapse>
 //     </Container>
 // </Navbar>
-    // if (isMobile) {
-    //     return (
-    //         <Fragment>
-    //             <HeaderMobile />
-    //             <Outlet />
-    //         </Fragment>
-    //     );
-    // }
+
     return (
         <div>
             {isMobile?(
@@ -138,9 +130,11 @@ const Header = () => {
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>
-                    <div className='header-logo-container-mobile'>
-                        <img className='logo' src={Logo} alt='logo' style={{width:'36px',height:'36px'}}/>
-                    </div>
+                    {/* <div className='header-logo-container-mobile'> */}
+                        <Link className='header-logo-container-mobile' to='/'>
+                          <img className='logo' src={Logo} alt='logo' style={{width:'36px',height:'36px'}}/>
+                        </Link>
+                    {/* </div> */}
                     <div className='header-login-container-mobile'>
                     <Dropdown style={{marginTop:'-9px'}}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic"style={{ backgroundColor: 'transparent', borderColor: 'transparent',height:'36px',padding:'10px 20px' }}>
@@ -174,7 +168,9 @@ const Header = () => {
                             // to = '/procedure/botox_injections'
                             data-bs-toggle='dropdown disabled' 
                             aria-expanded='false'
-                            onClick={() => setIsModelOpen(true)}>
+                            //onMouseOver={() => setIsModelOpen(true)}
+                            onClick={() => setIsModelOpen(true)}
+                            >
                             Procedure
                         </Link>
                         <ul className='dropdown-menu'>
@@ -201,25 +197,16 @@ const Header = () => {
                     
                 </div>
                 <div className='header-login'>
-                    {/* <div className="header-search">
+                    <div className="header-search">
                         <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                         </input>
-                    </div> */}
-                    {/* <div className="header-login-logo">
+                    </div> 
+                   <div className="header-login-logo">
                         <img src={loginIcon} alt="login Image" ></img>
                     </div>
                     <div className="header-login-text">
                         <p>login</p>
-                    </div> */}
-                   
-                    <div className={loginClick ? 'login-icon active' : 'login-icon'} onClick={handleLoginClick}>
-                        <i className={loginClick ? 'fas fa-user active' : 'fas fa-user'} />
-                        {loginClick && < HeaderMobileDropDownV2/>}
                     </div>
-                </div>
-                <div className={click ? 'menu-icon active' : 'menu-icon'} onClick={handleClick} style={{position: 'relative'}}>
-                        <i className={click ? 'fas fa-bars active' : 'fas fa-bars'} />
-                       {click && < HeaderMobileDropDown/>}
                 </div>
             </div>
             <Outlet />

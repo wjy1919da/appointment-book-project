@@ -2,6 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import './sub-procedure-scroll.styles.scss'
 import SubProcedureScrollCard from './sub-procedure-scroll-card/sub-procedure-scroll-card.component';
+// import { Fragment } from "react";
 const SubProcedureScroll = (props) => {
   console.log("SubProcedureScroll", props);
   const responsive = {
@@ -29,11 +30,19 @@ const SubProcedureScroll = (props) => {
   ));
 
   return (
+    // <Fragment>
       <div className="carousel-container">
          <Carousel responsive={responsive}>
             {cards}      
         </Carousel>
       </div>
+
+      /*  
+        <div className="pic-container-mobile">
+          {cards}
+        </div>
+      */
+    // </Fragment>
   )
 };
 export default SubProcedureScroll;

@@ -2,10 +2,13 @@ import React from "react";
 import { usePostDetail } from "../../hooks/useGetPosts";
 import Modal from 'react-bootstrap/Modal';
 import PostDetailPopUP from "../post-detail-popUp/postDetail-popUp";
-const PostDetail = ({show,onHide}) =>
+import PostDetailMobile from "../post-detail-mobile/post-detail-mobile";
+//import closeIcon from '../../assets/post/heart.png'
+//import { BsX } from 'react-icons/bs';
+import './postDetail.styles.scss'
+import CloseButton from 'react-bootstrap/CloseButton';
+const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
 {
-    
-    // const setUserID = usePostQueryStore((state) => state.setUserID);
     
     const{
         data,
@@ -13,14 +16,7 @@ const PostDetail = ({show,onHide}) =>
         isLoading,
     }=usePostDetail();
     console.log("fetchdata",data);
-    // console.log("userID",setUserID)
-    
-    
-    
-    // useEffect(()=>
-    // {
-    //     setUserID(userID)
-    // }, []);
+   
     if (error) {
         return <div>Error: {error.message}</div>;
       }
@@ -29,6 +25,43 @@ const PostDetail = ({show,onHide}) =>
     }
 
     return (
+        <div>
+        {isMobile?(
+            <div>
+            {show && (
+            <div style={{ position: 'fixed', top: '0px', right:'0px' }}>
+            <div className='post-detail-close-button'>
+            <CloseButton style={{color:"white"}} onClick={onHide}/>
+            </div>
+
+            </div>
+        )}
+            <Modal
+            dialogClassName='post-detail-mobile-modals'
+            show={show}
+            onHide={onHide}
+            size="sm"
+            aria-labelledby="example-custom-modal-styling-title"
+            style={{marginTop:'30px'}}
+            >
+            <div style={{border:'20px solid white',borderRadius:'50px'}}>
+            {data&&<PostDetailMobile
+                    picture= {data.data.pictures} 
+                    brief={data.data.brief} 
+                    tag={data.data.tags?data.data.tags[0].tagName : null}
+                    postDate={data.data.createTimestamp}
+                    commentCount={data.data.commentCount}
+                    likeCount={data.data.likeCount}
+                    collectCount={data.data.collectCount}
+                    comments={data.data.comments}
+                    userName={postUserName}      
+                    userAvatar={postAvatar}          
+                />   
+            }
+            </div>
+            </Modal>
+            </div>
+        ):(
         <Modal
         dialogClassName="post-detail-modals"
         show={show}
@@ -49,6 +82,8 @@ const PostDetail = ({show,onHide}) =>
         />}
         
         </Modal>
+        )} 
+        </div>
     )
 }
 export default PostDetail;

@@ -1,4 +1,3 @@
-
 @media (max-width: 992px) {
     .header-container-mobile
     {
@@ -6,7 +5,7 @@
         flex-direction: row;
         justify-content: space-between;
         width:100%;
-        height:50px;
+        height: 55px;
         border-bottom:1px solid rgba(53, 44, 41, 1);
         background-color: rgba(251, 252, 255, 1);
 
@@ -76,6 +75,27 @@
             width:33%;
             order:2;
             // margin-top: -20px;
+            
+        }
+        .header-logo-container-mobile .active
+        {
+            order:1;
+            width: 33%;
+            
+            align-items: center;
+            
+            // left: 90px;
+            // top:100px;
+            margin-left: 18%;
+            margin-top: 2%;
+            position: relative;
+            background-color: black;
+            .logo { 
+                height: 40px;
+                width:37.83px;
+                object-fit: contain;
+                color: white;
+            }
             
         }
        
@@ -388,7 +408,7 @@
         
     
         .dropdown-center:hover .dropdown-menu {
-            display: block;
+            display: block ;
             width: max-content;
             position: absolute;
             left: 0;
@@ -403,122 +423,4 @@
             margin: 0 20px;
         }
     }
-    .login-icon{
-        display: none;
-    }
-    .menu-icon {
-        display: none;
-    }
-    .fas.fa-bars{
-        display: none;
-    }
-    .fas.fa-user{
-        display: none;
-    }
-    .dropdown-container{
-        display: none;
-    }
-    
-}
-@media(max-width :576px){
-    .header-container {
-        width: 100%;
-        height: 50px;
-        z-index: 9999;
-        background-color: white;
-        border-bottom: 1px solid grey;  /* 添加这行 */
-    }
-    .header-nav-container{
-        display: none;
-    }
-    .header-logo-container{
-        width: 37.83px;
-        height: 40px;
-        position: fixed;
-        top:4px !important;
-        left: 45% !important;
-        transform: translateX(-50%);
-    }
-    .logo { 
-        height: 40px;
-        width: 37.83px;
-        object-fit: contain;
-    }
-    .login-icon{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 4px;
-        //transform: translate(-100%, 60%); // 使用transform
-        font-size: 1.8rem;
-        cursor: pointer;
-        background-color: transparent;
-        width: 40px;
-        height: 40px; // add a specific height
-    }
-    .login-icon.active{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 4px;
-        //transform: translate(-100%, 60%);
-        font-size: 1.8rem;
-        cursor: pointer;
-        background-color: black;
-        width: 50px;
-        height: 50px; // add a specific height
-    }
-    .menu-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute !important;
-        padding: 4px;
-        top: 0;
-        left: 0 !important;
-        //transform: translate(-100%, 60%); // 使用transform
-        font-size: 1.8rem;
-        cursor: pointer;
-        background-color: transparent;
-        width: 40px;
-        height: 40px; // add a specific height
-    }
-    .menu-icon.active {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute !important;
-        padding: 4px;
-        top: 0;
-        left: 0 !important;
-        //transform: translate(-100%, 60%);
-        font-size: 1.8rem;
-        cursor: pointer;
-        background-color: black;
-        width: 50px;
-        height: 50px; // add a specific height
-    }
-    .fas.fa-bars.active {
-        color: white;  
-    }
-    .fas.fa-user.active {
-        color: white;
-    }
-    .dropdown-container{
-        // z-index: 999;
-        // position: fixed;
-        // top: 50px;
-        // left: 0;
-        // width: 224.009px;
-        // height: 199px;
-        // flex-shrink: 0;
-        // background-color: white;
-    }
-
 }

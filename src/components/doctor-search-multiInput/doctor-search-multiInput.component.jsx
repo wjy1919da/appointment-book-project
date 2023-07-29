@@ -20,6 +20,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
     const setLocation = useDoctorQueryStore(state=>state.setLocation);
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
+    const topLocations = ['Los Angeles, CA', 'Chicago, IL', 'Houston, TX'];
     useEffect(() => {
         if (!IsModalOpen) {
             setDoctorName('');
@@ -29,6 +30,9 @@ const DoctorSearchMultiInput = ({isMobile}) => {
     }, [IsModalOpen]);
     const handleOnClick = () => {
         setIsModelOpen(true);
+    }
+    const handleDropdownLocationClick = (item) => {
+        setLocation(item);
     }
     const handleBlur = () => {
         if (dropdownIsOpen) {
@@ -45,41 +49,52 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                     <div className='doctor-search-multiInput-button'>
                     <Dropdown>
                         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            ZIP,city or state
+                            {/* ZIP,city or state */}
+                            {doctorQuery.location || 'ZIP,city or state'}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu  className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px',marginTop:'-10px'}}>
+                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px',marginTop:'-10px'}}> */}
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginTop:'-10px'}}>
                                 <Form.Control 
                                     type="input" 
                                     placeholder="search..." 
                                     ref = {locationRef}
+                                    value = {doctorQuery.location || ''}
                                     onChange = {(event) => setLocation(event.target.value)}
                                 />
                             </Form.Group>
-                            <Button className="search-location-button mb-3"  variant="outline-primary">
-                                Los Angeles,CA
-                            </Button>
-                            <Button className="search-location-button mb-3" variant="outline-primary">
-                                Chicago, IL
-                            </Button>
-                            <Button className="search-location-button" variant="outline-primary">
-                                Houston, TX
-                            </Button>
+                            {topLocations.map((item, index) => (
+                                    <Button 
+                                        key={index}
+                                        className="search-location-button mb-3"  
+                                        variant="outline-primary"
+                                        onClick={() => handleDropdownLocationClick(item)}
+                                    >
+                                        {item}
+                                    </Button>
+                                ))}
                             </Form>
                         </Dropdown.Menu>
                         </Dropdown>
 
                         <Dropdown>
                         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            Specialization
+                           {doctorQuery.field || 'Specialization'}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}>
-                                <Form.Control type="input" placeholder="search..." />
+                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
+                               <Form.Control 
+                                    type="input" 
+                                    placeholder="search..." 
+                                    ref = {specializationRef}
+                                    value={doctorQuery.field || ''}
+                                    onChange = {(event) => setField(event.target.value)}
+                                />
                             </Form.Group>
                             </Form>
                         </Dropdown.Menu>
@@ -87,13 +102,20 @@ const DoctorSearchMultiInput = ({isMobile}) => {
 
                         <Dropdown>
                         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            Doctor Name
+                            {doctorQuery.doctorName || 'Doctor Name'}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu className='search-doctor-dropDown-menu'>
                             <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}>
-                                <Form.Control type="email" placeholder="search..." />
+                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
+                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
+                                <Form.Control 
+                                    type="input" 
+                                    placeholder="search..." 
+                                    ref = {doctorNameRef}
+                                    value={doctorQuery.doctorName || ''}
+                                    onChange = {(event) => setDoctorName(event.target.value)} 
+                                />
                             </Form.Group>
                             </Form>
                         </Dropdown.Menu>

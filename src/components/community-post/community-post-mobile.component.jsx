@@ -19,7 +19,7 @@ const CommunityPostMobile = ({imageURL,text,profileImage,authorName,likes}) => {
                         <img src={heartIcon} className="heartIcon-mobile"></img>
                         <span className="gray-text-mobile">{likes}</span>
                     </div>
-                </div>
+            </div>
         </div>
     </div>
   )

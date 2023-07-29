@@ -114,5 +114,5 @@
 .individual-page-container {
     display: flex; 
     flex-direction: column;
-    min-height: 240vh; /* This allows the footer to be sticked at the bottom if there's not enough content */
+    min-height: 150vh; /* This allows the footer to be sticked at the bottom if there's not enough content */
 }
