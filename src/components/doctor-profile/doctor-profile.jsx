@@ -63,12 +63,15 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     const profileData = data?.pages[0]?.data[0];
     
     return (
-        <div >
             <div className='doctor-profile-container'>
-            <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..." style={{width:"160px",height:"160px"}}></img>
+            <img src={DoctorProfileImage} class="img-fluid rounded-start individual-doctor-pic" alt="..." style={{width:"160px",height:"160px"}}></img>
             {mergedData && mergedData[0] && 
                 <div className="profile-card-body">
                     {mergedData[0].nickname && <span className="search-card-title">{mergedData[0].nickname}</span>}
+
+                    <span className='starRate'>
+                        <StarRate rate={doctorStars || 4}/>
+                    </span>
                   
                     {mergedData[0].address &&
                         <span className='search-card-text '>
@@ -85,9 +88,6 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                     <span className='search-card-text '>
                         <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                          Charm Verified
-                    </span>
-                    <span className='starRate'>
-                        <StarRate rate={doctorStars || 4}/>
                     </span>
                 </div>
             }
@@ -111,12 +111,11 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             </div>
             <div className='doctor-profile-back'>
                 <Link to='/doctor'>
-                    <img src={backIcon} style={{height:"24px", display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
+                    <img src={backIcon} className='back-link-icon' style={{display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
                     <span className='back-link'>All Doctors</span>
                 </Link>
             </div>
           </div>
-        </div>
         
     )
 }

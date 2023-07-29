@@ -4,8 +4,8 @@ import useDoctorQueryStore from '../store.ts';
 
 const base = {
   reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
-  //aboutUrl: 'https://api.charm-life.com/info/doctor-details'
-  aboutUrl: 'http://localhost:8080/info/doctor-details'
+  aboutUrl: 'https://api.charm-life.com/info/doctor-details'
+  // aboutUrl: 'http://localhost:8080/info/doctor-details'
 }
 
 export function useGetDoctorReviews() {

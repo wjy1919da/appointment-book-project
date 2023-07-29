@@ -1,39 +1,39 @@
 // desktop
 @media (min-width: 768px) {
-    .home-container{
+    .home-container {
         width: 100%;
-        background:white;
+        background: white;
         position: relative;
     }
-    .section-container{
+    .section-container {
         display: flex;
         flex-direction: row;
     }
-    .sub-procedure-reference{
+    .sub-procedure-reference {
         margin-top: 10px;
         margin-bottom: 30px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 0px;
-        gap: 0px;
+        padding: 0;
+        gap: 0;
         margin-bottom: 30px;
         width: 800px;
     }
-    .sub-link{
+    .sub-link {
         margin-top: 20px;
         margin-bottom: 10px;
         width: 175px;
     }
-    .sub-procedure-side-effect{
+    .sub-procedure-side-effect {
         /* Auto layout */
-        padding: 0px;
+        padding: 0;
         gap: 16px;
         margin-top: 20px;
         width: 800px;
         height: 135px;
     }
-    .sub-procedure-left-container{
+    .sub-procedure-left-container {
         align-items: flex-start;
         gap: 50px;
         margin-left: 40px;
@@ -58,7 +58,7 @@
         display: flex;
         flex-direction: column;
         height: 300px;
-        .sub-procedure-top-text{
+        .sub-procedure-top-text {
             position: absolute;
             width: 700px;
             height: 29px;
@@ -93,7 +93,7 @@
             flex-grow: 0;
 
         }
-        .sub-procedure-normal-text{
+        .sub-procedure-normal-text {
             position: absolute;
             width: 800px;
             height: 87px;
@@ -115,7 +115,7 @@
         }
     }
     // mingqi sub text
-    .sub-text{
+    .sub-text {
         // margin-left: 40px;
         margin-top: 20px;
         position: relative;
@@ -123,15 +123,14 @@
         flex-direction: column;
         justify-content: space-around;
         width: 800px;
-        gap:70px;
+        gap: 70px;
         flex: none;
-        .what-section
-        {
+        .what-section {
             display: flex;
             flex-direction: column;
         }
-        .watch-video{
-            margin-top:-20px;
+        .watch-video {
+            margin-top: -20px;
             /* Link Button */
             width: 210px;
             height: 22px;
@@ -163,8 +162,7 @@
             flex: 1; // 新加
             display: flex;
             flex-direction: column;
-            .pros-and-cons
-            {
+            .pros-and-cons {
                 width: 744px;
                 height: 58px;
                 font-family: 'Lora';
@@ -177,53 +175,53 @@
                 margin-left: -30px;
             }
         }
-            
+
     }
-    .FQA-collapside{
+    .FQA-collapside {
         display: flex;
         flex-direction: column;
         position: relative;
         flex: none;
         margin-top: 20px;
     }
-    .sub-procedure-right-container{
-            flex: 1; // 新加，原来是none
-            align-self: stretch;
-            flex-grow: 0;
-            width: 45%;
-            .sub-procedure-right-content{
-                margin-right: 160px;
-                display: flex;
-                flex-direction: column;
+    .sub-procedure-right-container {
+        flex: 1; // 新加，原来是none
+        align-self: stretch;
+        flex-grow: 0;
+        width: 45%;
+        .sub-procedure-right-content {
+            margin-right: 160px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sub-procedure-right-board {
+            box-sizing: border-box;
+            /* Auto layout */
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 24px 16px;
+            gap: 24px;
+
+            position: absolute;
+            width: 352px;
+            height: 240px;
+            right: 40px;
+            top: 104px;
+
+            background: #FFFFFF;
+            /* 银灰 */
+
+            border: 1px solid #E2E3E7;
+            /* Soft Shadow */
+
+            box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
+            border-radius: 8px;
+            span {
+                display: block;
             }
-            .sub-procedure-right-board{
-                box-sizing: border-box;
-                /* Auto layout */
-
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 24px 16px;
-                gap: 24px;
-
-                position: absolute;
-                width: 352px;
-                height: 240px;
-                right: 40px;
-                top: 104px;
-
-                background: #FFFFFF;
-                /* 银灰 */
-
-                border: 1px solid #E2E3E7;
-                /* Soft Shadow */
-
-                box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 12px 16px rgba(226, 227, 231, 0.25);
-                border-radius: 8px;
-                span {
-                    display: block;
-                } 
-            .right-board-text{
+            .right-board-text {
                 font-family: 'Open Sans';
                 font-style: normal;
                 font-weight: 600;
@@ -234,10 +232,12 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                gap:8px;
+                gap: 8px;
 
                 color: #000000;
-                body { font-size: 18px; }
+                body {
+                    font-size: 18px;
+                }
                 .stars-container {
                     position: relative;
                     display: inline-block;
@@ -255,31 +255,49 @@
                     top: 0;
                     left: 0;
                     content: '★★★★★';
-                    color:#FFA4A3;
+                    color: #FFA4A3;
                     overflow: hidden;
                 }
-                .stars-10:after { width: 20%; }
-                .stars-15:after { width: 30%; }
-                .stars-20:after { width: 40%; }
-                .stars-25:after { width: 50%; }
-                .stars-30:after { width: 60%; }
-                .stars-35:after { width: 70%; }
-                .stars-40:after { width: 80%; }
-                .stars-45:after { width: 90%; }
-                .stars-50:after { width: 100%; }
-            }   
-        } 
+                .stars-10:after {
+                    width: 20%;
+                }
+                .stars-15:after {
+                    width: 30%;
+                }
+                .stars-20:after {
+                    width: 40%;
+                }
+                .stars-25:after {
+                    width: 50%;
+                }
+                .stars-30:after {
+                    width: 60%;
+                }
+                .stars-35:after {
+                    width: 70%;
+                }
+                .stars-40:after {
+                    width: 80%;
+                }
+                .stars-45:after {
+                    width: 90%;
+                }
+                .stars-50:after {
+                    width: 100%;
+                }
+            }
+        }
         .introduction-slide {
             display: flex;
             flex-direction: row;
             background: #FFFFFF;
-            order:1;
+            order: 1;
             flex: none;
             position: absolute;
             right: 3px;
             top: 350px;
         }
-        
+
         .introduction-slide .introduction-catalog {
             flex: none;
             order: 1;
@@ -294,7 +312,7 @@
             height: 240px;
             right: 40px;
         }
-        
+
         .introduction-slide .introduction-catalog .introduction-title {
             font-family: 'Inter';
             font-style: normal;
@@ -328,24 +346,24 @@
             transform: rotate(90deg);
             visibility: hidden;
         }
-        
+
         // 点击后的效果
         .introduction-slide .introduction-catalog .introduction-section.active {
             font-weight: 800;
         }
-        
+
         .introduction-slide .introduction-catalog .introduction-section.active::before {
             visibility: visible;
         }
         .introduction-slide .introduction-catalog .introduction-section:hover {
             font-weight: 800;
         }
-        
+
         .introduction-slide .introduction-catalog .introduction-section:hover::before {
             visibility: visible;
         }
     }
-    .sub-title{
+    .sub-title {
         width: 300px;
         height: 32px;
         margin-top: 10px;
@@ -356,60 +374,60 @@
         font-size: 24px;
         line-height: 135%;
     }
-    .sub-procedure-form-ver{
+    .sub-procedure-form-ver {
         margin-top: 50px;
         margin-bottom: 30px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 0px;
-        gap: 16px; 
-        width: 800px; 
+        padding: 0;
+        gap: 16px;
+        width: 800px;
     }
-    .sub-procedure-scroll-container{
+    .sub-procedure-scroll-container {
         width: 800px;
         gap: 20px;
     }
 }
 
 @media (max-width: 576px) {
-    .home-container{
+    .home-container {
         width: 100%;
-        background:white;
+        background: white;
         position: relative;
     }
-    .section-container{
+    .section-container {
         display: flex;
         flex-direction: row;
         width: 90%;
         margin: 0 auto;
     }
-    .sub-procedure-reference{
+    .sub-procedure-reference {
         margin-top: 10px;
         margin-bottom: 30px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 0px;
-        gap: 0px;
+        padding: 0;
+        gap: 0;
         margin-bottom: 30px;
         width: 100%;
     }
-    .sub-link{
+    .sub-link {
         margin-top: 20px;
         margin-bottom: 10px;
         width: 175px;
     }
-    .sub-procedure-side-effect{
+    .sub-procedure-side-effect {
         /* Auto layout */
-        padding: 0px;
+        padding: 0;
         gap: 16px;
         margin-top: 20px;
         width: 100%;
         height: 135px;
         display: none;
     }
-    .sub-procedure-left-container{
+    .sub-procedure-left-container {
         align-items: flex-start;
         // gap: 50px;
         flex: none;
@@ -438,63 +456,83 @@
             border: 1px solid #E2E3E7;
             /* Soft Shadow */
 
-            box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 12px 16px rgba(226, 227, 231, 0.25);
+            box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
             border-radius: 8px;
             span {
                 display: block;
-            } 
-        .right-board-text{
-            font-family: 'Open Sans';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 100%;
-            /* identical to box height, or 18px */
+            }
+            .right-board-text {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 100%;
+                /* identical to box height, or 18px */
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap:8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
 
-            color: #000000;
-            body { font-size: 18px; }
-            .stars-container {
-                position: relative;
-                display: inline-block;
-                color: transparent;
+                color: #000000;
+                body {
+                    font-size: 18px;
+                }
+                .stars-container {
+                    position: relative;
+                    display: inline-block;
+                    color: transparent;
+                }
+                .stars-container:before {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '★★★★★';
+                    color: lightgray;
+                }
+                .stars-container:after {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '★★★★★';
+                    color: #FFA4A3;
+                    overflow: hidden;
+                }
+                .stars-10:after {
+                    width: 20%;
+                }
+                .stars-15:after {
+                    width: 30%;
+                }
+                .stars-20:after {
+                    width: 40%;
+                }
+                .stars-25:after {
+                    width: 50%;
+                }
+                .stars-30:after {
+                    width: 60%;
+                }
+                .stars-35:after {
+                    width: 70%;
+                }
+                .stars-40:after {
+                    width: 80%;
+                }
+                .stars-45:after {
+                    width: 90%;
+                }
+                .stars-50:after {
+                    width: 100%;
+                }
             }
-            .stars-container:before {
-                position: absolute;
-                top: 0;
-                left: 0;
-                content: '★★★★★';
-                color: lightgray;
-            }
-            .stars-container:after {
-                position: absolute;
-                top: 0;
-                left: 0;
-                content: '★★★★★';
-                color:#FFA4A3;
-                overflow: hidden;
-            }
-            .stars-10:after { width: 20%; }
-            .stars-15:after { width: 30%; }
-            .stars-20:after { width: 40%; }
-            .stars-25:after { width: 50%; }
-            .stars-30:after { width: 60%; }
-            .stars-35:after { width: 70%; }
-            .stars-40:after { width: 80%; }
-            .stars-45:after { width: 90%; }
-            .stars-50:after { width: 100%; }
-        }   
-    }
+        }
     }
     // minqi part
     .sub-procedure-title-container {
         position: relative;
         margin-top: 30px;
-        .sub-procedure-top-text{
+        .sub-procedure-top-text {
             // position: absolute;
             width: 100%;
             font-family: 'Open Sans';
@@ -527,15 +565,15 @@
             flex-grow: 0;
             margin: 0;
         }
-        .sub-procedure-normal-text{    
+        .sub-procedure-normal-text {
             font-family: 'Lora';
             font-style: normal;
             font-weight: 400;
             font-size: 18px;
             line-height: 28.8px;
-    
+
             color: #000000;
-    
+
             flex: none;
             order: 1;
             align-self: stretch;
@@ -549,9 +587,9 @@
         position: relative;
         top: -40px;
     }
-    
+
     // mingqi sub text
-    .sub-text{
+    .sub-text {
         // margin-left: 40px;
         margin-top: 20px;
         // position: relative;
@@ -559,16 +597,15 @@
         flex-direction: column;
         justify-content: space-around;
         width: 100%;
-        gap:70px;
+        gap: 70px;
         flex: none;
-        .what-section
-        {
+        .what-section {
             display: none;
             flex-direction: column;
             width: 100%;
         }
-        .watch-video{
-            margin-top:-20px;
+        .watch-video {
+            margin-top: -20px;
             /* Link Button */
             width: 210px;
             height: 22px;
@@ -576,22 +613,22 @@
             font-weight: 600;
             font-size: 22px;
             line-height: 100%;
-    
+
             display: none;
             align-items: center;
             text-align: center;
-    
+
             /* 深巧 */
             color: #352C29;
-    
+
             /* Inside auto layout */
             flex: none;
             order: 0;
             flex-grow: 0;
-    
+
             /* Add underline */
             text-decoration: none;
-    
+
         }
         .watch-video:hover {
             text-decoration: underline;
@@ -600,8 +637,7 @@
             order: 2; // 新加
             display: flex;
             flex-direction: column;
-            .pros-and-cons
-            {
+            .pros-and-cons {
                 width: 100%;
                 height: 58px;
                 font-family: 'Lora';
@@ -614,9 +650,9 @@
                 margin-left: -30px;
             }
         }
-            
+
     }
-    .FQA-collapside{
+    .FQA-collapside {
         display: flex;
         flex-direction: column;
         position: relative;
@@ -625,17 +661,16 @@
         margin-top: 20px;
         width: 100%;
     }
-    
-    .sub-procedure-right-container{
-            order: 1; // 新加
-            align-self: stretch;
-            flex-grow: 0;
-            width: 45%;
-            display: none;
+
+    .sub-procedure-right-container {
+        order: 1; // 新加
+        align-self: stretch;
+        flex-grow: 0;
+        width: 45%;
+        display: none;
     }
-      
-  
-    .sub-title{
+
+    .sub-title {
         width: 300px;
         height: 32px;
         margin-top: 10px;
@@ -661,7 +696,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 0px;
-        gap: 16px; 
+        padding: 0;
+        gap: 16px;
     }
 }

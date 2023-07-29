@@ -236,25 +236,42 @@ const SubProcedure = () => {
                     </div>}
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
-                        <div className="introduction-catalog">
-                            <a href="#description" className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'} 
-                            onClick={() => setSelectedSection("description")}>Introduction</a>
-                            <a href="#consider" 
-                            className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'} 
-                            onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
-                            {optionsContent && <a href="#options" className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'} 
-                                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
-                            <a href="#sideEffects" className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'} 
-                            onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
-                            {beforeAndAfterImage && <a href="#beforeAndAfter" className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'} 
-                                                    onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>}
-                            {alternativeTreatmentForm && <a href="#alternative" className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'} 
-                                                            onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-                            <a href="#faq" className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'} 
-                            onClick={() => setSelectedSection("faq")}>FAQ</a>
-                            <a href="#reference" className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'} 
-                            onClick={() => setSelectedSection("reference")}>Reference</a>
-                        </div>
+<div className="introduction-catalog">
+    <a
+        href="#description"
+        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+        onClick={() => setSelectedSection("description")}>Introduction</a>
+    <a
+        href="#consider"
+        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+        onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+    {optionsContent &&
+    <a
+        href="#options"
+        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+        onClick={() => setSelectedSection("options")}>Procedure options</a>}
+    <a
+        href="#sideEffects"
+        className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
+        onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
+    {beforeAndAfterImage &&
+    <a
+        href="#beforeAndAfter"
+        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+        onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} {alternativeTreatmentForm &&
+    <a
+        href="#alternative"
+        className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
+        onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
+    <a
+        href="#faq"
+        className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
+        onClick={() => setSelectedSection("faq")}>FAQ</a>
+    <a
+        href="#reference"
+        className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
+        onClick={() => setSelectedSection("reference")}>Reference</a>
+</div>
                     </div>
                 </div>    
             </div>

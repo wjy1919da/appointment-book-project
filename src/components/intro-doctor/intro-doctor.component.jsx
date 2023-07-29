@@ -60,7 +60,7 @@ const IntroDoctor = ({isMobile}) => {
                     <p className='intro-card-text'>{ texts[2] }</p>
                 </div>
             </div>
-            )};
+            )}
         </div>
     )
 }

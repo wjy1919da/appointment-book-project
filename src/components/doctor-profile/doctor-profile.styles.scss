@@ -1,14 +1,13 @@
-.doctor-profile-container{
+.doctor-profile-container {
     display: flex;
     flex-direction: column;
     //position: relative;
-    .profile-card-body
-    {
+    .profile-card-body {
         //top:200px;
         //position: absolute;
-       
-        order:1;
-        flex:none;
+
+        order: 1;
+        flex: none;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -17,73 +16,68 @@
         width: 320px;
 
         //height: 78px;
-    .search-card-title
-    {
-        width: 244px;
-        // height: 29px;
-        margin-bottom: 10px;
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 100%;
-        /* identical to box height, or 29px */
-        color: #000000;
-        // margin-bottom: 24px;
-    }
-    .search-card-text
-    {
-        display: flex;
-        flex-direction: row;
-        width: 220px;
-        //height: 26px;
-        gap:6px;
+        .search-card-title {
+            width: 244px;
+            // height: 29px;
+            margin-bottom: 10px;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 100%;
+            /* identical to box height, or 29px */
+            color: #000000;
+            // margin-bottom: 24px;
+        }
+        .search-card-text {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            //height: 26px;
+            gap: 6px;
 
-        /* Body 3
+            /* Body 3
         
         Lora
         */
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 160%;
-        /* identical to box height, or 26px */
-        color: rgba(0, 0, 0, 0.82);
-    }
-    .starRate{
-        margin-top: 15px;
-        margin-bottom: 15px;
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 160%;
+            /* identical to box height, or 26px */
+            color: rgba(0, 0, 0, 0.82);
         }
-}
-    .post-follower-following
-    {
+        .starRate {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    }
+    .post-follower-following {
         //position: absolute;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 0px;
+        padding: 0;
         gap: 80px;
-       // top:420px;
+        // top:420px;
         margin-top: 15px;
         margin-bottom: 15px;
-        
+
         width: 280px;
         height: 53px;
 
         flex: none;
         order: 2;
         flex-grow: 0;
-        .info-showlist
-        {
+        .info-showlist {
             width: 40px;
             height: 53px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            .infor-text
-            {
+            .infor-text {
                 font-family: 'Lora';
                 font-style: normal;
                 font-weight: 500;
@@ -97,15 +91,13 @@
 
                 color: #A5A6A8;
 
-
                 /* Inside auto layout */
 
                 flex: none;
                 order: 1;
                 flex-grow: 0;
             }
-            .infor-number
-            {
+            .infor-number {
                 font-family: 'Lora';
                 font-style: normal;
                 font-weight: 500;
@@ -121,26 +113,25 @@
                 flex: none;
                 order: 0;
                 flex-grow: 0;
-                margin: -7px 0px;
+                margin: -7px 0;
             }
 
         }
     }
-    .consult-follow-button
-    {
-        top:500px;
+    .consult-follow-button {
+        top: 500px;
         position: absolute;
         flex: none;
         order: 3;
         flex-grow: 0;
         display: flex;
         flex-direction: column;
-        gap:24px;
+        gap: 24px;
     }
     .doctor-profile-back {
         position: relative;
         top: 650px;
-        
+
         color: #352C29;
         font-family: 'Open Sans';
         font-style: normal;
@@ -160,149 +151,139 @@
 
 // Phone
 @media (max-width: 576px) {
-    .doctor-profile-container{
+    .doctor-profile-container {
         display: flex;
         flex-direction: column;
         position: relative;
         width: 100%;
+        text-align: center;
 
         .individual-doctor-pic {
             margin: auto;
         }
 
-        .profile-card-body
-        {
-            top:200px;
+        .profile-card-body {
+            top: 200px;
             position: absolute;
-            order:1;
-            flex:none;
+            order: 1;
+            flex: none;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: 0px;
-    
+            padding: 0;
+
             width: 100%;
             height: 78px;
             text-align: center;
 
-        .search-card-title
-        {
-            width: 100%;
-            // height: 29px;
-            font-family: 'Lora';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 22px;
-            line-height: 100%;
-            /* identical to box height, or 29px */
-            color: #000000;
-            // margin-bottom: 24px;
-        }
-        .search-card-text
-        {
-            display: flex;
-            flex-direction: row;
-            width: 220px;
-            height: 26px;
-            gap:6px;
-    
-            /* Body 3
+            .search-card-title {
+                width: 100%;
+                // height: 29px;
+                font-family: 'Lora';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 22px;
+                line-height: 100%;
+                /* identical to box height, or 29px */
+                color: #000000;
+                // margin-bottom: 24px;
+            }
+            .search-card-text {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                // height: 26px;
+                gap: 6px;
+                text-align: left;
+                /* Body 3
             
             Lora
             */
-            font-family: 'Lora';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 160%;
-            /* identical to box height, or 26px */
-            color: rgba(0, 0, 0, 0.82);
+                font-family: 'Lora';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 160%;
+                /* identical to box height, or 26px */
+                color: rgba(0, 0, 0, 0.82);
+            }
+            .starRate {
+                margin: 12px auto;
+            }
         }
-        .starRate{
-            margin-top: 24px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 24px;
-        }
-    }
-        .post-follower-following
-        {
-            position: absolute;
+        .post-follower-following {
+            position: relative;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            padding: 0px;
+            padding: 0;
             gap: 80px;
-            top:420px;
+            top: 250px;
+            // top:400px;
             width: 100%;
             margin: auto;
             height: 53px;
-    
+
             flex: none;
             order: 2;
             flex-grow: 0;
-            .info-showlist
-            {
+            .info-showlist {
                 width: 40px;
                 height: 53px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                .infor-text
-                {
+                .infor-text {
                     font-family: 'Lora';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 16px;
                     line-height: 160%;
                     /* identical to box height, or 26px */
-    
+
                     text-align: center;
-    
+
                     /* 灰 */
-    
+
                     color: #A5A6A8;
-    
-    
+
                     /* Inside auto layout */
-    
+
                     flex: none;
                     order: 1;
                     flex-grow: 0;
                 }
-                .infor-number
-                {
+                .infor-number {
                     font-family: 'Lora';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 22px;
                     line-height: 160%;
                     /* or 35px */
-    
+
                     display: flex;
                     align-items: flex-end;
                     text-align: center;
-    
+
                     color: #000000;
                     flex: none;
                     order: 0;
                     flex-grow: 0;
-                    margin: -7px 0px;
+                    margin: -7px 0;
                 }
-    
+
             }
         }
-        .consult-follow-button
-        {
-            top:500px;
+        .consult-follow-button {
+            top: 500px;
             position: absolute;
             flex: none;
             order: 3;
             flex-grow: 0;
             display: flex;
             flex-direction: row;
-            gap:24px;
+            gap: 24px;
             width: 100%;
             margin: auto;
         }
@@ -310,7 +291,7 @@
             position: absolute;
             top: -40px;
             left: -40px;
-            
+
             color: #352C29;
             font-family: 'Open Sans';
             font-style: normal;
