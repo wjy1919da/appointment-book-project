@@ -36,6 +36,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-left: -4vh;
             padding: 50px; /* 上下左右各添加 50px 的 padding */
             box-sizing: border-box; /* 确保 padding 被包含在元素的总宽度和高度内 */
             position: relative; /* 添加相对定位 */
