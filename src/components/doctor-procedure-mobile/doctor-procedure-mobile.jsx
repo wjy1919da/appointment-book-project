@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import './doctor-procesure-mobile-styles.scss';
-import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+import '../components-doctor-search/doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+//src/components/components-doctors-search/doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import ProcesureInstrumentMobile from "../procedure-mobile-instrument/procedure-mobile-instrument";
 import ProcedureSearchMenuMobile from "../procedure-search-menu-mobile/procedure-search-menu-mobile";

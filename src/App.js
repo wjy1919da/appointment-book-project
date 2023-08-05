@@ -10,7 +10,7 @@ import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
-import DoctorPost from './components/doctor-post/doctor-post.component';
+import DoctorPost from  './routes/community/community.component';
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';

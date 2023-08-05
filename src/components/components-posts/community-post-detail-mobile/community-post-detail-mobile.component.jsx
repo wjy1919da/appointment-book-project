@@ -1,49 +1,29 @@
 import React,{ useRef} from 'react';
-import "./post-detail-mobile-styles.scss";
+import "./community-post-detail-mobile-styles.scss";
 import CommentCard from '../../comment-card/comment-card';
-import heartIcon from '../../assets/post/heart.png';
-import commentIcon from '../../assets/post/chat_bubble.png';
-import shareIcon from '../../assets/post/shareIcon.png';
-import collectIcon from '../../assets/post/star.png';
-import DownArrow from '../../assets/post/down-arrow.png'
-import '../post-detail-popUp/postDetail-popUp.styles.scss'
+import DownArrow from '../../../assets/post/down-arrow.png'
+import '../community-post-detail-pop-up/community-post-detail-pop-up.styles.scss'
 
-const PostDetailMobile = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,userName,userAvatar}) => {
+const CommunityPostDetailMobile = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,userName,userAvatar}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
-    //   const adjustContainerHeight = () => {
-    //     const container = containerRef.current;
-    //     const image = imageRef.current;
-    
-    //     if (container && image) {
-    //       container.style.height = image.offsetHeight + 'px';
-    //     }
-    //   };
-    //   const handleImageLoad = () => {
-    //     adjustContainerHeight();
-    //   };
-      const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString('en-US');
-        return formattedDate;
-      };
-      const ndate=formatDate(postDate)
-      const handleIconClick = () => {
-        window.location.href = '/download';
-      };
-    
-      
-    
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const formattedDate = date.toLocaleDateString('en-US');
+      return formattedDate;
+    };
+    const ndate=formatDate(postDate)
+    const handleIconClick = () => {
+      window.location.href = '/download';
+    };
     if(!picture&&!tag&&!postDate&&!likeCount&&!collectCount&&!comments&&!commentCount&&!brief)
     {
         return null
     }
-
     function convertUnicode(input) {
       return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
           String.fromCharCode(parseInt(b, 16)));
     }
-    
     return (
         <div className='post-detail-mobile-container'ref={containerRef}>
             <div className='post-detail-mobile-profile-container'>
@@ -102,5 +82,5 @@ const PostDetailMobile = ({picture,brief,tag,postDate,comments,likeCount,collect
     )
 }
 
-export default PostDetailMobile;
+export default CommunityPostDetailMobile;
 

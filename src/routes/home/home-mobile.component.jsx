@@ -1,6 +1,4 @@
 import './home-mobile.styles.scss'
-import DoctorPostGridMobile from '../../components/doctor-post-grid/doctor-post-grid-mobile.component';
-import PostGridMobileFollow from '../../components/doctor-post-grid/postGrid-mobile-follow.component';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import arrow from '../../assets/home/arrow.png'

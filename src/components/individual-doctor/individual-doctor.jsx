@@ -9,15 +9,12 @@ import HomeSpinner from '../home-spinner/home-spinner.component';
 import {useParams} from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import DoctorPostGridV2 from '../doctor-post-grid/doctor-post-grid-V2.component';
+import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../footer/footer.component';
-
 const IndividualDoctor = () => {
-
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-
     const {nickname} = useParams(); // Assuming "nickname" is the parameter in the URL
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
     const {
@@ -46,17 +43,16 @@ const IndividualDoctor = () => {
     const selectTab = (index) => {
         setActiveTab(index);
     }
-
     return (
         <div className='individual-page-container'>
             <div className="individual-doctor-container">
                 <div className="individual-doctor-left-container">
                     {
                         data.pages[0].data && <DoctorProfile
-                                    posts={data.pages[0].data.postNumber}
-                                    follower={data.pages[0].data.followers}
-                                    following={data.pages[0].data.followings}
-                                    doctorStars={data.pages[0].data.doctorStars}/>
+                            posts={data.pages[0].data.postNumber}
+                            follower={data.pages[0].data.followers}
+                            following={data.pages[0].data.followings}
+                            doctorStars={data.pages[0].data.doctorStars}/>
                     }
                 </div>
                 <div className="individual-doctor-right-container">
@@ -79,10 +75,9 @@ const IndividualDoctor = () => {
                         scrollThreshold={0.1}>
                         {activeTab === 0 && <DoctorAbout/>}
                         {
-                            activeTab === 1 && <div className="individual-doctor-posts scale-down">
-                                    {/* <div className='doctor-post-container'> */}
-                                    <DoctorPostGridV2/> {/* </div> */}
-                                </div>
+                            activeTab === 1 && <div className="individual-doctor-posts">
+                                <DoctorPostGrid isAbout={true}/> 
+                            </div>
                         }
                         {
                             activeTab === 2 && data?.pages.map((page, index) => (
@@ -109,10 +104,9 @@ const IndividualDoctor = () => {
 
                 </div>
             </div>
-            {/* <div className='individual-doctor-container'>
-              <Footer/>
-            </div> */}
+            {/* <Footer/> */}
         </div>
+        
     );
 };
 

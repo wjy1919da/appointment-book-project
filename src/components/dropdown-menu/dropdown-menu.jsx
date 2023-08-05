@@ -4,7 +4,6 @@ import './dropdown-menu.scss';
 import { Modal } from 'react-bootstrap';
 import ProcedureMenuDiv from './procedure-menu-div/procedure-menu-div.component';
 import ProcedureMenuSearch from './procedure-menu-search/procedure-menu-search.component';
-import DoctorSearchMultiInput from '../doctor-search-multiInput/doctor-search-multiInput.component';
 const capitalize = (str) => {
     return str.split(' ').map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
 }
