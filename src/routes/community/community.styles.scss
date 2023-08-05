@@ -1,39 +1,50 @@
 
-
-.doctor-post-outer-container{
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    margin-top: 64px;
-    //margin-right:70px;
-    gap: 30px;
-    background-color: #FBFCFF;
+@media (min-width: 992px){
+    .doctor-post-outer-container{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        margin-top: 64px;
+        //margin-right:70px;
+        gap: 30px;
+        background-color: #FBFCFF;
+    }
+    .doctor-post-header-container{
+        width: 100%;
+        height: 80px;
+        /* 白 */
+    
+       background: #FBFCFF;
+        /* 银灰 */
+    
+       border-bottom: 1px solid #E2E3E7;
+       display: flex;
+       flex-direction: row;
+       padding: 20px 40px;
+       gap:32px;
+    }
 }
-.doctor-post-header-container{
-    width: 100%;
-    height: 80px;
-    /* 白 */
-
-   background: #FBFCFF;
-    /* 银灰 */
-
-   border-bottom: 1px solid #E2E3E7;
-   display: flex;
-   flex-direction: row;
-   padding: 20px 40px;
-   gap:32px;
+@media (max-width: 576px){
+    .doctor-post-outer-container{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        background-color: #FBFCFF;
+    }
+    .doctor-post-header-container{
+        width: 100%;
+        height: 80px;
+        background: #FBFCFF;  /* 白 */
+        border-bottom: 1px solid #E2E3E7;  /* 银灰 */
+        display: flex;
+        justify-content: space-between; /* 确保两个元素之间有最大的间隙 */
+        padding: 0 2vh;  /* 上下边距为0, 左右边距为2vh */
+        gap: 3vh;  /* 设置两个元素之间的间隙为3vh */
+    }
 }
-.doctor-post-header-container-mobile {
-    width: 100%;
-    height: 80px;
-    background: #FBFCFF;  /* 白 */
-    border-bottom: 1px solid #E2E3E7;  /* 银灰 */
-    display: flex;
-    justify-content: space-between; /* 确保两个元素之间有最大的间隙 */
-    padding: 0 2vh;  /* 上下边距为0, 左右边距为2vh */
-    gap: 3vh;  /* 设置两个元素之间的间隙为3vh */
-}
+
 .doctor-post-content-container{
     width:100%;
     height: 70%;

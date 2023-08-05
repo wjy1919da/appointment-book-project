@@ -6,7 +6,6 @@ import { useState } from 'react';
 import usePostQueryStore from "../../postStore.ts";
 import React, { useLayoutEffect} from 'react';
 import { useMediaQuery } from 'react-responsive';
-//src/components/components-posts/community-post-dropdown/post-drop-down.component.jsx
 const Community = () => {
     const postQuery = usePostQueryStore(state => state.postQuery);
     const setFilterCondition = usePostQueryStore(state => state.setFilterCondition);
@@ -38,38 +37,21 @@ const Community = () => {
                 updatedFilter.splice(index, 1);
             }
         }
-    
-        setFilterCondition(updatedFilter);
-        
+        setFilterCondition(updatedFilter);  
     };
-    if (isMobile) {
-        return (
-            <div>
-                <div className='doctor-post-outer-container-mobile'>
-                    <div className='doctor-post-header-container-mobile'>
-                        <PostDropDown options={dropdownOptionsByCategory} handleFilters={handleFilters} menuLabel = "Category"/>
-                        <PostDropDown options={dropdownOptionsByRole} handleFilters={handleFilters} menuLabel = "Post By"/>
-                    </div>
-                    <DoctorPostGrid />
+    return (
+        <div>
+            <div className='doctor-post-outer-container'>
+                <div className='doctor-post-header-container'>
+                    <PostDropDown options={dropdownOptionsByCategory} handleFilters={handleFilters} menuLabel = "Category" wordAfterMenuLabel = "All"/>
+                    <PostDropDown options={dropdownOptionsByRole} handleFilters={handleFilters} menuLabel = "Post By" wordAfterMenuLabel = "All"/>
                 </div>
-                <Footer />
+                <DoctorPostGrid />
             </div>
-        )
-    }
-    else {
-        return (
-            <div>
-                <div className='doctor-post-outer-container'>
-                    <div className='doctor-post-header-container'>
-                        <PostDropDown options={dropdownOptionsByCategory} handleFilters={handleFilters} menuLabel = "Category"/>
-                        <PostDropDown options={dropdownOptionsByRole} handleFilters={handleFilters} menuLabel = "Post By" />
-                    </div>
-                    <DoctorPostGrid />
-                </div>
-                <Footer />
-            </div>
-        )
-    }
+            <Footer />
+        </div>
+    )
+    
 }
 
 export default Community;

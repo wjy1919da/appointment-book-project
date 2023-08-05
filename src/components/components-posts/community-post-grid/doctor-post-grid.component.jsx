@@ -45,29 +45,31 @@ const DoctorPostGrid = ({isAbout}) => {
       setUserAvatar(avatar);
       setUserName(username);
   }
+ const postCardList = flatData.map(post => (
+    <div 
+        className='btn' 
+        onClick={() => setPostID(post.id, post.avatar, post.username)}
+        key={post.id}  // Moved key prop to the outermost element being returned from .map()
+    >
+        {isMobile ?
+            <CommunityPostMobile
+                imageURL={post.pictures}
+                text={post.title}
+                profileImage={post.avatar}
+                authorName={post.username}
+                likes={post.likeCount}
+            /> :
+            <CommunityPost
+                imageURL={post.pictures}
+                text={post.title}
+                profileImage={post.avatar}
+                authorName={post.username}
+                likes={post.likeCount}
+            />
+        }
+        </div>
+    ));
 
-  const postCardList = flatData.map(post => (
-      <div className='btn' onClick={() => setPostID(post.id, post.avatar, post.username)}>
-          {isMobile ?
-              <CommunityPostMobile
-                  key={post.id}
-                  imageURL={post.pictures}
-                  text={post.title}
-                  profileImage={post.avatar}
-                  authorName={post.username}
-                  likes={post.likeCount}
-              /> :
-              <CommunityPost
-                  key={post.id}
-                  imageURL={post.pictures}
-                  text={post.title}
-                  profileImage={post.avatar}
-                  authorName={post.username}
-                  likes={post.likeCount}
-              />
-          }
-      </div>
-  ));
 
   return (
       <div className='doctor-post-grid-inner-container'>
