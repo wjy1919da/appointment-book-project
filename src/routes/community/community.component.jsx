@@ -18,15 +18,12 @@ const Community = () => {
         { value: 'by user', label: 'By User' },
         { value: 'by doctor', label: 'By Doctor' },
     ]; 
-    const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-    
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
 
     const handleFilters = (value, isChecked) => {
         const updatedFilter = [...postQuery.filterCondition];
-        
         if (isChecked) {
             if (!updatedFilter.includes(value)) {
                 updatedFilter.push(value);

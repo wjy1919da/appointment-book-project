@@ -2,8 +2,6 @@ import React,{useState,useEffect} from 'react';
 import "./community-post.styles.scss";
 import heartIcon from "../../../assets/post/heart.png"
 import { useMediaQuery } from 'react-responsive';
-//src\assets\doctor\post1.png
-
 const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
     const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
     const [width,setWidth]=useState('');
@@ -17,9 +15,9 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
     return (
         <div className='community-post-container'>
             <div className="post-Image">
-                <img src={imageURL[0]} className="postImage" style={{width:'240px'}}></img>
+                <img src={imageURL[0]} className="postImage"></img>
             </div>
-            <div className="post-information" style={{width:'240px'}}>
+            <div className="post-information" >
                 <span className="post-text">{text}</span>
                 <div className="profile">
                     <div className="profileImage">

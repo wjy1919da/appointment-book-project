@@ -9,10 +9,8 @@ import usePostQueryStore from "../../../postStore.ts";
 import Arrow from '../../../assets/post/arrow_grid.png';
 import Arrow1 from '../../../assets/post/arrow1_grid.png';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import CommunityPostMobile from '../community-post/community-post-mobile.component';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-
 const DoctorPostGrid = ({isAbout}) => {
   const {
       data,
@@ -22,7 +20,6 @@ const DoctorPostGrid = ({isAbout}) => {
       isFetchingNextPage,
       hasNextPage
   } = useGetPost();
-
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
@@ -31,14 +28,11 @@ const DoctorPostGrid = ({isAbout}) => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [gutterwidth, setGutterWidth] = useState('');
   const breakPoint = isAbout ?  { default: 3, 1100: 3, 800:2 }: {default: 5, 1100: 5,1000: 4, 800: 3, 430: 2} ;
-
   useEffect(() => {
       setGutterWidth(isMobile ? '0px' : '25px');
   }, [isMobile]);
-
   if (isLoading) return <HomeSpinner />;
   if (error) return <div className='error'>{error.message}</div>;
-
   const setPostID = (ID, avatar, username) => {
       setIsModelOpen(true);
       setUserID(ID);
@@ -51,24 +45,15 @@ const DoctorPostGrid = ({isAbout}) => {
         onClick={() => setPostID(post.id, post.avatar, post.username)}
         key={post.id}  // Moved key prop to the outermost element being returned from .map()
     >
-        {isMobile ?
-            <CommunityPostMobile
-                imageURL={post.pictures}
-                text={post.title}
-                profileImage={post.avatar}
-                authorName={post.username}
-                likes={post.likeCount}
-            /> :
-            <CommunityPost
-                imageURL={post.pictures}
-                text={post.title}
-                profileImage={post.avatar}
-                authorName={post.username}
-                likes={post.likeCount}
-            />
-        }
-        </div>
-    ));
+        <CommunityPost
+            imageURL={post.pictures}
+            text={post.title}
+            profileImage={post.avatar}
+            authorName={post.username}
+            likes={post.likeCount}
+        />
+    </div>
+  ));
 
 
   return (

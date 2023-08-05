@@ -6,7 +6,6 @@ import "./post-drop-down.styles.scss";
 const PostDropdown = (props) => {
     const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    
     useEffect(() => {
         const handleWindowResize = () => {
             setWindowWidth(window.innerWidth);
