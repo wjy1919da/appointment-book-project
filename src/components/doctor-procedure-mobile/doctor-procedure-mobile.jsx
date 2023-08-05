@@ -9,6 +9,7 @@ import Footer from "../footer/footer.component";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useProcedureQueryStore from "../../procedureStore.ts"
+import HomeButton from "../home-button/home-button.component";
 const formatTitle = (title) => {
     title = title.replace(/_/g, ' ');
     return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); 
@@ -65,14 +66,15 @@ const DoctorProcudreMobile =()=>
             </Dropdown>
 
             <div className='procedure-search-container'>
-            <button 
+            {/* <button 
                 className='doctor-search-button'
                 style={{width:'90%',height:'45px',radius:'8px'}}
                 onClick={handleSearchClick}
             >
                 <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                 Search
-            </button>
+            </button> */}
+            <HomeButton title='Search' onClick={handleSearchClick} isIcon = {SearchIcon} width='100%'/>
             </div>
             <div>
                 <ProcesureInstrumentMobile names={['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening','fox_eyes','laser_hair_removal','Chin-Implants','Facelift','Neck_Contouring','Tummy_Tuck','Otoplasty']} option="procedure"/>

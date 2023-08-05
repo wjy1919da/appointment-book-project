@@ -8,6 +8,7 @@ import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../form-input/form-input.component.jsx';
 import './doctor-search-multiput-dropDown.styles.scss'
+import HomeButton from '../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
 
 const DoctorSearchMultiInput = ({isMobile}) => {
@@ -120,7 +121,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                             </Form>
                         </Dropdown.Menu>
                         </Dropdown>
-                        <button className='doctor-search-button' 
+                        {/* <button className='doctor-search-button' 
                                 style={{
                                     width:'150px',
                                     marginLeft:'-1px'
@@ -129,7 +130,8 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                                 >
                             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             Search
-                        </button>
+                        </button> */}
+                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width='150px'/>
                         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                     </div>
                 </div>
@@ -157,10 +159,11 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                             value={doctorQuery.doctorName || ''}
                             onChange = {(event) => setDoctorName(event.target.value)}
                             label = "Doctor Name"  />
-                        <button className='doctor-search-button' onClick = {handleOnClick}>
+                        {/* <button className='doctor-search-button' onClick = {handleOnClick}>
                             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             search
-                        </button>
+                        </button> */}
+                            <HomeButton title='Search' onClick={handleOnClick} isIcon={SearchIcon} width='150px'height='40px'/>
                     </InputGroup>
                     {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                 </div>

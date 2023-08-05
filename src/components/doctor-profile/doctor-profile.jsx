@@ -13,6 +13,7 @@ import {useSearchMultiConditionsPopUp} from '../../hooks/useSearchDoctors';
 import StarRate from '../starRate/starRate';
 import backIcon from '../../assets/doctor/left_back.png';
 import { useMemo } from 'react';
+import HomeButton from '../home-button/home-button.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
   
@@ -106,7 +107,9 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                 </div>
             </div>
             <div className="consult-follow-button">
-                <ConsultDoctorButton title='Consult Doctor'/>
+                {/* <ConsultDoctorButton title='Consult Doctor'/>
+                <FollowButton title='Follow'/> */}
+                <HomeButton title='Consult Doctor'/>
                 <FollowButton title='Follow'/>
             </div>
             <div className='doctor-profile-back'>
