@@ -2,7 +2,6 @@ import React from "react";
 import { usePostDetail } from "../../../hooks/useGetPosts";
 import Modal from 'react-bootstrap/Modal';
 import PostDetailPopUP from "../community-post-detail-pop-up/community-post-detail-pop-up";
-import PostDetailMobile from "../community-post-detail-mobile/community-post-detail-mobile.component";
 import './community-post-detail.styles.scss'
 import CloseButton from 'react-bootstrap/CloseButton';
 const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
@@ -34,15 +33,15 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
             </div>
         )}
             <Modal
-            dialogClassName='post-detail-mobile-modals'
-            show={show}
-            onHide={onHide}
-            size="sm"
-            aria-labelledby="example-custom-modal-styling-title"
-            style={{marginTop:'30px'}}
+                dialogClassName='post-detail-mobile-modals'
+                show={show}
+                onHide={onHide}
+                size="sm"
+                aria-labelledby="example-custom-modal-styling-title"
+                style={{marginTop:'30px'}}
             >
             <div style={{border:'20px solid white',borderRadius:'50px'}}>
-            {data&&<PostDetailMobile
+            {data&&<PostDetailPopUP
                     picture= {data.data.pictures} 
                     brief={data.data.brief} 
                     tag={data.data.tags?data.data.tags[0].tagName : null}
@@ -60,21 +59,23 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
             </div>
         ):(
         <Modal
-        dialogClassName="post-detail-modals"
-        show={show}
-        onHide={onHide}
-        size='xl'
-        aria-labelledby="example-custom-modal-styling-title"
+            dialogClassName="post-detail-modals"
+            show={show}
+            onHide={onHide}
+            size='xl'
+            aria-labelledby="example-custom-modal-styling-title"
         >
         {data&&<PostDetailPopUP 
-            picture= {data.data.pictures} 
-            brief={data.data.brief} 
-            tag={data.data.tags?data.data.tags[0].tagName : null}
-            postDate={data.data.createTimestamp}
-            commentCount={data.data.commentCount}
-            likeCount={data.data.likeCount}
-            collectCount={data.data.collectCount}
-            comments={data.data.comments}
+             picture= {data.data.pictures} 
+             brief={data.data.brief} 
+             tag={data.data.tags?data.data.tags[0].tagName : null}
+             postDate={data.data.createTimestamp}
+             commentCount={data.data.commentCount}
+             likeCount={data.data.likeCount}
+             collectCount={data.data.collectCount}
+             comments={data.data.comments}
+             userName={postUserName}      
+             userAvatar={postAvatar}          
             
         />}
         

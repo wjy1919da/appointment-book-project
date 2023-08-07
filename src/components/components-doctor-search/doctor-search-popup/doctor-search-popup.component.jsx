@@ -16,7 +16,7 @@ import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.c
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../../form-input/form-input.component';
 import { Button, Dropdown, Form } from 'react-bootstrap';
-import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+import '../doctor-search-multiInput/doctor-search-multiput-dropdown.styles.scss'
 
 import { useMemo } from 'react';
 const mergeDoctorsByNickname = (pages) => {

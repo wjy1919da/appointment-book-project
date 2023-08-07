@@ -17,14 +17,10 @@ const Home = () => {
     const [show, setShow] = useState(false);
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
-
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
-    
-    
     function handleClick() {
         window.open(videoUrl, "_blank");
     }
-
     return (
         <Fragment>
             <div className='home'>

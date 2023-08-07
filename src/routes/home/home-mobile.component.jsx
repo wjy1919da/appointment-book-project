@@ -4,9 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import arrow from '../../assets/home/arrow.png'
 import { useLayoutEffect } from 'react';
 import PostContainerMobile from '../../assets/home/post_container.svg'
-// src/assets/home/post_container.svg
 import Doctor from '../../assets/home/doctor_mobile.svg'
-//src/assets/home/doctor_mobile.svg
 import StarRate from '../../components/starRate/starRate';
 import HomeMobileSubText from './home-mobile-subText.component';
 import HomeDoctors from '../../components/home-doctors/home-doctors.component';
@@ -30,7 +28,6 @@ const HomeMobile = () => {
   const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
   const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
   const isIpad = useMediaQuery({ query: `(min-width: 768px)` });
-
   function handleClick() {
       window.open(videoUrl, "_blank");
   }
@@ -44,8 +41,6 @@ const HomeMobile = () => {
       <img src={require(`../../assets/instrument/${name}.svg`)} className='home-mobile-instrument-pic' alt={name} />
     </div>
   )
-
-
   return (
     <div className='home-mobile-container'>
       <div className='home-mobile-intro-container'>
@@ -64,12 +59,6 @@ const HomeMobile = () => {
         <div className='home-mobile-share-pic-container'>
            <div className='home-mobile-share-pic animate__animated animate__slideInUp'> </div>
            <img src={PostContainerMobile} alt="postcontainer" className='home-mobile-share-postContainer'></img>
-           {/* {isIpad && <img
-                srcset="../../assets/home/post_container.svg 480w, ../../assets/home/post-container-ipad.png 800w"
-                sizes="(max-width: 768px) 480px,
-                      800px"
-                src="../../assets/home/post-container-ipad.png"
-                alt="Post container" />} */}
            <img src={Tag1} className='home-mobile-share-tag1'></img>
            <img src={Tag4} className='home-mobile-share-tag4'></img>
            <img src={Tag2} className='home-mobile-share-tag2'></img>

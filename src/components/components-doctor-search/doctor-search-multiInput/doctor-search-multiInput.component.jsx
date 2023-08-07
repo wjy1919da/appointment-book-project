@@ -4,14 +4,11 @@ import useDoctorQueryStore from '../../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx'
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component.jsx';
 import searchReducer from '../../../reducer/searchReducer.ts';
-import VerticalDivider from './doctor-search-divider.component.jsx'
+import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../../form-input/form-input.component.jsx';
-import './doctor-search-multiput-dropDown.styles.scss'
+import './doctor-search-multiput-dropdown.styles.scss'
 import { Button, Dropdown, Form } from 'react-bootstrap';
-//src/components/form-input/form-input.component.jsx
-// src/store.ts
-///Users/jingyiwang/Documents/charm/charm-life-web-ui/src/components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component.jsx
 
 const DoctorSearchMultiInput = ({isMobile}) => {
     const locationRef = useRef(null);
