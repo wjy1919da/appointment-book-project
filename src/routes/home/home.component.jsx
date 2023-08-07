@@ -4,12 +4,14 @@ import Footer from '../../components/footer/footer.component';
 import arrow from '../../assets/home/arrow.png'
 import { useState } from 'react';
 import './home.styles.scss';
+import HomeMobileSubText from './home-mobile-subText.component';
 import HomePost from '../../components/home-post/home-post.component';
 import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.component';
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 import Modal from 'react-bootstrap/Modal';
 import videoUrl from '../../assets/home/App-Demo-V10.mp4';
+import { useMediaQuery } from 'react-responsive';
 const Home = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -17,6 +19,7 @@ const Home = () => {
     const [show, setShow] = useState(false);
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
+    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     function handleClick() {
         window.open(videoUrl, "_blank");
@@ -24,8 +27,12 @@ const Home = () => {
     return (
         <Fragment>
             <div className='home'>
-                <div className='home-pic animate__animated animate__slideInDown'></div>
+             <div className='home-mobile-intro-container'>
+                <div className='home-mobile-intro-pic-container'>
+                    <div className='home-pic animate__animated animate__slideInDown'></div>
+                </div>
                 <div className='home-title-container'>
+                       {/* Web */}
                     <div className='home-title-text'>
                         Charm Community 
                         <br/>
@@ -39,7 +46,6 @@ const Home = () => {
                         </p>
                     </div>
                     <div className='home-title-buttons'>
-                   
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         <HomeButton title = "Start Charm life" href = '/download'/>
                         <button type="button" onClick={handleShow} className='button home-title-button2'>
@@ -52,8 +58,16 @@ const Home = () => {
                             <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
                         </div>
                         </Modal>
-                        
                     </div>
+                    {/* Mobile */}
+                    {isMobile&&<Fragment>
+                        <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>
+                        <button type="button" onClick={handleShow} className='home-mobile-intro-button'>
+                            <img src={arrow} alt="Button" className="home-mobile-intro-button-image"></img>
+                            <span className="home-mobile-intro-button-text">Watch Video</span>
+                        </button>
+                    </Fragment>}
+                </div>
                 </div>
             </div>
             <HomePost/>

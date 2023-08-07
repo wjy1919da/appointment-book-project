@@ -28,7 +28,8 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={<Header />}>
-        <Route index element={isMobile ? <HomeMobile /> : <Home />} />
+        {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
+        <Route index element={<Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />

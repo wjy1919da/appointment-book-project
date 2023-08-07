@@ -1,3 +1,4 @@
+@media (min-width: 992px) {
 .home {
     width: 100%;
     height: 800px;
@@ -6,7 +7,7 @@
     justify-content: space-between;
     position: relative;
     margin-top: 64px;
-    @media (min-width: 992px) {
+    
         .home-pic {
             position: absolute;
             width: 654px;
@@ -136,168 +137,28 @@
                 width: 100%;
                 height: 450px;
             }
-        }
-        .home-mobile-app-container{
-            display: none;
-        }
+        } 
     }
-// mobile 
-    @media (max-width: 768px) {
-        .home-title-container {
-            width: 1440px;
-            height: 800px;
-            left: 10px;
-            top: 64px;
-            text-align: left;
-            object-fit: cover;
-            .home-title-text
-            {
-                text-align: left;
-                display: flex-column;
-                position:absolute;
-                left: 40px;
-                top:160px;
-                margin-top: 70px;
-                
-                .home-title-text1
-                {
-                    
-                    font-family: 'Playfair Display';
-                    font-style: normal;
-                    font-weight: 700;
-                    width: 643px;
-                    height: 97px;
-                    font-size: 72px;
-                    line-height: 135%;
-                    color: #000000;
-                    flex: none;
-                    order: 0;
-                    flex-grow: 0;
-                
-                }
-                .home-title-text2
-                {
-                    font-family: 'Playfair Display';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 72px;
-                    line-height: 135%;
-                    color: #000000;
-                    width: 703px;
-                    height: 97px;
-                    flex: none;
-                    order: 1;
-                    flex-grow: 0;
-                    
-                }
-            }
-            .home-title-subText
-            {
-                position: absolute;
-                width: 560px;
-                height: 116px;
-                left: 48px;
-                top: 402px;
-                margin-top: 70px;
-                
-                .ptext{
-                    font-family: 'Lora';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 18px;
-                    line-height: 160%;
-                    color: #000000;
-                }
-            }
-            .home-title-button
-            {
-                position: absolute;     
-                flex: none;
-                order: 3;
-                flex-grow: 0;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                padding: 8px 20px;
-                gap: 12px;
-                left: 48px;
-                top: 620px;
-                width: 100%;
-                
-            .home-title-button1
-            {
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 22px;
-                line-height: 140%;
-                align-items: center;
-                text-align: center;
-                color: #FFFFFF;
-                width: 238px;
-                height: 56px;
-                background:#352C29;
-                border-radius: 8px;
-
-            }
-            .home-title-button2
-            {
-                width: 200px;
-                height: 56px;
-                background-color: white;
-                border-radius: 8px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 22px;
-                line-height: 140%;
-                color: #352C29;
-            }
-            }
-
-
-        }
-
-        .home-title {
-            font-size: 43px;
-            font-weight: 600;
-            color: #333333;
-            line-height: 50px;
-            margin: 122px auto 0;
-            text-align: center;
-        }
-
-        .home-divider {
-            width: 10%;
-            height: 6px;
-            background: #3397B9;
-            opacity: 1;
-            border-color: #3397B9;
-            border-radius: 3px;
-            margin: 15px auto 60px;
-        }
-
-        .video-container {
-            width: 80%;
-            margin: 80px auto 0;
-    
-            .video {
-                width: 100%;
-                height: 450px;
-            }
-        }
+     // Mobile
+    .home-mobile-app-container{
+        display: none;
     }
-    .pText{
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 160%;
-        color: #000000;
+    .home-mobile-intro-container{
+        display: block;
+    }
+    .home-mobile-intro-pic-container{
+        display: block;
+    }
+    .home-mobile-intro-button{
+        display: none;
+        .home-mobile-intro-button-image{
+           display: none;
+        }
+        .home-mobile-intro-button-text{
+           display: none;
+        }
     }
 }
-
 
 @media (max-width: 576px){
     .home{
@@ -306,29 +167,72 @@
         flex-direction: column;
         background-color: white;
     }
+    .home-mobile-intro-container{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .home-mobile-intro-pic-container{
+        width: 50%;
+        flex: 0;
+        display: flex; 
+        order: 1;  // 新增
+    }
+    .home-pic{
+        width: 280px;
+        height: 340px;
+        object-fit: cover;
+        background: url('../../assets/home/5.svg');
+    }
     .home-title-container{
-        .home-title-text {
-            position:absolute;
-            left: 40px;
-            top: 160px;
+        width: 50%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding:20px;
+        gap: 10px;
+    }
+    .home-title-text{
+        display: none;
+    }
+    .home-title-subText{
+        display: none;
+    }
+     //Todo: delete this when the button component is done
+    .home-title-buttons{
+        display: none;
+    }
+    .home-mobile-intro-button{
+        width: 190px;
+        height: 50px;
+        background-color: white;
+        border-radius: 8px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 140%;
+        margin: 6px 10px 0 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px 0 5px 35px;
+        border: 2px solid #352C29;
+        .home-mobile-intro-button-image{
+            width: 15px; 
+            height: 15px;
+            margin-top: 2px;
+            border-radius: 0;
         }
-        .home-title-text .main-title::after {
-            content: "Charm";
+        .home-mobile-intro-button-text{
+            position: relative;
+            left: 5px;
         }
     }
-    .Home-post{
-        display: none;
-    }
-    .home{
-        display: none;
-    }
-    .Home-doctor-page{
-        display: none ;
-    }
-    .home-section-container{
-        display: none;
-    }
-    .home-doctors-container{
-        display: none;
-    } 
+
+    
+
+   
 }
