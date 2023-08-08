@@ -32,41 +32,36 @@ const Home = () => {
                     <div className='home-pic animate__animated animate__slideInDown'></div>
                 </div>
                 <div className='home-title-container'>
-                       {/* Web */}
-                    <div className='home-title-text'>
-                        Charm Community 
-                        <br/>
-                        For All Beauty Lovers
-                    </div>
-                    <div className ='home-title-subText'>
-                        <p className='ptext'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                            laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
+                    {/* Web */}
+                    {!isMobile&& <Fragment>
+                            <div className='home-title-text'>
+                                Charm Community 
+                                <br/>
+                                For All Beauty Lovers
+                            </div>
+                            <div className ='home-title-subText'>
+                                <p className='ptext'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                    </Fragment>}
+                    {isMobile&& <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>}
                     <div className='home-title-buttons'>
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
-                        <HomeButton title = "Start Charm life" href = '/download'/>
+                        {!isMobile&&<HomeButton title = "Start Charm life" href = '/download'/>}
                         <button type="button" onClick={handleShow} className='button home-title-button2'>
                             <img src={arrow} alt="Button" className="button-image"></img>
-                            <span className="button-text">Video</span>
+                            {!isMobile&&<span className="button-text">Video</span>}
+                            {isMobile&&<span className="button-text">Watch Video</span>}
                         </button>
-                        
-                        <Modal show={show} onHide={handleClose} size='xl' >
+                        {!isMobile&&<Modal show={show} onHide={handleClose} size='xl' >
                         <div className="home-buttom-modal-container" style={{position:'absolute',top: '100px',width:'100%'}}>
                             <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
                         </div>
-                        </Modal>
+                        </Modal>}
                     </div>
-                    {/* Mobile */}
-                    {isMobile&&<Fragment>
-                        <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>
-                        <button type="button" onClick={handleShow} className='home-mobile-intro-button'>
-                            <img src={arrow} alt="Button" className="home-mobile-intro-button-image"></img>
-                            <span className="home-mobile-intro-button-text">Watch Video</span>
-                        </button>
-                    </Fragment>}
                 </div>
                 </div>
             </div>
