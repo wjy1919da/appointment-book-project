@@ -1,15 +1,13 @@
 @media (min-width: 992px) {
     .home-doctors-container {
-        
         margin-top: -350px;
         height: 2200px;
         top: 2514px;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 222px 463px; /* 上下 padding 222px，左右 padding 463px */
+        padding: 222px 463px; 
     }
-    
     .home-doctors-background{
         margin-top: -80px;
         transform: scale(0.8);
@@ -17,37 +15,30 @@
         width: 1280px;
         height: 1200px;
         padding: 102px 383px; 
-        .home-doctor-video
-        {
+        .home-doctor-video{
             align-items: center;
             justify-content: center;
             position: absolute;
             right:6%;
             left:6%;
             top:40px;
-            
             border-radius:5px;
-            
-
         }
         .home-doctor-apple-section {
-             width: 514px;
-             height: 90px;
+            width: 514px;
+            height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-left: -4vh;
-            padding: 50px; /* 上下左右各添加 50px 的 padding */
-            box-sizing: border-box; /* 确保 padding 被包含在元素的总宽度和高度内 */
-            position: relative; /* 添加相对定位 */
+            padding: 50px; 
+            box-sizing: border-box; 
+            position: relative; 
         }
         .home-doctor-apple-screen {
             display: flex;
-            // margin-left: -200px;
             align-items: center;
-            // width: 414px;
             height: 896px;
-            /* 白 */
             background: #FBFCFF;
         }
         .phone-screen {
@@ -60,7 +51,6 @@
             position: absolute;
             top: 0;
             left: 0;
-            // height:1050px;
             z-index: 2;
             pointer-events: none;
             width:110vh;       
@@ -76,6 +66,77 @@
     .home-doctors-button{
         margin-top: 40px;
     }
+     // For the mobile version
+     .home-mobile-app-background{
+        display: none;
+    }
+    .home-mobile-app-phone{
+        display: none;
+        .home-mobile-app-phone-screen{
+            display: none;
+        }
+    }
     
+}
+@media(max-width:992px){
+    .home-doctors-container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 50px;
+        padding: 10px 0;
+    }
+    // For the mobile version
+    .home-mobile-app-background{
+        z-index: 0;
+        width: 60vw;
+        height: 60vw;
+        object-fit: cover;
+        margin: auto;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        background: url('../../assets/home/ring.svg');
+        background-size: cover;
+    }
+    .home-mobile-app-phone{
+        z-index: 1;
+        position: relative; 
+        width: 147px;
+        height: 286px;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        background: url('../../assets/home/iphone.svg');
+        .home-mobile-app-phone-screen{
+            z-index: 2;
+            position: relative; 
+            width: 120px;
+            height: 257px;
+            object-fit: cover;
+            border-radius: 20px;
+            background: url('../../assets/home/iphoneScreen.svg');
+
+        }
+    }
+    .home-mobile-app-button-container{
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+    .home-mobile-app-text{
+        display: flex;
+        width: 357px;
+        height: 77px;
+        flex-direction: column;
+        flex-shrink: 0;
+        color: #000;
+        text-align: center;
+        font-family: Lora;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+    }
 }
 

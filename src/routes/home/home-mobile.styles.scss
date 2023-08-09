@@ -92,30 +92,30 @@
         background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
         border-radius: 0px 1000px 1000px 0px;
     }
-    .home-mobile-share-postContainer{
-        position: absolute;
-        top: 400px;
-        left: 0;
-        z-index: 1;
-    }
-    .home-mobile-share-tag1{
-        position: absolute;
-        z-index: 1;
-        top: 395px;
-        left: 8px;
-    }
-    .home-mobile-share-tag4{
-        position: absolute;
-        z-index: 2;
-        top: 505px;
-        left: 87px;
-    }
-    .home-mobile-share-tag2{
-        position: absolute;
-        z-index: 1;
-        top: 650px;
-        left: 17px;
-    }
+    // .home-mobile-share-postContainer{
+    //     position: absolute;
+    //     top: 400px;
+    //     left: 0;
+    //     z-index: 1;
+    // }
+    // .home-mobile-share-tag1{
+    //     position: absolute;
+    //     z-index: 1;
+    //     top: 395px;
+    //     left: 8px;
+    // }
+    // .home-mobile-share-tag4{
+    //     position: absolute;
+    //     z-index: 2;
+    //     top: 505px;
+    //     left: 87px;
+    // }
+    // .home-mobile-share-tag2{
+    //     position: absolute;
+    //     z-index: 1;
+    //     top: 650px;
+    //     left: 17px;
+    // }
     .home-mobile-share-content-container{
         flex: 0;
         display: flex; 
@@ -225,46 +225,44 @@
         background-size: cover;
     }
     
-    .home-mobile-app-phone{
-        z-index: 1;
-        position: relative; //新增
-        width: 147px;
-        height: 286px;
-        display: flex; //新增
-        justify-content: center; //新增
-        align-items: center; //新增
-        background: url('../../assets/home/iphone.svg');
-        .home-mobile-app-phone-screen{
-            z-index: 2;
-            position: relative; 
-            width: 120px;
-            height: 257px;
-            object-fit: cover;
-            border-radius: 20px;
-            background: url('../../assets/home/iphoneScreen.svg');
+    // .home-mobile-app-phone{
+    //     z-index: 1;
+    //     position: relative; 
+    //     width: 147px;
+    //     height: 286px;
+    //     display: flex; 
+    //     justify-content: center; 
+    //     align-items: center; 
+    //     background: url('../../assets/home/iphone.svg');
+    //     .home-mobile-app-phone-screen{
+    //         z-index: 2;
+    //         position: relative; 
+    //         width: wq`120px;
+    //         height: 257px;
+    //         object-fit: cover;
+    //         border-radius: 20px;
+    //         background: url('../../assets/home/iphoneScreen.svg');
 
-        }
-    }
-    .home-mobile-app-button-container{
-        margin-top: 30px;
-        margin-bottom: 15px;
-    }
-    .home-mobile-app-text{
-        display: flex;
-        width: 357px;
-        height: 77px;
-        flex-direction: column;
-        flex-shrink: 0;
-        color: #000;
-        text-align: center;
-
-        /* Body 3 */
-        font-family: Lora;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%;
-    }
+    //     }
+    // }
+    // .home-mobile-app-button-container{
+    //     margin-top: 30px;
+    //     margin-bottom: 15px;
+    // }
+    // .home-mobile-app-text{
+    //     display: flex;
+    //     width: 357px;
+    //     height: 77px;
+    //     flex-direction: column;
+    //     flex-shrink: 0;
+    //     color: #000;
+    //     text-align: center;
+    //     font-family: Lora;
+    //     font-size: 16px;
+    //     font-style: normal;
+    //     font-weight: 500;
+    //     line-height: 160%;
+    // }
     .home-mobile-procedure-container{
         display: flex;
         flex-direction: column;
@@ -284,8 +282,6 @@
         flex-direction: column;
         flex-shrink: 0;
         color: #000;
-    
-        /* Heading 4 */
         font-family: Playfair Display;
         font-size: 24px;
         font-style: normal;
@@ -358,13 +354,9 @@
     }
     
     .home-mobile-instrument-pic{
-        //border-radius: 100%; // 圆角
         width: 85px;
-        //height: 70px;  
         margin: 0 auto;
-    }
-
-       
+    }       
 }
 @media(min-width: 768px){
     .home-mobile-container{

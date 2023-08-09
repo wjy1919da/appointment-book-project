@@ -16,10 +16,10 @@ const HomePost = () => {
     return (
         <div className="Home-post">
             <div className='home-mobile-share-pic-container'>
-                <div className='home-post-pic animate__animated animate__slideInUp'>
-                        {!isMobile&&<img src={PostContainer} alt="postcontainer" className='post-pic'></img>}
-                        {isMobile&&<img src={PostContainerMobile} alt="postcontainermobile" className='home-mobile-share-postContainer'></img>}
-                        <div className="p-topic">
+                    {!isMobile&&<Fragment>
+                        <div className='home-post-pic animate__animated animate__slideInUp'>
+                            <img src={PostContainer} alt="postcontainer" className='post-pic'></img>
+                            <div className="p-topic">
                                 <img src={Decoration} className="decoration-pic1" alt=''></img>
                                 <img src={Decoration} className="decoration-pic2" alt=''></img>
                                 <span className="post-topic"style={{marginTop:"130px",marginLeft:"180px"}}>#Occaecat</span>
@@ -27,13 +27,17 @@ const HomePost = () => {
                                 <span className="post-topic"style={{marginTop:"330px",marginLeft:"130px"}}>#lorem </span>
                                 <span className="post-topic"style={{marginTop:"600px",marginLeft:"650px"}}>#Eiusmod </span>
                                 <span className="post-topic"style={{marginTop:"680px",marginLeft:"550px"}}>#Excepteur</span>  
+                            </div>
                         </div>
-                        {isMobile&&<Fragment>
-                                <img src={Tag1} className='home-mobile-share-tag1'></img>
-                                <img src={Tag4} className='home-mobile-share-tag4'></img>
-                                <img src={Tag2} className='home-mobile-share-tag2'></img>
-                        </Fragment>}      
-                </div>
+                    </Fragment>}                
+                {isMobile&&<Fragment>
+                    <div className='home-post-pic animate__animated animate__slideInUp'></div>
+                    <img src={PostContainerMobile} alt="postcontainermobile" className='home-mobile-share-postContainer'></img>
+                    <img src={Tag1} className='home-mobile-share-tag1'></img>
+                    <img src={Tag4} className='home-mobile-share-tag4'></img>
+                    <img src={Tag2} className='home-mobile-share-tag2'></img>
+                </Fragment>}      
+                
             </div>
             <div className='home-post-container'>
                 {/* Web */}

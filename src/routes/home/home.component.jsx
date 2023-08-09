@@ -69,7 +69,7 @@ const Home = () => {
             <HomeDoctorPage/>
             <HomeDoctors />
             <HomeInstruments />
-            <Footer />
+            <Footer /> 
         </Fragment>
     )
 }
