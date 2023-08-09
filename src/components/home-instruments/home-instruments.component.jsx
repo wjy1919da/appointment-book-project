@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import InstrumentGrid from '../instrument-grid/instrument-grid.component';
 import './home-instruments.styles.scss';
 import HomeSection5Titles from './home-section5-titles/home-section5-titles.component';
 import { useMediaQuery } from 'react-responsive';
@@ -44,7 +43,7 @@ const HomeInstruments = () => {
             <div className = 'home-instrument-container'>
                 {!isMobile&&<HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />}
                 {isMobile&&<HomeSection5Titles heading="Instruments" link="View All" />}
-                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px'}} columns={{ base: 5, md: 7, lg: 8 }} spacing={2}>
+                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px'}} columns={{ base: 5, md: 7, lg: 7 }} spacing={5}>
                         {proceduresGrid}
                 </SimpleGrid>
             </div>
