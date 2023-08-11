@@ -16,11 +16,8 @@ import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import { useMediaQuery } from 'react-responsive';
-
-
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-
   return (
     <Routes>
       <Route path='/' element={<Header />}>
