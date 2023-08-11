@@ -41,10 +41,8 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
-    //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
     //   Save: old navbar    
-
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
