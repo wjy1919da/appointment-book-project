@@ -4,6 +4,7 @@
     height: 800px;
     background:white;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     position: relative;
     margin-top: 64px;
@@ -151,7 +152,14 @@
     .home-footer-container{
         width: 100vw;
         position: absolute;
-        top: 4800px;
+        top: 360vw;
+    }
+}
+@media(min-width: 1300px){
+    .home-footer-container{
+        width: 100vw;
+        position: absolute;
+        top: 310vw;
     }
 }
 /* Styles for tablets like iPads here */

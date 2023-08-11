@@ -1,8 +1,9 @@
+
+
 @media(min-width: 1024px){
     .home-section-container{
-        /* Home 1.2 Section 5 */
         position: absolute;
-        top: 4000px;
+        top: 300vw;
         transform: scale(0.9);
         //margin-top: -350px;
         box-sizing: border-box;
@@ -29,7 +30,7 @@
         order: 1;
         align-self: stretch;
         flex-grow: 0;
-        margin: 0 auto;
+        margin-bottom: 20px;
     }
 
     .home-instrument{
@@ -79,6 +80,24 @@
         height: 160px;
         width: 160px; 
         margin: 0 auto;
+    }
+}
+@media(min-width: 1300px){
+    .home-section-container{
+        position: absolute;
+        top: 260vw;
+        //transform: scale(0.9);
+        //margin-top: -350px;
+        box-sizing: border-box;
+        /* Auto layout */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 0px;
+        // gap: 80px;
+        width: 100%;
+        height: 870px;
+        border-top: 1px solid #E2E3E7;
     }
 }
 @media (min-width: 576px) and (max-width: 1024px){
