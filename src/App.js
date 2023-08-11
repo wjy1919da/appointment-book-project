@@ -14,11 +14,7 @@ import DoctorPost from  './routes/community/community.component';
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
-
-
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
-
-import HomeMobile from './routes/home/home-mobile.component';
 import { useMediaQuery } from 'react-responsive';
 
 
