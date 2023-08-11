@@ -8,7 +8,7 @@ import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../../form-input/form-input.component.jsx';
 import './doctor-search-multiput-dropDown.styles.scss'
-import HomeButton from '../home-button/home-button.component.jsx';
+import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
 
 const DoctorSearchMultiInput = ({isMobile}) => {

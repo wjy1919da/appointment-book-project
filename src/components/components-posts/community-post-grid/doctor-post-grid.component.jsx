@@ -11,8 +11,7 @@ import Arrow1 from '../../../assets/post/arrow1_grid.png';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import HomeButton from '../home-button/home-button.component';
-const DoctorPostGrid = () => {
+const DoctorPostGrid = ({isAbout}) => {
   const {
       data,
       error,
@@ -91,14 +90,13 @@ const DoctorPostGrid = () => {
               <div className='download-text'>
                   Join Charm community to view more
               </div>
-              {/* <Link to='/download'>
+              <Link to='/download'>
                   <button className='download-button'>
                       <div className='download-button-text'>
                           DownLoad APP
                       </div>
                   </button>
-              </Link> */}
-              <HomeButton title = "Download APP" href = '/download'/>
+              </Link>
           </div>
       </div>
   );

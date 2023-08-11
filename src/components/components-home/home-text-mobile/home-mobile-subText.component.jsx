@@ -1,5 +1,4 @@
 import './home-mobile-subText.styles.scss'
-
 const HomeMobileSubText = ({title,content}) => {
   return (
     <div>
