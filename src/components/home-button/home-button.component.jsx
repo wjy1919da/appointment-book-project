@@ -13,7 +13,20 @@ const HomeButton = (props) => {
             props.onClick();
         }
     }
-    return <button className='home-button' onClick={handleClick}>{props.title}</button>;
+    const hasIcon = props.isIcon;
+    const buttonStyle = {
+        width: props.width || 'auto',
+        height:props.height
+         // if width is not provided, it defaults to 'auto'
+        // Other styles can be added here
+      };
+    
+    return (
+        <button className='home-button' onClick={handleClick} style={buttonStyle}>
+            {props.isIcon&&<img src={props.isIcon} className='HomeButton-icon' alt='search'/>}
+            {props.title}
+        </button>
+    );
 };
 
 export default HomeButton;
