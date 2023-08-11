@@ -4,7 +4,7 @@ import HomeSection5Titles from './home-section5-titles/home-section5-titles.comp
 import { useMediaQuery } from 'react-responsive';
 import { Box, SimpleGrid, Image } from '@chakra-ui/react';
 const HomeInstruments = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const procedures_names_mobile = ['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening']
     const procedures_names = ['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening','fox_eyes','laser_hair_removal']
     const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
@@ -26,7 +26,7 @@ const HomeInstruments = () => {
                 className='home-instrument-pic' 
             />
         </Box>
-    );
+    )
     return (
         <div className = 'home-section-container'>
             {/* procedure */}

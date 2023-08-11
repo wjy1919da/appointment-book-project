@@ -11,9 +11,9 @@
         order: 0;
         align-self: stretch;
         flex-grow: 0;
-    
+        margin-bottom: 20px;
         width: 100vw;
-        margin: 0 auto;
+        
     }
     .home-section5-title-heading3{
         /* Popular Cosmetic Procedures */
@@ -55,6 +55,7 @@
         flex-direction: row;
         justify-content: space-between;
         padding:0px 20px;
+        margin-bottom: 20px;
     }
     .home-section5-title-heading3{
         display: flex;
