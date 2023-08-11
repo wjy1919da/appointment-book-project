@@ -77,7 +77,9 @@ const Home = () => {
             <HomeDoctorPage/>
             <HomeDoctors />
             <HomeInstruments />
-            {/* <Footer  />  */}
+            <div className='home-footer-container'>
+                <Footer/> 
+            </div>
         </Fragment>
     )
 }

@@ -148,6 +148,11 @@
     .home-mobile-intro-pic-container{
         display: block;
     }
+    .home-footer-container{
+        width: 100vw;
+        position: absolute;
+        top: 4800px;
+    }
 }
 /* Styles for tablets like iPads here */
 @media (min-width: 576px) and (max-width: 1024px) {
@@ -279,6 +284,11 @@
             border-radius: 0;
         }
       } 
+    }
+    .home-footer-container{
+        width: 100vw;
+        position: absolute;
+        top: 3250px;
     }
     
 

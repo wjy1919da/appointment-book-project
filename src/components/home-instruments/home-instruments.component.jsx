@@ -34,7 +34,7 @@ const HomeInstruments = () => {
                 {!isMobile&& <HomeSection5Titles heading="Popular Cosmetic Procedures" link = "View All Procedures"/>}
                 {isMobile&& <HomeSection5Titles heading="Procedures" link = "View All"/>}
                 <div>
-                    <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px'}} columns={ 4 } spacing={8}>
+                    <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px',marginBottom:'10px'}} columns={ 4 } spacing={8}>
                         {instrumentsGrid}
                     </SimpleGrid>
                 </div>
