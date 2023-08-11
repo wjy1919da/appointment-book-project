@@ -1,14 +1,11 @@
-import PostContainer from '../../assets/home/post-container.png';
-import Decoration from '../../assets/home/decoration-post.png';
-import vector from '../../assets/home/Vector.png'
-import PostContainerMobile from '../../assets/home/post_container.svg'
-import Tag1 from '../../assets/home/tag1.svg'
-import Tag2 from '../../assets/home/tag2.svg'
-import Tag4 from '../../assets/home/tag4.svg' 
+import Decoration from '../../../assets/home/decoration-post.png';
+import vector from '../../../assets/home/Vector.png'
+import PostContainerMobile from '../../../assets/home/post_container.svg'
+import Tag1 from '../../../assets/home/tag1.svg'
+import Tag2 from '../../../assets/home/tag2.svg'
+import Tag4 from '../../../assets/home/tag4.svg' 
 import { Link } from 'react-router-dom';
-import HomeText from '../home-text/home-text.component';
-import HomePic from '../../assets/home/home-pic1.png'
-import HomeMobileSubText from '../../routes/home/home-mobile-subText.component';
+import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
 import './home-post.styles.scss';
 import HomeLink from '../home-link/home-link.component';
 import { useMediaQuery } from 'react-responsive';

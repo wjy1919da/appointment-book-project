@@ -12,7 +12,7 @@ const HomeInstruments = () => {
     const proceduresGrid = proceduresToRender.map((name) => 
         <Box as="div" className='home-procedure' key={name}>
             <Image 
-                src={require(`../../assets/procedure/${name}.svg`)} 
+                src={require(`../../../assets/procedure/${name}.svg`)} 
                 alt={name} 
                 className='home-procedure-pic' 
             />
@@ -21,7 +21,7 @@ const HomeInstruments = () => {
     const instrumentsGrid = instruments_names.map((name) => 
         <Box as="div" className='home-instrument' key={name}>
             <Image 
-                src={require(`../../assets/instrument/${name}.svg`)} 
+                src={require(`../../../assets/instrument/${name}.svg`)} 
                 alt={name} 
                 className='home-instrument-pic' 
             />

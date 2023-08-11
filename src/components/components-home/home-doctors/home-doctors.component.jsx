@@ -1,10 +1,9 @@
-import backgroundImage from '../../assets/home/ring.svg'
-import  PhoneImage from '../../assets/home/iphone.svg'
-import PhoneScreen from '../../assets/home/iphoneScreen.svg'
+import backgroundImage from '../../../assets/home/ring.svg'
+import  PhoneImage from '../../../assets/home/iphone.svg'
 import HomeText from '../home-text/home-text.component';
-import HomeButton from '../home-button/home-button.component';
+import HomeButton from '../../home-button/home-button.component';
 import './home-doctors.styles.scss'
-import videoURL from '../../assets/home/vertical-video.mp4';
+import videoURL from '../../../assets/home/vertical-video.mp4';
 import React, { useRef, useEffect, Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 const HomeDoctors = () => {

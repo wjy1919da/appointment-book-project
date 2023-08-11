@@ -1,10 +1,9 @@
-import DoctorImg from '../../assets/home/doctor_mobile.svg';
-import vector from '../../assets/home/Vector.png';
+import DoctorImg from '../../../assets/home/doctor_mobile.svg';
+import vector from '../../../assets/home/Vector.png';
 import './home-doctor-page.styles.scss'
-import HomeText from '../home-text/home-text.component';
 import HomeLink from '../home-link/home-link.component';
-import StarRate from '../starRate/starRate';
-import HomeMobileSubText from '../../routes/home/home-mobile-subText.component';
+import StarRate from '../../starRate/starRate';
+import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
 

@@ -1,13 +1,12 @@
-import HomeDoctors from '../../components/home-doctors/home-doctors.component';
-import HomeInstruments from '../../components/home-instruments/home-instruments.component';
+import HomeDoctors from '../../components/components-home/home-doctors/home-doctors.component';
+import HomeInstruments from '../../components/components-home/home-instruments/home-instruments.component';
 import Footer from '../../components/footer/footer.component';
 import arrow from '../../assets/home/arrow.png'
-import HomeText from '../../components/home-text/home-text.component';
 import { useState } from 'react';
 import './home.styles.scss';
-import HomeMobileSubText from './home-mobile-subText.component';
-import HomePost from '../../components/home-post/home-post.component';
-import HomeDoctorPage from '../../components/home-doctor-page/home-doctor-page.component';
+import HomeMobileSubText from '../../components/components-home/home-text-mobile/home-mobile-subText.component';
+import HomePost from '../../components/components-home/home-post/home-post.component';
+import HomeDoctorPage from '../../components/components-home/home-doctor-page/home-doctor-page.component';
 import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 import Modal from 'react-bootstrap/Modal';
