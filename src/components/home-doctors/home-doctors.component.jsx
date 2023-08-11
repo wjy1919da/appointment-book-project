@@ -9,7 +9,7 @@ import React, { useRef, useEffect, Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 const HomeDoctors = () => {
     const videoRef = useRef(null);
-    const isMobile = useMediaQuery({ query: `(max-width: 992px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     useEffect(() => {
       const videoElement = videoRef.current;
@@ -47,7 +47,7 @@ const HomeDoctors = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className='home-doctors-text'>
+            <div className='home-doctors-text'>
                     <HomeText 
                         title="Community" 
                         content={`Our app is a welcoming community of beauty lovers like you.
@@ -56,7 +56,7 @@ const HomeDoctors = () => {
                     <div className='home-doctors-button'>
                         <HomeButton title="Download App" href = "/download"/>
                     </div>
-            </div> */}
+            </div>
           </Fragment>
         }
           {isMobile&&<Fragment>

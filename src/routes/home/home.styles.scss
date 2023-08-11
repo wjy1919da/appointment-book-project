@@ -1,4 +1,4 @@
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
 .home {
     width: 100%;
     height: 800px;
@@ -7,14 +7,13 @@
     justify-content: space-between;
     position: relative;
     margin-top: 64px;
-    
         .home-pic {
             position: absolute;
             width: 654px;
             height: 800px;
             right: 0;
             top: 0;
-            background: url('../../assets/home/home-pic1.png');
+            //background: url('../../assets/home/home-pic1.png');
             border-radius: 0px 0px 0px 1000px;
         }
         .home-title-container {
@@ -149,17 +148,142 @@
     .home-mobile-intro-pic-container{
         display: block;
     }
-    // .home-mobile-intro-button{
-    //     display: none;
-    //     .home-mobile-intro-button-image{
-    //        display: none;
-    //     }
-    //     .home-mobile-intro-button-text{
-    //        display: none;
-    //     }
-    // }
 }
+/* Styles for tablets like iPads here */
+@media (min-width: 576px) and (max-width: 1024px) {
+    .home{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        position: relative;
+        top: 64px;
+    }
+    .home-mobile-intro-container{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        height: 500px;
+    }
+    .home-mobile-intro-pic-container{
+        width: 50%;
+        flex: 0;
+        display: flex; 
+        order: 1;  // 新增
+    }
+    .home-pic{
+        position: absolute;
+        width: 412px;
+        height: 503.976px;
+        right: 0;
+        top: 0;
+        //background: url('../../assets/home/home-pic1.png');
+        border-radius: 0px 0px 0px 1000px;
+        
+    }
+    .home-title-container{
+        width: 30vh;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding:20px;
+        gap: 10px;
+    }
+    .home-title-text{
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        position:absolute;
+        left: 40px;
+        top: 60px;
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 135%;
+        color: #000000;
+        flex: none;
+        flex-grow: 0;
+    }
+    .home-title-subText{
+        position: absolute;
+        width: 40vh;
+        height: 116px;
+        left: 48px;
+        top: 250px;
+        .ptext{
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 160%;
+            color: #000000;
+        }
+    }
+    .home-title-buttons
+    {
+        margin-top: 20px;
+        position: absolute;     
+        flex: none;
+        order: 3;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        gap: 48px;
+        left: 0px;
+        top: 500px;
+        padding: 8px 40px;
 
+    .home-title-button1
+    {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 140%;
+        color: #FFFFFF;
+        width: 238px;
+        height: 56px;
+        background: #352C29;
+        border-radius: 8px;
+
+    }
+    .home-title-button2
+    {
+        width: 150px;
+        height: 56px;
+        background-color: white;
+        border-radius: 8px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 140%;
+        margin-right: 10px;
+        border: 2px solid #352C29;
+
+        .button-text {
+            position: relative;
+            bottom: 25px;
+            left: 15px;
+        }
+        .button-image {
+            width: 20px; /* Adjust the width and height as needed */
+            height: 20px;
+            margin-top: 15px;
+            margin-left: 20px;
+            border-radius: 0;
+        }
+      } 
+    }
+    
+
+}
+/* Styles for tablets like iPhone here */
 @media (max-width: 576px){
     .home{
         width: 100%;
@@ -171,8 +295,8 @@
         width: 100%;
         display: flex;
         flex-direction: row;
+        
     }
-    
     .home-mobile-intro-pic-container{
         width: 50%;
         flex: 0;
@@ -180,10 +304,19 @@
         order: 1;  // 新增
     }
     .home-pic{
-        width: 280px;
+        // width: 280px;
+        // height: 340px;
+        // object-fit: cover;
+        // background-size: contain;
+        //background: url('../../assets/home/5.svg');
+        position: absolute;
+        //width: 300px;
         height: 340px;
-        object-fit: cover;
-        background: url('../../assets/home/5.svg');
+        right: 0px;
+        top: 60px;
+        //background: url('../../assets/home/home-pic1.png');
+        border-radius: 0px 0px 0px 1000px;
+
     }
     .home-title-container{
         width: 50%;
@@ -232,8 +365,5 @@
             border-radius: 0;
         }
     } 
-
-    
-
    
 }

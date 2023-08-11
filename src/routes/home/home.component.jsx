@@ -2,6 +2,7 @@ import HomeDoctors from '../../components/home-doctors/home-doctors.component';
 import HomeInstruments from '../../components/home-instruments/home-instruments.component';
 import Footer from '../../components/footer/footer.component';
 import arrow from '../../assets/home/arrow.png'
+import HomeText from '../../components/home-text/home-text.component';
 import { useState } from 'react';
 import './home.styles.scss';
 import HomeMobileSubText from './home-mobile-subText.component';
@@ -11,6 +12,9 @@ import { Fragment, useLayoutEffect } from 'react';
 import HomeButton from '../../components/home-button/home-button.component';
 import Modal from 'react-bootstrap/Modal';
 import videoUrl from '../../assets/home/App-Demo-V10.mp4';
+import HomePic from '../../assets/home/home-pic1.png';
+import HomePicIpad from '../../assets/home/5-ipad.png';
+import HomePicMobile from '../../assets/home/5.svg';
 import { useMediaQuery } from 'react-responsive';
 const Home = () => {
     useLayoutEffect(() => {
@@ -20,6 +24,8 @@ const Home = () => {
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
     const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1024px)` });
+    const isMobileOrIpad = isMobile || isIpad;
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     function handleClick() {
         window.open(videoUrl, "_blank");
@@ -29,7 +35,9 @@ const Home = () => {
             <div className='home'>
              <div className='home-mobile-intro-container'>
                 <div className='home-mobile-intro-pic-container'>
-                    <div className='home-pic animate__animated animate__slideInDown'></div>
+                    {!isMobileOrIpad&&<img src={HomePic} className='home-pic animate__animated animate__slideInDown'></img>}
+                    {isIpad&&<img src={HomePicIpad} className='home-pic animate__animated animate__slideInDown'></img>}
+                    {isMobile&&<img src={HomePicMobile} className='home-pic animate__animated animate__slideInDown'></img>}
                 </div>
                 <div className='home-title-container'>
                     {/* Web */}
@@ -49,7 +57,7 @@ const Home = () => {
                     </Fragment>}
                     {isMobile&& <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>}
                     <div className='home-title-buttons'>
-                        {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
+                       {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         {!isMobile&&<HomeButton title = "Start Charm life" href = '/download'/>}
                         <button type="button" onClick={handleShow} className='button home-title-button2'>
                             <img src={arrow} alt="Button" className="button-image"></img>
@@ -69,7 +77,7 @@ const Home = () => {
             <HomeDoctorPage/>
             <HomeDoctors />
             <HomeInstruments />
-            <Footer /> 
+            {/* <Footer  />  */}
         </Fragment>
     )
 }

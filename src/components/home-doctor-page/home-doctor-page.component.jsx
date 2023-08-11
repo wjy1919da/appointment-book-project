@@ -1,6 +1,7 @@
 import DoctorImg from '../../assets/home/doctor_mobile.svg';
 import vector from '../../assets/home/Vector.png';
 import './home-doctor-page.styles.scss'
+import HomeText from '../home-text/home-text.component';
 import HomeLink from '../home-link/home-link.component';
 import StarRate from '../starRate/starRate';
 import HomeMobileSubText from '../../routes/home/home-mobile-subText.component';
@@ -11,6 +12,8 @@ import { Fragment } from 'react';
 
 const HomeDoctorPage = () => {
     const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1024px)` });
+    const isMobileOrIpad = isMobile || isIpad;
     return(
         <div className='Home-doctor-page'>
             {isMobile&&<Fragment>
@@ -35,7 +38,7 @@ const HomeDoctorPage = () => {
                </div>
              </div>}
             <div className='home-doctor-page-container'>  
-                {!isMobile&&<Fragment>
+                {!isMobileOrIpad&&<Fragment>
                      <div className='home-doctor-page-text'>
                         <span className='home-doctor-page-text1'>Consult A Doctor</span>
                      </div>
@@ -52,7 +55,7 @@ const HomeDoctorPage = () => {
                         </div>
                     </div>
                 </Fragment>}
-                {isMobile&&<Fragment>
+                {isMobileOrIpad&&<Fragment>
                     <HomeMobileSubText title='Consult' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>
                     <div style={{marginTop: '10px'}}>
                         <Link to='/doctor' className='home-mobile-share-link'>View More Doctors</Link>
