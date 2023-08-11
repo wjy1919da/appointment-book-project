@@ -2,10 +2,9 @@ import React from 'react';
 import "./comment-card.styles.scss";
 import HeartIcon from '../../assets/post/heart.png';
 import commentIcon from '../../assets/post/chat_bubble.png';
-import '../post-detail-popUp/postDetail-popUp.styles.scss'
+import '../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss'
 
 const CommentCard = ({avatar,name,date,commentText}) => {
-    
     if(!avatar&&!name&&!date&&!commentText)
     {
         return null

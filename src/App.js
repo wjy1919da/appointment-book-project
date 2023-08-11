@@ -10,25 +10,19 @@ import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
-import DoctorPost from './components/doctor-post/doctor-post.component';
+import DoctorPost from  './routes/community/community.component';
 import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
-
-
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
-
-import HomeMobile from './routes/home/home-mobile.component';
 import { useMediaQuery } from 'react-responsive';
-
-
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-
   return (
     <Routes>
       <Route path='/' element={<Header />}>
-        <Route index element={isMobile ? <HomeMobile /> : <Home />} />
+        {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
+        <Route index element={<Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />

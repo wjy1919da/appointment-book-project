@@ -1,10 +1,6 @@
 import { Fragment } from "react";
-
 import HomeProcedureCard from "./home-procedure-card/home-procedure-card.component";
-
 import './home-procedure.styles.scss';
-// feature grid 需要改, container 和 procedure 外层的一样
-// container 能否 抽离出来？？？
 const HomeProcedure = () => {
     return (
         <Fragment>

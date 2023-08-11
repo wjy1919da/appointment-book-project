@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import './doctor-procesure-mobile-styles.scss';
-import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+import '../components-doctor-search/doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
+//src/components/components-doctors-search/doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss
 import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import ProcesureInstrumentMobile from "../procedure-mobile-instrument/procedure-mobile-instrument";
 import ProcedureSearchMenuMobile from "../procedure-search-menu-mobile/procedure-search-menu-mobile";
@@ -17,15 +18,12 @@ const formatTitle = (title) => {
 const DoctorProcudreMobile =()=>
 {
     const [IsModalOpen,setIsModelOpen] = useState(false);
-    
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
     const location = useLocation();
     const navigate = useNavigate();
-
     useEffect(() => {
-        // 每当路由发生变化时，这个回调函数会被调用
-        setCategories(''); // 重置categories为''
+        setCategories('');
     }, [location.pathname, setCategories]); 
 
     const handleOnClick = () => {

@@ -1,0 +1,104 @@
+@media(min-width: 1024px){
+    .home-section5-titles-container{
+    
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        gap: 30vw;
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+       // margin-bottom: 20px;
+        width: 100vw;
+        
+    }
+    .home-section5-title-heading3{
+        /* Popular Cosmetic Procedures */
+     
+         //width: 549px;;
+         width: 50vw;
+         height: 54px;
+     
+         /* Heading 3 */
+     
+         font-family: 'Playfair Display';
+         font-style: normal;
+         font-weight: 700;
+         font-size: 40px;
+         line-height: 135%;
+         /* identical to box height, or 54px */
+     
+         display: flex;
+         align-items: center;
+     
+         color: #000000;
+     
+     
+        
+         flex: none;
+         order: 0;
+         flex-grow: 0;
+     }   
+     .home-mobile-procedure-grid{
+        display: block;
+    } 
+    .home-mobile-procedure-link{
+        display: block;
+    }
+}
+@media(max-width: 1024px){
+    .home-section5-titles-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding:0px 20px;
+        margin-bottom: 20px;
+    }
+    .home-section5-title-heading3{
+        display: flex;
+        width: 50vw;
+        height: 27px;
+        flex-direction: column;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Playfair Display;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 135%;
+        justify-content: center;
+    }
+    // For the mobile version
+    .home-mobile-procedure-grid{
+        display: flex;
+        margin: auto;
+    
+        flex-direction: row;
+        justify-content: space-around; 
+        padding: 0px 20px;
+        grid-gap: 6px;
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;  
+    }
+    .home-mobile-procedure-link{
+        display: flex;
+        width: 30vw;
+        height: 27px;
+        flex-direction: column;
+        flex-shrink: 0;
+        color: #000;
+        text-align: right;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        text-decoration-line: underline;
+        margin-top: 10px;
+    }
+}

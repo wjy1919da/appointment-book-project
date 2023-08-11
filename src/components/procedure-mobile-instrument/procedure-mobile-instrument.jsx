@@ -4,8 +4,6 @@ import './procesure-mobile-instrument.styles.scss';
 const formatTitle = (title) => {
     return title.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
-
-// 接收instrument 和 procedure 两种option
 const ProcesureInstrumentMobile = (props) => {
     var option = props.option;
     const instrumentsGrid = props.names.map((name) => 

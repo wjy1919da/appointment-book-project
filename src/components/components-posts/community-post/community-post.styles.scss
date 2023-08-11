@@ -1,0 +1,121 @@
+   .community-post-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 0px 5px;
+        gap: 10px;
+        
+        width: 100%;
+        
+        /* 白 */
+        
+        background: #FBFCFF;
+        /* Strong Shadow */
+        
+        box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1), 0px 8px 16px rgba(32, 32, 33, 0.1), 0px 16px 40px rgba(32, 32, 33, 0.2);
+        border-radius: 10px;
+    }
+    .postImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* This will ensure that the image covers the entire parent div */
+        object-position: center; /* This will center the image in the div */
+        border-radius: 10px 10px 0 0;
+    }
+    .post-information{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        
+        width: 100%;
+        height: 50px;
+        
+        
+        /* Inside auto layout */
+        
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+    
+    .post-text{
+        width: 100%;
+        
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 100%;
+        /* or 23px */
+        
+        display: flex;
+        justify-content: center;
+        color: #000000;
+        /* Inside auto layout */
+        
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .profile{
+        display: flex;
+        justify-content: space-between;
+        height: 15px;
+        margin-top: 8px;
+        gap:20%;
+        width:100%;
+        padding: 0px 10px;
+    }
+    .profileImage{
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+        height: 15px;
+        align-items: center;
+        flex:none;
+        order:1;
+        width:50%;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .profile-pic{
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        object-fit: cover;
+    }
+    .gray-text{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 100%;
+        flex-direction: row;
+        /* identical to box height, or 16px */
+        width:70%;
+        display: flex;
+        align-items: center;
+        color: #A5A6A8;
+    }
+    
+    .likeNumber
+    {
+        position: relative;
+        flex:none;
+        order:1;
+        flex-grow:0;
+        margin-top: 5px;
+        display: flex;
+        gap:5px;
+        .heartIcon
+        {
+            width: 12px;
+            border-radius: 0;
+        }
+    }
+
+
+
+

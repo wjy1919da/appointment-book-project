@@ -1,6 +1,6 @@
 import React,{ useRef} from 'react';
 import "./post-detail-mobile-styles.scss";
-import CommentCard from '../comment-card/comment-card';
+import CommentCard from '../../comment-card/comment-card';
 import heartIcon from '../../assets/post/heart.png';
 import commentIcon from '../../assets/post/chat_bubble.png';
 import shareIcon from '../../assets/post/shareIcon.png';

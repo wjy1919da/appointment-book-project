@@ -1,5 +1,5 @@
 import SubProcedureMobileExtraImage from '../../assets/procedure/sub-procedure-mobile-extra-pic.png';
-import HomeLink from '../home-link/home-link.component';
+import HomeLink from '../components-home/home-link/home-link.component';
 import './sub-procedure-mobile-extra-bottom.styles.scss';
 
 const SubProcedureMobileExtraBottom = () => {

@@ -1,0 +1,154 @@
+
+
+@media(min-width: 1024px){
+    .home-section-container{
+        position: absolute;
+        top: 300vw;
+        transform: scale(0.9);
+        //margin-top: -350px;
+        box-sizing: border-box;
+        /* Auto layout */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 0px;
+        // gap: 80px;
+        width: 100%;
+        height: 870px;
+        border-top: 1px solid #E2E3E7;
+    }
+    
+    .home-instrument-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 40px;
+        width: 100%;
+        height: 291px;
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+        margin-bottom: 20px;
+    }
+
+    .home-instrument{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 8px;
+    
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .home-instrument-pic{
+         //border-radius: 100%; // 圆角
+         height: 160px;
+         align-self: stretch;
+         margin: 0 auto;
+    }
+    .home-instrument-grid{
+        display: flex;
+        margin: auto;
+        flex-direction: row;
+        justify-content: space-around; 
+        
+        grid-gap: 40px;
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+    }
+    .home-procedure{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 8px;
+    
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .home-procedure-pic{
+        border-radius: 100%; // 圆角
+        // width: 70px;
+        // height: 70px; 
+        height: 160px;
+        width: 160px; 
+        margin: 0 auto;
+    }
+}
+@media(min-width: 1300px){
+    .home-section-container{
+        position: absolute;
+        top: 260vw;
+        //transform: scale(0.9);
+        //margin-top: -350px;
+        box-sizing: border-box;
+        /* Auto layout */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 0px;
+        // gap: 80px;
+        width: 100%;
+        height: 870px;
+        border-top: 1px solid #E2E3E7;
+    }
+}
+@media (min-width: 576px) and (max-width: 1024px){
+    .home-section-container{
+        /* Home 1.2 Section 5 */
+        //transform: scale(0.9);
+        position: absolute;
+        top: 2950px;
+        box-sizing: border-box;
+        /* Auto layout */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //padding: 80px 0 139px;
+        //gap: 80px;
+        width: 100%;
+        //height: 870px;
+       // border-top: 1px solid #E2E3E7;
+    }
+    .home-instrument-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .home-instrument-pic{
+        width: 75px;
+        margin: 0 auto;
+    }
+    .home-procedure-pic{
+        border-radius: 100%; // 圆角
+        width: 70px;
+        height: 70px;  
+        margin: 0 auto;
+    }
+}
+@media(max-width:576px){
+    .home-instrument-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .home-instrument-pic{
+        width: 75px;
+        margin: 0 auto;
+    }
+    .home-procedure-pic{
+        border-radius: 100%; // 圆角
+        width: 70px;
+        height: 70px;  
+        margin: 0 auto;
+    }
+}
