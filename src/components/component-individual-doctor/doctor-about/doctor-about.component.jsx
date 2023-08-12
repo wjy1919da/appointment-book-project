@@ -1,9 +1,9 @@
 import './doctor-about.styles.scss';
-import DoctorAboutSection from '../doctor-about-section/doctor-about-section.component';
-import { useGetDoctorAbout } from '../../hooks/useGetIndividualDoctor';
-import highlightYear from '../../assets/doctor/highlight-year.png';
-import highlightVerified from '../../assets/doctor/highlight-verified.png';
-import highlightAppointment from '../../assets/doctor/highlight-appointment.png';
+import DoctorAboutSection from '../../doctor-about-section/doctor-about-section.component';
+import { useGetDoctorAbout } from '../../../hooks/useGetIndividualDoctor';
+import highlightYear from '../../../assets/doctor/highlight-year.png';
+import highlightVerified from '../../../assets/doctor/highlight-verified.png';
+import highlightAppointment from '../../../assets/doctor/highlight-appointment.png';
 
 const DoctorAbout = () => {
     const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();

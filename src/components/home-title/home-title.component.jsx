@@ -10,7 +10,7 @@ const HomeTitle = ({title,isMobile}) => {
                 {title}
             </div>
         ):(
-            <div className='home-title-computer'>
+            <div className='home-title-website'>
                 {title}
             </div>
         )}

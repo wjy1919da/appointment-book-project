@@ -131,7 +131,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             Search
                         </button> */}
-                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width='150px'/>
+                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width='150px' height='40px'/>
                         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                     </div>
                 </div>
