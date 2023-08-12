@@ -11,7 +11,7 @@ import { Fragment } from 'react';
 
 const HomeDoctorPage = () => {
     const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
-    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1024px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1200px)` });
     const isMobileOrIpad = isMobile || isIpad;
     return(
         <div className='Home-doctor-page'>
