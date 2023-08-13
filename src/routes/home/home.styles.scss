@@ -186,8 +186,8 @@
         }
         .home-pic{
             position: absolute;
-            width: 412px;
-            height: 503.976px;
+            width: 45vw;
+            height: auto;
             right: 0;
             top: 0;
             //background: url('../../assets/home/home-pic1.png');
@@ -209,7 +209,7 @@
             flex-direction: column;
             position:absolute;
             left: 40px;
-            top: 60px;
+            top: 30px;
             font-family: 'Playfair Display';
             font-style: normal;
             font-weight: 700;
@@ -224,7 +224,7 @@
             width: 48vw;
             height: 116px;
             left: 48px;
-            top: 250px;
+            top: 190px;
             .ptext{
                 font-family: 'Lora';
                 font-style: normal;
@@ -248,7 +248,7 @@
             text-align: center;
             gap: 48px;
             left: 0px;
-            top: 450px;
+            top: 390px;
             padding: 8px 40px;
     
         .home-title-button1

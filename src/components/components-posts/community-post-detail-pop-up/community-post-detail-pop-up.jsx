@@ -5,12 +5,16 @@ import heartIcon from '../../../assets/post/heart.png';
 import commentIcon from '../../../assets/post/chat_bubble.png';
 import DownArrow from '../../../assets/post/down-arrow.png'
 import collectIcon from '../../../assets/post/star.png';
+import { useEffect, useState} from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,userName,userAvatar}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
-    const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
+    //const [forceRerender, setForceRerender] = useState(false);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
+    
     const adjustContainerHeight = () => {
       const container = containerRef.current;
       const image = imageRef.current;
@@ -18,6 +22,8 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
         container.style.height = image.offsetHeight + 'px';
       }
     };
+    
+      
     const handleImageLoad = () => {
       adjustContainerHeight();
     };
