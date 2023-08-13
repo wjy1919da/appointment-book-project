@@ -1,11 +1,11 @@
 import React from 'react';
 import "./doctor-review-card.styles.scss";
-import verifiedIcon from '../../assets/doctor/verified-Icon.png'
-import StarRate from '../starRate/starRate';
+import verifiedIcon from '../../../assets/doctor/verified-Icon.png'
+import StarRate from '../../starRate/starRate';
 import { reverseEasing } from 'framer-motion';
 
 
-const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
+const DoctorReview = ({profileImage,name,starRate,reviewText,date}) => {
     let starRateTimeTen = starRate * 10;
     if(!profileImage&&!name&&!starRate&&!reviewText&&!date)
     {
@@ -44,4 +44,4 @@ const DoctorReviewCard = ({profileImage,name,starRate,reviewText,date}) => {
     )
 }
 
-export default DoctorReviewCard;
+export default DoctorReview;

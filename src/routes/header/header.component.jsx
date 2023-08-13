@@ -41,7 +41,7 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     //   Save: old navbar    
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);

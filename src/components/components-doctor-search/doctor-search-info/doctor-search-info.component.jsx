@@ -16,6 +16,7 @@ const IntroDoctor = ({isMobile}) => {
         'Doctors provide exclusive discounts and coupons on our app, making high-quality healthcare more affordable.'
     ];
     
+    
     return (
         <div>
             {isMobile?(

@@ -1,0 +1,88 @@
+.doctor-search-outer-continer-mobile
+{
+    width:100%;
+    left:0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .doctor-intro-container-mobile
+    {
+        
+        position: relative;
+        margin-top: 500px;
+        width:100%;
+        
+        
+    }
+    .doctor-feature-doctor-container-mobile
+    {
+        position: relative;
+    }
+    .doctor-post-part-mobile
+    {
+        position: relative;
+        margin-top: 100px;
+        text-align: center;
+        .doctor-post-title-mobile
+        {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 135%;
+            
+        
+            color: #000000;
+        }
+    }
+    .doctor-post-grid-container-mobile
+    {
+        position: relative;
+        margin-left: 30px;
+    }
+    
+    .doctor-search-hearder-container-mobile
+    {
+        position: absolute;
+        width:100%;
+        order:0;
+        top:76px;
+        height:500px;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        .doctor-search-header-title-and-bar
+        {
+            position: relative;
+            order:0;
+        }
+        .doctor-search-header-pic-container-mobile
+        {
+            
+            right:0%;
+            order:1;
+            height: 350px;
+            margin-top: 40px;
+            width:100%;
+            background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+            border-radius: 1000px 0px 0px 1000px;
+            align-items: center;
+            display: flex;
+            position: relative;
+             // added this to hide parts of the image that overflow the container 
+            .doctor-search-header-pic-mobile
+            {
+                max-width: 100%; // changed from width to max-width
+                height: 420px;
+                position: relative;
+                margin-top: -6%;
+                z-index: 2; 
+                border: none;
+                border-radius: 1000px 0px 0px 1000px;
+                object-fit: cover;
+            }
+            
+        }
+
+    }
+}

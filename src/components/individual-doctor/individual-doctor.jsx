@@ -1,9 +1,9 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import "./individual-doctor.styles.scss";
-import DoctorProfile from '../doctor-profile/doctor-profile';
-import DoctorAbout from '../doctor-about/doctor-about.component';
-import DoctorReviewCard from '../doctor-review-card/doctor-review-card';
-import DoctorProfileImage from '../../assets/doctor/profile2.png'
+import DoctorProfile from '../component-individual-doctor/doctor-profile/doctor-profile';
+import DoctorAbout from '../component-individual-doctor/doctor-about/doctor-about.component';
+import DoctorReview from '../component-individual-doctor/doctor-review-card/doctor-review-card';
+// import DoctorProfileImage from '../../assets/doctor/profile2.png'
 import {useGetDoctorReviews} from '../../hooks/useGetIndividualDoctor';
 import HomeSpinner from '../home-spinner/home-spinner.component';
 import {useParams} from 'react-router-dom';
@@ -88,7 +88,7 @@ const IndividualDoctor = () => {
                                                     .evaRespPage
                                                     .records
                                                     .map((review, index) => (
-                                                        <DoctorReviewCard
+                                                        <DoctorReview
                                                             key={index}
                                                             profileImage={review.img}
                                                             name={review.nickname}

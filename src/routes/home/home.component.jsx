@@ -22,8 +22,8 @@ const Home = () => {
     const [show, setShow] = useState(false);
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
-    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1024px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1024px)` });
     const isMobileOrIpad = isMobile || isIpad;
     function handleClick() {
         window.open(videoUrl, "_blank");

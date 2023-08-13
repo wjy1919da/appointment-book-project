@@ -2,18 +2,18 @@ import React from 'react';
 import "./doctor-profile.styles.scss";
 import { Link, useParams,useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import DoctorProfileImage from '../../assets/doctor/doctor-profile-image.png'
-import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
-import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
-import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
-import ConsultDoctorButton from '../consult-doctor-button/consult-doctor-button.component';
-import FollowButton from '../follow-button/follow-button.component';
-import useDoctorQueryStore from '../../store.ts';
-import {useSearchMultiConditionsPopUp} from '../../hooks/useSearchDoctors';
-import StarRate from '../starRate/starRate';
-import backIcon from '../../assets/doctor/left_back.png';
+import DoctorProfileImage from '../../../assets/doctor/doctor-profile-image.png'
+import locationIcon from '../../../assets/doctor/search-card-locationIcon.png'
+import glassIcon from '../../../assets/doctor/search-card-glassIcon.png'
+import badgeIcon from '../../../assets/doctor/search-card-badgeIcon.png'
+import ConsultDoctorButton from '../../consult-doctor-button/consult-doctor-button.component';
+import FollowButton from '../../follow-button/follow-button.component';
+import useDoctorQueryStore from '../../../store.ts';
+import {useSearchMultiConditionsPopUp} from '../../../hooks/useSearchDoctors';
+import StarRate from '../../starRate/starRate';
+import backIcon from '../../../assets/doctor/left_back.png';
 import { useMemo } from 'react';
-import HomeButton from '../home-button/home-button.component';
+import HomeButton from '../../home-button/home-button.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
   
