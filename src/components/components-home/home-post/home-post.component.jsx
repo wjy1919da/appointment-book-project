@@ -11,8 +11,8 @@ import HomeLink from '../home-link/home-link.component';
 import { useMediaQuery } from 'react-responsive';
 import { Fragment } from 'react';
 const HomePost = () => {
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
-    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1024px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1023px)` });
     const isMobileOrIpad = isMobile || isIpad;
     return (
         <div className="Home-post">

@@ -154,6 +154,7 @@
             position: absolute;
             top: 360vw;
         }
+       
     }
     @media(min-width: 1300px){
         .home-footer-container{
@@ -163,7 +164,7 @@
         }
     }
     /* Styles for tablets like iPads here */
-    @media (min-width: 576px) and (max-width: 1024px) {
+    @media (min-width: 768px) and (max-width: 1024px) {
         .home{
             width: 100%;
             display: flex;
@@ -200,7 +201,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding:20px;
+            padding: 20px 0px 0px 45px;
             gap: 10px;
         }
         .home-title-text{
@@ -236,7 +237,7 @@
         }
         .home-title-buttons
         {
-            margin-top: 20px;
+            margin-top: 30px;
             position: absolute;     
             flex: none;
             order: 3;
@@ -298,11 +299,10 @@
             position: absolute;
             top: 3250px;
         }
-        
     
     }
     /* Styles for tablets like iPhone here */
-    @media (max-width: 576px){
+    @media (max-width: 767px){
         .home{
             width: 100%;
             display: flex;

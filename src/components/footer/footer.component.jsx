@@ -10,7 +10,7 @@ import './footer.styles.scss';
 
 const Footer = () => {
     //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     return (
         <div>
         {isMobile?(

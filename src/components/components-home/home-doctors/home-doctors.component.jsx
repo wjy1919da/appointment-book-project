@@ -8,7 +8,7 @@ import React, { useRef, useEffect, Fragment } from 'react';
 import { useMediaQuery } from 'react-responsive';
 const HomeDoctors = () => {
     const videoRef = useRef(null);
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     useEffect(() => {
       const videoElement = videoRef.current;

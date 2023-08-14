@@ -53,7 +53,7 @@ const Home = () => {
                                 </p>
                             </div>
                     </Fragment>}
-                    {isMobileOrIpad&& <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>}
+                    {isMobileOrIpad&& <div className='home-mobile-text-container'><HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText></div>}
                     <div className='home-title-buttons'>
                        {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         {!isMobile&&<HomeButton title = "Start Charm life" href = '/download'/>}
