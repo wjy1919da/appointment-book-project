@@ -32,15 +32,16 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
 
             </div>
         )}
+        <div class="modal-parent-container">
             <Modal
                 dialogClassName='post-detail-mobile-modals'
                 show={show}
                 onHide={onHide}
-                size="sm"
+                size='xl'
                 aria-labelledby="example-custom-modal-styling-title"
-                style={{marginTop:'30px'}}
+                style={{marginTop:'50px'}}
             >
-            <div style={{border:'20px solid white',borderRadius:'50px'}}>
+            <div style={{border:'10px solid white',borderRadius:'50px'}}>
             {data&&<PostDetailPopUP
                     picture= {data.data.pictures} 
                     brief={data.data.brief} 
@@ -56,6 +57,7 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
             }
             </div>
             </Modal>
+            </div>
             </div>
         ):(
         <Modal

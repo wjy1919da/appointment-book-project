@@ -22,3 +22,24 @@
     color:white;
 }
 }
+.modal-dialog {
+    max-width: 100%; /* Allows the child element to define the width */
+    width: auto;
+    margin: 0.5rem auto; /* Vertical margin kept, horizontal set to auto for centering */
+}
+@media (min-width: 576px) {
+    .modal-content {
+        width: 80%;  
+        margin-left: auto;
+        margin-right: auto;
+        /* maintaining the same width */
+    }
+}
+@media (max-width: 576px) {
+    .modal-content {
+        width: 80%;  
+        margin-left: auto;
+        margin-right:auto;
+        /* maintaining the same width */
+    }
+}
