@@ -1,18 +1,21 @@
 .individual-doctor-container {
     display: flex;
     flex-direction: row;
+    padding: 10vw 0vw 0vw 4vw;
+    gap: 8vw;
+    box-sizing: border-box;
     .individual-doctor-left-container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
         padding: 0 0 64px;
-
-        position: absolute;
-        width: 320px;
+        //position: absolute;
+        position: relative;
+        width: 30vw;
         height: 920px;
-        left: 80px;
-        top: 104px;
+        //left: 80px;
+        //top: 104px;
     }
     .individual-doctor-right-container {
         display: flex;
@@ -21,11 +24,12 @@
         padding: 0;
         gap: 40px;
 
-        position: absolute;
-        width: 800px;
-        height: 920px;
-        right: 80px;
-        top: 104px;
+        //position: absolute;
+        position: relative;
+        width: 50vw;
+        //height: 920px;
+        //right: 80px;
+        //top: 104px;
 
         .individual-doctor-tabs {
             display: flex;
@@ -96,7 +100,7 @@
             position: relative;
             top: -30px;
             left: -30px;
-            width: 900px;
+            width: 55vw;
         }
 
     }
@@ -106,6 +110,7 @@
 }
 .individual-page-container {
     display: flex;
+    width: 100%;
     flex-direction: column;
     min-height: 150vh;
     /* This allows the footer to be sticked at the bottom if there's not enough content */

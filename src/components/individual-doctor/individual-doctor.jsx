@@ -48,7 +48,8 @@ const IndividualDoctor = () => {
             <div className="individual-doctor-container">
                 <div className="individual-doctor-left-container">
                     {
-                        data.pages[0].data && <DoctorProfile
+                        data.pages[0].data && 
+                          <DoctorProfile
                             posts={data.pages[0].data.postNumber}
                             follower={data.pages[0].data.followers}
                             following={data.pages[0].data.followings}
@@ -104,7 +105,7 @@ const IndividualDoctor = () => {
 
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
         
     );

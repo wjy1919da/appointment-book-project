@@ -1,30 +1,34 @@
 @media (min-width: 1024px) {
     .home {
         width: 100%;
-        height: 800px;
-        background:white;
+        background: white;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
+        margin-bottom: 150px;
         margin-top: 64px;
     }
-    .home-mobile-intro-container{
+    
+    .home-mobile-intro-container {
         width: 100%;
         display: flex;
         flex-direction: row;
     }
     
-    .home-mobile-app-container{
+    .home-mobile-app-container {
         display: none;
     }
-    .home-mobile-intro-pic-container{
+    
+    .home-mobile-intro-pic-container {
         width: 40%;
     }
+    
     .home-pic {
-        flex:1;
+        width: 100%;      /* Set width to 100% */
+        height: auto;     /* Set height to auto */
         border-radius: 0px 0px 0px 1000px;
-    }
+    }    
     .home-title-container {
         display: flex;
         flex: 1;
@@ -150,18 +154,18 @@
 
     .home-footer-container{
         width: 100vw;
-        position: absolute;
-        top: 360vw;
+        position: relative;
+       // top: 360vw;
     }
        
 }
-@media(min-width: 1300px){
-    .home-footer-container{
-        width: 100vw;
-        position: absolute;
-        top: 310vw;
-    }
-}
+// @media(min-width: 1300px){
+//     .home-footer-container{
+//         width: 100vw;
+//         position: absolute;
+//         top: 310vw;
+//     }
+// }
 /* Styles for tablets like iPads here */
 @media (min-width: 768px) and (max-width: 1023px) {
     .home{
@@ -295,8 +299,9 @@
     }
     .home-footer-container{
         width: 100vw;
-        position: absolute;
-        top: 3250px;
+        position: relative;
+        margin-top: 30px;
+       // top: 360vw;
     }
 
 }
