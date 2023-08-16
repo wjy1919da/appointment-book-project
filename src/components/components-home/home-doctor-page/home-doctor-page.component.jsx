@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
 const HomeDoctorPage = () => {
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
-    const isIpad = useMediaQuery({ query: `(min-width: 576px) and (max-width: 1200px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1023px)` });
     const isMobileOrIpad = isMobile || isIpad;
     return(
         <div className='Home-doctor-page'>

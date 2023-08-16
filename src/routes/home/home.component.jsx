@@ -23,7 +23,7 @@ const Home = () => {
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1024px)` });
+    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1023px)` });
     const isMobileOrIpad = isMobile || isIpad;
     function handleClick() {
         window.open(videoUrl, "_blank");
@@ -53,7 +53,7 @@ const Home = () => {
                                 </p>
                             </div>
                     </Fragment>}
-                    {isMobileOrIpad&& <HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>}
+                    {isMobileOrIpad&& <div className='home-mobile-text-container'><HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText></div>}
                     <div className='home-title-buttons'>
                        {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
                         {!isMobile&&<HomeButton title = "Start Charm life" href = '/download'/>}

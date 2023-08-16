@@ -45,7 +45,7 @@ const HomeInstruments = () => {
             <div className = 'home-instrument-container'>
                 {!isMobile&&<HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />}
                 {isMobile&&<HomeSection5Titles heading="Instruments" link="View All" />}
-                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'95vw'}} columns={{ base: 5, lg: 7}} spacing={5}>
+                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'95vw'}} columns={{ base: 5, md:5, lg: 7}} spacing={5}>
                         {proceduresGrid}
                 </SimpleGrid>
             </div>

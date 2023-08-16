@@ -1,6 +1,6 @@
 
 
-@media(min-width: 1201px){
+@media(min-width: 1200px){
     .home-section-container{
         position: absolute;
         top: 300vw;
@@ -82,7 +82,7 @@
         margin: 0 auto;
     }
 }
-@media (min-width: 1024px) and (max-width: 1200px){
+@media (min-width: 1024px) and (max-width: 1119px){
     .home-section-container{
         /* Home 1.2 Section 5 */
         //transform: scale(0.9);
@@ -134,7 +134,7 @@
         border-top: 1px solid #E2E3E7;
     }
 }
-@media (min-width: 576px) and (max-width: 1023px){
+@media (min-width: 768px) and (max-width: 1023px){
     .home-section-container{
         /* Home 1.2 Section 5 */
         //transform: scale(0.9);
@@ -168,7 +168,7 @@
         margin: 0 auto;
     }
 }
-@media(max-width:576px){
+@media(max-width:767px){
     .home-instrument-container{
         display: flex;
         flex-direction: column;

@@ -25,7 +25,7 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
         {isMobile?(
             <div>
             {show && (
-            <div style={{ position: 'fixed', top: '0px', right:'0px' }}>
+            <div style={{ position: 'fixed', top: '10px', right:'20px' }}>
             <div className='post-detail-close-button'>
             <CloseButton style={{color:"white"}} onClick={onHide}/>
             </div>
