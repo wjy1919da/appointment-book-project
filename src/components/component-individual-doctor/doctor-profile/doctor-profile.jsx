@@ -13,10 +13,11 @@ import {useSearchMultiConditionsPopUp} from '../../../hooks/useSearchDoctors';
 import StarRate from '../../starRate/starRate';
 import backIcon from '../../../assets/doctor/left_back.png';
 import { useMemo } from 'react';
-import Footer from '../../footer/footer.component';
+import { useMediaQuery } from 'react-responsive';
 import HomeButton from '../../home-button/home-button.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
+    
   
     // Flatten the data into a single array
     const flatData = pages.flatMap(page => page.data || []);
@@ -44,6 +45,8 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
     const setField = useDoctorQueryStore((state) => state.setField);
     const setLocation = useDoctorQueryStore((state) => state.setLocation);
+    const isMobile  = useMediaQuery({ query: `(max-width: 767px)` });
+    const buttonHeight = isMobile ? '50px' : '56px';
     useEffect(() => {
         setDoctorName(nickname);
         setField("");
@@ -107,7 +110,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             <div className="consult-follow-button">
                 {/* <ConsultDoctorButton title='Consult Doctor'/>
                 <FollowButton title='Follow'/> */}
-                <HomeButton height = '50px' title='Consult Doctor'/>
+                <HomeButton height = {buttonHeight} title='Consult Doctor'/>
                 <FollowButton title='Follow'/>
             </div>
             <div className='doctor-profile-back'>
