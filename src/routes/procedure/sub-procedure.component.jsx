@@ -17,7 +17,6 @@ import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
 
-
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -208,7 +207,7 @@ const SubProcedure = () => {
             </div>}   
             </div>
             {/* end of left side */}
-            {/* <div className='sub-procedure-right-container'  onScroll={handleScroll}>
+            <div className='sub-procedure-right-container'  onScroll={handleScroll}>
                 <div className='sub-procedure-right-content'>
                 {cardInfo &&<div className='sub-procedure-right-board'>
                         <div className="right-board-text">
@@ -274,7 +273,7 @@ const SubProcedure = () => {
 </div>
                     </div>
                 </div>    
-            </div> */}
+            </div>
         </div> 
         <SubProcedureMobileExtraBottom />   
         <Footer />
