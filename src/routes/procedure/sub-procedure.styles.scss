@@ -1,5 +1,5 @@
 // desktop
-@media(min-width: 1024px){
+@media(min-width: 1025px){
     .home-container {
         width: 100%;
         background: white;
@@ -392,7 +392,7 @@
 
 
 // ipad
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .home-container {
         width: 100%;
         background: white;
@@ -579,12 +579,14 @@
 
     }
     .FQA-collapside {
+        width: 100%;
         display: flex;
         flex-direction: column;
         position: relative;
         flex: none;
         margin-top: 20px;
     }
+
     .sub-procedure-right-container {
         flex: 1; // 新加，原来是none
         align-self: stretch;
@@ -711,7 +713,7 @@
             gap: 24px;
             position: absolute;
             //width: 380px;
-            width: 37vw;
+            width: 300px;
             height: 240px;
             //right: 40px;
             right: 2vw;

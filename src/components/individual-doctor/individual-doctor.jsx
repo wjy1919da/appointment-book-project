@@ -73,7 +73,9 @@ const IndividualDoctor = () => {
                         dataLength={fetchedReviewsCount}
                         next={fetchNextPage}
                         hasMore={hasNextPage}
+                        //style={{ width: '100%' }}
                         scrollThreshold={0.1}>
+                        
                         {activeTab === 0 && <DoctorAbout/>}
                         {
                             activeTab === 1 && <div className="individual-doctor-posts">
