@@ -13,9 +13,11 @@ import {useSearchMultiConditionsPopUp} from '../../../hooks/useSearchDoctors';
 import StarRate from '../../starRate/starRate';
 import backIcon from '../../../assets/doctor/left_back.png';
 import { useMemo } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import HomeButton from '../../home-button/home-button.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
+    
   
     // Flatten the data into a single array
     const flatData = pages.flatMap(page => page.data || []);
@@ -39,30 +41,29 @@ const mergeDoctorsByNickname = (pages) => {
     return Object.values(mergedDoctors);
 };
 const DoctorProfile = ({posts, follower, following,doctorStars}) => {
-    
     const { nickname } = useParams();
-    
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
     const setField = useDoctorQueryStore((state) => state.setField);
     const setLocation = useDoctorQueryStore((state) => state.setLocation);
+    const isMobile  = useMediaQuery({ query: `(max-width: 767px)` });
+    const buttonHeight = isMobile ? '50px' : '56px';
     useEffect(() => {
         setDoctorName(nickname);
         setField("");
         setLocation("");
     }, [nickname]);
     const {
-        data,
-        error,
-        isLoading,
-        isFetchingNextPage,
-        fetchNextPage,
-        hasNextPage
-   } = useSearchMultiConditionsPopUp();
+            data,
+            error,
+            isLoading,
+            isFetchingNextPage,
+            fetchNextPage,
+            hasNextPage
+    } = useSearchMultiConditionsPopUp();
    const mergedData = useMemo(() => {
-    return data ? mergeDoctorsByNickname(data.pages) : [];
-   }, [data]);
+        return data ? mergeDoctorsByNickname(data.pages) : [];
+    }, [data]);
     const profileData = data?.pages[0]?.data[0];
-    
     return (
             <div className='doctor-profile-container'>
             <img src={DoctorProfileImage} class="img-fluid rounded-start individual-doctor-pic" alt="..." style={{width:"160px",height:"160px"}}></img>
@@ -109,7 +110,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             <div className="consult-follow-button">
                 {/* <ConsultDoctorButton title='Consult Doctor'/>
                 <FollowButton title='Follow'/> */}
-                <HomeButton title='Consult Doctor'/>
+                <HomeButton height = {buttonHeight} title='Consult Doctor'/>
                 <FollowButton title='Follow'/>
             </div>
             <div className='doctor-profile-back'>
@@ -118,6 +119,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
                     <span className='back-link'>All Doctors</span>
                 </Link>
             </div>
+            
           </div>
         
     )

@@ -1,3 +1,10 @@
-.doctor-about-container {
-    width: 100%;
+@media(min-width: 768px){
+    .doctor-about-container {
+        width: 50vw;
+    }
+}
+@media(max-width: 767px){
+    .doctor-about-container {
+        width: 100%;
+    }
 }

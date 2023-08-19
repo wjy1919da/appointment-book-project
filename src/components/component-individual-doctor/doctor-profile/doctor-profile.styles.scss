@@ -13,11 +13,11 @@
         align-items: flex-start;
         padding: 10px;
 
-        width: 320px;
+        //width: 320px;
 
         //height: 78px;
         .search-card-title {
-            width: 244px;
+            //width: 244px;
             // height: 29px;
             margin-bottom: 10px;
             font-family: 'Lora';
@@ -35,11 +35,6 @@
             width: 100%;
             //height: 26px;
             gap: 6px;
-
-            /* Body 3
-        
-        Lora
-        */
             font-family: 'Lora';
             font-style: normal;
             font-weight: 500;
@@ -57,20 +52,19 @@
         //position: absolute;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        //justify-content: center;
         align-items: center;
-        padding: 0;
-        gap: 80px;
+        //padding: 0;
+        gap: 6vw;
         // top:420px;
         margin-top: 15px;
         margin-bottom: 15px;
 
-        width: 280px;
+        //width: 280px;
         height: 53px;
-
-        flex: none;
+       // flex: none;
         order: 2;
-        flex-grow: 0;
+        //flex-grow: 0;
         .info-showlist {
             width: 40px;
             height: 53px;
@@ -119,8 +113,9 @@
         }
     }
     .consult-follow-button {
-        top: 500px;
-        position: absolute;
+       // top: 500px;
+        margin-top: 20px;
+        position: relative;
         flex: none;
         order: 3;
         flex-grow: 0;
@@ -130,7 +125,7 @@
     }
     .doctor-profile-back {
         position: relative;
-        top: 650px;
+        top: 600px;
 
         color: #352C29;
         font-family: 'Open Sans';

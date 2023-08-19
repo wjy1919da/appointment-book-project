@@ -27,9 +27,11 @@ const DoctorPostGrid = ({isAbout}) => {
   const flatData = data ? data.pages.flatMap(page => page.data) : [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
-  const breakPoint = isAbout ?  { default: 3, 1100: 3, 767:3, 430: 2}: {default: 5, 1100: 5,1000: 4, 768: 3, 430: 2} ;
+  const breakPoint = isAbout ?  { default: 3, 1024: 3, 600: 2 }: {default: 5, 1024: 5, 768: 3, 430: 2} ;
+  const isMobileOrAbout = isMobile || isAbout;
+
   useEffect(() => {
-      setGutterWidth(isMobile ? '0px' : '25px');
+      setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
   if (error) return <div className='error'>{error.message}</div>;

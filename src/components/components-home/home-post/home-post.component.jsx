@@ -1,6 +1,7 @@
 import Decoration from '../../../assets/home/decoration-post.png';
 import vector from '../../../assets/home/Vector.png'
 import PostContainerMobile from '../../../assets/home/post_container.svg'
+import PostPic from '../../../assets/home/post-container.png'
 import Tag1 from '../../../assets/home/tag1.svg'
 import Tag2 from '../../../assets/home/tag2.svg'
 import Tag4 from '../../../assets/home/tag4.svg' 
@@ -19,18 +20,21 @@ const HomePost = () => {
             <div className='home-mobile-share-pic-container'>
                     {!isMobile&&<Fragment>
                         <div className='home-post-pic animate__animated animate__slideInUp'>
-                            <div className='post-pic'></div>
-                            <div className="p-topic">
-                                <img src={Decoration} className="decoration-pic1" alt=''></img>
-                                <img src={Decoration} className="decoration-pic2" alt=''></img>
-                                <div className="decoration-pic1"></div>
-                                <div className='decoration-pic2'></div>
-                                <span className="post-topic topic1">#Occaecat</span>
-                                <span className="post-topic topic2">#Adipiscing</span>
-                                <span className="post-topic topic3">#lorem </span>
-                                <span className="post-topic topic4">#Eiusmod </span>
-                                <span className="post-topic topic5">#Excepteur</span>
-                            </div>
+                            <div className='home-post-inner-container'>
+                                {/* <div className='post-pic'></div> */}
+                                <img src={PostPic} alt="postPic" className='post-pic'/>
+                                <div className="p-topic">
+                                    <img src={Decoration} className="decoration-pic1" alt=''></img>
+                                    <img src={Decoration} className="decoration-pic2" alt=''></img>
+                                    <div className="decoration-pic1"></div>
+                                    <div className='decoration-pic2'></div>
+                                    <span className="post-topic topic1">#Occaecat</span>
+                                    <span className="post-topic topic2">#Adipiscing</span>
+                                    <span className="post-topic topic3">#lorem </span>
+                                    <span className="post-topic topic4">#Eiusmod </span>
+                                    <span className="post-topic topic5">#Excepteur</span>
+                                </div>
+                            </div>  
                         </div>
                     </Fragment>}                
                 {isMobile&&<Fragment>

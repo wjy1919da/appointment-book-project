@@ -1,13 +1,14 @@
 @media (min-width: 768px) {
     .carousel-container {
-        width: 800px; // 调整宽度
+        //width: 800px; 
+        width:100%;
         margin-bottom:20px; 
     }
 }
 
 @media (max-width: 768px) {
     .carousel-container {
-        width: 100%; // 调整宽度
+        width: 100%; 
         margin-bottom:20px; 
     }
 

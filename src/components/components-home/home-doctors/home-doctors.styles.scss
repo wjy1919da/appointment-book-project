@@ -1,88 +1,90 @@
-@media (min-width: 1200px) {
-    .home-doctors-container {
-        //margin-top: -350px;
-        //height: 2200px;
-        top: 2400px;
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        justify-content: center;
-        align-items: center;
-        //padding: 222px 463px; 
-        width: 100%; 
-    }
-    .home-doctors-background{
-        background-size: 100% 100%;  
-        width: 100%;  
-        height: 81vw; 
-        padding: 10vw 30vw 10vw 32vw;
-        background-repeat: no-repeat;  
-        .home-doctor-video{
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            right:6%;
-            left:6%;
-            top:40px;
-            border-radius:5px;
-        }
-        .home-doctor-apple-section {
-            width: 30vw;
-            height: 90px;
-            box-sizing: border-box; 
-            position: relative; 
-        }
-        .home-doctor-apple-screen {
-            display: flex;
-            align-items: center;
-            height: 896px;
-            background: #FBFCFF;
-        }
-        .phone-screen {
-            border-radius: 40px;
-            position: absolute;
-            top: 80px;
-            left: 50px;
-        }
-        .phone-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;
-            pointer-events: none;
-            width:110vh;       
-        }
-    }
-    .home-doctors-text{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0px;
-    }
-    .home-doctors-button{
-        margin-top: 40px;
-    }
-     // For the mobile version
-     .home-mobile-app-background{
-        display: none;
-    }
-    .home-mobile-app-phone{
-        display: none;
-        .home-mobile-app-phone-screen{
-            display: none;
-        }
-    }
+// @media (min-width: 1200px) {
+//     .home-doctors-container {
+//         //margin-top: -350px;
+//         //height: 2200px;
+//         top: 2400px;
+//         display: flex;
+//         flex-direction: column;
+//         position: absolute;
+//         justify-content: center;
+//         align-items: center;
+//         //padding: 222px 463px; 
+//         width: 100%; 
+//     }
+//     .home-doctors-background{
+//         background-size: 100% 100%;  
+//         width: 100%;  
+//         height: 81vw; 
+//         padding: 10vw 30vw 10vw 32vw;
+//         background-repeat: no-repeat;  
+//         .home-doctor-video{
+//             align-items: center;
+//             justify-content: center;
+//             position: absolute;
+//             right:6%;
+//             left:6%;
+//             top:40px;
+//             border-radius:5px;
+//         }
+//         .home-doctor-apple-section {
+//             width: 30vw;
+//             height: 90px;
+//             box-sizing: border-box; 
+//             position: relative; 
+//         }
+//         .home-doctor-apple-screen {
+//             display: flex;
+//             align-items: center;
+//             height: 896px;
+//             background: #FBFCFF;
+//         }
+//         .phone-screen {
+//             border-radius: 40px;
+//             position: absolute;
+//             top: 80px;
+//             left: 50px;
+//         }
+//         .phone-image {
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+//             z-index: 2;
+//             pointer-events: none;
+//             width:110vh;       
+//         }
+//     }
+//     .home-doctors-text{
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         padding: 10px 0px;
+//     }
+//     .home-doctors-button{
+//         margin-top: 40px;
+//     }
+//      // For the mobile version
+//      .home-mobile-app-background{
+//         display: none;
+//     }
+//     .home-mobile-app-phone{
+//         display: none;
+//         .home-mobile-app-phone-screen{
+//             display: none;
+//         }
+//     }
     
-}
-@media (min-width: 1024px) and (max-width: 1200px){
+// }
+@media (min-width: 1024px){
     .home-doctors-container {
-        top: 2350px;
+        //top: 2350px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        //justify-content: center;
         align-items: center;
-        position: absolute;
+        position: relative;
         width: 100%; 
+        margin-bottom: 100px;
     }
     .home-doctors-background{
         transform: scale(0.8);  
@@ -139,9 +141,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 120px 0px;
-        position: absolute;
-        top: 550px;
+        margin-top: -120px;
+       // padding: 120px 0px;
+        //position: absolute;
+       // top: 550px;
     }
     .home-doctors-button{
         margin-top: 40px;
@@ -157,14 +160,17 @@
         }
     }
 }
+// ipad
 @media (min-width: 768px) and (max-width: 1023px){
     .home-doctors-container {
-        top: 1850px;
+        //top: 2350px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        //justify-content: center;
         align-items: center;
-        position: absolute;
+        position: relative;
         width: 100%; 
+        margin-bottom: 80px;
     }
     .home-doctors-background{
         transform: scale(0.8);  
@@ -217,13 +223,18 @@
         width:110vh;       
     }
     .home-doctors-text{
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+        // padding: 120px 0px;
+        // position: absolute;
+        // top: 550px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 120px 0px;
-        position: absolute;
-        top: 550px;
+        margin-top: -80px;
     }
     .home-doctors-button{
         margin-top: 40px;

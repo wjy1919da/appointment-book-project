@@ -1,7 +1,8 @@
 @media (min-width: 768px) {
     .sub-procedure-form {
         .sub-procedure-form-table {
-            width: 800px;
+            //width: 800px;
+            width:100%;
             height: 60px;
         }
         .sub-procedure-form-container {
@@ -10,7 +11,8 @@
             
         
             .sub-procedure-form-tr {
-                width: 800px; /* 设置表格宽度 */
+               // width: 800px; /* 设置表格宽度 */
+                width:100%;
                 height: 60px; /* 设置行的高度 */
             }
         
