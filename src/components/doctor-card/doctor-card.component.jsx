@@ -5,10 +5,14 @@ import locationIcon from '../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import StarRate from '../starRate/starRate';
+import { useMediaQuery } from 'react-responsive';
 
 const DoctorCard = ({doctor}) => {
+    const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
+    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
+    const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : 'defaultWidth');
     return (
-         <div className='search-doctor-card-container'>
+         <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
             <div className='doctor-profile-img'>
                 <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..."></img>
             </div>

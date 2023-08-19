@@ -10,8 +10,9 @@ import FormInput from '../../form-input/form-input.component.jsx';
 import './doctor-search-multiput-dropDown.styles.scss'
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
-const DoctorSearchMultiInput = ({isMobile}) => {
+const DoctorSearchMultiInput = () => {
     const locationRef = useRef(null);
     const specializationRef = useRef(null);
     const doctorNameRef = useRef(null);
@@ -22,6 +23,11 @@ const DoctorSearchMultiInput = ({isMobile}) => {
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
     const topLocations = ['Los Angeles, CA', 'Chicago, IL', 'Houston, TX'];
+    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
+    const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
+    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
+    const searchButtonWidth = isIpad ? '257px' : (isPhone ? '150px' : 'defaultWidth');
+    const searchButtonHeight = isIpad ? '52px' : (isPhone ? '40px' : 'defaultWidth');
     useEffect(() => {
         if (!IsModalOpen) {
             setDoctorName('');
@@ -131,7 +137,7 @@ const DoctorSearchMultiInput = ({isMobile}) => {
                             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             Search
                         </button> */}
-                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width='150px' height='40px'/>
+                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
                         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                     </div>
                 </div>
