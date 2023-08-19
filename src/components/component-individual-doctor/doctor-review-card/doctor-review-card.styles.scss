@@ -6,7 +6,7 @@
     align-items: flex-start;
     padding-top: 24px;
     gap: 12px;
-    width: 800px;
+    width: 50vw;
     height: 199px;
     border-bottom: 1px solid #E2E3E7;
 
@@ -14,8 +14,9 @@
     {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+        width: 50vw;
         .reviewer-information
         {
             height: 40px;
@@ -53,10 +54,12 @@
             }
         }
         .review-date{
-            flex: none;
-            order: 1;
+            //flex: none;
+            order: 2;
             flex-grow: 0;
             display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
             align-items: center;
             margin-left: auto;
             align-items: right;
@@ -64,15 +67,15 @@
             height: 26px;
             color: #A5A6A8;
             font-weight: 500;
-            left:700px;
-            position: absolute;
+            //left:700px;
+            //position: absolute;
 
         }
     }
 }
 
 // Phone
-@media (max-width: 576px) {
+@media (max-width: 768px) {
 
     .doctor-review-card-container
     {

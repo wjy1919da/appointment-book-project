@@ -1,119 +1,127 @@
-.individual-doctor-container {
-    display: flex;
-    flex-direction: row;
-    .individual-doctor-left-container {
+@media(min-width: 768px){
+    .individual-doctor-container {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 0 0 64px;
-
-        position: absolute;
-        width: 320px;
-        height: 920px;
-        left: 80px;
-        top: 104px;
-    }
-    .individual-doctor-right-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0;
-        gap: 40px;
-
-        position: absolute;
-        width: 800px;
-        height: 920px;
-        right: 80px;
-        top: 104px;
-
-        .individual-doctor-tabs {
+        flex-direction: row;
+        padding: 10vw 0vw 0vw 4vw;
+        gap: 8vw;
+        box-sizing: border-box;
+        .individual-doctor-left-container {
             display: flex;
-            flex-direction: row;
-            gap: 40px;
-
-            .individual-doctor-tab {
-                //styleName: Interactive 3 Bold;
-                font-family: 'Open Sans';
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 16px;
-                letter-spacing: 0;
-                text-align: left;
-            }
-
-            .individual-doctor-tab {
-                //styleName: Interactive 3 Bold;
-                font-family: 'Open Sans';
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 16px;
-                letter-spacing: 0;
-                text-align: left;
-
-                .individual-doctor-tab-underline {
-                    height: 3px;
-                    background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
-                    border-bottom: 3px;
-                    border-radius: 50px;
-                    margin-top: 5px;
-                    display: none;
-                }
-            }
-
-            .individual-doctor-tab:hover {
-                //styleName: Interactive 3 Bold;
-                font-family: Inter;
-                font-size: 16px;
-                font-weight: 700;
-                line-height: 16px;
-                letter-spacing: 0;
-                text-align: left;
-                cursor: pointer;
-
-                .individual-doctor-tab-underline {
-                    display: block;
-                }
-            }
-
-            .active,
-            .individual-doctor-tab:hover {
-                //styleName: Interactive 3 Bold;
-                font-family: Inter;
-                font-size: 16px;
-                font-weight: 700;
-                line-height: 16px;
-                letter-spacing: 0;
-                text-align: left;
-
-                .individual-doctor-tab-underline {
-                    display: block;
-                }
-            }
-        }
-
-        .individual-doctor-posts {
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 0 64px;
+            //position: absolute;
             position: relative;
-            top: -30px;
-            left: -30px;
-            width: 900px;
+            width: 30vw;
+            height: 920px;
+            //left: 80px;
+            //top: 104px;
         }
-
+        .individual-doctor-right-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 40px;
+    
+            //position: absolute;
+            position: relative;
+            width: 50vw;
+            //height: 920px;
+            //right: 80px;
+            //top: 104px;
+    
+            .individual-doctor-tabs {
+                display: flex;
+                flex-direction: row;
+                gap: 40px;
+    
+                .individual-doctor-tab {
+                    //styleName: Interactive 3 Bold;
+                    font-family: 'Open Sans';
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 16px;
+                    letter-spacing: 0;
+                    text-align: left;
+                }
+    
+                .individual-doctor-tab {
+                    //styleName: Interactive 3 Bold;
+                    font-family: 'Open Sans';
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 16px;
+                    letter-spacing: 0;
+                    text-align: left;
+    
+                    .individual-doctor-tab-underline {
+                        height: 3px;
+                        background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+                        border-bottom: 3px;
+                        border-radius: 50px;
+                        margin-top: 5px;
+                        display: none;
+                    }
+                }
+    
+                .individual-doctor-tab:hover {
+                    //styleName: Interactive 3 Bold;
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 16px;
+                    letter-spacing: 0;
+                    text-align: left;
+                    cursor: pointer;
+    
+                    .individual-doctor-tab-underline {
+                        display: block;
+                    }
+                }
+    
+                .active,
+                .individual-doctor-tab:hover {
+                    //styleName: Interactive 3 Bold;
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 16px;
+                    letter-spacing: 0;
+                    text-align: left;
+    
+                    .individual-doctor-tab-underline {
+                        display: block;
+                    }
+                }
+            }
+    
+            .individual-doctor-posts {
+                position: relative;
+                top: -30px;
+                left: -30px;
+                width: 55vw;
+            }
+    
+        }
     }
-}
-.doctor-post-container {
-    transform: scale(0.7) !important;
-}
-.individual-page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 150vh;
-    /* This allows the footer to be sticked at the bottom if there's not enough content */
+    .doctor-post-container {
+        transform: scale(0.7) !important;
+    }
+    .individual-page-container {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        min-height: 150vh;
+        /* This allows the footer to be sticked at the bottom if there's not enough content */
+    }
 }
 
 // Phone
-@media (max-width: 576px) {
+@media (max-width: 767px) {
     .individual-page-container {
+        margin-top: 61px;
         display: flex;
         flex-direction: column;
         min-height: 150vh;
@@ -131,7 +139,8 @@
             padding: 0 50px;
             width: 100%;
             margin: auto;
-            position: absolute;
+            position: relative;
+            
             left: 0;
         }
         .individual-doctor-right-container {
@@ -141,16 +150,17 @@
             padding: 0 10px;
             gap: 40px;
             width: 100%;
-
-            position: absolute;
-            top: 700px;
+            
+            position: relative;
+            margin-top: 400px;
+            //top: 700px;
             right: 0;
 
             .individual-doctor-tabs {
                 display: flex;
                 flex-direction: row;
                 margin: 0 auto;
-
+                gap: 20px;
                 .individual-doctor-tab {
                     //styleName: Interactive 3 Bold;
                     font-family: 'Open Sans';

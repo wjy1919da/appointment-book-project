@@ -48,7 +48,8 @@ const IndividualDoctor = () => {
             <div className="individual-doctor-container">
                 <div className="individual-doctor-left-container">
                     {
-                        data.pages[0].data && <DoctorProfile
+                        data.pages[0].data && 
+                          <DoctorProfile
                             posts={data.pages[0].data.postNumber}
                             follower={data.pages[0].data.followers}
                             following={data.pages[0].data.followings}
@@ -72,7 +73,9 @@ const IndividualDoctor = () => {
                         dataLength={fetchedReviewsCount}
                         next={fetchNextPage}
                         hasMore={hasNextPage}
+                        //style={{ width: '100%' }}
                         scrollThreshold={0.1}>
+                        
                         {activeTab === 0 && <DoctorAbout/>}
                         {
                             activeTab === 1 && <div className="individual-doctor-posts">
@@ -104,7 +107,7 @@ const IndividualDoctor = () => {
 
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
         
     );

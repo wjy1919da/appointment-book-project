@@ -17,7 +17,6 @@ import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
 
-
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
