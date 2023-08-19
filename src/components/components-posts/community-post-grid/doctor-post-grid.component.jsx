@@ -25,9 +25,9 @@ const DoctorPostGrid = ({isAbout}) => {
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
   const flatData = data ? data.pages.flatMap(page => page.data) : [];
-  const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
-  const breakPoint = isAbout ?  { default: 3, 1100: 3, 800:2 }: {default: 5, 1100: 5,1000: 4, 800: 3, 430: 2} ;
+  const breakPoint = isAbout ?  { default: 3, 1100: 3, 767:3, 430: 2}: {default: 5, 1100: 5,1000: 4, 768: 3, 430: 2} ;
   useEffect(() => {
       setGutterWidth(isMobile ? '0px' : '25px');
   }, [isMobile]);

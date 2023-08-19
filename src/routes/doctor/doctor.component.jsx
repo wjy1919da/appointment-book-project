@@ -14,7 +14,8 @@ const Doctor = () => {
     useLayoutEffect(() => {
        window.scrollTo(0, 0);
     });
-    const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+
     return (
         <div className='doctor-container animate__animated animate__fadeIn'>
             <div>
