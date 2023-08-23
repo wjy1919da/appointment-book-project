@@ -10,16 +10,39 @@
         letter-spacing: 0em;
         text-align: left;
         margin: 0;
+
+        // Layout
+        display: flex;
+        min-height: 40px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
     }
 
     .procedure-menu-div-item {
-        font-family: Lora;
+        // font-family: Lora;
+        // font-size: 20px;
+        // font-weight: 500;
+        // line-height: 40px;
+        // letter-spacing: 0em;
+        // text-align: left;
+        // margin: 0;
+        overflow: hidden;
+        color: #000;
+        text-overflow: ellipsis;
+        whitespace: nowrap;
+        font-family: PingFang HK;
         font-size: 20px;
-        font-weight: 500;
-        line-height: 40px;
-        letter-spacing: 0em;
-        text-align: left;
-        margin: 0;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%; /* 32px */
+        /* Layout */ 
+        display: flex;
+        //width: 296px;
+        min-height: 40px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
     }
 
     .procedure-menu-div-item:hover {

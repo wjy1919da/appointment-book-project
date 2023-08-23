@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import './procedure-menu-div.styles.scss';
-
+import { useMediaQuery } from 'react-responsive';
 const ProcedureMenuDiv = ({category, items, onHide}) => {
-    const location = useLocation();  // 获取当前的路由 
-
+    const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1023px)` });
+    const location = useLocation();  
     const itemsGird = items.map((item) => 
-        <div className='col-4' key={item}>
+        <div className={isIpad ? 'col-md-12' : 'col-lg-4'} key={item}>
             <Link 
                 className='procedure-menu-div-item'
                 to={`/procedure/${item.toLowerCase().replaceAll(' ', '_')}`} 
@@ -23,7 +23,7 @@ const ProcedureMenuDiv = ({category, items, onHide}) => {
             <div className='container'>
                 <div className='row'>
                     {itemsGird}
-                    <div className='col-4 procedure-menu-div-item'>
+                    <div className={isIpad ? 'col-md-12 procedure-menu-div-item' : 'col-lg-4 procedure-menu-div-item'}>
                         <Link className='procedure-menu-div-more-link'>
                             View More...
                         </Link>
