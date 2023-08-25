@@ -159,13 +159,7 @@
     }
        
 }
-// @media(min-width: 1300px){
-//     .home-footer-container{
-//         width: 100vw;
-//         position: absolute;
-//         top: 310vw;
-//     }
-// }
+
 /* Styles for tablets like iPads here */
 @media (min-width: 768px) and (max-width: 1023px) {
     .home{
@@ -327,7 +321,7 @@
        // order: 1;  // 新增
     }
     .home-pic{
-        margin-top: -25px;
+        //margin-top: -25px;
         border-radius: 0px 0px 0px 1000px;
 
     }
