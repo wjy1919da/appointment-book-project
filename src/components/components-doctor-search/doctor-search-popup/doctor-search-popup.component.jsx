@@ -3,10 +3,9 @@ import {
     SimpleGrid,
     Text
   } from '@chakra-ui/react';
-  //src/components/form-input/form-input.component.jsx
 import './doctor-search-popup.styles.scss'
 import { Link } from 'react-router-dom';
-import React,{ useRef, useState } from 'react';
+import React,{ useRef, useState,useEffect } from 'react';
 import {useSearchMultiConditionsPopUp ,useSearchMultiConditions} from '../../../hooks/useSearchDoctors';
 import DoctorCard from '../../doctor-card/doctor-card.component';
 import Modal from 'react-bootstrap/Modal';
@@ -61,12 +60,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const mergedData = useMemo(() => {
      return data ? mergeDoctorsByNickname(data.pages) : [];
    }, [data]);
+  
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
    const doctorQuery  = useDoctorQueryStore(state=>state.doctorQuery);
-   
-
+   const setNickName = useDoctorQueryStore(state=>state.setNickName);
    const setDoctorName = useDoctorQueryStore(state=>state.setDoctorName);
    const setField = useDoctorQueryStore(state=>state.setField);
    const setLocation = useDoctorQueryStore(state=>state.setLocation);
@@ -77,6 +76,13 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
    const searchButtonWidth = isIpad ? '600px' : (isPhone ? '186px' : 'defaultWidth');
    const searchButtonHeight = isIpad ? '56px' : (isPhone ? '40px' : 'defaultWidth');
+   const nickname = useDoctorQueryStore(state=>state.nickname);
+//    useEffect(() => {
+//        setDoctorName(nickname);
+//        setField("");
+//        setLocation("");
+//    }, [nickname]);
+   
    if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -174,20 +180,29 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                     </button> */}
                     <HomeButton title='Search'  onClick={handleMobileClick} isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
                     {isLoading ?
-                        <div ><p>is Loading</p></div> :
-                        (data && 
-                            <SimpleGrid columns={1} spacing={0}>
-                                {mergedData && mergedData.map((item, i) => (
-                                    item.nickname &&
-                                    <div key={i} className='doctor-search-card-container-mobile'>
-                                        <Link to={`/doctor/${item.nickname}`}>
-                                            <DoctorCard doctor={item} />
-                                        </Link>
-                                    </div>
-                                ))}
-                            </SimpleGrid>
-                        )
-                    }
+                        <div><p>is Loading</p></div> :
+                            (data && 
+                                <SimpleGrid columns={1} spacing={0}>
+                                    {mergedData && mergedData.map((item, i) => (
+                                        item.memberId && item.nickname &&
+                                        <div key={i} className='doctor-search-card-container'>
+                                           <Link 
+                                                to={`/doctor/${item.memberId}`} 
+                                                onClick={() => {
+                                                    setNickName(item.nickname);
+                                                    setDoctorName(item.nickname);
+                                                    setField("");
+                                                    setLocation("");
+                                                }}
+                                            >
+                                                <DoctorCard doctor={item} />
+                                            </Link>
+
+                                        </div>
+                                    ))}
+                                </SimpleGrid>
+                            )
+                        }
                     </div>
                         </Modal>
                     </div> 
@@ -235,15 +250,24 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
             </div> 
             <div className='doctor-search-grid-container'>
                 {isLoading ?
-                    <div ><p>is Loading</p></div> :
+                    <div><p>is Loading</p></div> :
                     (data && 
                         <SimpleGrid columns={3} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
-                                item.nickname &&
+                                item.memberId && item.nickname &&
                                 <div key={i} className='doctor-search-card-container'>
-                                    <Link to={`/doctor/${item.nickname}`}>
+                                   <Link 
+                                        to={`/doctor/${item.memberId}`} 
+                                        onClick={() => {
+                                            setNickName(item.nickname);
+                                            setDoctorName(item.nickname);
+                                            setField("");
+                                            setLocation("");
+                                        }}
+                                    >
                                         <DoctorCard doctor={item} />
                                     </Link>
+
                                 </div>
                             ))}
                         </SimpleGrid>

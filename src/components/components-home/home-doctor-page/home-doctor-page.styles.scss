@@ -96,8 +96,9 @@
         .home-doctor-page-pic
         {
             order: 1;
-            width: 50vw;
-            height:650px;
+            width: 40vw;
+            //height:650px;
+            height: 55vw;
             // left:0;
             // top: 6%;
             // bottom: 0%;
@@ -108,10 +109,12 @@
             .doctor-page-img
             {
                 position: absolute;
-                width: 498px;
-                height: 720px;
-                left: 0px;
-                top: 30px;  
+                //width: 498px;
+                //height: 720px;
+                width: 30vw;
+                height: auto;
+                margin-left: 10vw;
+                top: 3vw;  
                 border: none;
                 // background-image: url('../../assets/home/doctor-img.png');
                 // mask-image: linear-gradient(to top, transparent, black);
@@ -129,12 +132,17 @@
                 padding: 8px 80px 8px 16px;
                 gap: 8px;
                 position: absolute;
-                width: 416px;
-                height: 149px;
+                //width: 416px;
+                //height: 149px;
+                width: 27vw;
+                height:12vw;
+                background-color: #FEFFFF;
                 right: 0px;
-                top: 660px;
-                background: rgba(254, 255, 255, 0.2);
+                margin-top: 37vw;
+                //top: 660px;
+                //background: rgba(254, 255, 255, 0.2);
                 border-radius: 8px;
+                justify-content: center;
                 .starRatePart{
                     display: flex;
                     flex-direction: row;
@@ -148,10 +156,21 @@
     }
     // for mobile doctor card
     .card-title{
-        display:block;
+        color: #000;
+        /* Boby 1 */
+        font-family: Lora;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 35.2px */
     }
     .card-content{
-        display:block;
+        color: #000;
+        font-family: PingFang HK;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 28.8px */
     }
     .home-mobile-share-link{
         display: block;

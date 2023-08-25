@@ -15,8 +15,11 @@ const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-    const {nickname} = useParams(); // Assuming "nickname" is the parameter in the URL
-    const setNickName = useDoctorQueryStore((state) => state.setNickName);
+   
+    //const {nickname} = useParams(); // Assuming "nickname" is the parameter in the URL
+    //const setNickName = useDoctorQueryStore((state) => state.setNickName);
+    const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+    console.log('IndividualDoctor queryStore: ', doctorQuery);
     const {
         data,
         error,
@@ -25,12 +28,13 @@ const IndividualDoctor = () => {
         fetchNextPage,
         hasNextPage
     } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
+    
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
     const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;
-    useEffect(() => {
-        setNickName(nickname);
-    }, [nickname]);
+    // useEffect(() => {
+    //     setNickName(nickname);
+    // }, [nickname]);
 
     if (isLoading) {
         return <HomeSpinner/>;
