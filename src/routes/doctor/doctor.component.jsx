@@ -43,7 +43,7 @@ const Doctor = () => {
                         <FeatureDoctor />
                         <span className="doctor-title">Post by doctor</span>
                         <div className='doctor-post-grid-container'>
-                            <DoctorPostGrid isAbout={false}/>
+                            <DoctorPostGrid />
                         </div>
                     </div>
                 )}

@@ -52,7 +52,7 @@ const DoctorSearchMultiInput = () => {
     return (
         <div>
             {isMobile?(
-                <div>
+                <div className="doctor-search-mobile-multiInput-container">
                     <div className='doctor-search-multiInput-button'>
                     <Dropdown>
                         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">

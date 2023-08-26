@@ -13,7 +13,7 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
     const imageRef = useRef(null);
     //const [forceRerender, setForceRerender] = useState(false);
 
-    const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+    const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     
     const adjustContainerHeight = () => {
       const container = containerRef.current;
