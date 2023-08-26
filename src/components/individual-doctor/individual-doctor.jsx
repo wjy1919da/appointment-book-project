@@ -16,10 +16,10 @@ const IndividualDoctor = () => {
         window.scrollTo(0, 0);
     });
    
-    //const {nickname} = useParams(); // Assuming "nickname" is the parameter in the URL
+   // const {mem} = useParams(); // Assuming "nickname" is the parameter in the URL
     //const setNickName = useDoctorQueryStore((state) => state.setNickName);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-    console.log('IndividualDoctor queryStore: ', doctorQuery);
+    //console.log('IndividualDoctor queryStore: ', doctorQuery);
     const {
         data,
         error,

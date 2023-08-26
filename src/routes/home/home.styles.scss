@@ -313,12 +313,13 @@
         flex-direction: row;
         
     }
-    .home-mobile-intro-pic-container{
+    .home-mobile-intro-pic-container {
         width: 50%;
         flex: 1;
-        display: flex; 
+        display: flex;
+        justify-content: flex-end; /* 添加这一行使图片右对齐 */
         height: auto;
-       // order: 1;  // 新增
+        /* order: 1;  移除 // */
     }
     .home-pic{
         //margin-top: -25px;
