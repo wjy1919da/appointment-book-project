@@ -1,3 +1,4 @@
+//Style for web
 @media(min-width:1024px){
     .Home-post{
         width: 100%;
@@ -20,7 +21,7 @@
     .home-post-pic
     {
         width: 40vw;
-        height: 650px;
+        height: 55vw;
         left: 0px;
         top: 0%;
         bottom: 0%;
@@ -42,8 +43,8 @@
     }
     
     .post-pic {
-        width: 400px;
-        height: auto;
+        //width: 400px;
+        //height: auto;
         margin-right: 2vw;
         overflow: hidden;
         z-index: 2;  /* Increase the z-index */
@@ -54,70 +55,79 @@
     }
     
     .decoration-pic1 {
-        position: absolute;
-        top: 210px;
-        right: 0;  /* Aligns it to the right edge of the parent */
-        width: 160px;
-        height: 180px;
-        object-fit: cover;
-        z-index: 1;  /* Ensure this is below the post-pic */
-        border: none;
-        border-radius: 0;
+        // position: absolute;
+        // top: 210px;
+        // right: 0;  /* Aligns it to the right edge of the parent */
+        // width: 160px;
+        // height: 180px;
+        // object-fit: cover;
+        // z-index: 1;  /* Ensure this is below the post-pic */
+        // border: none;
+        // border-radius: 0;
+        display:none;
     }
     .decoration-pic2 {
-        position: absolute;
-        top: 340px;
-        right: 310px;
-        width: 180px;
-        height: auto;
-        object-fit: cover;
-        z-index: 1;  
-        border: none;
-        border-radius: 0;
+        // position: absolute;
+        // top: 340px;
+        // right: 310px;
+        // width: 180px;
+        // height: auto;
+        // object-fit: cover;
+        // z-index: 1;  
+        // border: none;
+        // border-radius: 0;
+        display:none;
     }
     .p-topic{
         //position: relative;
+        display: none;
         .post-topic {
-            position: absolute;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px 12px;
-            background: #FFFFFF;
-            box-shadow: 0px 0px 16px rgba(255, 164, 163, 0.1), 0px 2px 4px rgba(32, 32, 33, 0.04), 0px 4px 16px rgba(32, 32, 33, 0.08);
-            border-radius: 100px;
-            font-family: 'Open Sans';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 160%;
-            color: #333333;
-            z-index: 3;
+            // position: absolute;
+            // display: inline-flex;
+            // align-items: center;
+            // justify-content: center;
+            // padding: 2px 12px;
+            // background: #FFFFFF;
+            // box-shadow: 0px 0px 16px rgba(255, 164, 163, 0.1), 0px 2px 4px rgba(32, 32, 33, 0.04), 0px 4px 16px rgba(32, 32, 33, 0.08);
+            // border-radius: 100px;
+            // font-family: 'Open Sans';
+            // font-style: normal;
+            // font-weight: 400;
+            // font-size: 18px;
+            // line-height: 160%;
+            // color: #333333;
+            // z-index: 3;
+            display: none;
         }
         
         .topic1 {
-           top: -20px;
-           right: 340px;
+        //    top: -20px;
+        //    right: 340px;
+            display: none;
         }
         
         .topic2 {
-            top: 110px;
-            right: 390px;
+            // top: 110px;
+            // right: 390px;
+            display: none;
         }
         
         .topic3 {
-            top: 210px;
-            right: 380px;
+            // top: 210px;
+            // right: 380px;
+            display: none;
         }
         
         .topic4 {
-            top: 380px;
-            right: 0px;
+            // top: 380px;
+            // right: 0px;
+            display: none;
         }
         
         .topic5 {
-            top: 480px;
-            right: 40px;
+            // top: 480px;
+            // right: 40px;
+            display: none;
         }
         
     }
@@ -227,6 +237,9 @@
     display: none;
   }
 }
+// Style for extra large screen
+
+// Style for ipad
 @media (min-width: 768px) and (max-width: 1023px){
     .Home-post{
         width:100%;
@@ -250,6 +263,7 @@
             object-fit: cover;
             border: none;
             border-radius: 0;
+            //display: none;
         }
         .decoration-pic2
         {
@@ -263,10 +277,13 @@
             object-fit: cover;
             border: none;
             border-radius: 0;
+            //display: none;
         }
     .home-post-pic{
         width: 50vw;
         height: 514px;
+        //width:40vw;
+        //height: 50vw;
         left: 0px;
         top: 0%;
         bottom: 0%;
@@ -274,12 +291,15 @@
         background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
         border-radius: 0px 1000px 1000px 0px;
         .post-pic{
-            background-image: url('../../../assets/home/post-container-ipad.png');
-            background-size: contain;
+           // background-image: url('../../../assets/home/post-container-ipad.png');
+            //background-image: url('../../../assets/home/trendings.png');
+           // background-repeat: no-repeat;
+            //background-size: contain;
             position: absolute;
             width: 345px;
             height: 414px;
             margin-top: 60px;
+            margin-top: 30px;
             margin-left: 80px;
             overflow: hidden;
             z-index: 1;
@@ -304,29 +324,35 @@
         color: #333333;
         // tag will be on the top of the post
         z-index: 3;
+        //display: none;
     }
     .topic1 {
         margin-top: 40px;
         margin-left: 5vw;
+        //display: none;
     }
     .topic2 {
         margin-top: 170px;
         margin-left: 1vw;
+        //display: none;
     }
     
     .topic3 {
         margin-top: 250px;
         margin-left: 3vw;
+       //display: none;
     }
     
     .topic4 {
         margin-top: 350px;
         margin-left: 35vw;
+        //display: none;
     }
     
     .topic5 {
         margin-top: 450px;
         margin-left: 26vw;
+        //display: none;
     }
     .home-post-container {
         object-fit: cover;
@@ -426,7 +452,7 @@
         padding-right: 15px;
     }
     .home-post-pic{
-        //width: 40vh;
+        width: 160px;
         height: 307px;
         left: 0;
         top: 0%;

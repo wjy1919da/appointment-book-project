@@ -16,12 +16,10 @@ const DoctorAbout = () => {
         return <div>Error: {error.message}</div>;
     }
 
-    // 在数据加载完成且无错误时，判断数据是否存在，不存在则渲染一个空的组件或消息
     if (!data || !data.pages[0]?.data) {
         return <div>No data available</div>;
     }
 
-    // 如果数据存在，我们可以安全地进行解构
     const { programs, interesteds, methods, actual, isAuth, method } = data.pages[0].data;
 
     const abouts = [

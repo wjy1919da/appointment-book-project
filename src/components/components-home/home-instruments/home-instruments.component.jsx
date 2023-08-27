@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import './home-instruments.styles.scss';
 import HomeSection5Titles from './home-section5-titles/home-section5-titles.component';
 import { useMediaQuery } from 'react-responsive';
@@ -15,14 +16,18 @@ const HomeInstruments = () => {
     const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
     const proceduresToRender = isMobileOrIpad ? procedures_names_mobile : procedures_names;
     const proceduresGrid = proceduresToRender.map((name) => 
+   
         <Box as="div" className='home-procedure' key={name}>
-            <Image 
-                src={require(`../../../assets/procedure/${name}.svg`)} 
-                alt={name} 
-                className='home-procedure-pic' 
-            />
-            {!isMobileOrIpad && <div className = 'title'>{formatTitle(name)}</div> }
+            <Link to={`/procedure/${name}`}>
+                <Image 
+                    src={require(`../../../assets/procedure/${name}.svg`)} 
+                    alt={name} 
+                    className='home-procedure-pic' 
+                />
+                {!isMobileOrIpad && <div className = 'title'>{formatTitle(name)}</div> }
+            </Link>
         </Box>
+        
     );
     const instrumentsGrid = instruments_names.map((name) => 
         <Box as="div" className='home-instrument' key={name}>
