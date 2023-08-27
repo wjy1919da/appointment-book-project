@@ -105,6 +105,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                     aria-labelledby="example-custom-modal-styling-title"
                     style={{marginTop:'50px'}}
                 > 
+                <div className="modal-content-centering-wrapper">
                     <div className='doctor-search-multiInput-button'>
                     <Dropdown>
                         <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
@@ -188,6 +189,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                             </SimpleGrid>
                         )
                     }
+                    </div>
                     </div>
                         </Modal>
                     </div> 

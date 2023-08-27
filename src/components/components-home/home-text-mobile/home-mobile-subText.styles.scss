@@ -1,7 +1,9 @@
-@media(max-width: 1200px){
+@media(max-width: 767px){
     .home-mobile-subText-title{
-        width: 150px;
-        height: 54px;
+        //width: 150px;
+        //height: 54px;
+        width: 40vw;
+        height: 13vw;
         color: #000;
         font-family: Playfair Display;
         font-size: 40px;
@@ -18,7 +20,8 @@
         font-style: normal;
         font-weight: 500;
         line-height: 160%;
-        width: 186px;
+        //width: 186px;
+        width: 40vw;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;

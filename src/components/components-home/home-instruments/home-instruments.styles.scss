@@ -109,14 +109,29 @@
         margin-bottom: 20px;
     }
     .home-instrument-pic{
-        width: 75px;
+        width: 15vw;
         margin: 0 auto;
+        //border-radius: 100%;
+       // box-shadow: 0px 0px 5px #888888;
     }
     .home-procedure-pic{
         border-radius: 100%; // 圆角
-        width: 70px;
-        height: 70px;  
+        width: 10vw;
+        height: 10vw;  
         margin: 0 auto;
+        border-radius: 100%;
+        //box-shadow: 0px 0px 5px #888888;
+    }
+    .title{
+        margin-top: 10px;
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+        /* identical to box height, or 29px */
+        text-align: center;
+        color: #000000;
     }
 }
 // @media(min-width: 1300px){
@@ -162,7 +177,7 @@
         margin-bottom: 20px;
     }
     .home-instrument-pic{
-        width: 75px;
+        width: 15vw;
         margin: 0 auto;
     }
     .home-procedure-pic{
@@ -185,8 +200,8 @@
     }
     .home-procedure-pic{
         border-radius: 100%; // 圆角
-        width: 70px;
-        height: 70px;  
+        width: 10vw;
+        height: 10vw;  
         margin: 0 auto;
     }
 }

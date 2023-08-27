@@ -39,7 +39,7 @@ const DoctorMobilWebpage = () => {
                 <div className='doctor-post-part-mobile'>
                     <span className="doctor-post-title-mobile">Post by doctor</span>
                     <div className='doctor-post-grid-container-mobile'>
-                        <DoctorPostGrid isAbout={isMobile}/>
+                        <DoctorPostGrid/>
                     </div>
                 </div>
             </div>

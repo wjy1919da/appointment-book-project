@@ -1,45 +1,49 @@
 @media(min-width:768px) and (max-width:1024px)
 {
-.doctor-search-multiInput-button
-{
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    margin-top: 30px;
-    width:257px;
-    .custom-button
-    {
-        border:1px solid black;
-        width:257px;
-        height:52px;
-        align-items: center;
-        background-color: white;
-        color: black;
-    }
+    .doctor-search-mobile-multiInput-container {
 
-    .search-doctor-dropDown-menu
-    {
-        width:140%;
-        background-color: rgba(53, 44, 41, 1);
-        margin-top: 10px;
-        margin-left: -15px;
-        justify-content: center;
-        max-height: 250px;
-    }
-    .search-location-button
-    {
-        
-       // margin-left: -10px;
-        border:1px solid black;
-        width:100%;
-        text-align: left;
-        background-color: white;
-        color: rgba(53, 44, 41, 1);
-
+        .doctor-search-multiInput-button {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+            width: 257px;
+            /* align-items: left; This line is incorrect. Use flex-start instead. */
+            align-items: flex-start; 
+            margin:30px 0px 0px 0px;
+    
+            .custom-button {
+                border: 1px solid black;
+                width: 257px;
+                height: 52px;
+                /* align-items: center; This is only valid within a flex container or a grid container. 
+                   If you intended this button to be a flex container and its children to be centered, then it's okay.
+                   If not, you can remove this line.
+                */
+                background-color: white;
+                color: black;
+            }
+    
+            .search-doctor-dropDown-menu {
+                width: 140%;
+                background-color: rgba(53, 44, 41, 1);
+                margin-top: 10px;
+                margin-left: -15px;
+                /* justify-content: center; This property centers the content. 
+                   If you don't want centering, you can remove it or comment it out. */
+                max-height: 250px;
+            }
+    
+            .search-location-button {
+                border: 1px solid black;
+                width: 100%;
+                text-align: left;
+                background-color: white;
+                color: rgba(53, 44, 41, 1);
+            }
+        }
     }
 }
-}
-
 @media (max-width: 767px)
 {
 .doctor-search-multiInput-button
