@@ -7,6 +7,17 @@
 //     }
 // }
 
+
+@media(max-width: 1024px) and (max-width: 1279px){
+    .sub-procedure-table-v2 {
+        width: 80%;
+        height: 60px;
+    }
+    .form-v2-none {
+        display: none;
+    }
+}
+
 //@media (max-width: 767px) {
 @media(max-width: 1023px){
     .sub-procedure-table-v2 {

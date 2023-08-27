@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import "./post-drop-down.styles.scss";
 
 const PostDropdown = (props) => {
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
         const handleWindowResize = () => {
@@ -16,10 +16,10 @@ const PostDropdown = (props) => {
             window.removeEventListener('resize', handleWindowResize);
         }
     }, []);
-    var dropdownContainerWidth = (windowWidth - 2 * 20 - 2 * 13 - 31) / 2;
-    var dropdownButtonText1Width = 83 * (dropdownContainerWidth / 173);
-    var dropdownButtonText2Width = 22 * (dropdownContainerWidth / 173);
-    var dropdownMenuWidth = dropdownContainerWidth * 1.069;
+    const dropdownContainerWidth = (windowWidth - 2 * 20 - 2 * 13 - 2 * 13) / 2;
+    const dropdownButtonText1Width = 83 * (dropdownContainerWidth / 173);
+    const dropdownButtonText2Width = 22 * (dropdownContainerWidth / 173);
+    const dropdownMenuWidth = dropdownContainerWidth * 1.069;
     const [Checked, setChecked] = useState([]);
     const handleToggle = (value) => {
         const currentIndex = Checked.indexOf(value);

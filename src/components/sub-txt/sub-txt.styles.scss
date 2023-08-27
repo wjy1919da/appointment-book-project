@@ -1,5 +1,5 @@
 
-@media(min-width: 1025px){
+@media(min-width: 1280px){
     .sub-txt-container {
         margin: 40px 0;
         
@@ -33,7 +33,8 @@
         }
         
         .sub-txt-text {
-            width: 800px;
+            // width: 800px;
+            width: 57vw;
             //height: 87px;
             
             /* Body 2
@@ -61,7 +62,71 @@
     }
 }
 
-@media (min-width: 768px) and (max-width:1024px) {
+@media (min-width: 1024px) and (max-width:1279px) {
+    .sub-txt-container {
+        margin: 40px 0;
+        
+    
+        .sub-txt-title {
+            // width: 500px;
+            width: 60vw;
+            height: 32px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+    
+            /* Heading 4 */
+    
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 135%;
+            /* or 32px */
+    
+            display: flex;
+            align-items: center;
+    
+            color: #000000;
+    
+    
+            /* Inside auto layout */
+    
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        
+        .sub-txt-text {
+            // width: 800px;
+            width: 60vw;
+            //height: 87px;
+            
+            /* Body 2
+            
+            Playfair Display
+            */
+            font-family: 'Lora';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 160%;
+            /* or 29px */
+            
+            
+            color: #000000;
+            
+            
+            /* Inside auto layout */
+            
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width:1023px) {
     .sub-txt-container {
         margin: 40px 0;
     
