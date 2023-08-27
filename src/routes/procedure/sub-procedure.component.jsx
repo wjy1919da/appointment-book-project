@@ -52,8 +52,8 @@ const SubProcedure = () => {
     const { data, isLoading, error } = useGetProcedures();
     const setCategoryId = useProcedureQueryStore(state=>state.setCategoryId);
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
-    const isWeb = useMediaQuery({ query: `(min-width: 768px)` });
-    const isMobile = useMediaQuery({ query: `(max-width: 576px)` });
+    const isPadAndWeb = useMediaQuery({ query: `(min-width: 768px)` });
+    const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     useEffect(() => {
         setCategories(name);
     }, [name]);
@@ -66,7 +66,7 @@ const SubProcedure = () => {
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
-        if (isWeb) {
+        if (isPadAndWeb) {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
         if (isMobile) {

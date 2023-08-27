@@ -1,5 +1,5 @@
 
-@media (min-width: 992px){
+// @media (min-width: 768px){
     .doctor-post-outer-container{
         width:100%;
         display: flex;
@@ -24,10 +24,12 @@
        padding: 20px 40px;
        gap:32px;
     }
-}
-@media (max-width: 576px){
+// }
+
+@media (max-width: 767px){
     .doctor-post-outer-container{
         width:100%;
+        margin-top: 0px;
         display: flex;
         flex-direction: column;
         align-items: center; 
@@ -39,9 +41,11 @@
         background: #FBFCFF;  /* 白 */
         border-bottom: 1px solid #E2E3E7;  /* 银灰 */
         display: flex;
-        justify-content: space-between; /* 确保两个元素之间有最大的间隙 */
-        padding: 0 2vh;  /* 上下边距为0, 左右边距为2vh */
-        gap: 3vh;  /* 设置两个元素之间的间隙为3vh */
+        justify-content: center;
+        // justify-content: space-between; /* 确保两个元素之间有最大的间隙 */
+        padding: 0 33px;
+        // padding: 0 2vh;  /* 上下边距为0, 左右边距为2vh */
+        // gap: 3vh;  /* 设置两个元素之间的间隙为3vh */
     }
 }
 
