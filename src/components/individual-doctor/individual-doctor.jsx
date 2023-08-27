@@ -10,13 +10,14 @@ import {useParams} from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
+//import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor';
 import Footer from '../footer/footer.component';
 const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
    
-   // const {mem} = useParams(); // Assuming "nickname" is the parameter in the URL
+    const {memberId} = useParams(); // Assuming "nickname" is the parameter in the URL
     //const setNickName = useDoctorQueryStore((state) => state.setNickName);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     //console.log('IndividualDoctor queryStore: ', doctorQuery);
@@ -28,7 +29,8 @@ const IndividualDoctor = () => {
         fetchNextPage,
         hasNextPage
     } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
-    
+    //const {data,error,isLoading,} = useGetDoctorInfo();
+
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
     const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;

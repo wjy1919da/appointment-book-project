@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useInfiniteQuery} from "react-query";
+import { useInfiniteQuery, useQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
-
 const base = {
   reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
-  aboutUrl: 'https://api.charm-life.com/info/doctor-details'
+  aboutUrl: 'https://api.charm-life.com/info/doctor-details',
+  infoUrl: 'http://localhost:8080/doctor/search'
   // aboutUrl: 'http://localhost:8080/info/doctor-details'
 }
 
@@ -78,3 +78,25 @@ export function useGetDoctorAbout() {
     }
   );
 }
+// Get all doctor info
+export function useGetDoctorInfo() {
+  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+
+  const fetchDoctorInfo = async () => {
+    try {
+      const response = await axios.get(base.infoUrl, {
+        "memberId": 45,
+      });
+      //console.log("doctor about data", response.data);
+      return response.data.data;
+    } catch (error) {
+      throw new Error("Failed to fetch doctor about");
+    }
+  };
+
+  return useQuery(["doctor-info", doctorQuery.memberId], fetchDoctorInfo, {
+    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
+    keepPreviousData: true,
+  });
+}
+// 

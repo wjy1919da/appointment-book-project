@@ -317,9 +317,9 @@
         width: 50%;
         flex: 1;
         display: flex;
-        justify-content: flex-end; /* 添加这一行使图片右对齐 */
+        justify-content: flex-end;
+        align-items: flex-start; 
         height: auto;
-        /* order: 1;  移除 // */
     }
     .home-pic{
         //margin-top: -25px;
