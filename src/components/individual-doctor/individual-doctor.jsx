@@ -18,7 +18,6 @@ const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-   
     const {encodedMemberId} = useParams(); 
     console.log('encodeMemberId: ', encodedMemberId);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
@@ -41,7 +40,9 @@ const IndividualDoctor = () => {
     //const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;
     useEffect(() => {
        setMemberId(encodedMemberId);
-       setNickName(data.nickname);
+       if(data){
+         setNickName(data.nickname);
+        }
     }, [encodedMemberId]);
     
 
@@ -59,16 +60,18 @@ const IndividualDoctor = () => {
     return (
         <div className='individual-page-container'>
             <div className="individual-doctor-container">
-                {/* <div className="individual-doctor-left-container">
+                {/* Evaluation hook */}
+                <div className="individual-doctor-left-container">
                     {
-                        data.pages[0].data && 
+                        data && 
                           <DoctorProfile
-                            posts={data.pages[0].data.postNumber}
-                            follower={data.pages[0].data.followers}
-                            following={data.pages[0].data.followings}
-                            doctorStars={data.pages[0].data.doctorStars}/>
+                            nickname={data.nickname}
+                            projects={data.name}
+                            mechName={data.mechName}
+                            address = {data.address}
+                        />
                     }
-                </div> */}
+                </div>
                 <div className="individual-doctor-right-container">
                     <div className='individual-doctor-tabs'>
                         {
@@ -82,6 +85,7 @@ const IndividualDoctor = () => {
                             ))
                         }
                     </div>
+                    {/* reviews hook */}
                     {/* <InfiniteScroll
                         dataLength={fetchedReviewsCount}
                         next={fetchNextPage}

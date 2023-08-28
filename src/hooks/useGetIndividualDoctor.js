@@ -18,15 +18,15 @@ export function useGetDoctorReviews() {
         base.reviewsUrl,
         {
           "currentPage": pageParam,
-          "memberId": doctorQuery.memberId,
+          "memberId": 56,
           "nickname": clearnickName,
           "pageSize": doctorQuery.pageSize,
           
         }
       );
       
-      console.log("reviewdata",response.data);
-      return { data: response.data.data, pageInfo: response.data.pageInfo };
+      //console.log("reviewdata",response.data);
+      return { data: response.data, pageInfo: response.data.pageInfo };
     } catch (error) {
       throw new Error('Failed to fetch doctor reviews');
     }
@@ -54,7 +54,7 @@ export function useGetDoctorAbout() {
         base.aboutUrl,
         {
           "currentPage": pageParam,
-          "memberId": doctorQuery.memberId,
+          "memberId": 56,
           "nickname": clearnickName,
           "pageSize": doctorQuery.pageSize,
 
