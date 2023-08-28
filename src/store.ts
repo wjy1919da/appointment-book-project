@@ -5,7 +5,7 @@ interface DoctorQuery{
     field?: string;
     pageSize?: number;
     nickName:string;
-    memberId?:number;
+    memberId?:string;
 }
 interface doctorQueryStore{
     doctorQuery: DoctorQuery;
@@ -14,10 +14,10 @@ interface doctorQueryStore{
     setField: (field: string) => void;
     setPageSize: (pageSize: number) => void; 
     setNickName: (setNickName:string) => void;
-    setMemberId: (memberId:number) => void;
+    setMemberId: (memberId:string) => void;
 }
 const useDoctorQueryStore = create<doctorQueryStore>((set) => ({ 
-    doctorQuery: {pageSize: 20, field:"", location:"",doctorName:"",nickName:"",memberId:0}, // pageSize default value 20
+    doctorQuery: {pageSize: 20, field:"", location:"",doctorName:"",nickName:"",memberId:""}, // pageSize default value 20
     setDoctorName: (doctorName) => 
         set((store) => ({ doctorQuery: {...store.doctorQuery, doctorName} })),
     setLocation: (location) =>

@@ -3,6 +3,7 @@ import {
     SimpleGrid,
     Text
   } from '@chakra-ui/react';
+import Hashids from 'hashids';
 import './doctor-search-popup.styles.scss'
 import { Link } from 'react-router-dom';
 import React,{ useRef, useState,useEffect } from 'react';
@@ -60,12 +61,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const mergedData = useMemo(() => {
      return data ? mergeDoctorsByNickname(data.pages) : [];
    }, [data]);
-  
+   const hashids = new Hashids('Encode the Url');
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
    const doctorQuery  = useDoctorQueryStore(state=>state.doctorQuery);
-   const setNickName = useDoctorQueryStore(state=>state.setNickName);
+   const setMemberId = useDoctorQueryStore(state=>state.setMemberId);
    const setDoctorName = useDoctorQueryStore(state=>state.setDoctorName);
    const setField = useDoctorQueryStore(state=>state.setField);
    const setLocation = useDoctorQueryStore(state=>state.setLocation);
@@ -185,20 +186,13 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                             (data && 
                                 <SimpleGrid columns={1} spacing={0}>
                                     {mergedData && mergedData.map((item, i) => (
-                                        item.memberId && item.nickname &&
+                                        item.memberId &&
                                         <div key={i} className='doctor-search-card-container'>
                                            <Link 
-                                                to={`/doctor/${item.memberId}`} 
-                                                onClick={() => {
-                                                    setNickName(item.nickname);
-                                                    setDoctorName(item.nickname);
-                                                    setField("");
-                                                    setLocation("");
-                                                }}
+                                                to={`/doctor/${hashids.encode(item.memberId)}`} 
                                             >
                                                 <DoctorCard doctor={item} />
                                             </Link>
-
                                         </div>
                                     ))}
                                 </SimpleGrid>
@@ -256,20 +250,13 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                     (data && 
                         <SimpleGrid columns={3} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
-                                item.memberId && item.nickname &&
+                                item.memberId &&
                                 <div key={i} className='doctor-search-card-container'>
-                                   <Link 
-                                        to={`/doctor/${item.memberId}`} 
-                                        onClick={() => {
-                                            setNickName(item.nickname);
-                                            setDoctorName(item.nickname);
-                                            setField("");
-                                            setLocation("");
-                                        }}
-                                    >
-                                        <DoctorCard doctor={item} />
-                                    </Link>
-
+                                 <Link 
+                                    to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                 >
+                                    <DoctorCard doctor={item} />
+                                </Link>
                                 </div>
                             ))}
                         </SimpleGrid>
