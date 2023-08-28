@@ -16,7 +16,7 @@ const HomeButton = (props) => {
     const hasIcon = props.isIcon;
     const buttonStyle = {
         width: props.width || 'auto',
-        height:props.height
+        height:props.height || 'auto'
          // if width is not provided, it defaults to 'auto'
         // Other styles can be added here
       };

@@ -10,11 +10,13 @@ import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component
 import './home-post.styles.scss';
 import HomeLink from '../home-link/home-link.component';
 import { useMediaQuery } from 'react-responsive';
+import HomePostPic from '../../../assets/home/trendings.png';
 import { Fragment } from 'react';
 const HomePost = () => {
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({ query: `(min-width: 768px) and (max-width: 1023px)` });
     const isMobileOrIpad = isMobile || isIpad;
+    const selectedImage = isIpad ? PostPic : HomePostPic;
     return (
         <div className="Home-post">
             <div className='home-mobile-share-pic-container'>
@@ -22,7 +24,8 @@ const HomePost = () => {
                         <div className='home-post-pic animate__animated animate__slideInUp'>
                             <div className='home-post-inner-container'>
                                 {/* <div className='post-pic'></div> */}
-                                <img src={PostPic} alt="postPic" className='post-pic'/>
+                                {/* <img src={PostPic} alt="postPic" className='post-pic'/> */}
+                                <img src={selectedImage} alt="postPic" className='post-pic'/>
                                 <div className="p-topic">
                                     <img src={Decoration} className="decoration-pic1" alt=''></img>
                                     <img src={Decoration} className="decoration-pic2" alt=''></img>

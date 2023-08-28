@@ -41,17 +41,11 @@ const mergeDoctorsByNickname = (pages) => {
     return Object.values(mergedDoctors);
 };
 const DoctorProfile = ({posts, follower, following,doctorStars}) => {
-    const { nickname } = useParams();
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
     const setField = useDoctorQueryStore((state) => state.setField);
     const setLocation = useDoctorQueryStore((state) => state.setLocation);
     const isMobile  = useMediaQuery({ query: `(max-width: 767px)` });
     const buttonHeight = isMobile ? '50px' : '56px';
-    useEffect(() => {
-        setDoctorName(nickname);
-        setField("");
-        setLocation("");
-    }, [nickname]);
     const {
             data,
             error,
