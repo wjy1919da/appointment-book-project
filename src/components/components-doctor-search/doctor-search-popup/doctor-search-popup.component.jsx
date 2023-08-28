@@ -227,10 +227,11 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                             onChange={(e)=>setInternalName(e.target.value)}
                         />
                         <VerticalDivider/>
-                        <button className='doctor-search-button' type = 'submit'>
+                        {/* <button className='doctor-search-button' type = 'submit'>
                                 <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                                 search
-                        </button>
+                        </button> */}
+                        <HomeButton title='Search'  onClick={handleMobileClick} isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
                     </InputGroup> 
                 </form>
                 </div>
