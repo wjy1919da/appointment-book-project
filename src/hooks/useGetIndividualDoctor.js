@@ -7,7 +7,7 @@ const base = {
   infoUrl: 'http://localhost:8080/doctor/search'
   // aboutUrl: 'http://localhost:8080/info/doctor-details'
 }
-
+// Reviews
 export function useGetDoctorReviews() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   //console.log("useGetDoctorReviewsDoctorQuery",doctorQuery)
@@ -43,12 +43,12 @@ export function useGetDoctorReviews() {
     }
   );
 }
-
+// Projects, Counpons, About
 export function useGetDoctorAbout() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  console.log(doctorQuery)
+  console.log("useGetDoctorAbout: ",doctorQuery)
   const clearnickName=doctorQuery.nickName.replace(":", "")
-  const fetchDoctorReviews = async ({ pageParam = 1 }) => {
+  const fetchDoctorAbout = async ({ pageParam = 1 }) => {
     try {
       const response = await axios.post(
         base.aboutUrl,
@@ -67,10 +67,9 @@ export function useGetDoctorAbout() {
       throw new Error('Failed to fetch doctor about');
     }
   };
-
   return useInfiniteQuery(
     ['doctor-about', doctorQuery.nickName, doctorQuery.pageSize],
-    fetchDoctorReviews,
+    fetchDoctorAbout,
     {
       staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hours
       keepPreviousData: true,

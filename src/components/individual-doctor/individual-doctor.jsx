@@ -19,11 +19,11 @@ const IndividualDoctor = () => {
         window.scrollTo(0, 0);
     });
     const {encodedMemberId} = useParams(); 
-    console.log('encodeMemberId: ', encodedMemberId);
+    //console.log('encodeMemberId: ', encodedMemberId);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
-    console.log('IndividualDoctor queryStore: ', doctorQuery);
+    //console.log('IndividualDoctor queryStore: ', doctorQuery);
     // const {
     //     data,
     //     error,
@@ -33,7 +33,7 @@ const IndividualDoctor = () => {
     //     hasNextPage
     // } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
     const {data,error,isLoading,} = useGetDoctorInfo();
-    console.log('IndividualDoctor data: ', data);
+    //console.log('IndividualDoctor data: ', data);
 
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
@@ -41,8 +41,8 @@ const IndividualDoctor = () => {
     useEffect(() => {
        setMemberId(encodedMemberId);
        if(data){
-         setNickName(data.nickname);
-        }
+          setNickName(data.nickname);
+       }
     }, [encodedMemberId]);
     
 
@@ -85,6 +85,10 @@ const IndividualDoctor = () => {
                             ))
                         }
                     </div>
+                    {activeTab === 0 && <DoctorAbout/>}
+                    {activeTab === 1 && <div className="individual-doctor-posts">
+                            <DoctorPostGrid isAbout={true}/> 
+                    </div>}
                     {/* reviews hook */}
                     {/* <InfiniteScroll
                         dataLength={fetchedReviewsCount}
@@ -93,12 +97,8 @@ const IndividualDoctor = () => {
                         //style={{ width: '100%' }}
                         scrollThreshold={0.1}>
                         
-                        {activeTab === 0 && <DoctorAbout/>}
-                        {
-                            activeTab === 1 && <div className="individual-doctor-posts">
-                                <DoctorPostGrid isAbout={true}/> 
-                            </div>
-                        }
+                        
+                        
                         {
                             activeTab === 2 && data?.pages.map((page, index) => (
                                         <React.Fragment key={index}>

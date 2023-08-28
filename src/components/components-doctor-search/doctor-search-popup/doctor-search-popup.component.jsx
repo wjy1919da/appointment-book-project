@@ -186,10 +186,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                             (data && 
                                 <SimpleGrid columns={1} spacing={0}>
                                     {mergedData && mergedData.map((item, i) => (
-                                        item.memberId &&
+                                        item.memberId &&item.nickname&&
+                                        //item.nickname&&
                                         <div key={i} className='doctor-search-card-container'>
                                            <Link 
-                                                to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                               to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                               //to = "#"
                                             >
                                                 <DoctorCard doctor={item} />
                                             </Link>
@@ -250,13 +252,15 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                     (data && 
                         <SimpleGrid columns={3} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
-                                item.memberId &&
+                                item.memberId &&item.nickname&&
+                                //item.nickname&&
                                 <div key={i} className='doctor-search-card-container'>
-                                 <Link 
-                                    to={`/doctor/${hashids.encode(item.memberId)}`} 
-                                 >
-                                    <DoctorCard doctor={item} />
-                                </Link>
+                                    <Link 
+                                        to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                        //to = "#"
+                                    >
+                                        <DoctorCard doctor={item} />
+                                    </Link>
                                 </div>
                             ))}
                         </SimpleGrid>
