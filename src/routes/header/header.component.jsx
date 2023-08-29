@@ -1,15 +1,10 @@
 import { Outlet, Link } from 'react-router-dom';
 import { Fragment } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
 import menuBar from '../../assets/home/menu-bar.png'
-import HeaderMobileDropDownV2 from './header-mobile-dropDownV2.component';
-
 import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
