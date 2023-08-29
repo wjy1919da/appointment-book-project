@@ -9,7 +9,7 @@ import badgeIcon from '../../../assets/doctor/search-card-badgeIcon.png'
 import ConsultDoctorButton from '../../consult-doctor-button/consult-doctor-button.component';
 import FollowButton from '../../follow-button/follow-button.component';
 import useDoctorQueryStore from '../../../store.ts';
-import {useSearchMultiConditionsPopUp} from '../../../hooks/useSearchDoctors';
+import {useGetDoctorAbout} from '../../../hooks/useGetIndividualDoctor';
 import StarRate from '../../starRate/starRate';
 import backIcon from '../../../assets/doctor/left_back.png';
 import { useMemo } from 'react';
@@ -17,14 +17,10 @@ import { useMediaQuery } from 'react-responsive';
 import HomeButton from '../../home-button/home-button.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
-    
-  
     // Flatten the data into a single array
     const flatData = pages.flatMap(page => page.data || []);
-  
     flatData.forEach(doctor => {
       const { nickname, name } = doctor;
-  
       if (mergedDoctors[nickname]) {
         // If doctor already exists, add the new programTitle to the existing one
         mergedDoctors[nickname].name.push(name);
@@ -44,6 +40,7 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
     const setDoctorName = useDoctorQueryStore((state) => state.setDoctorName);
     const setField = useDoctorQueryStore((state) => state.setField);
     const setLocation = useDoctorQueryStore((state) => state.setLocation);
+   
     const isMobile  = useMediaQuery({ query: `(max-width: 767px)` });
     const buttonHeight = isMobile ? '50px' : '56px';
     const {
@@ -53,8 +50,8 @@ const DoctorProfile = ({posts, follower, following,doctorStars}) => {
             isFetchingNextPage,
             fetchNextPage,
             hasNextPage
-    } = useSearchMultiConditionsPopUp();
-   const mergedData = useMemo(() => {
+    } = useGetDoctorAbout();
+    const mergedData = useMemo(() => {
         return data ? mergeDoctorsByNickname(data.pages) : [];
     }, [data]);
     const profileData = data?.pages[0]?.data[0];

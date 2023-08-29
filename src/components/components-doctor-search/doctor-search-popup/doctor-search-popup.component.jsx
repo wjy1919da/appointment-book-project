@@ -3,12 +3,14 @@ import {
     SimpleGrid,
     Text
   } from '@chakra-ui/react';
+import Hashids from 'hashids';
 import './doctor-search-popup.styles.scss'
 import { Link } from 'react-router-dom';
 import React,{ useRef, useState,useEffect } from 'react';
 import {useSearchMultiConditionsPopUp ,useSearchMultiConditions} from '../../../hooks/useSearchDoctors';
 import DoctorCard from '../../doctor-card/doctor-card.component';
 import Modal from 'react-bootstrap/Modal';
+import '@fortawesome/fontawesome-free/css/all.css';
 //src/store.ts
 import useDoctorQueryStore from '../../../store.ts';
 import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.component';
@@ -60,12 +62,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const mergedData = useMemo(() => {
      return data ? mergeDoctorsByNickname(data.pages) : [];
    }, [data]);
-  
+   const hashids = new Hashids('Encode the Url');
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
    const doctorQuery  = useDoctorQueryStore(state=>state.doctorQuery);
-   const setNickName = useDoctorQueryStore(state=>state.setNickName);
+   const setMemberId = useDoctorQueryStore(state=>state.setMemberId);
    const setDoctorName = useDoctorQueryStore(state=>state.setDoctorName);
    const setField = useDoctorQueryStore(state=>state.setField);
    const setLocation = useDoctorQueryStore(state=>state.setLocation);
@@ -76,13 +78,35 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
    const searchButtonWidth = isIpad ? '600px' : (isPhone ? '186px' : 'defaultWidth');
    const searchButtonHeight = isIpad ? '56px' : (isPhone ? '40px' : 'defaultWidth');
+   const [column, setColumn] = useState(3); // Default value for column
    const nickname = useDoctorQueryStore(state=>state.nickname);
 //    useEffect(() => {
 //        setDoctorName(nickname);
 //        setField("");
 //        setLocation("");
 //    }, [nickname]);
-   
+    useEffect(() => {
+        const handleResize = () => {
+        const width = window.innerWidth;
+
+        if (width >= 1025 && width <= 1350) {
+            setColumn(2);
+        } else if (width > 1350) {
+            setColumn(3);
+        }
+        };
+
+            // Initial call to set the initial column value
+        handleResize();
+
+        // Add event listener to handle window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
    if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -99,116 +123,126 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
         <div>
             {isMobile?(
             <div>
-                {show && (
-                <img src= {CloseButton} onClick={onHide} style={{width:'50px',height:'50px'}} className='pop-close-button'/>
-                )}
-            <div class="modal-parent-container">
-                <Modal
-                    dialogClassName='post-detail-mobile-modals'
-                    show={show}
-                    onHide={onHide}
-                    size='xl'
-                    aria-labelledby="example-custom-modal-styling-title"
-                    style={{marginTop:'50px'}}
-                > 
-                <div className="modal-content-centering-wrapper">
-                    <div className='doctor-search-multiInput-button'>
-                    <Dropdown>
-                        <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            {internalLocation||'ZIP,city or state'}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
-                                <Form.Control 
-                                type="input" 
-                                placeholder="search..." 
-                                ref = {locationRef}
-                                value={internalLocation||''}
-                                onChange={(e)=>setInternalLocation(e.target.value)}
-                                />
-                            </Form.Group>
-                            </Form>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Dropdown>
-                        <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            {internalField||'Specialization'}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
-                                <Form.Control 
-                                    type="input" 
-                                    placeholder="search..." 
-                                    ref = {specializationRef}
-                                    value={internalField||''}
-                                    onChange={(e)=>setInternalField(e.target.value)}
-                                />
-                            </Form.Group>
-                            </Form>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Dropdown>
-                        <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                        {internalName||'Doctor Name'}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
-                                <Form.Control 
-                                    type="email" 
-                                    placeholder="search..." 
-                                    ref = {doctorNameRef}
-                                    value={internalName||''}
-                                    onChange={(e)=>setInternalName(e.target.value)}
-                                />
-                            </Form.Group>
-                        
-                            </Form>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    {/* <button 
-                            className='doctor-search-button' 
-                            type = 'search'
-                            onClick={handleMobileClick}
-                        >
-                            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-                            search
-                    </button> */}
-                    <HomeButton title='Search'  onClick={handleMobileClick} isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
-                    {isLoading ?
-                        <div><p>is Loading</p></div> :
-                            (data && 
-                                <SimpleGrid columns={1} spacing={0}>
-                                    {mergedData && mergedData.map((item, i) => (
-                                        item.memberId && item.nickname &&
-                                        <div key={i} className='doctor-search-card-container'>
-                                           <Link 
-                                                to={`/doctor/${item.memberId}`} 
-                                                onClick={() => {
-                                                    setNickName(item.nickname);
-                                                    setDoctorName(item.nickname);
-                                                    setField("");
-                                                    setLocation("");
-                                                }}
-                                            >
-                                                <DoctorCard doctor={item} />
-                                            </Link>
-
-                                        </div>
-                                    ))}
-                                </SimpleGrid>
-                            )
-                        }
-                    </div>
-                    </div>
-                        </Modal>
-                    </div> 
+                <div className="modal-parent-container">
+                    <Modal
+                        dialogClassName='close-button-modal'
+                        show={show} // Set this according to your logic
+                        onHide={onHide} // Set this according to your logic
+                        size='xl'
+                        aria-labelledby="example-custom-modal-styling-title"
+                        style={{ marginTop: '50px' }}
+                    >
+                        <div className="modal-content-centering-wrapper">
+                            <div className="modal-content first-modal-content">
+                                <button className="close-button" onClick={onHide}>
+                                <i className="fas fa-times"></i>
+                                </button>
+                                {/* ...more content for the first modal... */}
+                            </div>
+                        </div>
+                    </Modal>
                 </div>
+                <div class="modal-parent-container">
+                    <Modal
+                        dialogClassName='post-detail-mobile-modals'
+                        show={show}
+                        onHide={onHide}
+                        size='xl'
+                        aria-labelledby="example-custom-modal-styling-title"
+                        style={{marginTop:'100px'}}
+                    > 
+                        <div className="modal-content-centering-wrapper">
+                            <div className='doctor-search-multiInput-button'>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                                        {internalLocation||'ZIP,city or state'}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                                        <Form className="p-4">
+                                        <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                            <Form.Control 
+                                            type="input" 
+                                            placeholder="search..." 
+                                            ref = {locationRef}
+                                            value={internalLocation||''}
+                                            onChange={(e)=>setInternalLocation(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        </Form>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                                        {internalField||'Specialization'}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                                        <Form className="p-4">
+                                        <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                            <Form.Control 
+                                                type="input" 
+                                                placeholder="search..." 
+                                                ref = {specializationRef}
+                                                value={internalField||''}
+                                                onChange={(e)=>setInternalField(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        </Form>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="pop-up-custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                                    {internalName||'Doctor Name'}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                                        <Form className="p-4">
+                                        <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'186px', marginLeft:'-10px'}}>
+                                            <Form.Control 
+                                                type="email" 
+                                                placeholder="search..." 
+                                                ref = {doctorNameRef}
+                                                value={internalName||''}
+                                                onChange={(e)=>setInternalName(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    
+                                        </Form>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                {/* <button 
+                                        className='doctor-search-button' 
+                                        type = 'search'
+                                        onClick={handleMobileClick}
+                                    >
+                                        <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
+                                        search
+                                </button> */}
+                                <HomeButton title='Search'  onClick={handleMobileClick} isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
+                                {isLoading ?
+                                    <div><p>is Loading</p></div> :
+                                        (data && 
+                                            <SimpleGrid columns={1} spacing={0}>
+                                                {mergedData && mergedData.map((item, i) => (
+                                                    // item.memberId &&
+                                                    item.nickname &&
+                                                    <div key={i} className='doctor-search-card-container'>
+                                                    {/* <Link 
+                                                            to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                                        > */}
+                                                            <DoctorCard doctor={item} />
+                                                        {/* </Link> */}
+                                                    </div>
+                                                ))}
+                                            </SimpleGrid>
+                                        )
+                                    }
+                            </div>
+                        </div>
+                    </Modal>
+                </div> 
+            </div>
             ):(
         <Modal
             dialogClassName="doctor-search-modals"
@@ -241,12 +275,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                             value={internalName || ''}
                             onChange={(e)=>setInternalName(e.target.value)}
                         />
-                        
-                        {/* <button className='doctor-search-button' type = 'submit'>
-                                <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-                                search
-                        </button> */}
-                        <HomeButton title='Search' isIcon={SearchIcon} width='150px'height='40px' />
+                        <HomeButton title='Search'  isIcon={SearchIcon} width='150px'height='40px'/>
                     </InputGroup> 
                 </form>
                 </div>
@@ -255,22 +284,16 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                 {isLoading ?
                     <div><p>is Loading</p></div> :
                     (data && 
-                        <SimpleGrid columns={3} spacing={10}>
+                        <SimpleGrid columns={column} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
-                                item.memberId && item.nickname &&
+                                // item.memberId &&
+                                item.nickname &&
                                 <div key={i} className='doctor-search-card-container'>
-                                   <Link 
-                                        to={`/doctor/${item.memberId}`} 
-                                        onClick={() => {
-                                            setNickName(item.nickname);
-                                            setDoctorName(item.nickname);
-                                            setField("");
-                                            setLocation("");
-                                        }}
-                                    >
-                                        <DoctorCard doctor={item} />
-                                    </Link>
-
+                                 {/* <Link 
+                                    to={`/doctor/${hashids.encode(item.memberId)}`} 
+                                 > */}
+                                    <DoctorCard doctor={item} />
+                                {/* </Link> */}
                                 </div>
                             ))}
                         </SimpleGrid>

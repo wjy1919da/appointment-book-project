@@ -108,13 +108,15 @@
         //box-sizing: border-box; 
         position: relative; 
     }
-    .home-doctor-video{
+    .home-doctor-video {
         position: absolute;
         right:6%;
         left:6%;
-        top:30px;
+        top: 3.5vw;
         border-radius:5px;
+        overflow: hidden;
     }
+    
    
     .home-doctor-apple-screen {
         display: flex;
@@ -194,12 +196,13 @@
         //box-sizing: border-box; 
         position: relative; 
     }
-    .home-doctor-video{
+    .home-doctor-video {
         position: absolute;
         right:6%;
         left:6%;
-        top:30px;
+        top: 3.5vw;
         border-radius:5px;
+        overflow: hidden;
     }
    
     .home-doctor-apple-screen {

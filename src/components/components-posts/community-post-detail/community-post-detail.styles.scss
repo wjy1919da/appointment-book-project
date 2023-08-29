@@ -4,24 +4,38 @@
 //     max-height: 800px; /* Set your desired height */
 //     height: 100%; /* Set your desired height */
 //   }
-.post-detail-close-button
+.close-button-modal
 {
-    position:absolute;
-    right:0;
-    top:0px;
+    .modal-content
+    {
+        background-color: transparent;
+        border:none;
+    }
+}
+.first-modal-content {
+    background-color: transparent; /* Set background color to transparent */
+  }
+  
+  /* Close button styles */
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: -10%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .close-button i {
+    font-size: 40px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
     border:none;
-    padding:10px 20px;
-    
-    
-
-.btn-close
-{
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1;
-    color:white;
-}
-}
+    filter: brightness(1.5);
+    padding: 2px;
+    margin: 0;
+  }
 .modal-dialog {
     max-width: 100%; /* Allows the child element to define the width */
     width: auto;

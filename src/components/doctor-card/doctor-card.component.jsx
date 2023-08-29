@@ -10,7 +10,8 @@ import { useMediaQuery } from 'react-responsive';
 const DoctorCard = ({doctor}) => {
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
-    const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : 'defaultWidth');
+    const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
+    console.log("doctor card: ",doctor);
     return (
          <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
             <div className='doctor-profile-img'>

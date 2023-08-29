@@ -1,5 +1,6 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import "./individual-doctor.styles.scss";
+import Hashids from 'hashids';
 import DoctorProfile from '../component-individual-doctor/doctor-profile/doctor-profile';
 import DoctorAbout from '../component-individual-doctor/doctor-about/doctor-about.component';
 import DoctorReview from '../component-individual-doctor/doctor-review-card/doctor-review-card';
@@ -10,6 +11,7 @@ import {useParams} from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
+import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
 //import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor';
 import Footer from '../footer/footer.component';
 const IndividualDoctor = () => {
@@ -17,26 +19,31 @@ const IndividualDoctor = () => {
         window.scrollTo(0, 0);
     });
    
-    const {memberId} = useParams(); // Assuming "nickname" is the parameter in the URL
-    //const setNickName = useDoctorQueryStore((state) => state.setNickName);
+    const {encodedMemberId} = useParams(); 
+    console.log('encodeMemberId: ', encodedMemberId);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-    //console.log('IndividualDoctor queryStore: ', doctorQuery);
-    const {
-        data,
-        error,
-        isLoading,
-        isFetchingNextPage,
-        fetchNextPage,
-        hasNextPage
-    } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
-    //const {data,error,isLoading,} = useGetDoctorInfo();
+    const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
+    const setNickName = useDoctorQueryStore((state) => state.setNickName);
+    console.log('IndividualDoctor queryStore: ', doctorQuery);
+    // const {
+    //     data,
+    //     error,
+    //     isLoading,
+    //     isFetchingNextPage,
+    //     fetchNextPage,
+    //     hasNextPage
+    // } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
+    const {data,error,isLoading,} = useGetDoctorInfo();
+    console.log('IndividualDoctor data: ', data);
 
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
-    const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;
-    // useEffect(() => {
-    //     setNickName(nickname);
-    // }, [nickname]);
+    //const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;
+    useEffect(() => {
+       setMemberId(encodedMemberId);
+       setNickName(data.nickname);
+    }, [encodedMemberId]);
+    
 
     if (isLoading) {
         return <HomeSpinner/>;
@@ -52,7 +59,7 @@ const IndividualDoctor = () => {
     return (
         <div className='individual-page-container'>
             <div className="individual-doctor-container">
-                <div className="individual-doctor-left-container">
+                {/* <div className="individual-doctor-left-container">
                     {
                         data.pages[0].data && 
                           <DoctorProfile
@@ -61,7 +68,7 @@ const IndividualDoctor = () => {
                             following={data.pages[0].data.followings}
                             doctorStars={data.pages[0].data.doctorStars}/>
                     }
-                </div>
+                </div> */}
                 <div className="individual-doctor-right-container">
                     <div className='individual-doctor-tabs'>
                         {
@@ -75,7 +82,7 @@ const IndividualDoctor = () => {
                             ))
                         }
                     </div>
-                    <InfiniteScroll
+                    {/* <InfiniteScroll
                         dataLength={fetchedReviewsCount}
                         next={fetchNextPage}
                         hasMore={hasNextPage}
@@ -109,7 +116,7 @@ const IndividualDoctor = () => {
                                         </React.Fragment>
                                     ))
                         }
-                    </InfiniteScroll>
+                    </InfiniteScroll> */}
 
                 </div>
             </div>
