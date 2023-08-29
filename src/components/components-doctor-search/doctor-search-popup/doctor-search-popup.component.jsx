@@ -10,7 +10,6 @@ import React,{ useRef, useState,useEffect } from 'react';
 import {useSearchMultiConditionsPopUp ,useSearchMultiConditions} from '../../../hooks/useSearchDoctors';
 import DoctorCard from '../../doctor-card/doctor-card.component';
 import Modal from 'react-bootstrap/Modal';
-//src/store.ts
 import useDoctorQueryStore from '../../../store.ts';
 import VerticalDivider from '../doctor-search-multiInput/doctor-search-divider.component';
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
@@ -20,35 +19,7 @@ import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
 import { useMemo } from 'react';
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { useMediaQuery } from 'react-responsive';
-// import CloseButton from 'react-bootstrap/CloseButton';
-// import styled from 'styled-components';
 import CloseButton from '../../../assets/post/pop-up-close-button.png';
-
-const mergeDoctorsByNickname = (pages) => {
-    const mergedDoctors = {};
-  
-    // Flatten the data into a single array
-    const flatData = pages.flatMap(page => page.data || []);
-  
-    flatData.forEach(doctor => {
-      const { nickname, name } = doctor;
-  
-      if (mergedDoctors[nickname]) {
-        // If doctor already exists, add the new programTitle to the existing one
-        mergedDoctors[nickname].name.push(name);
-      } else {
-        // If doctor doesn't exist, add them to the object
-        mergedDoctors[nickname] = {
-          ...doctor,
-          name: [name],  // Use an array to store programTitles
-        };
-      }
-    });
-  
-    // Convert the object back into an array
-    return Object.values(mergedDoctors);
-  };
-
 const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const {
         data,
@@ -58,15 +29,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
         fetchNextPage,
         hasNextPage
    } = useSearchMultiConditionsPopUp();
-   const mergedData = useMemo(() => {
-     return data ? mergeDoctorsByNickname(data.pages) : [];
-   }, [data]);
+   const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
    const hashids = new Hashids('Encode the Url');
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
    const doctorNameRef = useRef(null);
    const doctorQuery  = useDoctorQueryStore(state=>state.doctorQuery);
-   const setMemberId = useDoctorQueryStore(state=>state.setMemberId);
    const setDoctorName = useDoctorQueryStore(state=>state.setDoctorName);
    const setField = useDoctorQueryStore(state=>state.setField);
    const setLocation = useDoctorQueryStore(state=>state.setLocation);
@@ -77,13 +45,6 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
    const searchButtonWidth = isIpad ? '600px' : (isPhone ? '186px' : 'defaultWidth');
    const searchButtonHeight = isIpad ? '56px' : (isPhone ? '40px' : 'defaultWidth');
-   const nickname = useDoctorQueryStore(state=>state.nickname);
-//    useEffect(() => {
-//        setDoctorName(nickname);
-//        setField("");
-//        setLocation("");
-//    }, [nickname]);
-   
    if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();

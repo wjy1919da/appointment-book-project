@@ -12,6 +12,7 @@ import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
+import DoctorReviewGrid from '../component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
 //import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor';
 import Footer from '../footer/footer.component';
 const IndividualDoctor = () => {
@@ -19,41 +20,25 @@ const IndividualDoctor = () => {
         window.scrollTo(0, 0);
     });
     const {encodedMemberId} = useParams(); 
-    //console.log('encodeMemberId: ', encodedMemberId);
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
-    //console.log('IndividualDoctor queryStore: ', doctorQuery);
-    // const {
-    //     data,
-    //     error,
-    //     isLoading,
-    //     isFetchingNextPage,
-    //     fetchNextPage,
-    //     hasNextPage
-    // } = useGetDoctorReviews(); // Destructure the reviews, error, and isLoading from the hook
     const {data,error,isLoading,} = useGetDoctorInfo();
-    //console.log('IndividualDoctor data: ', data);
-
+    const {nickname} = data?.nickname || {};
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
-    //const fetchedReviewsCount = data?.pages.reduce((acc, page) => acc + page.data.evaRespPage.records.length, 0) || 0;
     useEffect(() => {
-       setMemberId(encodedMemberId);
-       if(data){
-          setNickName(data.nickname);
-       }
-    }, [encodedMemberId]);
-    
-
+        setMemberId(encodedMemberId);
+        if (data) {
+           setNickName(data.nickname);
+        }
+     }, [encodedMemberId, data]);     
     if (isLoading) {
         return <HomeSpinner/>;
     }
-
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-
     const selectTab = (index) => {
         setActiveTab(index);
     }
@@ -89,39 +74,7 @@ const IndividualDoctor = () => {
                     {activeTab === 1 && <div className="individual-doctor-posts">
                             <DoctorPostGrid isAbout={true}/> 
                     </div>}
-                    {/* reviews hook */}
-                    {/* <InfiniteScroll
-                        dataLength={fetchedReviewsCount}
-                        next={fetchNextPage}
-                        hasMore={hasNextPage}
-                        //style={{ width: '100%' }}
-                        scrollThreshold={0.1}>
-                        
-                        
-                        
-                        {
-                            activeTab === 2 && data?.pages.map((page, index) => (
-                                        <React.Fragment key={index}>
-                                            {
-                                                page
-                                                    .data
-                                                    .evaRespPage
-                                                    .records
-                                                    .map((review, index) => (
-                                                        <DoctorReview
-                                                            key={index}
-                                                            profileImage={review.img}
-                                                            name={review.nickname}
-                                                            starRate={review.score}
-                                                            reviewText={review.text}
-                                                            date={new Date(review.addTime * 1000).toLocaleDateString()}/>
-                                                    ))
-                                            }
-                                        </React.Fragment>
-                                    ))
-                        }
-                    </InfiniteScroll> */}
-
+                    {activeTab === 2 && < DoctorReviewGrid/>}
                 </div>
             </div>
             <Footer/>

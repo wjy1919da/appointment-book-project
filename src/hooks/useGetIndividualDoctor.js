@@ -46,8 +46,8 @@ export function useGetDoctorReviews() {
 // Projects, Counpons, About
 export function useGetDoctorAbout() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  console.log("useGetDoctorAbout: ",doctorQuery)
-  const clearnickName=doctorQuery.nickName.replace(":", "")
+  //console.log("useGetDoctorAbout: ",doctorQuery)
+  const clearnickName = doctorQuery.nickName.replace(":", "")
   const fetchDoctorAbout = async ({ pageParam = 1 }) => {
     try {
       const response = await axios.post(
