@@ -12,6 +12,7 @@ const DoctorCard = ({doctor}) => {
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
     const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
     console.log("doctor card: ",doctor);
+
     return (
          <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
             <div className='doctor-profile-img'>
