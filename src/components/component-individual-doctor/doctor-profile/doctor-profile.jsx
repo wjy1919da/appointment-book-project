@@ -5,7 +5,6 @@ import DoctorProfileImage from '../../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../../assets/doctor/search-card-badgeIcon.png'
-import ConsultDoctorButton from '../../consult-doctor-button/consult-doctor-button.component';
 import FollowButton from '../../follow-button/follow-button.component';
 import useDoctorQueryStore from '../../../store.ts';
 import {useGetDoctorReviews} from '../../../hooks/useGetIndividualDoctor';
@@ -72,10 +71,11 @@ const DoctorProfile = ({nickname,projects,mechName,address}) => {
                         <span className="infor-text">Following</span>
                     </div>
                 </div>
-            <div className="consult-follow-button">
+            {/* Link is unavaliable so I hide these buttons */}
+            {/* <div className="consult-follow-button">
                 <HomeButton height = {buttonHeight} title='Consult Doctor'/>
                 <FollowButton title='Follow'/>
-            </div>
+            </div> */}
             <div className='doctor-profile-back'>
                 <Link to='/doctor'>
                     <img src={backIcon} className='back-link-icon' style={{display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
