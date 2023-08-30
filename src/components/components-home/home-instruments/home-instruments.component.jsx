@@ -42,16 +42,16 @@ const HomeInstruments = () => {
         <div className = 'home-section-container'>
             {/* instruments */}
             <div className = 'home-instrument-container'>
-                {!isMobile&&<HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />}
-                {isMobile&&<HomeSection5Titles heading="Instruments" link="View All" />}
+                {!isMobile&& <HomeSection5Titles heading="Popular Cosmetic Procedures" link = "View All Procedures"/>}
+                {isMobile&& <HomeSection5Titles heading="Procedures" link = "View All"/>}
                 <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'95vw'}} columns={isMobileOrIpad? 5:7} spacing={5}>
                         {proceduresGrid}
                 </SimpleGrid>
             </div>
              {/* procedure */}
-             <div className = 'home-instrument-container'>
-                {!isMobile&& <HomeSection5Titles heading="Popular Cosmetic Procedures" link = "View All Procedures"/>}
-                {isMobile&& <HomeSection5Titles heading="Procedures" link = "View All"/>}
+             <div className = 'home-instrument-container'>   
+                {!isMobile&&<HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />}
+                {isMobile&&<HomeSection5Titles heading="Instruments" link="View All" />}
                 <div>
                     <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px',marginBottom:'10px', width:'95vw'}} columns={ 4 } spacing={8}>
                         {instrumentsGrid}
