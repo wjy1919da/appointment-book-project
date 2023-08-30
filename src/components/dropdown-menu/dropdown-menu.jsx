@@ -26,7 +26,7 @@ const DropdownMenu = ({show, onHide}) => {
         <Modal
             dialogClassName='procedure-menu-modal'
             show={show}
-            //onHide={onHide}
+            onHide={onHide}
             size='xl'
             >
                 <div style={{padding: '15px'}}>

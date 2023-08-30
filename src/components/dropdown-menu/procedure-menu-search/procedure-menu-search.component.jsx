@@ -18,7 +18,7 @@ const ProcedureMenuSearch = ({ onHide }) => {
             //setInternalProcedure(internalProcedure.replace(/ /g, '_'));
             let cleanProcedure = internalProcedure.replace(/ /g, '_');
             navigate(`/procedure/${cleanProcedure}`);
-            onHide();// Close the modal
+            // onHide();// Close the modal
         }
         
     }
