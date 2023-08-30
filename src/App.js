@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { DataRouter, Routes, Route } from 'react-router-dom';
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
@@ -20,7 +20,8 @@ import { useMediaQuery } from 'react-responsive';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   return (
-    <Routes>
+    // <DataRouter>
+      <Routes>
       <Route path='/' element={<Header />}>
         {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
         <Route index element={<Home />} />
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
+  // </DataRouter> 
   );
 }
 

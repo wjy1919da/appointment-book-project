@@ -11,6 +11,7 @@ import Arrow1 from '../../../assets/post/arrow1_grid.png';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import ErrorMsg from '../../error-msg/error-msg.component';
 const DoctorPostGrid = ({isAbout}) => {
   const {
       data,
@@ -34,7 +35,7 @@ const DoctorPostGrid = ({isAbout}) => {
       setGutterWidth(isMobileOrAbout ? '0px' : '10px');
     }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
-  if (error) return <div className='error'>{error.message}</div>;
+  if (error) return <ErrorMsg />;
   const setPostID = (ID, avatar, username) => {
       setIsModelOpen(true);
       setUserID(ID);

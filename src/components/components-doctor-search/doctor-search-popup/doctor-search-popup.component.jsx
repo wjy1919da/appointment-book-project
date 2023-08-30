@@ -98,7 +98,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-   if (error) return <Text>{error.message}</Text>;
+   //if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
       setLocation(internalLocation);
@@ -211,9 +211,9 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                         search
                                 </button> */}
                                 <HomeButton title='Search'  onClick={handleMobileClick} isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
-                                {isLoading ?
-                                    <div><p>is Loading</p></div> :
-                                        (data && 
+                                {/* {isLoading ? */}
+                                    {/* <div><p>is Loading</p></div> : */}
+                                       { (data && 
                                             <SimpleGrid columns={1} spacing={0}>
                                                 {mergedData && mergedData.map((item, i) => (
                                                     // item.nickname && item.memberId&&
@@ -228,8 +228,8 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                                     </div>
                                                 ))}
                                             </SimpleGrid>
-                                        )
-                                    }
+                                        )}
+                                    {/* } */}
                             </div>
                         </div>
                     </Modal>
@@ -273,9 +273,9 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                 </div>
             </div> 
             <div className='doctor-search-grid-container'>
-                {isLoading ?
-                    <div><p>is Loading</p></div> :
-                    (data && 
+                {/* {isLoading ? */}
+                    {/* <div><p>is Loading</p></div> : */}
+                    {(data && 
                         <SimpleGrid columns={column} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
                                 item.nickname && 
@@ -290,8 +290,8 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                 </div>
                             ))}
                         </SimpleGrid>
-                    )
-                }
+                    )}
+                {/* } */}
             </div>
         </Modal> 
         )}

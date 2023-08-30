@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useProcedureQueryStore from '../../../procedureStore.ts';
 
-const ProcedureMenuSearch = () => {
+const ProcedureMenuSearch = ({ onHide }) => {
     const [internalProcedure,setInternalProcedure] = useState('');
     const navigate = useNavigate();
     const procedureQuery = useProcedureQueryStore(state=>state.procedureQuery);
@@ -18,7 +18,9 @@ const ProcedureMenuSearch = () => {
             //setInternalProcedure(internalProcedure.replace(/ /g, '_'));
             let cleanProcedure = internalProcedure.replace(/ /g, '_');
             navigate(`/procedure/${cleanProcedure}`);
+            onHide();// Close the modal
         }
+        
     }
     return (
         <div className='procedure-menu-search'>
@@ -28,7 +30,7 @@ const ProcedureMenuSearch = () => {
                 className='procedure-menu-input' 
                 onChange={(event)=>setInternalProcedure(event.target.value)}
             />
-            <HomeButton title='search' onClick = {handleOnClick} isIcon = {SearchIcon} height='40px' width='150px'/>
+             <HomeButton title='search' onClick = {handleOnClick} isIcon = {SearchIcon} height='40px' width='150px'/>
             </InputGroup>
         </div>
     )

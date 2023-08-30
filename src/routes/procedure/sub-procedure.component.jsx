@@ -15,6 +15,7 @@ import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import SubProcedureMobileExtraBottom from '../../components/sub-procedure-mobile-extra-bottom/sub-procedure-mobile-extra-bottom.component';
 import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
+import ErrorMsg from "../../components/error-msg/error-msg.component";
 import { useState } from 'react';
 
 function safeJsonParse(str) {
@@ -108,7 +109,7 @@ const SubProcedure = () => {
             cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
         }
     }else{
-        return <div className='error'>{data.msg}</div>;
+        return <ErrorMsg/>;
     }
    
     return (
