@@ -1,14 +1,16 @@
 @media(min-width:1024px){
     .home-text-container {
-        width: 560px;
-        height: 200px;
+        //width: 560px;
+        //height: 200px;
+        width: 56vw;
+        height: 20vw;
     }
     
     .home-text-title {
         font-family: 'Playfair Display';
         font-style: normal;
         font-weight: 700;
-        font-size: 64px;
+        font-size: 6vw;
         line-height: 135%;
         text-align: center;
         color: #000000;
@@ -16,12 +18,14 @@
     }
     
     .home-text-content {
-        width: 560px;
-        height: 87px;
+        //width: 560px;
+        //height: 87px;
+        width: 56vw;
+        height: 8.7vw;
         font-family: 'Lora';
         font-style: normal;
         font-weight: 500;
-        font-size: 18px;
+        font-size: 2vw;
         line-height: 160%;
         text-align: center;
         color: #000000;

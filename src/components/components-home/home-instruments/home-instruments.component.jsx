@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './home-instruments.styles.scss';
 import HomeSection5Titles from './home-section5-titles/home-section5-titles.component';
 import { useMediaQuery } from 'react-responsive';
-import { Box, SimpleGrid, Image } from '@chakra-ui/react';
+import { Box, SimpleGrid, Image,Grid } from '@chakra-ui/react';
 const formatTitle = (title) => {
     return title.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
@@ -16,7 +16,6 @@ const HomeInstruments = () => {
     const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
     const proceduresToRender = isMobileOrIpad ? procedures_names_mobile : procedures_names;
     const proceduresGrid = proceduresToRender.map((name) => 
-   
         <Box as="div" className='home-procedure' key={name}>
             <Link to={`/procedure/${name}`}>
                 <Image 
@@ -45,7 +44,7 @@ const HomeInstruments = () => {
             <div className = 'home-instrument-container'>
                 {!isMobile&&<HomeSection5Titles heading="Featured Instruments" link="View All Instruments" />}
                 {isMobile&&<HomeSection5Titles heading="Instruments" link="View All" />}
-                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'95vw'}} columns={{ base: 5, md:5, lg: 7}} spacing={5}>
+                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'95vw'}} columns={isMobileOrIpad? 5:7} spacing={5}>
                         {proceduresGrid}
                 </SimpleGrid>
             </div>
