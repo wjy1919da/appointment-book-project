@@ -9,8 +9,8 @@ const HomeSectionTitles = (props) => {
         <div className="home-section5-title-heading3">
            {props.heading}
         </div>
-        {!isMobile&&<HomeLink title={props.link} href = "procedure/facial-rejuvenation"/>} 
-        {isMobile&&<Link to='procedure/breast_augmentation' className='home-mobile-procedure-link'>
+        {!isMobile&&<HomeLink title={props.link} href = "/download"/>} 
+        {isMobile&&<Link to='/download' className='home-mobile-procedure-link'>
                     View All
               </Link>}       
       </div>

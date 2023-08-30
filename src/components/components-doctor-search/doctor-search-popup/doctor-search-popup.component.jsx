@@ -48,13 +48,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const searchButtonHeight = isIpad ? '56px' : (isPhone ? '40px' : 'defaultWidth');
 
    const [column, setColumn] = useState(3); // Default value for column
-   const nickname = useDoctorQueryStore(state=>state.nickname);
-//    useEffect(() => {
-//        setDoctorName(nickname);
-//        setField("");
-//        setLocation("");
-//    }, [nickname]);
-    useEffect(() => {
+   useEffect(() => {
         const handleResize = () => {
         const width = window.innerWidth;
 
@@ -194,14 +188,15 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                         (data && 
                                             <SimpleGrid columns={1} spacing={0}>
                                                 {mergedData && mergedData.map((item, i) => (
-                                                    // item.memberId &&
-                                                    item.nickname &&
+                                                    item.nickname && item.memberId&&
+                                                    // item.nickname &&
                                                     <div key={i} className='doctor-search-card-container'>
-                                                    {/* <Link 
-                                                            to={`/doctor/${hashids.encode(item.memberId)}`} 
-                                                        > */}
+                                                        <Link 
+                                                            // to={`/doctor/${item.memberId}`} 
+                                                            to={`/doctor/${hashids.encode(item.memberId)}`}
+                                                        >
                                                             <DoctorCard doctor={item} />
-                                                        {/* </Link> */}
+                                                        </Link>
                                                     </div>
                                                 ))}
                                             </SimpleGrid>
@@ -255,14 +250,15 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                     (data && 
                         <SimpleGrid columns={column} spacing={10}>
                             {mergedData && mergedData.map((item, i) => (
-                                // item.memberId &&
-                                item.nickname &&
+                                // item.nickname &&
+                                item.nickname &&item.memberId&&
                                 <div key={i} className='doctor-search-card-container'>
-                                 {/* <Link 
-                                    to={`/doctor/${hashids.encode(item.memberId)}`} 
-                                 > */}
+                                 <Link 
+                                    // to={`/doctor/${item.memberId}`} 
+                                    to = {`/doctor/${hashids.encode(item.memberId)}`}
+                                 >
                                     <DoctorCard doctor={item} />
-                                {/* </Link> */}
+                                </Link>
                                 </div>
                             ))}
                         </SimpleGrid>

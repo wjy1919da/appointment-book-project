@@ -1,20 +1,18 @@
 import React from 'react';
 import "./doctor-profile.styles.scss";
-import { Link, useParams,useLocation } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import DoctorProfileImage from '../../../assets/doctor/doctor-profile-image.png'
 import locationIcon from '../../../assets/doctor/search-card-locationIcon.png'
 import glassIcon from '../../../assets/doctor/search-card-glassIcon.png'
 import badgeIcon from '../../../assets/doctor/search-card-badgeIcon.png'
 import FollowButton from '../../follow-button/follow-button.component';
-import useDoctorQueryStore from '../../../store.ts';
 import {useGetDoctorReviews} from '../../../hooks/useGetIndividualDoctor';
 import StarRate from '../../starRate/starRate';
 import backIcon from '../../../assets/doctor/left_back.png';
 import { useMediaQuery } from 'react-responsive';
 import HomeButton from '../../home-button/home-button.component';
 const DoctorProfile = ({nickname,projects,mechName,address}) => {
-    const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-    //console.log('doctorQuery in profile', doctorQuery);
+    
     const isMobile  = useMediaQuery({ query: `(max-width: 767px)` });
     const buttonHeight = isMobile ? '50px' : '56px';
     const {
@@ -25,13 +23,16 @@ const DoctorProfile = ({nickname,projects,mechName,address}) => {
         isFetchingNextPage,
         hasNextPage
     }  = useGetDoctorReviews();
-    // if(data&&data.pages[0].data.data){
-    //     console.log('DoctorProfile data.page[0]: ', data.pages[0].data.data.postNumber, data.pages[0].data.data.followers, data.pages[0].data.data.followings);
-    // }
+   
     const { doctorStars } = data?.pages[0]?.data?.data || {};
     const {postNumber} = data?.pages[0]?.data?.data || {};
     const {followers} = data?.pages[0]?.data?.data || {};
     const {followings} = data?.pages[0]?.data?.data || {};
+    const navigate = useNavigate();
+
+    const handleOnClick = () => {
+        navigate('/download');
+    };
     return (
             <div className='doctor-profile-container'>
             <img src={DoctorProfileImage} class="img-fluid rounded-start individual-doctor-pic" alt="..." style={{width:"160px",height:"160px"}}></img> 
@@ -72,10 +73,10 @@ const DoctorProfile = ({nickname,projects,mechName,address}) => {
                     </div>
                 </div>
             {/* Link is unavaliable so I hide these buttons */}
-            {/* <div className="consult-follow-button">
-                <HomeButton height = {buttonHeight} title='Consult Doctor'/>
-                <FollowButton title='Follow'/>
-            </div> */}
+            <div className="consult-follow-button">
+                <HomeButton height = {buttonHeight} title='Consult Doctor' href="/download"/>
+                <FollowButton title='Follow' onClick={handleOnClick}/>
+            </div>
             <div className='doctor-profile-back'>
                 <Link to='/doctor'>
                     <img src={backIcon} className='back-link-icon' style={{display:"inline-block", marginInlineEnd:"10px", marginBottom:"3px"}} alt='back'/>
