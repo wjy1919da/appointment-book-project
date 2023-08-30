@@ -11,9 +11,10 @@ const DoctorCard = ({doctor}) => {
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
     const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
-    console.log("doctor card: ",doctor);
+    //console.log("doctor card: ",doctor);
+
     return (
-         <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
+        <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
             <div className='doctor-profile-img'>
                 <img src={DoctorProfileImage} class="img-fluid rounded-start" alt="..."></img>
             </div>
@@ -23,10 +24,10 @@ const DoctorCard = ({doctor}) => {
                     <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
                     {doctor.address}
                 </span>
-                <span className='search-card-text '>
+               {doctor.name&&<span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
-                </span>
+                    {doctor.name.split(' ').length > 1 ? (doctor.name.split(' ').slice(0, 2).join(', ') + '...') : doctor.name}
+                </span>} 
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                     {doctor.mechName}

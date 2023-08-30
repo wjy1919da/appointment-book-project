@@ -32,7 +32,6 @@ const Home = () => {
         <Fragment>
             <div className='home'>
              <div className='home-mobile-intro-container'>
-                
                 <div className='home-title-container'>
                     {/* Web */}
                     {!isMobileOrIpad&& <Fragment>
@@ -52,17 +51,17 @@ const Home = () => {
                         {isMobileOrIpad&& <div className='home-mobile-text-container'><HomeMobileSubText title='Charm' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText></div>}
                         <div className='home-title-buttons'>
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
-                            {!isMobile&&<HomeButton title = "Start Charm life" href = '/download'/>}
+                            {!isMobile&&<HomeButton height="56px" title = "Start Charm life" href = '/download'/>}
                             <button type="button" onClick={handleShow} className='button home-title-button2'>
                                 <img src={arrow} alt="Button" className="button-image"></img>
                                 {!isMobile&&<span className="button-text">Video</span>}
                                 {isMobile&&<span className="button-text">Watch Video</span>}
                             </button>
-                            {!isMobile&&<Modal show={show} onHide={handleClose} size='xl' >
-                            <div className="home-buttom-modal-container" style={{position:'absolute',top: '100px',width:'100%'}}>
-                                <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
-                            </div>
-                            </Modal>}
+                            <Modal show={show} onHide={handleClose} size='xl' >
+                                <div className="home-buttom-modal-container" style={{position:'absolute',top: '100px',width:'100%'}}>
+                                    <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
+                                </div>
+                            </Modal>
                         </div>
                   </div>
                    <div className='home-mobile-intro-pic-container'>

@@ -202,11 +202,12 @@
         width: 100%;
         height: 400px;
     .doctor-search-header-title-container{
-        width:50%;
+        width:50vw;
         height: 100%;
         display: flex;
         justify-content: center; /* 水平居中 */
         align-items: center;
+        //margin-right: 10vw;
     }
     .doctor-search-header-pic-container{
         width:50%;

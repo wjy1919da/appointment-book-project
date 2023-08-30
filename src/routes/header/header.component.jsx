@@ -1,15 +1,10 @@
 import { Outlet, Link } from 'react-router-dom';
 import { Fragment } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
 import menuBar from '../../assets/home/menu-bar.png'
-import HeaderMobileDropDownV2 from './header-mobile-dropDownV2.component';
-
 import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -139,8 +134,8 @@ const Header = () => {
                         <img src={loginIcon} alt="login-Image" style={{width:'34px',height:'36px',marginTop:'-15%'}}></img>
                         </Dropdown.Toggle>
                         <Dropdown.Menu className='header-menu-bar-mobile-container'>
-                        <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>login</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>register</Dropdown.Item>
+                        {/* <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>login</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>register</Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>
@@ -194,7 +189,7 @@ const Header = () => {
                     </Link>
                     
                 </div>
-                <div className='header-login'>
+                {/* <div className='header-login'>
                     <div className="header-search">
                         <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                         </input>
@@ -205,7 +200,7 @@ const Header = () => {
                     <div className="header-login-text">
                         <p>login</p>
                     </div>
-                </div>
+                </div> */}
             </div>
             <Outlet />
         </Fragment>
