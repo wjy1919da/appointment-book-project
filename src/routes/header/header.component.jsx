@@ -134,8 +134,8 @@ const Header = () => {
                         <img src={loginIcon} alt="login-Image" style={{width:'34px',height:'36px',marginTop:'-15%'}}></img>
                         </Dropdown.Toggle>
                         <Dropdown.Menu className='header-menu-bar-mobile-container'>
-                        <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>login</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>register</Dropdown.Item>
+                        {/* <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>login</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>register</Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>
@@ -189,7 +189,7 @@ const Header = () => {
                     </Link>
                     
                 </div>
-                <div className='header-login'>
+                {/* <div className='header-login'>
                     <div className="header-search">
                         <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                         </input>
@@ -200,7 +200,7 @@ const Header = () => {
                     <div className="header-login-text">
                         <p>login</p>
                     </div>
-                </div>
+                </div> */}
             </div>
             <Outlet />
         </Fragment>

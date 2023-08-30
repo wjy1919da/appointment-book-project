@@ -57,11 +57,11 @@ const Home = () => {
                                 {!isMobile&&<span className="button-text">Video</span>}
                                 {isMobile&&<span className="button-text">Watch Video</span>}
                             </button>
-                            {!isMobile&&<Modal show={show} onHide={handleClose} size='xl' >
-                            <div className="home-buttom-modal-container" style={{position:'absolute',top: '100px',width:'100%'}}>
-                                <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
-                            </div>
-                            </Modal>}
+                            <Modal show={show} onHide={handleClose} size='xl' >
+                                <div className="home-buttom-modal-container" style={{position:'absolute',top: '100px',width:'100%'}}>
+                                    <iframe src={videoUrl} style={{width:'100%',height:'600px', border: '10px solid white'}}/>
+                                </div>
+                            </Modal>
                         </div>
                   </div>
                    <div className='home-mobile-intro-pic-container'>
