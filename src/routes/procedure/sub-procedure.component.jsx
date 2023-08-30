@@ -62,6 +62,9 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
+    // function handleClick() {
+    //     window.open(videoUrl, "_blank");
+    // }
 
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');

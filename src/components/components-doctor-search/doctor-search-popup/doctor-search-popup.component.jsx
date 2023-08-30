@@ -21,6 +21,31 @@ import { useMemo } from 'react';
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { useMediaQuery } from 'react-responsive';
 import CloseButton from '../../../assets/post/pop-up-close-button.png';
+const mergeDoctorsByNickname = (pages) => {
+    const mergedDoctors = {};
+  
+    // Flatten the data into a single array
+    const flatData = pages.flatMap(page => page.data || []);
+  
+    flatData.forEach(doctor => {
+      const { nickname, name } = doctor;
+  
+      if (mergedDoctors[nickname]) {
+        // If doctor already exists, add the new programTitle to the existing one
+        mergedDoctors[nickname].name.push(name);
+      } else {
+        // If doctor doesn't exist, add them to the object
+        mergedDoctors[nickname] = {
+          ...doctor,
+          name: [name],  // Use an array to store programTitles
+        };
+      }
+    });
+  
+    // Convert the object back into an array
+    return Object.values(mergedDoctors);
+};
+
 const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const {
         data,
@@ -30,7 +55,11 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
         fetchNextPage,
         hasNextPage
    } = useSearchMultiConditionsPopUp();
-   const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
+   // No need to merge the data by nickname since backend already does that
+   //const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
+   const mergedData = useMemo(() => {
+    return data ? mergeDoctorsByNickname(data.pages) : [];
+   }, [data]);
    const hashids = new Hashids('Encode the Url');
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
@@ -46,7 +75,6 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
    const searchButtonWidth = isIpad ? '600px' : (isPhone ? '186px' : 'defaultWidth');
    const searchButtonHeight = isIpad ? '56px' : (isPhone ? '40px' : 'defaultWidth');
-
    const [column, setColumn] = useState(3); // Default value for column
    useEffect(() => {
         const handleResize = () => {
