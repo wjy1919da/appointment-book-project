@@ -24,10 +24,10 @@ const DoctorCard = ({doctor}) => {
                     <img src={locationIcon} style={{height:"18px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt='location'></img>
                     {doctor.address}
                 </span>
-                <span className='search-card-text '>
+               {doctor.name&&<span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
-                </span>
+                    {doctor.name.split(' ').length > 1 ? (doctor.name.split(' ').slice(0, 2).join(', ') + '...') : doctor.name}
+                </span>} 
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>
                     {doctor.mechName}
