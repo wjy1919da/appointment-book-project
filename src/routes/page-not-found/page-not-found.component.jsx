@@ -12,16 +12,14 @@ const PageNotFound = () => {
             </div>
 
             <div className='page-not-found-text-button-section'>
-                <p className='text-section'>the requested URL was not found on this server</p>
-
+                <p className='text-section'>The requested URL was not found on this server</p>
                 <div className='button-section'>
-                    <Link className='refresh-page-link'>
-                        <HomeButton title='Refresh Page' href = '/download'/>
-                    </Link>
+                    <HomeButton height="56px" title='Refresh Page' href = '/download'/>
                 </div>
             </div>
-
-            <Footer/>
+            <div style={{width: "100vw"}}>
+                <Footer/> 
+            </div>
         </div>
     )
 }
