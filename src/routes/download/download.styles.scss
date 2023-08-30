@@ -3,6 +3,7 @@
     justify-content: space-between;
     width: 100%;
     margin-top: 64px;
+    margin-bottom: 150px;
 
     .download-pics {
         width: 30%;
@@ -89,4 +90,8 @@
             }
         }
     }
+}
+.download-container{
+    display: flex;
+    flex-direction: column;
 }
