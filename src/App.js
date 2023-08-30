@@ -15,6 +15,7 @@ import IndividualDoctor from './components/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
+import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -37,7 +38,7 @@ const App = () => {
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />
-        
+        <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
   );
