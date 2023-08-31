@@ -7,6 +7,7 @@ import DownArrow from '../../../assets/post/down-arrow.png'
 import collectIcon from '../../../assets/post/star.png';
 import { useEffect, useState} from 'react';
 import { useMediaQuery } from 'react-responsive';
+import HomeButton from '../../home-button/home-button.component';
 
 const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,userName,userAvatar}) => {
     const containerRef = useRef(null);
@@ -56,11 +57,12 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                     <span>{userName}</span>
                 </div>
                 <div> 
-                <button className='doctor-search-button'  
-                        style={{width:'90px',height:'30px',radius:'8px',fontSize:'10px'}}
-                        >
-                    Try Charm Life
-                </button>
+                    <button className='doctor-search-button'  
+                            style={{width:'90px',height:'30px',radius:'8px',fontSize:'10px'}}
+                            onClick={() => window.location.href="/download"}
+                            >
+                        Try Charm Life
+                    </button> 
                 </div>
             </div>
             {/* Web */}
@@ -72,12 +74,12 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                 <div className="detail-top-content">
                     <div className="post-popUp-content">
                         {!isMobile&&brief&&<span>{brief}</span>}
-                        <span>This experience has set the bar for 
+                         {/* <span>This experience has set the bar for 
                             me for all future surgeries and/or other medical 
                             procedures moving forward. From the moment I walked in the 
                             door and was greeted by Arissa I felt warm and welcomed.
                             She immediately made me feel comfortable by explaining every step of
-                                the procedure and post</span>
+                                the procedure and post</span>  */}
                         {tag&&<span className="detail-red-font">{tag}</span>}
                         {postDate&&<span className="detail-gray-font">{ndate}</span>}
                     </div>
@@ -104,16 +106,18 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                     </div>
                     
                     </div>
-                   </div>
+                   </div> 
                    {/* Mobile */}
                    <div className='post-detail-mobile-download-button'>
                         <img src={DownArrow} style={{marginTop:'50px',width:'15px',height:'13px'}}></img>
                         <span className='join-community-text'>Join the Charm Life Community to View More</span>
-                        <button className='doctor-search-button'  
-                                style={{width:'150px',height:'40px',radius:'20px',fontSize:'15px',marginTop:'10px'}}
-                                >
-                            Try Charm Life
-                        </button>
+                            <button className='doctor-search-button'  
+                                    style={{width:'150px',height:'40px',radius:'20px',fontSize:'15px',marginTop:'10px'}}
+                                    onClick={() => window.location.href="/download"}
+                                    >
+                                Try Charm Life
+                            </button>
+                        
                     </div>
                     {/* Web */}
                     <div className='fixed-input-box' >

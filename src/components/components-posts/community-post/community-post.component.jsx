@@ -25,7 +25,9 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
                         <span className="gray-text">{authorName}</span>
                     </div>
                     <div className="likeNumber">
-                       <img src={heartIcon} className="heartIcon"></img>
+                    
+                       <img src={heartIcon} className="heartIcon" onClick={() => window.location.href="/download"}></img>
+      
                         <span className="gray-text">{likes}</span>
                     </div>
                 </div>
