@@ -12,7 +12,6 @@
             border-radius: 20px 0px 0px 20px;
             .post-detail-image
             {
-                width:600px;
                 border-radius: 5px 0 0 5px;
                 object-fit: contain;
             }
@@ -24,14 +23,19 @@
             display: flex;
             flex-direction: column;
             flex-basis: 50%;
-            margin-top:5%;
+            //margin-top:5%;
+            height:100%;
+            //justify-content: space-between;
             .detail-top-content
             {
+                margin-top: 5%;
                 position: relative;
                 display: flex;
                 flex-direction: column;
                 overflow-y: auto;
-                left:5%;
+                margin-left: 5%;
+                flex: 1;
+                padding-bottom: 100px;
             
             .post-popUp-content
             {
@@ -62,21 +66,25 @@
         }
         .fixed-input-box
         {
-            position: fixed;
-            position: relative;
+            
+            position: absolute;
             width:100%;
-            height:150px;
+            //height:90px;
+            bottom:0px;
+            flex: 1;
+            //height:50%;
+            max-height: 90px;
             border:solid 1px rgba(226, 227, 231, 1);
             border-radius: 0 0 8px 0;
-
+            background-color: #FFFFFF;
             .Icon-display
             {
                 display: flex;
                 flex-direction: row;
                 gap:40px;
                 width:420px;
-                height:25px;
-                margin-top: 10px;
+                height:40px;
+                //margin-top: 10px;
                 margin-left: 5%;
                 .Icon-size
                 {
@@ -221,6 +229,7 @@
     }
     .postdetail-popUp-left-container{
         display:flex;
+        justify-content: center;
     }
     .post-detail-image {
         display: flex;
