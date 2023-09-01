@@ -1,20 +1,16 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import "./individual-doctor.styles.scss";
-import Hashids from 'hashids';
-import DoctorProfile from '../component-individual-doctor/doctor-profile/doctor-profile';
-import DoctorAbout from '../component-individual-doctor/doctor-about/doctor-about.component';
-import DoctorReview from '../component-individual-doctor/doctor-review-card/doctor-review-card';
-// import DoctorProfileImage from '../../assets/doctor/profile2.png'
-import {useGetDoctorReviews} from '../../hooks/useGetIndividualDoctor';
-import HomeSpinner from '../home-spinner/home-spinner.component';
+import DoctorProfile from '../../components/component-individual-doctor/doctor-profile/doctor-profile';
+import DoctorAbout from '../../components/component-individual-doctor/doctor-about/doctor-about.component';
+import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import {useParams} from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
+import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
-import DoctorReviewGrid from '../component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
-//import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor';
-import Footer from '../footer/footer.component';
+import DoctorReviewGrid from '../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
+import Footer from '../../components/footer/footer.component';
+import ErrorMsg from '../../components/error-msg/error-msg.component';
 const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
@@ -37,7 +33,12 @@ const IndividualDoctor = () => {
         return <HomeSpinner/>;
     }
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return (
+            <div>
+                <ErrorMsg/>
+                <Footer/>
+            </div>
+        );
     }
     const selectTab = (index) => {
         setActiveTab(index);
@@ -45,7 +46,6 @@ const IndividualDoctor = () => {
     return (
         <div className='individual-page-container'>
             <div className="individual-doctor-container">
-                {/* Evaluation hook */}
                 <div className="individual-doctor-left-container">
                     {
                         data && 

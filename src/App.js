@@ -1,4 +1,4 @@
-import { DataRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
@@ -11,7 +11,7 @@ import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
 import DoctorPost from  './routes/community/community.component';
-import IndividualDoctor from './components/individual-doctor/individual-doctor';
+import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';

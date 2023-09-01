@@ -98,7 +98,7 @@
         flex-direction: column;
     }
 }
-@media(max-width: 1023px){
+@media(min-width: 577px) and (max-width: 1023px){
     .download-div {
         display: flex;
         justify-content: space-between;
@@ -157,7 +157,8 @@
             }
     
             .QR-subtitle {
-                width: 45vw;
+                //width: 45vw;
+                width: 100%;
                 //height: 54px;
                 color: #000;
                // font-family: Inter;
@@ -165,6 +166,114 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 135%; /* 16.2px */
+                margin-top:-8px;
+            }
+    
+            .QR-codes {
+                display: flex;
+                justify-content: space-between;
+                //width: 85%;
+                margin: 30px auto 0;
+                gap: 20px;
+    
+                .QR-code {
+                    //width: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .QR-code-pic {
+                        //width: 66px;
+                        width: 20vw;
+                        margin-bottom: 30px;
+                        border: none;
+                        border-radius: 0;
+                    }
+            
+                    .download-btn {
+                        //width: 90px;
+                        width: 20vw;
+                        height: 6.6vw;
+                        border: none;
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+    }
+    .download-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media(max-width: 576px){
+    .download-div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        //margin-top: 64px;
+        margin-bottom: 150px;
+    
+        .download-pics {
+            width: 30%;
+    
+            .decorator {
+                display: block;
+                position: absolute;
+                //width: 40%;
+                //height: 600px;
+                width: 290px;
+                height: 303px;
+                left: 0;
+                background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+                border-radius: 0px 0px 1000px 0px;
+                border: black;
+            }
+    
+            .phone-pic {
+                //width: 350px;
+                width: 174px;
+                height: auto;
+                position: relative;
+                top: 64px;
+                left: 20px;
+                border: none;
+                border-radius: 0;
+            }
+        }
+    
+        .QR-codes-div {
+            //margin-right: 99px;
+            position: relative;
+            //left:45vw;
+            margin-right: 4.5vw;
+            top: 75px;
+            z-index: 1;
+            //display: flex;
+            
+            .QR-title {
+                width: 50vw;
+                //height: 86px;
+    
+                font-family: 'Playfair Display';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 32px;
+                line-height: 135%; 
+                color: #000000;
+                text-align: left;
+            }
+    
+            .QR-subtitle {
+                //width: 45vw;
+                width: 100%;
+                //height: 54px;
+                color: #000;
+               // font-family: Inter;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 135%; /* 16.2px */
+                margin-top:-8px;
             }
     
             .QR-codes {

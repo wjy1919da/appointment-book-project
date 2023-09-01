@@ -128,7 +128,12 @@ const SubProcedure = () => {
     }
     if (!data.data || !data.data.subcategories) {
     // if(error||loadingTimeout){
-        return <ErrorMsg />;
+        return (
+            <div>
+                <ErrorMsg/>
+                <Footer/>
+            </div>
+        );
     }
    
     return (
