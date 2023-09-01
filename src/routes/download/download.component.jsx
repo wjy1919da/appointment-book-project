@@ -6,16 +6,19 @@ import BadgeiOS from '../../assets/download/iOS-Badges.png';
 import QRAndroid from '../../assets/download/QR-code-Android.png';
 import BadgeAndroid from '../../assets/download/Android-Badges.png';
 import Footer from '../../components/footer/footer.component';
-
+import iPhoneMobile from '../../assets/download/iphone.png'
+import { useMediaQuery } from 'react-responsive';
+//src/assets/download/iphone.png
 const Download = () => {
     
-
+    const isMobile = useMediaQuery({ query: `(max-width: 1023px)` });
     return (
         <div className='download-container'>
             <div className='download-div'>
                     <div className='download-pics'>
                         <div className='decorator'></div>
-                        <img className='phone-pic' src={iPhone} alt='iphone'></img>
+                        {!isMobile&&<img className='phone-pic' src={iPhone} alt='iphone'></img>}
+                        {isMobile&&<img className='phone-pic' src={iPhoneMobile} alt='iphoneMobile'></img>}
                     </div>
                     <div className='QR-codes-div'>
                         <p className='QR-title'>Get the Charm App</p>

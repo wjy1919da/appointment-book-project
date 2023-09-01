@@ -42,6 +42,13 @@ const SubProcedure = () => {
             }
         }
     }
+    const [loadingTimeout, setLoadingTimeout] = useState(false);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoadingTimeout(true);
+        }, 5000);
+        return () => clearTimeout(timeout);
+    }, []);
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
@@ -80,9 +87,9 @@ const SubProcedure = () => {
    
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
 
-    if (isLoading) {
-       return <HomeSpinner />;
-    }
+    // if (isLoading) {
+    //    return <HomeSpinner />;
+    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
@@ -108,8 +115,20 @@ const SubProcedure = () => {
         if (data.data.subcategories[7]) {
             cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
         }
-    }else{
-        return <ErrorMsg/>;
+    }
+    // else{
+    //     //return <HomeSpinner />;
+    //     return <ErrorMsg/>;
+    // }
+    // if (error) {
+    //     return <ErrorMsg/>;
+    // }
+    if (isLoading || !loadingTimeout) {
+        return <HomeSpinner />;
+    }
+    if (!data.data || !data.data.subcategories) {
+    // if(error||loadingTimeout){
+        return <ErrorMsg />;
     }
    
     return (

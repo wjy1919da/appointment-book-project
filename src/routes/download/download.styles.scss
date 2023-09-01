@@ -1,97 +1,203 @@
-.download-div {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 64px;
-    margin-bottom: 150px;
-
-    .download-pics {
-        width: 30%;
-
-        .decorator {
-            display: block;
-            position: absolute;
-            width: 40%;
-            height: 600px;
-            left: 0;
-            background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
-            border-radius: 0px 0px 1000px 0px;
-            border: black;
-        }
-
-        .phone-pic {
-            width: 350px;
-            position: relative;
-            top: 64px;
-            left: 80px;
-            border: none;
-            border-radius: 0;
-        }
-    }
-
-    .QR-codes-div {
-        margin-right: 99px;
-        margin-top: 20px;
-        z-index: 1;
-
-        .QR-title {
-            width: 581px;
-            height: 86px;
-
-            font-family: 'Playfair Display';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 64px;
-            line-height: 135%;
-            /* or 86px */
-
-            text-align: center;
-
-            color: #000000;
-        }
-
-        .QR-subtitle {
-            width: 581px;
-            height: 54px;
-
-            font-family: 'Playfair Display';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 40px;
-            line-height: 135%;
-            /* identical to box height, or 54px */
-
-            text-align: center;
-
-            color: #000000;
-        }
-
-        .QR-codes {
-            display: flex;
-            justify-content: space-between;
-            width: 85%;
-            margin: 40px auto 0;
-
-            .QR-code {
-                width: 200px;
+@media(min-width: 1024px){
+    .download-div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 64px;
+        margin-bottom: 150px;
     
-                .QR-code-pic {
+        .download-pics {
+            width: 30%;
+    
+            .decorator {
+                display: block;
+                position: absolute;
+                width: 40%;
+                height: 600px;
+                left: 0;
+                background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+                border-radius: 0px 0px 1000px 0px;
+                border: black;
+            }
+    
+            .phone-pic {
+                //width: 350px;
+                width: 25vw;
+                position: relative;
+                top: 64px;
+                left: 80px;
+                border: none;
+                border-radius: 0;
+            }
+        }
+    
+        .QR-codes-div {
+            margin-right: 99px;
+            margin-top: 20px;
+            z-index: 1;
+    
+            .QR-title {
+                width: 581px;
+                height: 86px;
+    
+                font-family: 'Playfair Display';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 64px;
+                line-height: 135%;
+                /* or 86px */
+    
+                text-align: center;
+    
+                color: #000000;
+            }
+    
+            .QR-subtitle {
+                width: 581px;
+                height: 54px;
+    
+                font-family: 'Playfair Display';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 135%;
+                /* identical to box height, or 54px */
+    
+                text-align: center;
+    
+                color: #000000;
+            }
+    
+            .QR-codes {
+                display: flex;
+                justify-content: space-between;
+                width: 85%;
+                margin: 40px auto 0;
+    
+                .QR-code {
                     width: 200px;
-                    margin-bottom: 40px;
-                    border: none;
-                    border-radius: 0;
-                }
         
-                .download-btn {
-                    width: 200px;
-                    border: none;
-                    border-radius: 0;
+                    .QR-code-pic {
+                        width: 200px;
+                        margin-bottom: 40px;
+                        border: none;
+                        border-radius: 0;
+                    }
+            
+                    .download-btn {
+                        width: 200px;
+                        border: none;
+                        border-radius: 0;
+                    }
                 }
             }
         }
     }
+    .download-container{
+        display: flex;
+        flex-direction: column;
+    }
 }
-.download-container{
-    display: flex;
-    flex-direction: column;
+@media(max-width: 1023px){
+    .download-div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        //margin-top: 64px;
+        margin-bottom: 150px;
+    
+        .download-pics {
+            width: 30%;
+    
+            .decorator {
+                display: block;
+                position: absolute;
+                //width: 40%;
+                //height: 600px;
+                width: 290px;
+                height: 303px;
+                left: 0;
+                background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+                border-radius: 0px 0px 1000px 0px;
+                border: black;
+            }
+    
+            .phone-pic {
+                //width: 350px;
+                width: 174px;
+                height: auto;
+                position: relative;
+                top: 64px;
+                left: 20px;
+                border: none;
+                border-radius: 0;
+            }
+        }
+    
+        .QR-codes-div {
+            //margin-right: 99px;
+            position: relative;
+            //left:45vw;
+            margin-right: 4.5vw;
+            top: 75px;
+            z-index: 1;
+            //display: flex;
+            
+            .QR-title {
+                width: 50vw;
+                //height: 86px;
+    
+                font-family: 'Playfair Display';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 32px;
+                line-height: 135%; 
+                color: #000000;
+                text-align: left;
+            }
+    
+            .QR-subtitle {
+                width: 45vw;
+                //height: 54px;
+                color: #000;
+               // font-family: Inter;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 135%; /* 16.2px */
+            }
+    
+            .QR-codes {
+                display: flex;
+                justify-content: space-between;
+                //width: 85%;
+                margin: 30px auto 0;
+                gap: 20px;
+    
+                .QR-code {
+                    //width: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .QR-code-pic {
+                        width: 66px;
+                        margin-bottom: 30px;
+                        border: none;
+                        border-radius: 0;
+                    }
+            
+                    .download-btn {
+                        width: 90px;
+                        height: 30px;
+                        border: none;
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+    }
+    .download-container{
+        display: flex;
+        flex-direction: column;
+    }
 }

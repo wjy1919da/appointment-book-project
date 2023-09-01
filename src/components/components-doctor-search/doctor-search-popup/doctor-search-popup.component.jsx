@@ -57,6 +57,7 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
    } = useSearchMultiConditionsPopUp();
    // No need to merge the data by nickname since backend already does that
    //const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
+   //Save: merge data by nickname
    const mergedData = useMemo(() => {
     return data ? mergeDoctorsByNickname(data.pages) : [];
    }, [data]);
@@ -219,12 +220,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                                     // item.nickname && item.memberId&&
                                                     item.nickname &&
                                                     <div key={i} className='doctor-search-card-container'>
-                                                        {/* <Link 
-                                                            // to={`/doctor/${item.memberId}`} 
-                                                            to={`/doctor/${hashids.encode(item.memberId)}`}
-                                                        > */}
+                                                        <Link 
+                                                            to={`/doctor/${item.memberId}`} 
+                                                            // to={`/doctor/${hashids.encode(item.memberId)}`}
+                                                        >
                                                             <DoctorCard doctor={item} />
-                                                        {/* </Link> */}
+                                                        </Link>
                                                     </div>
                                                 ))}
                                             </SimpleGrid>
@@ -281,12 +282,12 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                 item.nickname && 
                                 // item.nickname &&item.memberId&&
                                 <div key={i} className='doctor-search-card-container'>
-                                 {/* <Link 
-                                    // to={`/doctor/${item.memberId}`} 
-                                    to = {`/doctor/${hashids.encode(item.memberId)}`}
-                                 > */}
+                                 <Link 
+                                    to={`/doctor/${item.memberId}`} 
+                                    // to = {`/doctor/${hashids.encode(item.memberId)}`}
+                                 >
                                     <DoctorCard doctor={item} />
-                                {/* </Link> */}
+                                </Link>
                                 </div>
                             ))}
                         </SimpleGrid>

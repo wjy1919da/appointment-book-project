@@ -9,12 +9,14 @@
 }
 
 .page-not-found-text-button-section {
-    margin-top : -160px;
+    //margin-top : -8vh;
+    position: relative;
+    top: -50px;
     .text-section {
         color: #000;
         text-align: center;
         font-family: Playfair Display;
-        font-size: 24px;
+        font-size: 2vw;
         font-style: normal;
         font-weight: 700;
         line-height: 135%; /* 32.4px */
