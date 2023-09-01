@@ -55,7 +55,8 @@ const HomeDoctorPage = () => {
                     </div>
                 </Fragment>}
                 {isMobileOrIpad&&<Fragment>
-                    <HomeMobileSubText title='Consult' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>
+                    <HomeMobileSubText title='Consult' content=' Our platform collaborates with top professionals and institutions to provide 
+                            you with expert advice and support.'></HomeMobileSubText>
                     <div style={{marginTop: '10px'}}>
                         <Link to='/doctor' className='home-mobile-share-link'>View More Doctors</Link>
                     </div>

@@ -68,7 +68,7 @@ const HomeDoctors = () => {
                 <HomeButton title="Try Charm App" href = "/download"/>
               </div>
               <div className='home-mobile-app-text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+                    Join us today and connect with like-minded individuals who share your passion for personal care. 
               </div>
           </Fragment>}
         </div>

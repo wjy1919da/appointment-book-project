@@ -57,7 +57,7 @@ const HomePost = () => {
                     <div className ='home-post-subText'>
                         <span className='postText'> Our platform is a transparent community where beauty 
                         lovers can connect and empower each other. 
-                        Share your cosmetic experience and explore others’ posts. 
+                        Share your cosmetic experience and explore others' posts. 
                         Know the market and stay on-trend. Discover exceptional savings and exclusive offers.
                         </span>
                     </div> 
@@ -69,7 +69,7 @@ const HomePost = () => {
                 </Fragment>}
                 {/* Mobile */}
                 {isMobileOrIpad&&<Fragment>
-                    <HomeMobileSubText title='Share' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut'></HomeMobileSubText>
+                    <HomeMobileSubText title='Share' content='Our platform is a transparent community where beauty lovers can connect and empower each other.'></HomeMobileSubText>
                     <Link to='/posts' className='home-mobile-share-link'>View More Posts</Link>
                 </Fragment>}
             </div>
