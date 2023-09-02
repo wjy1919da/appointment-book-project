@@ -9,10 +9,10 @@ const HomeSectionTitles = (props) => {
         <div className="home-section5-title-heading3">
            {props.heading}
         </div>
-        {!isMobile&&<HomeLink title={props.link} href = "/download"/>} 
+        {/* {!isMobile&&<HomeLink title={props.link} href = "/download"/>} 
         {isMobile&&<Link to='/download' className='home-mobile-procedure-link'>
                     View All
-              </Link>}       
+              </Link>}        */}
       </div>
     );
   };
