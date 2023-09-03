@@ -221,8 +221,8 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                                     item.nickname &&
                                                     <div key={i} className='doctor-search-card-container'>
                                                         <Link 
-                                                            to={`/doctor/${item.memberId}`} 
-                                                            // to={`/doctor/${hashids.encode(item.memberId)}`}
+                                                            // to={`/doctor/${item.memberId}`} 
+                                                            to={`/doctor/${hashids.encode(item.memberId)}`}
                                                         >
                                                             <DoctorCard doctor={item} />
                                                         </Link>

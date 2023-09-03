@@ -41,10 +41,7 @@ const Home = () => {
                                 For All Beauty Lovers
                             </div>
                             <div className ='home-title-subText'>
-                                <p className='ptext'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                <p className='ptext'> Charm is more than just a platform; it's a thriving community that embraces the diversity of beauty and offers a seamless experience for all beauty enthusiasts. From subtle enhancements to bold transformations, our platform is designed to cater to your unique needs and desires.
                                 </p>
                             </div>
                      </Fragment>}
