@@ -1,65 +1,54 @@
-.featured-doctor-card-container
-{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    .feature-doctor-card-text1
-    {
-      
-      font-family: 'Lora';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 160%;
-      /* identical to box height, or 29px */
-      
-      text-align: center;
-      
-      margin-top: 10px;
-      color: #000000;
-      
-      
-      /* Inside auto layout */
-      
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    .feature-doctor-card-text2
-    {
-      // width: 238px;
-      // height: 26px;
-      
-      /* Body 3
-      
-      Lora
-      */
-      font-family: 'Lora';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 160%;
-      /* identical to box height, or 26px */
-      
-      text-align: center;
-      
-      color: rgba(0, 0, 0, 0.82);
-      
-      
-      /* Inside auto layout */
-      
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    .feature-doctor-starRate
-    {
-      flex: none;
-      order: 2;
-      align-self: stretch;
-      flex-grow: 0;
-      text-align: center;
+.featured-doctor-card-container {
+  width: 210px; /* or whatever width you want */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.featured-doctor-card-container img {
+  width: 175px;
+  height: 262.5px;
+  object-fit: cover;
+}
+
+.feature-doctor-card-text1 {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  text-align: center;
+  margin-top: 10px;
+  color: #000000;
+  white-space: normal;
+  word-wrap: break-word;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.feature-doctor-card-text2 {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.82);
+  white-space: normal;
+  word-wrap: break-word;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.feature-doctor-starRate {
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  text-align: center;
 }

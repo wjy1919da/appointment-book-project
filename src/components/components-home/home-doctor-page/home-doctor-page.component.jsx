@@ -20,7 +20,7 @@ const HomeDoctorPage = () => {
                 {<img src={DoctorImg} alt='doctorImg' className='doctor-page-img'></img> }
                 <div className = 'doctor-page-name-card'>
                     <h5 className='card-title'>Dr. Amir Karam</h5>
-                    <p className='card-content'>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+                    <p className='card-content'>Over 25 years in the medical field</p>
                     <span className='starRatePart'>
                         <StarRate rateScore='50'/>
                     </span>
@@ -29,8 +29,8 @@ const HomeDoctorPage = () => {
             {!isMobile&&<div className='home-doctor-page-pic animate__animated animate__slideInUp'>
                {<img src={DoctorImg} alt='doctorImg' className='doctor-page-img'></img> }
                 <div className = 'doctor-page-name-card'>
-                    <h5 className='card-title'>Dr. Amir Karam</h5>
-                    <p className='card-content'>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+                    <h5 className='card-title'>Dr. Lisa Chipps</h5>
+                    <p className='card-content'>Over 25 years in the medical field</p>
                     <span className='starRatePart'>
                         <StarRate rateScore='50'/>
                     </span>
