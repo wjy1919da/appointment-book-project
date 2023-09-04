@@ -16,7 +16,7 @@ export function useGetPost() {
         pageSize: postQuery.pageSize,
         filterType: postQuery.filterType,
       });
-      console.log("userIDdata", res.data);
+      //console.log("userIDdata", res.data);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     };
     return useInfiniteQuery(

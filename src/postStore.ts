@@ -3,7 +3,6 @@ interface PostQuery{
     filterType: number;
     pageSize: number;
     userID :number;  
-    // 此处或许可以替换成number
     filterCondition?: Array<string>;    
 }
 interface postQueryStore {
@@ -14,7 +13,7 @@ interface postQueryStore {
     setFilterCondition?: (filterCondition: Array<string>) => void;
 }
 const usePostQueryStore = create<postQueryStore>((set) => ({
-    postQuery: {pageSize: 8, filterType: 2,userID:0,filterCondition:[]},
+    postQuery: {pageSize: 12, filterType: 2,userID:0,filterCondition:[]},
     setFilterType: (filterType) => 
       set(state => ({postQuery: {...state.postQuery, filterType}})),
     setPageSize: (pageSize) =>
