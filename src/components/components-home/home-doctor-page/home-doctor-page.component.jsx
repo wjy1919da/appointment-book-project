@@ -20,7 +20,7 @@ const HomeDoctorPage = () => {
                 {<img src={DoctorImg} alt='doctorImg' className='doctor-page-img'></img> }
                 <div className = 'doctor-page-name-card'>
                     <h5 className='card-title'>Dr. Amir Karam</h5>
-                    <p className='card-content'>Over 25 years in the medical field</p>
+                    <p className='card-content'>American Board of Medical Specialties®; American Board of Dermatology®</p>
                     <span className='starRatePart'>
                         <StarRate rateScore='50'/>
                     </span>
@@ -30,7 +30,7 @@ const HomeDoctorPage = () => {
                {<img src={DoctorImg} alt='doctorImg' className='doctor-page-img'></img> }
                 <div className = 'doctor-page-name-card'>
                     <h5 className='card-title'>Dr. Lisa Chipps</h5>
-                    <p className='card-content'>Over 25 years in the medical field</p>
+                    <p className='card-content'>American Board of Medical Specialties®; American Board of Dermatology®</p>
                     <span className='starRatePart'>
                         <StarRate rateScore='50'/>
                     </span>
