@@ -12,13 +12,11 @@
         margin-left: 40px;
         width: 60vw;
     }
-    .sub-instrument-right-container{
-        display: flex;
-        flex: 1; 
-        align-self: stretch;
-        flex-grow: 0;
-        width: 35vw;
-    }
+    .sub-instrument-right-container-card {
+        /* ... other styles remain unchanged ... */
+        position: relative; /* switch from absolute to relative */
+        margin-top: 20px; /* adjust this value as needed */
+    }    
     .sub-instrument-title-container{
         position: relative;
         flex: none;
@@ -164,7 +162,8 @@
         flex: none;
         position: absolute;
         right: 3px;
-        top: 350px;
+        top: 350px; 
+
     }
 
     .instrument-introduction-slide .introduction-catalog {
@@ -236,5 +235,12 @@
     .instrument-introduction-slide .introduction-catalog .introduction-section:hover::before {
         visibility: visible;
     }
+    .instrument-recommendation-container{
+        position: fixed;
+        bottom: 20px; /* 50px (footer height) + 30px */
+        right: 45px;
+        //margin-right: 35px; /* 已有的样式 */
+    }
+
 
 }
