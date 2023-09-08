@@ -157,7 +157,7 @@
     .instrument-introduction-slide {
         display: flex;
         flex-direction: row;
-        background: #FFFFFF;
+        //background: #FFFFFF;
         order: 1;
         flex: none;
         position: absolute;
@@ -243,6 +243,9 @@
         flex: none;
         position: relative;
         right: 40px;
+    }
+    .instrument-footer-container{
+        margin-top: 100px;
     }
 
 

@@ -91,24 +91,11 @@ const SubInstrument = () => {
     const slideRef = useRef(null);
     const recommendationGridRef = useRef(null);
     const footerRef = useRef(null);
-    // const [recommendationGridBottom, setRecommendationGridBottom] = useState(null);
-    // const [footerTop, setFooterTop] = useState(null);
-    
-    // useEffect(() => {
-    //     if (recommendationGridRef.current && footerRef.current) {
-    //         setRecommendationGridBottom(recommendationGridRef.current.getBoundingClientRect().bottom);
-    //         setFooterTop(footerRef.current.getBoundingClientRect().top);
-    //     }
-    //     // Your existing event listener
-    //     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    //     // Don't forget to remove the event listener on cleanup
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
    
+    let lastScrollTop = 0;  // 使用这个变量来存储上一次的滚动位置
+
     const handleScroll = () => {
+        
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
                 document.getElementById("slide").style.top = '60px';
@@ -116,32 +103,28 @@ const SubInstrument = () => {
             }
         } else {
             if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '350px';
+                document.getElementById("slide").style.top = '370px';
                 document.getElementById("slide").style.position = 'absolute';
             }
         }
-        if(window.scrollY >= 350){
-            if(document.getElementById("recommendation")){
+        
+        if (window.scrollY >= 350) {
+            if (document.getElementById("recommendation")) {
                 document.getElementById("recommendation").style.top = '220px';
                 document.getElementById("recommendation").style.position = 'fixed';
             }
-        }else{
-            if(document.getElementById("recommendation")){
+        } else {
+            if (document.getElementById("recommendation")) {
                 document.getElementById("recommendation").style.top = '530px';
                 document.getElementById("recommendation").style.position = 'absolute';
             }
         }
-        if(window.scrollY > 800){
-            if(document.getElementById('footer')){
+        checkWhichSectionInView();
 
-            }
-        }
-      
-        checkWhichSectionInView(); 
-    } 
+    };
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
-    });
+    }, []); 
     return (
         <div className='outer-container'>
              <div className='sub-instrument-container'>
@@ -237,7 +220,9 @@ const SubInstrument = () => {
             </div>
          
         </div>
-        <Footer />
+        <div className='instrument-footer-container'>
+            <Footer />
+        </div>
         </div>
        
     )
