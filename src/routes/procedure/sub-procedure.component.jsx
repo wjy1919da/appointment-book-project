@@ -25,14 +25,9 @@ function safeJsonParse(str) {
         return undefined;
     }
 }
-
 const SubProcedure = () => { 
-    // useLayoutEffect(() => {
-    //     window.scrollTo(0, 0);
-    // });
     const checkWhichSectionInView = () => {
         const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
-    
         for (const section of sections) {
             const element = document.getElementById(section);
             if (element) {
@@ -57,14 +52,7 @@ const SubProcedure = () => {
             }
         }
         checkWhichSectionInView(); 
-    }    
-    //const [loadingTimeout, setLoadingTimeout] = useState(false);
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         setLoadingTimeout(true);
-    //     }, 5000);
-    //     return () => clearTimeout(timeout);
-    // }, []);
+    } 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
@@ -86,10 +74,6 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
-    // function handleClick() {
-    //     window.open(videoUrl, "_blank");
-    // }
-
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
@@ -100,12 +84,7 @@ const SubProcedure = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
-   
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
-
-    // if (isLoading) {
-    //    return <HomeSpinner />;
-    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;

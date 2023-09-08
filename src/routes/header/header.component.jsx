@@ -182,10 +182,10 @@ const Header = () => {
                     <Link className='header-nav-link2' to='/doctor'>
                         Doctors
                     </Link>
-                    {/* <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument'>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
                         Instruments
-                    </Link> */}
+                    </Link>
                     <span className='header-nav-divider'>|</span>
                     <Link className='header-nav-link3' to='/posts'>
                         Posts
