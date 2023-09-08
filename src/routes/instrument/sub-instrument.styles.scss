@@ -163,7 +163,6 @@
         position: absolute;
         right: 3px;
         top: 350px; 
-
     }
 
     .instrument-introduction-slide .introduction-catalog {
@@ -175,7 +174,8 @@
         align-items: flex-start;
         padding: 24px 16px;
         gap: 24px;
-        position: absolute;
+       // position: absolute;
+       position: relative;
         width: 380px;
         //width: 300px;
 
@@ -236,10 +236,13 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        position: fixed;
-        bottom: 20px; /* 50px (footer height) + 30px */
-        right: 45px;
-        //margin-right: 35px; /* 已有的样式 */
+        display: flex;
+        flex-direction: row;
+        background: #FFFFFF;
+        order: 1;
+        flex: none;
+        position: relative;
+        right: 40px;
     }
 
 

@@ -48,6 +48,7 @@
     "react-select": "^5.7.3",
     "react-social-login-buttons": "^3.6.1",
     "react-stack-grid": "^0.7.1",
+    "react-sticky": "^6.0.3",
     "react-waterfall": "^4.0.4",
     "reactjs-social-login": "^2.6.2",
     "sass": "^1.55.0",
