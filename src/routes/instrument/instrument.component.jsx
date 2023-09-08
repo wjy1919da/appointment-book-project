@@ -11,8 +11,8 @@ const Instrument = () => {
     });
 
     return (
-        <div className='instrument-container animate__animated animate__fadeIn'>
-            <img className='instrument-pic' src={InstrumentPic} alt='instrument' />
+        <div className='instrument-container'>
+            {/* <img className='instrument-pic' src={InstrumentPic} alt='instrument' /> */}
             {/* <div className='slide-in-animation'>
                 <h2 className='instrument-title'>
                     FEATURED INSTRUMENTS

@@ -15,7 +15,7 @@ const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-    const {encodedMemberId} = useParams(); 
+    const {memberId} = useParams(); 
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
@@ -24,11 +24,11 @@ const IndividualDoctor = () => {
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
     useEffect(() => {
-        setMemberId(encodedMemberId);
+        setMemberId(memberId);
         if (data) {
            setNickName(data.nickname);
         }
-     }, [encodedMemberId, data]);     
+     }, [memberId, data]);     
     if (isLoading) {
         return <HomeSpinner/>;
     }

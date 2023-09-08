@@ -25,10 +25,25 @@ function safeJsonParse(str) {
         return undefined;
     }
 }
+
 const SubProcedure = () => { 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // });
+    const checkWhichSectionInView = () => {
+        const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
+    
+        for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+                const bounding = element.getBoundingClientRect();
+                if ((bounding.top >= 0 && bounding.top <= window.innerHeight) || (bounding.bottom >= 0 && bounding.bottom <= window.innerHeight)) {
+                    setSelectedSection(section);
+                    break;
+                }
+            }
+        }
+    };
     const handleScroll = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
@@ -41,14 +56,15 @@ const SubProcedure = () => {
                 document.getElementById("slide").style.position = 'absolute';
             }
         }
-    }
-    const [loadingTimeout, setLoadingTimeout] = useState(false);
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setLoadingTimeout(true);
-        }, 5000);
-        return () => clearTimeout(timeout);
-    }, []);
+        checkWhichSectionInView(); 
+    }    
+    //const [loadingTimeout, setLoadingTimeout] = useState(false);
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         setLoadingTimeout(true);
+    //     }, 5000);
+    //     return () => clearTimeout(timeout);
+    // }, []);
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
@@ -116,14 +132,8 @@ const SubProcedure = () => {
             cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
         }
     }
-    // else{
-    //     //return <HomeSpinner />;
-    //     return <ErrorMsg/>;
-    // }
-    // if (error) {
-    //     return <ErrorMsg/>;
-    // }
-    if (isLoading || !loadingTimeout) {
+   
+    if (isLoading) {
         return <HomeSpinner />;
     }
     if (!data.data || !data.data.subcategories) {
@@ -263,42 +273,42 @@ const SubProcedure = () => {
                     </div>}
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
-<div className="introduction-catalog">
-    <a
-        href="#description"
-        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-        onClick={() => setSelectedSection("description")}>Introduction</a>
-    <a
-        href="#consider"
-        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
-    {optionsContent &&
-    <a
-        href="#options"
-        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
-        onClick={() => setSelectedSection("options")}>Procedure options</a>}
-    <a
-        href="#sideEffects"
-        className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
-    {beforeAndAfterImage &&
-    <a
-        href="#beforeAndAfter"
-        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} {alternativeTreatmentForm &&
-    <a
-        href="#alternative"
-        className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
-        onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-    <a
-        href="#faq"
-        className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-        onClick={() => setSelectedSection("faq")}>FAQ</a>
-    <a
-        href="#reference"
-        className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
-        onClick={() => setSelectedSection("reference")}>Reference</a>
-</div>
+                        <div className="introduction-catalog">
+                            <a
+                                href="#description"
+                                className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                                onClick={() => setSelectedSection("description")}>Introduction</a>
+                            <a
+                                href="#consider"
+                                className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                            {optionsContent &&
+                            <a
+                                href="#options"
+                                className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                            <a
+                                href="#sideEffects"
+                                className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
+                            {beforeAndAfterImage &&
+                            <a
+                                href="#beforeAndAfter"
+                                className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} {alternativeTreatmentForm &&
+                            <a
+                                href="#alternative"
+                                className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
+                                onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
+                             <a
+                                href="#faq"
+                                className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
+                                onClick={() => setSelectedSection("faq")}>FAQ</a>
+                            {/* <a
+                                href="#reference"
+                                className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
+                                onClick={() => setSelectedSection("reference")}>Reference</a> */}
+                        </div>
                     </div>
                 </div>    
             </div>

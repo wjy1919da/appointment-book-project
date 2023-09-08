@@ -56,11 +56,11 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
         hasNextPage
    } = useSearchMultiConditionsPopUp();
    // No need to merge the data by nickname since backend already does that
-   //const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
+   const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
    //Save: merge data by nickname
-   const mergedData = useMemo(() => {
-    return data ? mergeDoctorsByNickname(data.pages) : [];
-   }, [data]);
+//    const mergedData = useMemo(() => {
+//     return data ? mergeDoctorsByNickname(data.pages) : [];
+//    }, [data]);
    const hashids = new Hashids('Encode the Url');
    const locationRef = useRef(null);
    const specializationRef = useRef(null);
@@ -221,8 +221,8 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                                     item.nickname &&
                                                     <div key={i} className='doctor-search-card-container'>
                                                         <Link 
-                                                            // to={`/doctor/${item.memberId}`} 
-                                                            to={`/doctor/${hashids.encode(item.memberId)}`}
+                                                            to={`/doctor/${item.memberId}`} 
+                                                            // to={`/doctor/${hashids.encode(item.memberId)}`}
                                                         >
                                                             <DoctorCard doctor={item} />
                                                         </Link>
@@ -283,8 +283,8 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
                                 // item.nickname &&item.memberId&&
                                 <div key={i} className='doctor-search-card-container'>
                                  <Link 
-                                    // to={`/doctor/${item.memberId}`} 
-                                    to = {`/doctor/${hashids.encode(item.memberId)}`}
+                                    to={`/doctor/${item.memberId}`} 
+                                    // to = {`/doctor/${hashids.encode(item.memberId)}`}
                                  >
                                     <DoctorCard doctor={item} />
                                 </Link>

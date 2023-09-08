@@ -44,7 +44,7 @@ const SubInstrument = () => {
                     text={why} />
             {/* <InstrumentBenifits instrumentName={textName} /> */}
             {/* <SubInstrumentPhotos photo_1={ThermagePhoto_1} photo_2={ThermagePhoto_2} /> */}
-            <SubFooter />
+            
             <Footer />
         </div>
     )
