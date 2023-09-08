@@ -92,36 +92,41 @@ const SubInstrument = () => {
     const recommendationGridRef = useRef(null);
     const footerRef = useRef(null);
    
-    let lastScrollTop = 0;  // 使用这个变量来存储上一次的滚动位置
-
     const handleScroll = () => {
-        
+        const slideElement = document.getElementById("slide");
+        const recommendationElement = document.getElementById("recommendation");
+        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+    
         if (window.scrollY >= 280) {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '60px';
-                document.getElementById("slide").style.position = 'fixed';
+            if (slideElement) {
+                slideElement.style.top = '60px';
+                slideElement.style.position = 'fixed';
             }
         } else {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '370px';
-                document.getElementById("slide").style.position = 'absolute';
+            if (slideElement) {
+                slideElement.style.top = '370px';
+                slideElement.style.position = 'absolute';
             }
         }
-        
+    
         if (window.scrollY >= 350) {
-            if (document.getElementById("recommendation")) {
-                document.getElementById("recommendation").style.top = '220px';
-                document.getElementById("recommendation").style.position = 'fixed';
+            if (recommendationElement && (footerTop > recommendationElement.getBoundingClientRect().bottom)) {
+                recommendationElement.style.top = '220px';
+                recommendationElement.style.position = 'fixed';
+            } else if (recommendationElement && footerTop <= recommendationElement.getBoundingClientRect().bottom) {
+                recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight}px`;
+                recommendationElement.style.position = 'absolute';
             }
         } else {
-            if (document.getElementById("recommendation")) {
-                document.getElementById("recommendation").style.top = '530px';
-                document.getElementById("recommendation").style.position = 'absolute';
+            if (recommendationElement) {
+                recommendationElement.style.top = '530px';
+                recommendationElement.style.position = 'absolute';
             }
         }
+    
         checkWhichSectionInView();
-
     };
+    
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     }, []); 
@@ -220,7 +225,7 @@ const SubInstrument = () => {
             </div>
          
         </div>
-        <div className='instrument-footer-container'>
+        <div className='instrument-footer-container' ref={footerRef}>
             <Footer />
         </div>
         </div>
