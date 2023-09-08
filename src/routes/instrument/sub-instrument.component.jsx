@@ -20,12 +20,9 @@ import SubProcedureForm from '../../components/sub-procedure-form/sub-procedure-
 import SubProcedureScroll from '../../components/sub-procedure-scroll/sub-procedure-scroll.component';
 import HomeLink from '../../components/components-home/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
+import { useState,useEffect } from 'react';
 
 const SubInstrument = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
-    
     const images = {
         coolsculpting,
         inmode,
@@ -52,10 +49,18 @@ const SubInstrument = () => {
             }
         ]
     };
+    const cardInfo = {
+        Cost: "$5000 - $10000",
+        Duration: "2 - 3 hours",
+        Safety: "Generally Safe",
+        SatisfactionRate: 4, // Assuming this is out of 5, hence '★★★★☆'
+        Pain: "Mild to Moderate"
+    };    
     const reference = ["https://www.runoob.com/html/html-lists.html","https://www.runoob.com/html/html-lists.html","https://www.example.com/xz2c5pd","https://www.example.com/qw7e3rf","https://www.example.com/vt1n6ml"];
     const beforeAndAfterImage = {"beforeAndAfterImage":[{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"}]}
     const isPadAndWeb = useMediaQuery({ query: `(min-width: 768px)` });
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+    const [selectedSection, setSelectedSection] = useState("description");
     // Todo: video need to be replace
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     const formatTitle = (title) => {
@@ -68,9 +73,39 @@ const SubInstrument = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
+    const checkWhichSectionInView = () => {
+        const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
+        for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+                const bounding = element.getBoundingClientRect();
+                if ((bounding.top >= 0 && bounding.top <= window.innerHeight) || (bounding.bottom >= 0 && bounding.bottom <= window.innerHeight)) {
+                    setSelectedSection(section);
+                    break;
+                }
+            }
+        }
+    };
+    const handleScroll = () => {
+        if (window.scrollY >= 280) {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '60px';
+                document.getElementById("slide").style.position = 'fixed';
+            }
+        } else {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '350px';
+                document.getElementById("slide").style.position = 'absolute';
+            }
+        }
+        checkWhichSectionInView(); 
+    } 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    });
     return (
-        
-        <div className='sub-instrument-container'>
+        <div className='outer-container'>
+             <div className='sub-instrument-container'>
             <div className='sub-instrument-left-container'>
                  {/* <img src={logo2} alt="testing" /> */}
                 <div className='sub-instrument-title-container'>
@@ -105,12 +140,62 @@ const SubInstrument = () => {
                 </div>
             </div>
             <div className='sub-instrument-right-container'>
+                <div>
                 <div className='sub-instrument-right-container-card'>
-
+                        <div className="sub-instrument-right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Cost:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
+                        </div>
+                        <div className="sub-instrument-right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Duration:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
+                        </div>
+                        <div className="sub-instrument-right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Safety:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
+                        </div>
+                        <div className="sub-instrument-right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
+                            <div>
+                               <span className={`stars-container stars`}>★★★★★</span>
+                            </div>
+                        </div>
+                        <div className="sub-instrument-right-board-text">
+                            <span style={{color:"#A5A6A8"}}>Pain:</span>
+                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
+                        </div>  
+                </div>
+                <div className="instrument-introduction-slide" id='slide'>
+                        <div className="introduction-icon"></div>
+                        <div className="introduction-catalog">
+                            <a
+                                href="#description"
+                                className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                                onClick={() => setSelectedSection("description")}>Introduction</a>
+                            <a
+                                href="#consider"
+                                className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                            {optionsContent &&
+                            <a
+                                href="#options"
+                                className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                            {beforeAndAfterImage &&
+                            <a
+                                href="#beforeAndAfter"
+                                className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
+                        
+                         </div>
+                    </div>
                 </div>
             </div>
-            {/* <Footer /> */}
+         
         </div>
+        <Footer />
+        </div>
+       
     )
 }
 
