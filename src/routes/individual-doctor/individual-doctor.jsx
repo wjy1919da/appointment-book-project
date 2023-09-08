@@ -5,7 +5,6 @@ import DoctorAbout from '../../components/component-individual-doctor/doctor-abo
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import {useParams} from 'react-router-dom';
 import useDoctorQueryStore from '../../store.ts';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
 import DoctorReviewGrid from '../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
@@ -28,7 +27,7 @@ const IndividualDoctor = () => {
         if (data) {
            setNickName(data.nickname);
         }
-     }, [memberId, data]);     
+    }, [memberId, data]);     
     if (isLoading) {
         return <HomeSpinner/>;
     }
