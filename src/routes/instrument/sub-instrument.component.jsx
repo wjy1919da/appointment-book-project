@@ -110,11 +110,11 @@ const SubInstrument = () => {
         }
     
         if (window.scrollY >= 350) {
-            if (recommendationElement && (footerTop > recommendationElement.getBoundingClientRect().bottom)) {
+            if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
                 recommendationElement.style.top = '220px';
                 recommendationElement.style.position = 'fixed';
-            } else if (recommendationElement && footerTop <= recommendationElement.getBoundingClientRect().bottom) {
-                recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight}px`;
+            } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
+                recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`; // 这里减去15px确保了15px的间隔
                 recommendationElement.style.position = 'absolute';
             }
         } else {
@@ -122,7 +122,7 @@ const SubInstrument = () => {
                 recommendationElement.style.top = '530px';
                 recommendationElement.style.position = 'absolute';
             }
-        }
+        }        
     
         checkWhichSectionInView();
     };

@@ -17,7 +17,7 @@ const DoctorCard = ({doctor}) => {
         displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name.join(', ');
     } else {
         // 如果 doctor.name 是字符串
-        displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2) + '...') : doctor.name;
+        displayText = doctor.name;
     }
 
     return (

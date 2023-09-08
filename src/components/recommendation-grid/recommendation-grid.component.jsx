@@ -6,14 +6,14 @@ const RecommendationGrid = ({ style }) => {
         {
           id: 1,
           nickname: "Dr. Smith",
-          address: "123 Medicine St, Health City",
+          address: "123 Medicine St",
           name: "John Smith",
           mechName: "Health Hospital",
         },
         {
           id: 2,
           nickname: "Dr. Johnson",
-          address: "456 Wellness Ave, Health City",
+          address: "456 Wellness Ave",
           name: "Sarah Johnson",
           mechName: "Wellness Clinic",
         }
