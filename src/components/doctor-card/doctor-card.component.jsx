@@ -11,7 +11,14 @@ const DoctorCard = ({doctor}) => {
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
     const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
-    //console.log("doctor card: ",doctor);
+    let displayText;
+    if (Array.isArray(doctor.name)) {
+        // 如果 doctor.name 是数组
+        displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name.join(', ');
+    } else {
+        // 如果 doctor.name 是字符串
+        displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2) + '...') : doctor.name;
+    }
 
     return (
         <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
@@ -26,8 +33,7 @@ const DoctorCard = ({doctor}) => {
                 </span>
                {doctor.name&&<span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {/* {doctor.name.split(' ').length > 1 ? (doctor.name.split(' ').slice(0, 2).join(', ') + '...') : doctor.name} */}
-                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
+                    {displayText}
                 </span>} 
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>

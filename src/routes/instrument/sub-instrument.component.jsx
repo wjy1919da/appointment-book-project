@@ -21,6 +21,8 @@ import SubProcedureScroll from '../../components/sub-procedure-scroll/sub-proced
 import HomeLink from '../../components/components-home/home-link/home-link.component';
 import SubProcedureReference from '../../components/sub-procedure-reference/sub-procedure-reference.component';
 import { useState,useEffect } from 'react';
+import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
+import { useRef } from 'react';
 
 const SubInstrument = () => {
     const images = {
@@ -86,6 +88,26 @@ const SubInstrument = () => {
             }
         }
     };
+    const slideRef = useRef(null);
+    const recommendationGridRef = useRef(null);
+    const footerRef = useRef(null);
+    // const [recommendationGridBottom, setRecommendationGridBottom] = useState(null);
+    // const [footerTop, setFooterTop] = useState(null);
+    
+    // useEffect(() => {
+    //     if (recommendationGridRef.current && footerRef.current) {
+    //         setRecommendationGridBottom(recommendationGridRef.current.getBoundingClientRect().bottom);
+    //         setFooterTop(footerRef.current.getBoundingClientRect().top);
+    //     }
+    //     // Your existing event listener
+    //     window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    //     // Don't forget to remove the event listener on cleanup
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
+   
     const handleScroll = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
@@ -165,7 +187,7 @@ const SubInstrument = () => {
                             <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
                         </div>  
                 </div>
-                <div className="instrument-introduction-slide" id='slide'>
+                <div className="instrument-introduction-slide" id='slide' >
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
                             <a
@@ -188,7 +210,12 @@ const SubInstrument = () => {
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
                         
                          </div>
+                        
                     </div>
+                    <div className='instrument-recommendation-container' >
+                        <RecommendationGrid/>
+                    </div>
+                    
                 </div>
             </div>
          
