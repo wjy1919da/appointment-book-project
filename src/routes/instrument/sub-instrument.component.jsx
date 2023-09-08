@@ -1,16 +1,7 @@
-import SubInstrumentPic from '../../assets/instrument/sub-instrument-pic.jpg';
-import texts from './instrument-text.json';
-//import ThermagePhoto_1 from '../../assets/thermage/thermage-01.png';
-// import ThermagePhoto_2 from '../../assets/thermage/thermage-02.png';
 import './sub-instrument.styles.scss';
 import SubTxt from '../../components/sub-txt/sub-txt.component';
-import SubFooter from '../../components/sub-footer/sub-footer.component';
 import Footer from '../../components/footer/footer.component';
-// import SubInstrumentPhotos from '../../components/sub-instrument-photos/sub-instrument-photos.component';
 import { Link, useParams } from 'react-router-dom';
-// import InstrumentBenifits from '../../components/instrument-benefits/instrument-benefits.component';
-import StyledButtonV3 from '../../components/styled-button-v3/styled-button-v3.component';
-import { useLayoutEffect } from 'react';
 import coolsculpting from '../../assets/instrument/coolsculpting.svg';
 import thermage from '../../assets/instrument/thermage.svg';
 import fraxel_laser from '../../assets/instrument/fraxel_laser.svg';
@@ -23,7 +14,6 @@ import SubProcedureReference from '../../components/sub-procedure-reference/sub-
 import { useState,useEffect } from 'react';
 import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
 import { useRef } from 'react';
-
 const SubInstrument = () => {
     const images = {
         coolsculpting,
@@ -128,13 +118,16 @@ const SubInstrument = () => {
     };
     
     useEffect(() => {
+        handleScroll(); 
         window.addEventListener('scroll', handleScroll, { passive: true });
-    }, []); 
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, []);     
     return (
         <div className='outer-container'>
              <div className='sub-instrument-container'>
             <div className='sub-instrument-left-container'>
-                 {/* <img src={logo2} alt="testing" /> */}
                 <div className='sub-instrument-title-container'>
                     <h3 className='sub-instrument-top-text'>Instrument</h3>
                   {/* Logo picture */}
@@ -213,14 +206,11 @@ const SubInstrument = () => {
                                 href="#beforeAndAfter"
                                 className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
-                        
-                         </div>
-                        
+                         </div>  
                     </div>
                     <div className='instrument-recommendation-container' id='recommendation' >
                         <RecommendationGrid/>
                     </div>
-                    
                 </div>
             </div>
          
