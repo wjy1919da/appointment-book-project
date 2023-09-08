@@ -47,7 +47,6 @@
             display: none;
         }
     }
-    // minqi part
     .sub-procedure-title-container {
         position: relative;
         flex: none;
@@ -1512,5 +1511,16 @@
         align-items: flex-start;
         padding: 0;
         gap: 16px;
+    }
+    .sub-instrument-reference{
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 0;
+        margin-bottom: 30px;
+        width: 800px;
     }
 }

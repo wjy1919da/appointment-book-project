@@ -1,101 +1,121 @@
-.sub-instrument-container {
-    position: absolute;
-    top: 42px;
-    position: relative;
+@media(min-width: 1024px){
+    .sub-instrument-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 64px;
+    }
+    .sub-instrument-left-container{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-left: 40px;
+        width: 60vw;
+    }
+    .sub-instrument-right-container{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .sub-instrument-title-container{
+        position: relative;
+        flex: none;
+        order: 0;
+        opacity: 1;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        justify-content: flex-start; /* add or modify this line */
+        align-items: flex-start; /* add this line */
+    }
+    .sub-instrument-top-text{
+        position: absolute;
+        width: 700px;
+        height: 29px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 160%;
+        text-transform: uppercase;
+        color: #A5A6A8;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .sub-instrument-logo-pic{
+        width: auto;
+        height: 15vw;
+        margin-bottom: 40px;
+        margin-left: 0; 
+        margin-top: 16px;
+    }
+    .sub-instrument-right-container-card{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+    }
+    .sub-instrument-normal-text{
+        color: #000;
+        font-family: PingFang HK;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 28.8px */
+    }
+    .sub-instrument-watch-video {
+        margin-top: -80px;
+        width: 210px;
+        height: 22px;
+        font-family: 'Open Sans';
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #352C29;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        text-decoration: none;
 
-    .sub-instrument-pic {
+    }
+    .sub-instrument-watch-video:hover {
+        text-decoration: underline;
+    }
+    .sub-instrument-option-form-container{
         width: 100%;
-        height: 450px;
-        object-fit: cover;
-        opacity: 0.7;
+        position: relative;
+        margin-top: 56px;
     }
-
-    @media (min-width: 768px) {
-        .sub-instrument-title-container {
-            position: absolute;
-            top: 180px;
-            left: 9.5%;
-            opacity: 1;
-            z-index: 1;
-    
-            .sub-instrument-title-text {
-                line-height: 60px;
-                text-transform: capitalize;
-                font-size: 50px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: capitalize;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-            }
-    
-            .sub-instrument-title-button-link {
-                text-decoration: none;
-            }
-    
-            .sub-instrument-title-button-container {
-                width: 200px;
-            }
-        }
+    .sub-instrument-scroll-container{
+        width: 100%;
+        position: relative;
+        top: -40px;
+        gap: 20px;
     }
-
-    @media (max-width: 767px) {
-        .sub-instrument-title-container {
-            position: absolute;
-            top: 180px;
-            opacity: 1;
-            z-index: 1;
-            width: 100%;
-            text-align: center;
-    
-            .sub-instrument-title-text {
-                line-height: 60px;
-                font-size: 45px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: capitalize;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-            }
-    
-            .sub-instrument-title-button-link {
-                text-decoration: none;
-            }
-    
-            .sub-instrument-title-button-container {
-                width: 200px;
-                margin: 0 auto;
-            }
-        }
+    .sub-instrument-reference{
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 0;
+        margin-bottom: 30px;
+        width: 800px;
     }
-
-    @media (max-width: 576px) {
-        .sub-instrument-title-container {
-            position: absolute;
-            top: 180px;
-            opacity: 1;
-            z-index: 1;
-            width: 100%;
-            text-align: center;
-    
-            .sub-instrument-title-text {
-                line-height: 60px;
-                font-size: 45px;
-                font-family: 'Merienda', cursive, sans-serif;
-                font-weight: 900;
-                color: #3397B9;
-                text-transform: capitalize;
-                text-shadow: -2px -2px 0 #FDFDFD, 2px -2px 0 #FDFDFD, -2px 2px 0 #FDFDFD, 2px 2px 0 #FDFDFD;
-            }
-    
-            .sub-instrument-title-button-link {
-                text-decoration: none;
-            }
-    
-            .sub-instrument-title-button-container {
-                width: 200px;
-                margin: 0 auto;
-            }
-        }
+    .sub-instrument-title{
+        width: 300px;
+        height: 32px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 135%;
     }
 }

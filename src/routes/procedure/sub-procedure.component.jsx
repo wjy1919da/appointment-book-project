@@ -29,6 +29,19 @@ const SubProcedure = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
+    const checkWhichSectionInView = () => {
+        const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
+        for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+                const bounding = element.getBoundingClientRect();
+                if ((bounding.top >= 0 && bounding.top <= window.innerHeight) || (bounding.bottom >= 0 && bounding.bottom <= window.innerHeight)) {
+                    setSelectedSection(section);
+                    break;
+                }
+            }
+        }
+    };
     const handleScroll = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
@@ -41,7 +54,7 @@ const SubProcedure = () => {
                 document.getElementById("slide").style.position = 'absolute';
             }
         }
-    }
+
     const [loadingTimeout, setLoadingTimeout] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -49,6 +62,8 @@ const SubProcedure = () => {
         }, 5000);
         return () => clearTimeout(timeout);
     }, []);
+        checkWhichSectionInView(); 
+    } 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
@@ -70,10 +85,6 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
-    // function handleClick() {
-    //     window.open(videoUrl, "_blank");
-    // }
-
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
@@ -84,12 +95,7 @@ const SubProcedure = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
-   
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
-
-    // if (isLoading) {
-    //    return <HomeSpinner />;
-    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
