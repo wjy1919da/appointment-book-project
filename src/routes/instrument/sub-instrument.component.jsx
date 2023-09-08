@@ -120,6 +120,23 @@ const SubInstrument = () => {
                 document.getElementById("slide").style.position = 'absolute';
             }
         }
+        if(window.scrollY >= 350){
+            if(document.getElementById("recommendation")){
+                document.getElementById("recommendation").style.top = '220px';
+                document.getElementById("recommendation").style.position = 'fixed';
+            }
+        }else{
+            if(document.getElementById("recommendation")){
+                document.getElementById("recommendation").style.top = '530px';
+                document.getElementById("recommendation").style.position = 'absolute';
+            }
+        }
+        if(window.scrollY > 800){
+            if(document.getElementById('footer')){
+
+            }
+        }
+      
         checkWhichSectionInView(); 
     } 
     useEffect(() => {
@@ -212,7 +229,7 @@ const SubInstrument = () => {
                          </div>
                         
                     </div>
-                    <div className='instrument-recommendation-container' >
+                    <div className='instrument-recommendation-container' id='recommendation' >
                         <RecommendationGrid/>
                     </div>
                     

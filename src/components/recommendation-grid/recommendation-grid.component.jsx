@@ -1,7 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import DoctorCard from "../doctor-card/doctor-card.component";
 
-const RecommendationGrid = () => {
+const RecommendationGrid = ({ style }) => {
     const doctors = [
         {
           id: 1,
@@ -37,7 +37,7 @@ const RecommendationGrid = () => {
       ))
       
   return (
-        <SimpleGrid columns={1} spacing={0}>
+        <SimpleGrid columns={1} spacing={0} style={style}>
             {doctorList}
         </SimpleGrid>
   )
