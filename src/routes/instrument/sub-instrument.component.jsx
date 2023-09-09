@@ -105,16 +105,23 @@ const SubInstrument = () => {
             if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
                 recommendationElement.style.top = '220px';
                 recommendationElement.style.position = 'fixed';
+                recommendationElement.style.display = 'block';  // 确保元素是可见的
             } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
-                recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`; // 这里减去15px确保了15px的间隔
-                recommendationElement.style.position = 'absolute';
+                if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
+                    recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
+                } else {
+                    recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
+                    recommendationElement.style.position = 'absolute';
+                    recommendationElement.style.display = 'block';  // 确保元素是可见的
+                }
             }
         } else {
             if (recommendationElement) {
                 recommendationElement.style.top = '530px';
                 recommendationElement.style.position = 'absolute';
+                //recommendationElement.style.display = 'block';  // 确保元素是可见的
             }
-        }        
+        }
         checkWhichSectionInView();
     };
     
@@ -124,7 +131,8 @@ const SubInstrument = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-    }, []);     
+    }, []);
+        
     return (
         <div className='outer-container'>
              <div className='sub-instrument-container'>
