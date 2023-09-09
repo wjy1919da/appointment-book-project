@@ -14,6 +14,7 @@ import SubProcedureReference from '../../components/sub-procedure-reference/sub-
 import { useState,useEffect } from 'react';
 import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
 import { useRef } from 'react';
+import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.component'
 const SubInstrument = () => {
     const images = {
         coolsculpting,
@@ -160,6 +161,9 @@ const SubInstrument = () => {
                    <SubTxt title={'Before and After'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
                    <SubProcedureScroll data={beforeAndAfterImage.beforeAndAfterImage} />
                    <HomeLink title = "View More Post" href = '/posts'/>  
+                </div>
+                <div className='instrument-FQA'>
+                    <InstrumentFAQ/>
                 </div>
                 <div className='sub-instrument-reference' id = 'reference'> 
                     <div className='sub-instrument-title'>
