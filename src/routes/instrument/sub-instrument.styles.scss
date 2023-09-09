@@ -265,6 +265,10 @@
         font-weight: 700;
         line-height: 100%; /* 17.007px */
     }
+    .instrument-FQA{
+        margin-top: 40px;
+        margin-bottom: 80px;
+    }
 
 }
 @media(min-width:768px) and (max-width: 1023px){
@@ -534,4 +538,7 @@
         font-weight: 700;
         line-height: 100%; /* 17.007px */
     }
+}
+@media(max-width: 767px){
+
 }
