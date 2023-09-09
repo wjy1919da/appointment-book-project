@@ -210,13 +210,17 @@ const SubInstrument = () => {
                          </div>  
                     </div>
                     {isLarge&&<div className='instrument-recommendation-container' id='recommendation' >
-                        <div className='instrument-recommendation-tilte'></div>
+                        <div className='instrument-recommendation-tilte'>Specialization</div>
                         <RecommendationGrid/>
                     </div>}
                 </div>
             </div>
          
         </div>
+        {isMedium&&isLarge&&<div className='instrument-recommendation-container' id='recommendation' >
+                        <div className='instrument-recommendation-tilte'>Spec</div>
+                        <RecommendationGrid/>
+                    </div>}
         <div className='instrument-footer-container' ref={footerRef}>
             <Footer />
         </div>
