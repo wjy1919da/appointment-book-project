@@ -9,12 +9,10 @@ import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
-    const [selectedTab, setSelectedTab] = useState('');
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
@@ -43,6 +41,8 @@ const Header = () => {
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
+    // const [activeTab, setActiveTab] = useState(0);
+    // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
   
     const handleClick = () => setClick(!click);
     const handleLoginClick = () => setLoginClick(!loginClick);
@@ -66,6 +66,11 @@ const Header = () => {
     const onClick = ()=>{
         setDropdown(!dropdown)
     }
+    /*
+    const selectTab = (index) => {
+        setActiveTab(index);
+    }
+    */
 
 
 //   Save: old navbar    
@@ -160,6 +165,26 @@ const Header = () => {
                     <img className='logo' src={Logo} alt='logo' />
                 </Link>
                 <div className='header-nav-container' id='#navbarTogglerDemo02'>
+                    {/*  
+                    <div className='header-tabs'>
+                        {
+                            tabs.map((item, index) => (
+                                <div
+                                    className={`head-tab ${activeTab === index ? 'active' : ''}`}
+                                    onClick={() => selectTab(index)}>
+                                    {item}
+                                    <div className="head-tab-underline"></div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    {activeTab === 0 && <DoctorAbout/>}
+                    {activeTab === 1 && <div className="individual-doctor-posts">
+                            <DoctorPostGrid isAbout={true}/> 
+                    </div>}
+                    {activeTab === 2 && < DoctorReviewGrid/>}
+                    */}
+
                     <span className='dropdown-center'>
                         <Link 
                             className='header-nav-link1' 
@@ -169,7 +194,7 @@ const Header = () => {
                             //onMouseOver={() => setIsModelOpen(true)}
                             onClick={() => setIsModelOpen(true)}
                             >
-                            Procedure
+                                Procedure
                         </Link>
                         <ul className='dropdown-menu'>
                             {IsModalOpen && 
@@ -181,20 +206,18 @@ const Header = () => {
                         </ul>
                     </span>
                     <span className='header-nav-divider'>|</span>
-                    <NavLink className='header-nav-link2' to='/doctor' activeClassName='active'>
+                    <Link className='header-nav-link2' to='/doctor'>
                         Doctors
-                        <div className='header-underline'></div>
-                    </NavLink>
+                    </Link>
                     <span className='header-nav-divider'>|</span>
-                    <NavLink className='header-nav-link3' to='/instrument/coolsculpting' activeClassName='active'>
+                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
                         Instruments
-                        <div className='header-underline'></div>
-                    </NavLink>
+                    </Link>
                     <span className='header-nav-divider'>|</span>
-                    <NavLink className='header-nav-link4' to='/posts' activeClassName='active'>
+                    <Link className='header-nav-link3' to='/posts'>
                         Posts
-                        <div className='header-underline'></div>
-                    </NavLink>
+                    </Link>
+                    
                 </div>
                 {/* <div className='header-login'>
                     <div className="header-search">
