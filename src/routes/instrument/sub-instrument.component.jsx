@@ -27,16 +27,15 @@ const SubInstrument = () => {
         "optionsForm": [
             {
                 "header": [
-                    {"name":"Silicone Implants"},
-                    {"name":"Saline Implants"},
-                    {"name":"Fat Transfer"}
+                    {"name":"What it Does"},
+                    {"name":"How it work"}
                 ]
             },
             {
                 "body": [
-                    {"name":"Procedure Type","value":["Surgical","Surgical","Non-Surgical"]},
-                    {"name":"Anesthesia","value":["General","General","Local or General"]},
-                    {"name":"Recovery Time","value":["6-8 weeks","6-8 weeks","Variable"]}
+                    {"name":"Target","value":['You ll work with your provider to determine if you re a  candidate and develop a personalized treatment plan.']},
+                    {"name":"Freeze","value":['You ll work with your provider to determine if you re a candidate and develop a personalized treatment plan.']},
+                    {"name":"Freeze ","value":['You ll work with your provider to determine if you re a candidate and develop a personalized treatment plan.']}
                 ]
             }
         ]
@@ -136,7 +135,7 @@ const SubInstrument = () => {
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.
                     </h1>
                 </div>
-                <div className='sub-text'>
+                <div className='instrument-sub-text'>
                     <div className='sub-instrument-what' id='consider'>
                         <SubTxt title={'What is ' + formatTitle(name) + '?'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'} />
                     </div>
