@@ -9,10 +9,12 @@ import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
+    const [selectedTab, setSelectedTab] = useState('');
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
@@ -179,18 +181,20 @@ const Header = () => {
                         </ul>
                     </span>
                     <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link2' to='/doctor'>
+                    <NavLink className='header-nav-link2' to='/doctor' activeClassName='active'>
                         Doctors
-                    </Link>
+                        <div className='header-underline'></div>
+                    </NavLink>
                     <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
+                    <NavLink className='header-nav-link3' to='/instrument/coolsculpting' activeClassName='active'>
                         Instruments
-                    </Link>
+                        <div className='header-underline'></div>
+                    </NavLink>
                     <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/posts'>
+                    <NavLink className='header-nav-link4' to='/posts' activeClassName='active'>
                         Posts
-                    </Link>
-                    
+                        <div className='header-underline'></div>
+                    </NavLink>
                 </div>
                 <div className='header-login'>
                     {/* <div className="header-search">
