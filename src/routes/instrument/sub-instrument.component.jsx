@@ -21,8 +21,10 @@ const SubInstrument = () => {
         thermage,
         fraxel_laser
     };
+  
     const { name } = useParams();
     const imageToUse = images[name];
+   
     const optionsContent = {
         "optionsForm": [
             {
@@ -46,18 +48,19 @@ const SubInstrument = () => {
         Safety: "Generally Safe",
         SatisfactionRate: 4, // Assuming this is out of 5, hence '★★★★☆'
         Pain: "Mild to Moderate"
-    };    
+    };  
     const reference = ["https://www.runoob.com/html/html-lists.html","https://www.runoob.com/html/html-lists.html","https://www.example.com/xz2c5pd","https://www.example.com/qw7e3rf","https://www.example.com/vt1n6ml"];
     const beforeAndAfterImage = {"beforeAndAfterImage":[{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"}]}
-    const isPadAndWeb = useMediaQuery({ query: `(min-width: 768px)` });
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+    const isMedium = useMediaQuery({ query: `(min-width: 768px) and (max-width:1024px)` });
+    const isLarge = useMediaQuery({ query: `(min-width: 1280px)` });
     const [selectedSection, setSelectedSection] = useState("description");
     // Todo: video need to be replace
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
-        if (isPadAndWeb) {
+        if (isMedium || isLarge) {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
         if (isMobile) {
@@ -112,7 +115,6 @@ const SubInstrument = () => {
                 recommendationElement.style.position = 'absolute';
             }
         }        
-    
         checkWhichSectionInView();
     };
     
@@ -207,9 +209,10 @@ const SubInstrument = () => {
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
                          </div>  
                     </div>
-                    <div className='instrument-recommendation-container' id='recommendation' >
+                    {isLarge&&<div className='instrument-recommendation-container' id='recommendation' >
+                        <div className='instrument-recommendation-tilte'></div>
                         <RecommendationGrid/>
-                    </div>
+                    </div>}
                 </div>
             </div>
          
