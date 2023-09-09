@@ -240,12 +240,13 @@
     }
     .instrument-recommendation-container{
         display: flex;
-        flex-direction: row;
-        background: #FFFFFF;
+        flex-direction: column;
+       // background: #FFFFFF;
         order: 1;
         flex: none;
         position: relative;
         right: 40px;
+        margin-top: 40px;
     }
     .instrument-footer-container{
         margin-top: 80px;
@@ -297,6 +298,7 @@
         justify-content: flex-start; 
         align-items: flex-start;
         margin-bottom: 80px;
+        width: 55vw;
     }
     .sub-instrument-top-text{
         position: absolute;
@@ -446,9 +448,9 @@
         padding: 24px 16px;
         gap: 24px;
        // position: absolute;
-       position: relative;
-        width: 380px;
-        //width: 300px;
+        position: relative;
+        //width: 380px;
+        width: 38vw;
 
         height: 240px;
         //right: 40px;
