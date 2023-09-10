@@ -12,11 +12,6 @@
         margin-left: 40px;
         width: 60vw;
     }
-    .sub-instrument-right-container-card {
-        /* ... other styles remain unchanged ... */
-        position: relative; /* switch from absolute to relative */
-        margin-top: 20px; /* adjust this value as needed */
-    }    
     .sub-instrument-title-container{
         position: relative;
         flex: none;
@@ -51,11 +46,6 @@
        // margin-bottom: 40px;
         margin-left: 0; 
         margin-top: 16px;
-    }
-    .sub-instrument-right-container-card{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
     }
     .sub-instrument-normal-text{
         color: #000;
@@ -127,23 +117,21 @@
     }
     .sub-instrument-right-container-card{
         box-sizing: border-box;
-        /* Auto layout */
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         padding: 24px 16px;
         gap: 24px;
-
-        position: absolute;
+        //position: absolute;
         width: 352px;
-        //width: 30vw; 
-        //height: 240px;
-        right: 2vw;
+        margin-left:5vw;
         top: 104px;
         background: #FFFFFF;   
         border: 1px solid #E2E3E7;   
         box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
         border-radius: 8px;
+        position: relative; /* switch from absolute to relative */
+       // margin-top: 20px; /* adjust this value as needed */
     }
     .sub-instrument-right-board-text{
         font-family: 'Open Sans';
@@ -239,13 +227,13 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        display: flex;
-        flex-direction: column;
-       // background: #FFFFFF;
+    //     display: flex;
+    //     flex-direction: column;
+    //    // background: #FFFFFF;
         order: 1;
         flex: none;
         position: relative;
-        right: 40px;
+        margin-left: 100px;
         margin-top: 40px;
     }
     .instrument-footer-container{
@@ -256,14 +244,6 @@
     }
     .instrument-sub-text{
         margin-bottom: 80px;
-    }
-    .instrument-recommendation-tilte{
-        color: #000;
-        font-family: Inter;
-        font-size: 17.007px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 100%; /* 17.007px */
     }
     .instrument-FQA{
         margin-top: 40px;
@@ -285,11 +265,7 @@
         margin-left: 40px;
         width: 60vw;
     }
-    .sub-instrument-right-container-card {
-        /* ... other styles remain unchanged ... */
-        position: relative; /* switch from absolute to relative */
-        margin-top: 20px; /* adjust this value as needed */
-    }    
+        
     .sub-instrument-title-container{
         position: relative;
         flex: none;
@@ -326,11 +302,7 @@
         margin-left: 0; 
         margin-top: 16px;
     }
-    .sub-instrument-right-container-card{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-    }
+    
     .sub-instrument-normal-text{
         color: #000;
         font-family: PingFang HK;
@@ -407,17 +379,15 @@
         align-items: flex-start;
         padding: 24px 16px;
         gap: 24px;
-
-        position: absolute;
         width: 35vw;
-        //width: 30vw; 
-        //height: 240px;
-        right: 2vw;
-        top: 104px;
+        //right: 2vw;
+        top: 36px;
         background: #FFFFFF;   
         border: 1px solid #E2E3E7;   
         box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
         border-radius: 8px;
+        position: relative; 
+       // margin-left: 5vw;
     }
     .sub-instrument-right-board-text{
         font-family: 'Open Sans';
@@ -434,11 +404,10 @@
     .instrument-introduction-slide {
         display: flex;
         flex-direction: row;
-        //background: #FFFFFF;
         order: 1;
         flex: none;
-        position: absolute;
-        right: 3px;
+        //position: absolute;
+        left:68vw;
         top: 350px; 
     }
 
@@ -454,7 +423,7 @@
        // position: absolute;
         position: relative;
         //width: 380px;
-        width: 38vw;
+        //width: 38vw;
 
         height: 240px;
         //right: 40px;
@@ -513,13 +482,10 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        display: flex;
-        flex-direction: row;
-        background: #FFFFFF;
-        order: 1;
-        flex: none;
+        // display: flex;
         position: relative;
-        right: 40px;
+        margin-top: 30px;
+        margin-left: 20px;
     }
     .instrument-footer-container{
         margin-top: 80px;
@@ -529,14 +495,6 @@
     }
     .instrument-sub-text{
         margin-bottom: 80px;
-    }
-    .instrument-recommendation-tilte{
-        color: #000;
-        font-family: Inter;
-        font-size: 17.007px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 100%; /* 17.007px */
     }
 }
 @media(max-width: 767px){

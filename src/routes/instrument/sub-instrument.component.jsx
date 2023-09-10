@@ -142,9 +142,9 @@ const SubInstrument = () => {
                     <h3 className='sub-instrument-top-text'>Instrument</h3>
                   {/* Logo picture */}
                     <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic'/>
-                    <h1 className='sub-instrument-normal-text' id='description'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.
-                    </h1>
+                    <div style={{ marginTop: '-40px' }}>
+                        <SubTxt text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
+                    </div>
                 </div>
                 <div className='instrument-sub-text'>
                     <div className='sub-instrument-what' id='consider'>
@@ -171,6 +171,9 @@ const SubInstrument = () => {
                     </div>
                     <SubProcedureReference reference = {reference} id = ''/>
                 </div>
+                {/* {isMedium&&<div className='instrument-recommendation-container' >
+                        <RecommendationGrid isMobile={true}/>
+                 </div>} */}
             </div>
             <div className='sub-instrument-right-container'>
                 <div>
@@ -221,18 +224,12 @@ const SubInstrument = () => {
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
                          </div>  
                     </div>
-                    {isLarge&&<div className='instrument-recommendation-container' id='recommendation' >
-                        <div className='instrument-recommendation-tilte'>Specialization</div>
-                        <RecommendationGrid/>
-                    </div>}
+                    <div className='instrument-recommendation-container' id='recommendation'>
+                        <RecommendationGrid isMobile={false} />
+                    </div>
                 </div>
             </div>
-         
         </div>
-        {isMedium&&isLarge&&<div className='instrument-recommendation-container' id='recommendation' >
-                        <div className='instrument-recommendation-tilte'>Spec</div>
-                        <RecommendationGrid/>
-                    </div>}
         <div className='instrument-footer-container' ref={footerRef}>
             <Footer />
         </div>
