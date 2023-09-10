@@ -1,7 +1,8 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import DoctorCard from "../doctor-card/doctor-card.component";
-
-const RecommendationGrid = ({ style }) => {
+import './recommendation-grid.styles.scss'
+import RecommendationCard from "../doctor-card/recommendation-card.component";
+const RecommendationGrid = ({ style, isMobile}) => {
     const doctors = [
         {
           id: 1,
@@ -17,29 +18,26 @@ const RecommendationGrid = ({ style }) => {
           name: "Sarah Johnson",
           mechName: "Wellness Clinic",
         }
-        // {
-        //   id: 3,
-        //   nickname: "Dr. Lee",
-        //   address: "789 Health Blvd, Health City",
-        //   name: "", // 这个医生没有名字
-        //   mechName: "Life Care Center",
-        // }
-        // {
-        //   id: 4,
-        //   nickname: "Dr. Patel",
-        //   address: "101 Health Plaza, Health City",
-        //   name: "Amit Patel",
-        //   mechName: "Vitality Hospital",
-        // },
       ];
       const doctorList = doctors.map(doctor => (
-        <DoctorCard key={doctor.id} doctor={doctor} />
+        <RecommendationCard key={doctor.id} doctor={doctor}/>
       ))
       
   return (
-        <SimpleGrid columns={1} spacing={0} style={style}>
-            {doctorList}
-        </SimpleGrid>
+        // isMobile ? 
+        // <div className="recommendation-grid-outer-container">
+        //     <div className='recommendation-title'>Specialization</div>
+        //     <div className="recommendation-grid-container">
+        //         {doctorList}
+        //     </div>
+        // </div>
+        // :
+        <div className="recommendation-grid-outer-container">
+            <div className='recommendation-title'>Specialization</div>
+            <SimpleGrid columns={1} spacing={0} style={style}>
+                {doctorList}
+            </SimpleGrid>
+        </div>
   )
 }
 

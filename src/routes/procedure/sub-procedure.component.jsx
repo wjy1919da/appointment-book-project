@@ -58,6 +58,7 @@ const SubProcedure = () => {
     });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
+   
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -132,10 +133,13 @@ const SubProcedure = () => {
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
-                {data.data.description &&
+                {/* {data.data.description &&
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
-                    </p>}
+                    </p>} */}
+                <div style={{ marginTop: '120px' }}>
+                    {data.data.description && <SubTxt text={data.data.description}/>}
+                </div>   
             </div>
 
             {cardInfo &&<div className='sub-procedure-right-board-mobile'>
@@ -279,10 +283,11 @@ const SubProcedure = () => {
                                 href="#alternative"
                                 className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
                                 onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-                             <a
+                            {/* NOTICE: window.innerHeight Can not reach to these 2 section */}
+                             {/* <a
                                 href="#faq"
                                 className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-                                onClick={() => setSelectedSection("faq")}>FAQ</a>
+                                onClick={() => setSelectedSection("faq")}>FAQ</a> */}
                             {/* <a
                                 href="#reference"
                                 className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}

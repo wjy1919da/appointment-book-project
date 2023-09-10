@@ -7,16 +7,17 @@ import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import StarRate from '../starRate/starRate';
 import { useMediaQuery } from 'react-responsive';
 
-const DoctorCard = ({doctor}) => {
+const DoctorCard = ({doctor,isRecommendation}) => {
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
-    const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
+    let searchButtonWidth;
+    searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
     let displayText;
     if (Array.isArray(doctor.name)) {
-        // 如果 doctor.name 是数组
+        // if doctor.name is array
         displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name.join(', ');
     } else {
-        // 如果 doctor.name 是字符串
+        // if doctor.name is string
         displayText = doctor.name;
     }
 
