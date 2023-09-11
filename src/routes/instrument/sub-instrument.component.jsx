@@ -97,7 +97,7 @@ const SubInstrument = () => {
             }
         } else {
             if (slideElement) {
-                slideElement.style.top = '370px';
+                slideElement.style.top = '300px';
                 slideElement.style.position = 'absolute';
             }
         }
@@ -118,7 +118,7 @@ const SubInstrument = () => {
             }
         } else {
             if (recommendationElement) {
-                recommendationElement.style.top = '530px';
+                recommendationElement.style.top = '460px';
                 recommendationElement.style.position = 'absolute';
                 //recommendationElement.style.display = 'block';  // 确保元素是可见的
             }
@@ -171,9 +171,6 @@ const SubInstrument = () => {
                     </div>
                     <SubProcedureReference reference = {reference} id = ''/>
                 </div>
-                {/* {isMedium&&<div className='instrument-recommendation-container' >
-                        <RecommendationGrid isMobile={true}/>
-                 </div>} */}
             </div>
             <div className='sub-instrument-right-container'>
                 <div>

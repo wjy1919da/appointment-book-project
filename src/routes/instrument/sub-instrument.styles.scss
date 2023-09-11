@@ -2,7 +2,6 @@
     .sub-instrument-container{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
         margin-top: 64px;
     }
     .sub-instrument-left-container{
@@ -166,7 +165,7 @@
         padding: 24px 16px;
         gap: 24px;
        // position: absolute;
-       position: relative;
+        position: relative;
         width: 380px;
         //width: 300px;
 
@@ -257,13 +256,16 @@
         flex-direction: row;
         justify-content: flex-start;
         margin-top: 64px;
+        position: relative;
+        width:100%;
     }
     .sub-instrument-left-container{
         display: flex;
         flex-direction: column;
         position: relative;
         margin-left: 40px;
-        width: 60vw;
+        width: 55vw;
+        flex-grow:0;
     }
         
     .sub-instrument-title-container{
@@ -278,11 +280,12 @@
         justify-content: flex-start; 
         align-items: flex-start;
         margin-bottom: 80px;
-        width: 55vw;
+        //width: 55vw;
     }
     .sub-instrument-top-text{
         position: absolute;
-        width: 700px;
+        //width: 700px;
+        width: 50vw;
         height: 29px;
         font-family: 'Open Sans';
         font-style: normal;
@@ -303,17 +306,17 @@
         margin-top: 16px;
     }
     
-    .sub-instrument-normal-text{
-        color: #000;
-        font-family: PingFang HK;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; /* 28.8px */
-    }
+    // .sub-instrument-normal-text{
+    //     color: #000;
+    //     font-family: PingFang HK;
+    //     font-size: 18px;
+    //     font-style: normal;
+    //     font-weight: 500;
+    //     line-height: 160%; /* 28.8px */
+    // }
     .sub-instrument-watch-video {
         //margin-top: -80px;
-        width: 210px;
+        //width: 210px;
         height: 22px;
         font-family: 'Open Sans';
         font-weight: 600;
@@ -354,7 +357,7 @@
         padding: 0;
         gap: 0;
         margin-bottom: 30px;
-        width: 800px;
+        width: 100%;
     }
     .sub-instrument-title{
         width: 300px;
@@ -373,7 +376,6 @@
     }
     .sub-instrument-right-container-card{
         box-sizing: border-box;
-        /* Auto layout */
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -387,7 +389,7 @@
         box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
         border-radius: 8px;
         position: relative; 
-       // margin-left: 5vw;
+        margin-left: 2vw;
     }
     .sub-instrument-right-board-text{
         font-family: 'Open Sans';
@@ -408,7 +410,7 @@
         flex: none;
         //position: absolute;
         left:68vw;
-        top: 350px; 
+        top: 300px; 
     }
 
     .instrument-introduction-slide .introduction-catalog {
@@ -482,10 +484,12 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        // display: flex;
+        
         position: relative;
-        margin-top: 30px;
-        margin-left: 20px;
+        order: 1;
+        flex: none;
+        margin-top: 40px;
+        margin-left: 5vw;
     }
     .instrument-footer-container{
         margin-top: 80px;
