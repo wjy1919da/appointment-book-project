@@ -147,7 +147,7 @@ const SubProcedure = () => {
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
                     </p>} */}
-                <div style={{ marginTop: '120px' }}>
+                <div className="sub-procedure-normal-text">
                     {data.data.description && <SubTxt text={data.data.description}/>}
                 </div>   
             </div>
@@ -311,6 +311,5 @@ const SubProcedure = () => {
         <Footer />
     </div>
     )
-}
-}
+}}
 export default SubProcedure;

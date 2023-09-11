@@ -128,6 +128,7 @@ const Header = () => {
 
                         <Dropdown.Menu className='header-menu-bar-mobile-container' >
                         <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="instrument/coolsculpting" className='header-menu-bar-item-mobile' >Instrument</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>Post</Dropdown.Item>
                         </Dropdown.Menu>

@@ -14,6 +14,7 @@ import SubProcedureReference from '../../components/sub-procedure-reference/sub-
 import { useState,useEffect } from 'react';
 import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
 import { useRef } from 'react';
+import ProcedureCard from '../../components/procedure-card/procedure-card.component';
 import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.component'
 const SubInstrument = () => {
     const images = {
@@ -53,8 +54,9 @@ const SubInstrument = () => {
     const reference = ["https://www.runoob.com/html/html-lists.html","https://www.runoob.com/html/html-lists.html","https://www.example.com/xz2c5pd","https://www.example.com/qw7e3rf","https://www.example.com/vt1n6ml"];
     const beforeAndAfterImage = {"beforeAndAfterImage":[{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"},{"before":"facial_injection_before_group2.png","after":"facial_injection_after_group2.png"},{"before":"facial_injection_before_group1.png","after":"facial_injection_after_group1.png"}]}
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-    const isMedium = useMediaQuery({ query: `(min-width: 768px) and (max-width:1024px)` });
-    const isLarge = useMediaQuery({ query: `(min-width: 1280px)` });
+    const isMedium = useMediaQuery({ query: `(min-width: 768px) and (max-width:1023px)` });
+    const isLarge = useMediaQuery({ query: `(min-width: 1024px)` });
+    const isMediumOrLarge = isMedium || isLarge;
     const [selectedSection, setSelectedSection] = useState("description");
     // Todo: video need to be replace
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -146,6 +148,9 @@ const SubInstrument = () => {
                         <SubTxt text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
                     </div>
                 </div>
+                {isMobile&&<div>
+                    <ProcedureCard cardInfo={cardInfo}/>
+                </div>}
                 <div className='instrument-sub-text'>
                     <div className='sub-instrument-what' id='consider'>
                         <SubTxt title={'What is ' + formatTitle(name) + '?'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'} />
@@ -171,34 +176,15 @@ const SubInstrument = () => {
                     </div>
                     <SubProcedureReference reference = {reference} id = ''/>
                 </div>
+                {isMobile && <div>
+                        <RecommendationGrid isMobile={false} />
+                </div>}
             </div>
             <div className='sub-instrument-right-container'>
-                <div>
-                <div className='sub-instrument-right-container-card'>
-                        <div className="sub-instrument-right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="sub-instrument-right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="sub-instrument-right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="sub-instrument-right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="sub-instrument-right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div>  
-                </div>
-                <div className="instrument-introduction-slide" id='slide' >
+              <div>
+                {/* Card of right container */}
+                {isMediumOrLarge && <ProcedureCard cardInfo={cardInfo}/>}
+                {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
                             <a
@@ -220,10 +206,10 @@ const SubInstrument = () => {
                                 className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
                          </div>  
-                    </div>
-                    <div className='instrument-recommendation-container' id='recommendation'>
+                    </div>}
+                    {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
                         <RecommendationGrid isMobile={false} />
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>
