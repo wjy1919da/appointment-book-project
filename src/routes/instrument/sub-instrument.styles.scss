@@ -472,7 +472,6 @@
         flex-direction: column;
         width: 100%;
     }
-        
     .sub-instrument-title-container{
         position: relative;
         margin-top: 30px;
@@ -558,6 +557,9 @@
         display: flex;
         flex-direction: column;
     }
+    .sub-instrument-right-container{
+
+    }
     .sub-instrument-right-container-card{
         box-sizing: border-box;
         display: flex;
@@ -607,15 +609,8 @@
         align-items: flex-start;
         padding: 24px 16px;
         gap: 24px;
-       // position: absolute;
         position: relative;
-        //width: 380px;
-        //width: 38vw;
-
         height: 240px;
-        //right: 40px;
-        //right: 2vw;
-        //margin-left: -10vw;
     }
 
     .instrument-introduction-slide .introduction-catalog .introduction-title {
@@ -670,7 +665,6 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        
         position: relative;
         order: 1;
         flex: none;
