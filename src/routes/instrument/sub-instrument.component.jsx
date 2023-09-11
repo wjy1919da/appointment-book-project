@@ -16,7 +16,7 @@ import RecommendationGrid from '../../components/recommendation-grid/recommendat
 import { useRef } from 'react';
 import ProcedureCard from '../../components/procedure-card/procedure-card.component';
 import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.component'
-import { Diversity1 } from '@mui/icons-material';
+import SubProcedureMobileExtraBottom from '../../components/sub-procedure-mobile-extra-bottom/sub-procedure-mobile-extra-bottom.component';
 const SubInstrument = () => {
     const images = {
         coolsculpting,
@@ -195,6 +195,7 @@ const SubInstrument = () => {
                     </div>
                     <SubProcedureReference reference = {reference} id = ''/>
                 </div>
+                {isMobile && <SubProcedureMobileExtraBottom />  }
                 {isMobile && <div className='instrument-recommendation-container'>
                         <RecommendationGrid isMobile={false} />
                 </div>}
@@ -226,6 +227,7 @@ const SubInstrument = () => {
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
                          </div>  
                     </div>}
+                   
                     {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
                         <RecommendationGrid isMobile={false} />
                     </div>}
