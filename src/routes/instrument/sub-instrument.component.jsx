@@ -23,10 +23,8 @@ const SubInstrument = () => {
         thermage,
         fraxel_laser
     };
-  
     const { name } = useParams();
     const imageToUse = images[name];
-   
     const optionsContent = {
         "optionsForm": [
             {
@@ -130,13 +128,30 @@ const SubInstrument = () => {
     };
     
     useEffect(() => {
-        handleScroll(); 
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        const handleResize = () => {
+            window.removeEventListener('scroll', handleScroll);
+            handleScroll(); // 重新调整位置
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+    
+        const initialize = () => {
+            handleScroll();
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+    
+        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+        if (document.readyState === "complete") {
+            initialize();
+        } else {
+            window.onload = initialize;
+        }
+    
         return () => {
+            window.removeEventListener('resize', handleResize);
             window.removeEventListener('scroll', handleScroll);
         }
-    }, []);
-        
+    }, []);    
     return (
         <div className='outer-container'>
              <div className='sub-instrument-container'>
@@ -144,7 +159,7 @@ const SubInstrument = () => {
                 <div className='sub-instrument-title-container'>
                     <h3 className='sub-instrument-top-text'>Instrument</h3>
                   {/* Logo picture */}
-                    <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic'/>
+                    <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic' id='description'/>
                     <div style={{ marginTop: '-40px' }}>
                         <SubTxt text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
                     </div>
