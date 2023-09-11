@@ -125,7 +125,6 @@ const SubProcedure = () => {
             </div>
         );
     }
-   
     return (
      <div className='home-container'>
         <div className='section-container'>
@@ -137,7 +136,7 @@ const SubProcedure = () => {
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
                     </p>} */}
-                <div style={{ marginTop: '120px' }}>
+                <div className="sub-procedure-normal-text">
                     {data.data.description && <SubTxt text={data.data.description}/>}
                 </div>   
             </div>

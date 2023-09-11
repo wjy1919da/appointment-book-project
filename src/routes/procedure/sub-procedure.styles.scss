@@ -1,4 +1,4 @@
-// desktop
+// Desktop
 @media(min-width: 1280px){
     .home-container {
         width: 100%;
@@ -111,7 +111,10 @@
             flex-grow: 0;
         }
     }
-    // mingqi sub text
+    .sub-procedure-normal-text{
+        //display: block;
+        margin-top: 120px;
+    }
     .sub-text {
         // margin-left: 40px;
         margin-top: 20px;
@@ -436,6 +439,10 @@
         .sub-procedure-right-board-mobile {
             display: none;
         }
+    }
+    .sub-procedure-normal-text{
+        //display: block;
+        margin-top: 120px;
     }
     .sub-procedure-title-container {
         position: relative;
@@ -812,6 +819,9 @@
         gap: 0;
         margin-bottom: 30px;
         width: 800px;
+    }
+    .sub-procedure-normal-text{
+        margin-top: 120px;
     }
     .sub-link {
         margin-top: 20px;
@@ -1340,7 +1350,9 @@
             }
         }
     }
-    // minqi part
+    .sub-procedure-normal-text{
+        display: block;
+    }
     .sub-procedure-title-container {
         position: relative;
         margin-top: 30px;
