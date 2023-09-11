@@ -16,6 +16,7 @@ import RecommendationGrid from '../../components/recommendation-grid/recommendat
 import { useRef } from 'react';
 import ProcedureCard from '../../components/procedure-card/procedure-card.component';
 import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.component'
+import { Diversity1 } from '@mui/icons-material';
 const SubInstrument = () => {
     const images = {
         coolsculpting,
@@ -164,7 +165,7 @@ const SubInstrument = () => {
                         <SubTxt text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
                     </div>
                 </div>
-                {isMobile&&<div>
+                {isMobile&&<div className='instrument-card-mobile-container'>
                     <ProcedureCard cardInfo={cardInfo}/>
                 </div>}
                 <div className='instrument-sub-text'>
@@ -177,7 +178,9 @@ const SubInstrument = () => {
                 <div className='sub-instrument-option-form-container' id = 'options'>
                     <SubProcedureForm data={optionsContent} /> 
                 </div>
-                <SubTxt title={'How long does ' + formatTitle(name) + ' take?'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'} />
+                <div className='instrument-sub-text'>
+                     <SubTxt title={'How long does ' + formatTitle(name) + ' take?'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'} />
+                </div>
                 <div className='sub-instrument-scroll-container' id = 'beforeAndAfter'>
                    <SubTxt title={'Before and After'} text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias. Soluta blanditiis cupiditate sed quibusdam aperiam quo, neque unde quod totam maxime necessitatibus id ipsa dolor alias debitis! Beatae, unde.'}/>
                    <SubProcedureScroll data={beforeAndAfterImage.beforeAndAfterImage} />
@@ -192,7 +195,7 @@ const SubInstrument = () => {
                     </div>
                     <SubProcedureReference reference = {reference} id = ''/>
                 </div>
-                {isMobile && <div>
+                {isMobile && <div className='instrument-recommendation-container'>
                         <RecommendationGrid isMobile={false} />
                 </div>}
             </div>
