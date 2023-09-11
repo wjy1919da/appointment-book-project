@@ -91,41 +91,42 @@ const SubInstrument = () => {
         const slideElement = document.getElementById("slide");
         const recommendationElement = document.getElementById("recommendation");
         const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
-    
-        if (window.scrollY >= 280) {
-            if (slideElement) {
-                slideElement.style.top = '60px';
-                slideElement.style.position = 'fixed';
-            }
-        } else {
-            if (slideElement) {
-                slideElement.style.top = '300px';
-                slideElement.style.position = 'absolute';
-            }
-        }
-    
-        if (window.scrollY >= 350) {
-            if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
-                recommendationElement.style.top = '220px';
-                recommendationElement.style.position = 'fixed';
-                recommendationElement.style.display = 'block';  // 确保元素是可见的
-            } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
-                if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
-                    recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
-                } else {
-                    recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
-                    recommendationElement.style.position = 'absolute';
-                    recommendationElement.style.display = 'block';  // 确保元素是可见的
+        if(!isMobile){
+            if (window.scrollY >= 280) {
+                if (slideElement) {
+                    slideElement.style.top = '60px';
+                    slideElement.style.position = 'fixed';
+                }
+            } else {
+                if (slideElement) {
+                    slideElement.style.top = '300px';
+                    slideElement.style.position = 'absolute';
                 }
             }
-        } else {
-            if (recommendationElement) {
-                recommendationElement.style.top = '460px';
-                recommendationElement.style.position = 'absolute';
-                //recommendationElement.style.display = 'block';  // 确保元素是可见的
+        
+            if (window.scrollY >= 350) {
+                if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
+                    recommendationElement.style.top = '220px';
+                    recommendationElement.style.position = 'fixed';
+                    recommendationElement.style.display = 'block';  // 确保元素是可见的
+                } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
+                    if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
+                        recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
+                    } else {
+                        recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
+                        recommendationElement.style.position = 'absolute';
+                        recommendationElement.style.display = 'block';  // 确保元素是可见的
+                    }
+                }
+            } else {
+                if (recommendationElement) {
+                    recommendationElement.style.top = '460px';
+                    recommendationElement.style.position = 'absolute';
+                    //recommendationElement.style.display = 'block';  // 确保元素是可见的
+                }
             }
+            checkWhichSectionInView();
         }
-        checkWhichSectionInView();
     };
     
     useEffect(() => {
