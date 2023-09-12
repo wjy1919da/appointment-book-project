@@ -13,10 +13,10 @@
         flex-direction: column;
         position: relative;
         margin-left: 40px;
-        width: 55vw;
+        //width: 55vw;
+        width: 800px;
         flex-grow:0;
-    }
-        
+    }   
     .sub-instrument-title-container{
         position: relative;
         flex: none;
@@ -80,7 +80,8 @@
         text-decoration: underline;
     }
     .sub-instrument-option-form-container{
-        width: 100%;
+        //width: 100%;
+        width: 800px;
         position: relative;
         margin-top: 30px;
         margin-bottom:80px;
@@ -123,7 +124,8 @@
         flex-direction: row;
         order: 1;
         flex: none;
-        left:63vw;
+        //left:63vw;
+        margin-left: 6vw;
         top: 300px; 
     }
     .instrument-introduction-slide .introduction-catalog {
@@ -135,13 +137,8 @@
         align-items: flex-start;
         padding: 24px 16px;
         gap: 24px;
-       // position: absolute;
         position: relative;
-        //width: 380px;
-        //width: 38vw;
-
         height: 240px;
-        //right: 40px;
         right: 2vw;
     }
 
@@ -150,7 +147,7 @@
         font-style: normal;
         font-weight: 800;
         //font-size: 18px;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
@@ -162,7 +159,7 @@
         font-style: normal;
         font-weight: 400;
         //font-size: 18px;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
@@ -197,7 +194,6 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-        
         position: relative;
         order: 1;
         flex: none;
@@ -300,6 +296,7 @@
     }
     .sub-instrument-option-form-container{
         width: 100%;
+        //width: 800px;
         position: relative;
         margin-top: 30px;
         margin-bottom:80px;
@@ -377,7 +374,7 @@
         font-style: normal;
         font-weight: 800;
         //font-size: 18px;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
@@ -389,7 +386,7 @@
         font-style: normal;
         font-weight: 400;
         //font-size: 18px;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 100%;
         display: flex;
         align-items: center;
@@ -424,9 +421,6 @@
         visibility: visible;
     }
     .instrument-recommendation-container{
-    //     display: flex;
-    //     flex-direction: column;
-    //    // background: #FFFFFF;
         order: 1;
         flex: none;
         position: relative;
@@ -693,7 +687,7 @@
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 28.8px;
         text-transform: uppercase;
         color: #A5A6A8;
