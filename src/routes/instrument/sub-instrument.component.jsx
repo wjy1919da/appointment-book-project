@@ -105,7 +105,7 @@ const SubInstrument = () => {
         
             if (window.scrollY >= 350) {
                 if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
-                    recommendationElement.style.top = '220px';
+                    recommendationElement.style.top = '250px';
                     recommendationElement.style.position = 'fixed';
                     recommendationElement.style.display = 'block';  // 确保元素是可见的
                 } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
@@ -119,7 +119,7 @@ const SubInstrument = () => {
                 }
             } else {
                 if (recommendationElement) {
-                    recommendationElement.style.top = '460px';
+                    recommendationElement.style.top = '490px';
                     recommendationElement.style.position = 'absolute';
                     //recommendationElement.style.display = 'block';  // 确保元素是可见的
                 }
@@ -186,7 +186,7 @@ const SubInstrument = () => {
                    <SubProcedureScroll data={beforeAndAfterImage.beforeAndAfterImage} />
                    <HomeLink title = "View More Post" href = '/posts'/>  
                 </div>
-                <div className='instrument-FQA'>
+                <div className='instrument-FQA' id='faq'>
                     <InstrumentFAQ/>
                 </div>
                 <div className='sub-instrument-reference' id = 'reference'> 
@@ -225,6 +225,10 @@ const SubInstrument = () => {
                                 href="#beforeAndAfter"
                                 className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
                                 onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
+                            <a
+                                href="#faq"
+                                className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
+                                onClick={() => setSelectedSection("faq")}>FAQ</a>
                          </div>  
                     </div>}
                    

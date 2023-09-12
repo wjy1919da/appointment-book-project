@@ -1,13 +1,222 @@
 /* Large Screen  */
 @media(min-width: 1280px){
     .sub-instrument-container{
-        width: 100%;
-        background: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 64px;
         position: relative;
+        width:100%;
+    }
+    .sub-instrument-left-container{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-left: 40px;
+        width: 55vw;
+        flex-grow:0;
+    }
+        
+    .sub-instrument-title-container{
+        position: relative;
+        flex: none;
+        order: 0;
+        opacity: 1;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        justify-content: flex-start; 
+        align-items: flex-start;
+        margin-bottom: 80px;
+        //width: 55vw;
+    }
+    .sub-instrument-top-text{
+        position: absolute;
+        //width: 700px;
+        width: 50vw;
+        height: 29px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 160%;
+        text-transform: uppercase;
+        color: #A5A6A8;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    .sub-instrument-logo-pic{
+        width: auto;
+        height: 15vw;
+       // margin-bottom: 40px;
+        margin-left: 0; 
+        margin-top: 16px;
+    }
+    .sub-instrument-right-container{
+        //position: relative;
+        width: 35vw;
+    }
+    .sub-instrument-watch-video {
+        //margin-top: -80px;
+        //width: 210px;
+        height: 22px;
+        font-family: 'Open Sans';
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #352C29;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        text-decoration: none;
+
+    }
+    .sub-instrument-watch-video:hover {
+        text-decoration: underline;
+    }
+    .sub-instrument-option-form-container{
+        width: 100%;
+        position: relative;
+        margin-top: 30px;
+        margin-bottom:80px;
+    }
+    .sub-instrument-scroll-container{
+        width: 100%;
+        position: relative;
+        margin-top: 40px;
+        gap: 20px;
+        margin-bottom: 80px;
+    }
+    .sub-instrument-reference{
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 0;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    .sub-instrument-title{
+        width: 300px;
+        height: 32px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 135%;
+    }
+    .outer-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .instrument-introduction-slide {
+        display: flex;
+        flex-direction: row;
+        order: 1;
+        flex: none;
+        left:63vw;
+        top: 300px; 
+    }
+    .instrument-introduction-slide .introduction-catalog {
+        flex: none;
+        order: 1;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+       // position: absolute;
+        position: relative;
+        //width: 380px;
+        //width: 38vw;
+
+        height: 240px;
+        //right: 40px;
+        right: 2vw;
+    }
+
+    .instrument-introduction-slide .introduction-catalog .introduction-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        //font-size: 18px;
+        font-size: 15px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    // 点击前的效果
+    .instrument-introduction-slide .introduction-catalog .introduction-section {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        //font-size: 18px;
+        font-size: 15px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    // 点击前
+    .instrument-introduction-slide .introduction-catalog .introduction-section::before {
+        content: "";
+        display: flex;
+        width: 24px;
+        height: 3px;
+        margin-right: 5px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+        transform: rotate(90deg);
+        visibility: hidden;
+    }
+
+    // 点击后的效果
+    .instrument-introduction-slide .introduction-catalog .introduction-section.active {
+        font-weight: 800;
+    }
+
+    .instrument-introduction-slide .introduction-catalog .introduction-section.active::before {
+        visibility: visible;
+    }
+    .instrument-introduction-slide .introduction-catalog .introduction-section:hover {
+        font-weight: 800;
+    }
+
+    .instrument-introduction-slide .introduction-catalog .introduction-section:hover::before {
+        visibility: visible;
+    }
+    .instrument-recommendation-container{
+        
+        position: relative;
+        order: 1;
+        flex: none;
+        margin-top: 40px;
+        margin-left: 5vw;
+    }
+    .instrument-footer-container{
+        margin-top: 80px;
+    }
+    .sub-instrument-what{
+        margin-top:-40px;
+    }
+    .instrument-sub-text{
+        margin-bottom: 80px;
     }
     .instrument-card-mobile-container{
         display: none;
     }
+
 }
 /* Normal Screen */
 @media(min-width: 1024px) and (max-width: 1279px){
@@ -82,7 +291,9 @@
         order: 0;
         flex-grow: 0;
         text-decoration: none;
-
+    }
+    .sub-instrument-watch-video:hover {
+        text-decoration: underline;
     }
     .sub-instrument-watch-video:hover {
         text-decoration: underline;
