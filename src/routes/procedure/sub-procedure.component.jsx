@@ -123,19 +123,19 @@ const SubProcedure = () => {
     // if (error) {
     //     return <ErrorMsg/>;
     // }
-    if (isLoading || !loadingTimeout) {
+    if (isLoading && !loadingTimeout) {
+        // If it's still loading and hasn't timed out, show the spinner
         return <HomeSpinner />;
-    }
-    if (!data.data || !data.data.subcategories) {
-    // if(error||loadingTimeout){
+    } else if (error && loadingTimeout) {
+        // If there's an error and it has timed out, show the error message
         return (
             <div>
                 <ErrorMsg/>
                 <Footer/>
             </div>
         );
-    }
-   
+    } 
+    else if (data.data && data.data.subcategories) {
     return (
      <div className='home-container'>
         <div className='section-container'>
@@ -307,5 +307,6 @@ const SubProcedure = () => {
         <Footer />
     </div>
     )
+}
 }
 export default SubProcedure;
