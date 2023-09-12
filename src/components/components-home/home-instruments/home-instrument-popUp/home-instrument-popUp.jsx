@@ -3,11 +3,41 @@ import DropdownMenu from '../../../dropdown-menu/dropdown-menu';
 import './home-instrument-popUp.styles.scss';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { useGetInstruments } from '../../../../hooks/useGetInstruments';
 const HomeInstrumentPopUP = (props) => {
   const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
   const [IsModalOpen, setIsModelOpen] = useState(false);
+  const { data, isLoading, error } = useGetInstruments();
+  console.log("pass-indata", data);
+  console.log("pass-indata-name", data.data.name);
+  const [logoSrc, setLogoSrc] = useState(null);
+  const [procedureIcon,setProcedureIcon] = useState(null);
+   useEffect(() => {
+     // This will re-calculate the logoSrc every time data.data.logo changes
+   if (data && data.data && data.data.logo) {
+       try {
+        const newLogoSrc = require(`../../../../assets/instrument/${data.data.logo}`);
+         setLogoSrc(newLogoSrc);
+      } catch (err) {
+        console.error("Error loading logo image:", err);
+        setLogoSrc(null); // set to a default/fallback image if you have one
+      }
+   }
+ }, [data.data.logo]);
+ useEffect(() => {
+    // This will re-calculate the logoSrc every time data.data.logo changes
+  if (data && data.data && data.data.procedure) {
+      try {
+       const newprocedureSrc = require(`../../../../assets/instrument/${data.data.procedure}`);
+       setProcedureIcon(newprocedureSrc);
+     } catch (err) {
+       console.error("Error loading logo image:", err);
+       setLogoSrc(null); // set to a default/fallback image if you have one
+     }
+  }
+}, [data.data.procedure]);
  
     return (
       <div>
@@ -20,29 +50,30 @@ const HomeInstrumentPopUP = (props) => {
             style={{ marginTop: '100px' }}
         >
             <div className="instrument-popUp-container">
-                {props.instrument.logo && 
-                    <div className={`instrument-logo-${props.instrument.hasProcedure ? 'with-procedure' : 'without-procedure'}`}>
-                        <img src = {props.instrument.logo} ></img>
+                {data.data.logo && 
+                    <div className={`instrument-logo-${data.data.hasProcedure ? 'with-procedure' : 'without-procedure'}`}>
+                        <img src = {logoSrc} ></img>
                     </div>
                 }
-                {props.instrument.title && 
-                <div className={`instrument-popUp-title ${props.instrument.name.toLowerCase() === 'thermage' ? 'thermage-title' : ''}`}>
-                    <span>{props.instrument.title}</span>
+                {data.data.title && 
+                <div className={`instrument-popUp-title ${data.data.name.toLowerCase() === 'thermage' ? 'thermage-title' : ''}`}>
+                    <span>{data.data.title}</span>
                 </div>
                 }
-                {props.instrument.text &&
+                {data.data.text &&
                     <div className='instrument-popUp-text'>
-                        <span style={{width:'491px'}}>{props.instrument.text}</span>
+                        <span style={{width:'491px'}}>{data.data.text}</span>
                     </div>
                 }
-                {props.instrument.subtext&&
+                {data.data.subtext&&
                     <div className='instrument-popUp-subtext'>
-                         <span>{props.instrument.subtext}</span>
+                         <span>{data.data.subtext}</span>
                     </div>
                 }
-                {props.instrument.procedure &&
+                {data.data.procedure &&
                     <div className='instrument-popUp-procedure'>
-                        <img src = {props.instrument.procedure} ></img>
+                        {/* <img src = {require(`../../../../assets/instrument/${data.data.procedure}`)} ></img> */}
+                        <img src = {procedureIcon} ></img>
                     </div>
                 }
                 <div className='instrument-popUp-clickMore'>

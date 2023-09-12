@@ -1,10 +1,13 @@
-import { Fragment,useState } from 'react';
+import { Fragment,useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './home-instruments.styles.scss';
+import instrumentQueryStore from '../../../instrumentStore.ts';
+import useInstrumentQueryStore from '../../../instrumentStore.ts';
 import HomeSection5Titles from './home-section5-titles/home-section5-titles.component';
 import { useMediaQuery } from 'react-responsive';
 import { Box, SimpleGrid, Image,Grid } from '@chakra-ui/react';
 import HomeInstrumentPopUP from './home-instrument-popUp/home-instrument-popUp';
+import { useGetInstruments } from '../../../hooks/useGetInstruments';
 const formatTitle = (title) => {
     return title.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
@@ -13,54 +16,67 @@ const HomeInstruments = () => {
     const isIpad = useMediaQuery({ query: '(min-width: 576px) and (max-width: 1023px)' });
     const isMobileOrIpad = isMobile || isIpad;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedInstrument, setSelectedInstrument] = useState(null);
+    const [selectedInstrument, setSelectedInstrument] = useState(false);
     const procedures_names_mobile = ['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening']
     const procedures_names = ['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening','fox_eyes','laser_hair_removal']
-    //const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
-    const instrumentsData = [
-        {
-            name: "thermage",
-            logo: require(`../../../assets/instrument/thermageLogo.png`), 
-            title: 'ADDRESS THE VISIBLE SIGNS OF AGING IN MINUTES',
-            text: "The Thermage® system is a non-invasive radiofrequency (RF) therapy that can help smooth, tighten and contour skin for an overall younger-looking appearance.",
-            subtext: "",
-            procedure: require(`../../../assets/instrument/thermageProcessIcon.png`),
-        },
-        {
-            name: "inmode",
-            logo: require(`../../../assets/instrument/inmodeLogo.png`),
-            title: 'InMode’s innovative technologies provide superior results for your patients.',
-            text: 'InMode’s technological advancements began over two decades ago with state-of-the-art light, laser, and radiofrequency devices invented by leading doctors and scientists, who essentially launched and shaped the industry. Our technology continues that legacy to provide superior satisfaction for both the patient and the practice',
-            subtext: "",
-            procedure: ""
-        },
-        {
-            name: "coolsculpting",
-            logo:require(`../../../assets/instrument/coolsculptingLogo.png`),
-            title: "Get rid of stubborn fat for good.",
-            text: "CoolSculpting® is the treatment doctors usemost for nonsurgical fat reduction",
-            subtext: "",
-            procedure: ""
-        },
-        {
-            name: "fraxel_laser",
-            logo: require(`../../../assets/instrument/fraxel_laserLogo.png`),
-            title: "A NOTICEABLY YOUNGER LOOK WITHOUT SURGERY",
-            text: "Fraxel® treatment improves tone, texture and radiance for aging, sun-damaged or scarred skin.Fraxel® is for people who want to look younger without dramatic changes or extended downtime.",
-            subtext: "FRAXEL® IS EFFECTIVE ON",
-            procedure:require(`../../../assets/instrument/fraxel_laser_process_Icon.png`)
-        },
-        // ... other instruments
-    ];
+    const setInstruName = instrumentQueryStore((state) => state.setInstruName);
+    const instruments_names = ['thermage', 'inmode', 'coolsculpting', 'fraxel_laser'];
+    const { instrumentQuery } = useInstrumentQueryStore();
+    const instruName = instrumentQuery.instruName;
+    // const instrumentsData = [
+    //     {
+    //         name: "thermage",
+    //         logo: require(`../../../assets/instrument/thermageLogo.png`), 
+    //         title: 'ADDRESS THE VISIBLE SIGNS OF AGING IN MINUTES',
+    //         text: "The Thermage® system is a non-invasive radiofrequency (RF) therapy that can help smooth, tighten and contour skin for an overall younger-looking appearance.",
+    //         subtext: "",
+    //         procedure: require(`../../../assets/instrument/thermageProcessIcon.png`),
+    //     },
+    //     {
+    //         name: "inmode",
+    //         logo: require(`../../../assets/instrument/inmodeLogo.png`),
+    //         title: 'InMode’s innovative technologies provide superior results for your patients.',
+    //         text: 'InMode’s technological advancements began over two decades ago with state-of-the-art light, laser, and radiofrequency devices invented by leading doctors and scientists, who essentially launched and shaped the industry. Our technology continues that legacy to provide superior satisfaction for both the patient and the practice',
+    //         subtext: "",
+    //         procedure: ""
+    //     },
+    //     {
+    //         name: "coolsculpting",
+    //         logo:require(`../../../assets/instrument/coolsculptingLogo.png`),
+    //         title: "Get rid of stubborn fat for good.",
+    //         text: "CoolSculpting® is the treatment doctors usemost for nonsurgical fat reduction",
+    //         subtext: "",
+    //         procedure: ""
+    //     },
+    //     {
+    //         name: "fraxel_laser",
+    //         logo: require(`../../../assets/instrument/fraxel_laserLogo.png`),
+    //         title: "A NOTICEABLY YOUNGER LOOK WITHOUT SURGERY",
+    //         text: "Fraxel® treatment improves tone, texture and radiance for aging, sun-damaged or scarred skin.Fraxel® is for people who want to look younger without dramatic changes or extended downtime.",
+    //         subtext: "FRAXEL® IS EFFECTIVE ON",
+    //         procedure:require(`../../../assets/instrument/fraxel_laser_process_Icon.png`)
+    //     },
+    //     // ... other instruments
+    // ];
+    const { data, isLoading, error } = useGetInstruments();
+    console.log("fetchdata",data);
     const proceduresToRender = isMobileOrIpad ? procedures_names_mobile : procedures_names;
     const openModal = (instrumentName) => {
-        const instrument = instrumentsData.find(i => i.name === instrumentName);
-        setSelectedInstrument(instrument);
+        setSelectedInstrument(true);
+        //const instrument = instrumentsData.find(i => i.name === instrumentName);
         setIsModalOpen(true);
     };
+    // useEffect(() => {
+    //     if (data && data.name === instruName) {
+    //         setSelectedInstrument(data.data);
+    //         console.log("seleteInstru", selectedInstrument);
+    //     }
+    // }, [data, instruName]);
     const proceduresGrid = proceduresToRender.map((name) => 
+        
         <Box as="div" className='home-procedure' key={name}>
             <Link to={`/procedure/${name}`}>
+                
                 <Image 
                     src={require(`../../../assets/procedure/${name}.svg`)} 
                     alt={name} 
@@ -71,17 +87,23 @@ const HomeInstruments = () => {
         </Box>
         
     );
-    const instrumentsGrid = instrumentsData.map((instrument) => 
-        <Box as="div" className='home-instrument' key={instrument.name}>
-            <Image 
-                src={require(`../../../assets/instrument/${instrument.name}.svg`)} 
-                alt={instrument.name} 
-                className='home-instrument-pic' 
-                onClick={() => openModal(instrument.name)}
-            />
-           {!isMobileOrIpad && <div className = 'title'>{formatTitle(instrument.name)}</div> }
-        </Box>
-    )
+    const instrumentsGrid = instruments_names.map((name) => {
+        return (
+            <Box as="div" className='home-instrument' key={name}>
+                <Image 
+                    src={require(`../../../assets/instrument/${name}.svg`)} 
+                    alt={name} 
+                    className='home-instrument-pic' 
+                    onClick={() => {
+                        console.log("Image clicked:", name);
+                        setInstruName(name);
+                        openModal(name);  // Ensure your openModal function utilizes the instrument data
+                    }}
+                />
+                {!isMobileOrIpad && <div className='title'>{formatTitle(name)}</div>}
+            </Box>
+        );
+    })
     return (
         <div className = 'home-section-container'>
             {/* procedures */}
@@ -106,8 +128,7 @@ const HomeInstruments = () => {
             {selectedInstrument && 
                 <HomeInstrumentPopUP 
                     show = {isModalOpen}
-                    instrument={selectedInstrument} 
-                    onClose={() => setSelectedInstrument(null)}
+                    onClose={() => setSelectedInstrument(false)}
                 />
             }
         </div>   

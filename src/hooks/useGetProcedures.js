@@ -34,6 +34,7 @@ export default function useGetProcedures() {
             page: 1,
           }
         });
+        console.log("procedure", res.data);
         return res.data;
       } catch (error) {
         console.error("Failed to fetch procedures", error);
