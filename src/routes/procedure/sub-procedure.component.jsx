@@ -282,11 +282,12 @@ const SubProcedure = () => {
                                 href="#alternative"
                                 className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
                                 onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-                            {/* NOTICE: window.innerHeight Can not reach to these 2 section */}
-                             {/* <a
+                            
+                             <a
                                 href="#faq"
                                 className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-                                onClick={() => setSelectedSection("faq")}>FAQ</a> */}
+                                onClick={() => setSelectedSection("faq")}>FAQ</a>
+                            {/* NOTICE: window.innerHeight Can not reach to this section */}
                             {/* <a
                                 href="#reference"
                                 className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
