@@ -192,18 +192,21 @@ const Header = () => {
                     </Link>
                     
                 </div>
-                {/* <div className='header-login'>
-                    <div className="header-search">
+                <div className='header-login'>
+                    {/* <div className="header-search">
                         <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                         </input>
-                    </div> 
+                    </div>  */}
                    <div className="header-login-logo">
                         <img src={loginIcon} alt="login Image" ></img>
                     </div>
                     <div className="header-login-text">
-                        <p>login</p>
+                        <Link>
+                        login
+                        </Link>
+                        
                     </div>
-                </div> */}
+                </div> 
             </div>
             <Outlet />
         </Fragment>
