@@ -7,7 +7,7 @@ import { useState } from 'react';
 const HomeSectionTitles = (props) => {
   const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
   const [IsModalOpen, setIsModelOpen] = useState(false);
- 
+  //console.log('IsModalOpen',IsModalOpen);
     return (
       <div className="home-section5-titles-container">
         <div className="home-section5-title-heading3">
