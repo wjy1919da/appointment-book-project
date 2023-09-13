@@ -77,11 +77,10 @@ const HomeInstrumentPopUP = (props) => {
                     </div>
                 }
                 <div className='instrument-popUp-clickMore'>
-                    <Link >
-                        Click to learn more
-                    </Link>
+                  <Link to={`/instrument/${data.data.name}`}>
+                      Click to learn more
+                  </Link>
                 </div>
-
             </div>
         </Modal>
       </div>
