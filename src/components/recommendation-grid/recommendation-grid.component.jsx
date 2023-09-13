@@ -40,7 +40,7 @@ const RecommendationGrid = ({ isMobile}) => {
         // </div>
         // :
         <div className="recommendation-grid-outer-container">
-            <div className='recommendation-title'>Specialization</div>
+            <div className='recommendation-title'>Suggested</div>
             <SimpleGrid 
               columns={1} 
               spacing={0} 
