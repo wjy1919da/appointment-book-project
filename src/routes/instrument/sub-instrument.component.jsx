@@ -217,12 +217,15 @@ const SubInstrument = () => {
                                 className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
                                // onClick={() => setSelectedSection("consider")}
                                 >Why consider {formatTitle(name)}</a>
+
                             {optionsContent &&
                             <a
                                 href="#options"
                                 className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+
                                 //onClick={() => setSelectedSection("options")}
                                 >Procedure options</a>}
+
                             {beforeAndAfterImage &&
                             <a
                                 href="#beforeAndAfter"
@@ -234,6 +237,7 @@ const SubInstrument = () => {
                                 className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
                                 //onClick={() => setSelectedSection("faq")}
                                 >FAQ</a>
+1
                          </div>  
                     </div>}
                    

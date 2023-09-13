@@ -26,7 +26,7 @@ function safeJsonParse(str) {
     }
 }
 const SubProcedure = () => { 
-    
+
     const handleScroll = () => {
         if (window.scrollY >= 280) {
             if (document.getElementById("slide")) {
@@ -61,11 +61,14 @@ const SubProcedure = () => {
         }, 5000);
         return () => clearTimeout(timeout);
     }, []);
+
+    
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
+   
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -82,10 +85,6 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
-    // function handleClick() {
-    //     window.open(videoUrl, "_blank");
-    // }
-    console.log(selectedSection);
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
@@ -96,12 +95,7 @@ const SubProcedure = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
-   
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
-
-    // if (isLoading) {
-    //    return <HomeSpinner />;
-    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
@@ -146,8 +140,7 @@ const SubProcedure = () => {
                 <Footer/>
             </div>
         );
-    } 
-    else if (data.data && data.data.subcategories) {
+    }
     return (
      <div className='home-container'>
         <div className='section-container'>
@@ -155,10 +148,13 @@ const SubProcedure = () => {
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
-                {data.data.description &&
+                {/* {data.data.description &&
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
-                    </p>}
+                    </p>} */}
+                <div className="sub-procedure-normal-text">
+                    {data.data.description && <SubTxt text={data.data.description}/>}
+                </div>   
             </div>
 
             {cardInfo &&<div className='sub-procedure-right-board-mobile'>
@@ -314,6 +310,7 @@ const SubProcedure = () => {
                                 className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
                                 //onClick={() => setSelectedSection("faq")}
                             >FAQ</a>
+
                             {/* <a
                                 href="#reference"
                                 className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
