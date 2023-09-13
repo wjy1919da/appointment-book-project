@@ -237,7 +237,6 @@ const SubInstrument = () => {
                                 className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
                                 //onClick={() => setSelectedSection("faq")}
                                 >FAQ</a>
-1
                          </div>  
                     </div>}
                    
