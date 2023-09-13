@@ -210,25 +210,30 @@ const SubInstrument = () => {
                             <a
                                 href="#description"
                                 className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                                onClick={() => setSelectedSection("description")}>Introduction</a>
+                                //onClick={() => setSelectedSection("description")}
+                                >Introduction</a>
                             <a
                                 href="#consider"
                                 className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                               // onClick={() => setSelectedSection("consider")}
+                                >Why consider {formatTitle(name)}</a>
                             {optionsContent &&
                             <a
                                 href="#options"
                                 className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
-                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                                //onClick={() => setSelectedSection("options")}
+                                >Procedure options</a>}
                             {beforeAndAfterImage &&
                             <a
                                 href="#beforeAndAfter"
                                 className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} 
+                                //onClick={() => setSelectedSection("beforeAndAfter")}
+                                >Before and After</a>} 
                             <a
                                 href="#faq"
                                 className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("faq")}>FAQ</a>
+                                //onClick={() => setSelectedSection("faq")}
+                                >FAQ</a>
                          </div>  
                     </div>}
                    

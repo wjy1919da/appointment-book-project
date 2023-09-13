@@ -85,7 +85,7 @@ const SubProcedure = () => {
     // function handleClick() {
     //     window.open(videoUrl, "_blank");
     // }
-
+    console.log(selectedSection);
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
