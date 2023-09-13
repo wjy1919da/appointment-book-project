@@ -26,9 +26,22 @@ function safeJsonParse(str) {
     }
 }
 const SubProcedure = () => { 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    
+    const handleScroll = () => {
+        if (window.scrollY >= 280) {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '60px';
+                document.getElementById("slide").style.position = 'fixed';
+            }
+        } else {
+            if (document.getElementById("slide")) {
+                document.getElementById("slide").style.top = '350px';
+                document.getElementById("slide").style.position = 'absolute';
+            }
+        }
+        checkWhichSectionInView(); 
+    }
+    const [loadingTimeout, setLoadingTimeout] = useState(false);
     const checkWhichSectionInView = () => {
         const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
         for (const section of sections) {
@@ -42,34 +55,17 @@ const SubProcedure = () => {
             }
         }
     };
-    const handleScroll = () => {
-        if (window.scrollY >= 280) {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '60px';
-                document.getElementById("slide").style.position = 'fixed';
-            }
-        } else {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '350px';
-                document.getElementById("slide").style.position = 'absolute';
-            }
-        }
-
-    const [loadingTimeout, setLoadingTimeout] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => {
             setLoadingTimeout(true);
         }, 5000);
         return () => clearTimeout(timeout);
     }, []);
-        checkWhichSectionInView(); 
-    } 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
-   
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -86,6 +82,10 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
+    // function handleClick() {
+    //     window.open(videoUrl, "_blank");
+    // }
+
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
@@ -96,7 +96,12 @@ const SubProcedure = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
+   
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
+
+    // if (isLoading) {
+    //    return <HomeSpinner />;
+    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
@@ -123,6 +128,13 @@ const SubProcedure = () => {
             cardInfo = data.data.subcategories[7].other ? safeJsonParse(data.data.subcategories[7].other) : undefined;
         }
     }
+    // else{
+    //     //return <HomeSpinner />;
+    //     return <ErrorMsg/>;
+    // }
+    // if (error) {
+    //     return <ErrorMsg/>;
+    // }
     if (isLoading && !loadingTimeout) {
         // If it's still loading and hasn't timed out, show the spinner
         return <HomeSpinner />;
@@ -143,13 +155,10 @@ const SubProcedure = () => {
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
-                {/* {data.data.description &&
+                {data.data.description &&
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
-                    </p>} */}
-                <div className="sub-procedure-normal-text">
-                    {data.data.description && <SubTxt text={data.data.description}/>}
-                </div>   
+                    </p>}
             </div>
 
             {cardInfo &&<div className='sub-procedure-right-board-mobile'>
@@ -270,35 +279,41 @@ const SubProcedure = () => {
                             <a
                                 href="#description"
                                 className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                                onClick={() => setSelectedSection("description")}>Introduction</a>
+                                //onClick={() => setSelectedSection("description")}
+                                >Introduction</a>
                             <a
                                 href="#consider"
                                 className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
+                                //onClick={() => setSelectedSection("consider")}
+                                >Why consider {formatTitle(name)}</a>
                             {optionsContent &&
                             <a
                                 href="#options"
                                 className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
-                                onClick={() => setSelectedSection("options")}>Procedure options</a>}
+                                //onClick={() => setSelectedSection("options")}
+                                >Procedure options</a>}
                             <a
                                 href="#sideEffects"
                                 className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
+                                //onClick={() => setSelectedSection("sideEffects")}
+                                >Potential Side Effects</a>
                             {beforeAndAfterImage &&
                             <a
                                 href="#beforeAndAfter"
                                 className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                                onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} {alternativeTreatmentForm &&
+                                //onClick={() => setSelectedSection("beforeAndAfter")}
+                                >Before and After</a>} {alternativeTreatmentForm &&
                             <a
                                 href="#alternative"
                                 className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
-                                onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-                            
-                             <a
+                                //onClick={() => setSelectedSection("alternative")}
+                                >Alternative Treatments</a>}
+                            {/* NOTICE: Window.innerHeight can not access to these 2 sections */}
+                            <a
                                 href="#faq"
                                 className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-                                onClick={() => setSelectedSection("faq")}>FAQ</a>
-                            {/* NOTICE: window.innerHeight Can not reach to this section */}
+                                //onClick={() => setSelectedSection("faq")}
+                            >FAQ</a>
                             {/* <a
                                 href="#reference"
                                 className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
@@ -312,5 +327,6 @@ const SubProcedure = () => {
         <Footer />
     </div>
     )
-}}
+}
+}
 export default SubProcedure;
