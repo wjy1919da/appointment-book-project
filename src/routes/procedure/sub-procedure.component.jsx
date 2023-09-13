@@ -99,8 +99,6 @@ const SubProcedure = () => {
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
-
-
         }
         if (data.data.subcategories[2]) {
             optionsContent = data.data.subcategories[2].other ? safeJsonParse(data.data.subcategories[2].other) : undefined;
@@ -141,6 +139,7 @@ const SubProcedure = () => {
             </div>
         );
     }
+    else if (data.data && data.data.subcategories) {
     return (
      <div className='home-container'>
         <div className='section-container'>
@@ -324,6 +323,5 @@ const SubProcedure = () => {
         <Footer />
     </div>
     )
-}
-}
+}}
 export default SubProcedure;
