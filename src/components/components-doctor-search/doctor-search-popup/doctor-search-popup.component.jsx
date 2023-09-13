@@ -21,6 +21,7 @@ import { useMemo } from 'react';
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { useMediaQuery } from 'react-responsive';
 import CloseButton from '../../../assets/post/pop-up-close-button.png';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
 const mergeDoctorsByNickname = (pages) => {
     const mergedDoctors = {};
   
@@ -99,6 +100,9 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    if (data === undefined) {
+        return <HomeSpinner />;
+    }
    //if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
