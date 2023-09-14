@@ -10,8 +10,12 @@ const HomeInstrumentPopUP = (props) => {
   const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const { data, isLoading, error } = useGetInstruments();
-  console.log("pass-indata", data);
-  console.log("pass-indata-name", data.data.name);
+  //console.log("pass-indata", data);
+  //console.log("pass-indata-name", data.data.name);
+  if (data && data.data) {
+    console.log("pass-indata", data);
+    console.log("pass-indata-name", data.data.name);
+  }
   const [logoSrc, setLogoSrc] = useState(null);
   const [procedureIcon,setProcedureIcon] = useState(null);
    useEffect(() => {
@@ -25,7 +29,9 @@ const HomeInstrumentPopUP = (props) => {
         setLogoSrc(null); // set to a default/fallback image if you have one
       }
    }
- }, [data.data.logo]);
+ //}, [data.data.logo]);
+}, [data]);
+
  useEffect(() => {
     // This will re-calculate the logoSrc every time data.data.logo changes
   if (data && data.data && data.data.procedure) {
@@ -37,8 +43,8 @@ const HomeInstrumentPopUP = (props) => {
        setLogoSrc(null); // set to a default/fallback image if you have one
      }
   }
-}, [data.data.procedure]);
- 
+//}, [data.data.procedure]);
+}, [data]);
     return (
       <div>
         <Modal
@@ -50,37 +56,38 @@ const HomeInstrumentPopUP = (props) => {
             style={{ marginTop: '100px' }}
         >
             <div className="instrument-popUp-container">
-                {data.data.logo && 
+                {data?.data?.logo && 
                     <div className={`instrument-logo-${data.data.hasProcedure ? 'with-procedure' : 'without-procedure'}`}>
                         <img src = {logoSrc} ></img>
                     </div>
                 }
-                {data.data.title && 
+                {data?.data?.title && 
                 <div className={`instrument-popUp-title ${data.data.name.toLowerCase() === 'thermage' ? 'thermage-title' : ''}`}>
                     <span>{data.data.title}</span>
                 </div>
                 }
-                {data.data.text &&
+                {data?.data?.text &&
                     <div className='instrument-popUp-text'>
                         <span style={{width:'491px'}}>{data.data.text}</span>
                     </div>
                 }
-                {data.data.subtext&&
+                {data?.data?.subtext&&
                     <div className='instrument-popUp-subtext'>
                          <span>{data.data.subtext}</span>
                     </div>
                 }
-                {data.data.procedure &&
+                {data?.data?.procedure &&
                     <div className='instrument-popUp-procedure'>
                         {/* <img src = {require(`../../../../assets/instrument/${data.data.procedure}`)} ></img> */}
                         <img src = {procedureIcon} ></img>
                     </div>
-                }
-                <div className='instrument-popUp-clickMore'>
-                  <Link to={`/instrument/${data.data.name}`}>
-                      Click to learn more
-                  </Link>
-                </div>
+                }    
+                {data?.data?.name&&<div className='instrument-popUp-clickMore'>
+                    <Link to={`/instrument/${data.data.name}`}>
+                        Click to learn more
+                    </Link>
+                </div>}
+                
             </div>
         </Modal>
       </div>
