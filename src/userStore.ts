@@ -5,6 +5,8 @@ interface userInfo {
     otp?: string;
     email?: string;
     password?: string;
+    following?: number;
+    followers?: number;
 }
 
 interface userInfoStore {
@@ -13,10 +15,12 @@ interface userInfoStore {
     setOtp: (otp: string) => void;
     setEmail: (email: string) => void;
     setPassword: (password: string) => void;
+    setFollowing: (following: number) => void;
+    setFollowers: (followers: number) => void;
 }
 
 const userInfoStore = create<userInfoStore>((set) => ({
-    userInfo: { mobile: "", otp: "", email: "", password: "" },
+    userInfo: { mobile: "", otp: "", email: "", password: "", following: 0, followers: 0 },
     setMobile: (mobile) =>
         set((store) => ({ userInfo: { ...store.userInfo, mobile } })),
     setOtp: (otp) =>
@@ -25,6 +29,10 @@ const userInfoStore = create<userInfoStore>((set) => ({
         set((store) => ({ userInfo: { ...store.userInfo, email } })),
     setPassword: (password) =>
         set((store) => ({ userInfo: { ...store.userInfo, password } })),
+    setFollowing: (following) =>
+        set((store) => ({ userInfo: { ...store.userInfo, following } })),
+    setFollowers: (followers) =>
+        set((store) => ({ userInfo: { ...store.userInfo, followers } }))
 }));
 
 export default userInfoStore;
