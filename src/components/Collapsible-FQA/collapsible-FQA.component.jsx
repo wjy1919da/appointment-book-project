@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './collapsible-FQA.styles.scss';
 import { useGetFAQ } from '../../hooks/useGetProcedures';
+import HomeSpinner from '../home-spinner/home-spinner.component';
 
 const CollapsibleSet = () => {
   const [activeIndexes, setActiveIndexes] = useState([]);
@@ -17,7 +18,7 @@ const CollapsibleSet = () => {
 
   // Handle the loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <HomeSpinner/>;
   }
 
   // Handle the error state

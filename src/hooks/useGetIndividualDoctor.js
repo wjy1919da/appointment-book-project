@@ -3,9 +3,9 @@ import { useInfiniteQuery, useQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
 const base = {
   reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
-  aboutUrl: 'https://api.charm-life.com/info/doctor-details',
-  infoUrl: 'http://localhost:8080/doctor/search'
-  // aboutUrl: 'http://localhost:8080/info/doctor-details'
+  //aboutUrl: 'https://api.charm-life.com/info/doctor-details',
+  infoUrl: 'http://localhost:8080/doctor/search',
+  aboutUrl: 'http://localhost:8080/info/doctor-details'
 }
 // Reviews
 export function useGetDoctorReviews() {
@@ -18,7 +18,7 @@ export function useGetDoctorReviews() {
         base.reviewsUrl,
         {
           "currentPage": pageParam,
-          "memberId": 56,
+          "memberId": doctorQuery.memberId,
           "nickname": clearnickName,
           "pageSize": doctorQuery.pageSize,
           
@@ -50,17 +50,7 @@ export function useGetDoctorAbout() {
   const clearnickName = doctorQuery.nickName.replace(":", "")
   const fetchDoctorAbout = async ({ pageParam = 1 }) => {
     try {
-      const response = await axios.post(
-        base.aboutUrl,
-        {
-          "currentPage": pageParam,
-          "memberId": 56,
-          "nickname": clearnickName,
-          "pageSize": doctorQuery.pageSize,
-
-        }
-      );
-
+      const response = await axios.get(`${base.aboutUrl}/${doctorQuery.memberId}`)
       //console.log("doctor about data",response.data);
       return { data: response.data.data, pageInfo: response.data.pageInfo };
     } catch (error) {

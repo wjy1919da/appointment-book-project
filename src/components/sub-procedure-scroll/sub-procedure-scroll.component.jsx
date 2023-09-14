@@ -4,7 +4,7 @@ import './sub-procedure-scroll.styles.scss'
 import SubProcedureScrollCard from './sub-procedure-scroll-card/sub-procedure-scroll-card.component';
 // import { Fragment } from "react";
 const SubProcedureScroll = (props) => {
-  console.log("SubProcedureScroll", props);
+  //console.log("SubProcedureScroll", props);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.

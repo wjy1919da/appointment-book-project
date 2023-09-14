@@ -7,11 +7,19 @@ import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png'
 import StarRate from '../starRate/starRate';
 import { useMediaQuery } from 'react-responsive';
 
-const DoctorCard = ({doctor}) => {
+const DoctorCard = ({doctor,isRecommendation}) => {
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
-    const searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
-    //console.log("doctor card: ",doctor);
+    let searchButtonWidth;
+    searchButtonWidth = isIpad ? '600' : (isPhone ? '300' : '330');
+    let displayText;
+    if (Array.isArray(doctor.name)) {
+        // if doctor.name is array
+        displayText = doctor.name.length > 2 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name.join(', ');
+    } else {
+        // if doctor.name is string
+        displayText = doctor.name;
+    }
 
     return (
         <div className='search-doctor-card-container' style={{ width: `${searchButtonWidth}px` }}>
@@ -26,8 +34,7 @@ const DoctorCard = ({doctor}) => {
                 </span>
                {doctor.name&&<span className='search-card-text '>
                     <img src={glassIcon} style={{height:"18px", marginTop:"4px"}} alt='glass'></img>
-                    {/* {doctor.name.split(' ').length > 1 ? (doctor.name.split(' ').slice(0, 2).join(', ') + '...') : doctor.name} */}
-                    {doctor.name.length > 1 ? (doctor.name.slice(0, 2).join(', ') + '...') : doctor.name[0]}
+                    {displayText}
                 </span>} 
                 <span className='search-card-text '>
                     <img src={badgeIcon} style={{height:"18px", marginTop:"4px"}} alt='badge'></img>

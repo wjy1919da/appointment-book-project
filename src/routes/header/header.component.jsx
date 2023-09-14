@@ -41,6 +41,8 @@ const Header = () => {
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
+    // const [activeTab, setActiveTab] = useState(0);
+    // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
   
     const handleClick = () => setClick(!click);
     const handleLoginClick = () => setLoginClick(!loginClick);
@@ -64,6 +66,11 @@ const Header = () => {
     const onClick = ()=>{
         setDropdown(!dropdown)
     }
+    /*
+    const selectTab = (index) => {
+        setActiveTab(index);
+    }
+    */
 
 
 //   Save: old navbar    
@@ -121,6 +128,7 @@ const Header = () => {
 
                         <Dropdown.Menu className='header-menu-bar-mobile-container' >
                         <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="instrument/coolsculpting" className='header-menu-bar-item-mobile' >Instrument</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>Post</Dropdown.Item>
                         </Dropdown.Menu>
@@ -158,6 +166,26 @@ const Header = () => {
                     <img className='logo' src={Logo} alt='logo' />
                 </Link>
                 <div className='header-nav-container' id='#navbarTogglerDemo02'>
+                    {/*  
+                    <div className='header-tabs'>
+                        {
+                            tabs.map((item, index) => (
+                                <div
+                                    className={`head-tab ${activeTab === index ? 'active' : ''}`}
+                                    onClick={() => selectTab(index)}>
+                                    {item}
+                                    <div className="head-tab-underline"></div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    {activeTab === 0 && <DoctorAbout/>}
+                    {activeTab === 1 && <div className="individual-doctor-posts">
+                            <DoctorPostGrid isAbout={true}/> 
+                    </div>}
+                    {activeTab === 2 && < DoctorReviewGrid/>}
+                    */}
+
                     <span className='dropdown-center'>
                         <Link 
                             className='header-nav-link1' 
@@ -167,7 +195,7 @@ const Header = () => {
                             //onMouseOver={() => setIsModelOpen(true)}
                             onClick={() => setIsModelOpen(true)}
                             >
-                            Procedure
+                                Procedure
                         </Link>
                         <ul className='dropdown-menu'>
                             {IsModalOpen && 
@@ -182,10 +210,10 @@ const Header = () => {
                     <Link className='header-nav-link2' to='/doctor'>
                         Doctors
                     </Link>
-                    {/* <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument'>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
                         Instruments
-                    </Link> */}
+                    </Link>
                     <span className='header-nav-divider'>|</span>
                     <Link className='header-nav-link3' to='/posts'>
                         Posts

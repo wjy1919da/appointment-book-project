@@ -1,0 +1,130 @@
+@media(min-width: 1280px){
+    .procedure-card-container{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+        width: 300px;
+        //right: 2vw;
+        top: 56px;
+        background: #FFFFFF;   
+        border: 1px solid #E2E3E7;   
+        box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
+        border-radius: 8px;
+        position: relative; 
+
+        margin-left: 12vw;
+      
+    }
+    .procedure-card-text{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: #000000;
+    }
+}
+@media(min-width: 1024px) and (max-width: 1279px){
+    .procedure-card-container{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+        width: 300px;
+        //right: 2vw;
+        top: 56px;
+        background: #FFFFFF;   
+        border: 1px solid #E2E3E7;   
+        box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
+        border-radius: 8px;
+        position: relative; 
+        margin-left: 2vw;
+    }
+    .procedure-card-text{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: #000000;
+    }
+
+}
+@media(min-width: 768px) and (max-width: 1023px){
+    .procedure-card-container{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+        //position: absolute;
+        //width: 352px;
+        width:95%;
+        margin-left:4vw;
+        top: 44px;
+        background: #FFFFFF;   
+        border: 1px solid #E2E3E7;   
+        box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
+        border-radius: 8px;
+        position: relative; 
+    }
+    .procedure-card-text{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: #000000;
+    }
+}
+@media(max-width: 767px){
+    .procedure-card-container{
+        width: 85vw;
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 24px;
+        background: #FFFFFF;
+        border: 1px solid #E2E3E7;
+        box-shadow: 0 0 40px rgba(255, 164, 163, 0.1), 0 12px 16px rgba(226, 227, 231, 0.25);
+        border-radius: 8px;
+       // margin: 0 auto; /* 主要的修改是这里 */
+        margin-left: 30px;
+        
+    }
+    .procedure-card-text{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 100%;
+        /* identical to box height, or 18px */
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: #000000;
+    }
+}

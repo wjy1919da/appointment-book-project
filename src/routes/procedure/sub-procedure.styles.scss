@@ -1,4 +1,4 @@
-// desktop
+// Desktop
 @media(min-width: 1280px){
     .home-container {
         width: 100%;
@@ -47,7 +47,6 @@
             display: none;
         }
     }
-    // minqi part
     .sub-procedure-title-container {
         position: relative;
         flex: none;
@@ -100,21 +99,22 @@
 
             font-family: 'Lora';
             font-style: normal;
-            font-weight: 400;
-            font-size: 21px;
+            font-weight: 500;
+            font-size: 19px;
             line-height: 160%;
             /* or 29px */
             margin-top: 150px;
-
             color: #000000;
-
             flex: none;
             order: 1;
             align-self: stretch;
             flex-grow: 0;
         }
     }
-    // mingqi sub text
+    .sub-procedure-normal-text{
+        //display: block;
+        margin-top: 120px;
+    }
     .sub-text {
         // margin-left: 40px;
         margin-top: 20px;
@@ -439,6 +439,10 @@
         .sub-procedure-right-board-mobile {
             display: none;
         }
+    }
+    .sub-procedure-normal-text{
+        //display: block;
+        margin-top: 120px;
     }
     .sub-procedure-title-container {
         position: relative;
@@ -815,6 +819,9 @@
         gap: 0;
         margin-bottom: 30px;
         width: 800px;
+    }
+    .sub-procedure-normal-text{
+        margin-top: 120px;
     }
     .sub-link {
         margin-top: 20px;
@@ -1251,7 +1258,6 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-
         .sub-procedure-right-board-mobile {
             width: 100%;
             position: relative;
@@ -1343,7 +1349,9 @@
             }
         }
     }
-    // minqi part
+    .sub-procedure-normal-text{
+        display: block;
+    }
     .sub-procedure-title-container {
         position: relative;
         margin-top: 30px;
@@ -1514,5 +1522,16 @@
         align-items: flex-start;
         padding: 0;
         gap: 16px;
+    }
+    .sub-instrument-reference{
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 0;
+        margin-bottom: 30px;
+        width: 800px;
     }
 }
