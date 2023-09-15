@@ -9,6 +9,10 @@ import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
+import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-popup.component';
+import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
+import SignupPopup2 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup2.component';
+import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
@@ -35,15 +39,17 @@ const Header = () => {
         </NavDropdown.Item>
     );
 
-    const [IsModalOpen, setIsModelOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-    //   Save: old navbar    
+    //   Save: old navbar
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
-  
+    // const [activeTab, setActiveTab] = useState(0);
+    // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
+
     const handleClick = () => setClick(!click);
-    const handleLoginClick = () => setLoginClick(!loginClick);
+    const handleLoginClick = () => setLoginClick(!loginClick); 
     const MenuItems = [
       {
           title: 'Login',
@@ -151,66 +157,83 @@ const Header = () => {
                     <Outlet />
                 </>
             ):(
-            <Fragment>
-            {/* desktop */}
-            <div className='header-container'>
-                <Link className='header-logo-container' to='/'>
-                    <img className='logo' src={Logo} alt='logo' />
-                </Link>
-                <div className='header-nav-container' id='#navbarTogglerDemo02'>
-                    <span className='dropdown-center'>
-                        <Link 
-                            className='header-nav-link1' 
-                            // to = '/procedure/botox_injections'
-                            data-bs-toggle='dropdown disabled' 
-                            aria-expanded='false'
-                            //onMouseOver={() => setIsModelOpen(true)}
-                            onClick={() => setIsModelOpen(true)}
-                            >
-                            Procedure
+                <Fragment>
+                {/* desktop */}
+                <div className='header-container'>
+                    <Link className='header-logo-container' to='/'>
+                        <img className='logo' src={Logo} alt='logo' />
+                    </Link>
+                    <div className='header-nav-container' id='#navbarTogglerDemo02'>
+                        <span className='dropdown-center'>
+                            <Link 
+                                className='header-nav-link1' 
+                                // to = '/procedure/botox_injections'
+                                data-bs-toggle='dropdown disabled' 
+                                aria-expanded='false'
+                                //onMouseOver={() => setIsModelOpen(true)}
+                                onClick={() => setIsModalOpen(true)}
+                                >
+                                Procedure
+                            </Link>
+                            <ul className='dropdown-menu'>
+                                {isModalOpen && 
+                                    <DropdownMenu
+                                        show={isModalOpen}
+                                        onHide={() => setIsModalOpen(false)}
+                                    />} 
+                                {/* <DropdownMenu /> */}
+                            </ul>
+                        </span>
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link2' to='/doctor'>
+                            Doctors
                         </Link>
-                        <ul className='dropdown-menu'>
-                            {IsModalOpen && 
-                                <DropdownMenu
-                                    show={IsModalOpen}
-                                    onHide={() => setIsModelOpen(false)}
-                                />} 
-                            {/* <DropdownMenu /> */}
-                        </ul>
-                    </span>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link2' to='/doctor'>
-                        Doctors
-                    </Link>
-                    {/* <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument'>
-                        Instruments
-                    </Link> */}
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/posts'>
-                        Posts
-                    </Link>
-                    
-                </div>
-                <div className='header-login'>
-                    {/* <div className="header-search">
-                        <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                        </input>
-                    </div>  */}
-                   <div className="header-login-logo">
-                        <img src={loginIcon} alt="login Image" ></img>
-                    </div>
-                    <div className="header-login-text">
-                        <Link>
-                        login
+                        {/* <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link3' to='/instrument'>
+                            Instruments
+                        </Link> */}
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link3' to='/posts'>
+                            Posts
                         </Link>
                         
                     </div>
-                </div> 
-            </div>
-            <Outlet />
-        </Fragment>
-        )}
+                    <div className='header-login'>
+                        {/* <div className="header-search">
+                            <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                            </input>
+                        </div>  */}
+                    <div className="header-login-logo">
+                            <img src={loginIcon} alt="login Image" ></img>
+                        </div>
+                        <div className="header-login-text">
+                            <Link onClick={() => handleLoginClick()}>
+                                login
+                            </Link>   
+
+                            {/*  
+                            <ul className='signup-popup'>
+                                {loginClick && 
+                                    <SignupPopup1 
+                                        show = {loginClick}
+                                        onHide={() => setLoginClick(false)}
+                                    />
+                                }
+                            </ul>
+                            */}
+                        </div>
+                    </div> 
+                </div>
+                <Outlet />
+            </Fragment>
+            )}
+            
+            {loginClick && 
+                <LoginPopup 
+                    show={loginClick}
+                    onHide={() => setLoginClick(false)}
+                />
+            }
         </div>
     )
 }

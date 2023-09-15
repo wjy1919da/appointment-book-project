@@ -1,0 +1,179 @@
+@media(min-width: 1024px) {
+    .signup-popup-modal {
+        /*
+        .modal-lg {
+            max-width: 50%; 
+        }
+        */
+
+        .modal-content {
+            // border-color: 3px solid var(--unnamed, #FFA4A3);
+            border-color: #FFA4A3;
+            border-width: thin;
+            border-radius: 20px;
+            min-width: 400px;
+            max-width: 430px;
+            min-height: 520px;
+            max-height: 550px;
+        }
+    }
+    
+    /*
+    .signup-popup-email-input {
+        width: 270px;
+        height: 20px;
+        margin-left: 80px;
+        border: 1px solid #F8F8F8; 
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
+        padding-left: 5px;
+        font-family: Lora;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    */
+
+    /*
+    signup-popup-email-input:focus { 
+        width: 270px;
+        height: 20px;
+        margin-left: 80px;
+        border: 1px solid #FFA4A3 !important; 
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25) !important;
+        box-shadow: none;
+        padding-left: 5px;
+        font-family: Lora;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    */
+
+    .verify-email-button-section {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        // margin-bottom: 60px;
+    }
+    
+    /*
+    .line-separator {
+        background-color: #AAA;
+        flex-grow: 5;
+        height: 1px;
+    }
+    */
+    
+    .or-label {
+        color: #AAA;
+        font-family: Lora;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin-top: 33px;
+        text-align: center;
+        // flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    .signin-with-apple-section {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .signin-with-google-section {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .signin-with-facebook-section {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+
+
+
+
+
+    .signup-popup.container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        /*
+        .signup-popup-title {
+            width: 226px;
+            height: 85px;
+            marginTop: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #000000;
+            font-family: Playfair Display;
+            font-style: normal;
+            font-size: 64px;
+            font-weight: 400;
+            line-height: 135%; // 86.4px 
+        }
+        */
+        
+        /*
+        .signup-popup-email {
+            .signup-popup-email-lable {
+                .red-asterisk {
+                    color: red;
+                    font-size: 12px; // Adjust the size of the asterisk as needed 
+                    margin-left: 5px; // Adjust the spacing between the word and the asterisk 
+                }
+            }
+
+            .signup-popup-email-input{
+                margin-left: 80px;
+                // border: 2px solid #FFA4A3; // Border style and color 
+                border-radius: 8px;    // Border radius to round the corners 
+                padding: 10px;         // Padding inside the input box 
+                width: 300px;          // Width of the input box 
+                outline: #AAA;
+                box-shadow: 5px 5px #AAA;
+                // box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+            .signup-popup-email-input:focus-visible {
+                border-color: #FFA4A3; // Change the border color when focused 
+                // box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); // Add a shadow when focused 
+               
+                border: 2px solid #ccc; // Border style and color 
+                border-radius: 5px;    // Border radius to round the corners 
+                padding: 10px;         // Padding inside the input box 
+                width: 300px;          // Width of the input box
+                outline: none; 
+                
+                width: 100%;
+                padding-left: 10px;
+                font-family: Lora;
+                font-size: 20px;
+                font-weight: 500;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+        }
+        */
+    }
+}

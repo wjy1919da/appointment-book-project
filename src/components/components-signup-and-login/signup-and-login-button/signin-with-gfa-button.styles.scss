@@ -1,0 +1,38 @@
+@media(min-width: 1024px) {
+    .signin-with-gfa-button {
+        display: inline-flex; /* Display as an inline-flex element */
+        // width: 100px; /* Set the width of the button */
+        // height: 50px; /* Set the height of the button */
+        padding: 5px 10px; /* Add padding inside the button */
+        justify-content: center; /* Horizontally center content */
+        align-items: center; /* Vertically center content */
+        // gap: 12px; /* Add gap between child elements (if any) */
+        flex-shrink: 0; /* Prevent the button from shrinking */
+        border-radius: 20px; /* Add rounded corners */
+        // border: 2px solid var(--, #FFA4A3); /* Add a border with a variable color fallback */
+        border: 2px solid #FFA4A3;
+        // background: var(--unnamed, white); /* Set the background color with a variable fallback */
+        background: white;
+        // color: #FFA4A3 #FAB25E; // 渐变色
+        color: #FAB25E; /* Set the text color */
+        font-family: 'Open Sans'; /* Set the font family */
+        font-style: normal; /* Set the font style to normal */
+        font-weight: 600; /* Set the font weight to 600 (semi-bold) */
+        // font-size: 18px;
+        font-size: 20px; /* Set the font size to 22 pixels */
+        // line-height: 140%;
+        line-height: 100%; /* Set the line height to 100% (normal) */
+    }
+
+    .signin-with-gfa-button-icon {
+        left: 12.5%;
+        right: 12.5%;
+        top: 12.5%;
+        bottom: 12.5%;
+        border-radius: 0;
+        //vborder: 2.4px solid #FFFFFF;
+        width: 25px; /* 或其他你希望的尺寸 */
+        height: 25px; /* 或其他你希望的尺寸 */
+        margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+    }
+}
