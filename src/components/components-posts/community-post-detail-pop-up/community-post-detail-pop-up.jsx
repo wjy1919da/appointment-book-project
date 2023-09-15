@@ -15,7 +15,10 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
     //const [forceRerender, setForceRerender] = useState(false);
 
     const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
-    
+    const [commentText, setCommentText] = useState('');
+    // const handleInputChange = (event) => {
+    //     setCommentText(event.target.value);
+    // };    
     const adjustContainerHeight = () => {
       const container = containerRef.current;
       const image = imageRef.current;
@@ -34,8 +37,10 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
       return formattedDate;
     };
     const ndate=formatDate(postDate)
-    const handleIconClick = () => {
-      window.location.href = '/download';
+    const handleIconClick = (event) => {
+        //window.location.href = '/download';
+        setCommentText(event.target.value);
+
     };
     if(!picture&&!tag&&!postDate&&!likeCount&&!collectCount&&!comments&&!commentCount&&!brief)
     {
@@ -127,7 +132,7 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                             <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size"onClick={handleIconClick}/>{commentCount}</span>
                        </div>
                        <div className="new-comment-input" onClick={handleIconClick}>
-                           <input type="text" placeholder="Enter your comment" className="input-blank"/>
+                           <input type="text" placeholder="Enter your comment" value={commentText} className="input-blank"/>
                        </div>
                     </div>
             </div>

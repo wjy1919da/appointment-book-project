@@ -1,4 +1,5 @@
-import userInfoStore from '../stores/userInfoStore';
+import userInfoQueryStore from '../userStore.ts';
+//src/userStore.ts
 import axios from 'axios';
 import { useQuery } from "react-query";
 
@@ -12,7 +13,7 @@ const base = {
     emailRegisterValidate: 'http://localhost:8080/register/verifyEmail',
 };
 export function useUserOptLogin() {
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchUserLogin = async () => {
         const res = await axios.post(base.userOtpLogin, {
             "mobile": userInfo.mobile,
@@ -26,7 +27,7 @@ export function useUserOptLogin() {
 }
 
 export function useUserRegister() {
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchUserRegister = async () => {
         const res = await axios.post(base.addUser, {
             "email": userInfo.email,
@@ -39,7 +40,7 @@ export function useUserRegister() {
     });
 }
 export function useUserEmailLogin(){
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchEmailLogin = async () => {
         const res = await axios.post(base.userEmailLogin, {
             "email": userInfo.email,
@@ -52,7 +53,7 @@ export function useUserEmailLogin(){
     });
 }
 export function useSendOpt(){
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchSendOpt = async () => {
         const res = await axios.post(base.userSendOtp, {
             "mobile": userInfo.mobile,
@@ -67,7 +68,7 @@ export function useSendOpt(){
 
 // }
 export function useUserOtpRegister(){
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchUserOtpRegister = async () => {
         const res = await axios.post(base.otpRegister, {
             "mobile": userInfo.mobile,
@@ -79,7 +80,7 @@ export function useUserOtpRegister(){
     });
 }
 export function useUserOtpRegisterValidate(){
-    const userInfo = userInfoStore(s => s.userInfo);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchUserOtpRegisterValidate = async () => {
         const res = await axios.post(base.otpRegisterValidate, {
             "mobile": userInfo.mobile,

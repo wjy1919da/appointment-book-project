@@ -8,8 +8,7 @@ interface userInfo {
     following?: number;
     followers?: number;
 }
-
-interface userInfoStore {
+interface userInfoQuery {
     userInfo: userInfo;
     setMobile: (mobile: string) => void;
     setOtp: (otp: string) => void;
@@ -19,7 +18,7 @@ interface userInfoStore {
     setFollowers: (followers: number) => void;
 }
 
-const userInfoStore = create<userInfoStore>((set) => ({
+const userInfoQueryStore = create<userInfoQuery>((set) => ({
     userInfo: { mobile: "", otp: "", email: "", password: "", following: 0, followers: 0 },
     setMobile: (mobile) =>
         set((store) => ({ userInfo: { ...store.userInfo, mobile } })),
@@ -35,4 +34,4 @@ const userInfoStore = create<userInfoStore>((set) => ({
         set((store) => ({ userInfo: { ...store.userInfo, followers } }))
 }));
 
-export default userInfoStore;
+export default userInfoQueryStore;
