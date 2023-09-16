@@ -203,7 +203,7 @@ const SubInstrument = () => {
             <div className='sub-instrument-right-container'>
               <div>
                 {/* Card of right container */}
-                {isMediumOrLarge && <ProcedureCard cardInfo={cardInfo}/>}
+                {isMediumOrLarge && <div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
                 {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">

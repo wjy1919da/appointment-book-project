@@ -17,7 +17,7 @@ import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
 import ErrorMsg from "../../components/error-msg/error-msg.component";
 import { useState } from 'react';
-
+import ProcedureCard from '../../components/procedure-card/procedure-card.component';
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -156,31 +156,11 @@ const SubProcedure = () => {
                 </div>   
             </div>
 
-            {cardInfo &&<div className='sub-procedure-right-board-mobile'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
-            
+            {cardInfo &&
+            <div className='sub-procedure-right-board-mobile'>
+                            <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                    }
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
                 <div className='what-section'id = 'consider'> 
@@ -243,31 +223,12 @@ const SubProcedure = () => {
             </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
-                <div className='sub-procedure-right-content'>
-                {cardInfo &&<div className='sub-procedure-right-board'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
+                {/* <div className='sub-procedure-right-content'> */}
+                {cardInfo &&
+                    <div className='procedure-card-container-outer'>
+                         <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                }
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
@@ -316,7 +277,7 @@ const SubProcedure = () => {
                                 onClick={() => setSelectedSection("reference")}>Reference</a> */}
                         </div>
                     </div>
-                </div>    
+                {/* </div>     */}
             </div>
         </div> 
         <SubProcedureMobileExtraBottom />   
