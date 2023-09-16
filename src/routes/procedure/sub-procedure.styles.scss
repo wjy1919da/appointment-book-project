@@ -1125,9 +1125,10 @@
             order: 1;
             flex: none;
             position: absolute;
-            right: 3px;
+            //right: 3px;
+            margin-left: 48vw;
             //top: 350px;
-            margin-top:10px;
+            margin-top:20px;
         }
 
         .introduction-slide .introduction-catalog {
@@ -1283,7 +1284,6 @@
         .sub-procedure-right-board-mobile {
             width: 100%;
             position: relative;
-            
             // //top: 40px;
             // box-sizing: border-box;
             // /* Auto layout */
