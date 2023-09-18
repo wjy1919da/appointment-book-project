@@ -13,17 +13,20 @@ import LoginPopup from '../../components/components-signup-and-login/signup-and-
 import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
 import SignupPopup2 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup2.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
-import AfterSignupPopup1 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup1.component';
-import AfterSignupPopup2 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup2.component';
-import AfterSignupPopup3 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup3.component';
-import AfterSignupPopup4 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup4.component';
-
+import Cookies from 'js-cookie';
+import userInfoQueryStore from '../../userStore.ts';
+import { Cookie } from '@mui/icons-material';
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
+    const userInfo= userInfoQueryStore(state=>state.userInfo);
+    //console.log("userInfoQuery",userInfo);
+    if(userInfo){
+        console.log("userInfoQuery.token",userInfo.userId);
+    }
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}
@@ -48,12 +51,20 @@ const Header = () => {
     //   Save: old navbar
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
+    //const [unLoginClick, setUnLoginClick] = useState(false);
+    const setToken = userInfoQueryStore(state=>state.setToken);
+    const removeToken = userInfoQueryStore(state=>state.removeToken);
     const [dropdown, setDropdown] = useState(false);
     // const [activeTab, setActiveTab] = useState(0);
     // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
 
     const handleClick = () => setClick(!click);
     const handleLoginClick = () => setLoginClick(!loginClick); 
+    const handleLogOutClick = () => {
+        Cookies.remove('token');
+        removeToken();
+        alert('Log out successfully!');
+    };
     const MenuItems = [
       {
           title: 'Login',
@@ -74,11 +85,6 @@ const Header = () => {
     const onClick = ()=>{
         setDropdown(!dropdown)
     }
-    /*
-    const selectTab = (index) => {
-        setActiveTab(index);
-    }
-    */
 
 
 //   Save: old navbar    
@@ -133,10 +139,8 @@ const Header = () => {
                         <Dropdown.Toggle variant="success" id="dropdown-basic"style={{ backgroundColor: 'transparent', borderColor: 'transparent',height:'36px',padding:'10px 20px'}}>
                         <img src={menuBar}alt="your alt text" style={{width: "36px", height: "36px"}}/>
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu className='header-menu-bar-mobile-container' >
                         <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="instrument/coolsculpting" className='header-menu-bar-item-mobile' >Instrument</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>Post</Dropdown.Item>
                         </Dropdown.Menu>
@@ -167,7 +171,6 @@ const Header = () => {
                     <Outlet />
                 </>
             ):(
-
                 <Fragment>
                 {/* desktop */}
                 <div className='header-container'>
@@ -199,87 +202,13 @@ const Header = () => {
                         <Link className='header-nav-link2' to='/doctor'>
                             Doctors
                         </Link>
-                        {/* <span className='header-nav-divider'>|</span>
-                        <Link className='header-nav-link3' to='/instrument'>
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link3' to='/instrument/coolsculpting'>
                             Instruments
-                        </Link> */}
+                        </Link>
                         <span className='header-nav-divider'>|</span>
                         <Link className='header-nav-link3' to='/posts'>
                             Posts
-
-            <Fragment>
-            {/* desktop */}
-            <div className='header-container'>
-                <Link className='header-logo-container' to='/'>
-                    <img className='logo' src={Logo} alt='logo' />
-                </Link>
-                <div className='header-nav-container' id='#navbarTogglerDemo02'>
-                    {/*  
-                    <div className='header-tabs'>
-                        {
-                            tabs.map((item, index) => (
-                                <div
-                                    className={`head-tab ${activeTab === index ? 'active' : ''}`}
-                                    onClick={() => selectTab(index)}>
-                                    {item}
-                                    <div className="head-tab-underline"></div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    {activeTab === 0 && <DoctorAbout/>}
-                    {activeTab === 1 && <div className="individual-doctor-posts">
-                            <DoctorPostGrid isAbout={true}/> 
-                    </div>}
-                    {activeTab === 2 && < DoctorReviewGrid/>}
-                    */}
-
-                    <span className='dropdown-center'>
-                        <Link 
-                            className='header-nav-link1' 
-                            // to = '/procedure/botox_injections'
-                            data-bs-toggle='dropdown disabled' 
-                            aria-expanded='false'
-                            //onMouseOver={() => setIsModelOpen(true)}
-                            onClick={() => setIsModelOpen(true)}
-                            >
-                                Procedure
-                        </Link>
-                        <ul className='dropdown-menu'>
-                            {IsModalOpen && 
-                                <DropdownMenu
-                                    show={IsModalOpen}
-                                    onHide={() => setIsModelOpen(false)}
-                                />} 
-                            {/* <DropdownMenu /> */}
-                        </ul>
-                    </span>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link2' to='/doctor'>
-                        Doctors
-                    </Link>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
-                        Instruments
-                    </Link>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/posts'>
-                        Posts
-                    </Link>
-                    
-                </div>
-                <div className='header-login'>
-                    {/* <div className="header-search">
-                        <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                        </input>
-                    </div>  */}
-                   <div className="header-login-logo">
-                        <img src={loginIcon} alt="login Image" ></img>
-                    </div>
-                    <div className="header-login-text">
-                        <Link>
-                        login
-
                         </Link>
                         
                     </div>
@@ -292,10 +221,12 @@ const Header = () => {
                             <img src={loginIcon} alt="login Image" ></img>
                         </div>
                         <div className="header-login-text">
-                            <Link onClick={() => handleLoginClick()}>
+                            {/* TODO: user state change */}
+                            {!userInfo.userId&&<div onClick={() => handleLoginClick()}>
                                 login
-                            </Link>   
-
+                            </div>}
+                            {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
+                            {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out?</div>}
                             {/*  
                             <ul className='signup-popup'>
                                 {loginClick && 
@@ -314,7 +245,7 @@ const Header = () => {
             )}
             
             {loginClick && 
-                <AfterSignupPopup3
+                <LoginPopup 
                     show={loginClick}
                     onHide={() => setLoginClick(false)}
                 />
