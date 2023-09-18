@@ -212,6 +212,11 @@
     .instrument-card-mobile-container{
         display: none;
     }
+    .instrument-card-container{
+        margin-left: 12vw;
+        position: relative;
+        margin-top: 56px;
+    }
 
 }
 /* Normal Screen */
@@ -443,6 +448,11 @@
     .instrument-card-mobile-container{
         display: none;
     }
+    .instrument-card-container{
+        margin-left: 2vw;
+        position: relative; 
+        margin-top:56px;
+    }
 
 }
 @media(min-width:768px) and (max-width: 1023px){
@@ -570,7 +580,8 @@
         order: 1;
         flex: none;
         left:63vw;
-        top: 300px; 
+        //top: 300px; 
+        margin-top: 20px;
     }
     .instrument-introduction-slide .introduction-catalog {
         flex: none;
@@ -661,6 +672,11 @@
     }
     .instrument-card-mobile-container{
         display: none;
+    }
+    .instrument-card-container{
+        position: relative; 
+        margin-left:4vw;
+        margin-top: 44px;
     }
 }
 @media(max-width: 767px){
@@ -816,6 +832,8 @@
     }
     .instrument-card-mobile-container{
         margin-bottom: 40px;
+        margin-left: 30px;
+        position: relative;
     }
     .instrument-FQA{
         width: 85vw;

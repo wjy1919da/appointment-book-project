@@ -17,7 +17,9 @@ import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
 import ErrorMsg from "../../components/error-msg/error-msg.component";
 import { useState } from 'react';
-
+import ProcedureCard from '../../components/procedure-card/procedure-card.component';
+import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
+import { useRef } from 'react';
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -26,22 +28,6 @@ function safeJsonParse(str) {
     }
 }
 const SubProcedure = () => { 
-
-    const handleScroll = () => {
-        if (window.scrollY >= 280) {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '60px';
-                document.getElementById("slide").style.position = 'fixed';
-            }
-        } else {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '350px';
-                document.getElementById("slide").style.position = 'absolute';
-            }
-        }
-        checkWhichSectionInView(); 
-    }
-    const [loadingTimeout, setLoadingTimeout] = useState(false);
     const checkWhichSectionInView = () => {
         const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
         for (const section of sections) {
@@ -55,17 +41,73 @@ const SubProcedure = () => {
             }
         }
     };
+    const handleScroll = () => {
+        const slideElement = document.getElementById("slide");
+        const recommendationElement = document.getElementById("recommendation");
+        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+        
+        if (!isMobile) {
+            if (window.scrollY >= 280) {
+                if (slideElement) {
+                    slideElement.style.top = '64px';
+                    slideElement.style.position = 'fixed';
+                    if (recommendationElement) {
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 340) + 'px';  // Introduction slide's top + 400px
+                        recommendationElement.style.position = 'fixed';
+                    }
+                }
+            } else {
+                if (slideElement) {
+                    slideElement.style.top = '350px';
+                    slideElement.style.position = 'absolute';
+                    if (recommendationElement) {
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 340) + 'px';
+                        recommendationElement.style.position = 'absolute';
+                    }
+                }
+            }
+            checkWhichSectionInView();
+        }
+    };    
+    const [loadingTimeout, setLoadingTimeout] = useState(false);
+    const footerRef = useRef(null);
+    
     useEffect(() => {
+        const handleResize = () => {
+            window.removeEventListener('scroll', handleScroll);
+            handleScroll(); // 重新调整位置
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+    
+        const initialize = () => {
+            handleScroll();
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+    
+        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+        if (document.readyState === "complete") {
+            initialize();
+        } else {
+            window.onload = initialize;
+        }
+    
         const timeout = setTimeout(() => {
             setLoadingTimeout(true);
         }, 5000);
-        return () => clearTimeout(timeout);
+    
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timeout);
+        };
     }, []);
+    
 
     
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    });
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll, { passive: true });
+    // });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
    
@@ -156,31 +198,11 @@ const SubProcedure = () => {
                 </div>   
             </div>
 
-            {cardInfo &&<div className='sub-procedure-right-board-mobile'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
-            
+            {cardInfo &&
+            <div className='sub-procedure-right-board-mobile'>
+                            <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                    }
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
                 <div className='what-section'id = 'consider'> 
@@ -243,31 +265,11 @@ const SubProcedure = () => {
             </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
-                <div className='sub-procedure-right-content'>
-                {cardInfo &&<div className='sub-procedure-right-board'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
+                {cardInfo &&
+                    <div className='procedure-card-container-outer'>
+                         <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                }
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
@@ -316,11 +318,16 @@ const SubProcedure = () => {
                                 onClick={() => setSelectedSection("reference")}>Reference</a> */}
                         </div>
                     </div>
-                </div>    
+                    {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
+                        <RecommendationGrid isMobile={false} height={'210px'} />
+                    </div>}
             </div>
         </div> 
-        <SubProcedureMobileExtraBottom />   
-        <Footer />
+        <SubProcedureMobileExtraBottom />  
+        {isMobile && <div className='procedure-recommendation-container'>
+                        <RecommendationGrid isMobile={false}  height={'300px'} />
+                </div>} 
+        <Footer ref={footerRef}/>
     </div>
     )
 }}

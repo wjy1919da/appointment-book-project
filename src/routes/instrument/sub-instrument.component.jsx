@@ -197,13 +197,13 @@ const SubInstrument = () => {
                 </div>
                 {isMobile && <SubProcedureMobileExtraBottom />  }
                 {isMobile && <div className='instrument-recommendation-container'>
-                        <RecommendationGrid isMobile={false} />
+                        <RecommendationGrid isMobile={false}  height={'250px'} />
                 </div>}
             </div>
             <div className='sub-instrument-right-container'>
               <div>
                 {/* Card of right container */}
-                {isMediumOrLarge && <ProcedureCard cardInfo={cardInfo}/>}
+                {isMediumOrLarge && <div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
                 {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
@@ -241,7 +241,7 @@ const SubInstrument = () => {
                     </div>}
                    
                     {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
-                        <RecommendationGrid isMobile={false} />
+                        <RecommendationGrid isMobile={false} height={'250px'} />
                     </div>}
                 </div>
             </div>

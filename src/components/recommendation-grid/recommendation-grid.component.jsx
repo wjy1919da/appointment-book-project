@@ -44,8 +44,8 @@ const RecommendationGrid = ({ isMobile}) => {
             <SimpleGrid 
               columns={1} 
               spacing={0} 
-              height="350px"
-              width="250px"
+              height="250px"
+              //width="250px"
               overflowY="auto"
             >
                 {doctorList}
