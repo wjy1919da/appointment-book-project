@@ -17,7 +17,9 @@ import useProcedureQueryStore from '../../procedureStore.ts'
 import { useMediaQuery } from 'react-responsive';
 import ErrorMsg from "../../components/error-msg/error-msg.component";
 import { useState } from 'react';
-
+import ProcedureCard from '../../components/procedure-card/procedure-card.component';
+import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
+import { useRef } from 'react';
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -26,34 +28,94 @@ function safeJsonParse(str) {
     }
 }
 const SubProcedure = () => { 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
-    const handleScroll = () => {
-        if (window.scrollY >= 280) {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '60px';
-                document.getElementById("slide").style.position = 'fixed';
-            }
-        } else {
-            if (document.getElementById("slide")) {
-                document.getElementById("slide").style.top = '350px';
-                document.getElementById("slide").style.position = 'absolute';
+    const checkWhichSectionInView = () => {
+        const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
+        for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+                const bounding = element.getBoundingClientRect();
+                if ((bounding.top >= 0 && bounding.top <= window.innerHeight) || (bounding.bottom >= 0 && bounding.bottom <= window.innerHeight)) {
+                    setSelectedSection(section);
+                    break;
+                }
             }
         }
-    }
+    };
+    const handleScroll = () => {
+        console.log('scroll');
+        const slideElement = document.getElementById("slide");
+        const recommendationElement = document.getElementById("recommendation");
+        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+        
+        if (!isMobile) {
+            if (window.scrollY >= 280) {
+                if (slideElement) {
+                    slideElement.style.top = '64px';
+                    slideElement.style.position = 'fixed';
+                    if (recommendationElement) {
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';  // Introduction slide's top + 400px
+                        recommendationElement.style.position = 'fixed';
+                    }
+                }
+            } else {
+                console.log("window.scrollY < 280",recommendationElement,slideElement);
+                if (slideElement) {
+                    slideElement.style.top = '350px';
+                    slideElement.style.position = 'absolute';
+
+                    if (recommendationElement) {
+                        console.log("recommendationElement adjust");
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
+                        recommendationElement.style.position = 'absolute';
+                    }
+                }
+            }
+            checkWhichSectionInView();
+        }
+    };    
     const [loadingTimeout, setLoadingTimeout] = useState(false);
+    const footerRef = useRef(null);
+    
     useEffect(() => {
+        const initialize = () => {
+            console.log('initialize');
+            handleScroll();
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+        const handleResize = () => {
+            window.removeEventListener('scroll', handleScroll);
+            handleScroll(); // 重新调整位置
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+        if (document.readyState === "complete") {
+            console.log('complete');
+            initialize();
+        } else {
+            console.log('not complete');
+            window.onload = initialize;
+        }
+    
         const timeout = setTimeout(() => {
             setLoadingTimeout(true);
         }, 5000);
-        return () => clearTimeout(timeout);
+    
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timeout);
+        };
     }, []);
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    });
+    
+
+    
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll, { passive: true });
+    // });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
+   
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
@@ -70,10 +132,6 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
-    // function handleClick() {
-    //     window.open(videoUrl, "_blank");
-    // }
-
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         
@@ -84,17 +142,10 @@ const SubProcedure = () => {
             return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('\n');
         }
     }
-   
     var prosAndCons, optionsContent, beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
-
-    // if (isLoading) {
-    //    return <HomeSpinner />;
-    // }
     if (data.data && data.data.subcategories) {
         if (data.data.subcategories[1]) {
             prosAndCons = data.data.subcategories[1].other ? safeJsonParse(data.data.subcategories[1].other) : undefined;
-
-
         }
         if (data.data.subcategories[2]) {
             optionsContent = data.data.subcategories[2].other ? safeJsonParse(data.data.subcategories[2].other) : undefined;
@@ -134,7 +185,7 @@ const SubProcedure = () => {
                 <Footer/>
             </div>
         );
-    } 
+    }
     else if (data.data && data.data.subcategories) {
     return (
      <div className='home-container'>
@@ -143,37 +194,20 @@ const SubProcedure = () => {
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
                 <h1 className='sub-procedure-title-text' id = 'description'>{formatTitle(name)}</h1>
-                {data.data.description &&
+                {/* {data.data.description &&
                     <p className='sub-procedure-normal-text' >
                         {data.data.description}
-                    </p>}
+                    </p>} */}
+                <div className="sub-procedure-normal-text">
+                    {data.data.description && <SubTxt text={data.data.description}/>}
+                </div>   
             </div>
 
-            {cardInfo &&<div className='sub-procedure-right-board-mobile'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
-            
+            {cardInfo &&
+            <div className='sub-procedure-right-board-mobile'>
+                            <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                    }
             <div className='sub-text'> 
             {data.data?.subcategories[0] &&
                 <div className='what-section'id = 'consider'> 
@@ -236,77 +270,70 @@ const SubProcedure = () => {
             </div>
             {/* end of left side */}
             <div className='sub-procedure-right-container'  onScroll={handleScroll}>
-                <div className='sub-procedure-right-content'>
-                {cardInfo &&<div className='sub-procedure-right-board'>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Cost:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Cost}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Duration:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Duration}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Safety:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Safety}</span>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Satisfication Rate:</span>
-                            <div>
-                               <span className={`stars-container stars-${n}`}>★★★★★</span>
-                            </div>
-                        </div>
-                        <div className="right-board-text">
-                            <span style={{color:"#A5A6A8"}}>Pain:</span>
-                            <span style={{color:"#000000"}}>{cardInfo.Pain}</span>
-                        </div> 
-                    </div>}
+                {cardInfo &&
+                    <div className='procedure-card-container-outer'>
+                         <ProcedureCard cardInfo={cardInfo}/>
+                    </div>
+                }
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
-<div className="introduction-catalog">
-    <a
-        href="#description"
-        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-        onClick={() => setSelectedSection("description")}>Introduction</a>
-    <a
-        href="#consider"
-        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("consider")}>Why consider {formatTitle(name)}</a>
-    {optionsContent &&
-    <a
-        href="#options"
-        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
-        onClick={() => setSelectedSection("options")}>Procedure options</a>}
-    <a
-        href="#sideEffects"
-        className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("sideEffects")}>Potential Side Effects</a>
-    {beforeAndAfterImage &&
-    <a
-        href="#beforeAndAfter"
-        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-        onClick={() => setSelectedSection("beforeAndAfter")}>Before and After</a>} {alternativeTreatmentForm &&
-    <a
-        href="#alternative"
-        className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
-        onClick={() => setSelectedSection("alternative")}>Alternative Treatments</a>}
-    <a
-        href="#faq"
-        className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-        onClick={() => setSelectedSection("faq")}>FAQ</a>
-    <a
-        href="#reference"
-        className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
-        onClick={() => setSelectedSection("reference")}>Reference</a>
-</div>
+                        <div className="introduction-catalog">
+                            <a
+                                href="#description"
+                                className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                                //onClick={() => setSelectedSection("description")}
+                                >Introduction</a>
+                            <a
+                                href="#consider"
+                                className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                                //onClick={() => setSelectedSection("consider")}
+                                >Why consider {formatTitle(name)}</a>
+                            {optionsContent &&
+                            <a
+                                href="#options"
+                                className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                                //onClick={() => setSelectedSection("options")}
+                                >Procedure options</a>}
+                            <a
+                                href="#sideEffects"
+                                className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
+                                //onClick={() => setSelectedSection("sideEffects")}
+                                >Potential Side Effects</a>
+                            {beforeAndAfterImage &&
+                            <a
+                                href="#beforeAndAfter"
+                                className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                                //onClick={() => setSelectedSection("beforeAndAfter")}
+                                >Before and After</a>} {alternativeTreatmentForm &&
+                            <a
+                                href="#alternative"
+                                className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
+                                //onClick={() => setSelectedSection("alternative")}
+                                >Alternative Treatments</a>}
+                            {/* NOTICE: Window.innerHeight can not access to these 2 sections */}
+                            <a
+                                href="#faq"
+                                className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
+                                //onClick={() => setSelectedSection("faq")}
+                            >FAQ</a>
+
+                            {/* <a
+                                href="#reference"
+                                className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
+                                onClick={() => setSelectedSection("reference")}>Reference</a> */}
+                        </div>
                     </div>
-                </div>    
+                    {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
+                        <RecommendationGrid isMobile={false} height={'210px'} />
+                    </div>}
             </div>
         </div> 
-        <SubProcedureMobileExtraBottom />   
-        <Footer />
+        <SubProcedureMobileExtraBottom />  
+        {isMobile && <div className='procedure-recommendation-container'>
+                        <RecommendationGrid isMobile={false}  height={'300px'} />
+                </div>} 
+        <Footer ref={footerRef}/>
     </div>
     )
-}
-}
+}}
 export default SubProcedure;

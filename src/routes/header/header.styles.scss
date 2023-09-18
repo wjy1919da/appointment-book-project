@@ -314,7 +314,11 @@
                 color: #333333;
                 text-decoration: none;
                 padding-bottom: 13px;
+
+                text-decoration: none;
+                transition: font-weight 0.2s ease, border-bottom 0.2s ease; /* 过渡效果 */
             }
+
             .header-nav-link2
             {
                 width:59px;
@@ -328,6 +332,7 @@
                 text-decoration: none;
                 padding-bottom: 13px;
             }
+            
             .header-nav-link3
             {
                 width:91px;
@@ -340,6 +345,19 @@
                 color: #333333;
                 text-decoration: none;
                 padding-bottom: 13px;
+            }
+
+            .header-nav-link1:hover,
+            .header-nav-link1:active,
+            .header-nav-link2:hover,
+            .header-nav-link2:active,
+            .header-nav-link3:hover,
+            .header-nav-link3:active {
+                font-weight: bold;
+                /* 鼠标悬停时变为粗体 */
+                border-bottom: 2px solid orange;
+                /* 鼠标悬停时添加下划线，使用橙色线条 */
+                // color: orange; // 鼠标悬停时的文本颜色 
             }
             
         }

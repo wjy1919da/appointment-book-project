@@ -35,7 +35,7 @@ const App = () => {
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
-        <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
+        <Route path="doctor/:memberId" element={<IndividualDoctor />} />
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />

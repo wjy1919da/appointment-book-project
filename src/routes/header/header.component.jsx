@@ -74,6 +74,11 @@ const Header = () => {
     const onClick = ()=>{
         setDropdown(!dropdown)
     }
+    /*
+    const selectTab = (index) => {
+        setActiveTab(index);
+    }
+    */
 
 
 //   Save: old navbar    
@@ -131,6 +136,7 @@ const Header = () => {
 
                         <Dropdown.Menu className='header-menu-bar-mobile-container' >
                         <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="instrument/coolsculpting" className='header-menu-bar-item-mobile' >Instrument</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/posts" className='header-menu-bar-item-mobile'>Post</Dropdown.Item>
                         </Dropdown.Menu>
@@ -161,6 +167,7 @@ const Header = () => {
                     <Outlet />
                 </>
             ):(
+
                 <Fragment>
                 {/* desktop */}
                 <div className='header-container'>
@@ -199,6 +206,80 @@ const Header = () => {
                         <span className='header-nav-divider'>|</span>
                         <Link className='header-nav-link3' to='/posts'>
                             Posts
+
+            <Fragment>
+            {/* desktop */}
+            <div className='header-container'>
+                <Link className='header-logo-container' to='/'>
+                    <img className='logo' src={Logo} alt='logo' />
+                </Link>
+                <div className='header-nav-container' id='#navbarTogglerDemo02'>
+                    {/*  
+                    <div className='header-tabs'>
+                        {
+                            tabs.map((item, index) => (
+                                <div
+                                    className={`head-tab ${activeTab === index ? 'active' : ''}`}
+                                    onClick={() => selectTab(index)}>
+                                    {item}
+                                    <div className="head-tab-underline"></div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    {activeTab === 0 && <DoctorAbout/>}
+                    {activeTab === 1 && <div className="individual-doctor-posts">
+                            <DoctorPostGrid isAbout={true}/> 
+                    </div>}
+                    {activeTab === 2 && < DoctorReviewGrid/>}
+                    */}
+
+                    <span className='dropdown-center'>
+                        <Link 
+                            className='header-nav-link1' 
+                            // to = '/procedure/botox_injections'
+                            data-bs-toggle='dropdown disabled' 
+                            aria-expanded='false'
+                            //onMouseOver={() => setIsModelOpen(true)}
+                            onClick={() => setIsModelOpen(true)}
+                            >
+                                Procedure
+                        </Link>
+                        <ul className='dropdown-menu'>
+                            {IsModalOpen && 
+                                <DropdownMenu
+                                    show={IsModalOpen}
+                                    onHide={() => setIsModelOpen(false)}
+                                />} 
+                            {/* <DropdownMenu /> */}
+                        </ul>
+                    </span>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link2' to='/doctor'>
+                        Doctors
+                    </Link>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/instrument/coolsculpting'>
+                        Instruments
+                    </Link>
+                    <span className='header-nav-divider'>|</span>
+                    <Link className='header-nav-link3' to='/posts'>
+                        Posts
+                    </Link>
+                    
+                </div>
+                <div className='header-login'>
+                    {/* <div className="header-search">
+                        <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                        </input>
+                    </div>  */}
+                   <div className="header-login-logo">
+                        <img src={loginIcon} alt="login Image" ></img>
+                    </div>
+                    <div className="header-login-text">
+                        <Link>
+                        login
+
                         </Link>
                         
                     </div>

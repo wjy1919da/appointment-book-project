@@ -1,32 +1,51 @@
-import React, { useCallback,useState } from 'react';
+import React, { useCallback,useEffect,useState } from 'react';
 import FormInput from '../form-input/form-input.component';
-//import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
-//import { GoogleLoginButton,FacebookLoginButton } from "react-social-login-buttons";
 import './sign-in-form.styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Image } from 'react-bootstrap';
-import {useNavigate} from "react-router-dom";
-//import FacebookLogin from "react-facebook-login";
-
-
-
-const defaultFormContent = {
-    username: '',
-    password: ''
-}
+import userInfoQueryStore from '../../userStore.ts';
+import Cookies from 'js-cookie';
+import { useUserEmailLogin } from '../../hooks/useAuth';
+// REDIRECT URL must be same with URL where the (reactjs-social-login) components is locate
+// MAKE SURE the (reactjs-social-login) components aren't unmounted or destroyed before the ask permission dialog closes
+import {
+    LoginSocialGoogle,
+    LoginSocialAmazon,
+    LoginSocialFacebook,
+    LoginSocialGithub,
+    LoginSocialInstagram,
+    LoginSocialLinkedin,
+    LoginSocialMicrosoft,
+    LoginSocialPinterest,
+    LoginSocialTwitter,
+    LoginSocialApple,
+    LoginSocialTiktok,
+  } from 'reactjs-social-login'
+  import {
+    FacebookLoginButton,
+    GoogleLoginButton,
+    GithubLoginButton,
+    AmazonLoginButton,
+    InstagramLoginButton,
+    LinkedInLoginButton,
+    MicrosoftLoginButton,
+    TwitterLoginButton,
+    AppleLoginButton,
+  } from 'react-social-login-buttons'
 const isValidEmail = (input) => {
     // 简单的正则表达式，用于验证电子邮件
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(input);
 };
 const SignInForm = () => {
-    // const [login, setLogin] = useState(false);
-    // display need to be implemented
-    const [inputValue, setInputValue] = useState('');
-    const [formContent, setFormContent] = useState(defaultFormContent);
-    const [error, setError] = useState("");
-    const { username, password } = formContent;
-    
+    const [inputValue, setInputValue] = useState('');  // 初始化 inputValue 状态
+    const [password, setPasswordValue] = useState(''); 
+    const userInfoQuery = userInfoQueryStore(state=>state.userInfoQuery);
+    const setEmail = userInfoQueryStore(state=>state.setEmail);
+    const setPassword = userInfoQueryStore(state=>state.setPassword);
+    const [provider, setProvider] = useState('')
+    const [profile, setProfile] = useState(null)
+
+
     const REDIRECT_URI = 'http://localhost:3000/sign-in';
     const onLoginStart = useCallback(() => {
         alert('login start');
@@ -48,66 +67,36 @@ const SignInForm = () => {
             console.log("facebook "+data);
         }
     };
-    // send accessToken to your backend API
-    // async function apiCallToBackend(accessToken, userID) {
-    //     try {
-    //       const response = await fetch('https://your-backend-api.example.com/login', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //           accessToken: accessToken,
-    //           userID: userID,
-    //         }),
-    //       });
-      
-    //       if (response.ok) {
-    //         const data = await response.json();
-    //         return data;
-    //       } else {
-    //         console.error('Error during the API call:', response.status, response.statusText);
-    //         return null;
-    //       }
-    //     } catch (error) {
-    //       console.error('Error during the API call:', error);
-    //       return null;
-    //     }
-    //   }
-      
-    const handleContentChange = (event) => {
-        const { name, value } = event.target;
-        setInputValue(event.target.value);
-        setFormContent({ ...formContent, [name]: value });
-    }
-
+    
     const handleSignInSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            if (isValidEmail(inputValue)) {
-                // 输入是一个有效的电子邮件地址，调用邮箱登录函数
-                console.log('Email login function called');
-                // const url = "http://localhost:8080/api/auth";
-			    // const { data: res } = await axios.post(url, data);
-			    // localStorage.setItem("token", res.data);
-			    // window.location = "/";
-              } else {
-                // 输入是一个用户名，调用用户名登录函数
-                console.log('Username login function called');
-              }
-            console.log('email sign in successfully')
-        } catch (error) {
-            if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
+        if (isValidEmail(inputValue)&&password) {
+            setEmail(inputValue);
+            setPassword(password);
+        } else {
+            alert("Email is not valid!");
         }
     }
-
+    const handleContentChange = (event) => {
+        const { value, name } = event.target;
+        if (name === 'username') {
+            setInputValue(value);
+        } else if (name === 'password') {
+            setPasswordValue(value);
+        }
+    };
+    const {data,isLoading,error} = useUserEmailLogin();
+    if(error){
+        alert(error.message);
+    }
+    useEffect(() => {
+        if(data?.data){
+            let myToken = data.data.token;
+            Cookies.set('token', myToken);
+            //const token = Cookies.get('token');
+            //console.log("my token",token);
+        }
+    }, [data]);
     return (
 
         <div className='sign-in-container'>
@@ -136,29 +125,17 @@ const SignInForm = () => {
 
             </form>
             <div>
-             {/* <LoginSocialFacebook
-                            appId="206755055457088"
-                            onLoginStart={onLoginStart}
-                            redirect_uri={REDIRECT_URI}
-                            onResolve={onResolve}
-                            onReject={(error) => {
-                               console.log(error);
-                            }}
-                    >
+            <LoginSocialFacebook
+                appId="206755055457088"
+                onLoginStart={onLoginStart}
+                redirect_uri={REDIRECT_URI}
+                onResolve={onResolve}
+                onReject={(error) => {
+                    console.log(error);
+                }}
+            >
                         <FacebookLoginButton  />      
                 </LoginSocialFacebook>
-                    
-            </div>
-            <div>
-                <LoginSocialGoogle
-                    client_id="335380465213-onpgm3trbbg8evainsj23ou12om5tqk1.apps.googleusercontent.com"
-                    onResolve={onResolve}
-                      onReject={(error) => {
-                        console.log(error);
-                      }}
-                >
-                    <GoogleLoginButton/>
-                </LoginSocialGoogle>       */}
             </div>
         </div>
 

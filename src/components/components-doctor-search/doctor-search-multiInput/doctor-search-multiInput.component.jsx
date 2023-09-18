@@ -48,7 +48,6 @@ const DoctorSearchMultiInput = () => {
             }, 100);
         }
     }
-  
     return (
         <div>
             {isMobile?(
@@ -165,10 +164,10 @@ const DoctorSearchMultiInput = () => {
                             value={doctorQuery.doctorName || ''}
                             onChange = {(event) => setDoctorName(event.target.value)}
                             label = "Doctor Name"  />
-                        {/* <button className='doctor-search-button' onClick = {handleOnClick}>
+                        <button className='doctor-search-button' onClick = {handleOnClick}>
                             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
                             search
-                        </button> */}
+                        </button>
                             <HomeButton title='Search' onClick={handleOnClick} isIcon={SearchIcon} width='150px'height='40px'/>
                     </InputGroup>
                     {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}

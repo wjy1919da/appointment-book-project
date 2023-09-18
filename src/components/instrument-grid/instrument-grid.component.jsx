@@ -8,17 +8,17 @@ const formatTitle = (title) => {
 
 const InstrumentGrid = (props) => {
     var option = props.option;
-    const instrumentsGrid = props.names.map((name) => 
-        <div className='instruments-procedure' key={name}>
-            <Link to={`/${props.option}/${name}`} >
-                <img src={require(`../../assets/${props.option}/${name}.svg`)} className={`${option}-pic`}  alt={name} />
-            </Link>
-            <div className = 'title'>{formatTitle(name)}</div>
-        </div>
-    );
+    // const instrumentsGrid = props.names.map((name) => 
+    //     <div className='instruments-procedure' key={name}>
+    //         <Link to={`/${props.option}/${name}`} >
+    //             <img src={require(`../../assets/${props.option}/${name}.svg`)} className={`${option}-pic`}  alt={name} />
+    //         </Link>
+    //         <div className = 'title'>{formatTitle(name)}</div>
+    //     </div>
+    // );
     return (
          <div className='instruments-container'>
-                {instrumentsGrid}
+                {/* {instrumentsGrid} */}
         </div>
     )
 }
