@@ -63,7 +63,7 @@ const LoginPopup = (props) => {
                             flexShrink:0,
                             flexdirection:'column',
                             justifyContent:'center' }}>
-                    Welcom Back
+                    Welcome Back
                 </p>
                 
                 <div className="login-popup-username">
@@ -149,7 +149,7 @@ const LoginPopup = (props) => {
                 </p>
                 
                 <div className="login-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' herf='/download' onClick = { handleOnClick }/> 
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' herf='/download'/> 
                 </div>
                     
                 <div className="login-popup-gfa-section">

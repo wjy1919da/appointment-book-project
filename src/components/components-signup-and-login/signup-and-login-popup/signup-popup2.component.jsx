@@ -106,7 +106,6 @@ const SignupPopup2 = (props) => {
                            type='text' 
                            placeholder='example@email.com'
                            onChange={(event)=>setInternalEmail(event.target.value)}
-                           
                            style={{ width: '270px',
                                     height:'20px', 
                                     marginLeft: '80px', 
@@ -142,8 +141,8 @@ const SignupPopup2 = (props) => {
                         </Link>
                 </p>
                 
-                <div className="verify-email-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Cancel' herf='/download' onClick = { handleOnClick }/> 
+                <div className="cancel-verification-button-section">
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Cancel' herf='/download'/> 
                 </div>
                     
                 <div className="signup-popup-gfa-section">

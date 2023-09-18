@@ -51,22 +51,13 @@
     }
     */
 
-    .verify-email-button-section {
+    .cancel-verification-button-section {
         margin-top: 15px;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        // margin-bottom: 60px;
     }
-    
-    /*
-    .line-separator {
-        background-color: #AAA;
-        flex-grow: 5;
-        height: 1px;
-    }
-    */
     
     .or-label {
         color: #AAA;
@@ -101,79 +92,5 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-    }
-
-
-
-
-
-
-
-
-    .signup-popup.container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-
-        /*
-        .signup-popup-title {
-            width: 226px;
-            height: 85px;
-            marginTop: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-shrink: 0;
-            color: #000000;
-            font-family: Playfair Display;
-            font-style: normal;
-            font-size: 64px;
-            font-weight: 400;
-            line-height: 135%; // 86.4px 
-        }
-        */
-        
-        /*
-        .signup-popup-email {
-            .signup-popup-email-lable {
-                .red-asterisk {
-                    color: red;
-                    font-size: 12px; // Adjust the size of the asterisk as needed 
-                    margin-left: 5px; // Adjust the spacing between the word and the asterisk 
-                }
-            }
-
-            .signup-popup-email-input{
-                margin-left: 80px;
-                // border: 2px solid #FFA4A3; // Border style and color 
-                border-radius: 8px;    // Border radius to round the corners 
-                padding: 10px;         // Padding inside the input box 
-                width: 300px;          // Width of the input box 
-                outline: #AAA;
-                box-shadow: 5px 5px #AAA;
-                // box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            }
-            .signup-popup-email-input:focus-visible {
-                border-color: #FFA4A3; // Change the border color when focused 
-                // box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); // Add a shadow when focused 
-               
-                border: 2px solid #ccc; // Border style and color 
-                border-radius: 5px;    // Border radius to round the corners 
-                padding: 10px;         // Padding inside the input box 
-                width: 300px;          // Width of the input box
-                outline: none; 
-                
-                width: 100%;
-                padding-left: 10px;
-                font-family: Lora;
-                font-size: 20px;
-                font-weight: 500;
-                letter-spacing: 0em;
-                text-align: left;
-            }
-        }
-        */
     }
 }

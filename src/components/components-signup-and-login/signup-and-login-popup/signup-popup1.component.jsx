@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 // import { useMediaQuery } from 'react-responsive';
-import { InputGroup } from '@chakra-ui/react';
-// import HomeButton from '../../home-button/home-button.component';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import AppleLogo from '../../../assets/sign/apple-logo.png';
 import GoogleLogo from '../../../assets/sign/google-logo.png';
@@ -92,7 +90,6 @@ const SignupPopup1 = (props) => {
                            type='text' 
                            placeholder='example@email.com'
                            onChange={(event)=>setInternalEmail(event.target.value)}
-                           
                            style={{ width: '270px',
                                     height:'20px', 
                                     marginLeft: '80px', 
@@ -129,7 +126,7 @@ const SignupPopup1 = (props) => {
                 </p>
                 
                 <div className="verify-email-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Verify' herf='/download' onClick = { handleOnClick }/> 
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Verify' herf='/download'/> 
                 </div>
                     
                 <div className="signup-popup-gfa-section">

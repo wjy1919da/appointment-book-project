@@ -13,6 +13,10 @@ import LoginPopup from '../../components/components-signup-and-login/signup-and-
 import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
 import SignupPopup2 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup2.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
+import AfterSignupPopup1 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup1.component';
+import AfterSignupPopup2 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup2.component';
+import AfterSignupPopup3 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup3.component';
+import AfterSignupPopup4 from '../../components/components-signup-and-login/after-signup-popup/after-signup-popup4.component';
 
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
@@ -229,7 +233,7 @@ const Header = () => {
             )}
             
             {loginClick && 
-                <LoginPopup 
+                <AfterSignupPopup3
                     show={loginClick}
                     onHide={() => setLoginClick(false)}
                 />
