@@ -1,0 +1,117 @@
+@media(min-width: 1024px) {
+    .signup-popup-modal {
+        /*
+        .modal-lg {
+            max-width: 50%; 
+        }
+        */
+
+        .modal-content {
+            // border-color: 3px solid var(--unnamed, #FFA4A3);
+            border-color: #FFA4A3;
+            border-width: thin;
+            border-radius: 20px;
+            min-width: 400px;
+            max-width: 430px;
+            min-height: 520px;
+            max-height: 550px;
+        }
+    }
+    
+    /*
+    .gender-option-section {
+        margin-top: 20px;
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        justify-content: center;
+        // align-items: center;
+    }
+    */
+
+    /*
+    .male-icon {
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+    */
+
+    .male-icon-image {
+        width: 22%;
+        height: 22%;
+        opacity: 0.6;
+        
+    }
+    .male-icon-image:hover {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+    .male-icon-image:active {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+
+    /*
+    .female-icon {
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+    */
+
+    .female-icon-image {
+        margin-top: -12px;
+        width: 22%;
+        height: 22%;
+        opacity: 0.6;
+    }
+    .female-icon-image:hover {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+    .female-icon-image:active {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+    
+    /*
+    .other-icon {
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+    */
+
+    .other-icon-image {
+        margin-top: -10px;
+        width: 22%;
+        height: 22%;
+        opacity: 0.6;
+    }
+    .other-icon-image:hover {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+    .other-icon-image:active {
+        width: 25%;
+        height: 25%;
+        opacity: 1;
+    }
+
+    .next-button-section {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
