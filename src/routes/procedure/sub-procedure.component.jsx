@@ -42,6 +42,7 @@ const SubProcedure = () => {
         }
     };
     const handleScroll = () => {
+        console.log('scroll');
         const slideElement = document.getElementById("slide");
         const recommendationElement = document.getElementById("recommendation");
         const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
@@ -52,16 +53,19 @@ const SubProcedure = () => {
                     slideElement.style.top = '64px';
                     slideElement.style.position = 'fixed';
                     if (recommendationElement) {
-                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 340) + 'px';  // Introduction slide's top + 400px
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';  // Introduction slide's top + 400px
                         recommendationElement.style.position = 'fixed';
                     }
                 }
             } else {
+                console.log("window.scrollY < 280",recommendationElement,slideElement);
                 if (slideElement) {
                     slideElement.style.top = '350px';
                     slideElement.style.position = 'absolute';
+
                     if (recommendationElement) {
-                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 340) + 'px';
+                        console.log("recommendationElement adjust");
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
                         recommendationElement.style.position = 'absolute';
                     }
                 }
@@ -73,22 +77,23 @@ const SubProcedure = () => {
     const footerRef = useRef(null);
     
     useEffect(() => {
+        const initialize = () => {
+            console.log('initialize');
+            handleScroll();
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
         const handleResize = () => {
             window.removeEventListener('scroll', handleScroll);
             handleScroll(); // 重新调整位置
             window.addEventListener('scroll', handleScroll, { passive: true });
         }
-    
-        const initialize = () => {
-            handleScroll();
-            window.addEventListener('resize', handleResize);
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }
-    
         // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
         if (document.readyState === "complete") {
+            console.log('complete');
             initialize();
         } else {
+            console.log('not complete');
             window.onload = initialize;
         }
     
