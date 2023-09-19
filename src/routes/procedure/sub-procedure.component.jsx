@@ -42,7 +42,7 @@ const SubProcedure = () => {
         }
     };
     const handleScroll = () => {
-        console.log('scroll');
+        //console.log('scroll');
         const slideElement = document.getElementById("slide");
         const recommendationElement = document.getElementById("recommendation");
         const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
@@ -58,13 +58,13 @@ const SubProcedure = () => {
                     }
                 }
             } else {
-                console.log("window.scrollY < 280",recommendationElement,slideElement);
+                //console.log("window.scrollY < 280",recommendationElement,slideElement);
                 if (slideElement) {
                     slideElement.style.top = '350px';
                     slideElement.style.position = 'absolute';
 
                     if (recommendationElement) {
-                        console.log("recommendationElement adjust");
+                        //console.log("recommendationElement adjust");
                         recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
                         recommendationElement.style.position = 'absolute';
                     }
@@ -78,7 +78,7 @@ const SubProcedure = () => {
     
     useEffect(() => {
         const initialize = () => {
-            console.log('initialize');
+            //console.log('initialize');
             handleScroll();
             window.addEventListener('resize', handleResize);
             window.addEventListener('scroll', handleScroll, { passive: true });
@@ -90,10 +90,10 @@ const SubProcedure = () => {
         }
         // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
         if (document.readyState === "complete") {
-            console.log('complete');
+            //console.log('complete');
             initialize();
         } else {
-            console.log('not complete');
+            //console.log('not complete');
             window.onload = initialize;
         }
     

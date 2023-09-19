@@ -1,6 +1,7 @@
 import userInfoQueryStore from '../userStore.ts';
 //src/userStore.ts
 import axios from 'axios';
+import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 
 const base = {
@@ -39,19 +40,34 @@ export function useUserRegister() {
         placeholderData: { data: {} }, // Default object to use before fetching completes
     });
 }
+// export function useUserEmailLogin(){
+//     const userInfo = userInfoQueryStore(s => s.userInfo);
+//     const fetchEmailLogin = async () => {
+//         const res = await axios.post(base.userEmailLogin, {
+//             "email": userInfo.email,
+//             "password": userInfo.password,
+//         });
+//         return res.data;
+//     };
+//     return useQuery(['emailLogin', userInfo.email, userInfo.password], fetchEmailLogin, {
+//         placeholderData: { data: {} }, // Default object to use before fetching completes
+//     });
+// }
+
+
 export function useUserEmailLogin(){
     const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchEmailLogin = async () => {
+    const fetchEmailLogin = async (email, password) => {
         const res = await axios.post(base.userEmailLogin, {
-            "email": userInfo.email,
-            "password": userInfo.password,
+            email,
+            password,
         });
         return res.data;
     };
-    return useQuery(['emailLogin', userInfo.email, userInfo.password], fetchEmailLogin, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
+
+    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password));
 }
+
 export function useSendOpt(){
     const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchSendOpt = async () => {

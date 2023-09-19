@@ -24,9 +24,9 @@ const Header = () => {
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
     const userInfo= userInfoQueryStore(state=>state.userInfo);
     //console.log("userInfoQuery",userInfo);
-    if(userInfo){
-        console.log("userInfoQuery.token",userInfo.userId);
-    }
+    // if(userInfo){
+    //     console.log("userInfoQuery.token",userInfo.userId);
+    // }
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}

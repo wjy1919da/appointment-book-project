@@ -1,35 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-// import { useMediaQuery } from 'react-responsive';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import AppleLogo from '../../../assets/sign/apple-logo.png';
-import GoogleLogo from '../../../assets/sign/google-logo.png';
-import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import './login-popup.styles.scss';
+import Cookies from 'js-cookie';
+import { useUserEmailLogin } from '../../../hooks/useAuth';
+import userInfoQueryStore from '../../../userStore.ts';
+import SocialSignUP from './social-signup.component';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
 
+const isValidEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email);
+}
+/* TODO: password Validation */
 const LoginPopup = (props) => {
-    // const navigate = useNavigate();
-    // const [IsModalOpen, setIsModalOpen] = useState(false);
     const [internalEmail, setInternalEmail] = useState('');
+    const [internalPassword, setInternalPassword] = useState('');
+    const userInfo = userInfoQueryStore(state=>state.userInfo);
+    const setEmail = userInfoQueryStore(state=>state.setEmail);
+    const setPassword = userInfoQueryStore(state=>state.setPassword);
+    const setToken = userInfoQueryStore(state=>state.setToken);
+    console.log("userInfo in login",userInfo);
+    const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
     const handleOnClick = () => {
-        if (!internalEmail) {
-            alert('Error: Input can not be empty!');
-        } 
-        else {
-            //setInternalEmail(internalEmail.replace(/ /g, '_'));
-            let cleanEmail = internalEmail.replace(/ /g, '_');
-            // navigate(`/procedure/${cleanProcedure}`);
-            // onHide();// Close the modal
+        //console.log("email ",internalEmail);
+        if (!internalEmail || !isValidEmail(internalEmail)) {
+            alert('Error: Invalid email!');
+            return;
         }
+        if (!internalPassword) {
+            alert('Error: Invalid password!');
+            return;
+        }
+        // setEmail(internalEmail);
+        // setPassword(internalPassword);
+        // if(data?.data && data.code === 100){
+        //     let myToken = data.data.token;
+        //     Cookies.set('token', myToken);
+        //     setToken(myToken);
+        //     alert(data.msg);
+        //     props.onHide();
+        // }
+        // if(data?.data && data.code === 500){
+        //     alert(data.msg);
+        // }
+        mutate({
+            email: internalEmail,
+            password: internalPassword
+        });
+        
     }
-    
+    useEffect(() => {
+        if (data?.data && data.code === 100) {
+            let myToken = data.data.token;
+            Cookies.set('token', myToken);
+            setToken(myToken);
+            alert(data.msg);
+            props.onHide();
+        }
+        if (data?.data && data.code === 500) {
+            alert(data.msg);
+        }
+    }, [data]);
+   // const {data,isLoading,error} = useUserEmailLogin();
+    if(isLoading){
+        return <HomeSpinner />
+    }
+    if(error){
+        alert(error.message);
+    }
+    /* Store JWT into Cookie*/
+    // useEffect(() => {
+    //     /* TODO: The return code is werid , it should be 200 if Login in success*/
+        
+    // }, [data]);
     return (
         <Modal dialogClassName="signup-popup-modal"
                show={props.show} 
                onHide={props.onHide} 
-               size="lg" // the modal will have a large size, can use the other size options such as 'sm' for small or 'xl' for extra-large
-               // aria-labelledby="example-custom-modal-styling-title"
+               size="lg"
                style={{ marginTop:"100px" }}> 
 
             <div className="signup-popup-container">
@@ -63,7 +113,7 @@ const LoginPopup = (props) => {
                             flexShrink:0,
                             flexdirection:'column',
                             justifyContent:'center' }}>
-                    Welcome Back
+                    Welcom Back
                 </p>
                 
                 <div className="login-popup-username">
@@ -98,8 +148,8 @@ const LoginPopup = (props) => {
 
                     <input className='login-popup-password-input'
                            type='text' 
-                           placeholder='1234567'
-                           onChange={(event)=>setInternalEmail(event.target.value)}
+                           placeholder='password'
+                           onChange={(event)=>setInternalPassword(event.target.value)}
                            style={{ width:'270px',
                                     height:'20px', 
                                     marginBottom:'5px', 
@@ -149,26 +199,10 @@ const LoginPopup = (props) => {
                 </p>
                 
                 <div className="login-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' herf='/download'/> 
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' onClick = { handleOnClick }/> 
                 </div>
-                    
-                <div className="login-popup-gfa-section">
-                    <div className="or-section">
-                        {/* <div className="line-separator"></div>  */}
-                        <div className="or-label">- OR -</div>
-                        {/* <div class="line-separator"></div> */}
-                    </div>
-             
-                    <div className="signin-with-apple-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' href = '/download'/>
-                    </div>
-                    <div className="signin-with-google-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ GoogleLogo } title='Sign in with Google' href = '/download'/>
-                    </div>
-                    <div className="signin-with-facebook-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook' href = '/download'/> 
-                    </div>
-                </div>
+                <SocialSignUP />
+               
             </div>
         </Modal>
     )
