@@ -3,26 +3,50 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 // import { useMediaQuery } from 'react-responsive';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import AppleLogo from '../../../assets/sign/apple-logo.png';
-import GoogleLogo from '../../../assets/sign/google-logo.png';
-import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import './signup-popup3.styles.scss';
-
+import Cookies from 'js-cookie';
+import userInfoQueryStore from '../../../userStore.ts';
+import {useUserRegister} from '../../../hooks/useAuth';
+// 注册
+const isValidEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email);
+}
 const SignupPopup3 = (props) => {
-    // const navigate = useNavigate();
-    // const [IsModalOpen, setIsModalOpen] = useState(false);
+    // 此处是否可以合并到sign-in
     const [internalEmail, setInternalEmail] = useState('');
+    const [internalPassword, setInternalPassword] = useState('');
+    const {mutate,data,isLoading,isError,error} = useUserRegister();
+    /*
+        1. validation
+        2. 提交表单
+        3. tab 页切换
+    */
     const handleOnClick = () => {
-        if (!internalEmail) {
-            alert('Error: Input can not be empty!');
-        } 
-        else {
-            //setInternalEmail(internalEmail.replace(/ /g, '_'));
-            let cleanEmail = internalEmail.replace(/ /g, '_');
-            // navigate(`/procedure/${cleanProcedure}`);
-            // onHide();// Close the modal
+        if (!internalEmail || !isValidEmail(internalEmail)) {
+            alert('Error: Invalid email!');
+            return;
         }
+        if (!internalPassword) {
+            alert('Error: Invalid password!');
+            return;
+        }
+        mutate({
+            email: internalEmail,
+            password: internalPassword
+        });
     }
+    console.log("register data",data);
+    useEffect(() => {
+        if (data?.data && data.code === 100) {
+           //  切换到下一个tab
+           // 用户点击链接获取token
+           alert("sending email ",data.msg);
+        }
+        if (data?.data && 400<=data.code <=500) {
+            alert(data.msg);
+        }
+    }, [data]);
     
     return (
         <Modal dialogClassName="signup-popup-modal"
@@ -86,7 +110,7 @@ const SignupPopup3 = (props) => {
                     <input className='signup-popup-password-input'
                            type='text' 
                            placeholder='1234567'
-                           onChange={(event)=>setInternalEmail(event.target.value)}
+                           onChange={(event)=>setInternalPassword(event.target.value)}
                            style={{ width: '270px',
                                     height:'20px', 
                                     marginBottom: '5px', 
@@ -111,7 +135,7 @@ const SignupPopup3 = (props) => {
                     <input className='signup-popup-reenter-password-input'
                            type='text' 
                            placeholder='1234567'
-                           onChange={(event)=>setInternalEmail(event.target.value)}
+                          // onChange={(event)=>setInternalEmail(event.target.value)}
                            style={{ width: '270px',
                                     height:'20px', 
                                     marginLeft: '80px', 
@@ -151,23 +175,7 @@ const SignupPopup3 = (props) => {
                     <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' herf='/download' onClick = { handleOnClick }/> 
                 </div>
                     
-                <div className="signup-popup-gfa-section">
-                    <div className="or-section">
-                        {/* <div className="line-separator"></div>  */}
-                        <div className="or-label">- OR -</div>
-                        {/* <div class="line-separator"></div> */}
-                    </div>
-             
-                    <div className="signin-with-apple-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' href = '/download'/>
-                    </div>
-                    <div className="signin-with-google-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ GoogleLogo } title='Sign in with Google' href = '/download'/>
-                    </div>
-                    <div className="signin-with-facebook-section">
-                        <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook' href = '/download'/> 
-                    </div>
-                </div>
+                
             </div>
         </Modal>
     )

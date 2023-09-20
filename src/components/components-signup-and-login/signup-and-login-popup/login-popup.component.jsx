@@ -17,11 +17,8 @@ const isValidEmail = (email) => {
 const LoginPopup = (props) => {
     const [internalEmail, setInternalEmail] = useState('');
     const [internalPassword, setInternalPassword] = useState('');
-    const userInfo = userInfoQueryStore(state=>state.userInfo);
-    const setEmail = userInfoQueryStore(state=>state.setEmail);
-    const setPassword = userInfoQueryStore(state=>state.setPassword);
     const setToken = userInfoQueryStore(state=>state.setToken);
-    console.log("userInfo in login",userInfo);
+    //console.log("userInfo in login",userInfo);
     const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
     const handleOnClick = () => {
         //console.log("email ",internalEmail);
@@ -33,25 +30,16 @@ const LoginPopup = (props) => {
             alert('Error: Invalid password!');
             return;
         }
-        // setEmail(internalEmail);
-        // setPassword(internalPassword);
-        // if(data?.data && data.code === 100){
-        //     let myToken = data.data.token;
-        //     Cookies.set('token', myToken);
-        //     setToken(myToken);
-        //     alert(data.msg);
-        //     props.onHide();
-        // }
-        // if(data?.data && data.code === 500){
-        //     alert(data.msg);
-        // }
         mutate({
             email: internalEmail,
-            password: internalPassword
+            password: internalPassword,
+            provider: 'email'
         });
         
     }
+    // 异常处理需要补充
     useEffect(() => {
+        // 100 success
         if (data?.data && data.code === 100) {
             let myToken = data.data.token;
             Cookies.set('token', myToken);
@@ -70,11 +58,7 @@ const LoginPopup = (props) => {
     if(error){
         alert(error.message);
     }
-    /* Store JWT into Cookie*/
-    // useEffect(() => {
-    //     /* TODO: The return code is werid , it should be 200 if Login in success*/
-        
-    // }, [data]);
+    // validation 需要补充
     return (
         <Modal dialogClassName="signup-popup-modal"
                show={props.show} 

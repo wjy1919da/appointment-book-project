@@ -27,45 +27,29 @@ export function useUserOptLogin() {
     });
 }
 
+
 export function useUserRegister() {
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchUserRegister = async () => {
+    const fetchUserRegister = async (email,password) => {
         const res = await axios.post(base.addUser, {
-            "email": userInfo.email,
-            "password": userInfo.password,
+            email,
+            password
         });
         return res.data;
     };
-    return useQuery(['userRegister', userInfo.email, userInfo.password], fetchUserRegister, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
+    return useMutation((credentials) => fetchUserRegister(credentials.email, credentials.password));
 }
-// export function useUserEmailLogin(){
-//     const userInfo = userInfoQueryStore(s => s.userInfo);
-//     const fetchEmailLogin = async () => {
-//         const res = await axios.post(base.userEmailLogin, {
-//             "email": userInfo.email,
-//             "password": userInfo.password,
-//         });
-//         return res.data;
-//     };
-//     return useQuery(['emailLogin', userInfo.email, userInfo.password], fetchEmailLogin, {
-//         placeholderData: { data: {} }, // Default object to use before fetching completes
-//     });
-// }
-
 
 export function useUserEmailLogin(){
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchEmailLogin = async (email, password) => {
+    const fetchEmailLogin = async (email, password,provider) => {
         const res = await axios.post(base.userEmailLogin, {
             email,
             password,
+            provider
         });
         return res.data;
     };
 
-    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password));
+    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider));
 }
 
 export function useSendOpt(){
