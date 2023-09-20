@@ -5,11 +5,11 @@ export default function useDebounce(value, delay) {
     
     useEffect(() => {
         const handler = setTimeout(() => {
-        setDebouncedValue(value);
+           setDebouncedValue(value);
         }, delay);
     
         return () => {
-        clearTimeout(handler);
+           clearTimeout(handler);
         };
     }, [value, delay]);
     

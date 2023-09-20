@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom';
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
@@ -19,6 +18,9 @@ import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './private-route.component';
+//src/private-route.component.jsx
 import Cookies from 'js-cookie';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -51,7 +53,11 @@ const App = () => {
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-        <Route path='user-info' element={<UserInfo />} />
+        <Route path="/user-info" element={
+          <PrivateRoute>
+            <UserInfo />
+          </PrivateRoute>
+        }/>
         <Route path='download' element={<Download />} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='*' element={<PageNotFound />} />

@@ -185,7 +185,7 @@ const LoginPopup = (props) => {
                 <div className="login-button-section">
                     <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' onClick = { handleOnClick }/> 
                 </div>
-                <SocialSignUP />
+                <SocialSignUP onHide={props.onHide}/>
                
             </div>
         </Modal>

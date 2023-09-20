@@ -75,10 +75,14 @@
         border-color: #FAB25E;
     }
 
-    .procedure-icon-pic:active {
+    .procedure-icon-section.active {
+        border-radius: 25%;
+        //background-color: #FAB25E;
+        //opacity: 0.8;
         border: 1.6px solid;
         border-color: #FAB25E;
     }
+    
     
     /*
     .procidure-col {

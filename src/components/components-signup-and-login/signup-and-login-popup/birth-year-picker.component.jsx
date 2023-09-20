@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react';
-// import ReactDOM from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-// import { useMediaQuery } from 'react-responsive';
-//import DatePicker from 'react-datepicker';
-// import DatePicker from 'react-mobile-datepicker';
-// import BirthdayPicker from '../date-picker/date-picker.component';
-// import ScrollDatePicker from '../date-picker/scroll-date-picker.component';
-import HandWritingScrollDatePicker from '../date-picker/hand-writing-date-scroll-date-picker.component'
+//import HandWritingScrollDatePicker from '../date-picker/hand-writing-date-scroll-date-picker.component'
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import './after-signup-popup3.styles.scss';
+import React from 'react';
+//import ScrollDatePicker from '../date-picker/scroll-date-picker.component';
+//src/components/components-signup-and-login/date-picker/scroll-date-picker.component.jsx
 
-const AfterSignupPopup2 = (props) => {
-    return (
-        <Modal dialogClassName="signup-popup-modal"
-               show={props.show} 
-               onHide={props.onHide} 
-               size="lg" // the modal will have a large size, can use the other size options such as 'sm' for small or 'xl' for extra-large
-               // aria-labelledby="example-custom-modal-styling-title"
-               style={{ marginTop:"100px" }}> 
-            <div className="signup-popup-container">
+const BirthYearPicker = ({ setActiveTab }) => {
+  return (
+    <div className="signup-popup-container">
                 <p style={{ color:'#000',
                             fontFamily:'Playfair Display',
                             fontStyle:'normal',
@@ -64,15 +52,14 @@ const AfterSignupPopup2 = (props) => {
                 </p>
 
                 <div>
-                    <HandWritingScrollDatePicker/>
-                </div>    
-                             
+                    {/* <ScrollDatePicker/> */}
+                    {/* <HandWritingScrollDatePicker/> */}
+                </div>        
                 <div className="next-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' herf='/download'/> 
+                    <SignupAndLoginButton onClick={()=>setActiveTab('interested')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/> 
                 </div>
-            </div>
-        </Modal>
-    )
+    </div>
+  )
 }
 
-export default AfterSignupPopup2;
+export default BirthYearPicker

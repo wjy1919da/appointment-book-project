@@ -7,21 +7,22 @@ import AppleLogo from '../../../assets/sign/apple-logo.png';
 import GoogleLogo from '../../../assets/sign/google-logo.png';
 import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import './signup-popup1.styles.scss';
-
+// Verify Email Popup
+const isValidEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email);
+}
 const SignupPopup1 = (props) => {
     // const navigate = useNavigate();
     // const [IsModalOpen, setIsModalOpen] = useState(false);
     const [internalEmail, setInternalEmail] = useState('');
     const handleOnClick = () => {
-        if (!internalEmail) {
-            alert('Error: Input can not be empty!');
-        } 
-        else {
-            //setInternalEmail(internalEmail.replace(/ /g, '_'));
-            let cleanEmail = internalEmail.replace(/ /g, '_');
-            // navigate(`/procedure/${cleanProcedure}`);
-            // onHide();// Close the modal
+        if (!internalEmail || !isValidEmail(internalEmail)) {
+            alert('Error: Invalid email!');
+            return;
         }
+        // navigate('/download');
+        // setIsModalOpen(true);
     }
     
     return (
@@ -129,11 +130,9 @@ const SignupPopup1 = (props) => {
                     <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Verify' herf='/download'/> 
                 </div>
                     
-                <div className="signup-popup-gfa-section">
+                {/* <div className="signup-popup-gfa-section">
                     <div className="or-section">
-                        {/* <div className="line-separator"></div>  */}
                         <div className="or-label">- OR -</div>
-                        {/* <div class="line-separator"></div> */}
                     </div>
              
                     <div className="signin-with-apple-section">
@@ -145,7 +144,7 @@ const SignupPopup1 = (props) => {
                     <div className="signin-with-facebook-section">
                         <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook' href = '/download'/> 
                     </div>
-                </div>
+                </div> */}
             </div>
         </Modal>
     )

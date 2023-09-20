@@ -10,8 +10,7 @@ import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-popup.component';
-import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
-import SignupPopup2 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup2.component';
+//import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
@@ -166,7 +165,12 @@ const Header = () => {
                         <Link className='header-nav-link3' to='/posts'>
                             Posts
                         </Link>
-                        
+                        {userInfo.token&&<>
+                            <span className='header-nav-divider'>|</span>
+                            <Link className='header-nav-link3' to='/user-info'>
+                                Profile Testing
+                            </Link>
+                        </>}
                     </div>
                     <div className='header-login'>
                         {/* <div className="header-search">
@@ -181,7 +185,7 @@ const Header = () => {
                             {!userInfo.userId&&<div onClick={() => handleLoginClick()}>
                                 login
                             </div>}
-                            <div onClick={()=>setVerifyEmailClick(true)}>Register</div>
+                            {!userInfo.token && <div onClick={()=>setVerifyEmailClick(true)}>Register</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>

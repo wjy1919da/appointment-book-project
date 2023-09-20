@@ -13,6 +13,7 @@ const base = {
     otpRegisterValidate: 'http://localhost:8080/register/phone/validate-otp',
     emailRegisterValidate: 'http://localhost:8080/register/verifyEmail',
 };
+
 export function useUserOptLogin() {
     const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchUserLogin = async () => {
@@ -50,6 +51,16 @@ export function useUserEmailLogin(){
     };
 
     return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider));
+}
+export function useSocialLogin() {
+    const fetchSocialLogin = async (googleAccessToken, provider) => {
+        const res = await axios.post(base.userEmailLogin, {
+            googleAccessToken,
+            provider
+        });
+        return res.data;
+    };
+    return useMutation((credentials) => fetchSocialLogin(credentials.googleAccessToken, credentials.provider));
 }
 
 export function useSendOpt(){
