@@ -34,10 +34,10 @@ export default function useGetProcedures() {
             page: 1,
           }
         });
-        console.log("procedure", res.data);
+       // console.log("procedure", res.data);
         return res.data;
       } catch (error) {
-        console.error("Failed to fetch procedures", error);
+        //console.error("Failed to fetch procedures", error);
         return { data: {} };
       }
     }
@@ -50,10 +50,10 @@ export default function useGetProcedures() {
 
 export function useGetFAQ() {
     const procedureQuery = useProcedureQueryStore(s => s.procedureQuery);
-    console.log("useGetFAQ",procedureQuery.categoryId)
+    //console.log("useGetFAQ",procedureQuery.categoryId)
     const fetchFAQ = async () => {
       const res = await axios.get(`${base.faqUrl}/${procedureQuery.categoryId}`);
-      console.log("fetch Data:", res.data);
+      //console.log("fetch Data:", res.data);
       return res.data;
     };
     return useQuery(['faq',procedureQuery.categoryId], fetchFAQ);

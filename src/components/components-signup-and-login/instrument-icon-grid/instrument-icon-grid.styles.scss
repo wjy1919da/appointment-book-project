@@ -1,0 +1,123 @@
+.procedure-icons-container {
+    /* procedures */
+    /* Auto layout */
+  
+    display: flex;
+    margin: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+      
+    padding: 5px 10px;  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns per row */
+    gap: 2px; 
+    justify-content: space-around; 
+    justify-items: center; /* 水平居中 */
+    // align-items: center; /* 垂直居中 */
+    
+    grid-gap: 2px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    // align-items: center;
+    flex-grow: 0;
+     
+    .procedure-icon-section {
+        /* procedure */
+        /* Auto layout */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        gap: 0px;
+  
+        // width: 330px;
+        width: 1/9;
+        height: 1/9;
+  
+        /* Inside auto layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    /*
+    .procedure-icon-section:hover {
+        border-radius: 25%;
+        background-color: #FAB25E;
+        opacity: 0.8;
+    }
+    .procedure-icon-section:active {
+        border-radius: 25%;
+        background-color: #FAB25E;
+        opacity: 0.8;
+    }
+    */
+    
+    .procedure-icon-pic {
+        /* Thermage */
+
+        // width: 300px;
+        // height: 120px;
+        border-radius: 100%;
+        
+        /* Inside auto layout */
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+    }
+    
+    .procedure-icon-pic:hover {
+        border: 1.6px solid;
+        border-color: #FAB25E;
+    }
+
+    .procedure-icon-section.active {
+        border-radius: 25%;
+        //background-color: #FAB25E;
+        //opacity: 0.8;
+        border: 1.6px solid;
+        border-color: #FAB25E;
+    }
+    
+    
+    /*
+    .procidure-col {
+        flex: 1; 
+        text-align: center; // Add this line to center text 
+    }
+
+    .procedure-pic{
+        border-radius: 100%; // 圆角
+        width: 155px;
+        height: 155px;  
+        margin: 0 auto;
+    } 
+    */
+      
+    .title {
+        margin-top: -2%;
+        width: 60px;
+        // height: 29px;
+        padding: 0px 0px;
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 9px;
+        line-height: 160%;
+        /* identical to box height, or 29px */
+
+        text-align: center;
+        color: #000000;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+    }  
+  }

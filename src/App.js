@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom';
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
@@ -17,12 +16,32 @@ import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
+
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import { Create } from '@mui/icons-material';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
+
+import React, { useEffect } from 'react';
+import userInfoQueryStore from './userStore.ts';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './private-route.component';
+//src/private-route.component.jsx
+import Cookies from 'js-cookie';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+  const userInfo = userInfoQueryStore(state => state.userInfo);
+  /* Load token from cookie*/
+  console.log('userInfo init', userInfo);
+  const token = userInfoQueryStore(state => state.userInfo.token);
+  const setToken = userInfoQueryStore(state => state.setToken);
+  useEffect(() => {
+    const cookieToken = Cookies.get('token');
+    if (cookieToken && cookieToken !== token) {
+        setToken(cookieToken);
+    }
+  }, []);  
+  
   return (
     // <DataRouter>
       <Routes>
@@ -40,7 +59,11 @@ const App = () => {
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-        <Route path='user-info' element={<UserInfo />} />
+        <Route path="/user-info" element={
+          <PrivateRoute>
+            <UserInfo />
+          </PrivateRoute>
+        }/>
         <Route path='download' element={<Download />} />
         <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />

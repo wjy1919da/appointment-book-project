@@ -6,17 +6,26 @@ import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
 import menuBar from '../../assets/home/menu-bar.png'
 import './header.styles.scss';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-import HeaderLoginPopUp from './header-login-popUp/login-popUp';
-
+import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-popup.component';
+//import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
+import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
+import Cookies from 'js-cookie';
+import userInfoQueryStore from '../../userStore.ts';
+import { Cookie } from '@mui/icons-material';
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
+    const userInfo= userInfoQueryStore(state=>state.userInfo);
+    //console.log("userInfoQuery",userInfo);
+    // if(userInfo){
+    //     console.log("userInfoQuery.token",userInfo.userId);
+    // }
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}
@@ -36,28 +45,25 @@ const Header = () => {
         </NavDropdown.Item>
     );
 
-    const [IsModalOpen, setIsModelOpen] = useState(false);
-    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-    //   Save: old navbar    
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
+    const [verifyEmailClick, setVerifyEmailClick] = useState(false);
+    const setToken = userInfoQueryStore(state=>state.setToken);
+    const removeToken = userInfoQueryStore(state=>state.removeToken);
     const [dropdown, setDropdown] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
-    useEffect(() => {
-        if (isClicked) {
-            const timer = setTimeout(() => {
-                setIsClicked(false);
-            }, 200); // Reverts font-weight back to normal after 200ms
+    // const [activeTab, setActiveTab] = useState(0);
+    // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
 
-            return () => {
-                clearTimeout(timer); // Cleanup timer on unmount
-            };
-        }
-    }, [isClicked]);
-  
     const handleClick = () => setClick(!click);
-    const handleLoginClick = () => setLoginClick(!loginClick);
+    const handleLoginClick = () => setLoginClick(!loginClick); 
+    const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
+    const handleLogOutClick = () => {
+        Cookies.remove('token');
+        removeToken();
+        alert('Log out successfully!');
+    };
     const MenuItems = [
       {
           title: 'Login',
@@ -78,50 +84,6 @@ const Header = () => {
     const onClick = ()=>{
         setDropdown(!dropdown)
     }
-
-
-//   Save: old navbar    
-//     <Navbar className='header-navbar' expand="lg" expanded={expanded}>
-//     <Container>
-//         <Link className='header-logo-container' to='/'>
-//             {/* <img className='logo' src={Logo} alt='logo' /> */}
-//         </Link>
-//         <Navbar.Toggle className='toggle-button' aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : 'expanded')}/>
-//         <Navbar.Collapse id="basic-navbar-nav">
-//             <Nav className="me-auto">
-//                 <NavDropdown className='nav-link nav-dropdown' title="Procedure" id="basic-nav-dropdown">
-//                     <NavDropdown className='nav-link nav-dropdown' title="Facial" id="basic-nav-dropdown">
-//                         <NavDropdown.Item className='nav-link' as={Link} to="procedure/facial" onClick={() => setExpanded(expanded ? false : 'expanded')}>
-//                             All Facial Procedure Options
-//                             <span><img className='dropdown-item-icon' src={ArrowIcon} alt='go to detail'/></span>
-//                         </NavDropdown.Item>
-//                         {facialDropDownMenuMobile}
-//                     </NavDropdown>
-//                     <NavDropdown.Divider />
-//                     <NavDropdown className='nav-link nav-dropdown' title="Breast" id="basic-nav-dropdown">
-//                         <NavDropdown.Item className='nav-link' as={Link} to="procedure/breast" onClick={() => setExpanded(expanded ? false : 'expanded')}>
-//                             All Breast Procedure Options
-//                             <span><img className='dropdown-item-icon' src={ArrowIcon} alt='go to detail'/></span>
-//                         </NavDropdown.Item>
-//                         {breastDropDownMenuMobile}
-//                     </NavDropdown>
-//                     <NavDropdown.Divider />
-//                     <NavDropdown className='nav-link nav-dropdown' title="Body" id="basic-nav-dropdown">
-//                         <NavDropdown.Item className='nav-link' as={Link} to="procedure/body" onClick={() => setExpanded(expanded ? false : 'expanded')}>
-//                             All Body Procedure Options
-//                             <span><img className='dropdown-item-icon' src={ArrowIcon} alt='go to detail'/></span>
-//                         </NavDropdown.Item>
-//                         {bodyDropDownMenuMobile}
-//                     </NavDropdown>
-//                 </NavDropdown>
-//                 <Nav.Link className='nav-link' as={Link} to="doctor" onClick={() => setExpanded(expanded ? false : 'expanded')}>Doctors</Nav.Link>
-//                 <Nav.Link className='nav-link' as={Link} to="instrument" onClick={() => setExpanded(expanded ? false : 'expanded')}>Instruments</Nav.Link>
-//                 {/* <Nav.Link className='nav-link' as={Link} to="sign-in" onClick={() => setExpanded(expanded ? false : 'expanded')}><b>Sign in</b></Nav.Link> */}
-//             </Nav>
-//         </Navbar.Collapse>
-//     </Container>
-// </Navbar>
-
     return (
         <div>
             {isMobile?(
@@ -132,7 +94,6 @@ const Header = () => {
                         <Dropdown.Toggle variant="success" id="dropdown-basic"style={{ backgroundColor: 'transparent', borderColor: 'transparent',height:'36px',padding:'10px 20px'}}>
                         <img src={menuBar}alt="your alt text" style={{width: "36px", height: "36px"}}/>
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu className='header-menu-bar-mobile-container' >
                         <Dropdown.Item as={Link} to="/procedureMobile" className='header-menu-bar-item-mobile' >Procedure</Dropdown.Item>
                         <Dropdown.Item as={Link} to="/doctor" className='header-menu-bar-item-mobile'>Doctor</Dropdown.Item>
@@ -165,72 +126,88 @@ const Header = () => {
                     <Outlet />
                 </>
             ):(
-            <Fragment>
-            {/* desktop */}
-            <div className='header-container'>
-                <Link className='header-logo-container' to='/'>
-                    <img className='logo' src={Logo} alt='logo' />
-                </Link>
-                <div className='header-nav-container' id='#navbarTogglerDemo02'>
-                    <span className='dropdown-center'>
-                        <Link 
-                            className='header-nav-link1' 
-                            // to = '/procedure/botox_injections'
-                            data-bs-toggle='dropdown disabled' 
-                            aria-expanded='false'
-                            //onMouseOver={() => setIsModelOpen(true)}
-                            onClick={() => setIsModelOpen(true)}
-                            >
-                            Procedure
+                <Fragment>
+                {/* desktop */}
+                <div className='header-container'>
+                    <Link className='header-logo-container' to='/'>
+                        <img className='logo' src={Logo} alt='logo' />
+                    </Link>
+                    <div className='header-nav-container' id='#navbarTogglerDemo02'>
+                        <span className='dropdown-center'>
+                            <Link 
+                                className='header-nav-link1' 
+                                // to = '/procedure/botox_injections'
+                                data-bs-toggle='dropdown disabled' 
+                                aria-expanded='false'
+                                //onMouseOver={() => setIsModelOpen(true)}
+                                onClick={() => setIsModalOpen(true)}
+                                >
+                                Procedure
+                            </Link>
+                            <ul className='dropdown-menu'>
+                                {isModalOpen && 
+                                    <DropdownMenu
+                                        show={isModalOpen}
+                                        onHide={() => setIsModalOpen(false)}
+                                    />} 
+                                {/* <DropdownMenu /> */}
+                            </ul>
+                        </span>
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link2' to='/doctor'>
+                            Doctors
                         </Link>
-                        <ul className='dropdown-menu'>
-                            {IsModalOpen && 
-                                <DropdownMenu
-                                    show={IsModalOpen}
-                                    onHide={() => setIsModelOpen(false)}
-                                />} 
-                            {/* <DropdownMenu /> */}
-                        </ul>
-                    </span>
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link2' to='/doctor'>
-                        Doctors
-                    </Link>
-                    {/* <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/instrument'>
-                        Instruments
-                    </Link> */}
-                    <span className='header-nav-divider'>|</span>
-                    <Link className='header-nav-link3' to='/posts'>
-                        Posts
-                    </Link>
-                    
-                </div>
-                <div className='header-login'>
-                    {/* <div className="header-search">
-                        <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                        </input>
-                    </div>  */}
-                   <div className="header-login-logo">
-                        <img src={loginIcon} alt="login Image" ></img>
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link3' to='/instrument/coolsculpting'>
+                            Instruments
+                        </Link>
+                        <span className='header-nav-divider'>|</span>
+                        <Link className='header-nav-link3' to='/posts'>
+                            Posts
+                        </Link>
+                        {userInfo.token&&<>
+                            <span className='header-nav-divider'>|</span>
+                            <Link className='header-nav-link3' to='/user-info'>
+                                Profile Testing
+                            </Link>
+                        </>}
                     </div>
-                    <div className="header-login-text">
-                    <Link 
-                        onClick={() => {
-                            setIsClicked(true);
-                            setIsLoginOpen(true);
-                        }}
-                        className={isClicked ? 'clicked' : ''}
-                    >
-                    login
-                    </Link>
-                    {isLoginOpen && <HeaderLoginPopUp show={isLoginOpen} onHide={() => setIsLoginOpen(false)} />}
+                    <div className='header-login'>
+                        {/* <div className="header-search">
+                            <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                            </input>
+                        </div>  */}
+                    <div className="header-login-logo">
+                            <img src={loginIcon} alt="login Image" ></img>
+                        </div>
+                        <div className="header-login-text">
+                            {/* TODO: user state change */}
+                            {!userInfo.userId&&<div onClick={() => handleLoginClick()}>
+                                login
+                            </div>}
+                            {!userInfo.token && <div onClick={()=>setVerifyEmailClick(true)}>Register</div>}
+                            {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
+                            {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
+                        </div>
+                    </div> 
                 </div>
-                </div> 
-            </div>
-            <Outlet />
-        </Fragment>
-        )}
+                <Outlet />
+            </Fragment>
+            )}
+            
+            {loginClick && 
+                <LoginPopup 
+                    show={loginClick}
+                    onHide={() => setLoginClick(false)}
+                />
+            }
+            {verifyEmailClick &&
+                <SignupPopup3
+                show = {verifyEmailClick}
+                onHide={() => setVerifyEmailClick(false)}
+                />  
+            }
+
         </div>
     )
 }
