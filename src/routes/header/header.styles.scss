@@ -381,9 +381,18 @@
             }
             .header-login-text
             {
+                font-size:18px;
                 margin-top: 8px;
                 margin-right: 40px;
                 font-family: 'Open Sans';
+            }
+            .header-login-text a,
+            .header-login-text a:visited,
+            .header-login-text a:active {
+                color: black; /* keeps the color black */
+            }
+            .header-login-text a.clicked {
+                font-weight: 600;
             }
             input[type=text] {
                 

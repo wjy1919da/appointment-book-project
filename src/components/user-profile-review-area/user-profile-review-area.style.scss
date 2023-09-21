@@ -1,0 +1,118 @@
+.user-profile-review-container
+{
+    margin-left: 50px;
+}
+.review-recommande-doctor {
+    position: relative; 
+    width: 100%; /* or set a specific width like 800px if you want */
+    //overflow: hidden; /* Hide any overflowing content, like the arrows */
+}
+
+.review-recommande-doctor-list-container {
+    width: 100%;
+    overflow-x: auto;
+}
+.custom-grid {
+    padding-left: 20px;
+    padding-right: 100px;
+    margin-left: 50px;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to ensure horizontal scrolling */
+    gap: 100px; /* Replace with desired gap between items */
+}
+.doctor-search-card-container {
+    width: 250px;  // or whatever you need
+    //background-color: red;  // just for testing
+}
+
+.scroll-indicator {
+    position: absolute;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.scroll-left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-right {
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Optional: Hide horizontal scrollbar */
+.review-recommande-doctor-list-container::-webkit-scrollbar {
+    display: none;
+}
+
+.review-recommande-doctor-list-container {
+    -ms-overflow-style: none;
+}
+.review-recommande-doctor,
+.review-recommande-doctor-list-container,
+.doctor-search-card-container:first-child {
+    padding-left: 0;
+    margin-left: 0;
+}
+.summary-title
+{
+    margin-top: 50px;
+    color: #000;
+    /* Boby 1 */
+    font-family: Lora;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 35.2px */
+
+}
+.summary-rate
+{
+    margin-top: 20px;
+    display: flex;
+    gap:20px;
+    color: #000;
+/* Boby 1 */
+    font-family: Lora;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}
+.summary-text
+{
+    margin-top: 20px;
+    color: #000;
+/* Body 2 */
+    font-family: Lora;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; 
+}
+.user-profile-review-divider
+{
+    height: 1px;
+    background:linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+    width: 90%; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+.recommande-doctor-reviews
+{
+    margin-top: 40px;
+    color: #000;
+/* Boby 1 */
+    font-family: Lora;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}
