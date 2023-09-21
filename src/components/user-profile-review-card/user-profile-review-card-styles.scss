@@ -1,0 +1,84 @@
+.user-profile-review-card-container
+{
+
+    margin-top: 20px;
+.user-review-card-info
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .user-review-basic-info
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:20px;
+        .user-review-card-avatar
+        {
+            width:42px;
+            height:42px;
+            background-color: gray;
+            border-radius: 50px;
+        }
+        .user-review-card-name
+        {
+            color: #000;
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 160%;
+        }
+        .user-review-card-verified
+        {
+            margin-left: 10px;
+            display: flex;
+            gap:5px;
+            align-items: center;
+            color: gray;
+            text-align: center;
+            font-family: Open Sans;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 100%; /* 12px */
+        }
+    }
+    .user-review-card-date
+    {
+        color: #838383;
+/* Body 3 */
+        font-family: Lora;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+    }
+}
+    .user-review-card-rate-star
+    {
+        margin-top: 10px;
+    }
+    .user-review-card-title
+    {
+        margin-top: 10px;
+        color: #000;
+        /* Body 2 */
+        font-family: Lora;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; 
+    }
+    .user-review-card-text
+    {
+        margin-top: 10px;
+        /* Body 3 */
+        font-family: Lora;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 25.6px */
+    }
+
+}

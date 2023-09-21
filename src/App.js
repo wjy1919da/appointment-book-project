@@ -16,6 +16,12 @@ import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
+
+import CreatePostOfUser from './components/create-post/create-post.jsx';
+import { Create } from '@mui/icons-material';
+import UserProfilePage from './components/user-profile-page/user-profile-page';
+import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
+
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -59,7 +65,9 @@ const App = () => {
           </PrivateRoute>
         }/>
         <Route path='download' element={<Download />} />
+        <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />
+        <Route path='userProfile' element={<UserProfilePage />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
