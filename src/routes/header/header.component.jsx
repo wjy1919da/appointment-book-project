@@ -6,9 +6,10 @@ import Logo from '../../assets/home/logo.png';
 import ArrowIcon from '../../assets/home/arrow-icon.png';
 import menuBar from '../../assets/home/menu-bar.png'
 import './header.styles.scss';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
+import HeaderLoginPopUp from './header-login-popUp/login-popUp';
 
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
@@ -36,11 +37,24 @@ const Header = () => {
     );
 
     const [IsModalOpen, setIsModelOpen] = useState(false);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     //   Save: old navbar    
     const [click, setClick] = useState(false);
     const [loginClick, setLoginClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    useEffect(() => {
+        if (isClicked) {
+            const timer = setTimeout(() => {
+                setIsClicked(false);
+            }, 200); // Reverts font-weight back to normal after 200ms
+
+            return () => {
+                clearTimeout(timer); // Cleanup timer on unmount
+            };
+        }
+    }, [isClicked]);
   
     const handleClick = () => setClick(!click);
     const handleLoginClick = () => setLoginClick(!loginClick);
@@ -201,11 +215,17 @@ const Header = () => {
                         <img src={loginIcon} alt="login Image" ></img>
                     </div>
                     <div className="header-login-text">
-                        <Link>
-                        login
-                        </Link>
-                        
-                    </div>
+                    <Link 
+                        onClick={() => {
+                            setIsClicked(true);
+                            setIsLoginOpen(true);
+                        }}
+                        className={isClicked ? 'clicked' : ''}
+                    >
+                    login
+                    </Link>
+                    {isLoginOpen && <HeaderLoginPopUp show={isLoginOpen} onHide={() => setIsLoginOpen(false)} />}
+                </div>
                 </div> 
             </div>
             <Outlet />

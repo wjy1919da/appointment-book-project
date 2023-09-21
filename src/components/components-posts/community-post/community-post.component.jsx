@@ -2,9 +2,11 @@ import React,{useState,useEffect} from 'react';
 import "./community-post.styles.scss";
 import heartIcon from "../../../assets/post/heart.png"
 import { useMediaQuery } from 'react-responsive';
+import heartIconFilled from '../../../assets/post/heart-fill-Icon.png'
 const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
     const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
     const [width,setWidth]=useState('');
+    const [liked, setLiked] = useState(false);
     useEffect(() => {
         if (isMobile) {
           setWidth('240px');
@@ -12,10 +14,15 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
           setWidth('186px');
         }
     }, [isMobile]);
+    const toggleLike = () => {
+        setLiked(!liked);
+        // If you want to navigate to another page when the heart is clicked, uncomment the next line.
+        // window.location.href = "/download";
+    };
     return (
         <div className='community-post-container'>
-            <div className="post-Image">
-                <img src={imageURL[0]} className="postImage"></img>
+            <div className="post-Image" >
+                <img src={imageURL} className="postImage"></img>
             </div>
             <div className="post-information" >
                 <span className="post-text">{text}</span>
@@ -26,7 +33,13 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
                     </div>
                     <div className="likeNumber">
                     
-                       <img src={heartIcon} className="heartIcon" onClick={() => window.location.href="/download"}></img>
+                    <img 
+                        src={liked ? heartIconFilled : heartIcon} 
+                        className="heartIcon" 
+                        onClick={toggleLike} 
+                        alt="Like Icon"
+                    />
+
       
                         <span className="gray-text">{likes}</span>
                     </div>

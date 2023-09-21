@@ -17,6 +17,10 @@ import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
+import CreatePostOfUser from './components/create-post/create-post.jsx';
+import { Create } from '@mui/icons-material';
+import UserProfilePage from './components/user-profile-page/user-profile-page';
+import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   return (
@@ -38,7 +42,9 @@ const App = () => {
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
         <Route path='user-info' element={<UserInfo />} />
         <Route path='download' element={<Download />} />
+        <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />
+        <Route path='userProfile' element={<UserProfilePage />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
