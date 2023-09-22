@@ -82,7 +82,7 @@ const SocialSignUP = ({onHide}) => {
                 <div className="or-label">- OR -</div>
                 {/* <div class="line-separator"></div> */}
             </div>
-            {/* <div className="signin-with-apple-section">
+            <div className="signin-with-apple-section">
                 <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' />
             </div>
             <div className="signin-with-google-section">
@@ -90,8 +90,8 @@ const SocialSignUP = ({onHide}) => {
             </div>
             <div className="signin-with-facebook-section">
                 <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook'/> 
-            </div> */}
-             <div>
+            </div>
+             {/* <div>
              <LoginSocialFacebook
                             appId="1301849283867898"
                             onLoginStart={onLoginStart}
@@ -117,7 +117,7 @@ const SocialSignUP = ({onHide}) => {
 
                     />
                 </LoginSocialGoogle>      
-            </div>
+            </div> */}
         </div>
   )
 }
