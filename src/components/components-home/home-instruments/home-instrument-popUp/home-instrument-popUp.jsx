@@ -106,8 +106,8 @@ const numCombinations = instrumentsGrid ? instrumentsGrid.length : 0;
                     </div>
                 }
                 <div className='instrument-popUp-clickMore'>
-                    <Link >
-                        Click to learn more
+                    <Link to={`/instrument/${data.data.name}`}>
+                      Click to learn more
                     </Link>
                 </div>
 
