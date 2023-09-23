@@ -14,6 +14,7 @@ const Verification = () => {
     const { data, isLoading, isError, error } = useUserEmailRegisterValidate(token);
     const navigate = useNavigate();
     const setToken = userInfoQueryStore(state => state.setToken);
+    const togglePopup = userInfoQueryStore(state => state.togglePopup);
     //console.log("verification is called!!!",token)
     useEffect(() => {
         if (!isLoading) {
@@ -25,6 +26,7 @@ const Verification = () => {
         if(data && data.code === 100){
             Cookies.set('token', data.data.token);
             setToken(data.data.token);
+            togglePopup(true,'gender');
             alert("Verification data success");
             navigate('/');
         }
