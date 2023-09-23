@@ -21,10 +21,6 @@ const Header = () => {
     const breastProcedures = ['Breast Augmentation', 'Breast Lift', 'Breast Reconstruction', 'En Bloc Capsulectomy']
     const bodyProcedures = ['Liposuction', 'Butt Lift', 'Feminine Rejuvenation', 'Tummy Tuck', 'Arm Lift']
     const userInfo= userInfoQueryStore(state=>state.userInfo);
-    //console.log("userInfoQuery",userInfo);
-    // if(userInfo){
-    //     console.log("userInfoQuery.token",userInfo.userId);
-    // }
     const facialDropDownMenuMobile = facialProcedures.map((procedure) => 
         <NavDropdown.Item className='nav-link' as={Link} to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')} onClick={() => setExpanded(expanded ? false : 'expanded')} key={procedure}>
             {procedure}
@@ -43,21 +39,17 @@ const Header = () => {
             <span><img className='dropdown-item-icon' src={ArrowIcon} alt='go to detail'/></span>
         </NavDropdown.Item>
     );
-
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-    const [click, setClick] = useState(false);
+    
     const [loginClick, setLoginClick] = useState(false);
     const [verifyEmailClick, setVerifyEmailClick] = useState(false);
-    const setToken = userInfoQueryStore(state=>state.setToken);
+    const togglePopup = userInfoQueryStore(state=>state.togglePopup);
+    const isPopupOpen = userInfo.popupState !== 'closed';
+    
     const removeToken = userInfoQueryStore(state=>state.removeToken);
     const [dropdown, setDropdown] = useState(false);
-    // const [activeTab, setActiveTab] = useState(0);
-    // const tabs = ['Procedure', 'Doctors', 'Instruments', 'Posts'];
-
-    const handleClick = () => setClick(!click);
     const handleLoginClick = () => setLoginClick(!loginClick); 
-    const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
     const handleLogOutClick = () => {
         Cookies.remove('token');
         removeToken();
@@ -117,11 +109,6 @@ const Header = () => {
                     </Dropdown>
                     </div>
                 </div>
-                {/* <div className='header-conatiner-mobile'
-                     style={{borderBottom:'1px solid grey',marginTop:'-10px'}}
-                        >
-
-                </div> */}
                     <Outlet />
                 </>
             ):(
@@ -184,7 +171,7 @@ const Header = () => {
                             {!userInfo.userId&&<div onClick={() => handleLoginClick()}>
                                 login
                             </div>}
-                            {!userInfo.token && <div onClick={()=>setVerifyEmailClick(true)}>Register</div>}
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>Register</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>
@@ -194,16 +181,16 @@ const Header = () => {
             </Fragment>
             )}
             
-            {loginClick && 
+            {/* {loginClick && 
                 <LoginPopup 
                     show={loginClick}
                     onHide={() => setLoginClick(false)}
                 />
-            }
-            {verifyEmailClick &&
-                <SignupPopup3
-                show = {verifyEmailClick}
-                onHide={() => setVerifyEmailClick(false)}
+            } */}
+            {isPopupOpen &&
+                    <SignupPopup3
+                    show = {isPopupOpen}
+                    onHide={() => togglePopup(false)}
                 />  
             }
 

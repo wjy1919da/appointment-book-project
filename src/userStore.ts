@@ -5,13 +5,25 @@ interface DecodedToken {
     sub: string;
     [key: string]: any;
 }
-
+/*
+    1. open popup
+    2. close popup
+    3. open popup and stay in gender page
+    4. open popup and stay in interest page
+    5. open popup and stay in birthday page
+    6. open popup and stay in sign up success page
+    7. open popup and stay in verify email page
+    8. open popup and stay in sign in page
+    9. open popup and stay in sign up page
+*/
 interface userInfo {
     token?: string;
     googleToken?: string;
     userId?: string;
     gender?: string;
     selectedInterests: Set<string>;
+     // Used to control the register popup page and open/close
+    popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'signIn';
 }
 
 interface userInfoQuery {
@@ -22,6 +34,8 @@ interface userInfoQuery {
     setToken: (token: string) => void;
     setUserId: (userId: string) => void;
     removeToken: () => void;
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'signIn') => void;
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'signIn') => void;
 }
 
 const userInfoQueryStore = create<userInfoQuery>((set) => ({
@@ -30,7 +44,9 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         userId: "",
         gender: "",
         googleToken: "",
-        selectedInterests: new Set<string>()
+        selectedInterests: new Set<string>(),
+        // Initial state is closed
+        popupState: "closed"
     },
     setGender: (gender: string) => {
         set((store) => ({
@@ -40,6 +56,22 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     setGoogleToken: (token: string) => {
         set((store) => ({
             userInfo: { ...store.userInfo, googleToken: token }
+        }));
+    },
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'signIn') => {
+        if (open) {
+            set((store) => ({
+                userInfo: { ...store.userInfo, popupState: initialState || 'gender' }
+            }));
+        } else {
+            set((store) => ({
+                userInfo: { ...store.userInfo, popupState: 'closed' }
+            }));
+        }
+    },
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'signIn') => {
+        set((store) => ({
+            userInfo: { ...store.userInfo, popupState: tab }
         }));
     },
     setInterested: (interest: string) => {
