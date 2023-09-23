@@ -57,7 +57,7 @@ const ChooseInterestedArea = ({ setActiveTab }) => {
                 </div>    
                              
                 <div className="next-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={()=>setActiveTab('thanks')}/> 
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={setActiveTab}/> 
                 </div>
             </div>
   )

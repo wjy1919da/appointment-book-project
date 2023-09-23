@@ -56,7 +56,7 @@ const BirthYearPicker = ({ setActiveTab }) => {
                     {/* <HandWritingScrollDatePicker/> */}
                 </div>        
                 <div className="next-button-section">
-                    <SignupAndLoginButton onClick={()=>setActiveTab('interested')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/> 
+                    <SignupAndLoginButton onClick={setActiveTab} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/> 
                 </div>
     </div>
   )

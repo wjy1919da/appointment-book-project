@@ -34,7 +34,7 @@ const SignUpForm = ({ setActiveTab }) => {
            //  切换到下一个tab
            // 用户点击链接获取token
            alert("sending email ",data.msg);
-           setActiveTab("verify");
+           setActiveTab();
         }
         if (data?.data && 400<=data.code <=500) {
             alert(data.msg);

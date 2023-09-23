@@ -11,7 +11,7 @@ const base = {
     addUser: 'http://localhost:8080/register/email',
     otpRegister: 'http://localhost:8080/register/phone/send-otp',
     otpRegisterValidate: 'http://localhost:8080/register/phone/validate-otp',
-    emailRegisterValidate: 'http://localhost:8080/register/verifyEmail',
+    emailRegisterValidate: 'http://localhost:8080/register',
 };
 
 export function useUserOptLogin() {
@@ -103,10 +103,16 @@ export function useUserOtpRegisterValidate(){
         placeholderData: { data: {} }, // Default object to use before fetching completes
     });
 }
-export function useUserEmailRegisterValidate(){
-    const fetchUserEmailRegisterValidate = async () => {
-        const res = await axios.get(base.emailRegisterValidate);
+export function useUserEmailRegisterValidate(token) {
+    const fetchUserEmailRegisterValidate = async (token) => {
+        const endpoint = `${base.emailRegisterValidate}/verifyEmail`;
+        const res = await axios.get(endpoint, {
+            params: {
+                token: token
+            }
+        });
         return res.data;
     }
-    return useQuery(['userEmailRegisterValidate'], fetchUserEmailRegisterValidate);
+
+    return useQuery(['userEmailRegisterValidate', token], () => fetchUserEmailRegisterValidate(token));
 }

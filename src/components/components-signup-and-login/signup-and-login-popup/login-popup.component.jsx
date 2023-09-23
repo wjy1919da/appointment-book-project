@@ -8,40 +8,34 @@ import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
 import SocialSignUP from './social-signup.component';
 import HomeSpinner from '../../home-spinner/home-spinner.component';
-
-const isValidEmail = (email) => {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return regex.test(email);
-}
+import {useForm} from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {z} from 'zod';
 /* TODO: password Validation */
 const LoginPopup = (props) => {
-    const [internalEmail, setInternalEmail] = useState('');
-    const [internalPassword, setInternalPassword] = useState('');
-    const setToken = userInfoQueryStore(state=>state.setToken);
-    //console.log("userInfo in login",userInfo);
+    const [setToken] = userInfoQueryStore((state) => state.setToken);
+    const schema = z.object({
+        email: z.string().email(),
+        password: z.string().min(6),
+    });
+
+    const { login, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(schema),
+    });
+
     const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
-    const handleOnClick = () => {
-        //console.log("email ",internalEmail);
-        if (!internalEmail || !isValidEmail(internalEmail)) {
-            alert('Error: Invalid email!');
-            return;
-        }
-        if (!internalPassword) {
-            alert('Error: Invalid password!');
-            return;
-        }
+
+    const onSubmit = (formData) => {
         mutate({
-            email: internalEmail,
-            password: internalPassword,
-            provider: 'email'
+            email: formData.email,
+            password: formData.password,
+            provider: 'email',
         });
-        
-    }
-    // 异常处理需要补充
+    };
+
     useEffect(() => {
-        // 100 success
         if (data?.data && data.code === 100) {
-            let myToken = data.data.token;
+            const myToken = data.data.token;
             Cookies.set('token', myToken);
             setToken(myToken);
             alert(data.msg);
@@ -51,145 +45,84 @@ const LoginPopup = (props) => {
             alert(data.msg);
         }
     }, [data]);
-   // const {data,isLoading,error} = useUserEmailLogin();
-    if(isLoading){
-        return <HomeSpinner />
+
+    if (isLoading) {
+        return <HomeSpinner />;
     }
-    if(error){
+
+    if (error) {
         alert(error.message);
     }
-    // validation 需要补充
-    return (
-        <Modal dialogClassName="signup-popup-modal"
-               show={props.show} 
-               onHide={props.onHide} 
-               size="lg"
-               style={{ marginTop:"100px" }}> 
 
+    return (
+        <Modal
+            dialogClassName="signup-popup-modal"
+            show={props.show}
+            onHide={props.onHide}
+            size="lg"
+            style={{ marginTop: '100px' }}
+        >
             <div className="signup-popup-container">
-                {/*  
-                <div className="signup-popup-title">
-                    Sign Up
-                </div>
-                */}
-                <p style={{ color:'#000',
-                            fontFamily:'Playfair Display',
-                            fontStyle:'normal',
-                            fontSize:'36px',
-                            fontWeight:400,
-                            lineHeight:'135%',
-                            marginTop:'25px',
-                            display:'flex',
-                            flexShrink:0,
-                            flexdirection:'column',
-                            justifyContent:'center' }}>
+                <p style={{
+                    color: '#000',
+                    fontFamily: 'Playfair Display',
+                    fontStyle: 'normal',
+                    fontSize: '36px',
+                    fontWeight: 400,
+                    lineHeight: '135%',
+                    marginTop: '25px',
+                }}>
                     Log In
                 </p>
-
-                <p style={{ color:'#000',
-                            fontFamily:'PingFang HK',
-                            fontStyle:'normal',
-                            fontSize:'16px',
-                            fontWeight:400,
-                            lineHeight:'160%',
-                            marginTop:'-15px',
-                            display:'flex',
-                            flexShrink:0,
-                            flexdirection:'column',
-                            justifyContent:'center' }}>
-                    Welcom Back
+                <p style={{
+                    color: '#000',
+                    fontFamily: 'PingFang HK',
+                    fontStyle: 'normal',
+                    fontSize: '16px',
+                    fontWeight: 400,
+                    lineHeight: '160%',
+                    marginTop: '-15px',
+                }}>
+                    Welcome Back
                 </p>
-                
-                <div className="login-popup-username">
-                    <div className="login-popup-lable">
-                        <p>User Name<span class="red-asterisk">*</span></p> 
-                    </div>
-                    
-                    <input className='login-popup-username-input'
-                           type='text' 
-                           placeholder='Username'
-                           onChange={(event)=>setInternalEmail(event.target.value)}
-                           style={{ width:'270px',
-                                    height:'20px', 
-                                    marginBottom:'5px', 
-                                    marginLeft: '80px', 
-                                    // borderColor:onClicked? '1px solid #FFA4A3':'1px solid #F8F8F8', 
-                                    borderColor:'1px solid #F8F8F8',
-                                    boxShadow:'0px 1px 4px 0px rgba(176, 176, 176, 0.25)',
-                                    paddingLeft:'5px',
-                                    fontFamily:'Lora',
-                                    fontSize:'12px',
-                                    fontWeight:500,
-                                    letterSpacing:'0em',
-                                    textAlign:'left' }}   
-                    /> 
-                </div>
-                    
-                <div className="signup-popup-password">
-                    <div className="login-popup-lable">
-                        <p>Password<span class="red-asterisk" style={{ color:'red', fontFamily:'Lora', fontSize:'14px', marginLeft:'2px' }}>*</span></p>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="login-popup-username">
+                        <div className="login-popup-label">
+                            <p>
+                                User Name<span className="red-asterisk">*</span>
+                            </p>
+                        </div>
+                        <input
+                            {...login('email')}
+                            className='login-popup-username-input'
+                            type='text'
+                            placeholder='Username'
+                        />
+                        {errors.email && <span>{errors.email.message}</span>}
                     </div>
 
-                    <input className='login-popup-password-input'
-                           type='text' 
-                           placeholder='password'
-                           onChange={(event)=>setInternalPassword(event.target.value)}
-                           style={{ width:'270px',
-                                    height:'20px', 
-                                    marginBottom:'5px', 
-                                    marginLeft:'80px', 
-                                    // borderColor:onClicked? '1px solid #FFA4A3':'1px solid #F8F8F8', 
-                                    borderColor:'1px solid #F8F8F8',
-                                    boxShadow:'0px 1px 4px 0px rgba(176, 176, 176, 0.25)',
-                                    paddingLeft:'5px',
-                                    fontFamily:'Lora',
-                                    fontSize:'12px',
-                                    fontWeight:500,
-                                    letterSpacing:'0em',
-                                    textAlign:'left' }}   
-                    />   
-                </div>
+                    <div className="signup-popup-password">
+                        <div className="login-popup-label">
+                            <p>
+                                Password<span className="red-asterisk">*</span>
+                            </p>
+                        </div>
+                        <input
+                            {...login('password')}
+                            className='login-popup-password-input'
+                            type='password'
+                            placeholder='Password'
+                        />
+                        {errors.password && <span>{errors.password.message}</span>}
+                    </div>
 
-                <p style={{ color:'#000',
-                            fontFamily:'Lora',
-                            fontStyle:'normal',
-                            fontSize:'8px',
-                            fontWeight:400,
-                            lineHeight:'normal',
-                            marginTop:'5px',
-                            marginLeft:'80px',
-                            textDecorationLine:'underline' }}>
-                    Forgot Password?
-                </p>
-                
-                <p style={{ color: '#AAA',
-                            fontFamily:'Lora',
-                            fontStyle:'normal',
-                            fontSize:'12px',
-                            fontWeight:400,
-                            lineHeight:'normal', 
-                            marginTop:'10px',
-                            display:'flex',
-                            flexShrink:0,
-                            flexdirection:'column',
-                            justifyContent:'center' }}>
-                    Don't have an account? 
-                        <Link className="account-login"
-                              style={{ color: '#FFA4A3',
-                                       fontWeight:700,
-                                       marginLeft:'5px' }}>
-                            Sign up
-                        </Link>
-                </p>
-                
-                <div className="login-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Log in' onClick = { handleOnClick }/> 
-                </div>
-                <SocialSignUP onHide={props.onHide}/>
-               
+                    <button type="submit">Log in</button>
+                </form>
+                <SocialSignUP onHide={props.onHide} />
             </div>
         </Modal>
-    )
+    );
 }
+
 
 export default LoginPopup;

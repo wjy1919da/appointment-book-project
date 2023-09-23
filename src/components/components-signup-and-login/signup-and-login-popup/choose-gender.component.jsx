@@ -9,7 +9,7 @@ import './after-signup-popup1.styles.scss';
 const ChooseGender = ({ setActiveTab }) => {
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     const setGender = userInfoQueryStore((state) => state.setGender);
-    console.log("userInfo in register",userInfo);
+    //console.log("userInfo in register",userInfo);
     return (
         <div className="signup-popup-container">
                     <p style={{ color:'#000',
@@ -108,7 +108,7 @@ const ChooseGender = ({ setActiveTab }) => {
                         
                     <div className="next-button-section">
                         {/* <SignupAndLoginButton onClick={()=>setActiveTab('birthyear')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>  */}
-                        <SignupAndLoginButton onClick={()=>{setActiveTab('birth')}} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>
+                        <SignupAndLoginButton onClick={setActiveTab} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>
                     </div>
                 </div>
         )

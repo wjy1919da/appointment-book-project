@@ -14,7 +14,6 @@ import LoginPopup from '../../components/components-signup-and-login/signup-and-
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
-import { Cookie } from '@mui/icons-material';
 const Header = () => {
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
