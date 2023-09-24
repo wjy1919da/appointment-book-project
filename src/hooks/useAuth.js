@@ -118,10 +118,10 @@ export function useUserEmailRegisterValidate(token) {
 }
 export function useSetUserProfile(){
     const token = Cookies.get('token');
-    if (!token) {
-       alert('user not login');
-    }
     const fetchSetUserProfile = async (gender, interestArea, email,birthday) => {
+            if (!token) {
+                alert('user not login');
+            }
             const res = await axios.post(base.setUserProfile, {
                 gender,
                 interestArea,

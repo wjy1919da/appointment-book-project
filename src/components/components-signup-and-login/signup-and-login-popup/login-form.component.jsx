@@ -20,8 +20,9 @@ const LoginForm = (props) => {
         email: z.string().email(),
         password: z.string().min(8),
     });
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
+        mode: 'onChange'
     });
     const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
     const onSubmit = (formData) => {
@@ -103,7 +104,7 @@ const LoginForm = (props) => {
                     </FormControl>
                     <div onClick={()=>switchPopupTab('signUp')}>go to register</div>
                     <div className='login-button-section'>
-                        <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px"/>
+                        <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/>
                     </div>
                 </FormControl>
                 <SocialSignUP onHide={props.onHide} />
