@@ -1,5 +1,4 @@
 import React, { useState, useEffect,useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import './login-popup.styles.scss';
@@ -11,8 +10,8 @@ import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
-import { Input } from '@chakra-ui/react'
-/* TODO: CSS style */
+import { FormControl, FormLabel,FormErrorMessage, Text } from "@chakra-ui/react";
+import LoginRegisterTitle from './login-register-title.component';
 const LoginPopup = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const schema = z.object({
@@ -47,7 +46,6 @@ const LoginPopup = (props) => {
     if (isLoading) {
         return <HomeSpinner />;
     }
-
     if (error) {
         alert(error.message);
     }
@@ -62,66 +60,55 @@ const LoginPopup = (props) => {
         >
             <div className="signup-popup-container">
                 <div className='login-title-container'>
-                    <p style={{
-                            color: '#000',
-                            fontFamily: 'Playfair Display',
-                            fontStyle: 'normal',
-                            fontSize: '36px',
-                            fontWeight: 400,
-                            lineHeight: '135%',
-                            
-                        }}>
-                        Log In
-                    </p>
-                    <p style={{
-                            color: '#000',
-                            fontFamily: 'PingFang HK',
-                            fontStyle: 'normal',
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            lineHeight: '160%',
-                            marginTop: '-15px',
-                        }}>
-                         Welcome Back
-                    </p>
+                    <LoginRegisterTitle title={"Log in"} subTitle={"Welcome back"}/>
                 </div>
-                
-                   
-                <form 
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <div className="login-popup-username">
-                        <div className="login-popup-label">
-                            <p>
-                                User Name<span className="red-asterisk">*</span>
-                            </p>
-                        </div>
-                        <input
-                            {...register('email')}
-                            className='login-popup-username-input'
-                            type='text'
-                            placeholder='Username'
-                        />
-                        {errors.email && <span>{errors.email.message}</span>}
+                <FormControl as="form" onSubmit={handleSubmit(onSubmit)}>
+                     <FormControl isInvalid={!!errors.email} mb="16px">
+                        <Text 
+                            mb="3px"
+                            color="#352C29"
+                            fontFamily="Open Sans"
+                            fontSize="13px"
+                            fontWeight="600"
+                            lineHeight="100%"
+                        >
+                            Email
+                        </Text>
+                        <input {...register('email')} placeholder="Email" className='custom-input'/>
+                        <Text 
+                            mb="3px"
+                            color="red"
+                            fontFamily="Open Sans"
+                            fontSize="13px"
+                            fontWeight="600"
+                            lineHeight="100%"
+                        >{errors.email?.message}</Text>
+                    </FormControl>
+                    <FormControl mt={4} isInvalid={!!errors.password}>
+                        <Text 
+                            mb="3px"
+                            color="#352C29"
+                            fontFamily="Open Sans"
+                            fontSize="13px"
+                            fontWeight="600"
+                            lineHeight="100%"
+                        >
+                            Password
+                        </Text>
+                        <input {...register('password')} type="password" placeholder="Password" className='custom-input'/>
+                         <Text 
+                            mb="3px"
+                            color="red"
+                            fontFamily="Open Sans"
+                            fontSize="13px"
+                            fontWeight="600"
+                            lineHeight="100%"
+                        >{errors.password?.message}</Text>
+                    </FormControl>
+                    <div className='login-button-section'>
+                        <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px"/>
                     </div>
-
-                    <div className="signup-popup-password">
-                        <div className="login-popup-label">
-                            <p>
-                                Password<span className="red-asterisk">*</span>
-                            </p>
-                        </div>
-                        <input
-                            {...register('password')}
-                            className='login-popup-password-input'
-                            type='password'
-                            placeholder='Password'
-                        />
-                        {errors.password && <span>{errors.password.message}</span>}
-                    </div>
-
-                    <button type="submit">Log in</button>
-                </form>
+                </FormControl>
                 <SocialSignUP onHide={props.onHide} />
             </div>
         </Modal>

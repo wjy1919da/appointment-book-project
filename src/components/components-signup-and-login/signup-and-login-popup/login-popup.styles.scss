@@ -1,18 +1,41 @@
-@media(min-width: 1024px) {
-    .login-button-section {
-        margin-top: -10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .signup-popup-container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .login-title-container{
-        margin-top: 25px;
-    }
+.login-button-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 36px;
+}
+.signup-popup-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-title-container{
+    margin-top: 25px;
+}
+.input-label{
+    color: #352C29;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 16px */
+}
+
+.custom-input {
+    border: 1px solid #ccc; 
+    padding: 8px 12px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s; /* 平滑过渡 */
+    height: 32px;
+}
+.custom-input:focus {
+    border-color: orange;
+    outline: none; /* 移除默认的轮廓 */
+}
+.sign-in-form-container{
+    display: flex;
+    flex-direction: column;
+   // justify-content: center;
+    align-items: center;
 }
