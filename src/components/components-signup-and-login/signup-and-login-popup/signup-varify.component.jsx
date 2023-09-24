@@ -1,7 +1,9 @@
 import React from 'react'
 import './signup-popup2.styles.scss';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-const SignupVerify = ({ setActiveTab }) => {
+import userInfoQueryStore from '../../../userStore.ts';
+const SignupVerify = () => {
+   const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
   return (
     <div className="signup-popup-container">
                 <p style={{ color:'#000',
@@ -102,7 +104,7 @@ const SignupVerify = ({ setActiveTab }) => {
                 </p>
                 
                 <div className="cancel-verification-button-section">
-                    <SignupAndLoginButton onClick={()=>{setActiveTab('gender')}} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='next'/> 
+                    <SignupAndLoginButton onClick={()=>switchPopupTab('gender')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='next'/> 
                 </div>
             </div>
   )

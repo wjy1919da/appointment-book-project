@@ -9,8 +9,6 @@ import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-form.component';
-//import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
@@ -167,7 +165,6 @@ const Header = () => {
                             <img src={loginIcon} alt="login Image" ></img>
                         </div>
                         <div className="header-login-text">
-                            {/* TODO: user state change */}
                             {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>login</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
@@ -177,12 +174,6 @@ const Header = () => {
                 <Outlet />
             </Fragment>
             )}          
-            {loginClick && 
-                <LoginPopup 
-                    show={loginClick}
-                    onHide={() => setLoginClick(false)}
-                />
-            }
             {isPopupOpen &&
                     <SignupPopup3
                     show = {isPopupOpen}

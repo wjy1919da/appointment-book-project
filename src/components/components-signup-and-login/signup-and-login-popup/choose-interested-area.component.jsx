@@ -4,9 +4,8 @@ import React from 'react';
 import './after-signup-popup3.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
 
-const ChooseInterestedArea = ({ setActiveTab }) => {
-  const userInfo = userInfoQueryStore(state => state.userInfo);
-  const setInterested = userInfoQueryStore(state => state.setInterested);
+const ChooseInterestedArea = () => {
+  const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
   return (
       <div className="signup-popup-container">
                 <p style={{ color:'#000',
@@ -57,7 +56,7 @@ const ChooseInterestedArea = ({ setActiveTab }) => {
                 </div>    
                              
                 <div className="next-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={setActiveTab}/> 
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={()=>switchPopupTab('success')}/> 
                 </div>
             </div>
   )

@@ -15,6 +15,7 @@ import LoginRegisterTitle from './login-register-title.component';
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
+    const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const schema = z.object({
         email: z.string().email(),
         password: z.string().min(8),
@@ -37,7 +38,8 @@ const LoginForm = (props) => {
             setToken(myToken);
             /* TODO：alert component */ 
             alert(data.msg);
-            props.onHide();
+            togglePopup(false);
+            //props.onHide();
         }
         if (data?.data && data.code === 500) {
             alert(data.msg);

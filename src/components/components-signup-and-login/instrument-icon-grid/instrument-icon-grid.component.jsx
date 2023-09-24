@@ -10,17 +10,15 @@ const ProcedureIconGrid = (props) => {
         setInterested: state.setInterested,
         userInfo: state.userInfo
     }));
-    
     const selectedInterests = userInfo.selectedInterests || new Set();
-    
-
+    //console.log("selectedInterests",selectedInterests);
     const instrumentsGrid = props.names.map((name) => 
         <div 
-            className={`procedure-icon-section ${selectedInterests.has(name) ? 'active' : ''}`}
+            className= "procedure-icon-section"
             key={name}
             onClick={() => setInterested(name)}
         >
-            <img src={require(`../../../assets/sign/${name}.png`)} className='procedure-icon-pic'  alt={name} style={{ width: '60px', height: '60px'}} />
+            <img src={require(`../../../assets/sign/${name}.png`)} className= {`procedure-icon-pic ${selectedInterests.has(name) ? 'active' : ''}`} alt={name} style={{ width: '60px', height: '60px'}} />
             <div className = 'title'>{formatTitle(name)}</div>
         </div>
     );

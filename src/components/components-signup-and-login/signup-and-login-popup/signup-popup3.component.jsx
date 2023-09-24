@@ -22,12 +22,12 @@ const SignupPopup3 = (props) => {
                size="lg" 
                style={{ marginTop:"100px" }}> 
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
-            {userInfo.popupState === 'login' && <LoginForm onHide={props.onHide} />}
-            {userInfo.popupState === 'verifyEmail' && <SignupVerify setActiveTab={() => switchPopupTab('gender')} />}
-            {userInfo.popupState === 'gender' && <ChooseGender setActiveTab={() => switchPopupTab('birthday')} />}
-            {userInfo.popupState === 'birthday' && <BirthYearPicker setActiveTab={() => switchPopupTab('interest')} />}
-            {userInfo.popupState === 'interest' && <ChooseInterestedArea setActiveTab={() => switchPopupTab('success')} />}
-            {userInfo.popupState === 'success' && <SignUpFinal onHide={props.onHide} />}
+            {userInfo.popupState === 'login' && <LoginForm/>}
+            {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
+            {userInfo.popupState === 'gender' && <ChooseGender/>}
+            {/* {userInfo.popupState === 'birthday' && <BirthYearPicker />} */}
+            {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
+            {userInfo.popupState === 'success' && <SignUpFinal />}
             {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail') && <SocialSignUP />}
         </Modal>
     )

@@ -128,7 +128,7 @@ export function useSearchMultiConditionsPopUp() {
       if (doctorQuery.field !== "") filterType.push(2);
       if (doctorQuery.doctorName !== "") filterType.push(3);
 
-      //const res = await axios.post('https://api.charm-life.com/doctor/search',
+     // const res = await axios.post('https://api.charm-life.com/doctor/search',
       const res = await axios.post('http://localhost:8080/doctor/search',
       {
         "address": doctorQuery.location,
