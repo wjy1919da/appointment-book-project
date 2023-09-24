@@ -11,18 +11,17 @@ import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
+import { Input } from '@chakra-ui/react'
 /* TODO: password Validation */
 const LoginPopup = (props) => {
-    const [setToken] = userInfoQueryStore((state) => state.setToken);
+    const setToken = userInfoQueryStore((state) => state.setToken);
     const schema = z.object({
         email: z.string().email(),
-        password: z.string().min(6),
+        password: z.string().min(8),
     });
-
-    const { login, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
     });
-
     const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
 
     const onSubmit = (formData) => {
@@ -85,7 +84,9 @@ const LoginPopup = (props) => {
                 }}>
                     Welcome Back
                 </p>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form 
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <div className="login-popup-username">
                         <div className="login-popup-label">
                             <p>
@@ -93,7 +94,7 @@ const LoginPopup = (props) => {
                             </p>
                         </div>
                         <input
-                            {...login('email')}
+                            {...register('email')}
                             className='login-popup-username-input'
                             type='text'
                             placeholder='Username'
@@ -108,7 +109,7 @@ const LoginPopup = (props) => {
                             </p>
                         </div>
                         <input
-                            {...login('password')}
+                            {...register('password')}
                             className='login-popup-password-input'
                             type='password'
                             placeholder='Password'

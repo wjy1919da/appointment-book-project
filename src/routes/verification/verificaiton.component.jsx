@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUserEmailRegisterValidate } from '../../hooks/useAuth';
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';

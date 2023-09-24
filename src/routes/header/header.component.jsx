@@ -179,14 +179,13 @@ const Header = () => {
                 </div>
                 <Outlet />
             </Fragment>
-            )}
-            
-            {/* {loginClick && 
+            )}          
+            {loginClick && 
                 <LoginPopup 
                     show={loginClick}
                     onHide={() => setLoginClick(false)}
                 />
-            } */}
+            }
             {isPopupOpen &&
                     <SignupPopup3
                     show = {isPopupOpen}
