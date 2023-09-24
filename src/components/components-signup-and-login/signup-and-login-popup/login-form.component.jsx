@@ -12,8 +12,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import { FormControl, FormLabel,FormErrorMessage, Text } from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
-const LoginPopup = (props) => {
+const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
+    const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const schema = z.object({
         email: z.string().email(),
         password: z.string().min(8),
@@ -42,7 +43,7 @@ const LoginPopup = (props) => {
             alert(data.msg);
         }
     }, [data]);
-
+     /* TODO: Need to improve */ 
     if (isLoading) {
         return <HomeSpinner />;
     }
@@ -51,14 +52,7 @@ const LoginPopup = (props) => {
     }
 
     return (
-        <Modal
-            dialogClassName="signup-popup-modal"
-            show={props.show}
-            onHide={props.onHide}
-            size="lg"
-            style={{ marginTop: '100px' }}
-        >
-            <div className="signup-popup-container">
+            <div className="sign-in-form-container">
                 <div className='login-title-container'>
                     <LoginRegisterTitle title={"Log in"} subTitle={"Welcome back"}/>
                 </div>
@@ -105,15 +99,15 @@ const LoginPopup = (props) => {
                             lineHeight="100%"
                         >{errors.password?.message}</Text>
                     </FormControl>
+                    <div onClick={()=>switchPopupTab('signUp')}>go to register</div>
                     <div className='login-button-section'>
                         <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px"/>
                     </div>
                 </FormControl>
                 <SocialSignUP onHide={props.onHide} />
             </div>
-        </Modal>
     );
 }
 
 
-export default LoginPopup;
+export default LoginForm;

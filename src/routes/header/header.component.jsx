@@ -9,7 +9,7 @@ import './header.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-popup.component';
+import LoginPopup from '../../components/components-signup-and-login/signup-and-login-popup/login-form.component';
 //import SignupPopup1 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup1.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import Cookies from 'js-cookie';
@@ -168,10 +168,7 @@ const Header = () => {
                         </div>
                         <div className="header-login-text">
                             {/* TODO: user state change */}
-                            {!userInfo.userId&&<div onClick={() => handleLoginClick()}>
-                                login
-                            </div>}
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>Register</div>}
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>login</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>

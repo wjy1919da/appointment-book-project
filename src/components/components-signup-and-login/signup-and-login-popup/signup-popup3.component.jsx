@@ -9,6 +9,7 @@ import BirthYearPicker from './birth-year-picker.component';
 import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
+import LoginForm from './login-form.component';
 // 注册&登录
 // 主页面
 const SignupPopup3 = (props) => {
@@ -20,7 +21,8 @@ const SignupPopup3 = (props) => {
                onHide={props.onHide} 
                size="lg" 
                style={{ marginTop:"100px" }}> 
-            {userInfo.popupState === 'signUp' && <SignUpForm setActiveTab={() => switchPopupTab('verifyEmail')} />}
+            {userInfo.popupState === 'signUp' && <SignUpForm/>}
+            {userInfo.popupState === 'login' && <LoginForm onHide={props.onHide} />}
             {userInfo.popupState === 'verifyEmail' && <SignupVerify setActiveTab={() => switchPopupTab('gender')} />}
             {userInfo.popupState === 'gender' && <ChooseGender setActiveTab={() => switchPopupTab('birthday')} />}
             {userInfo.popupState === 'birthday' && <BirthYearPicker setActiveTab={() => switchPopupTab('interest')} />}
