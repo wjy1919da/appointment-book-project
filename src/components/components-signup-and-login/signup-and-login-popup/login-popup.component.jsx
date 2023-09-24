@@ -12,7 +12,7 @@ import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import { Input } from '@chakra-ui/react'
-/* TODO: password Validation */
+/* TODO: CSS style */
 const LoginPopup = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const schema = z.object({
@@ -23,7 +23,6 @@ const LoginPopup = (props) => {
         resolver: zodResolver(schema),
     });
     const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
-
     const onSubmit = (formData) => {
         mutate({
             email: formData.email,
@@ -31,12 +30,12 @@ const LoginPopup = (props) => {
             provider: 'email',
         });
     };
-
     useEffect(() => {
         if (data?.data && data.code === 100) {
             const myToken = data.data.token;
             Cookies.set('token', myToken);
             setToken(myToken);
+            /* TODO：alert component */ 
             alert(data.msg);
             props.onHide();
         }
@@ -62,28 +61,32 @@ const LoginPopup = (props) => {
             style={{ marginTop: '100px' }}
         >
             <div className="signup-popup-container">
-                <p style={{
-                    color: '#000',
-                    fontFamily: 'Playfair Display',
-                    fontStyle: 'normal',
-                    fontSize: '36px',
-                    fontWeight: 400,
-                    lineHeight: '135%',
-                    marginTop: '25px',
-                }}>
-                    Log In
-                </p>
-                <p style={{
-                    color: '#000',
-                    fontFamily: 'PingFang HK',
-                    fontStyle: 'normal',
-                    fontSize: '16px',
-                    fontWeight: 400,
-                    lineHeight: '160%',
-                    marginTop: '-15px',
-                }}>
-                    Welcome Back
-                </p>
+                <div className='login-title-container'>
+                    <p style={{
+                            color: '#000',
+                            fontFamily: 'Playfair Display',
+                            fontStyle: 'normal',
+                            fontSize: '36px',
+                            fontWeight: 400,
+                            lineHeight: '135%',
+                            
+                        }}>
+                        Log In
+                    </p>
+                    <p style={{
+                            color: '#000',
+                            fontFamily: 'PingFang HK',
+                            fontStyle: 'normal',
+                            fontSize: '16px',
+                            fontWeight: 400,
+                            lineHeight: '160%',
+                            marginTop: '-15px',
+                        }}>
+                         Welcome Back
+                    </p>
+                </div>
+                
+                   
                 <form 
                     onSubmit={handleSubmit(onSubmit)}
                 >
