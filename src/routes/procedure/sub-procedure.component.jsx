@@ -24,6 +24,7 @@ function safeJsonParse(str) {
     try {
         return JSON.parse(str);
     } catch (e) {
+        
         return undefined;
     }
 }
@@ -41,6 +42,7 @@ const SubProcedure = () => {
             }
         }
     };
+    //const result = {"optionsForm":[{"header":[{},{"name":"Workstations"},{"name":"Technologies Covered"},{"name":"Technologies Included"}]},{"body":[{"name":"Workstations","value":["InMode Forma","InMode Evoke","InMode Morpheus8","InMode Votiva","InMode Lumecca","InMode DiolazeXL","InMode Triton","InMode Optimas","InMode Avance"]},{"name":"Technologies Covered","value":["Radiofrequency","Microneedling","IPL","Diode Laser","Fractional Coagulation","Temperature Monitoring","Auto-adjusting","Multi-Wavelength","Pulse Control"]},{"name":"Technologies Included","value":["Radiofrequency for skin tightening","Microneedling for collagen production","IPL for pigmentation and vascular lesions","Diode Laser for hair removal","Fractional Coagulation for skin resurfacing","Temperature Monitoring for safety","Auto-adjusting for custom treatment","Multi-Wavelength for various treatments","Pulse Control for optimized output"]}]}]};
     const handleScroll = () => {
         //console.log('scroll');
         const slideElement = document.getElementById("slide");
@@ -132,6 +134,7 @@ const SubProcedure = () => {
             setCategoryId(data.data.subcategories[0].categoryId);
         }
     }, [data]);
+    console.log('procedure-data',data);
     const formatTitle = (title) => {
         title = title.replace(/_/g, ' ');
         

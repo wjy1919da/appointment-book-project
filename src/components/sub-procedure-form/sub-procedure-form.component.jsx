@@ -1,6 +1,7 @@
 import './sub-procedure-form.styles.scss'
  
 const SubProcedureForm = (props) => {
+    console.log('subprocedureFormData',props.data)
     const optionsForm = props.data.optionsForm;
     
     const headerObj = optionsForm.find(item => item.header);

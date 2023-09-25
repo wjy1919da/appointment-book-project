@@ -1,8 +1,8 @@
 .user-profile-subArea-container {
     position: absolute;
     top: 400px;
-    left: 10%;
-    width:70%;
+    left: 0%;
+    width:100%;
     .navbar {
         margin-left: 100px;
         width: 250px;
@@ -36,7 +36,7 @@
     }
     .bottom-rendering {
         
-        //max-width: 1500px; /* Example property */
+        max-width: 90%; /* Example property */
         padding: 60px;
         //background-color: #f5f5f5; /* Just an example, you can set to your preference */
         /* Add any other styles you want for the bottom rendering area */

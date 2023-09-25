@@ -347,17 +347,28 @@
                 padding-bottom: 13px;
             }
 
-            .header-nav-link1:hover,
-            .header-nav-link1:active,
+            .header-nav-link1:hover,      
             .header-nav-link2:hover,
-            .header-nav-link2:active,
             .header-nav-link3:hover,
-            .header-nav-link3:active {
+            .header-nav-link1:active,
+            .header-nav-link2:active,
+            .header-nav-link3:active
+            {
                 font-weight: bold;
                 /* 鼠标悬停时变为粗体 */
                 border-bottom: 2px solid orange;
                 /* 鼠标悬停时添加下划线，使用橙色线条 */
                 // color: orange; // 鼠标悬停时的文本颜色 
+            }
+            .active-link {
+                font-weight:bold;
+                font-size: 18px;
+                padding-bottom: 11px;
+                background-image: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+                background-size: 100% 2px; /* This ensures the gradient is only 2px tall */
+                background-repeat: no-repeat; /* Prevents the gradient from repeating */
+                background-position: bottom; /* Positions the gradient at the bottom */
+                border-bottom: 2px solid transparent; /* This ensures space for our gradient */
             }
             
         }

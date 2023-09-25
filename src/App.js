@@ -16,7 +16,6 @@ import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
-
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import { Create } from '@mui/icons-material';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
