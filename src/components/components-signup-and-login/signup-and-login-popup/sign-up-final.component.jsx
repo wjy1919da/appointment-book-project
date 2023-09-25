@@ -2,7 +2,60 @@ import React from 'react'
 import './after-signup-popup4.styles.scss';
 import CharmlifeLogo from '../../../assets/sign/charmlife-logo.png';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-const SignUpFinal = ({onHide}) => {
+import userInfoQueryStore from '../../../userStore.ts';
+import { useSetUserProfile } from '../../../hooks/useAuth';
+import { useEffect } from 'react';
+const formatTitleQuery = (title) => {
+  return title.replace(/-/g, '_');
+}
+const SignUpFinal = () => {
+  const userInfo = userInfoQueryStore(state=>state.userInfo);
+  const togglePopup = userInfoQueryStore(state=>state.togglePopup);
+  let interestAreaName = userInfo.selectedInterests || new Set();
+  console.log("interestArea in final",interestAreaName);
+  /* convert name to id */
+  const procedureToIdMapping = {
+    botox_injections: 1,
+    breast_augmentation: 2,
+    chemical_peels: 3,
+    fox_eyes: 4,
+    lip_augmentation: 5,
+    laser_hair_removal: 6,
+    teeth_whitening: 7,
+    chin_implants: 8,
+    neck_contouring: 9,
+    facelift: 10,
+    otoplasty: 11,
+    tummy_tuck: 12,
+    coolsculpting: 13,
+    InMode: 14,
+    thermage: 15,
+    fraxel_laser: 16
+  };
+  // Convert interestArea names to IDs
+  const interestArea = Array.from(interestAreaName).map(name => {
+    const formattedName = formatTitleQuery(name);
+    return procedureToIdMapping[formattedName];
+  });
+  const {mutate,data,isLoading,isError,error} = useSetUserProfile();
+  const handleOnClick = ()=>{
+      mutate({
+          interestArea: interestArea,
+          gender: userInfo.gender,
+          email: userInfo.email,
+          birthday: userInfo.birthday,
+      });
+  }
+  useEffect(() => {
+      if (data?.data && data.code === 100) {
+          alert(data.msg);
+          togglePopup(false);
+          //props.onHide();
+      }
+      if (data?.data && data.code === 500) {
+          alert(data.msg);
+      }
+  }, [data]);
   return (
     <div className="signup-popup-container">
     <p style={{ color:'#000',
@@ -52,7 +105,7 @@ const SignUpFinal = ({onHide}) => {
     </p>
     
     <div className="done-button-section">
-        <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Done' onClick={onHide}/> 
+        <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Done' onClick={handleOnClick}/> 
     </div>
 </div>
   )

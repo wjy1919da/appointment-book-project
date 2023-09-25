@@ -6,9 +6,10 @@ import OtherIcon from '../../../assets/sign/other-icon.jpg';
 import { useState } from 'react';
 import userInfoQueryStore from '../../../userStore.ts';
 import './after-signup-popup1.styles.scss';
-const ChooseGender = ({ setActiveTab }) => {
+const ChooseGender = () => {
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     const setGender = userInfoQueryStore((state) => state.setGender);
+    const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     console.log("userInfo in register",userInfo);
     return (
         <div className="signup-popup-container">
@@ -80,7 +81,7 @@ const ChooseGender = ({ setActiveTab }) => {
                             <img className='male-icon-image' 
                                 src={MaleIcon} 
                                 alt='Male Option'
-                                onClick={() => setGender('male')}/>
+                                onClick={() => setGender(1)}/>
                         </div>
 
                         <div className='female-option' style={{ display:'flex',
@@ -91,7 +92,7 @@ const ChooseGender = ({ setActiveTab }) => {
                             <img className='female-icon-image' 
                                 src={FemaleIcon} 
                                 alt='Female Option'
-                                onClick={() => setGender('female')}/>
+                                onClick={() => setGender(2)}/>
                         </div>
 
                         <div className='other-option' style={{ display:'flex',
@@ -102,13 +103,16 @@ const ChooseGender = ({ setActiveTab }) => {
                             <img className='other-icon-image' 
                                 src={OtherIcon} 
                                 alt='Other Option'
-                                onClick={() => setGender('more')}/>
+                                onClick={() => setGender(3)}/>
                         </div>
                     </div>
-                        
+                    <div className='skip-container'>
+                        <div className='skip' onClick={()=>switchPopupTab('interest')}>skip</div> 
+                    </div>
                     <div className="next-button-section">
+                        
                         {/* <SignupAndLoginButton onClick={()=>setActiveTab('birthyear')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>  */}
-                        <SignupAndLoginButton onClick={()=>{setActiveTab('birth')}} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>
+                        <SignupAndLoginButton onClick={()=>switchPopupTab('interest')} width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next'/>
                     </div>
                 </div>
         )

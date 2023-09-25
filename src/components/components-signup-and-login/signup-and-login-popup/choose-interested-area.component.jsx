@@ -4,9 +4,8 @@ import React from 'react';
 import './after-signup-popup3.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
 
-const ChooseInterestedArea = ({ setActiveTab }) => {
-  const userInfo = userInfoQueryStore(state => state.userInfo);
-  const setInterested = userInfoQueryStore(state => state.setInterested);
+const ChooseInterestedArea = () => {
+  const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
   return (
       <div className="signup-popup-container">
                 <p style={{ color:'#000',
@@ -54,10 +53,13 @@ const ChooseInterestedArea = ({ setActiveTab }) => {
 
                 <div>
                     <ProcedureIconGrid names={['breast-augmentation', 'botox-injections', 'chemical-peels','fox-eyes','lip-augmentation','laser-hair-removal','teeth-whitening','chin-implants','neck-contouring']}/> 
-                </div>    
-                             
+                </div>  
+                <div className='skip-container'>
+                    <div className='skip' onClick={()=>switchPopupTab('success')}>skip</div>  
+                </div>             
                 <div className="next-button-section">
-                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={()=>setActiveTab('thanks')}/> 
+                    
+                    <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Next' onClick={()=>switchPopupTab('success')}/> 
                 </div>
             </div>
   )

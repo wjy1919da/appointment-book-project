@@ -6,7 +6,6 @@ const SubProcedureForm = (props) => {
     
     const headerObj = optionsForm.find(item => item.header);
     const bodyObj = optionsForm.find(item => item.body);
-
     const header = headerObj ? headerObj.header : [];
     const body = bodyObj ? bodyObj.body : [];
     return (

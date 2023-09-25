@@ -27,6 +27,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './private-route.component';
 //src/private-route.component.jsx
 import Cookies from 'js-cookie';
+import Verification from './routes/verification/verificaiton.component';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const userInfo = userInfoQueryStore(state => state.userInfo);
@@ -67,6 +68,8 @@ const App = () => {
         <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='userProfile' element={<UserProfilePage />} />
+        {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
+        <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>

@@ -1,4 +1,4 @@
-@media(min-width: 1024px) {
+
     .signup-popup-modal {
         /*
         .modal-lg {
@@ -114,4 +114,18 @@
         justify-content: center;
         align-items: center;
     }
+.skip{
+    color: #A5A6A8;
+    text-align: center;
+    font-family: Lora;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 25.6px */
+}
+.skip-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

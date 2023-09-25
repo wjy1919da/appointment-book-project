@@ -31,6 +31,10 @@ import './login-popup.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
 import Cookies from 'js-cookie';
 import { useSocialLogin } from '../../../hooks/useAuth';
+import AppleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-apple.component';
+import FacebookLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-facebook.component';
+import GoogleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-google.component';
+
 const SocialSignUP = ({onHide}) => {
     const [provider, setProvider] = useState('')
     const [profile, setProfile] = useState(null)
@@ -83,13 +87,13 @@ const SocialSignUP = ({onHide}) => {
                 {/* <div class="line-separator"></div> */}
             </div>
             <div className="signin-with-apple-section">
-                <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' />
+                <AppleLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' />
             </div>
             <div className="signin-with-google-section">
-                <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon={ GoogleLogo } title='Sign in with Google' />
+                <GoogleLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon={ GoogleLogo } title='Sign in with Google' />
             </div>
             <div className="signin-with-facebook-section">
-                <SignupAndLoginButton width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook'/> 
+                <FacebookLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook'/>
             </div>
              {/* <div>
              <LoginSocialFacebook
