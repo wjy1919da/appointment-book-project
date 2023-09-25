@@ -3,10 +3,11 @@ import "./community-post.styles.scss";
 import heartIcon from "../../../assets/post/heart.png"
 import { useMediaQuery } from 'react-responsive';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png'
-const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
+const CommunityPost = ({imageURL,text,profileImage,authorName,likes,isLike}) => {
     const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
     const [width,setWidth]=useState('');
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(isLike);
+
     useEffect(() => {
         if (isMobile) {
           setWidth('240px');
@@ -15,7 +16,7 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes}) => {
         }
     }, [isMobile]);
     const toggleLike = () => {
-        setLiked(!liked);
+        setLiked(prevLiked => !prevLiked);
         // If you want to navigate to another page when the heart is clicked, uncomment the next line.
         // window.location.href = "/download";
     };

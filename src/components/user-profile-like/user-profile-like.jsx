@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 import CreatePostOfUser from '../create-post/create-post';
-import './user-profile-post-area.styles.scss';
+import '../user-profile-post-area/user-profile-post-area.styles.scss';
 import '../create-post/create-post.style.scss';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png'
 import post1 from '../../assets/doctor/post3.png'
@@ -12,13 +12,11 @@ import CommunityPost from '../components-posts/community-post/community-post.com
 
 import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
 
-const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
+const UserProfileLike = () => {
     const [activeTab, setActiveTab] = useState("like");  // By default, "like" is the active taba
     //const [showCreatePost, setShowCreatePost] = useState(false);
-    const handleIconClick = () => {
-        setShowCreatePost(true); // Show the CreatePostOfUser component when the icon is clicked
-    };
-    const [gutterwidth, setGutterWidth] = useState('20px');
+
+    const [gutterwidth, setGutterWidth] = useState('10px');
     const breakPoint ={default: 4, 2500: 4, 2047:4,1700: 4, 1024: 4, 767: 3, 430: 2} ;
     const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -53,11 +51,12 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
             profileImage={post.avatar}
             authorName={post.username}
             likes={post.likeCount}
+            isLike={true}
         />
     ));
     return (
         <div className="user-profile-post-area-container">
-            {!showCreatePost && imagesLoaded &&
+            {imagesLoaded &&
                 <div className="choose-picture-conatiner-post">
                     <ResponsiveMasonry
                         columnsCountBreakPoints={breakPoint}
@@ -65,10 +64,6 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
                     >
                         <Masonry gutter={gutterwidth}>
                             {/* CreatePostIcon as the first post */}
-                            <div className='choose-picture-section-image-post'>
-                                
-                                <img src={creatPostIcon} onClick={handleIconClick}  className='choose-picture-section-image'alt="Create Post" />
-                            </div>
                             
                             {/* Rest of the posts */}
                             {postList}
@@ -76,9 +71,9 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
                     </ResponsiveMasonry>
                 </div>
             }
-            {showCreatePost && <CreatePostOfUser />} 
+           
         </div>
     )
 }
 
-export default UserProfilePost;
+export default UserProfileLike;
