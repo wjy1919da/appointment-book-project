@@ -23,6 +23,7 @@ interface userInfo {
     email?: string;
     gender?: number;
     birthday?: string;
+    password?: string;
     selectedInterests: Set<string>;
      // Used to control the register popup page and open/close
     popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login';
@@ -31,6 +32,7 @@ interface userInfo {
 interface userInfoQuery {
     userInfo: userInfo;
     setEmail: (email: string) => void;
+    setPassword: (password: string) => void;
     setGender: (gender: number) => void;
     setInterested: (interest: string) => void;
     setGoogleToken: (token: string) => void;
@@ -46,6 +48,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         token: "",
         userId: "",
         email: "",
+        password: "",
         gender: 0,
         googleToken: "",
         selectedInterests: new Set<string>(),
@@ -55,6 +58,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     setEmail: (email: string) => {
         set((store) => ({
             userInfo: { ...store.userInfo, email }
+        }));
+    },
+    setPassword: (password: string) => {
+        set((store) => ({
+            userInfo: { ...store.userInfo, password }
         }));
     },
     setGender: (gender: number) => {

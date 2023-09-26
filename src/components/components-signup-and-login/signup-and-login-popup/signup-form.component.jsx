@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-// import { useMediaQuery } from 'react-responsive';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import './login-popup.styles.scss';
 import HomeSpinner from '../../home-spinner/home-spinner.component';
@@ -17,6 +14,7 @@ const SignUpForm = () => {
     const {mutate,data,isLoading,isError,error} = useUserRegister();
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
+    const setPassword = userInfoQueryStore(state=>state.setPassword);
     const schema = z.object({
         email: z.string().email(),
         password: z.string().min(8),
@@ -31,6 +29,7 @@ const SignUpForm = () => {
             password: formData.password
         });
         setEmail(formData.email);
+        setPassword(formData.password);
         /* TODO: Set birthday */
     };
     useEffect(() => {

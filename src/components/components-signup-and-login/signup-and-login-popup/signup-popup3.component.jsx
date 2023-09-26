@@ -20,7 +20,8 @@ const SignupPopup3 = (props) => {
                show={props.show} 
                onHide={props.onHide} 
                size="lg" 
-               style={{ marginTop:"100px" }}> 
+              // style={{ marginTop:"100px" }}
+            > 
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}
             {userInfo.popupState === 'verifyEmail' && <SignupVerify />}

@@ -165,7 +165,7 @@ const Header = () => {
                             <img src={loginIcon} alt="login Image" ></img>
                         </div>
                         <div className="header-login-text">
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'gender')}>login</div>}
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>login</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>
