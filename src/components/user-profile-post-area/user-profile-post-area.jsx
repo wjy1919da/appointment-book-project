@@ -3,6 +3,7 @@ import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-
 import CreatePostOfUser from '../create-post/create-post';
 import './user-profile-post-area.styles.scss';
 import '../create-post/create-post.style.scss';
+import {useGetUserPostedPost} from '../../hooks/useGetPosts';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png'
 import post1 from '../../assets/doctor/post3.png'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
@@ -21,7 +22,17 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
     const [gutterwidth, setGutterWidth] = useState('20px');
     const breakPoint ={default: 4, 2500: 4, 2047:4,1700: 4, 1024: 4, 767: 3, 430: 2} ;
     const [imagesLoaded, setImagesLoaded] = useState(false);
-
+    const {
+        data,
+        error,
+        isLoading,
+        fetchNextPage,
+        isFetchingNextPage,
+        hasNextPage
+    } = useGetUserPostedPost();
+    console.log('userCallBackdata',data);
+    const flatData = data ? data.pages.flatMap(page => page.data) : [];
+    console.log('userPostedpostin',flatData);
     useEffect(() => {
         const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
