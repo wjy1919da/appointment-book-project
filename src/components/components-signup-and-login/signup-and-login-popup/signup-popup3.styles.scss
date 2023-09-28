@@ -1,90 +1,13 @@
 @media(min-width: 1024px) {
-    .signup-popup-modal {
-        /*
-        .modal-lg {
-            max-width: 50%; 
-        }
-        */
-
-        .modal-content {
-            // border-color: 3px solid var(--unnamed, #FFA4A3);
-            border-color: #FFA4A3;
-            border-width: thin;
-            border-radius: 20px;
-            min-width: 400px;
-            max-width: 430px;
-            min-height: 620px;
-            max-height: 550px;
-        }
-    }
-
-    .signup-popup-lable {
-        color: #352C29;
-        font-family: Lora;
-        font-style: normal;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 0px;
-        margin-bottom: -17px;
-        margin-left: 80px;
-        flex-shrink: 0;
-    }
-
-    .next-button-section {
-        margin-top: -10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .or-label {
-        color: #AAA;
-        font-family: Lora;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        margin-top: 20px;
-        text-align: center;
-        // flex-grow: 1;
-        flex-shrink: 0;
-    }
-
-    .signin-with-apple-section {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .signin-with-google-section {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .signin-with-facebook-section {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+    .signup-popup-modal .modal-content {
+        border-color: #FFA4A3;
+        border-width: thin;
+        border-radius: 20px;
+        max-width: 600px;
+       // max-width: 430px;
+        //max-height: 90vh;  /* 90% of the viewport height */
+       // min-height: 720px;
+         max-height: 720px;
+         overflow-y: auto;
     }
 }
-
-
-/*
-style={{ color:'#352C29',
-    fontFamily:'Lora',
-    fontStyle:'normal',
-    fontSize:'12px',
-    fontWeight:400,
-    lineHeight:'normal',
-    marginTop:'0px',
-    marginBottom: '0px',
-    marginLeft:'80px',
-    flexShrink:0 }}>
-    */

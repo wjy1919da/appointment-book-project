@@ -7,8 +7,7 @@ import DownArrow from '../../../assets/post/down-arrow.png'
 import collectIcon from '../../../assets/post/star.png';
 import { useEffect, useState} from 'react';
 import { useMediaQuery } from 'react-responsive';
-import HomeButton from '../../home-button/home-button.component';
-
+import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,userName,userAvatar}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
@@ -132,6 +131,9 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                                 <span className="Icon-count"><img src = {collectIcon} alt="Icon" className="Icon-size"onClick={handleIconClick}/>{collectCount}</span>
                                 <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size"onClick={handleIconClick}/>{commentCount}</span>
                             </div>
+                            {/* <div className='comment-send-msg-container'> */}
+                                <CommunitySendMsg/>
+                            {/* </div> */}
                         </div>
                      
                        <div className="new-comment-input" onClick={handleIconClick}>

@@ -1,55 +1,5 @@
 @media(min-width: 1024px) {
-    .signup-popup-modal {
-        /*
-        .modal-lg {
-            max-width: 50%; 
-        }
-        */
-
-        .modal-content {
-            // border-color: 3px solid var(--unnamed, #FFA4A3);
-            border-color: #FFA4A3;
-            border-width: thin;
-            border-radius: 20px;
-            min-width: 400px;
-            max-width: 430px;
-            min-height: 520px;
-            max-height: 550px;
-        }
-    }
-    
-    /*
-    .signup-popup-email-input {
-        width: 270px;
-        height: 20px;
-        margin-left: 80px;
-        border: 1px solid #F8F8F8; 
-        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
-        padding-left: 5px;
-        font-family: Lora;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0em;
-        text-align: left;
-    }
-    */
-
-    /*
-    signup-popup-email-input:focus { 
-        width: 270px;
-        height: 20px;
-        margin-left: 80px;
-        border: 1px solid #FFA4A3 !important; 
-        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25) !important;
-        box-shadow: none;
-        padding-left: 5px;
-        font-family: Lora;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0em;
-        text-align: left;
-    }
-    */
+   
 
     .cancel-verification-button-section {
         margin-top: 15px;

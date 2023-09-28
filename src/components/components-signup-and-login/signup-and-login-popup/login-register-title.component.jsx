@@ -1,14 +1,19 @@
 import React from 'react'
 import './login-register-title.styles.scss'
-const LoginRegisterTitle = ({title, subTitle}) => {
+const LoginRegisterTitle = ({title, subTitle, subText}) => {
   return (
-    <div>
+    <div className='login-register-title-text-outer-container'>
         {title && <p className='login-register-title'>
                 {title}
         </p>}
-        {subTitle && <p className='login-register-sub-title'>
-                {subTitle}
-        </p>}
+        <div className='login-register-subtitle-container'>
+            {subTitle && <p className='login-register-sub-title'>
+                    {subTitle}
+            </p>}
+            {subText && <p className='login-register-sub-text'> 
+                    {subText}
+            </p>}
+        </div>
     </div>
   )
 }

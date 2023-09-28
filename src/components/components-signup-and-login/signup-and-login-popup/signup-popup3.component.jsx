@@ -5,31 +5,50 @@ import SignUpForm from './signup-form.component';
 import SignupVerify from './signup-varify.component';
 import SocialSignUP from './social-signup.component';
 import ChooseGender from './choose-gender.component';
-import BirthYearPicker from './birth-year-picker.component';
 import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginForm from './login-form.component';
+import SendVerifyEmail from './send-verify-email.component';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 // 注册&登录
 // 主页面
 const SignupPopup3 = (props) => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const userInfo = userInfoQueryStore(state=>state.userInfo);
+    console.log("userInfo in signup-popup3",userInfo);
     return (
         <Modal dialogClassName="signup-popup-modal"
                show={props.show} 
                onHide={props.onHide} 
                size="lg" 
-              // style={{ marginTop:"100px" }}
+               style={{ marginTop:"100px" }}
             > 
-            {userInfo.popupState === 'signUp' && <SignUpForm/>}
-            {userInfo.popupState === 'login' && <LoginForm/>}
-            {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
-            {userInfo.popupState === 'gender' && <ChooseGender/>}
-            {/* {userInfo.popupState === 'birthday' && <BirthYearPicker />} */}
-            {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
-            {userInfo.popupState === 'success' && <SignUpFinal />}
-            {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail') && <SocialSignUP />}
+            <Modal.Header closeButton style={{ borderBottom: 'none' }}>
+                <Tabs>
+                    <TabList>
+                        <Tab onClick={() => switchPopupTab('sendVerifyEmail')}>send</Tab>
+                        <Tab onClick={() => switchPopupTab('signUp')}>signUp</Tab>
+                        <Tab onClick={() => switchPopupTab('login')}>login</Tab>
+                        {/* <Tab onClick={() => switchPopupTab('verifyEmail')}>verifyEmail</Tab> */}
+                        <Tab onClick={()=> switchPopupTab('gender')}>gender</Tab>
+                        <Tab onClick={()=> switchPopupTab('interest')}>interest</Tab> 
+                        {/* <Tab onClick={()=> switchPopupTab('success')}>success</Tab> */}
+                    </TabList>
+                </Tabs>
+            </Modal.Header>
+            <Modal.Body>
+                {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail/>}
+                {userInfo.popupState === 'signUp' && <SignUpForm/>}
+                {userInfo.popupState === 'login' && <LoginForm/>}
+                {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
+                {userInfo.popupState === 'gender' && <ChooseGender/>}
+                {/* {userInfo.popupState === 'birthday' && <BirthYearPicker />} */}
+                {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
+                {userInfo.popupState === 'success' && <SignUpFinal />}
+                {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail'|| userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
+            </Modal.Body>
         </Modal>
     )
 }

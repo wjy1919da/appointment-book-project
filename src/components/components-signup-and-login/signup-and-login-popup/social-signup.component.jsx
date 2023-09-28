@@ -29,7 +29,6 @@ import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import './login-popup.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookies from 'js-cookie';
 import { useSocialLogin } from '../../../hooks/useAuth';
 import AppleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-apple.component';
 import FacebookLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-facebook.component';
@@ -83,7 +82,7 @@ const SocialSignUP = ({onHide}) => {
         <div className="login-popup-gfa-section">
             <div className="or-section">
                 {/* <div className="line-separator"></div>  */}
-                <div className="or-label">- OR -</div>
+                <div className="or-label">- - Or Log In With -</div>
                 {/* <div class="line-separator"></div> */}
             </div>
             <div className="signin-with-apple-section">
@@ -95,33 +94,6 @@ const SocialSignUP = ({onHide}) => {
             <div className="signin-with-facebook-section">
                 <FacebookLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook'/>
             </div>
-             {/* <div>
-             <LoginSocialFacebook
-                            appId="1301849283867898"
-                            onLoginStart={onLoginStart}
-                            //redirect_uri={REDIRECT_URI}
-                            onResolve={onResolve}
-                            onReject={(error) => {
-                               console.log(error);
-                            }}
-                    >
-                        <FacebookLoginButton  />      
-                </LoginSocialFacebook>
-                    
-            </div>
-            <div>
-                <LoginSocialGoogle
-                    client_id="304434731320-nh74t4nic2hbq9vhqr3n1jqe4u5gc6n1.apps.googleusercontent.com"
-                    onResolve={onResolve}
-                      onReject={(error) => {
-                        console.log(error);
-                      }}
-                >
-                    <GoogleLoginButton
-
-                    />
-                </LoginSocialGoogle>      
-            </div> */}
         </div>
   )
 }
