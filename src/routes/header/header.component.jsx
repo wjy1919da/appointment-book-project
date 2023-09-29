@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Fragment } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Button, Dropdown, Form } from 'react-bootstrap';
@@ -13,6 +13,7 @@ import SignupPopup3 from '../../components/components-signup-and-login/signup-an
 import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
 const Header = () => {
+    const location = useLocation();
     const loginIcon = require('../../assets/home/login-user.png');
     const [expanded, setExpanded] = useState(false);
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring', 'CO2 Laser Resurfacing']
@@ -48,6 +49,9 @@ const Header = () => {
     const removeToken = userInfoQueryStore(state=>state.removeToken);
     const [dropdown, setDropdown] = useState(false);
     const handleLoginClick = () => setLoginClick(!loginClick); 
+    const [activeTab, setActiveTab] = useState(""); 
+    const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
+
     const handleLogOutClick = () => {
         Cookies.remove('token');
         removeToken();
@@ -119,7 +123,7 @@ const Header = () => {
                     <div className='header-nav-container' id='#navbarTogglerDemo02'>
                         <span className='dropdown-center'>
                             <Link 
-                                className='header-nav-link1' 
+                                className={`header-nav-link1 ${location.pathname.startsWith('/procedure/') ? 'active-link' : ''}`}
                                 // to = '/procedure/botox_injections'
                                 data-bs-toggle='dropdown disabled' 
                                 aria-expanded='false'
@@ -138,15 +142,15 @@ const Header = () => {
                             </ul>
                         </span>
                         <span className='header-nav-divider'>|</span>
-                        <Link className='header-nav-link2' to='/doctor'>
+                        <Link className={`header-nav-link2 ${location.pathname === '/doctor' ? 'active-link' : ''}`} to='/doctor'>
                             Doctors
                         </Link>
                         <span className='header-nav-divider'>|</span>
-                        <Link className='header-nav-link3' to='/instrument/coolsculpting'>
+                        <Link className={`header-nav-link2 ${location.pathname === '/instrument/coolsculpting' ? 'active-link' : ''}`} to='/instrument/coolsculpting'>
                             Instruments
                         </Link>
                         <span className='header-nav-divider'>|</span>
-                        <Link className='header-nav-link3' to='/posts'>
+                        <Link className={`header-nav-link2 ${location.pathname === '/posts' ? 'active-link' : ''}`} to='/posts'>
                             Posts
                         </Link>
                         {userInfo.token&&<>
@@ -162,8 +166,10 @@ const Header = () => {
                             </input>
                         </div>  */}
                     <div className="header-login-logo">
-                            <img src={loginIcon} alt="login Image" ></img>
-                        </div>
+                        <a href="/userProfile">
+                            <img src={loginIcon} alt="login Image"></img>
+                        </a>
+                    </div>
                         <div className="header-login-text">
                             {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>login</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
