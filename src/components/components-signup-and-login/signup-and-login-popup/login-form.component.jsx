@@ -102,7 +102,7 @@ const LoginForm = (props) => {
                             lineHeight="100%"
                         >{errors.password?.message}</Text>
                     </FormControl>
-                    <div onClick={()=>switchPopupTab('signUp')}>go to register</div>
+                    <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to register</div>
                     <div className='login-button-section'>
                         <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/>
                     </div>

@@ -157,8 +157,8 @@ const SignUpForm = () => {
                         lineHeight="100%"
                     >{errors.birthday?.message}</Text>
                 </FormControl>
-                <div onClick={()=>switchPopupTab('login')}>go to login</div>
-                <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to verify</div>
+                {/* <div onClick={()=>switchPopupTab('login')}>go to login</div> */}
+                <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to previous tab</div>
                 <div className='login-button-section'>
                     <SignupAndLoginButton title="Next" type="submit" width="100px" height= "35px"/>
                 </div>

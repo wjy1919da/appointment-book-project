@@ -24,7 +24,7 @@ const SendVerifyEmail = () => {
         });
     };
     useEffect(() => {
-        if (data?.data && data.code === 100) {
+        if (data?.code === 100) {
            //  切换到下一个tab
            alert("sending email ",data.msg);
            switchPopupTab('verifyEmail');
@@ -58,6 +58,8 @@ const SendVerifyEmail = () => {
                     </Text>
                     <input {...register('email')} placeholder="Email" className='custom-input'/>
                 </FormControl>
+                {/* <div onClick={()=>switchPopupTab('verifyEmail')}>go to verifyEmail</div> */}
+                <div onClick={()=>switchPopupTab('login')}>go to login</div>
                 <div className='submit-button-section'>
                     <SignupAndLoginButton title="Send Verification Email" type="submit" width="220px" height= "35px"/>
                 </div>
