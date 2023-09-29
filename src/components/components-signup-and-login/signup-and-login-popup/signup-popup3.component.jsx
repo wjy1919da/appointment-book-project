@@ -27,17 +27,7 @@ const SignupPopup3 = (props) => {
             > 
             <Modal.Header closeButton style={{ borderBottom: 'none' }}>
             {/* <FontAwesomeIcon icon="fa-solid fa-arrow-right" /> */}
-            <Tabs>
-                    <TabList>
-                        <Tab onClick={() => switchPopupTab('sendVerifyEmail')}>send</Tab>
-                        <Tab onClick={() => switchPopupTab('signUp')}>signUp</Tab>
-                        <Tab onClick={() => switchPopupTab('login')}>login</Tab>
-                        <Tab onClick={() => switchPopupTab('verifyEmail')}>verifyEmail</Tab>
-                        <Tab onClick={()=> switchPopupTab('gender')}>gender</Tab>
-                        <Tab onClick={()=> switchPopupTab('interest')}>interest</Tab> 
-                        {/* <Tab onClick={()=> switchPopupTab('success')}>success</Tab> */}
-                    </TabList>
-                </Tabs>
+                
             </Modal.Header>
             <Modal.Body>
                 {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail/>}
