@@ -12,8 +12,9 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
         error,
         isLoading,
     } = usePostDetail();
-    console.log("fetchdata",data);
-   
+    // if(data){
+    //     console.log("fetchdata",data, data.data.id);
+    // }
     if (error) {
         return <div>Error: {error.message}</div>;
       }
@@ -23,7 +24,7 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
 
     return (
         <div>
-                            <div className="modal-parent-container">
+                <div className="modal-parent-container">
                     <Modal
                         dialogClassName='close-button-modal'
                         show={show} // Set this according to your logic
@@ -63,6 +64,7 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
                                     likeCount={data.data.likeCount}
                                     collectCount={data.data.collectCount}
                                     comments={data.data.comments}
+                                    id = {data.data.id}
                                     userName={postUserName}      
                                     userAvatar={postAvatar}          
                                 />   
@@ -89,6 +91,7 @@ const PostDetail = ({show,onHide,isMobile,postUserName,postAvatar}) =>
                     likeCount={data.data.likeCount}
                     collectCount={data.data.collectCount}
                     comments={data.data.comments}
+                    id = {data.data.id}
                     userName={postUserName}      
                     userAvatar={postAvatar}          
                     

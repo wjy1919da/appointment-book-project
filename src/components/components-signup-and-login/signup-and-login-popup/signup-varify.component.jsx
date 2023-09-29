@@ -4,65 +4,12 @@ import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-bu
 import userInfoQueryStore from '../../../userStore.ts';
 const SignupVerify = () => {
    const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
-  return (
-    <div className="signup-popup-container">
-                <p style={{ color:'#000',
-                            fontFamily:'Playfair Display',
-                            fontStyle:'normal',
-                            fontSize:'36px',
-                            fontWeight:400,
-                            lineHeight:'135%',
-                            marginTop:'30px',
-                            display:'flex',
-                            flexShrink:0,
-                            flexdirection:'column',
-                            justifyContent:'center' }}>
-                    Sign Up
-                </p>
+   return (
+    <div >
+                
                     
                 <div className="signup-popup-email">
-                        <p style={{ color:'#000',
-                                    fontFamily:'Lora',
-                                    fontStyle:'normal',
-                                    fontSize:'12px',
-                                    fontWeight:'bold',
-                                    lineHeight:'normal',
-                                    display:'flex',
-                                    flexShrink:0,
-                                    flexdirection:'column',
-                                    justifyContent:'center', 
-                                    flexShrink:0 }}>
-                            Check Your Email!
-                        </p>
-                        <p style={{ color:'#000',
-                                    fontFamily:'Lora',
-                                    fontStyle:'normal',
-                                    fontSize:'12px',
-                                    fontWeight:400,
-                                    lineHeight:'normal',
-                                    marginTop:'-12px',
-                                    display:'flex',
-                                    flexShrink:0,
-                                    flexdirection:'column',
-                                    justifyContent:'center', 
-                                    flexShrink:0 }}>
-                            We sent you a temporary link to verify your email.
-                        </p>
-                        <p style={{ color:'#000',
-                                    fontFamily:'Lora',
-                                    fontStyle:'normal',
-                                    fontSize:'12px',
-                                    fontWeight:400,
-                                    marginTop:'-12px',
-                                    lineHeight:'normal',
-                                    display:'flex',
-                                    flexShrink:0,
-                                    flexdirection:'column',
-                                    justifyContent:'center', 
-                                    flexShrink:0 }}>
-                            Check your email.
-                        </p>  
-                    {/* </label> */}
+                  
 
                     <input className='signup-popup-email-input'
                            type='text' 

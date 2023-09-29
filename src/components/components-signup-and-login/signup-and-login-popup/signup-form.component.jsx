@@ -48,7 +48,7 @@ const SignUpForm = () => {
     useEffect(() => {
         if (data?.msg && data.code === 100) {
            //  切换到下一个tab
-           const myToken = data.msg;
+           const myToken = data.data.token;
            console.log("myToken in new register ",myToken);
            Cookie.set('token', myToken);
            setToken(myToken);

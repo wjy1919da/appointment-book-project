@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 const CommunitySendMsg = () => {
   return (
-    <div className='comment-send-button'>
+    <button type = "submit" className='comment-send-button'>
         <FontAwesomeIcon icon={faArrowUp} className="arrow-icon" />
-    </div>
+    </button>
   )
 }
 

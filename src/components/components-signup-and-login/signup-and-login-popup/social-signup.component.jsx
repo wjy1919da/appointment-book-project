@@ -27,7 +27,7 @@ import AppleLogo from '../../../assets/sign/apple-logo.png';
 import GoogleLogo from '../../../assets/sign/google-logo.png';
 import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import './login-popup.styles.scss';
+import './signup-popup2.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
 import { useSocialLogin } from '../../../hooks/useAuth';
 import AppleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-apple.component';
@@ -82,7 +82,7 @@ const SocialSignUP = ({onHide}) => {
         <div className="login-popup-gfa-section">
             <div className="or-section">
                 {/* <div className="line-separator"></div>  */}
-                <div className="or-label">- - Or Log In With -</div>
+                <div className="or-label">- Or Log In With -</div>
                 {/* <div class="line-separator"></div> */}
             </div>
             <div className="signin-with-apple-section">

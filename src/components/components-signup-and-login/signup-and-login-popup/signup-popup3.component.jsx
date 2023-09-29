@@ -17,7 +17,7 @@ import 'react-tabs/style/react-tabs.css';
 const SignupPopup3 = (props) => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const userInfo = userInfoQueryStore(state=>state.userInfo);
-    console.log("userInfo in signup-popup3",userInfo);
+    //console.log("userInfo in signup-popup3",userInfo);
     return (
         <Modal dialogClassName="signup-popup-modal"
                show={props.show} 
@@ -26,12 +26,13 @@ const SignupPopup3 = (props) => {
                style={{ marginTop:"100px" }}
             > 
             <Modal.Header closeButton style={{ borderBottom: 'none' }}>
-                <Tabs>
+            {/* <FontAwesomeIcon icon="fa-solid fa-arrow-right" /> */}
+            <Tabs>
                     <TabList>
                         <Tab onClick={() => switchPopupTab('sendVerifyEmail')}>send</Tab>
                         <Tab onClick={() => switchPopupTab('signUp')}>signUp</Tab>
                         <Tab onClick={() => switchPopupTab('login')}>login</Tab>
-                        {/* <Tab onClick={() => switchPopupTab('verifyEmail')}>verifyEmail</Tab> */}
+                        <Tab onClick={() => switchPopupTab('verifyEmail')}>verifyEmail</Tab>
                         <Tab onClick={()=> switchPopupTab('gender')}>gender</Tab>
                         <Tab onClick={()=> switchPopupTab('interest')}>interest</Tab> 
                         {/* <Tab onClick={()=> switchPopupTab('success')}>success</Tab> */}

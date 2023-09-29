@@ -38,7 +38,7 @@ export function useGetPost() {
 
 export function usePostDetail() {
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  
+  //console.log("postQuery.trigger", postQuery.trigger);
   const fetchPostDetail = async () => {
     let url = `${base.postDetailUrl}${postQuery.userID}`;
     try {
@@ -49,7 +49,7 @@ export function usePostDetail() {
     }
 
   };
-  return useQuery(['postDetail', postQuery.userID], fetchPostDetail, {
+  return useQuery(['postDetail', postQuery.userID,postQuery.trigger], fetchPostDetail, {
     placeholderData: { data: {} }, // Default object to use before fetching completes
   });
 }
