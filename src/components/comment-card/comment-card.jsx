@@ -3,12 +3,14 @@ import "./comment-card.styles.scss";
 import HeartIcon from '../../assets/post/heart.png';
 import commentIcon from '../../assets/post/chat_bubble.png';
 import '../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss'
-
-const CommentCard = ({avatar,name,date,commentText}) => {
+import userInfoQueryStore from '../../userStore.ts';
+const CommentCard = ({avatar,name,date,commentText,onClick}) => {
+    
     if(!avatar&&!name&&!date&&!commentText)
     {
         return null
     }
+    
     const formatDate = (dateString) => {
         const dateParts = dateString.split('/');
         const month = dateParts[0];
@@ -38,10 +40,10 @@ const CommentCard = ({avatar,name,date,commentText}) => {
             </div>
             <div className="likeCount-commentCount">
                 <span>
-                    <img className='post-detail-icon' src ={HeartIcon} alt='like'></img>
+                    <img className='post-detail-icon' src ={HeartIcon} alt='like' onClick={onClick}></img>
                 </span>
                 <span>
-                    <img className='post-detail-icon' src={commentIcon} alt='comment'></img>
+                    <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
                 </span>
             </div>
         </div>

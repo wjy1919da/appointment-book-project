@@ -13,20 +13,28 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import { useAddComment } from '../../../hooks/useComment';
 import usePostQueryStore from '../../../postStore.ts';
+import userInfoQueryStore from '../../../userStore.ts';
 const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,id,userName,userAvatar}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
     const refresh = usePostQueryStore(state=>state.refresh);
+    const userInfo = userInfoQueryStore(state=>state.userInfo);
+    const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const schema = z.object({
         comment: z.string().nonempty("Comment is required"),
     });
+    //console.log("userInfo in post detail ",userInfo);
     const { register, handleSubmit,reset, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
     });
     const onSubmit = (formData) => {
-        console.log("formData ",formData);
+        //console.log("formData ",formData);
         // set post id and comment text
+        if (!userInfo.token) {
+            togglePopup(true, "login");
+            return;  
+        }
         mutate({
             dynamicId: id,
             text: formData.comment
@@ -35,16 +43,21 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
     };
     const {mutate,data,isLoading,isError,error} = useAddComment();
     useEffect(() => {
-        if(data&&data.code===100){
+        if(data?.code===100){
             //alert("send comment ",data.msg);
             reset({ comment: '' });
             refresh();
-        }else if(data&&data.code===500){
-            alert(data.msg);
-        }else if(data&&data.code===403){
+        }else if(data?.code===500 ||data?.code===403){
             alert(data.msg);
         }
     }, [data]);
+    const handleInputClick = (e) => {
+        //console.log("handleInputClick ",userInfo.token);
+        if (!userInfo.token) {
+            e.preventDefault();  // 阻止默认行为
+            togglePopup(true, "login");
+        }
+    };    
     const adjustContainerHeight = () => {
       const container = containerRef.current;
       const image = imageRef.current;
@@ -115,13 +128,14 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                                             name={comment.userName||''}
                                             commentText={convertUnicode(comment.content)}
                                             date={formatDate(comment.commentDate)}
+                                            onClick={handleInputClick}
                                         />
                                     );
                                 }
                                 return null;  // Or handle this case differently
                             })}
-                    </div>
-                    
+                        </div>
+                        {!userInfo.token && <div>Login to view more....</div>}
                     </div>
                    </div> 
                    {/* Mobile */}
@@ -141,16 +155,16 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='post-detail-send-box-outer-container'>
                                 <div className="Icon-display">
-                                    <span className="Icon-count"><img src = {heartIcon} alt="Icon"  className="Icon-size"  />{likeCount}</span>
-                                    <span className="Icon-count"><img src = {collectIcon} alt="Icon" className="Icon-size"/>{collectCount}</span>
-                                    <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size"/>{commentCount}</span>
+                                    <span className="Icon-count"><img src = {heartIcon} alt="Icon"  className="Icon-size" onClick={handleInputClick} />{likeCount}</span>
+                                    <span className="Icon-count"><img src = {collectIcon} alt="Icon" className="Icon-size" onClick={handleInputClick}/>{collectCount}</span>
+                                    <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size" onClick={handleInputClick} />{commentCount}</span>
                                 </div>
                                 {/* <div className='comment-send-msg-container'> */}
                                     <CommunitySendMsg />
                                 {/* </div> */}
                             </div>
                             <div className="new-comment-input" >
-                                <input {...register('comment')} type="text" placeholder="Enter your comment" className="input-blank"/>
+                                <input {...register('comment')} type="text" placeholder="Enter your comment" className="input-blank" onClick={handleInputClick}/>
                             </div>
                         </form>
                     </div>
