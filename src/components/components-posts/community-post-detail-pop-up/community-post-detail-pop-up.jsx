@@ -14,6 +14,7 @@ import {z} from 'zod';
 import { useAddComment } from '../../../hooks/useComment';
 import usePostQueryStore from '../../../postStore.ts';
 import userInfoQueryStore from '../../../userStore.ts';
+import {Button} from 'react-bootstrap';
 const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount,collectCount,commentCount,id,userName,userAvatar}) => {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
@@ -22,10 +23,12 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const schema = z.object({
-        comment: z.string().nonempty("Comment is required"),
-    });
+        comment: z.string()
+                 .nonempty("Comment is required")
+                 .min(5, "Comment must be at least 5 characters long"),
+    });    
     //console.log("userInfo in post detail ",userInfo);
-    const { register, handleSubmit,reset, formState: { errors } } = useForm({
+    const { register, handleSubmit,reset, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
     });
     const onSubmit = (formData) => {
@@ -33,6 +36,10 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
         // set post id and comment text
         if (!userInfo.token) {
             togglePopup(true, "login");
+            return;  
+        }
+        if (errors.comment) {
+            alert(errors.comment.message);
             return;  
         }
         mutate({
@@ -160,11 +167,13 @@ const CommunityPostDetailPopUP = ({picture,brief,tag,postDate,comments,likeCount
                                     <span className="Icon-count"><img src ={commentIcon} alt="Icon" className="Icon-size" onClick={handleInputClick} />{commentCount}</span>
                                 </div>
                                 {/* <div className='comment-send-msg-container'> */}
-                                    <CommunitySendMsg />
+                                {/* <CommunitySendMsg isValid={isValid} /> */}
                                 {/* </div> */}
+                                <Button as="input" type="submit" value="send" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                             </div>
                             <div className="new-comment-input" >
                                 <input {...register('comment')} type="text" placeholder="Enter your comment" className="input-blank" onClick={handleInputClick}/>
+                                <p>{errors.comment?.message}</p>
                             </div>
                         </form>
                     </div>

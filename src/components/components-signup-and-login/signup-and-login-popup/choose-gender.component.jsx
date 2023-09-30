@@ -39,6 +39,9 @@ const ChooseGender = () => {
                 <div className='skip-container'>
                     <div className='skip' onClick={()=>{switchPopupTab('interest'); setGender(0)}}>skip</div> 
                 </div>
+                <div className='skip-container'>
+                    <div className='skip' onClick={()=>{switchPopupTab('verifyEmail')}}>previous</div> 
+                </div>
                 <div className="next-button-section">
                     <SignupAndLoginButton onClick={()=>switchPopupTab('interest')} width='100px' height='35px' borderRadius='6px' title='Next'/>
                 </div>

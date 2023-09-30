@@ -12,7 +12,7 @@ const SignUpFinal = () => {
   const userInfo = userInfoQueryStore(state=>state.userInfo);
   const togglePopup = userInfoQueryStore(state=>state.togglePopup);
   let interestAreaName = userInfo.selectedInterests || new Set();
-  console.log("interestArea in final",interestAreaName);
+  //console.log("interestArea in final",interestAreaName);
   /* convert name to id */
   const procedureToIdMapping = {
     botox_injections: 1,
@@ -32,8 +32,7 @@ const SignUpFinal = () => {
     thermage: 15,
     fraxel_laser: 16
   };
-  // Convert interestArea names to IDs
-  // Convert interestArea names to IDs
+  
   const interestArea = Array.from(interestAreaName).map(name => {
     // Ensure name is a string before passing it to formatTitleQuery
     if (typeof name !== 'string') {
@@ -63,6 +62,7 @@ const SignUpFinal = () => {
       }
       if (data?.data && data.code === 500) {
           alert(data.msg);
+          togglePopup(false);
       }
   }, [data]);
   return (

@@ -10,8 +10,10 @@ import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
-import { FormControl, FormLabel,FormErrorMessage, Text } from "@chakra-ui/react";
+import { FormControl, FormLabel,FormErrorMessage, Text} from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
+import { Button } from 'react-bootstrap';
+
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
@@ -33,7 +35,7 @@ const LoginForm = (props) => {
         });
     };
     useEffect(() => {
-        if (data?.data && data.code === 100) {
+        if (data?.code === 100) {
             const myToken = data.data.token;
             Cookies.set('token', myToken);
             setToken(myToken);
@@ -42,8 +44,8 @@ const LoginForm = (props) => {
             togglePopup(false);
             //props.onHide();
         }
-        if (data?.data && data.code === 500) {
-            alert(data.msg);
+        if (data?.code === 500 || data?.code === 403) {
+            alert(data.msg);  
         }
     }, [data]);
      /* TODO: Need to improve */ 
@@ -104,7 +106,8 @@ const LoginForm = (props) => {
                     </FormControl>
                     <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to register</div>
                     <div className='login-button-section'>
-                        <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/>
+                        {/* <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/> */}
+                        <Button as="input" type="submit" value="Login" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                     </div>
                 </FormControl>
                 <SocialSignUP onHide={props.onHide} />

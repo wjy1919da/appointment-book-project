@@ -56,10 +56,12 @@ const ChooseInterestedArea = () => {
                     <ProcedureIconGrid names={['breast-augmentation', 'botox-injections', 'chemical-peels','fox-eyes','lip-augmentation','laser-hair-removal','teeth-whitening','chin-implants','neck-contouring']}/> 
                 </div>  
                 <div className='skip-container'>
+                    <div className='skip' onClick={()=>{switchPopupTab('gender')}}>previous</div>  
+                </div>  
+                <div className='skip-container'>
                     <div className='skip' onClick={()=>{switchPopupTab('success'); setInterested(new Set())}}>skip</div>  
                 </div>             
                 <div className="next-button-section">
-                    
                     <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' title='Next' onClick={()=>switchPopupTab('success')}/> 
                 </div>
             </div>

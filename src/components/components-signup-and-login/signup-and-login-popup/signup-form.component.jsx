@@ -9,9 +9,10 @@ import { FormControl, Text } from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import Cookie from 'js-cookie';
+import { Button } from 'react-bootstrap';
 //import DatePicker from "react-datepicker";
 const SignUpForm = () => {
-    const {mutate,data,isLoading,isError,error} = useUserRegister();
+    
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
     const setPassword = userInfoQueryStore(state=>state.setPassword);
@@ -30,9 +31,11 @@ const SignUpForm = () => {
             }),
         birthday: z.string().nonempty("Birthday is required"),
     });    
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
+        mode: 'onChange'
     });
+    const {mutate,data,isLoading,isError,error} = useUserRegister();
     const onSubmit = (formData) => {
         //console.log("formData ",formData);
         mutate({
@@ -45,6 +48,8 @@ const SignUpForm = () => {
         setUsername(formData.username);
         setBirthday(formData.birthday);
     };
+    console.log("sign up form errors ",errors);
+    
     useEffect(() => {
         if (data?.msg && data.code === 100) {
            //  切换到下一个tab
@@ -58,9 +63,9 @@ const SignUpForm = () => {
             alert(data.msg);
         }
     }, [data]);
-    if (error) {
-        alert(error.message);
-    }
+    // if (error) {
+    //     alert(error.message);
+    // }
     return (
         <div className='sign-in-form-container'>
             <div className='login-title-container'>
@@ -160,7 +165,8 @@ const SignUpForm = () => {
                 {/* <div onClick={()=>switchPopupTab('login')}>go to login</div> */}
                 <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to previous tab</div>
                 <div className='login-button-section'>
-                    <SignupAndLoginButton title="Next" type="submit" width="100px" height= "35px"/>
+                    {/* <SignupAndLoginButton title="Next" type="submit" width="100px" height= "35px"/> */}
+                    <Button as="input" type="submit" value="Next" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                 </div>
             </FormControl>     
         </div>

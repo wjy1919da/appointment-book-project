@@ -27,7 +27,7 @@ import AppleLogo from '../../../assets/sign/apple-logo.png';
 import GoogleLogo from '../../../assets/sign/google-logo.png';
 import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import './signup-popup2.styles.scss';
+import './signup-varify.styles.scss';
 import userInfoQueryStore from '../../../userStore.ts';
 import { useSocialLogin } from '../../../hooks/useAuth';
 import AppleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-apple.component';

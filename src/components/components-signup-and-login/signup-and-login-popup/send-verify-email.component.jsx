@@ -8,17 +8,20 @@ import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import {useClickVerification} from '../../../hooks/useAuth';
 import './send-verify-email.styles.scss';
+import { Button } from 'react-bootstrap';
 const SendVerifyEmail = () => {
     const schema = z.object({
         email: z.string().email(),
     });
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
     });
     const {mutate,data,isLoading,isError,error} = useClickVerification();
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
+    const setEmail = userInfoQueryStore(state=>state.setEmail);
     const onSubmit = (formData) => {
         //console.log("formData ",formData);
+        setEmail(formData.email);
         mutate({
             email: formData.email,
         });
@@ -27,15 +30,13 @@ const SendVerifyEmail = () => {
         if (data?.code === 100) {
            //  切换到下一个tab
            alert("sending email ",data.msg);
+           
            switchPopupTab('verifyEmail');
         }
         if (data?.data && 400<=data.code <=500) {
             alert(data.msg);
         }
     }, [data]);
-    // if (isLoading) {
-    //     return <SignupVerify />;
-    // }
     if (error) {
         alert(error.message);
     }
@@ -61,7 +62,8 @@ const SendVerifyEmail = () => {
                 {/* <div onClick={()=>switchPopupTab('verifyEmail')}>go to verifyEmail</div> */}
                 <div onClick={()=>switchPopupTab('login')}>go to login</div>
                 <div className='submit-button-section'>
-                    <SignupAndLoginButton title="Send Verification Email" type="submit" width="220px" height= "35px"/>
+                    {/* <SignupAndLoginButton title="Send Verification Email" type="submit" width="220px" height= "35px"/> */}
+                    <Button as="input" type="submit" value="Send Verification Email" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                 </div>
             </FormControl>    
         </div>
