@@ -35,23 +35,23 @@ const SignupPopup3 = (props) => {
                onHide={props.onHide} 
                size="lg" 
                style={{ marginTop:"100px" }}> 
-<Modal.Header style={{ border: 'none', display: 'flex', justifyContent: 'flex-end', marginTop: '-10px' }}>
-    <button 
-        onClick={props.onHide} 
-        style={{
-            background: 'none',
-            border: 'none',
-            fontWeight: 'bold',
-            fontSize: '24px',
-            color: 'black',
-            cursor: 'pointer',
-            outline: 'none',
-            
-        }}
-    >
-        &times;
-    </button>
-</Modal.Header>
+            <Modal.Header style={{ border: 'none', display: 'flex', justifyContent: 'flex-end', marginTop: '-10px' }}>
+                        <button 
+                            onClick={props.onHide} 
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                fontWeight: 'bold',
+                                fontSize: '24px',
+                                color: 'black',
+                                cursor: 'pointer',
+                                outline: 'none',
+                                
+                            }}
+                        >
+                            &times;
+                        </button>
+            </Modal.Header>
             {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}

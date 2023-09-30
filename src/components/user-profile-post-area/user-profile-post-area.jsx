@@ -30,7 +30,7 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
         isFetchingNextPage,
         hasNextPage
     } = useGetUserPostedPost();
-    console.log('userCallBackdata',data);
+    console.log('userpostedCallBackdata',data);
     const flatData = data ? data.pages.flatMap(page => page.data) : [];
     console.log('userPostedpostin',flatData);
     useEffect(() => {

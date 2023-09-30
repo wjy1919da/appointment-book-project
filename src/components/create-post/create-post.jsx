@@ -16,13 +16,19 @@ const CreatePostOfUser = () => {
         // Create the post object
         const newPost = {
             title: title,
-            brief: text, // or whichever field represents the brief in your BlogPost type
-            tags: [{ tagId: 0, tagName: tagDoctor }], // This is just a placeholder. You might need to handle tags differently.
+            brief: text, 
+            tags: [{ tagId: 0, tagName: tagDoctor }],
             location: location,
-            pictures: selectedImage,
+            pictures: hasSelectImage ? [selectedImage] : [], // since it's an array, we need to wrap it
+            address: "",
+            coverImg: "",
+            id: 0,
+            isDisplay: 0,
+            lat: "",
+            lon: ""
             // Add other necessary fields and defaults here
         };
-
+        console.log('Sending payload:', newPost);
         mutate(newPost);
     };
     const handleIconClick = () => {

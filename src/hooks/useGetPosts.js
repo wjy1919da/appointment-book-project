@@ -38,9 +38,11 @@ export function useGetPost() {
     );
 }
 export function useGetUserPostedPost() {
-  const token = Cookies.get('token');
+  console.log("DOI Call this hook?");
+  const token ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
   const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
+    console.log("DOI Call this hook2?");
     if (!token) {
       alert('user not login');
     } 
@@ -54,7 +56,7 @@ export function useGetUserPostedPost() {
       }
     }
     );
-    console.log("UserPostedPostData", res.data);
+    console.log("DOI Call this hook1?", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
   return useInfiniteQuery(
@@ -74,7 +76,7 @@ export function useGetUserPostedPost() {
   );
 }
 export function useGetUserLikededPost() {
-  const token = Cookies.get('token');
+  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
   const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
     if (!token) {
@@ -90,7 +92,7 @@ export function useGetUserLikededPost() {
       }
     }
     );
-    console.log("UserPostedPostData", res.data);
+    console.log("UserLikedPostData", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
   return useInfiniteQuery(

@@ -334,7 +334,7 @@ const SubProcedure = () => {
         <SubProcedureMobileExtraBottom />  
         {isMobile && <div className='procedure-recommendation-container'>
                         <RecommendationGrid isMobile={false}  height={'300px'} />
-                </div>} 
+                    </div>} 
         <Footer ref={footerRef}/>
     </div>
     )
