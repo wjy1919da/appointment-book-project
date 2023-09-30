@@ -13,7 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 import videoUrl from '../../assets/home/App-Demo-V10.mp4';
 import HomePic from '../../assets/home/home-pic1.png';
 import HomePicIpad from '../../assets/home/5-ipad.png';
-import HomePicMobile from '../../assets/home/5.svg';
+import HomePicMobile from '../../assets/home/5.png';
 import { useMediaQuery } from 'react-responsive';
 const Home = () => {
     useLayoutEffect(() => {

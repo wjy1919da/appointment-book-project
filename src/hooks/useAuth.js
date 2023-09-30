@@ -12,6 +12,7 @@ const base = {
     otpRegisterValidate: 'http://localhost:8080/register/phone/validate-otp',
     emailRegisterValidate: 'http://localhost:8080/register',
     setUserProfile:'http://localhost:8080/user/set_user_profile',
+    clickVerification:'http://localhost:8080/register/clickVerification'
 };
 
 export function useUserOptLogin() {
@@ -30,14 +31,15 @@ export function useUserOptLogin() {
 
 
 export function useUserRegister() {
-    const fetchUserRegister = async (email,password) => {
+    const fetchUserRegister = async (username,email,password) => {
         const res = await axios.post(base.addUser, {
+            username,
             email,
             password
         });
         return res.data;
     };
-    return useMutation((credentials) => fetchUserRegister(credentials.email, credentials.password));
+    return useMutation((credentials) => fetchUserRegister(credentials.username, credentials.email, credentials.password));
 }
 
 export function useUserEmailLogin(){
@@ -118,7 +120,7 @@ export function useUserEmailRegisterValidate(token) {
 }
 export function useSetUserProfile(){
     const token = Cookies.get('token');
-    const fetchSetUserProfile = async (gender, interestArea, email,birthday) => {
+    const fetchSetUserProfile = async (gender, interestArea, email,birthday,nickname) => {
             if (!token) {
                 alert('user not login');
             }
@@ -126,7 +128,9 @@ export function useSetUserProfile(){
                 gender,
                 interestArea,
                 email,
-                birthday
+                birthday,
+                nickname
+
             },
             {
                 headers: {
@@ -136,5 +140,16 @@ export function useSetUserProfile(){
         );
         return res.data;
     };
-    return useMutation((credentials) => fetchSetUserProfile(credentials.gender, credentials.interestArea, credentials.email));
+    return useMutation((credentials) => fetchSetUserProfile(credentials.gender, credentials.interestArea, credentials.email, credentials.birthday,credentials.nickname));
+}
+export function useClickVerification(){
+    
+    const fetchClickVerification = async (email) => {
+        console.log('useClickVerification',email);
+        const res = await axios.post(base.clickVerification, {
+            email,
+        });
+        return res.data;
+    };
+    return useMutation((credentials) => fetchClickVerification(credentials.email));
 }

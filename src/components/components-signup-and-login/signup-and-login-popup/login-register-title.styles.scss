@@ -5,14 +5,35 @@
     font-size: 36px;
     font-weight: 400;
     line-height: 135%;
+    text-align: center;
+    // 间距
+    margin-bottom: 32px;
 }
 
 .login-register-sub-title {
     color: #000;
-    font-family: 'PingFang HK', sans-serif;
+    font-family: Lora;
+    font-size: 18px;
     font-style: normal;
-    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+.login-register-sub-text{
+    color: #000;
+    font-family: Lora;
+    font-size: 18px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 160%;
-    margin-top: -15px;
+    line-height: 1.2;  /* Adjusted this value to prevent overlapping */
+    text-align: center;
+}
+.login-register-subtitle-container{
+    //width: 80%;
+    width:100%;
+}
+.login-register-title-text-outer-container{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
 }
