@@ -56,7 +56,7 @@ const SignupPopup3 = (props) => {
                         </button>
             </Modal.Header>
             {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
-            {/* {userInfo.popupState === 'accountType' && <SignUpAccountType />} */}
+            {userInfo.popupState === 'accountType' && <SignUpAccountType />}
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}
             {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
@@ -71,3 +71,5 @@ const SignupPopup3 = (props) => {
 }
 
 export default SignupPopup3;
+
+// Adding comment to test
