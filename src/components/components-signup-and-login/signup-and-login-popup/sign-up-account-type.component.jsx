@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap'; 
 import LoginRegisterTitle from './login-register-title.component'; 
-import './sign-up-account-type.scss'; 
+import './sign-up-account-type.styles.scss'; 
 
 const SignUpAccountType = () => {
     return (
