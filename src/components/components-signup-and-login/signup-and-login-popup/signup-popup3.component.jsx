@@ -5,7 +5,6 @@ import SignUpForm from './signup-form.component';
 import SignupVerify from './signup-varify.component';
 import SocialSignUP from './social-signup.component';
 import ChooseGender from './choose-gender.component';
-//import BirthYearPicker from './birth-year-picker.component';
 
 import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
@@ -29,16 +28,16 @@ const SignupPopup3 = (props) => {
             > 
             <Modal.Header closeButton style={{ borderBottom: 'none' }}>
             </Modal.Header>
-            <Modal.Body>
-                {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail/>}
-                {userInfo.popupState === 'signUp' && <SignUpForm/>}
-                {userInfo.popupState === 'login' && <LoginForm/>}
-                {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
-                {userInfo.popupState === 'gender' && <ChooseGender/>}
-                {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
-                {userInfo.popupState === 'success' && <SignUpFinal />}
-                {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail'|| userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
-            </Modal.Body>
+            {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
+            {userInfo.popupState === 'accountType' && <SignUpAccountType />}
+            {userInfo.popupState === 'signUp' && <SignUpForm/>}
+            {userInfo.popupState === 'login' && <LoginForm/>}
+            {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
+            {userInfo.popupState === 'gender' && <ChooseGender/>}
+            {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
+            {userInfo.popupState === 'download' && <SignUpDownloadPopUp />}
+            {userInfo.popupState === 'success' && <SignUpFinal />}
+            {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail') && <SocialSignUP />}
         </Modal>
     )
 }
