@@ -2,7 +2,9 @@ import React from 'react';
 import { Button } from 'react-bootstrap'; 
 import LoginRegisterTitle from './login-register-title.component'; 
 import './sign-up-account-type.styles.scss'; 
+
 import userInfoQueryStore from '../../../userStore.ts';
+
 
 const SignUpAccountType = () => {
     const setAccountType = userInfoQueryStore((state) => state.setAccountType);

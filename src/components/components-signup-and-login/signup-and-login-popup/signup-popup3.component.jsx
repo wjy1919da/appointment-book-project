@@ -28,7 +28,7 @@ const SignupPopup3 = (props) => {
             > 
             <Modal.Header closeButton style={{ borderBottom: 'none' }}>
             </Modal.Header>
-            {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
+            {/* {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />} */}
             {userInfo.popupState === 'accountType' && <SignUpAccountType />}
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}
