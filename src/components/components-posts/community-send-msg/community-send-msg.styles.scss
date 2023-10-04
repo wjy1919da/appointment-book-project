@@ -1,0 +1,22 @@
+.comment-send-button {
+    width: 50px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-send-button .arrow-icon {
+    color: #fafafa;  /* This sets the arrow to be white when the button is active */
+}
+
+.comment-send-button.disabled {
+    background: #EAEAEA;  /* This sets the background to be white when the button is disabled */
+}
+
+.comment-send-button.disabled .arrow-icon {
+    color: #FAB25E;  /* This sets the arrow to be orange when the button is disabled */
+}

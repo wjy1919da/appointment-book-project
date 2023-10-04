@@ -33,8 +33,7 @@ ReactDOM.render(
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
           <ChakraProvider theme={theme}>
             <App />
-          </ChakraProvider>
-          
+          </ChakraProvider> 
         </QueryParamProvider>
       </BrowserRouter>
       {/* <ReactQueryDevtools /> */}

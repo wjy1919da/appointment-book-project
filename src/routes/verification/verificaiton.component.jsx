@@ -23,10 +23,10 @@ const Verification = () => {
             }
         }
         if(data && data.code === 100){
-            Cookies.set('token', data.data.token);
-            setToken(data.data.token);
-            togglePopup(true,'gender');
-            alert("Verification data success");
+           // Cookies.set('token', data.data.token);
+           // setToken(data.data.token);
+            togglePopup(true,'signUp');
+            alert("go to sign up page");
             navigate('/');
         }
     }, [data, isLoading, isError, error]);

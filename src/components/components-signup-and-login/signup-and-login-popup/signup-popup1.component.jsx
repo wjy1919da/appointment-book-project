@@ -3,9 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 // import { useMediaQuery } from 'react-responsive';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import AppleLogo from '../../../assets/sign/apple-logo.png';
-import GoogleLogo from '../../../assets/sign/google-logo.png';
-import FacebookLogo from '../../../assets/sign/facebook-logo.png';
 import './signup-popup1.styles.scss';
 // Verify Email Popup
 const isValidEmail = (email) => {

@@ -12,7 +12,7 @@ const SignUpFinal = () => {
   const userInfo = userInfoQueryStore(state=>state.userInfo);
   const togglePopup = userInfoQueryStore(state=>state.togglePopup);
   let interestAreaName = userInfo.selectedInterests || new Set();
-  console.log("interestArea in final",interestAreaName);
+  //console.log("interestArea in final",interestAreaName);
   /* convert name to id */
   const procedureToIdMapping = {
     botox_injections: 1,
@@ -32,18 +32,26 @@ const SignUpFinal = () => {
     thermage: 15,
     fraxel_laser: 16
   };
-  // Convert interestArea names to IDs
+  
   const interestArea = Array.from(interestAreaName).map(name => {
+    // Ensure name is a string before passing it to formatTitleQuery
+    if (typeof name !== 'string') {
+        console.error('Expected string for interest area name, got:', name);
+        return null;
+    }
+
     const formattedName = formatTitleQuery(name);
     return procedureToIdMapping[formattedName];
-  });
+  }).filter(Boolean);  // This will filter out any null or undefined values
+
   const {mutate,data,isLoading,isError,error} = useSetUserProfile();
   const handleOnClick = ()=>{
       mutate({
-          interestArea: interestArea,
           gender: userInfo.gender,
+          interestArea: interestArea,
           email: userInfo.email,
           birthday: userInfo.birthday,
+          nickname: userInfo.username,
       });
   }
   useEffect(() => {
@@ -54,6 +62,7 @@ const SignUpFinal = () => {
       }
       if (data?.data && data.code === 500) {
           alert(data.msg);
+          togglePopup(false);
       }
   }, [data]);
   return (
@@ -105,7 +114,7 @@ const SignUpFinal = () => {
     </p>
     
     <div className="done-button-section">
-        <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' isIcon={ '' } title='Done' onClick={handleOnClick}/> 
+        <SignupAndLoginButton width='70px' height='28px' borderRadius='6px' title='Done' onClick={handleOnClick}/> 
     </div>
 </div>
   )

@@ -1,4 +1,3 @@
-import { Menu } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './create-post.style.scss'

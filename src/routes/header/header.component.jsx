@@ -153,25 +153,21 @@ const Header = () => {
                         <Link className={`header-nav-link2 ${location.pathname === '/posts' ? 'active-link' : ''}`} to='/posts'>
                             Posts
                         </Link>
-                        {userInfo.token&&<>
-                            <span className='header-nav-divider'>|</span>
-                            <Link className='header-nav-link3' to='/user-info'>
-                                Profile Testing
-                            </Link>
-                        </>}
                     </div>
                     <div className='header-login'>
                         {/* <div className="header-search">
                             <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                             </input>
                         </div>  */}
-                    <div className="header-login-logo">
-                        <a href="/userProfile">
-                            <img src={loginIcon} alt="login Image"></img>
-                        </a>
-                    </div>
+                        {userInfo.token && <div className="header-login-logo">
+                            <a href="/userProfile">
+                                <img src={loginIcon} alt="login Image"></img>
+                            </a>
+                        </div>}
                         <div className="header-login-text">
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'signUp')}>login</div>}
+
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'login')}>login</div>}
+
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>
