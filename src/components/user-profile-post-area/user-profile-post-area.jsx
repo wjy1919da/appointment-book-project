@@ -64,6 +64,7 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
             profileImage={post.avatar}
             authorName={post.username}
             likes={post.likeCount}
+            isProfile = {true}
         />
     ));
     return (
