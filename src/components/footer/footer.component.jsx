@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import React, { forwardRef } from 'react';
 import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
 import Facebook from '../../assets/home/facebook.svg';
@@ -8,11 +8,11 @@ import { useMediaQuery } from 'react-responsive';
 
 import './footer.styles.scss';
 
-const Footer = () => {
+const Footer = (props, ref)=> {
     //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     return (
-        <div>
+        <div ref={ref}>
         {isMobile?(
                 <div className='footer-mobile-container'>
                     <div className='footer-mobile-text'>
@@ -107,5 +107,6 @@ const Footer = () => {
         </div>
     )
 }
+;
 
-export default Footer;
+export default React.forwardRef(Footer);

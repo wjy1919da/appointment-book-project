@@ -3,7 +3,7 @@ import "./community-post.styles.scss";
 import heartIcon from "../../../assets/post/heart.png"
 import { useMediaQuery } from 'react-responsive';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png'
-const CommunityPost = ({imageURL,text,profileImage,authorName,likes,isLike}) => {
+const CommunityPost = ({imageURL,text,profileImage,authorName,likes,isLike,isProfile}) => {
     const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
     const [width,setWidth]=useState('');
     const [liked, setLiked] = useState(isLike);
@@ -21,7 +21,9 @@ const CommunityPost = ({imageURL,text,profileImage,authorName,likes,isLike}) => 
         // window.location.href = "/download";
     };
     return (
-        <div className='community-post-container'>
+        <div className='community-post-container'
+             style={{ width: isProfile ? '240px' : '100%' }}
+        >
             <div className="post-Image" >
                 <img src={imageURL} className="postImage"></img>
             </div>

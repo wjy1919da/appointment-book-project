@@ -5,6 +5,8 @@ import SignUpForm from './signup-form.component';
 import SignupVerify from './signup-varify.component';
 import SocialSignUP from './social-signup.component';
 import ChooseGender from './choose-gender.component';
+//import BirthYearPicker from './birth-year-picker.component';
+
 import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
