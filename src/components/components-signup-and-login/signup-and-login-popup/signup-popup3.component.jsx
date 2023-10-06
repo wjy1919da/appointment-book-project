@@ -15,6 +15,21 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 // 注册&登录
 // 主页面
+
+const StepTracker = ({ currentStep }) => {
+    const steps = ['accountType', 'signUp', 'verifyEmail', 'gender', 'interest', 'download'];
+    return (
+        <div className="step-tracker">
+            {steps.map((step, index) => (
+                <div 
+                    key={index} 
+                    className={`bullet-point ${currentStep === step ? 'active' : ''}`}
+                />
+            ))}
+        </div>
+    );
+}
+
 const SignupPopup3 = (props) => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const userInfo = userInfoQueryStore(state=>state.userInfo);
@@ -28,7 +43,7 @@ const SignupPopup3 = (props) => {
             > 
             <Modal.Header closeButton style={{ borderBottom: 'none' }}>
             </Modal.Header>
-            {/* {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />} */}
+            {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
             {userInfo.popupState === 'accountType' && <SignUpAccountType />}
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}

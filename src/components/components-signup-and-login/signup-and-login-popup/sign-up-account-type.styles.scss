@@ -1,18 +1,37 @@
-/* SignUpAccountType.css */
+// sign-up-account-type.styles.scss
 
 .signup-account-type-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh; /* Adjust height as per your requirement */
+    justify-content: flex-start;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.title-container {
+    margin-bottom: 100px;
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
 }
 
 .button-container {
     display: flex;
-    gap: 10px; /* Adjust gap as per your requirement */
-    margin-top: 20px; /* Adjust margin as per your requirement */
+    flex-direction: column; 
+    gap: 10px;
+    width: 70%; // Assuming you want the buttons 70% of the container width, adjust as needed
+    position: relative; // Added for absolute positioning of "Next" button
 }
 
+.button-container > .btn {
+    width: 100%; 
+}
 
-// Adding comment to test 
+.button-container > .btn:last-child { // Specifically targets the "Next" button
+    width: 50%; // Making the "Next" button shorter, adjust as needed
+    position: absolute;
+    right: 0; 
+    top: calc(100% + 10px);  // Pushes it just below the second button. 10px is the gap you had set.
+}
