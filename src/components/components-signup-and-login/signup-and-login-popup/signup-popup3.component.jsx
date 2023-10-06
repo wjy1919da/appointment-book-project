@@ -17,7 +17,7 @@ import SignUpAccountType from './sign-up-account-type.component';
 // 注册&登录
 // 主页面
 const StepTracker = ({ currentStep }) => {
-    const steps = ['signUp', 'verifyEmail', 'gender', 'interest', 'download'];
+    const steps = ['accountType', 'signUp', 'verifyEmail', 'gender', 'interest', 'download'];
     return (
         <div className="step-tracker">
             {steps.map((step, index) => (
@@ -55,7 +55,7 @@ const SignupPopup3 = (props) => {
                             &times;
                         </button>
             </Modal.Header>
-            {/* {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />} */}
+            {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
             {userInfo.popupState === 'accountType' && <SignUpAccountType />}
             {userInfo.popupState === 'signUp' && <SignUpForm/>}
             {userInfo.popupState === 'login' && <LoginForm/>}
