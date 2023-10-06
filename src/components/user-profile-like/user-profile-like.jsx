@@ -63,6 +63,7 @@ const UserProfileLike = () => {
             authorName={post.username}
             likes={post.likeCount}
             isLike={true}
+            isProfile={true}
         />
     ));
     return (
