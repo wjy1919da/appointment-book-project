@@ -13,6 +13,7 @@ import LoginForm from './login-form.component';
 import SendVerifyEmail from './send-verify-email.component';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import SignUpAccountType from './sign-up-account-type.component';
 // 注册&登录
 // 主页面
 
@@ -50,7 +51,7 @@ const SignupPopup3 = (props) => {
             {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
             {userInfo.popupState === 'gender' && <ChooseGender/>}
             {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
-            {userInfo.popupState === 'download' && <SignUpDownloadPopUp />}
+            {/* {userInfo.popupState === 'download' && <SignUpDownloadPopUp />} */}
             {userInfo.popupState === 'success' && <SignUpFinal />}
             {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail') && <SocialSignUP />}
         </Modal>
