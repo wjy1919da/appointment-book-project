@@ -1,4 +1,4 @@
-import Footer from "../../components/footer/footer.component";
+import OriginalFooter from "../../components/footer/footer.component";
 import { Link} from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import Collapsible from '../../components/Collapsible-FQA/collapsible-FQA.component';
@@ -28,6 +28,10 @@ function safeJsonParse(str) {
         return undefined;
     }
 }
+const Footer = React.forwardRef((props, ref) => {
+    return <OriginalFooter ref={ref} {...props} />;
+});
+
 const SubProcedure = () => { 
     const checkWhichSectionInView = () => {
         const sections = ['description', 'consider', 'options', 'sideEffects', 'beforeAndAfter', 'alternative', 'faq', 'reference'];
@@ -59,7 +63,16 @@ const SubProcedure = () => {
                         recommendationElement.style.position = 'fixed';
                     }
                 }
-            } else {
+                if (recommendationElement) {
+                    const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
+                    if (footerTop <= recommendationBottom) {
+                        recommendationElement.style.display = 'none';
+                    } else {
+                        recommendationElement.style.display = 'block';
+                    }
+                }
+            } else 
+            {
                 //console.log("window.scrollY < 280",recommendationElement,slideElement);
                 if (slideElement) {
                     slideElement.style.top = '350px';
@@ -72,12 +85,12 @@ const SubProcedure = () => {
                     }
                 }
             }
+
             checkWhichSectionInView();
         }
     };    
     const [loadingTimeout, setLoadingTimeout] = useState(false);
     const footerRef = useRef(null);
-    
     useEffect(() => {
         const initialize = () => {
             //console.log('initialize');
@@ -335,7 +348,7 @@ const SubProcedure = () => {
         {isMobile && <div className='procedure-recommendation-container'>
                         <RecommendationGrid isMobile={false}  height={'300px'} />
                     </div>} 
-        <Footer ref={footerRef}/>
+                    <Footer ref={footerRef} />
     </div>
     )
 }}

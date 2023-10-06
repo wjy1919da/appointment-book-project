@@ -24,11 +24,14 @@ const SignUpForm = () => {
         username: z.string().nonempty("Username is required"),
         email: z.string().email(),
         password: z.string()
-            .min(8)
-            .max(16)
-            .refine(pass => /[A-Za-z]/.test(pass), {
-                message: "Password must contain at least one letter",
-            }),
+            .min(6)
+            .max(18)
+            .refine(password => 
+                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
+                {
+                    message: "Password must contain both letters and numbers."
+                }
+        ),
         birthday: z.string().nonempty("Birthday is required"),
     });    
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({

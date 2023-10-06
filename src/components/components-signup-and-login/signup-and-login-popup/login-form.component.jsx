@@ -20,8 +20,17 @@ const LoginForm = (props) => {
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const schema = z.object({
         email: z.string().email(),
-        password: z.string().min(8),
+        password: z.string()
+            .min(6)
+            .max(18)
+            .refine(password => 
+                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
+                {
+                    message: "Password must contain both letters and numbers."
+                }
+            ),
     });
+    
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
         mode: 'onChange'

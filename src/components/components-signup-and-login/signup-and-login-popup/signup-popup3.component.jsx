@@ -32,28 +32,15 @@ const StepTracker = ({ currentStep }) => {
 const SignupPopup3 = (props) => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const userInfo = userInfoQueryStore(state=>state.userInfo);
+    //console.log("userInfo in signup-popup3",userInfo);
     return (
         <Modal dialogClassName="signup-popup-modal"
                show={props.show} 
                onHide={props.onHide} 
                size="lg" 
-               style={{ marginTop:"100px" }}> 
-            <Modal.Header style={{ border: 'none', display: 'flex', justifyContent: 'flex-end', marginTop: '-10px' }}>
-                        <button 
-                            onClick={props.onHide} 
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                fontWeight: 'bold',
-                                fontSize: '24px',
-                                color: 'black',
-                                cursor: 'pointer',
-                                outline: 'none',
-                                
-                            }}
-                        >
-                            &times;
-                        </button>
+               style={{ marginTop:"100px" }}
+            > 
+            <Modal.Header closeButton style={{ borderBottom: 'none' }}>
             </Modal.Header>
             {userInfo.popupState !== 'login' && <StepTracker currentStep={userInfo.popupState} />}
             {userInfo.popupState === 'accountType' && <SignUpAccountType />}
