@@ -1,16 +1,22 @@
-// sign-up-account-type.styles.scss
-
 .signup-account-type-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between; 
     height: 100vh;
     padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.group-title-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px; // Adjusted the spacing between the title and the buttons, increase as needed
 }
 
 .title-container {
-    margin-bottom: 100px;
+    margin: 0; // No margin, we're using gap in the .group-title-buttons for spacing
     font-family: Open Sans;
     font-size: 30px;
     font-style: normal;
@@ -20,18 +26,32 @@
 .button-container {
     display: flex;
     flex-direction: column; 
-    gap: 10px;
-   // width: 70%; // Assuming you want the buttons 70% of the container width, adjust as needed
-    position: relative; // Added for absolute positioning of "Next" button
+    gap: 20px;
+    position: relative;
 }
 
 .button-container > .btn {
     width: 100%; 
 }
 
-.button-container > .btn:last-child { // Specifically targets the "Next" button
-    width: 50%; // Making the "Next" button shorter, adjust as needed
+.button-container > .btn:last-child { 
+    width: 50%; 
     position: absolute;
     right: 0; 
-    top: calc(100% + 10px);  // Pushes it just below the second button. 10px is the gap you had set.
+    top: calc(100% + 20px); 
+}
+.login-prompt-container {
+    text-align: center;
+    width: 100%; 
+    padding: 10px 0;
+
+    span {
+        color: black;
+    }
+
+    // Specific styles for the "Log in" link
+    button {
+        color: #F48C8A;
+        text-decoration: none; // This can also be included for extra safety, even though we've added it inline in JSX
+    }
 }
