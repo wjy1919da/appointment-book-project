@@ -13,7 +13,7 @@ const SignUpAccountType = () => {
 
     const handleLoginButtonClick = () => {
         console.log("Login button clicked!");
-        // Add your logic for the login button click event
+        switchPopupTab('login')
     };
 
     console.log('accountType', userInfo.accountType);
