@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap'; 
 import LoginRegisterTitle from './login-register-title.component'; 
 import './sign-up-account-type.styles.scss'; 
-
 import userInfoQueryStore from '../../../userStore.ts';
-
-import NextButton from './next-button.component'; 
+// import NextButton from './next-button.component'; 
 import MemberAndDoctorButton from './member-doctor-button.component'; 
 
 
@@ -43,7 +41,7 @@ const SignUpAccountType = () => {
                     }}
                 />
 
-                <NextButton title="Next" type="submit" disabled={!isValid} />
+                {/* <NextButton title="Next" type="submit" disabled={!isValid} /> */}
             </div>
         </div>
     );

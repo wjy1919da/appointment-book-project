@@ -7,14 +7,19 @@ const MemberAndDoctorButton = (props) => {
     const activeStyle = {
         borderRadius: '8px',
         border: 'none',
-        background: '#675D59'
+        background: '#675D59',
+        width: '348px',
+        padding: '18px 40px',
     };
 
     const defaultStyle = {
         borderRadius: '8px',
         border: '2px solid #675D59',
-        color: '#675D59'
-    };
+        background: 'white',
+        color: '#675D59',
+        width: '348px',
+        padding: '18px 40px',
+    };    
 
     const handleButtonClick = () => {
         setIsActive(!isActive);
@@ -35,4 +40,4 @@ const MemberAndDoctorButton = (props) => {
     );
 };
 
-export default MemberAndDoctorButton; // Don't forget to export the component
+export default MemberAndDoctorButton; 
