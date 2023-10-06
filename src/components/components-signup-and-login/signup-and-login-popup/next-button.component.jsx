@@ -8,7 +8,9 @@ const NextButton = (props) => {
             variant="primary"
             style={{ 
                 background: 'linear-gradient(90deg, #F48C8A 0%, #F0A484 100%)',
-                border: 'none'
+                border: 'none',
+                width: '348px',
+                padding: '18px 40px',
             }}
             type={props.type} // added this line to utilize the type prop
             disabled={props.disabled}

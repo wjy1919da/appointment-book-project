@@ -34,6 +34,7 @@ const MemberAndDoctorButton = (props) => {
             variant="primary"
             style={isActive ? activeStyle : defaultStyle}
             onClick={handleButtonClick}
+            disabled={props.disabled}
         >
             {props.title}
         </Button>
