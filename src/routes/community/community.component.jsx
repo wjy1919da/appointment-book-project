@@ -1,5 +1,6 @@
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
+import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
 import './community.styles.scss'
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
 import { useState } from 'react';
@@ -38,7 +39,9 @@ const Community = () => {
     };
     return (
         <div>
+            <PostPageMain />
             <div className='doctor-post-outer-container'>
+                <h1 className='doctor-post-outer-title'>Community Posts</h1>
                 <div className='doctor-post-header-container'>
                     <PostDropDown options={dropdownOptionsByCategory} handleFilters={handleFilters} menuLabel = "Category" wordAfterMenuLabel = "All"/>
                     <PostDropDown options={dropdownOptionsByRole} handleFilters={handleFilters} menuLabel = "Post By" wordAfterMenuLabel = "All"/>
