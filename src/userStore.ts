@@ -22,6 +22,7 @@ interface userInfo {
     userId?: string;
     email?: string;
     gender?: number;
+    accountType?: string;
     birthday?: string;
     username?: string;
     password?: string;
@@ -35,6 +36,7 @@ interface userInfoQuery {
     setEmail: (email: string) => void;
     setPassword: (password: string) => void;
     setGender: (gender: number) => void;
+    setAccountType: (accountType: string) => void;
     setInterested: (interest: string) => void;
     setGoogleToken: (token: string) => void;
     setUsername: (username: string) => void;
@@ -53,12 +55,14 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         email: "",
         password: "",
         gender: 0,
+        accountType: "",
         birthday: "",
         googleToken: "",
         selectedInterests: new Set<string>(),
         // Initial state is closed
         popupState: "closed"
     },
+
     setEmail: (email: string) => {
         set((store) => ({
             userInfo: { ...store.userInfo, email }
@@ -72,6 +76,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     setGender: (gender: number) => {
         set((store) => ({
             userInfo: { ...store.userInfo, gender }
+        }));
+    },
+    setAccountType: (accountType: string) => {
+        set((store) => ({
+            userInfo: { ...store.userInfo, accountType }
         }));
     },
     setGoogleToken: (token: string) => {
