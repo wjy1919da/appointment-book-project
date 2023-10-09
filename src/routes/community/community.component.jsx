@@ -44,7 +44,6 @@ const Community = () => {
     <div>
       <PostPageMain />
       <div className='doctor-post-outer-container'>
-        <h1 className='doctor-post-outer-title'>Community Posts</h1>
         <div className='doctor-post-header-container'>
           <PostDropDown
             options={dropdownOptionsByCategory}

@@ -17,30 +17,32 @@ import 'react-tabs/style/react-tabs.css';
 // 注册&登录
 // 主页面
 const SignupPopup3 = (props) => {
-    const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
-    const userInfo = userInfoQueryStore(state=>state.userInfo);
-    //console.log("userInfo in signup-popup3",userInfo);
-    return (
-        <Modal dialogClassName="signup-popup-modal"
-               show={props.show} 
-               onHide={props.onHide} 
-               size="lg" 
-               style={{ marginTop:"100px" }}
-            > 
-            <Modal.Header closeButton style={{ borderBottom: 'none' }}>
-            </Modal.Header>
-            <Modal.Body>
-                {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail/>}
-                {userInfo.popupState === 'signUp' && <SignUpForm/>}
-                {userInfo.popupState === 'login' && <LoginForm/>}
-                {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
-                {userInfo.popupState === 'gender' && <ChooseGender/>}
-                {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
-                {userInfo.popupState === 'success' && <SignUpFinal />}
-                {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail'|| userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
-            </Modal.Body>
-        </Modal>
-    )
-}
+  const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  //console.log("userInfo in signup-popup3",userInfo);
+  return (
+    <Modal
+      dialogClassName='signup-popup-modal'
+      show={props.show}
+      onHide={props.onHide}
+      size='lg'
+      style={{ marginTop: '100px' }}
+    >
+      <Modal.Header closeButton style={{ borderBottom: 'none' }}></Modal.Header>
+      <Modal.Body>
+        {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail />}
+        {userInfo.popupState === 'signUp' && <SignUpForm />}
+        {userInfo.popupState === 'login' && <LoginForm />}
+        {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
+        {userInfo.popupState === 'gender' && <ChooseGender />}
+        {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
+        {userInfo.popupState === 'success' && <SignUpFinal />}
+        {(userInfo.popupState === 'signUp' ||
+          userInfo.popupState === 'verifyEmail' ||
+          userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
+      </Modal.Body>
+    </Modal>
+  );
+};
 
 export default SignupPopup3;
