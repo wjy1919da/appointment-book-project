@@ -4,6 +4,7 @@
     grid-gap: 10px; /* 列之间的间隙 */
     overflow-x: auto; /* 当容器的内容超出容器宽度时，显示水平滚动条 */
     white-space: nowrap; /* 防止内容换行 */
+    //margin-top: 15px;
 }
 .recommendation-title{
     color: #000;
@@ -12,8 +13,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 100%; /* 17.007px */
+    //height: 20px;
 }
 .recommendation-grid-outer-container{
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
