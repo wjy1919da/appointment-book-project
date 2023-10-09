@@ -59,15 +59,16 @@ const App = () => {
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-        <Route path="userProfile" element={
+        {/* <Route path="userProfile" element={
           <PrivateRoute>
             <UserProfilePage />
           </PrivateRoute>
-        }/>
+        }/> */}
+
         <Route path='download' element={<Download />} />
         <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />
-        {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
+        <Route path='userProfile' element={<UserProfilePage />} />
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='*' element={<PageNotFound />} />
