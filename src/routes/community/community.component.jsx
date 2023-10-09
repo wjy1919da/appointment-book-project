@@ -9,7 +9,7 @@ import PostPageMain from '../../components/components-posts/community-post-main/
 import './community.styles.scss'
 
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
-import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
+
 
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
