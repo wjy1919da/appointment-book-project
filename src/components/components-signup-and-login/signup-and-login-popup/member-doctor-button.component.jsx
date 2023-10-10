@@ -8,8 +8,9 @@ const MemberAndDoctorButton = (props) => {
         borderRadius: '8px',
         border: 'none',
         background: '#675D59',
-        width: '348px',
+        width: '300px',
         padding: '18px 40px',
+
     };
 
     const defaultStyle = {
@@ -17,7 +18,7 @@ const MemberAndDoctorButton = (props) => {
         border: '2px solid #675D59',
         background: 'white',
         color: '#675D59',
-        width: '348px',
+        width: '300px',
         padding: '18px 40px',
     };    
 
