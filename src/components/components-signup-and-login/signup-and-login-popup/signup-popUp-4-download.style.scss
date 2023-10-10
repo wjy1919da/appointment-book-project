@@ -1,45 +1,55 @@
-.signUp-download
-{
-    margin-top: 50px;
+.signUp-download {
+
     align-items: center;
     justify-content: center;
     text-align: center;
 
-    .signUp-download-title
-    {
-        color: #000;
-        font-family: Playfair Display;
-        font-size: 36px;
+    .signUp-download-header {
+        color: #675D59;
+        font-family: Open Sans;
+        font-size: 18px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 550;
         line-height: 135%;
     }
-    .signUp-download-text
-    {
-        margin-top: 10px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 260px;
-        height: 62px;
+
+    .signUp-download-title {
+        margin-top: 20px;
         color: #000;
-        text-align: center;
-        font-family: Lora;
-        font-size: 10px;
+        font-family: Open Sans;
+        font-size: 30px;
         font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+        font-weight: 600;
+        line-height: 135%;
+        margin-bottom: 20px;
+
     }
-    .signUp-download-QR-Code
-    {
+
+    .signUp-download-QR-Code {
         margin-left: auto;
         margin-right: auto;
         width: 200px;
         height: 200px;
         flex-shrink: 0;
     }
-    .signUp-download-button
-    {
+
+    .signUp-download-button {
         margin-top: 45px;
         margin-bottom: 50px;
     }
+    .charmlife-logo-image {
+        display: inline-block;
+        vertical-align: middle; 
+        height: 30px; 
+        width: auto; 
+        margin-left: 5px;
+    }
+    
+    .signUp-title-part-2 {
+        font-family: Open Sans;
+        color: #000;
+        font-size: 23px;
+        font-weight: 600;
+    }
+
 }
