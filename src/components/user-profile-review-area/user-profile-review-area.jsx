@@ -157,7 +157,11 @@ const UserProfileReview = () => {
         {/* ME */}
         <div className='recommend-doctor-box-wrapper'>
           {doctorsCard.map((x, index) => (
-            <div className='recommend-doctor-box'>
+            <div
+              className={`recommend-doctor-box ${
+                index === 0 && 'recommend-doctor-filtered-box-1'
+              }`}
+            >
               <div className='box-1'>
                 <img src={DoctorProfilePicture} alt='' />
                 <div className='username-review-card-rate-star'>
@@ -199,7 +203,7 @@ const UserProfileReview = () => {
           <span>How did User_Name think?</span>
         </div>
         <div className='summary-rate'>
-          <span>The review Title</span>
+          <span>The Review Title</span>
           <StarRate rateScore={4} />
         </div>
         <div className='summary-text'>
