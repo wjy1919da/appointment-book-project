@@ -1,115 +1,129 @@
-.user-profile-basic-container
-{
-    position: absolute;
-    top:120px;
-    left:6%;
-    display: flex;
-    gap:49px;
-    width:100%;
+* {
+  color: var(--text-1-footer, #352c29);
+  font-family: Open Sans;
+  font-style: normal;
+  line-height: normal;
+}
 
-    .user-profile-basic-avatar
-    {
-        order:0;
-    }
-    .user-profile-basic-information-container
-    {
-        order:1;
+.user-profile-basic-container {
+  position: absolute;
+  top: 120px;
+  left: 6%;
+  display: flex;
+  gap: 49px;
+  width: 100%;
+
+  .user-profile-basic-avatar {
+    order: 0;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .user-profile-basic-information-container {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    .user-profile-basic-name-and-editButton {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      width: 78%;
+      .user-profile-basic-name {
         display: flex;
         flex-direction: column;
-        width:80%;
-        .user-profile-basic-name-and-editButton
-        {
-            display: flex;
-            margin-top: 10px;
-            justify-content: space-between;
-            width:78%;
-            //justify-content: center;
-            align-items: center;
-            .user-profile-basic-name
-            {
-                display: flex;
-                flex-direction: column;
-                gap:30px;
-                .user-profile-basic-name-title
-                {
-                    display: flex;
-                    align-items: center;
-                    gap:17px;
-                    color: #000;
-                    /* Heading 3 */
-                    font-family: Playfair Display;
-                    font-size: 40px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 135%; /* 54px */
-                }
-                .user-profile-basic-name-text
-                {
-                    color: #000;
-                    /* Body 3 */
-                    font-family: Lora;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 160%; /* 25.6px */
-                }
-
-            }
-            .user-profile-basic-edit-button
-            {
-                
-            }
+        gap: 30px;
+        .user-profile-basic-name-title {
+          display: flex;
+          align-items: center;
+          gap: 17px;
+          color: #000;
+          /* Heading 3 */
+          font-family: Playfair Display;
+          font-size: 40px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 135%; /* 54px */
         }
-        .user-profile-basic-info-text
-        {
-            margin-top: 20px;
-            width:80%;
-            color: #000;
-            font-family: PingFang SC;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 160%; 
+        .user-profile-basic-user-name {
+          font-size: 34px;
+          font-weight: 700;
         }
-        .user-profile-basic-info-following-section
-        {
-            display: flex;
-            width: 325px;
-            align-items: flex-start;
-            gap: 30px;
-            margin-top: 30px;
-            .user-profile-number-cate-combimation
-            {
-                display: flex;
-                width: 59px;
-                height: 32px;
-                flex-shrink: 0;
-                align-items: center;
-                gap:5px;
-                .user-profile-black-text
-                {
-                    color: #000;
-                    text-align: center;
-                    font-family: PingFang SC;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 160%; 
-                }
-                .user-profile-gray-text
-                {
-                    font-family: PingFang SC;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 160%;
-                    /* identical to box height, or 16px */
-                    width:70%;
-                    display: flex;
-                    align-items: center;
-                    color: #A5A6A8;
-                }
-            }
+        .user-profile-basic-name-text {
+          color: #000;
+          /* Body 3 */
+          font-family: Lora;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 160%; /* 25.6px */
         }
+        .user-profile-basic-create-name {
+          font-size: 21px;
+          font-weight: 600;
+        }
+      }
     }
+
+    .user-profile-basic-booking-button-container button {
+      border-radius: 8px;
+      border: 2px solid var(--new-gradient, #f48c8a);
+      margin-left: 12px;
+      padding: 10px 22px;
+    }
+
+    .user-profile-basic-info-text {
+      margin-top: 20px;
+      width: 80%;
+      color: #000;
+      font-family: PingFang SC;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+    }
+    .user-profile-basic-description {
+      font-size: 18px;
+      font-weight: 400;
+      width: 842px;
+    }
+    .user-profile-basic-info-following-section {
+      display: flex;
+      width: 325px;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 30px;
+      .user-profile-number-cate-combimation {
+        display: flex;
+        width: 59px;
+        height: 32px;
+        flex-shrink: 0;
+        align-items: center;
+        gap: 5px;
+        .user-profile-black-text {
+          color: #000;
+          text-align: center;
+          font-family: PingFang SC;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 160%;
+        }
+        .user-profile-gray-text {
+          font-family: PingFang SC;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 160%;
+          /* identical to box height, or 16px */
+          width: 70%;
+          display: flex;
+          align-items: center;
+          color: #a5a6a8;
+        }
+      }
+    }
+  }
 }
