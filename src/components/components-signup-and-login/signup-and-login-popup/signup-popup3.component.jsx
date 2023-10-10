@@ -46,16 +46,15 @@ const SignupPopup3 = (props) => {
     >
       <Modal.Header closeButton style={{ borderBottom: 'none' }}></Modal.Header>
       <Modal.Body>
-        {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail />}
-        {userInfo.popupState === 'signUp' && <SignUpForm />}
-        {userInfo.popupState === 'login' && <LoginForm />}
-        {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
-        {userInfo.popupState === 'gender' && <ChooseGender />}
-        {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
-        {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
-        {(userInfo.popupState === 'signUp' ||
-          userInfo.popupState === 'verifyEmail' ||
-          userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
+      {userInfo.popupState === 'accountType' && <SignUpAccountType />}
+      {userInfo.popupState === 'login' && <LoginForm />}
+      {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
+      {userInfo.popupState === 'gender' && <ChooseGender />}
+      {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
+      {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
+      {(userInfo.popupState === 'signUp' ||
+       userInfo.popupState === 'verifyEmail' ||
+      userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
       </Modal.Body>
     </Modal>
   );
