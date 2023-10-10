@@ -289,13 +289,13 @@ const Header = () => {
                             <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                             </input>
                         </div>  */}
-              {userInfo.token && (
-                <div className='header-login-logo'>
-                  <a href='/userProfile'>
-                    <img src={loginIcon} alt='login Image'></img>
-                  </a>
-                </div>
-              )}
+              {/* {userInfo.token && ( */}
+              <div className='header-login-logo'>
+                <a href='/userProfile'>
+                  <img src={loginIcon} alt='login Image'></img>
+                </a>
+              </div>
+              {/* )} */}
               <div className='header-login-text'>
                 {!userInfo.token && (
                   <div onClick={() => togglePopup(true, 'login')}>login</div>
