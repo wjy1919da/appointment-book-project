@@ -9,10 +9,10 @@ const NextButton = (props) => {
             style={{ 
                 background: 'linear-gradient(90deg, #F48C8A 0%, #F0A484 100%)',
                 border: 'none',
-                width: '348px',
+                width: '300px',
                 padding: '18px 40px',
             }}
-            type={props.type} // added this line to utilize the type prop
+            type={props.type}
             disabled={props.disabled}
         >
             {props.title}
@@ -21,3 +21,8 @@ const NextButton = (props) => {
 };
 
 export default NextButton;
+
+
+
+
+
