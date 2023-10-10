@@ -4,9 +4,12 @@ import React, { useLayoutEffect } from 'react';
 // components
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
-import './community.styles.scss';
-import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
+
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
+import './community.styles.scss'
+
+import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
+
 
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -57,6 +60,7 @@ const Community = () => {
             menuLabel='Post By'
             wordAfterMenuLabel='All'
           />
+
         </div>
         <DoctorPostGrid />
       </div>

@@ -18,30 +18,30 @@ import DoctorSearchPopup from '../components-doctor-search/doctor-search-popup/d
 const UserProfileReview = () => {
     const hashids = new Hashids('Encode the Url');
     const [activeTab, setActiveTab] = useState("like");  // By default, "like" is the active taba
-    const mergeDoctorsByNickname = (pages) => {
-        const mergedDoctors = {};
+    // const mergeDoctorsByNickname = (pages) => {
+    //     const mergedDoctors = {};
         
-        // Flatten the data into a single array
-        const flatData = pages.flatMap(page => page.data || []);
+    //     // Flatten the data into a single array
+    //     const flatData = pages.flatMap(page => page.data || []);
       
-        flatData.forEach(doctor => {
-          const { nickname, name } = doctor;
+    //     flatData.forEach(doctor => {
+    //       const { nickname, name } = doctor;
       
-          if (mergedDoctors[nickname]) {
-            // If doctor already exists, add the new programTitle to the existing one
-            mergedDoctors[nickname].name.push(name);
-          } else {
-            // If doctor doesn't exist, add them to the object
-            mergedDoctors[nickname] = {
-              ...doctor,
-              name: [name],  // Use an array to store programTitles
-            };
-          }
-        });
+    //       if (mergedDoctors[nickname]) {
+    //         // If doctor already exists, add the new programTitle to the existing one
+    //         mergedDoctors[nickname].name.push(name);
+    //       } else {
+    //         // If doctor doesn't exist, add them to the object
+    //         mergedDoctors[nickname] = {
+    //           ...doctor,
+    //           name: [name],  // Use an array to store programTitles
+    //         };
+    //       }
+    //     });
       
-        // Convert the object back into an array
-        return Object.values(mergedDoctors);
-    };
+    //     // Convert the object back into an array
+    //     return Object.values(mergedDoctors);
+    // };
     const {
         data,
         error,
@@ -64,9 +64,10 @@ const UserProfileReview = () => {
             container.scrollLeft -= 200;  // Scroll by 200 pixels to the left
         }
     }
-    const mergedData = useMemo(() => {
-        return data ? mergeDoctorsByNickname(data.pages) : [];
-       }, [data]);
+    const mergedData = data ? data.pages.flatMap(page => page.data || []) : [];
+    // const mergedData = useMemo(() => {
+    //     return data ? mergeDoctorsByNickname(data.pages) : [];
+    //    }, [data]);
     return (
         <div className="user-profile-review-container">
             <div className='review-recommande-doctor'>

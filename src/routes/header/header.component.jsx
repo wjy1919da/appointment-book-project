@@ -298,9 +298,10 @@ const Header = () => {
               {/* )} */}
               <div className='header-login-text'>
                 {!userInfo.token && (
-                  <div onClick={() => togglePopup(true, 'login')}>login</div>
+                  <div onClick={() => togglePopup(true, 'accountType')}>
+                    login
+                  </div>
                 )}
-
                 {userInfo.userId && <div>{`Hello, ${userInfo.userId}`}</div>}
                 {userInfo.userId && (
                   <div onClick={() => handleLogOutClick()}>Log out</div>
