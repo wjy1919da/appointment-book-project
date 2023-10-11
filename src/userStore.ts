@@ -16,6 +16,7 @@ interface DecodedToken {
     8. open popup and stay in sign in page
     9. open popup and stay in sign up page
 */
+
 interface userInfo {
     token?: string;
     googleToken?: string;

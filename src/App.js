@@ -20,7 +20,7 @@ import CreatePostOfUser from './components/create-post/create-post.jsx';
 import { Create } from '@mui/icons-material';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
-
+import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -71,6 +71,7 @@ const App = () => {
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='*' element={<PageNotFound />} />
+        <Route path ='doctorSignup' element = {< DoctorSignUpProcess/>} />
       </Route>
     </Routes>
   // </DataRouter> 

@@ -1,0 +1,141 @@
+
+.doctor-personal-information-main-container
+{
+    width: 1000px;
+    height: 500px;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.error-message {
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+.doctor-Personal-Information-container
+{
+
+    display: flex;
+    .doctor-personal-information-right-section
+    {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        margin-top: 40px;
+        gap:20px;
+        width:50%;
+    }
+    .doctor-personal-information-left-section
+    {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        margin-top:40px;
+        gap:20px;
+        width:50%;
+    }
+    .doctor-information-customInput
+    {
+        width: 400px;
+        height: 30px;
+        padding: 10px 12px; /* Add some padding */
+        font-size: 12px; /* Adjust the font size */
+        border-radius: 8px;
+        border: 1px solid #F8F8F8;
+        background: #FFF;
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
+    }
+    .doctor-personal-address
+    {
+        display: flex;
+        gap:40px;
+    }
+    .doctor-information-address-customInput
+    {
+        width: 180px;
+        height: 30px;
+        padding: 10px 12px; /* Add some padding */
+        font-size: 12px; /* Adjust the font size */
+        border-radius: 8px;
+        border: 1px solid #F8F8F8;
+        background: #FFF;
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
+    }
+    .terms-agreement {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* For spacing between checkbox and label */
+        color: #838383;
+/* Interactive 3 */
+        font-family: Open Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+    }
+    
+    .terms-checkbox {
+        appearance: none;         /* Remove default checkbox appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        width: 15px;
+        height: 15px;
+        background: #FFF;
+        border: 1px solid #F8F8F8;
+        border-radius: 4px;
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
+        cursor: pointer;          /* Makes it clear it's clickable */
+    }
+    .terms-checkbox:checked::after {
+        content: '\2714';               /* Unicode checkmark */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;               /* Adjust to fit within the checkbox */
+        font-weight: bold;             /* Make the checkmark bold */
+        color: pink; 
+    }
+
+    .terms-label {
+        cursor: pointer; /* Makes the label act like a clickable element */
+        /* Add more styling if needed */
+    }
+    .charm-life-term-service
+    {
+        margin-left: 5px;
+        color:pink;
+    }
+
+}
+.doctor-personal-informtion-title
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.doctor-personal-info-text
+{
+    margin-top: 20px;
+    color: #352C29;
+/* Interactive 3 */
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 16px */
+}
+.doctor-Personal-Information-verify-button
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
