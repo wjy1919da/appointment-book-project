@@ -169,9 +169,18 @@
     line-height: normal;
   }
 
+  .post-main-likes-container {
+    img {
+      position: absolute;
+      left: 160px;
+      bottom: -355px;
+      z-index: 100;
+    }
+  }
+
   .post-main-photograph-like {
     position: absolute;
-    left: 160px;
+    left: 186px;
     bottom: -370px;
     z-index: 100;
     color: var(--text-2-button, #675d59);
