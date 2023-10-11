@@ -7,9 +7,9 @@ import SubProcedure from './routes/procedure/sub-procedure.component';
 import Instrument from './routes/instrument/instrument.component';
 import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
-import UserInfo from "./routes/user-info/user-info.component";
+import UserInfo from './routes/user-info/user-info.component';
 import Doctor from './routes/doctor/doctor.component';
-import DoctorPost from  './routes/community/community.component';
+import DoctorPost from './routes/community/community.component';
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -30,21 +30,21 @@ import Cookies from 'js-cookie';
 import Verification from './routes/verification/verificaiton.component';
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-  const userInfo = userInfoQueryStore(state => state.userInfo);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
   /* Load token from cookie*/
   console.log('userInfo init', userInfo);
-  const token = userInfoQueryStore(state => state.userInfo.token);
-  const setToken = userInfoQueryStore(state => state.setToken);
+  const token = userInfoQueryStore((state) => state.userInfo.token);
+  const setToken = userInfoQueryStore((state) => state.setToken);
   useEffect(() => {
     const cookieToken = Cookies.get('token');
     if (cookieToken && cookieToken !== token) {
-        setToken(cookieToken);
+      setToken(cookieToken);
     }
-  }, []);  
-  
+  }, []);
+
   return (
     // <DataRouter>
-      <Routes>
+    <Routes>
       <Route path='/' element={<Header />}>
         {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
         <Route index element={<Home />} />
@@ -52,29 +52,34 @@ const App = () => {
         <Route path='procedure/breast' element={<BreastProcedure />} />
         <Route path='procedure/body' element={<BodyProcedure />} />
         <Route path='procedure/:name' element={<SubProcedure />} />
-        <Route path='/procedureMobile' element={isMobile ? < DoctorProcudreMobile/>: <Download />} />
+        <Route
+          path='/procedureMobile'
+          element={isMobile ? <DoctorProcudreMobile /> : <Download />}
+        />
         <Route path='doctor' element={<Doctor />} />
         <Route path='instrument' element={<Instrument />} />
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
-        <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-        <Route path="userProfile" element={
+        <Route path='doctor/:encodedMemberId' element={<IndividualDoctor />} />
+
+        {/* <Route path="userProfile" element={
           <PrivateRoute>
             <UserProfilePage />
           </PrivateRoute>
-        }/>
+        }/> */}
+
         <Route path='download' element={<Download />} />
-        <Route path = 'create-post' element ={<CreatePostOfUser/>} />
+        <Route path='create-post' element={<CreatePostOfUser />} />
         <Route path='health-check' element={<HealthCheck />} />
-        {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
+        <Route path='userProfile' element={<UserProfilePage />} />
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
-  // </DataRouter> 
+    // </DataRouter>
   );
-}
+};
 
 export default App;
