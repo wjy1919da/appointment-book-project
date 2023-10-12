@@ -8,6 +8,7 @@ import './community-post-main.scss';
 import ArrowRight from '../../../assets/post/iconoir_arrow-right.svg';
 import PhotoGirl from '../../../assets/post/pic.png';
 import Photo from '../../../assets/post/decoration-post-1.png';
+import Heart from '../../../assets/post/heart_like.svg';
 
 const PostPageMain = () => {
   return (
@@ -31,7 +32,10 @@ const PostPageMain = () => {
             <p className='post-main-photograph-caption'>
               Top Makeup Trends for Spring 2023
             </p>
-            <p className='post-main-photograph-like'>1.8k</p>
+            <div className='post-main-likes-container'>
+              <img src={Heart} alt='Heart-Icon' />
+              <p className='post-main-photograph-like'>1.8k</p>
+            </div>
           </div>
 
           <div className='post-main-inner-container'>
