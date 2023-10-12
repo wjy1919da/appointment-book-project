@@ -10,9 +10,9 @@ import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginForm from './login-form.component';
-import SignUpDownloadPopUp from './signup-popUp-4-download';
 import SendVerifyEmail from './send-verify-email.component';
 import SignUpAccountType from './sign-up-account-type.component';
+import SignUpDownloadPopUp from './signup-popUp-4-download';
 
 // 注册&登录
 // 主页面
