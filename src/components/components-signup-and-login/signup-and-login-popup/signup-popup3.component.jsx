@@ -48,6 +48,8 @@ const SignupPopup3 = (props) => {
       <Modal.Body>
       {userInfo.popupState === 'accountType' && <SignUpAccountType />}
       {userInfo.popupState === 'login' && <LoginForm />}
+      {userInfo.popupState === 'signUp' && <SignUpForm />}
+      {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail />}
       {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
       {userInfo.popupState === 'gender' && <ChooseGender />}
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}

@@ -21,6 +21,7 @@ const SignUpAccountType = () => {
     return (
         <div className="signup-account-type-container">
             <div className="group-title-buttons">
+                
                 <div className="title-container">
                     Join Charm as a...
                 </div>
@@ -28,8 +29,8 @@ const SignUpAccountType = () => {
                     <MemberAndDoctorButton 
                         title="Doctor"
                         onClick={() => {
-                            console.log('Doctor button clicked');  
-                            setAccountType('doctor');
+                            //console.log('Doctor button clicked');  
+                            setAccountType('DOCTOR');
                             if (userInfo.accountType === 'doctor') {
                                 setAccountType(null);
                             } else {
@@ -41,27 +42,23 @@ const SignUpAccountType = () => {
                     <MemberAndDoctorButton 
                         title="Member"
                         onClick={() => {
-                            console.log('Member button clicked');  
+                            //console.log('Member button clicked');  
                             setAccountType('member');
                             if (userInfo.accountType === 'member') {
                                 setAccountType(null);
                             } else {
-                                setAccountType('member');
+                                setAccountType('USER');
                             }
                         }}
                         disabled={userInfo.accountType && userInfo.accountType !== 'member'}
                     />
                 </div>
             </div>
-            <NextButton title="Next" type="submit" disabled={!userInfo.accountType} />
+            <NextButton title="Next" onClick={()=>switchPopupTab('signUp')} disabled={!userInfo.accountType} />
             <div className="login-prompt-container">
-    <span>Already have an account? </span> 
-  
-    <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none' }} onClick={handleLoginButtonClick}>  Log in</button>
-
-</div>
-
-
+                <span>Already have an account? </span> 
+                <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none' }} onClick={handleLoginButtonClick}>  Log in</button>
+            </div>
         </div>
     );
 };

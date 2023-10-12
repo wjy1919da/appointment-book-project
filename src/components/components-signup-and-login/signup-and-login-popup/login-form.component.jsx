@@ -12,8 +12,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import LoginRegisterTitle from './login-register-title.component';
 import { Button } from 'react-bootstrap';
-import { FormControl, Form, InputGroup } from 'react-bootstrap';
-import CustomInput from '../custom-input/custom-input.component';
+// import { FormControl, Form, InputGroup } from 'react-bootstrap';
+// import CustomInput from '../custom-input/custom-input.component';
+import { FormControl, Text } from '@chakra-ui/react';
 
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
@@ -71,7 +72,7 @@ const LoginForm = (props) => {
                 <div className='login-title-container'>
                     <LoginRegisterTitle title={"Log in"} subTitle={"Welcome back"}/>
                 </div>
-                {/* <FormControl as="form" onSubmit={handleSubmit(onSubmit)}>
+                <FormControl as="form" onSubmit={handleSubmit(onSubmit)}>
                      <FormControl isInvalid={!!errors.email} mb="16px">
                         <Text 
                             mb="3px"
@@ -118,8 +119,8 @@ const LoginForm = (props) => {
                     <div className='login-button-section'>
                         <Button as="input" type="submit" value="Login" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                     </div>
-                </FormControl> */}
-                <div className="mb-3">
+                </FormControl>
+                {/* <div className="mb-3">
                     <Form.Label className="d-block" htmlFor="basic-url">Enter your Email Address</Form.Label>
                     <InputGroup hasValidation>
                         <CustomInput 
@@ -131,7 +132,7 @@ const LoginForm = (props) => {
                             {errors.email?.message} 
                         </Form.Control.Feedback>
                     </InputGroup>
-                </div>
+                </div> */}
                 <SocialSignUP onHide={props.onHide} />
                 
             </div>
