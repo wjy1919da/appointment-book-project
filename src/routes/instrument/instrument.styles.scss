@@ -1,78 +1,120 @@
 .instrument-container {
-    background: rgba($color: #51A3BF, $alpha: 0.06);
+    // background: rgba($color: #51A3BF, $alpha: 0.06);
+    background: #FBFCFF;
+    // .instrument-pic {
+    //     width: 100%;
+    //     height: 550px;
+    //     object-fit: cover;
+    //     opacity: 0.8;
+    // }
 
-    .instrument-pic {
-        width: 100%;
-        height: 550px;
-        object-fit: cover;
-        opacity: 0.8;
-    }
-
-    @media (min-width: 768px) {
-        .instrument-title {
-            font-size: 43px;
+    @media (min-width: 768px) { // desktop
+        .instrument-page-title {
+            padding-top: 8rem;
+            font-size: 60px;
+            font-weight: 700;
+            width: 55%;
+        }
+        .instrument-title-container {
+            width: 90%;
+            margin: auto;
+        }
+        .instrument-page-subtitle {
             font-weight: 600;
-            color: #333333;
-            line-height: 50px;
-            margin: 122px auto 0;
-            text-align: center;
+            font-size: 21px;
         }
+        .instrument-top-row {
+            display: flex;
+            justify-content: right;
+            padding-bottom: 4rem;
+        }
+        .instrument-top-img-container {
+            width:50%;
+            height: 22rem;
+            right:0px;
+            background: linear-gradient(115deg, #F48C8A 60%, #F0A484);
+            border-radius: 1000px 0px 0px 1000px;
+            position: relative; 
+            // overflow: hidden;
+        }
+        .instrument-doctor-img-container {
+            position: absolute;
+            right: 25%;
+            bottom: -3px;
+            width: 19rem;
+        }
+        .instrument-doctor-img {
+            width: 100%;
+        }
+        // .instrument-title {
+        //     font-size: 43px;
+        //     font-weight: 600;
+        //     color: #333333;
+        //     line-height: 50px;
+        //     margin: 122px auto 0;
+        //     text-align: center;
+        // }
     
-        .instrument-divider {
-            width: 10%;
-            height: 6px;
-            background: #3397B9;
-            opacity: 1;
-            border-color: #3397B9;
-            border-radius: 3px;
-            margin: 15px auto 60px;
-        }
+        // .instrument-divider {
+        //     width: 10%;
+        //     height: 6px;
+        //     background: #3397B9;
+        //     opacity: 1;
+        //     border-color: #3397B9;
+        //     border-radius: 3px;
+        //     margin: 15px auto 60px;
+        // }
     }
 
-    @media (max-width: 768px) {
-        .instrument-title {
-            font-size: 35px;
-            font-weight: 500;
-            color: #333333;
-            line-height: 50px;
-            margin: 122px auto 0;
-            text-align: center;
-        }
+    @media (max-width: 768px) { // tablet
+        // .instrument-title {
+        //     font-size: 35px;
+        //     font-weight: 500;
+        //     color: #333333;
+        //     line-height: 50px;
+        //     margin: 122px auto 0;
+        //     text-align: center;
+        // }
     
-        .instrument-divider {
-            width: 10%;
-            height: 4px;
-            background: #3397B9;
-            opacity: 1;
-            border-color: #3397B9;
-            border-radius: 3px;
-            margin: 15px auto 60px;
-        }
+        // .instrument-divider {
+        //     width: 10%;
+        //     height: 4px;
+        //     background: #3397B9;
+        //     opacity: 1;
+        //     border-color: #3397B9;
+        //     border-radius: 3px;
+        //     margin: 15px auto 60px;
+        // }
     }
 
-    @media (max-width: 576px) {
-        .instrument-title {
-            font-size: 29px;
-            font-weight: 600;
-            color: #333333;
-            line-height: 50px;
-            margin: 122px auto 0;
-            text-align: center;
-        }
+    @media (max-width: 576px) { // phone
+        // .instrument-title {
+        //     font-size: 29px;
+        //     font-weight: 600;
+        //     color: #333333;
+        //     line-height: 50px;
+        //     margin: 122px auto 0;
+        //     text-align: center;
+        // }
     
-        .instrument-divider {
-            width: 10%;
-            height: 3px;
-            background: #3397B9;
-            opacity: 1;
-            border-color: #3397B9;
-            border-radius: 3px;
-            margin: 5px auto 40px;
-        }
+        // .instrument-divider {
+        //     width: 10%;
+        //     height: 3px;
+        //     background: #3397B9;
+        //     opacity: 1;
+        //     border-color: #3397B9;
+        //     border-radius: 3px;
+        //     margin: 5px auto 40px;
+        // }
     }
 
     .instrument-grid-container {
         width: 82.6%;
         margin: 0 auto 55px;
     }
+}
+
+.instrument-text {
+    font-family: 'Open Sans';
+    color: #352C29;
 }
