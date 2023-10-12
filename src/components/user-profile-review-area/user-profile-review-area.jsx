@@ -63,31 +63,6 @@ const UserProfileReview = () => {
 
   const hashids = new Hashids('Encode the Url');
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
-  // const mergeDoctorsByNickname = (pages) => {
-  //     const mergedDoctors = {};
-
-  //     // Flatten the data into a single array
-  //     const flatData = pages.flatMap(page => page.data || []);
-
-  //     flatData.forEach(doctor => {
-  //       const { nickname, name } = doctor;
-
-  //       if (mergedDoctors[nickname]) {
-  //         // If doctor already exists, add the new programTitle to the existing one
-  //         mergedDoctors[nickname].name.push(name);
-  //       } else {
-  //         // If doctor doesn't exist, add them to the object
-  //         mergedDoctors[nickname] = {
-  //           ...doctor,
-  //           name: [name],  // Use an array to store programTitles
-  //         };
-  //       }
-  //     });
-
-  //     // Convert the object back into an array
-  //     return Object.values(mergedDoctors);
-  // };
-
   const {
     data,
     error,
@@ -128,9 +103,10 @@ const UserProfileReview = () => {
           className='review-recommande-doctor-list-container'
           ref={doctorCardListRef}
         >
+          {/* SAVE !!!!!!! */}
           {/* {isLoading ? */}
           {/* <div><p>is Loading</p></div> : */}
-          {data && (
+          {/* {data && (
             <div className='custom-grid'>
               {mergedData &&
                 mergedData.map(
@@ -144,7 +120,7 @@ const UserProfileReview = () => {
                     )
                 )}
             </div>
-          )}
+          )} */}
         </div>
         {/* <div
           className='scroll-indicator scroll-right'
