@@ -10,14 +10,12 @@ import ChooseInterestedArea from './choose-interested-area.component';
 import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginForm from './login-form.component';
-import SendVerifyEmail from './send-verify-email.component';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
+import SendVerifyEmail from './send-verify-email.component';
+import SignUpAccountType from './sign-up-account-type.component';
+
 // 注册&登录
 // 主页面
-
 const StepTracker = ({ currentStep }) => {
     const steps = ['accountType', 'signUp', 'verifyEmail', 'gender', 'interest', 'download'];
     return (
@@ -31,7 +29,6 @@ const StepTracker = ({ currentStep }) => {
         </div>
     );
 }
-
 const SignupPopup3 = (props) => {
   const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -57,6 +54,7 @@ const SignupPopup3 = (props) => {
       {(userInfo.popupState === 'signUp' ||
        userInfo.popupState === 'verifyEmail' ||
       userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
+
       </Modal.Body>
     </Modal>
   );

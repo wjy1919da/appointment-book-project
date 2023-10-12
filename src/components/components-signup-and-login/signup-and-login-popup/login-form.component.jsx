@@ -10,11 +10,12 @@ import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
+import { FormControl, FormLabel,FormErrorMessage, Text} from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
 import { Button } from 'react-bootstrap';
 // import { FormControl, Form, InputGroup } from 'react-bootstrap';
 // import CustomInput from '../custom-input/custom-input.component';
-import { FormControl, Text } from '@chakra-ui/react';
+
 
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
@@ -117,6 +118,7 @@ const LoginForm = (props) => {
                     </FormControl>
                     <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to register</div>
                     <div className='login-button-section'>
+                        {/* <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/> */}
                         <Button as="input" type="submit" value="Login" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
                     </div>
                 </FormControl>
@@ -133,8 +135,8 @@ const LoginForm = (props) => {
                         </Form.Control.Feedback>
                     </InputGroup>
                 </div> */}
+
                 <SocialSignUP onHide={props.onHide} />
-                
             </div>
     );
 }
