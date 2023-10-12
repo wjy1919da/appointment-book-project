@@ -2,17 +2,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; 
-    height: 100vh;
+    justify-content: space-between;
+    height: 100%;
+    //vw vh
+    //height:300px;
     padding-top: 20px;
-    padding-bottom: 20px;
+    //padding-bottom: 20px;
 }
 
 .group-title-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 100px; // Adjusted the spacing between the title and the buttons, increase as needed
+    gap: 80px; // Adjusted the spacing between the title and the buttons, increase as needed
 }
 
 .title-container {
