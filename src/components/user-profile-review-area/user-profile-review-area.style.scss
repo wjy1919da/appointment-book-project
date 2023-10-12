@@ -1,118 +1,176 @@
-.user-profile-review-container
-{
-    margin-left: 50px;
+* {
+  font-family: Open Sans;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.user-profile-review-container {
+  margin-left: 50px;
 }
 .review-recommande-doctor {
-    position: relative; 
-    width: 100%; /* or set a specific width like 800px if you want */
-    //overflow: hidden; /* Hide any overflowing content, like the arrows */
+  position: relative;
+  width: 100%; /* or set a specific width like 800px if you want */
+  //overflow: hidden; /* Hide any overflowing content, like the arrows */
 }
 
 .review-recommande-doctor-list-container {
-    width: 100%;
-    overflow-x: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 .custom-grid {
-    padding-left: 20px;
-    padding-right: 100px;
-    margin-left: 50px;
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping to ensure horizontal scrolling */
-    gap: 100px; /* Replace with desired gap between items */
+  padding-left: 20px;
+  padding-right: 100px;
+  margin-left: 50px;
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to ensure horizontal scrolling */
+  gap: 100px; /* Replace with desired gap between items */
 }
 .doctor-search-card-container {
-    width: 250px;  // or whatever you need
-    //background-color: red;  // just for testing
+  width: 250px; // or whatever you need
+  //background-color: red;  // just for testing
 }
 
 .scroll-indicator {
-    position: absolute;
-    padding: 5px 10px;
-    cursor: pointer;
-    z-index: 1;
+  position: absolute;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .scroll-left {
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .scroll-right {
-    right: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* Optional: Hide horizontal scrollbar */
 .review-recommande-doctor-list-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .review-recommande-doctor-list-container {
-    -ms-overflow-style: none;
+  -ms-overflow-style: none;
 }
 .review-recommande-doctor,
 .review-recommande-doctor-list-container,
 .doctor-search-card-container:first-child {
-    padding-left: 0;
-    margin-left: 0;
+  padding-left: 0;
+  margin-left: 0;
 }
-.summary-title
-{
-    margin-top: 50px;
-    color: #000;
-    /* Boby 1 */
-    font-family: Lora;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 160%; /* 35.2px */
+.summary-title {
+  margin-top: 50px;
+  color: #000;
+  /* Boby 1 */
+  font-family: Lora;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 35.2px */
+}
+.summary-rate {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  color: #000;
+  /* Boby 1 */
+  font-family: Lora;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.summary-text {
+  margin-top: 20px;
+  color: #000;
+  /* Body 2 */
+  font-family: Lora;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.user-profile-review-divider {
+  height: 1px;
+  background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+.recommande-doctor-reviews {
+  margin-top: 40px;
+  color: #000;
+  /* Boby 1 */
+  font-family: Lora;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
 
+.recommend-doctor-box-wrapper {
+  display: flex;
+  gap: 10px;
 }
-.summary-rate
-{
-    margin-top: 20px;
-    display: flex;
-    gap:20px;
-    color: #000;
-/* Boby 1 */
-    font-family: Lora;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 160%;
+
+.recommend-doctor-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--White, #fbfcff);
+  border: 2px solid #e2e3e7;
+  border-radius: 8px;
+  box-shadow: 0px 12px 16px 0px rgba(226, 227, 231, 0.25),
+    0px 0px 40px 0px rgba(255, 164, 163, 0.1);
+  padding: 22px;
+  width: 384px;
+  height: 166px;
 }
-.summary-text
-{
-    margin-top: 20px;
-    color: #000;
-/* Body 2 */
-    font-family: Lora;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 160%; 
+
+.recommend-doctor-filtered-box-1 {
+  border: 4px solid var(--new-gradient, #f48c8a);
 }
-.user-profile-review-divider
-{
-    height: 1px;
-    background:linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
-    width: 90%; 
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+
+.box-1 {
+  margin-right: 20px;
 }
-.recommande-doctor-reviews
-{
-    margin-top: 40px;
-    color: #000;
-/* Boby 1 */
-    font-family: Lora;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 160%;
+
+.city-name {
+  color: var(--text-2-button, #675d59);
+  font-size: 10px;
+  // font-size: 14px;
+}
+
+.doctor-name {
+  font-size: 20px;
+  // font-size: 24px;
+  margin-top: 8px;
+}
+
+.location-box,
+.specialization-box,
+.verification-box {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  // font-size: 14px;
+  font-weight: 400;
+}
+
+.verification-box {
+  margin-top: 2px;
+}
+
+.doctor-recommend-icon {
+  margin-right: 4px;
 }

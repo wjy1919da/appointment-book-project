@@ -1,6 +1,12 @@
 .user-profile-page-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;  // Or whatever height you want
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 320vh;
+}
+
+.user-profile-outter-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }

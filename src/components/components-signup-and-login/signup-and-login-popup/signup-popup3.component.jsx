@@ -54,7 +54,6 @@ const SignupPopup3 = (props) => {
       {(userInfo.popupState === 'signUp' ||
        userInfo.popupState === 'verifyEmail' ||
       userInfo.popupState === 'sendVerifyEmail') && <SocialSignUP />}
-
       </Modal.Body>
     </Modal>
   );
