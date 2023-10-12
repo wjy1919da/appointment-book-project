@@ -4,7 +4,9 @@ import HeartIcon from '../../assets/post/heart.png';
 import commentIcon from '../../assets/post/chat_bubble.png';
 import '../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss'
 import userInfoQueryStore from '../../userStore.ts';
+
 const CommentCard = ({avatar,name,date,commentText,onClick}) => {
+
     
     if(!avatar&&!name&&!date&&!commentText)
     {

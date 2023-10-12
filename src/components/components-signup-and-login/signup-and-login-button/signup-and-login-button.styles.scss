@@ -21,6 +21,7 @@
         font-size: 16px; /* Set the font size to 22 pixels */
         // line-height: 140%;
         line-height: 100%; /* Set the line height to 100% (normal) */
+        margin-bottom: 20px;
     }
 
     .signup-and-login-button:hover  {
@@ -29,16 +30,26 @@
         background: #FFA4A3;   
     }
 
+    // .signup-and-login-button-icon {
+    //     left: 12.5%;
+    //     right: 12.5%;
+    //     top: 12.5%;
+    //     bottom: 12.5%;
+    //     border-radius: 0;
+    //     //border: 2.4px solid #FFFFFF;
+    //     width: 20px; /* 或其他你希望的尺寸 */
+    //     height: 20px; /* 或其他你希望的尺寸 */
+    //     margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+    // }
+
     .signup-and-login-button-icon {
-        left: 12.5%;
-        right: 12.5%;
-        top: 12.5%;
-        bottom: 12.5%;
-        border-radius: 0;
-        //border: 2.4px solid #FFFFFF;
-        width: 15px; /* 或其他你希望的尺寸 */
-        height: 15px; /* 或其他你希望的尺寸 */
-        margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
-    }
+      
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        background-size: contain;
+        object-fit: contain;
 }
+
+    }
 

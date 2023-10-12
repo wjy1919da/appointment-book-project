@@ -33,6 +33,7 @@ import { useSocialLogin } from '../../../hooks/useAuth';
 import AppleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-apple.component';
 import FacebookLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-facebook.component';
 import GoogleLoginBtnWrap from '../signup-and-login-button/sigin-with-gfa-button-google.component';
+import './social-signup.styles.scss'
 
 const SocialSignUP = ({onHide}) => {
   //   const [provider, setProvider] = useState('')
@@ -80,22 +81,23 @@ const SocialSignUP = ({onHide}) => {
   // }, [data]);
   return (
         <div className="login-popup-gfa-section">
-            <div className="or-section">
-                {/* <div className="line-separator"></div>  */}
-                <div className="or-label">- Or Log In With -</div>
-                {/* <div class="line-separator"></div> */}
-            </div>
             <div className="signin-with-apple-section">
-                <AppleLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon={ AppleLogo } title='Sign in with Apple' />
-            </div>
+                <AppleLoginBtnWrap width='50px' height='50px' borderRadius='50px'  isIcon={ AppleLogo }/>
+             </div>
+
             <div className="signin-with-google-section">
-                <GoogleLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon={ GoogleLogo } title='Sign in with Google' />
+                <GoogleLoginBtnWrap width='50px' height='50px' borderRadius='50px' isIcon={ GoogleLogo }  />
             </div>
             <div className="signin-with-facebook-section">
-                <FacebookLoginBtnWrap width='220px' height='42px' borderRadius='20px' isIcon= { FacebookLogo } title='Sign in with Facebook'/>
-            </div>
+                <FacebookLoginBtnWrap width='50px' height='50px' borderRadius='50px' isIcon={ FacebookLogo } />
+
+       
+   
+ </div>
+
         </div>
   )
 }
 
 export default SocialSignUP
+
