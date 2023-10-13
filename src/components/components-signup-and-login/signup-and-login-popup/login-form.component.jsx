@@ -1,11 +1,8 @@
 import React, { useState, useEffect,useCallback } from 'react';
-import { Modal } from 'react-bootstrap';
-import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import './login-form.styles.scss';
 import Cookies from 'js-cookie';
 import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
-import SocialSignUP from './social-signup.component';
 import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +16,7 @@ const LoginForm = (props) => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-    var userRole = userInfo.accountType;
+    var userRole = localStorage.getItem('accountType');
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -67,9 +64,9 @@ const LoginForm = (props) => {
         alert(error.message);
     }
 
-    const handleCreateAccountClick = () => {
-        switchPopupTab('accountType')
-    };
+    // const handleCreateAccountClick = () => {
+    //     switchPopupTab('accountType')
+    // };
 
    
     return (
@@ -105,7 +102,7 @@ const LoginForm = (props) => {
                             {errors.password?.message}
                         </Form.Control.Feedback>
                     </InputGroup>
-                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={handleCreateAccountClick}>Forgot Password?</button>
+                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('sendVerifyEmail')}>Forgot Password?</button>
                 </Form.Group>
                 <div className='signUp-download-button'>
                     <NextButton title='Log In' width='180px' disabled={!isValid} />

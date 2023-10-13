@@ -14,6 +14,7 @@ import SendVerifyEmail from './send-verify-email.component';
 import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
 import CreateAccount from './create-account.component';
+import LoginPhone from './login-phone.component';
 
 // 注册&登录
 // 主页面
@@ -52,6 +53,7 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'gender' && <ChooseGender />}
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
       {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
+      {userInfo.popupState === 'phoneNumberLogin' && <LoginPhone />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login') && <SocialSignUP />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login' || userInfo.popupState === 'sendVerifyEmail' || userInfo.popupState === 'verifyEmail') && 
           <CreateAccount title="Already have an account?" subTitle="Log in" onClick={()=>switchPopupTab('accountType')}/>}
