@@ -14,6 +14,10 @@ import { FormControl, FormLabel,FormErrorMessage, Text} from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
 import { Button } from 'react-bootstrap';
 
+import { Form, InputGroup } from 'react-bootstrap'
+import CustomInput from '../custom-input/custom-input.component';
+import NextButton from './next-button.component';
+
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
@@ -65,64 +69,70 @@ const LoginForm = (props) => {
         alert(error.message);
     }
 
+    const handleCreateAccountClick = () => {
+        switchPopupTab('accountType')
+    };
+
+   
     return (
-            <div className="sign-in-form-container">
-                <div className='login-title-container'>
-                    <LoginRegisterTitle title={"Log in"} subTitle={"Welcome back"}/>
-                </div>
-                <FormControl as="form" onSubmit={handleSubmit(onSubmit)}>
-                     <FormControl isInvalid={!!errors.email} mb="16px">
-                        <Text 
-                            mb="3px"
-                            color="#352C29"
-                            fontFamily="Open Sans"
-                            fontSize="13px"
-                            fontWeight="600"
-                            lineHeight="100%"
-                        >
-                            Email
-                        </Text>
-                        <input {...register('email')} placeholder="Email" className='custom-input'/>
-                        <Text 
-                            mb="3px"
-                            color="red"
-                            fontFamily="Open Sans"
-                            fontSize="13px"
-                            fontWeight="600"
-                            lineHeight="100%"
-                        >{errors.email?.message}</Text>
-                    </FormControl>
-                    <FormControl mt={4} isInvalid={!!errors.password}>
-                        <Text 
-                            mb="3px"
-                            color="#352C29"
-                            fontFamily="Open Sans"
-                            fontSize="13px"
-                            fontWeight="600"
-                            lineHeight="100%"
-                        >
-                            Password
-                        </Text>
-                        <input {...register('password')} type="password" placeholder="Password" className='custom-input'/>
-                         <Text 
-                            mb="3px"
-                            color="red"
-                            fontFamily="Open Sans"
-                            fontSize="13px"
-                            fontWeight="600"
-                            lineHeight="100%"
-                        >{errors.password?.message}</Text>
-                    </FormControl>
-                    <div onClick={()=>switchPopupTab('sendVerifyEmail')}>go to register</div>
-                    <div className='login-button-section'>
-                        {/* <SignupAndLoginButton title="Login" type="submit" width="100px" height= "35px" disabled={!isValid}/> */}
-                        <Button as="input" type="submit" value="Login" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
-                    </div>
-                </FormControl>
-                <SocialSignUP onHide={props.onHide} />
+
+        <div className="sign-in-form-container">
+            <div className='login-title-container'>
+               Log In
             </div>
+            
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form.Group className="mb-3">
+                {/* <Form.Label className="d-block">Email Address</Form.Label> */}
+                <div style={{ fontSize: "14px" }}>Email Address</div>
+                    <InputGroup hasValidation>
+                        <CustomInput 
+                            {...register('email')}
+                            className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.email?.message}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                </Form.Group>
+                
+                <Form.Group className="mb-3">
+                    {/* <Form.Label className="d-block">Password</Form.Label> */}
+                    <div style={{ fontSize: "14px" }}>Password</div>
+                    <InputGroup hasValidation>
+                        <CustomInput 
+                            {...register('password')} 
+                            type="password"
+                            className={`d-block ${errors.password ? 'is-invalid' : ''}`} 
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password?.message}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={handleCreateAccountClick}>Forgot Password?</button>
+                </Form.Group>
+
+                <div className='signUp-download-button'>
+            <NextButton title='Log In' width='180px'
+            disabled={!isValid} />
+        </div>
+                
+                {/* <div className='login-button-section'>
+                    <Button as="input" type="submit" value="Login"  } />
+                </div> */}
+            </Form>
+            
+            <SocialSignUP onHide={props.onHide} />
+
+            <div className="create-account">
+
+            <span>Don't have an account?</span> 
+
+            <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '12px', marginLeft: '4px' }} onClick={handleCreateAccountClick}> Create one!</button>
+        </div>
+       </div>
+
     );
 }
-
 
 export default LoginForm;

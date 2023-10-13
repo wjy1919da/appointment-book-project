@@ -11,13 +11,11 @@ import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginForm from './login-form.component';
 import SendVerifyEmail from './send-verify-email.component';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
+
 // 注册&登录
 // 主页面
-
 const StepTracker = ({ currentStep }) => {
     const steps = ['accountType', 'signUp', 'verifyEmail', 'gender', 'interest', 'download'];
     return (
@@ -31,7 +29,6 @@ const StepTracker = ({ currentStep }) => {
         </div>
     );
 }
-
 const SignupPopup3 = (props) => {
   const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -48,6 +45,8 @@ const SignupPopup3 = (props) => {
       <Modal.Body>
       {userInfo.popupState === 'accountType' && <SignUpAccountType />}
       {userInfo.popupState === 'login' && <LoginForm />}
+      {userInfo.popupState === 'signUp' && <SignUpForm />}
+      {userInfo.popupState === 'sendVerifyEmail' && <SendVerifyEmail />}
       {userInfo.popupState === 'verifyEmail' && <SignupVerify />}
       {userInfo.popupState === 'gender' && <ChooseGender />}
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
@@ -61,4 +60,3 @@ const SignupPopup3 = (props) => {
 };
 
 export default SignupPopup3;
-

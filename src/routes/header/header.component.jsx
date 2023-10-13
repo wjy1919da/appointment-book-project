@@ -289,34 +289,32 @@ const Header = () => {
                             <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                             </input>
                         </div>  */}
-              {/* {userInfo.token && ( */}
-              <div className='header-login-logo'>
-                <a href='/userProfile'>
-                  <img src={loginIcon} alt='login Image'></img>
-                </a>
-              </div>
-              {/* )} */}
-              <div className='header-login-text'>
-                {!userInfo.token && (
-                  <div onClick={() => togglePopup(true, 'accountType')}>
-                    login
-                  </div>
-                )}
-                {userInfo.userId && <div>{`Hello, ${userInfo.userId}`}</div>}
-                {userInfo.userId && (
-                  <div onClick={() => handleLogOutClick()}>Log out</div>
-                )}
-              </div>
-            </div>
-          </div>
-          <Outlet />
-        </Fragment>
-      )}
-      {isPopupOpen && (
-        <SignupPopup3 show={isPopupOpen} onHide={() => togglePopup(false)} />
-      )}
-    </div>
-  );
-};
+                         <div className="header-login-logo">
+                            <a href="/userProfile">
+                                <img src={loginIcon} alt="login Image"></img>
+                            </a>
+                        </div>
+                        <div className="header-login-text">
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'accountType')}>login</div>}
+                            {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
+                            {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
+                        </div>
+                    </div> 
+                </div>
+                <Outlet />
+            </Fragment>
+            )}          
+            {isPopupOpen &&
+                    <SignupPopup3
+                    show = {isPopupOpen}
+                    onHide={() => togglePopup(false)}
+                />  
+            }
+     </div>
+   );
+ }; 
+
+
+
 
 export default Header;
