@@ -308,7 +308,7 @@ const Header = () => {
             {isPopupOpen &&
                     <SignupPopup3
                     show = {isPopupOpen}
-                    onHide={() => {togglePopup(false); setAccountType(null);}}
+                    onHide={() => {togglePopup(false)}}
                 />  
             }
      </div>

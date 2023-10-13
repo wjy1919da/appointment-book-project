@@ -22,8 +22,11 @@ const SendVerifyEmail = () => {
     const {mutate,data,isLoading,isError,error} = useClickVerification();
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
     const onSubmit = (formData) => {
-        console.log("formData ",formData);
+        //console.log("formData ",formData);
+        // Set accountType in localstorage
+        localStorage.setItem('accountType', userInfo.accountType);
         setEmail(formData.email);
         mutate({
             email: formData.email,
