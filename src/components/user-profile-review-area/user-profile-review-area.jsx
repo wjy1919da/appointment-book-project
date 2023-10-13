@@ -59,10 +59,70 @@ const UserProfileReview = () => {
       fieldIcon: '../../assets/post/glasses.svg',
       licenseIcon: '../../assets/post/verified_badge_icon.svg',
     },
+    {
+      cityName: 'City, State',
+      name: 'Dr. Name Name',
+      field: 'Specialization in Field Field',
+      license: 'License or Verification',
+      locationIcon: '../../assets/post/location_pin.svg',
+      fieldIcon: '../../assets/post/glasses.svg',
+      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+    },
+    {
+      cityName: 'City, State',
+      name: 'Dr. Name Name',
+      field: 'Specialization in Field Field',
+      license: 'License or Verification',
+      locationIcon: '../../assets/post/location_pin.svg',
+      fieldIcon: '../../assets/post/glasses.svg',
+      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+    },
+    {
+      cityName: 'City, State',
+      name: 'Dr. Name Name',
+      field: 'Specialization in Field Field',
+      license: 'License or Verification',
+      locationIcon: '../../assets/post/location_pin.svg',
+      fieldIcon: '../../assets/post/glasses.svg',
+      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+    },
   ];
+
+  const [clicked, setClicked] = useState(Array(doctorsCard.length).fill(false));
+
+  const handleClickRecommendDoctor = (index) => {
+    const updatedClickedState = [...clicked];
+    updatedClickedState[index] = !updatedClickedState[index];
+    setClicked(updatedClickedState);
+  };
 
   const hashids = new Hashids('Encode the Url');
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+  // const mergeDoctorsByNickname = (pages) => {
+  //     const mergedDoctors = {};
+
+  //     // Flatten the data into a single array
+  //     const flatData = pages.flatMap(page => page.data || []);
+
+  //     flatData.forEach(doctor => {
+  //       const { nickname, name } = doctor;
+
+  //       if (mergedDoctors[nickname]) {
+  //         // If doctor already exists, add the new programTitle to the existing one
+  //         mergedDoctors[nickname].name.push(name);
+  //       } else {
+  //         // If doctor doesn't exist, add them to the object
+  //         mergedDoctors[nickname] = {
+  //           ...doctor,
+  //           name: [name],  // Use an array to store programTitles
+  //         };
+  //       }
+  //     });
+
+  //     // Convert the object back into an array
+  //     return Object.values(mergedDoctors);
+  // };
+
   const {
     data,
     error,
@@ -103,10 +163,9 @@ const UserProfileReview = () => {
           className='review-recommande-doctor-list-container'
           ref={doctorCardListRef}
         >
-          {/* SAVE !!!!!!! */}
           {/* {isLoading ? */}
           {/* <div><p>is Loading</p></div> : */}
-          {/* {data && (
+          {data && (
             <div className='custom-grid'>
               {mergedData &&
                 mergedData.map(
@@ -120,7 +179,7 @@ const UserProfileReview = () => {
                     )
                 )}
             </div>
-          )} */}
+          )}
         </div>
         {/* <div
           className='scroll-indicator scroll-right'
@@ -135,9 +194,11 @@ const UserProfileReview = () => {
           {doctorsCard.map((x, index) => (
             <div
               className={`recommend-doctor-box ${
-                index === 0 && 'recommend-doctor-filtered-box-1'
+                clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
               }`}
+              onClick={() => handleClickRecommendDoctor(index)}
             >
+              {' '}
               <div className='box-1'>
                 <img src={DoctorProfilePicture} alt='' />
                 <div className='username-review-card-rate-star'>
