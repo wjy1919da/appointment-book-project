@@ -13,6 +13,9 @@ import PostDetail from '../components-posts/community-post-detail/community-post
 import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
 import { useMediaQuery } from 'react-responsive';
 
+// images
+import ArchiveFilter from '../../assets/post/archive_filter.svg';
+
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
   //const [showCreatePost, setShowCreatePost] = useState(false);
@@ -128,6 +131,12 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
                   className='choose-picture-section-image'
                   alt='Create Post'
                 />
+              </div>
+
+              {/* Archive Posts Button */}
+              <div className='archived-posts-button-container'>
+                <img src={ArchiveFilter} alt='Image-Archive-Posts' />
+                <span className='archive-title'>Archived Posts</span>
               </div>
 
               {/* Rest of the posts */}
