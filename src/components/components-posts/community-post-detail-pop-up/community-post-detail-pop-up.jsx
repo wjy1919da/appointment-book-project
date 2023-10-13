@@ -15,6 +15,14 @@ import { useAddComment } from '../../../hooks/useComment';
 import usePostQueryStore from '../../../postStore.ts';
 import userInfoQueryStore from '../../../userStore.ts';
 import { Button } from 'react-bootstrap';
+
+// images
+import UserImage from '../../../assets/post/user_image.svg';
+import HeartIcon from '../../../assets/post/heart_icon.svg';
+import StarIcon from '../../../assets/post/star_icon.svg';
+import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
+import ShareIcon from '../../../assets/post/share_icon.svg';
+
 const CommunityPostDetailPopUP = ({
   picture,
   brief,
@@ -86,7 +94,7 @@ const CommunityPostDetailPopUP = ({
     const container = containerRef.current;
     const image = imageRef.current;
     if (container && image) {
-      container.style.height = image.offsetHeight + 100 + 'px';
+      container.style.height = image.offsetHeight + 70 + 'px';
     }
   };
   const handleImageLoad = () => {
@@ -143,13 +151,28 @@ const CommunityPostDetailPopUP = ({
       {/* Web */}
       <div className='postdetail-popUp-left-container'>
         {!isMobile && picture && (
-          <img
-            src={picture}
-            ref={imageRef}
-            onLoad={handleImageLoad}
-            className='post-detail-image'
-            alt='detail-pic'
-          ></img>
+          <>
+            <img
+              src={picture}
+              ref={imageRef}
+              onLoad={handleImageLoad}
+              className='post-detail-image'
+              alt='detail-pic'
+            ></img>
+
+            <div className='user-detail'>
+              <div className='user-detail-inner'>
+                <img src={UserImage} alt='Image-User-Picture' />
+                <span>Anna</span>
+              </div>
+              <div>
+                <a href='#' className='anchor-archive'>
+                  Archive
+                </a>
+                <a href='#'>Edit your Post</a>
+              </div>
+            </div>
+          </>
         )}
         {isMobile && (
           <img
@@ -221,7 +244,7 @@ const CommunityPostDetailPopUP = ({
               <div className='Icon-display'>
                 <span className='Icon-count'>
                   <img
-                    src={heartIcon}
+                    src={HeartIcon}
                     alt='Icon'
                     className='Icon-size'
                     onClick={handleInputClick}
@@ -230,7 +253,7 @@ const CommunityPostDetailPopUP = ({
                 </span>
                 <span className='Icon-count'>
                   <img
-                    src={collectIcon}
+                    src={StarIcon}
                     alt='Icon'
                     className='Icon-size'
                     onClick={handleInputClick}
@@ -239,26 +262,31 @@ const CommunityPostDetailPopUP = ({
                 </span>
                 <span className='Icon-count'>
                   <img
-                    src={commentIcon}
+                    src={BubblesIcon}
                     alt='Icon'
                     className='Icon-size'
                     onClick={handleInputClick}
                   />
                   {commentCount}
                 </span>
+                <div className='share-icon'>
+                  <img src={ShareIcon} alt='Image-Share-Icon' />
+                </div>
               </div>
+
               {/* <div className='comment-send-msg-container'> */}
               {/* <CommunitySendMsg isValid={isValid} /> */}
               {/* </div> */}
-              <Button
+
+              {/* <Button
                 as='input'
                 type='submit'
                 value='send'
                 disabled={!isValid}
                 style={{ backgroundColor: 'orange', border: 'orange' }}
-              />
+              /> */}
             </div>
-            <div className='new-comment-input'>
+            {/* <div className='new-comment-input'>
               <input
                 {...register('comment')}
                 type='text'
@@ -267,7 +295,7 @@ const CommunityPostDetailPopUP = ({
                 onClick={handleInputClick}
               />
               <p>{errors.comment?.message}</p>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
