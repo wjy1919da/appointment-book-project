@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
+import { useState, useEffect } from 'react';
 import CreatePostOfUser from '../create-post/create-post';
 import './user-profile-post-area.styles.scss';
 import '../create-post/create-post.style.scss';
@@ -9,17 +8,25 @@ import post1 from '../../assets/doctor/post3.png';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import creatPostIcon from '../../assets/post/create-post-icon.png';
 import CommunityPost from '../components-posts/community-post/community-post.component';
-//import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
-
+import usePostQueryStore from '../../postStore.ts';
+import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
 import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
+import { useMediaQuery } from 'react-responsive';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
   //const [showCreatePost, setShowCreatePost] = useState(false);
+
+  const setUserID = usePostQueryStore((state) => state.setUserID);
+
   const handleIconClick = () => {
     setShowCreatePost(true); // Show the CreatePostOfUser component when the icon is clicked
   };
+
+  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+
   const [gutterwidth, setGutterWidth] = useState('20px');
+
   const breakPoint = {
     default: 4,
     2500: 4,
@@ -29,28 +36,52 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     767: 3,
     430: 2,
   };
+
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [IsModalOpen, setIsModelOpen] = useState(false);
   const {
     data,
+
     error,
+
     isLoading,
+
     fetchNextPage,
+
     isFetchingNextPage,
+
     hasNextPage,
   } = useGetUserPostedPost();
-  // console.log('userpostedCallBackdata',data);
+
+  var userName;
+  var avatar;
+
+  const handleOnClick = (userName, avatar) => {
+    setIsModelOpen(true);
+    userName = userName;
+    avatar = avatar;
+    setUserID(143);
+  };
+
+  console.log('userpostedCallBackdata', data);
+
   const flatData = data ? data.pages.flatMap((page) => page.data) : [];
-  //console.log('userPostedpostin',flatData);
-  console.log('test git again');
+
+  console.log('userPostedpostin', flatData);
+
   useEffect(() => {
     const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
     let loadedImagesCount = 0;
+
     images.forEach((src) => {
       const img = new Image();
+
       img.src = src;
+
       img.onload = () => {
         loadedImagesCount += 1;
+
         if (loadedImagesCount === images.length) {
           setImagesLoaded(true);
         }
@@ -65,17 +96,20 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     username: 'Sample Author',
     likeCount: 42,
   });
+
   const postList = samplePosts.map((post, index) => (
-    <CommunityPost
-      key={index}
-      imageURL={post.pictures}
-      text={post.title}
-      profileImage={post.avatar}
-      authorName={post.username}
-      likes={post.likeCount}
-      isProfile={true}
-    />
+    <div key={index} onClick={() => handleOnClick(post.avatar, post.username)}>
+      <CommunityPost
+        imageURL={post.pictures}
+        text={post.title}
+        profileImage={post.avatar}
+        authorName={post.username}
+        likes={post.likeCount}
+        isProfile={true}
+      />
+    </div>
   ));
+
   return (
     <div className='user-profile-post-area-container'>
       {!showCreatePost && imagesLoaded && (
@@ -86,6 +120,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
           >
             <Masonry gutter={gutterwidth}>
               {/* CreatePostIcon as the first post */}
+
               <div className='choose-picture-section-image-post'>
                 <img
                   src={creatPostIcon}
@@ -94,13 +129,26 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
                   alt='Create Post'
                 />
               </div>
+
               {/* Rest of the posts */}
+
               {postList}
             </Masonry>
           </ResponsiveMasonry>
         </div>
       )}
+
       {showCreatePost && <CreatePostOfUser />}
+
+      {IsModalOpen && (
+        <PostDetail
+          show={IsModalOpen}
+          onHide={() => setIsModelOpen(false)}
+          isMobile={isMobile}
+          postUserName={userName}
+          postAvatar={avatar}
+        />
+      )}
     </div>
   );
 };
