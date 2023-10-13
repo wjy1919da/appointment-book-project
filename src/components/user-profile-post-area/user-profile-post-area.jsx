@@ -30,9 +30,9 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
         isFetchingNextPage,
         hasNextPage
     } = useGetUserPostedPost();
-    console.log('userpostedCallBackdata',data);
+   // console.log('userpostedCallBackdata',data);
     const flatData = data ? data.pages.flatMap(page => page.data) : [];
-    console.log('userPostedpostin',flatData);
+    //console.log('userPostedpostin',flatData);
     useEffect(() => {
         const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
@@ -81,7 +81,6 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
                                 
                                 <img src={creatPostIcon} onClick={handleIconClick}  className='choose-picture-section-image'alt="Create Post" />
                             </div>
-                            
                             {/* Rest of the posts */}
                             {postList}
                         </Masonry>
