@@ -33,6 +33,7 @@ const UserProfilePost = ({showCreatePost, setShowCreatePost}) => {
    // console.log('userpostedCallBackdata',data);
     const flatData = data ? data.pages.flatMap(page => page.data) : [];
     //console.log('userPostedpostin',flatData);
+    console.log('test git again');
     useEffect(() => {
         const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
