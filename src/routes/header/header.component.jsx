@@ -43,6 +43,7 @@ const Header = () => {
     'Arm Lift',
   ];
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   const facialDropDownMenuMobile = facialProcedures.map((procedure) => (
     <NavDropdown.Item
       className='nav-link'
@@ -307,7 +308,7 @@ const Header = () => {
             {isPopupOpen &&
                     <SignupPopup3
                     show = {isPopupOpen}
-                    onHide={() => togglePopup(false)}
+                    onHide={() => {togglePopup(false); setAccountType(null);}}
                 />  
             }
      </div>
