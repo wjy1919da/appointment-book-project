@@ -10,14 +10,10 @@ import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
-import { FormControl, FormLabel,FormErrorMessage, Text} from "@chakra-ui/react";
-import LoginRegisterTitle from './login-register-title.component';
-import { Button } from 'react-bootstrap';
-
 import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
 import NextButton from './next-button.component';
-
+import LoginRegisterTitle from './login-register-title.component';
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
@@ -78,9 +74,8 @@ const LoginForm = (props) => {
 
         <div className="sign-in-form-container">
             <div className='login-title-container'>
-               Log In
+               <LoginRegisterTitle title={"Log In"}/>
             </div>
-            
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
                 {/* <Form.Label className="d-block">Email Address</Form.Label> */}
@@ -116,10 +111,7 @@ const LoginForm = (props) => {
             <NextButton title='Log In' width='180px'
             disabled={!isValid} />
         </div>
-                
-                {/* <div className='login-button-section'>
-                    <Button as="input" type="submit" value="Login"  } />
-                </div> */}
+            
             </Form>
             
             <SocialSignUP onHide={props.onHide} />

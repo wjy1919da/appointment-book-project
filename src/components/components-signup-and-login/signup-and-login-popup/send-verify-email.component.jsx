@@ -9,6 +9,9 @@ import userInfoQueryStore from '../../../userStore.ts';
 import {useClickVerification} from '../../../hooks/useAuth';
 import './send-verify-email.styles.scss';
 import { Button } from 'react-bootstrap';
+import CustomInput from '../custom-input/custom-input.component';
+import { Form, InputGroup } from 'react-bootstrap';
+import NextButton from './next-button.component';
 const SendVerifyEmail = () => {
     const schema = z.object({
         email: z.string().email(),
@@ -20,7 +23,7 @@ const SendVerifyEmail = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
     const onSubmit = (formData) => {
-        //console.log("formData ",formData);
+        console.log("formData ",formData);
         setEmail(formData.email);
         mutate({
             email: formData.email,
@@ -30,7 +33,6 @@ const SendVerifyEmail = () => {
         if (data?.code === 100) {
            //  切换到下一个tab
            alert("sending email ",data.msg);
-           
            switchPopupTab('verifyEmail');
         }
         if (data?.data && 400<=data.code <=500) {
@@ -45,27 +47,23 @@ const SendVerifyEmail = () => {
             <div className='verify-title-container'>
                 <LoginRegisterTitle title={"Sign in"}/> 
            </div>
-            <FormControl as="form" onSubmit={handleSubmit(onSubmit)}>
-                <FormControl isInvalid={!!errors.email} mb="16px">
-                    <Text 
-                        mb="3px"
-                        color="#352C29"
-                        fontFamily="Open Sans"
-                        fontSize="13px"
-                        fontWeight="600"
-                        lineHeight="100%"
-                    >
-                        Email
-                    </Text>
-                    <input {...register('email')} placeholder="Email" className='custom-input'/>
-                </FormControl>
-                {/* <div onClick={()=>switchPopupTab('verifyEmail')}>go to verifyEmail</div> */}
-                <div onClick={()=>switchPopupTab('login')}>go to login</div>
-                <div className='submit-button-section'>
-                    {/* <SignupAndLoginButton title="Send Verification Email" type="submit" width="220px" height= "35px"/> */}
-                    <Button as="input" type="submit" value="Send Verification Email" disabled={!isValid} style={{ backgroundColor: 'orange', border: 'orange'}} />
+           <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form.Group className="mb-3">
+                    <div style={{ fontSize: "14px" }}>Email Address</div>
+                        <InputGroup hasValidation>
+                            <CustomInput 
+                                {...register('email')}
+                                className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.email?.message}
+                            </Form.Control.Feedback>
+                    </InputGroup>
+                </Form.Group>
+                <div>
+                    <NextButton type="submit" title='Verify ' width='180px' disabled={!isValid} />
                 </div>
-            </FormControl>    
+            </Form>
         </div>
     )
 }

@@ -12,7 +12,7 @@ const NextButton = (props) => {
                 width: '300px',
                 padding: '18px 40px',
             }}
-            // type={props.type}
+            type={props.type}
             onClick={props.onClick}
             disabled={props.disabled}
         >
