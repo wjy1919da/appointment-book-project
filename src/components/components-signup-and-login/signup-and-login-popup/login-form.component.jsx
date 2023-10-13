@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import './login-popup.styles.scss';
+import './login-form.styles.scss';
 import Cookies from 'js-cookie';
 import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
@@ -107,24 +107,16 @@ const LoginForm = (props) => {
                     </InputGroup>
                      <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={handleCreateAccountClick}>Forgot Password?</button>
                 </Form.Group>
-
                 <div className='signUp-download-button'>
-            <NextButton title='Log In' width='180px'
-            disabled={!isValid} />
-        </div>
-            
+                    <NextButton title='Log In' width='180px' disabled={!isValid} />
+                </div>
             </Form>
-            
-            <SocialSignUP onHide={props.onHide} />
-
-            <div className="create-account">
-
-            <span>Don't have an account?</span> 
-
-            <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '12px', marginLeft: '4px' }} onClick={handleCreateAccountClick}> Create one!</button>
-        </div>
+            {/* <SocialSignUP onHide={props.onHide} /> */}
+            {/* <div className="create-account">
+                <span>Don't have an account?</span> 
+                <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '12px', marginLeft: '4px' }} onClick={handleCreateAccountClick}> Create one!</button>
+            </div> */}
        </div>
-
     );
 }
 

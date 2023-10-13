@@ -66,9 +66,9 @@ export function useSearchMultiConditionsPopUp() {
     ['doctors', doctorQuery],
      fetchDoctors,
      {
-      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-      keepPreviousData: true,
-      getNextPageParam: (lastPage, allPages) => {
+        staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+        keepPreviousData: true,
+        getNextPageParam: (lastPage, allPages) => {
         return lastPage.data && lastPage.data.length > 0 ? allPages.length + 1 : undefined; 
       } 
     }

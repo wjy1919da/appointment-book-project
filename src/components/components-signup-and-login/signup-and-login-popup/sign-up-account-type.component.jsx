@@ -54,10 +54,10 @@ const SignUpAccountType = () => {
                 </div>
             </div>
             <NextButton title="Next" onClick={()=>switchPopupTab('sendVerifyEmail')} disabled={!userInfo.accountType} />
-            <div className="login-prompt-container">
+            {/* <div className="login-prompt-container">
                 <span>Already have an account? </span> 
                 <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none' }} onClick={handleLoginButtonClick}>  Log in</button>
-            </div>
+            </div> */}
         </div>
     );
 };

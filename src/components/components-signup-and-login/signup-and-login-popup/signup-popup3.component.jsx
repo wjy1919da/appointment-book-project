@@ -13,6 +13,7 @@ import LoginForm from './login-form.component';
 import SendVerifyEmail from './send-verify-email.component';
 import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
+import CreateAccount from './create-account.component';
 
 // 注册&登录
 // 主页面
@@ -51,7 +52,10 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'gender' && <ChooseGender />}
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
       {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
-      {(userInfo.popupState === 'signUp' || userInfo.popupState === 'verifyEmail') && <SocialSignUP />}
+      {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login') && <SocialSignUP />}
+      {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login' || userInfo.popupState === 'sendVerifyEmail' || userInfo.popupState === 'verifyEmail') && 
+          <CreateAccount title="Already have an account?" subTitle="Log in" onClick={()=>switchPopupTab('accountType')}/>}
+      {userInfo.popupState === 'accountType' && <CreateAccount title="Don't have an account?" subTitle="Sign up" onClick={()=>switchPopupTab('login')}/>}
       </Modal.Body>
     </Modal>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import './login-popup.styles.scss';
+import './login-form.styles.scss';
 import {useUserRegister} from '../../../hooks/useAuth';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
