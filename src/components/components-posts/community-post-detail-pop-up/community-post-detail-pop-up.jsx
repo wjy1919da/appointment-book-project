@@ -186,10 +186,22 @@ const CommunityPostDetailPopUP = ({
         <div className='detail-top-content'>
           <div className='post-popUp-content'>
             {!isMobile && brief && <span>{brief}</span>}
-            {tag && <span className='detail-red-font'>{tag}</span>}
-            {postDate && <span className='detail-gray-font'>{ndate}</span>}
+            <hr className='hr' />
+            <p className='post-description'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
+              voluptatum quae doloremque non voluptates eius sapiente, explicabo
+              quasi suscipit quo. Delectus, tempora. Quo esse sapiente ut cumque
+              amet error ipsum.
+            </p>
+            <span className='post-tag-names'>
+              #Doctor reviews #Breast Augmentation
+            </span>
+            <span className='post-date'>5/10/2023</span>
+            <hr className='hr' />
+            {/* {tag && <span className='detail-red-font'>{tag}</span>}
+            {postDate && <span className='detail-gray-font'>{ndate}</span>} */}
           </div>
-          <div className='post-popUp-break-lines'></div>
+          {/* <div className='post-popUp-break-lines'></div> */}
           <div className='post-popUp-comments'>
             <span className='detail-gray-font'>{commentCount} comments</span>
             {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}

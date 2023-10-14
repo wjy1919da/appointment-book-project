@@ -236,7 +236,7 @@ const UserProfileReview = () => {
           ))}
         </div>
 
-        <div className='summary-title'>
+        {/* <div className='summary-title'>
           <span>How did User_Name think?</span>
         </div>
         <div className='summary-rate'>
@@ -261,7 +261,7 @@ const UserProfileReview = () => {
           <UserProfileReviewCard />
           <UserProfileReviewCard />
           <UserProfileReviewCard />
-        </div>
+        </div> */}
       </div>
     </div>
   );
