@@ -20,7 +20,7 @@ import CreatePostOfUser from './components/create-post/create-post.jsx';
 import { Create } from '@mui/icons-material';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
-
+import AccountSetup from './components/account-setting/account-setting';
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -73,6 +73,7 @@ const App = () => {
         <Route path='create-post' element={<CreatePostOfUser />} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='userProfile' element={<UserProfilePage />} />
+        <Route path='AccountSetup' element={<AccountSetup/>} />
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='*' element={<PageNotFound />} />
