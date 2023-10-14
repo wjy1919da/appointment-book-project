@@ -160,13 +160,13 @@ const UserProfileReview = () => {
         >
           &lt;
         </div> */}
-        <div
+        {/* <div
           className='review-recommande-doctor-list-container'
           ref={doctorCardListRef}
-        >
-          {/* {isLoading ? */}
-          {/* <div><p>is Loading</p></div> : */}
-          {data && (
+        > */}
+        {/* {isLoading ? */}
+        {/* <div><p>is Loading</p></div> : */}
+        {/* {data && (
             <div className='custom-grid'>
               {mergedData &&
                 mergedData.map(
@@ -180,8 +180,8 @@ const UserProfileReview = () => {
                     )
                 )}
             </div>
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
         {/* <div
           className='scroll-indicator scroll-right'
           onClick={handleRightScroll}
