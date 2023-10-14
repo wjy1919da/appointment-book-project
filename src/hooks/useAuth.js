@@ -31,28 +31,29 @@ export function useUserOptLogin() {
 
 
 export function useUserRegister() {
-    const fetchUserRegister = async (username,email,password) => {
+    const fetchUserRegister = async (username,email,password,userRole) => {
         const res = await axios.post(base.addUser, {
             username,
             email,
-            password
+            password,
+            userRole
         });
         return res.data;
     };
-    return useMutation((credentials) => fetchUserRegister(credentials.username, credentials.email, credentials.password));
+    return useMutation((credentials) => fetchUserRegister(credentials.username, credentials.email, credentials.password, credentials.userRole));
 }
 
 export function useUserEmailLogin(){
-    const fetchEmailLogin = async (email, password,provider) => {
+    const fetchEmailLogin = async (email, password,provider,identity) => {
         const res = await axios.post(base.userEmailLogin, {
             email,
             password,
-            provider
+            provider,
+            identity
         });
         return res.data;
     };
-
-    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider));
+    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider, credentials.identity));
 }
 export function useSocialLogin() {
     const fetchSocialLogin = async (googleAccessToken, provider) => {
@@ -143,7 +144,6 @@ export function useSetUserProfile(){
     return useMutation((credentials) => fetchSetUserProfile(credentials.gender, credentials.interestArea, credentials.email, credentials.birthday,credentials.nickname));
 }
 export function useClickVerification(){
-    
     const fetchClickVerification = async (email) => {
         console.log('useClickVerification',email);
         const res = await axios.post(base.clickVerification, {

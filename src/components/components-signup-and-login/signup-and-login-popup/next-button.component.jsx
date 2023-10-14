@@ -13,6 +13,7 @@ const NextButton = (props) => {
                 padding: '18px 40px',
             }}
             type={props.type}
+            onClick={props.onClick}
             disabled={props.disabled}
         >
             {props.title}

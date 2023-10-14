@@ -22,7 +22,7 @@ interface userInfo {
     userId?: string;
     email?: string;
     gender?: number;
-    accountType?: string;
+    accountType: number | null;
     birthday?: string;
     username?: string;
     password?: string;
@@ -36,7 +36,7 @@ interface userInfoQuery {
     setEmail: (email: string) => void;
     setPassword: (password: string) => void;
     setGender: (gender: number) => void;
-    setAccountType: (accountType: string) => void;
+    setAccountType: (accountType: number) => void;
     setInterested: (interest: string) => void;
     setGoogleToken: (token: string) => void;
     setUsername: (username: string) => void;
@@ -55,7 +55,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         email: "",
         password: "",
         gender: 0,
-        accountType: "",
+        accountType: null,
         birthday: "",
         googleToken: "",
         selectedInterests: new Set<string>(),
@@ -78,7 +78,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
             userInfo: { ...store.userInfo, gender }
         }));
     },
-    setAccountType: (accountType: string) => {
+    setAccountType: (accountType: number) => {
         set((store) => ({
             userInfo: { ...store.userInfo, accountType }
         }));
