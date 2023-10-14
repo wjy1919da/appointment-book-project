@@ -18,6 +18,8 @@ const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
+    var userRole = userInfo.accountType;
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -30,7 +32,6 @@ const LoginForm = (props) => {
                 }
             ),
     });
-    
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
         mode: 'onChange'
@@ -41,6 +42,7 @@ const LoginForm = (props) => {
             email: formData.email,
             password: formData.password,
             provider: 'email',
+            identity: userRole
         });
     };
     useEffect(() => {
@@ -71,7 +73,6 @@ const LoginForm = (props) => {
 
    
     return (
-
         <div className="sign-in-form-container">
             <div className='login-title-container'>
                <LoginRegisterTitle title={"Log In"}/>
