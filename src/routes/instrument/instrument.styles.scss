@@ -1,12 +1,13 @@
 .instrument-container {
     // background: rgba($color: #51A3BF, $alpha: 0.06);
     background: #FBFCFF;
-    // .instrument-pic {
-    //     width: 100%;
-    //     height: 550px;
-    //     object-fit: cover;
-    //     opacity: 0.8;
-    // }
+    .instrument-body-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        margin: auto;
+    }
 
     @media (min-width: 768px) { // desktop
         .instrument-page-title {
@@ -30,7 +31,7 @@
         }
         .instrument-top-img-container {
             width:50%;
-            height: 22rem;
+            height: 25rem;
             right:0px;
             background: linear-gradient(115deg, #F48C8A 60%, #F0A484);
             border-radius: 1000px 0px 0px 1000px;
@@ -45,6 +46,72 @@
         }
         .instrument-doctor-img {
             width: 100%;
+        }
+        .instrument-body-title {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            font-size: 60px;
+            font-weight: 700;
+        }
+        .instrument-card {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        .instrument-display-container {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            margin: auto;
+            box-shadow: 2px 4px 16px #675D591A;
+        }
+        .instrument-display {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            margin: auto;
+        }
+        .instrument-display-img-container {
+            width: 32rem;
+        }
+        .instrument-display-img {
+            width: 100%;
+        }
+        .instrument-display-info-container {
+            padding-top: 2rem;
+            color: #0D0D0D;
+            text-align: center;
+        }
+        .instrument-display-heading {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .instrument-display-subheading-container {
+            padding-top: 1rem;
+            width: 85%;
+            margin: auto;
+        }
+        .instrument-display-subheading {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .instrument-display-subimage-container {
+            display: flex;
+            justify-content: center;
+            width: 30rem;
+            margin: auto;
+        }
+        .instrument-display-subimage {
+            width: 100%;
+        }
+        .instrument-learn-more-link-container {
+            padding: 4rem 0;
+        }
+        .instrument-link {
+            font-weight: 800;
         }
         // .instrument-title {
         //     font-size: 43px;
