@@ -20,6 +20,7 @@ const SendOtpVerification = () => {
     const [otp, setOtp] = useState('');
     const [isValid, setIsValid] = useState(false); // Start with false since OTP is initially empty
     const [otpError, setOtpError] = useState(''); 
+    const setToken = userInfoQueryStore((state) => state.setToken);
     console.log("userInfo ",userInfo);
     useEffect(() => { // <- useEffect to validate OTP in real-time
         validateOtp();
@@ -52,6 +53,8 @@ const SendOtpVerification = () => {
     };
     useEffect(() => {
         if (data?.code === 100) {
+            const token = data.data.token;
+            setToken(token);
             alert(data.msg);
         }
         if (data?.code === 104 || data?.code === 501) {
