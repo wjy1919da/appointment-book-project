@@ -30,6 +30,7 @@
   width: 50%;
 }
 
+// archive posts button
 .archived-posts-button-container {
   position: relative;
   z-index: 50;
@@ -40,15 +41,15 @@
   background-repeat: no-repeat;
   border-radius: 8px;
   cursor: pointer;
-  width: 240px; /* Set width to 240px */
-  height: 240px; /* Set height to 240px */
-  background-size: 100% 100%; /* Ensure the background image covers the entire container */
+  width: 240px;
+  height: 240px;
+  background-size: 100% 100%;
 }
 
 .archived-posts-button-container img {
   border-radius: 8px;
-  width: 100%; /* Make the image fill the container width */
-  height: 100%; /* Make the image fill the container height */
+  width: 100%;
+  height: 100%;
 }
 
 .archive-title {
