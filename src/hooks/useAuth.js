@@ -66,45 +66,26 @@ export function useSocialLogin() {
     return useMutation((credentials) => fetchSocialLogin(credentials.googleAccessToken, credentials.provider));
 }
 
-export function useSendOpt(){
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchSendOpt = async () => {
-        const res = await axios.post(base.userSendOtp, {
-            "mobile": userInfo.mobile,
-        });
-        return res.data;
-    };
-    return useQuery(['sendOpt', userInfo.mobile], fetchSendOpt, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
-}
-// export function useUserFacebookLogin(){
 
-// }
 export function useUserOtpRegister(){
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchUserOtpRegister = async () => {
+    const fetchUserOtpRegister = async (phoneNumber) => {
         const res = await axios.post(base.otpRegister, {
-            "mobile": userInfo.mobile,
+            "mobile": phoneNumber,
         });
         return res.data;
     };
-    return useQuery(['userOtpRegister', userInfo.mobile], fetchUserOtpRegister, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
+    return useMutation((credentials) => fetchUserOtpRegister(credentials.phoneNumber));
 }
 export function useUserOtpRegisterValidate(){
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchUserOtpRegisterValidate = async () => {
+    const fetchUserOtpRegisterValidate = async (mobile,otp,userRole) => {
         const res = await axios.post(base.otpRegisterValidate, {
-            "mobile": userInfo.mobile,
-            "otp": userInfo.otp,
+            mobile,
+            otp,
+            userRole
         });
         return res.data;
     };
-    return useQuery(['userOtpRegisterValidate', userInfo.mobile, userInfo.otp], fetchUserOtpRegisterValidate, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
+    return useMutation((credentials) => fetchUserOtpRegisterValidate(credentials.mobile, credentials.otp, credentials.userRole));
 }
 export function useUserEmailRegisterValidate(token) {
     const fetchUserEmailRegisterValidate = async (token) => {

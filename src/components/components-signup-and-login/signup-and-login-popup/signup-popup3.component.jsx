@@ -15,7 +15,7 @@ import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
 import CreateAccount from './create-account.component';
 import LoginPhone from './login-phone.component';
-
+import SendOtpVerification from './send-otp-verification.component';
 // 注册&登录
 // 主页面
 const StepTracker = ({ currentStep }) => {
@@ -54,6 +54,7 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
       {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
       {userInfo.popupState === 'phoneNumberLogin' && <LoginPhone />}
+      {userInfo.popupState === 'sendOtpVerification' && <SendOtpVerification />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login') && <SocialSignUP />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login' || userInfo.popupState === 'sendVerifyEmail' || userInfo.popupState === 'verifyEmail') && 
           <CreateAccount title="Already have an account?" subTitle="Log in" onClick={()=>switchPopupTab('accountType')}/>}

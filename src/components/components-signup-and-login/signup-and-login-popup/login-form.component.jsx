@@ -102,7 +102,7 @@ const LoginForm = (props) => {
                             {errors.password?.message}
                         </Form.Control.Feedback>
                     </InputGroup>
-                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('sendVerifyEmail')}>Forgot Password?</button>
+                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
                 </Form.Group>
                 <div className='signUp-download-button'>
                     <NextButton title='Log In' width='180px' disabled={!isValid} />

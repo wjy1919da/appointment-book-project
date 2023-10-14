@@ -22,6 +22,7 @@ interface userInfo {
     googleToken?: string;
     userId?: string;
     email?: string;
+    phoneNumber?: string;
     gender?: number;
     accountType: number | null;
     birthday?: string;
@@ -35,6 +36,7 @@ interface userInfo {
 interface userInfoQuery {
     userInfo: userInfo;
     setEmail: (email: string) => void;
+    setPhoneNumber: (phoneNumber: string) => void;
     setPassword: (password: string) => void;
     setGender: (gender: number) => void;
     setAccountType: (accountType: number) => void;
@@ -54,6 +56,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         token: "",
         userId: "",
         email: "",
+        phoneNumber: "",
         password: "",
         gender: 0,
         accountType: null,
@@ -67,6 +70,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     setEmail: (email: string) => {
         set((store) => ({
             userInfo: { ...store.userInfo, email }
+        }));
+    },
+    setPhoneNumber: (phoneNumber: string) => {
+        set((store) => ({
+            userInfo: { ...store.userInfo, phoneNumber }
         }));
     },
     setPassword: (password: string) => {
