@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'; 
 import LoginRegisterTitle from './login-register-title.component'; 
 import './sign-up-account-type.styles.scss'; 
 import userInfoQueryStore from '../../../userStore.ts';
 import NextButton from './next-button.component'; 
 import MemberAndDoctorButton from './member-doctor-button.component'; 
+import { useEffect } from 'react';
 
 const SignUpAccountType = () => {
     const setAccountType = userInfoQueryStore((state) => state.setAccountType);
@@ -15,14 +15,14 @@ const SignUpAccountType = () => {
         // console.log("Login button clicked!");
         switchPopupTab('login')
     };
-
-    console.log('popupState', userInfo.popupState);
-
+    useEffect(() => {
+        setAccountType(null);
+    },[]);
     return (
         <div className="signup-account-type-container">
             <div className="group-title-buttons">
                 <div className="title-container">
-                    Join Charm as a...
+                    <LoginRegisterTitle title="Join Charm as a... "/>
                 </div>
                 <div className="button-container">
                     <MemberAndDoctorButton 
