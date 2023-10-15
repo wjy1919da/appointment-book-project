@@ -1,0 +1,109 @@
+.user-appointment-card-container
+{
+    display: flex;
+    background: white;
+    align-items: center;
+    padding-left: 30px;
+    justify-content: space-between;
+    width:100%;
+    height:200px;
+    padding-right: 30px;
+    &.isMostRecent {
+        background: rgba(217, 217, 217, 0.30);
+      }
+    .appointment-info-section
+    {
+        gap:10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .appointment-type-section
+        {
+            display: flex;
+            gap:10px;
+            align-items: center;
+        }
+        .appointment-start-button
+        {
+            color: #FFF;
+            text-align: center;
+            text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.10);
+            /* Interactive 1 */
+            font-family: Open Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 100%;
+            display: inline-flex;
+            height: 45px;
+            padding: 8px 32px;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            background:  #E2E3E7;
+
+            /* Override button background color for IsMostRecent=true */
+            &.isMostRecent {
+              background: #F48C8A;
+            }
+        }
+    }
+    .appointment-time-section
+    {
+        gap:10px;
+        display: flex;
+        flex-direction: column;
+
+    }
+    .appointment-today-Icon
+    {
+
+    }
+}
+.appointment-date1
+{
+    color: #000;
+
+    /* NEW TYPE/NEW sub title */
+    font-family: Open Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.appointment-time
+{
+    color: gray;
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    &.isMostRecent {
+        color:#F48C8A;
+      }
+
+}
+.appointment-name1
+{
+    color: var(--text-1-footer, #352C29);
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.appointment-type1
+{
+    color: #000;
+
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

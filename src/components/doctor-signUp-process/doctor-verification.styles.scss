@@ -1,0 +1,148 @@
+.doctor-verification-main-container
+{
+    width: 700px;
+    height: 900px;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 20px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    .doctor-verification-text
+    {
+
+        color: #352C29;
+    /* Interactive 3 */
+        font-family: Open Sans;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%; /* 16px */
+        //text-align: center;
+    }
+    .doctor-verification-gray-text
+    {
+        color: #838383;
+/* Interactive 3 */
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+    }
+    .doctor-verification-title
+    {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .doctor-verification-doctor-profile
+    {
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .doctor-verification-dropDown--button
+    {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        width: 400px;
+        height: 30px;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border: 1px solid #F8F8F8;
+        background: #FFF;
+        box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
+        color: black; /* For the button text color */
+        font-family: Open Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%; 
+    }
+    .doctor-verification-certification
+    {
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .doctor-verification-upload-section
+    {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+    }
+    .doctor-verification-choose-file-section
+    {
+        margin-top: 30px;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+
+    }
+    .doctor-verification-list-file-section
+    {
+        margin-top: 20px;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+    .doctor-verification-upload-button
+    {
+        margin-left: 14px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .doctor-verification-upload-button
+        {
+            border: 1px solid #838383;
+            background-color: #C9C9C9;
+            width: 600px;
+            height: 40px;
+            flex-shrink: 0;
+            cursor: pointer; /* Makes it clear it's clickable */
+            outline: none;   /* Removes the default focus outline */
+            transition: background-color 0.2s; 
+            color: #000;
+            /* Interactive 2 */
+            font-family: Open Sans;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 100%; 
+        }
+        .doctor-verification-upload-button:hover
+        {
+            background-color: #B0B0B0;
+        }
+    }
+    .doctor-verification-upload-body
+    {
+        
+        margin-top: 30px;
+        width: 600px;
+        height: 300px;
+        margin-left: 30px;
+        background-color: #EDEDED;
+        border: 1px dashed #000;
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center children horizontally */
+        justify-content: center; /* Center children vertically */
+        gap:20px;
+    }
+    .uploadFile-box
+    {
+        border: 1px solid #838383;
+        background: #FFF;
+        width: 600px;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+}
