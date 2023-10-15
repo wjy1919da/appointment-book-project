@@ -53,7 +53,7 @@ const AppEditDetail = () => {
             <div style={{display:'flex',flexDirection:'column'}}>
             <div className='app-edit-main-section'>
                 <div className='app-edit-calendar-section'>
-                <Calendar onChange={onChange} value={value} />
+                <Calendar onChange={onChange} value={value} className="react-calendar"/>
                 </div>
                 <div className='app-edit-time-section'>
                     <div className='app-edit-time-list'>
