@@ -1,0 +1,132 @@
+.appointment-detail-main-container
+{
+    display: flex;
+    flex-direction: column;
+}
+.appointment-top-info-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 60px;
+    padding-top: 20px;
+}
+.app-doctor-info-section
+{
+    display: flex;
+    align-items: center;
+    gap:40px;
+}
+.app-doctor-detail
+{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.app-doctor-detail-combin
+{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+.app-doctor-detail-text
+{
+    overflow: hidden;
+    color: var(--text-2-button, #675D59);
+    text-overflow: ellipsis;
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.app-time-info-section
+{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+.app-medium-info-section
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding-left: 30px;
+    color: #000;
+    /* NEW TYPE/NEW button */
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    gap:20px;
+}
+.app-description-section
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding-left: 30px;
+    padding-right: 200px;
+}
+.app-medium-buttons-combin
+{
+    display: flex;
+    align-items: center;
+    gap:30px;
+    .app-medium-button
+    {
+        color: #000;
+
+        text-align: center;
+        font-family: PingFang SC;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        border-radius: 30px;
+        border: 1px solid #A5A6A8;
+
+        background: rgba(0, 0, 0, 0.00);
+    }
+}
+.app-doctor-deatil-icon
+{
+    width:16px;
+    height:16px;
+}
+.app-cancel-or-change-button
+{
+    color: #FFF;
+
+        text-align: center;
+        text-shadow: 0px 1.5287762880325317px 1.5287762880325317px rgba(48, 48, 48, 0.10);
+        /* Interactive 1 */
+        font-family: Open Sans;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%;
+        display: inline-flex;
+        height: 35px;
+        padding: 5.115px 20.46px;
+        justify-content: center;
+        align-items: center;
+        gap: 9.173px;
+        flex-shrink: 0;
+        border-radius: 6.115px;
+        background:linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+}
+.app-edit-button
+{
+    color: #000;
+
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    margin-top: 10px;
+}

@@ -23,6 +23,7 @@ const DoctorPersonalInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [isAgreed, setIsAgreed] = useState(false);
+    const inputFieldsOrder = ["name", "clinic", "password", "mobilePhone", "businessPhone", "hasCheck"];
     const generateErrorMessage = () => {
         if (errors.name && errors.name.message) {
             console.log("Name error");
@@ -55,11 +56,11 @@ const DoctorPersonalInformation = () => {
         businessPhone: z.string().min(1, 'Business phone number is required'),
         mobilePhone: z.string().min(1, 'Mobile phone number is required'),
         isAgreed: z.boolean().refine(value => value === true, {
-            message: 'You must agree to the terms',
-            path: [] // You might not need this, but sometimes it's useful
+          message: 'You must agree to the terms',
+          path: [] // You might not need this, but sometimes it's useful
         }),
         // ... Add other fields if necessary
-    });
+      });
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         resolver: zodResolver(schema),
     });
@@ -94,15 +95,22 @@ const DoctorPersonalInformation = () => {
         addDoctorProfile(payload);
         togglePopup(true, 'verification');
     };
+    let firstErrorMessage = null;
+    for (const field of inputFieldsOrder) {
+      if (errors[field]) {
+        firstErrorMessage = errors[field].message;
+        break; // Stop at the first error message
+      }
+    }
     const onSubmit = handleSubmit(handleSubmitProfile);
 
     return (
         <div className='doctor-personal-information-main-container'>
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {firstErrorMessage && <div className="error-message">{firstErrorMessage}</div>}
             <div className='doctor-personal-informtion-title'>
                 <span className='doctor-personal-info-text'>Personal Information</span>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{display:'flex',flexDirection:'column'}}>
         <div className='doctor-Personal-Information-container'>  
             <div className='doctor-personal-information-right-section'>
                 <span className='doctor-personal-info-text'>
@@ -116,6 +124,7 @@ const DoctorPersonalInformation = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
+                    
                 <input
                         type="text"
                         {...register('clinic')}

@@ -18,6 +18,7 @@ import PageNotFound from './routes/page-not-found/page-not-found.component';
 import { useMediaQuery } from 'react-responsive';
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import { Create } from '@mui/icons-material';
+import UserAppointmentMain from './components/user-appointment/user-appointment-main';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
@@ -64,6 +65,7 @@ const App = () => {
             <UserProfilePage />
           </PrivateRoute>
         }/>
+        <Route path ='userApoinment' element = {<UserAppointmentMain/>} />
         <Route path='download' element={<Download />} />
         <Route path = 'create-post' element ={<CreatePostOfUser/>} />
         <Route path='health-check' element={<HealthCheck />} />
