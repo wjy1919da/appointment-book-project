@@ -27,7 +27,7 @@
     "antd": "^5.5.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
-    "framer-motion": "^10.12.16",
+    "framer-motion": "^10.16.4",
     "hashids": "^2.3.0",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
