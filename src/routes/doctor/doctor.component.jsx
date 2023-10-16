@@ -1,8 +1,8 @@
 import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
 import HomeTitle from '../../components/home-title/home-title.component';
-import DoctorSearchBackground from '../../assets/doctor/doctor-search-background.png';
-import DoctorSearchPhone from '../../assets/doctor/doctor-search-phone.png';
+import DoctorSearchBackground from '../../assets/doctor/featureDoctor3.png';
+// import DoctorSearchPhone from '../../assets/doctor/doctor-search-phone.png';
 import FeatureDoctor from '../../components/components-doctor-search/doctor-search-feature/doctor-search-feature.component';
 import IntroDoctor from '../../components/components-doctor-search/doctor-search-info/doctor-search-info.component';
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
@@ -23,28 +23,32 @@ const Doctor = () => {
                     <DoctorMobilWebpage/>
                 ) : (
                     <div className='doctor-search-outer-container'>
-                        <div className='doctor-search-header-container'>
-                            <div className='doctor-search-header-title-container'>
-                                <HomeTitle title='Find the Right Doctor At Your Fingertip' isMobile={isMobile} />
+                        <div className='gradient-background'>
+                            <div className='doctor-search-header-container'>
+                                <div className='doctor-search-header-title-container'>
+                                    <h1 className='doctor-upper-title'>Find the Right Doctor At Your Fingertip</h1>
+                                    {/* <HomeTitle title='Find the Right Doctor At Your Fingertip' isMobile={isMobile} /> */}
+                                </div>
+                                <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
+                                    <img src={DoctorSearchBackground} alt='Doctor Search Background' className='doctor-search-header-pic' />
+                                    {/* <img src={DoctorSearchPhone} alt='Doctor Search Phone' className='doctor-search-header-phone-pic' /> */}
+                                </div>
                             </div>
-                            <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
-                                <img src={DoctorSearchBackground} alt='Doctor Search Background' className='doctor-search-header-pic' />
-                                <img src={DoctorSearchPhone} alt='Doctor Search Phone' className='doctor-search-header-phone-pic' />
+                            <div className='doctor-intro-container'>
+                                <IntroDoctor isMobile={isMobile}/>
+                            </div>
+                            <div className='doctor-search-search-bar-container'>
+                                <h2 className='doctor-search-title'>Find your doctors</h2>
+                                <div className='doctor-search-container'>
+                                    <DoctorSearchMultiInput />
+                                </div>
                             </div>
                         </div>
-                        <div className='doctor-search-search-bar-outer-container'>
-                            <div className='doctor-search-outter-box'>
-                                <DoctorSearchMultiInput />
-                            </div>
-                        </div>
-                        <div className='doctor-intro-container'>
-                            <IntroDoctor isMobile={isMobile}/>
-                        </div>
-                        <FeatureDoctor />
+                        {/* <FeatureDoctor />
                         <span className="doctor-title">Post by doctor</span>
                         <div className='doctor-post-grid-container'>
                             <DoctorPostGrid />
-                        </div>
+                        </div> */}
                     </div>
                 )}
             </div>

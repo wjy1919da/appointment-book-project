@@ -1,5 +1,5 @@
 import React, { useRef, useState,useReducer,useEffect} from 'react'
-import { InputGroup } from "@chakra-ui/react";
+import { InputGroup, Input } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx'
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component.jsx';
@@ -47,6 +47,11 @@ const DoctorSearchMultiInput = () => {
                 dispatchDropdown({type: 'CLOSE_DROPDOWN'});
             }, 100);
         }
+    }
+    const handleSubmit = () => {
+        console.log('Location: ', doctorQuery.location);
+        console.log('Specialization: ', doctorQuery.field);
+        console.log('DoctorName: ', doctorQuery.doctorName);
     }
     return (
         <div>
@@ -141,11 +146,29 @@ const DoctorSearchMultiInput = () => {
                     </div>
                 </div>
             ):(
-                <div>
-                    <InputGroup display="flex" alignItems="center">
-                        <FormInput 
+                <div className='doctor-multiInput-container'>
+                    <form className='doctor-input-form'>
+                        <input placeholder='ZIP or City, State' 
+                            name='location' 
+                            onChange={(event) => setLocation(event.target.value)} 
+                            className='doctor-input-for-multiInput' />  {/*Location input */}
+                        <input placeholder='Specialization' 
+                            name='specialization' 
+                            onChange={(event) => setField(event.target.value)} 
+                            className='doctor-input-for-multiInput' />  {/*Specialization input */}
+                        <input placeholder='Doctor' 
+                            name='doctor' 
+                            onChange={(event) => setDoctorName(event.target.value)} 
+                            className='doctor-input-for-multiInput' />  {/*Doctor's Name input */}
+                        <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
+                        {/* <HomeButton title='Search' onClick={handleSubmit} isIcon={SearchIcon} className='doctor-search-button-multiInput' /> */}
+                    </form>
+                    
+                    {/* <InputGroup display="flex" alignItems="center"> */}
+                    {/* <InputGroup >
+                        <Input 
                             ref = {locationRef}
-                            onClick = {()=> { dispatchDropdown({type: 'TOGGLE_DROPDOWN'}); }}
+                            onClick = {()=> {dispatchDropdown({type: 'TOGGLE_DROPDOWN'}); }}
                             onBlur = {handleBlur}
                             value = {doctorQuery.location || ''}
                             onChange = {(event) => setLocation(event.target.value)}
@@ -153,13 +176,13 @@ const DoctorSearchMultiInput = () => {
                             label = "ZIP Code"  />
                             {dropdownIsOpen && <DoctorSearchDropDown/>}
                         <VerticalDivider/>
-                        <FormInput 
+                        <Input 
                             ref = {specializationRef}
                             value={doctorQuery.field || ''}
                             onChange = {(event) => setField(event.target.value)}
                             label = "Specialization"  />
                         <VerticalDivider/>
-                        <FormInput 
+                        <Input 
                             ref = {doctorNameRef}
                             value={doctorQuery.doctorName || ''}
                             onChange = {(event) => setDoctorName(event.target.value)}
@@ -170,10 +193,17 @@ const DoctorSearchMultiInput = () => {
                         </button>
                             <HomeButton title='Search' onClick={handleOnClick} isIcon={SearchIcon} width='150px'height='40px'/>
                     </InputGroup>
-                    {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
+                    {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>} */}
                 </div>
         )}
         </div>
     )
 }
+
+// const DoctorInput = ({onChange, placeHolder}) => {
+//     return (
+//         <input placeholder={placeHolder} onChange={onChange} className='doctor-input-for-multiInput' />
+//     )
+// }
+
 export default DoctorSearchMultiInput;
