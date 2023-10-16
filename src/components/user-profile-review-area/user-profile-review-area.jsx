@@ -22,6 +22,7 @@ import DoctorProfilePicture from '../../assets/post/doctor_profile_picture.svg';
 import LocationPinIcon from '../../assets/post/location_pin.svg';
 import SpecializationIcon from '../../assets/post/glasses.svg';
 import VerficationIcon from '../../assets/post/verified_badge_icon.svg';
+import RightArrow from '../../assets/post/arrow-right.svg';
 
 // others
 // import { useMemo } from 'react';
@@ -159,13 +160,13 @@ const UserProfileReview = () => {
         >
           &lt;
         </div> */}
-        <div
+        {/* <div
           className='review-recommande-doctor-list-container'
           ref={doctorCardListRef}
-        >
-          {/* {isLoading ? */}
-          {/* <div><p>is Loading</p></div> : */}
-          {data && (
+        > */}
+        {/* {isLoading ? */}
+        {/* <div><p>is Loading</p></div> : */}
+        {/* {data && (
             <div className='custom-grid'>
               {mergedData &&
                 mergedData.map(
@@ -179,8 +180,8 @@ const UserProfileReview = () => {
                     )
                 )}
             </div>
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
         {/* <div
           className='scroll-indicator scroll-right'
           onClick={handleRightScroll}
@@ -189,7 +190,6 @@ const UserProfileReview = () => {
         </div> */}
       </div>
       <div className='recommande-doctor-summary'>
-        {/* ME */}
         <div className='recommend-doctor-box-wrapper'>
           {doctorsCard.map((x, index) => (
             <div
@@ -198,7 +198,6 @@ const UserProfileReview = () => {
               }`}
               onClick={() => handleClickRecommendDoctor(index)}
             >
-              {' '}
               <div className='box-1'>
                 <img src={DoctorProfilePicture} alt='' />
                 <div className='username-review-card-rate-star'>
@@ -236,7 +235,22 @@ const UserProfileReview = () => {
           ))}
         </div>
 
-        <div className='summary-title'>
+        <div className='section-container'>
+          <span className='section-1'>
+            Face
+            <img src={RightArrow} alt='Image-Arrow' />
+          </span>
+          <span className='section-2'>
+            Lorum
+            <img src={RightArrow} alt='Image-Arrow' />
+          </span>
+          <span className='section-3'>
+            Lorum
+            <img src={RightArrow} alt='Image-Arrow' />
+          </span>
+        </div>
+
+        {/* <div className='summary-title'>
           <span>How did User_Name think?</span>
         </div>
         <div className='summary-rate'>
@@ -261,7 +275,7 @@ const UserProfileReview = () => {
           <UserProfileReviewCard />
           <UserProfileReviewCard />
           <UserProfileReviewCard />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -133,7 +133,7 @@
   box-shadow: 0px 12px 16px 0px rgba(226, 227, 231, 0.25),
     0px 0px 40px 0px rgba(255, 164, 163, 0.1);
   padding: 22px;
-  width: 384px;
+  width: 320px;
   height: 166px;
 }
 
@@ -178,4 +178,23 @@
 .recommend-doctor-box-wrapper {
   display: flex;
   flex-wrap: wrap;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-1-footer, #352c29);
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 25px;
+
+  .section-1,
+  .section-2,
+  .section-3 {
+    display: flex;
+    margin-bottom: 25px;
+  }
 }

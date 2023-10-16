@@ -1,0 +1,53 @@
+.user-appointment-section1-main-container
+{
+
+}
+.user-appointment-section1-container
+{
+    border-radius: 18px;
+    border: 1px solid #000;
+    width: 1000px;
+    height: 550px;
+    background-color: white;
+
+}
+.appointment-detail-section
+{
+    border-radius: 18px;
+    border: 1px solid #000;
+    width: 1000px;
+    height: 550px;
+    background-color: white;
+}
+.user-appointment-text-title
+{
+    display: flex;
+    gap:50px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.user-appointment-text1
+{
+    color: #000;
+
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.user-appointment-text2
+{
+    color: var(--before-input, rgba(20, 20, 20, 0.50));
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.user-appointment-most-recent
+{
+    margin-top: 40px;
+}

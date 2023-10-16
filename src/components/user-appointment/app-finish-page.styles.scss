@@ -1,0 +1,31 @@
+.app-finish-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:50px;
+    align-items: center; // this assumes you want it centered in the viewport
+}
+
+.app-finish-doctor-profile {
+    display: flex;
+    gap:30px;
+    align-items: center; // to vertically align the image and text list
+    // other styles for the doctor profile if any
+}
+.app-finish-text-list
+{
+    display: flex;
+    text-align: left;
+    gap:10px;
+    flex-direction: column;
+}
+.app-finish-title
+{
+    margin-top: 50px;
+}
+.app-finish-button
+{
+    position: absolute;
+    left:870px;
+    top:480px;
+}

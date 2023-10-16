@@ -267,11 +267,11 @@ const Header = () => {
               <span className='header-nav-divider'>|</span>
               <Link
                 className={`header-nav-link2 ${
-                  location.pathname === '/instrument/coolsculpting'
+                  location.pathname === '/instrument'
                     ? 'active-link'
                     : ''
                 }`}
-                to='/instrument/coolsculpting'
+                to='/instrument'
               >
                 Instruments
               </Link>

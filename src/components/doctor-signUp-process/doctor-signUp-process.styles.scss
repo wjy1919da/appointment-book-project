@@ -1,0 +1,62 @@
+.doctor-signUp-process-container
+{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width:100%;
+    position: relative;
+    .doctor-signUp-process-mainSection
+    {
+
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+        align-items: center;
+        justify-content: center;
+        height:900px;
+        z-index: 10;
+        .doctor-SignUp-process-text
+        {
+            color: #000;
+            text-align: center;
+            font-family: Playfair Display;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 135%; /* 72.9px */;
+        }
+        .doctor-signUp-main-button
+        {
+           position: relative;
+           margin-top: 50px;
+           margin-left: 100px;
+        }
+    }
+    .doctor-signUp-process-right-orange-render
+    {
+        position:absolute;
+        top:100px;
+        left:-750px;
+        border-radius: 190px;
+        background: #FAB25E;
+        width: 1011px;
+        height: 350px;
+        z-index: 1;
+    }
+    .doctor-signUp-process-left-orange-render
+    {
+        position:absolute;
+        top:550px;
+        right:-700px;
+        border-radius: 190px;
+        background: #FAB25E;
+        width: 1011px;
+        height: 350px;
+        z-index: 1; /* This value might need to be adjusted based on other elements */
+    }
+    .doctor-signUp-footer-component
+    {
+        margin-top: 100px;
+        z-index: 10; /* This value might need to be adjusted based on other elements */
+    }
+}

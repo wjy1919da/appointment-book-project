@@ -1,0 +1,28 @@
+.app-cancel-button
+{
+    border-radius: 6.307px;
+    background:  #E2E3E7;
+    display: inline-flex;
+    height: 35px;
+    padding: 5.115px 20.46px;
+    justify-content: center;
+    align-items: center;
+    gap: 9.461px;
+    flex-shrink: 0;
+    color:  #838383;
+    text-align: center;
+    /* Interactive 1 */
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 22px */
+}
+.app-detail-description-button
+{
+    display: flex;
+    margin: auto;
+    margin-top: 100px;
+    gap:50px;
+    justify-content: center;
+}
