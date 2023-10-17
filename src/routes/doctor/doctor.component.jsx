@@ -4,13 +4,14 @@ import DoctorSearchBackground from '../../assets/doctor/featureDoctor3.png';
 import IntroDoctor from '../../components/components-doctor-search/doctor-search-info/doctor-search-info.component';
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
 import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-card.component';
+import BlankSearchCard from '../../components/doctor-search-card/blank-search-card.component';
 import { useLayoutEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DoctorMobilWebpage from '../../components/components-doctor-search/doctor-mobile-webpage/doctor-mobile-web';
 import DoctorSearchLoadingBar from '../../components/doctor-search-loading-bar/doctor-search-loading-bar.component';
 const Doctor = () => {
     const [searchResults, setSearchResults] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     // useLayoutEffect(() => {
     //    window.scrollTo(0, 0);
@@ -93,6 +94,8 @@ const Doctor = () => {
                             {doctorArray.map((doctorObj, index) => 
                                 <DoctorSearchCard doctorObj={doctorObj} />
                             )}
+                            <BlankSearchCard />
+                            <BlankSearchCard />
                         </div>
                         <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results (testing purposes)</button>
                     </div>
