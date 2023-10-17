@@ -12,7 +12,7 @@ import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-const DoctorSearchMultiInput = () => {
+const DoctorSearchMultiInput = ({searchCallback}) => {
     const locationRef = useRef(null);
     const specializationRef = useRef(null);
     const doctorNameRef = useRef(null);
@@ -52,6 +52,12 @@ const DoctorSearchMultiInput = () => {
         console.log('Location: ', doctorQuery.location);
         console.log('Specialization: ', doctorQuery.field);
         console.log('DoctorName: ', doctorQuery.doctorName);
+        const obj = {'location': doctorQuery.location,
+                      'field':   doctorQuery.field,
+                      'name': doctorQuery.doctorName
+                    }
+        console.log('Now calling callback...');
+        searchCallback(obj);
     }
     return (
         <div>
