@@ -3,25 +3,28 @@ import './doctor.styles.scss';
 import DoctorSearchBackground from '../../assets/doctor/featureDoctor3.png';
 import IntroDoctor from '../../components/components-doctor-search/doctor-search-info/doctor-search-info.component';
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
-import locationIcon from '../../assets/doctor/search-card-locationIcon.png';
-import badgeIcon from '../../assets/doctor/search-card-badgeIcon.png';
-import glassesIcon from '../../assets/doctor/search-card-glassIcon.png';
-import DoctorCardComponent from '../../components/doctor-card/doctor-card.component'
-import StarRate from '../../components/starRate/starRate';
-import doctorStockPhoto from '../../assets/doctor/doctor-profile-image.png';
-import { Link } from 'react-router-dom';
+import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-card.component';
 import { useLayoutEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DoctorMobilWebpage from '../../components/components-doctor-search/doctor-mobile-webpage/doctor-mobile-web';
 const Doctor = () => {
     const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
     // useLayoutEffect(() => {
     //    window.scrollTo(0, 0);
     // });
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
-    const retrieveSearchResults = (results) => {  // callback function passed to search bar to retrieve results
-        setSearchResults(results);
-        console.log('search results set');
+    async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
+        setIsLoading(true);
+        try {
+            setSearchResults(results);
+            console.log('search results set');
+        } catch (err) {
+            setError(true);
+        } finally {
+            setIsLoading(false);
+        }
     }
     const testDoctor1 = {'name': 'Dr. Strange',
                             'memberId': 9001,
@@ -48,7 +51,14 @@ const Doctor = () => {
                             'field': 'Dentistry'
                         }; 
     const doctorArray = [testDoctor1, testDoctor2, testDoctor3, testDoctor4];                 
-
+    
+    if (error) {  // do we have a generic error page?
+        return (
+            <div className='error-page'>
+                <h1>Error</h1>
+            </div>
+        )
+    }
     return (
         <div className='doctor-container animate__animated animate__fadeIn'>
             <div>
@@ -72,6 +82,7 @@ const Doctor = () => {
                             </div>
                             <div className='doctor-search-search-bar-container'>
                                 <h2 className='doctor-search-title'>Find your doctors</h2>
+                                {isLoading && 'Loading Spinner here!'}
                                 <div className='doctor-search-container'>
                                     <DoctorSearchMultiInput searchCallback={retrieveSearchResults} />
                                 </div>
@@ -82,12 +93,7 @@ const Doctor = () => {
                                     <DoctorSearchCard doctorObj={doctorObj} />
                             )}
                         </div>
-                        <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results</button>
-                        {/* <FeatureDoctor />
-                        <span className="doctor-title">Post by doctor</span>
-                        <div className='doctor-post-grid-container'>
-                            <DoctorPostGrid />
-                        </div> */}
+                        <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results (testing purposes)</button>
                     </div>
                 )}
             </div>
@@ -96,52 +102,6 @@ const Doctor = () => {
     )
 };
 
-const DoctorSearchCard = ({doctorObj}) => { // based on Figma, doctorObj should preferably have: name, doctorId, photoUrl, rating, location, specialization/field, license/verification
-    const name = doctorObj?.name;           // ^I would assume doctorQuerys would be passed in here, from store.ts, which dont contain their rating. I'll have to ask how we will store that
-    const photoUrl = doctorObj?.photoUrl;
-    const id = doctorObj?.memberId;
-    const rating = doctorObj?.rating;
-    const location = doctorObj?.location;
-    const field = doctorObj?.field;
-    return (
-        <div className='doctor-sc-container'>  {/* 'sc' stands for search card */}
-            <div className='doctor-sc'>
-                <div className='doctor-sc-image-column'>
-                    <div className='doctor-sc-image-container'>
-                        <img src={photoUrl || doctorStockPhoto} alt='Doctor photo' className='doctor-sc-image' /> 
-                    </div>
-                    <div className='doctor-sc-rating-container'>
-                        <StarRate rateScore={rating} />
-                    </div>
-                </div>
-                <div className='doctor-sc-info-column'>
-                    <div className='doctor-sc-location-row doctor-sc-row'>
-                        <div className='doctor-sc-icon-container'>
-                            <img src={locationIcon} alt='location icon' className='doctor-sc-icon' />
-                        </div>
-                        <p className='doctor-sc-location-text doctor-sc-text'>{location  || 'City, State'}</p>
-                    </div>
-                    <div className='doctor-sc-name-row doctor-sc-row'>
-                        <div className='doctor-sc-name-container'>
-                        <Link to={`/doctor/${id}`}><h4 className='doctor-sc-name-text doctor-sc-text'>{name || 'Dr. Name Name'}</h4></Link>
-                        </div>
-                    </div>
-                    <div className='doctor-sc-field-row doctor-sc-row'>
-                        <div className='doctor-sc-icon-container'>
-                            <img src={glassesIcon} alt='glasses icon' className='doctor-sc-icon' />
-                        </div>
-                        <p className='doctor-sc-field-text doctor-sc-text'>{field || 'Generalist'}</p>
-                    </div>
-                    <div className='doctor-sc-license-row doctor-sc-row'>
-                        <div className='doctor-sc-icon-container'>
-                            <img src={badgeIcon} alt='badge icon' className='doctor-sc-icon' />
-                        </div>
-                        <p className='doctor-sc-verification-text doctor-sc-text'>License or Verification</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+
 
 export default Doctor;
