@@ -7,9 +7,10 @@ import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-
 import { useLayoutEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DoctorMobilWebpage from '../../components/components-doctor-search/doctor-mobile-webpage/doctor-mobile-web';
+import DoctorSearchLoadingBar from '../../components/doctor-search-loading-bar/doctor-search-loading-bar.component';
 const Doctor = () => {
     const [searchResults, setSearchResults] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     // useLayoutEffect(() => {
     //    window.scrollTo(0, 0);
@@ -82,7 +83,7 @@ const Doctor = () => {
                             </div>
                             <div className='doctor-search-search-bar-container'>
                                 <h2 className='doctor-search-title'>Find your doctors</h2>
-                                {isLoading && 'Loading Spinner here!'}
+                                {isLoading && <DoctorSearchLoadingBar />}
                                 <div className='doctor-search-container'>
                                     <DoctorSearchMultiInput searchCallback={retrieveSearchResults} />
                                 </div>
@@ -90,7 +91,7 @@ const Doctor = () => {
                         </div>
                         <div className='doctor-search-results-container'>
                             {doctorArray.map((doctorObj, index) => 
-                                    <DoctorSearchCard doctorObj={doctorObj} />
+                                <DoctorSearchCard doctorObj={doctorObj} />
                             )}
                         </div>
                         <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results (testing purposes)</button>
@@ -101,7 +102,6 @@ const Doctor = () => {
         </div>
     )
 };
-
 
 
 export default Doctor;

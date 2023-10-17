@@ -21,7 +21,7 @@ const DoctorSearchCard = ({doctorObj}) => { // based on Figma, doctorObj should 
                         <img src={photoUrl || doctorStockPhoto} alt='Doctor photo' className='doctor-sc-image' /> 
                     </div>
                     <div className='doctor-sc-rating-container'>
-                        <StarRate rateScore={rating} />
+                        <StarRate rateScore={4} />
                     </div>
                 </div>
                 <div className='doctor-sc-info-column'>
