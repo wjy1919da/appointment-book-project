@@ -1,0 +1,22 @@
+.community-post-search-box-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 60%;
+
+  .community-post-search-box-input {
+    background: transparent;
+    border-bottom: 1px solid #352c29;
+    outline: none;
+    padding: 3px 6px;
+    width: 260px;
+    height: 30px;
+  }
+
+  .community-post-search-box-icon {
+    position: absolute;
+    bottom: 9px;
+    right: 8px;
+  }
+}
