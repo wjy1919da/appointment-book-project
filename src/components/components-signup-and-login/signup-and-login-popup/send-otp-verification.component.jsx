@@ -4,13 +4,10 @@ import './send-otp-verification.styles.scss';
 import LoginRegisterTitle from "./login-register-title.component";
 import NextButton from "./next-button.component";
 import { useUserOtpRegisterValidate } from '../../../hooks/useAuth';
-import UserInfo from "../../user-info/user-info/user-info";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import userInfoQueryStore from '../../../userStore.ts';
-
+import Cookies from 'js-cookie';
 import { Form, InputGroup } from 'react-bootstrap'
+import { Cookie } from "@mui/icons-material";
 
 const SendOtpVerification = () => {
     // const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -54,6 +51,7 @@ const SendOtpVerification = () => {
     useEffect(() => {
         if (data?.code === 100) {
             const token = data.data.token;
+            Cookies.set('token', token);
             setToken(token);
             alert(data.msg);
         }

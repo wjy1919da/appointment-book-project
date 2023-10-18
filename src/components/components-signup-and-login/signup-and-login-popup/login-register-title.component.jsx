@@ -1,11 +1,15 @@
 import React from 'react'
 import './login-register-title.styles.scss'
-const LoginRegisterTitle = ({title}) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+const LoginRegisterTitle = ({title, handleBackwards, handleSkip}) => {
   return (
-     <div>
+     <div className='login-register-title-container'>
+       <FontAwesomeIcon icon={faArrowLeft} size="xl" onClick={handleBackwards}/>
         {title && <div className='login-register-title'>
                 {title}
         </div>}
+       <div className='login-register-title-skip' onClick={handleSkip}>skip</div>
     </div>
   )
 }

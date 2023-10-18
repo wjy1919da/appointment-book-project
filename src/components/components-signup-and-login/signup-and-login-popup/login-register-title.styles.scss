@@ -3,3 +3,10 @@
     font-size: 36px; 
     font-weight: 600;
 }
+.login-register-title-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}

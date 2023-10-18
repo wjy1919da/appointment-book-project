@@ -15,7 +15,6 @@ const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
-    const userInfo = userInfoQueryStore((state) => state.userInfo);
     var userRole = localStorage.getItem('accountType');
     const schema = z.object({
         email: z.string().email(),
