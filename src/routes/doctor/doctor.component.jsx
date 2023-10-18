@@ -20,6 +20,7 @@ const Doctor = () => {
     async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
         setIsLoading(true);
         try {
+            await delay(3000);  // used to simulate an API call to return information, remove when we actually get the API call
             setSearchResults(results);
             console.log('search results set');
         } catch (err) {
@@ -91,11 +92,16 @@ const Doctor = () => {
                             </div>
                         </div>
                         <div className='doctor-search-results-container'>
-                            {doctorArray.map((doctorObj, index) => 
-                                <DoctorSearchCard doctorObj={doctorObj} />
+                            {!isLoading ? doctorArray.map((doctorObj, index) => 
+                                <DoctorSearchCard doctorObj={doctorObj} key={index} />
+                            ) : doctorArray.map((doctorObj, index) => 
+                                <BlankSearchCard doctorObj={doctorObj} key={index} />
                             )}
-                            <BlankSearchCard />
-                            <BlankSearchCard />
+                            {/* {doctorArray.map((doctorObj, index) => 
+                                <DoctorSearchCard doctorObj={doctorObj} key={index + 100} />
+                            )} */}
+                            {/* <BlankSearchCard />
+                            <BlankSearchCard /> */}
                         </div>
                         <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results (testing purposes)</button>
                     </div>
@@ -106,5 +112,6 @@ const Doctor = () => {
     )
 };
 
+const delay = ms => new Promise(res => setTimeout(res, ms)); // used to simulate an API call to return information, remove when we actually get the API call
 
 export default Doctor;

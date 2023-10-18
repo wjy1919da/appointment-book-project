@@ -7,6 +7,7 @@ import searchReducer from '../../../reducer/searchReducer.ts';
 import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
 import FormInput from '../../form-input/form-input.component.jsx';
+import CloseButton from '../../../assets/post/pop-up-close-button.png';
 import './doctor-search-multiput-dropDown.styles.scss'
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
@@ -22,7 +23,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     const setLocation = useDoctorQueryStore(state=>state.setLocation);
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
-    const topLocations = ['Los Angeles, CA', 'Chicago, IL', 'Houston, TX'];
+    const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
@@ -40,6 +41,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     }
     const handleDropdownLocationClick = (item) => {
         setLocation(item);
+        closeLocationModal();
     }
     const handleBlur = () => {
         if (dropdownIsOpen) {
@@ -48,16 +50,25 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
             }, 100);
         }
     }
+    const defaultLocations = ["Los Angeles, CA", "Dallas, TX", "New York City, NY", "San Francisco, CA", "Las Vegas, NV", "Minneapolis, MI", "Atlanta, GA", "Phoenix, AZ"];
     const handleSubmit = () => {
-        console.log('Location: ', doctorQuery.location);
-        console.log('Specialization: ', doctorQuery.field);
-        console.log('DoctorName: ', doctorQuery.doctorName);
         const obj = {'location': doctorQuery.location,
                       'field':   doctorQuery.field,
                       'name': doctorQuery.doctorName
                     }
-        console.log('Now calling callback...');
+        console.log('Now calling multiInput callback...');
         searchCallback(obj);
+    }
+    const openLocationModal = () => {
+        setIsLocationModalOpen(true);
+    }
+    const closeLocationModal = () => {
+        setIsLocationModalOpen(false);
+    }
+    const filterFunction = (subString) => {
+        console.log(subString);
+        const filtered = defaultLocations.filter((location) => {return location.includes(subString)});
+        console.log(filtered);
     }
     return (
         <div>
@@ -82,7 +93,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                     onChange = {(event) => setLocation(event.target.value)}
                                 />
                             </Form.Group>
-                            {topLocations.map((item, index) => (
+                            {/* {topLocations.map((item, index) => (
                                     <Button 
                                         key={index}
                                         className="search-location-button mb-3"  
@@ -91,7 +102,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                     >
                                         {item}
                                     </Button>
-                                ))}
+                                ))} */}
                             </Form>
                         </Dropdown.Menu>
                         </Dropdown>
@@ -154,52 +165,32 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
             ):(
                 <div className='doctor-multiInput-container'>
                     <form className='doctor-input-form'>
-                        <input placeholder='ZIP or City, State' 
-                            name='location' 
-                            onChange={(event) => setLocation(event.target.value)} 
-                            className='doctor-input-for-multiInput' />  {/*Location input */}
+                        <span className='location-input-container' >
+                            <input placeholder='ZIP or City, State' 
+                                name='location' 
+                                onChange={(event) => setLocation(event.target.value)}
+                                onFocus={() => openLocationModal()}
+                                onKeyUp={(event) => filterFunction(event.target.value)}
+                                value={doctorQuery.location}
+                                className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
+                            <div className={`location-dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} onBlur={() => closeLocationModal()} >
+                                <span className='doctor-modal-x-button-container' onClick={() => closeLocationModal()}>x</span> 
+                                {defaultLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
+                                    return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
+                                })}
+                            </div>
+                        </span>
                         <input placeholder='Specialization' 
                             name='specialization' 
                             onChange={(event) => setField(event.target.value)} 
-                            className='doctor-input-for-multiInput' />  {/*Specialization input */}
+                            className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
                         <input placeholder='Doctor' 
                             name='doctor' 
                             onChange={(event) => setDoctorName(event.target.value)} 
-                            className='doctor-input-for-multiInput' />  {/*Doctor's Name input */}
+                            className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
                         <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
                         {/* <HomeButton title='Search' onClick={handleSubmit} isIcon={SearchIcon} className='doctor-search-button-multiInput' /> */}
                     </form>
-                    
-                    {/* <InputGroup display="flex" alignItems="center"> */}
-                    {/* <InputGroup >
-                        <Input 
-                            ref = {locationRef}
-                            onClick = {()=> {dispatchDropdown({type: 'TOGGLE_DROPDOWN'}); }}
-                            onBlur = {handleBlur}
-                            value = {doctorQuery.location || ''}
-                            onChange = {(event) => setLocation(event.target.value)}
-                            focusBorderColor="orange.200"
-                            label = "ZIP Code"  />
-                            {dropdownIsOpen && <DoctorSearchDropDown/>}
-                        <VerticalDivider/>
-                        <Input 
-                            ref = {specializationRef}
-                            value={doctorQuery.field || ''}
-                            onChange = {(event) => setField(event.target.value)}
-                            label = "Specialization"  />
-                        <VerticalDivider/>
-                        <Input 
-                            ref = {doctorNameRef}
-                            value={doctorQuery.doctorName || ''}
-                            onChange = {(event) => setDoctorName(event.target.value)}
-                            label = "Doctor Name"  />
-                        <button className='doctor-search-button' onClick = {handleOnClick}>
-                            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-                            search
-                        </button>
-                            <HomeButton title='Search' onClick={handleOnClick} isIcon={SearchIcon} width='150px'height='40px'/>
-                    </InputGroup>
-                    {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>} */}
                 </div>
         )}
         </div>

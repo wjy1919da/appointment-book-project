@@ -12,14 +12,80 @@
     margin: auto;
 }
 
+.location-input-container {
+    width: 25%;
+}
+
+.doctor-location-input {
+    width: 100%;
+}
+
+.location-input-container {
+    position: relative;
+}
+
+.location-dropdown-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.35rem;
+    padding: 1rem 1rem 1rem;
+    z-index: 1;
+    background: #FBFCFF;
+    border: 1px solid #675D59;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    max-height: 12rem;
+    top: 140%;
+    overflow: auto;
+}
+
+.location-dropdown-container::-webkit-scrollbar {
+    display: none;
+}
+
+.location-dropdown-selection:not(:last-child){
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #E2E3E7;
+}
+
+.location-dropdown-selection {
+    cursor: pointer;
+}
+
+.dropdown-closed {
+    display: none;
+}
+
+.doctor-modal-x-button-container {
+    position: absolute;
+    right: 0%;
+    top: -1%;
+    width: 1rem;
+    cursor: pointer;
+    color: red;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+
+}
+
 .doctor-input-for-multiInput {
     background: #E2E3E7;
     color: #141414;
     border-radius: 8px;
-    width: 25%;
     height: 3rem;
     padding-left: 1rem;
     box-shadow: 2px 4px 16px #675D591A;
+}
+
+.doctor-field-input {
+    width: 25%;
+}
+
+.doctor-name-input {
+    width: 25%;
 }
 
 .doctor-search-button-multiInput {
