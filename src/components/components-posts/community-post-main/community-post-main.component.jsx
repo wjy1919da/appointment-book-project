@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 // components
 import PostPageTitle from '../../community-post-main-title/community-post-main-title';
 
@@ -11,6 +13,12 @@ import Photo from '../../../assets/post/decoration-post-1.png';
 import Heart from '../../../assets/post/heart_like.svg';
 
 const PostPageMain = () => {
+  const navigate = useNavigate();
+
+  const handleCreatePostClick = () => {
+    navigate('/posts/create');
+  };
+
   return (
     <div>
       <div className='post-main-container-wrapper'>
@@ -47,14 +55,17 @@ const PostPageMain = () => {
               stay on-trend
             </h6>
             <div className='post-main-link'>
-              <p className='post-main-link-button'>
+              <button
+                className='post-main-link-button'
+                onClick={handleCreatePostClick}
+              >
                 Creating a post{' '}
                 <img
                   src={ArrowRight}
                   alt='ArrowRight'
                   className='arrow-right-icon'
                 />
-              </p>
+              </button>
             </div>
           </div>
         </div>
