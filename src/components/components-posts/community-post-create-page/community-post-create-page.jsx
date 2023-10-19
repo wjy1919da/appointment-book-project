@@ -150,6 +150,7 @@ const CreatePostPage = () => {
             {/* --- button --- */}
             <div className='post-information-sendButton'>
               <FormButton
+                buttonName="Post"
                 handlePostCreation={handlePostCreation}
                 className='create-post-custom-button'
               />
