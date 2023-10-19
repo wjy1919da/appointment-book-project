@@ -13,16 +13,14 @@ const Doctor = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
-    // useLayoutEffect(() => {
-    //    window.scrollTo(0, 0);
-    // });
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
         setIsLoading(true);
         try {
             await delay(3000);  // used to simulate an API call to return information, remove when we actually get the API call
-            setSearchResults(results);
-            console.log('search results set');
+            // CALL API HERE ONCE BACKEND IMPLEMENTS API!
+            // pass results to API call, then pass returned values as an array to setSearchResults below
+            setSearchResults(doctorArray); // CHANGE doctorArray TO THE RESULTS OF THE API CALL
         } catch (err) {
             setError(true);
         } finally {
@@ -53,7 +51,7 @@ const Doctor = () => {
                             'location': 'Chicago, IL',
                             'field': 'Dentistry'
                         }; 
-    const doctorArray = [testDoctor1, testDoctor2, testDoctor3, testDoctor4];                 
+    const doctorArray = [testDoctor1, testDoctor2, testDoctor3, testDoctor4, testDoctor1, testDoctor2];                 
     
     if (error) {  // do we have a generic error page?
         return (
@@ -73,11 +71,9 @@ const Doctor = () => {
                             <div className='doctor-search-header-container'>
                                 <div className='doctor-search-header-title-container'>
                                     <h1 className='doctor-upper-title'>Find the Right Doctor At Your Fingertip</h1>
-                                    {/* <HomeTitle title='Find the Right Doctor At Your Fingertip' isMobile={isMobile} /> */}
                                 </div>
                                 <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
                                     <img src={DoctorSearchBackground} alt='Doctor Search Background' className='doctor-search-header-pic' />
-                                    {/* <img src={DoctorSearchPhone} alt='Doctor Search Phone' className='doctor-search-header-phone-pic' /> */}
                                 </div>
                             </div>
                             <div className='doctor-intro-container'>
@@ -92,18 +88,12 @@ const Doctor = () => {
                             </div>
                         </div>
                         <div className='doctor-search-results-container'>
-                            {!isLoading ? doctorArray.map((doctorObj, index) => 
+                            {!isLoading ? searchResults?.map((doctorObj, index) => 
                                 <DoctorSearchCard doctorObj={doctorObj} key={index} />
                             ) : doctorArray.map((doctorObj, index) => 
                                 <BlankSearchCard doctorObj={doctorObj} key={index} />
                             )}
-                            {/* {doctorArray.map((doctorObj, index) => 
-                                <DoctorSearchCard doctorObj={doctorObj} key={index + 100} />
-                            )} */}
-                            {/* <BlankSearchCard />
-                            <BlankSearchCard /> */}
                         </div>
-                        <button type='button' className='doctor-test-button' onClick={() => console.log(searchResults)} >Click for search results (testing purposes)</button>
                     </div>
                 )}
             </div>

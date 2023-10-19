@@ -175,19 +175,18 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                     </div>
                 </div>
-            ):(
-                <div className='doctor-multiInput-container'>
+            ):(  
+                <div className='doctor-multiInput-container'> {/* I did not touch the mobile version above. Once the UI team completes the wireframe for it I can come back to this page */}
                     <form className='doctor-input-form'>
-                        <span className='location-input-container' >
+                        <span className='location-input-container' >  {/* Has position set to relative to allow the absolute position of the dropdown */}
                             <input placeholder='ZIP or City, State' 
                                 name='location' 
                                 onChange={(event) => setLocation(event.target.value)}
-                                onClick={() => toggleLocationModal()}
-                                onBlur={() => closeLocationModal()}
+                                onClick={() => toggleLocationModal()}  // clicking the input will open and close the modal
+                                onBlur={() => closeLocationModal()}  // moving focus away from the input will close the modal
                                 value={doctorQuery?.location}
                                 className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
                             <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
-                                {/* <span className='doctor-modal-x-button-container' onClick={() => closeLocationModal()}>x</span>  */}
                                 {defaultLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
                                     return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
                                 })}
@@ -215,7 +214,6 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                             className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
                         
                         <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
-                        {/* <HomeButton title='Search' onClick={handleSubmit} isIcon={SearchIcon} className='doctor-search-button-multiInput' /> */}
                     </form>
                 </div>
         )}
@@ -241,11 +239,5 @@ const ProcedureRow = ({procedureObj, onClick}) => {
         </div>
     )
 }
-
-// const DoctorInput = ({onChange, placeHolder}) => {
-//     return (
-//         <input placeholder={placeHolder} onChange={onChange} className='doctor-input-for-multiInput' />
-//     )
-// }
 
 export default DoctorSearchMultiInput;
