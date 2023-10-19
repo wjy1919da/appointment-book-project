@@ -14,17 +14,23 @@
 
 .location-input-container {
     width: 25%;
+    position: relative;
 }
 
 .doctor-location-input {
     width: 100%;
 }
 
-.location-input-container {
+.field-input-container {
+    width: 25%;
     position: relative;
 }
 
-.location-dropdown-container {
+.doctor-field-input {
+    width: 100%;
+}
+
+.dropdown-container {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -41,7 +47,18 @@
     overflow: auto;
 }
 
-.location-dropdown-container::-webkit-scrollbar {
+.field-dropdown {
+    width: 214%;
+    max-height: 18rem;
+    padding: 1.5rem 1.5rem 1.5rem;
+}
+
+.procedure-dropdown-row {
+    width: 100%;
+    color: #352C29;
+}
+
+.dropdown-container::-webkit-scrollbar {
     display: none;
 }
 
@@ -71,6 +88,42 @@
 
 }
 
+.procedure-dropdown-procedures-container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 3.5rem;
+}
+
+.procedure-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.procedure-photo-container {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1rem;
+}
+
+.blank-procedure-photo {
+    width: 100%;
+    height: 100%;
+    background: #E2E3E7;
+    border-radius: 50%;
+}
+
+.procedure-dropdown-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.procedure-subtitle {
+    font-size: 14px;
+    text-align: center;
+}
+
 .doctor-input-for-multiInput {
     background: #E2E3E7;
     color: #141414;
@@ -78,10 +131,6 @@
     height: 3rem;
     padding-left: 1rem;
     box-shadow: 2px 4px 16px #675D591A;
-}
-
-.doctor-field-input {
-    width: 25%;
 }
 
 .doctor-name-input {

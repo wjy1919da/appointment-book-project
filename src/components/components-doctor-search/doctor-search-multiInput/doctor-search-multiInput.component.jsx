@@ -24,6 +24,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
     const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+    const [isFieldModalOpen, setIsFieldModalOpen] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
@@ -51,6 +52,9 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
         }
     }
     const defaultLocations = ["Los Angeles, CA", "Dallas, TX", "New York City, NY", "San Francisco, CA", "Las Vegas, NV", "Minneapolis, MI", "Atlanta, GA", "Phoenix, AZ"];
+    const defaultProcedures = [{"location": "Face", "procedures" : [{"procedureName": "Botox", "photoURL": ""}, {"procedureName": "Liposuction", "photoURL": ""}, {"procedureName": "Laser Removal", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}]}, 
+                               {"location": "Body", "procedures" : [{"procedureName": "CoolFreeze", "photoURL": ""}, {"procedureName": "Liposuction", "photoURL": ""}, {"procedureName": "Laser Removal", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}]}
+                              ]
     const handleSubmit = () => {
         const obj = {'location': doctorQuery.location,
                       'field':   doctorQuery.field,
@@ -59,16 +63,25 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
         console.log('Now calling multiInput callback...');
         searchCallback(obj);
     }
-    const openLocationModal = () => {
-        setIsLocationModalOpen(true);
+    const toggleLocationModal = () => {
+        setIsLocationModalOpen(!isLocationModalOpen);
     }
     const closeLocationModal = () => {
-        setIsLocationModalOpen(false);
+        setTimeout(() => {
+            setIsLocationModalOpen(false);
+        }, 100); // need the timeout here or else the modal would close before we could grab the data from clicking the modal
     }
-    const filterFunction = (subString) => {
-        console.log(subString);
-        const filtered = defaultLocations.filter((location) => {return location.includes(subString)});
-        console.log(filtered);
+    const toggleFieldModal = () => {
+        setIsFieldModalOpen(!isFieldModalOpen);
+    }
+    const closeFieldModal = () => {
+        setTimeout(() => {
+            setIsFieldModalOpen(false);
+        }, 100); // need the timeout here or else the modal would close before we could grab the data from clicking the modal
+    }
+    const proceduresGetInfo = (item) => {
+        // console.log(item);
+        setField(item.procedureName);
     }
     return (
         <div>
@@ -169,30 +182,62 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                             <input placeholder='ZIP or City, State' 
                                 name='location' 
                                 onChange={(event) => setLocation(event.target.value)}
-                                onFocus={() => openLocationModal()}
-                                onKeyUp={(event) => filterFunction(event.target.value)}
-                                value={doctorQuery.location}
+                                onClick={() => toggleLocationModal()}
+                                onBlur={() => closeLocationModal()}
+                                value={doctorQuery?.location}
                                 className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
-                            <div className={`location-dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} onBlur={() => closeLocationModal()} >
-                                <span className='doctor-modal-x-button-container' onClick={() => closeLocationModal()}>x</span> 
+                            <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {/* <span className='doctor-modal-x-button-container' onClick={() => closeLocationModal()}>x</span>  */}
                                 {defaultLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
                                     return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
                                 })}
                             </div>
                         </span>
-                        <input placeholder='Specialization' 
-                            name='specialization' 
-                            onChange={(event) => setField(event.target.value)} 
-                            className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
+                        <span className='field-input-container'>
+                            <input placeholder='Specialization' 
+                                name='specialization' 
+                                onChange={(event) => setField(event.target.value)}
+                                onClick={() => toggleFieldModal()} 
+                                onBlur={() => closeFieldModal()}
+                                value={doctorQuery?.field}
+                                className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
+                            <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {defaultProcedures.map((procedureObj, index) => {
+                                    return <span className='procedure-dropdown-row-container'>
+                                        <ProcedureRow key={index} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
+                                    </span>
+                                })}
+                            </div>
+                        </span>
                         <input placeholder='Doctor' 
                             name='doctor' 
                             onChange={(event) => setDoctorName(event.target.value)} 
                             className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
+                        
                         <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
                         {/* <HomeButton title='Search' onClick={handleSubmit} isIcon={SearchIcon} className='doctor-search-button-multiInput' /> */}
                     </form>
                 </div>
         )}
+        </div>
+    )
+}
+
+const ProcedureRow = ({procedureObj, onClick}) => {
+    return (
+        <div className='procedure-dropdown-row'>
+            <p className='procedure-dropdown-title'>{procedureObj.location}</p>
+            <div className='procedure-dropdown-procedures-container'>
+                {procedureObj.procedures.map((item, index) => {
+                    return (<div className='procedure-wrapper' onClick={() => onClick(item)} key={index}>
+                                <div className='procedure-photo-container'>
+                                    {item?.photoURL ? <img src={item?.photoURL} alt='procedure' /> : <div className='blank-procedure-photo'></div>}
+                                </div>
+                                <p className='procedure-subtitle'>{item.procedureName}</p>
+                            </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
