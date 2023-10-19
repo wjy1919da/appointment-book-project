@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Dropdown } from 'react-bootstrap';
 
+// components
+import PostDropDownContents from '../community-post-dropdown-contents/community-post-dropdown-contents';
+
 // scss
 import './post-drop-down.styles.scss';
 
@@ -21,57 +24,63 @@ const PostDropdown = (props) => {
     };
   }, []);
 
-  const dropdownContainerWidth = (windowWidth - 2 * 20 - 2 * 13 - 2 * 13) / 2;
-  const dropdownButtonText1Width = 83 * (dropdownContainerWidth / 173);
-  const dropdownButtonText2Width = 22 * (dropdownContainerWidth / 173);
+  const desiredWidth = 617;
+  const dropdownContainerWidth = desiredWidth;
+  const dropdownButtonText1Width = (83 / 173) * dropdownContainerWidth;
+  const dropdownButtonText2Width = (22 / 173) * dropdownContainerWidth;
   const dropdownMenuWidth = dropdownContainerWidth * 1.069;
 
-  const [Checked, setChecked] = useState([]);
+  // const dropdownContainerWidth = (windowWidth - 2 * 20 - 2 * 13 - 2 * 13) / 2;
+  // const dropdownButtonText1Width = 83 * (dropdownContainerWidth / 173);
+  // const dropdownButtonText2Width = 22 * (dropdownContainerWidth / 173);
+  // const dropdownMenuWidth = dropdownContainerWidth * 1.069;
 
-  const handleToggle = (value) => {
-    const currentIndex = Checked.indexOf(value);
-    const newChecked = [...Checked];
-    let isNowChecked; // New variable to track the new state of the value
+  // const [Checked, setChecked] = useState([]);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-      isNowChecked = true; // The value is now checked
-    } else {
-      newChecked.splice(currentIndex, 1);
-      isNowChecked = false; // The value is now unchecked
-    }
+  // const handleToggle = (value) => {
+  //   const currentIndex = Checked.indexOf(value);
+  //   const newChecked = [...Checked];
+  //   let isNowChecked; // New variable to track the new state of the value
 
-    setChecked(newChecked);
-    props.handleFilters(value, isNowChecked);
-  };
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //     isNowChecked = true; // The value is now checked
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //     isNowChecked = false; // The value is now unchecked
+  //   }
 
-  const CheckboxList = () =>
-    props.options &&
-    props.options.map((value, index) => (
-      // <React.Fragment key={index}> // React.Fragment allows to return multiple elements from a React component
-      // by allowing to group a list of children without adding extra nodes to the DOM.
-      // To return multiple elements from a React component, need to wrap the element in a root element.
-      // But this one will lead to the flashing blue borders when clicking the dropdown buttons.
-      <div className='form-check' key={index}>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          value=''
-          hasValidation='false'
-          checked={Checked.indexOf(value.value) !== -1 ? true : false}
-          onChange={() => handleToggle(value.value)}
-          style={{
-            backgroundColor:
-              Checked.indexOf(value.value) === -1 ? '#FFFFFF' : '#FAB25E',
-          }}
-        />
+  //   setChecked(newChecked);
+  //   props.handleFilters(value, isNowChecked);
+  // };
 
-        <label className='form-check-label' htmlFor='flexCheckDefault'>
-          {value.label}
-        </label>
-      </div>
-      // </React.Fragment>
-    ));
+  // const CheckboxList = () =>
+  // props.options &&
+  // props.options.map((value, index) => (
+  //   // <React.Fragment key={index}> // React.Fragment allows to return multiple elements from a React component
+  //   // by allowing to group a list of children without adding extra nodes to the DOM.
+  //   // To return multiple elements from a React component, need to wrap the element in a root element.
+  //   // But this one will lead to the flashing blue borders when clicking the dropdown buttons.
+  //   <div className='form-check' key={index}>
+  //     <input
+  //       className='form-check-input'
+  //       type='checkbox'
+  //       value=''
+  //       hasValidation='false'
+  //       checked={Checked.indexOf(value.value) !== -1 ? true : false}
+  //       onChange={() => handleToggle(value.value)}
+  //       style={{
+  //         backgroundColor:
+  //           Checked.indexOf(value.value) === -1 ? '#FFFFFF' : '#FAB25E',
+  //       }}
+  //     />
+
+  //     <label className='form-check-label' htmlFor='flexCheckDefault'>
+  //       {value.label}
+  //     </label>
+  //   </div>
+  //   // </React.Fragment>
+  // ));
 
   return (
     <Dropdown
@@ -109,7 +118,8 @@ const PostDropdown = (props) => {
           className='post-dropdown-menu-list-section'
           style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
         >
-          {CheckboxList()}
+          <PostDropDownContents />
+          {/* {CheckboxList()} */}
         </div>
       </Dropdown.Menu>
     </Dropdown>
