@@ -2,14 +2,15 @@ import usePostQueryStore from '../../postStore.ts';
 import React, { useLayoutEffect } from 'react';
 
 // components
+import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
-
-import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
-import './community.styles.scss'
-
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
+import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
+import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
 
+// scss
+import './community.styles.scss';
 
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -51,16 +52,17 @@ const Community = () => {
           <PostDropDown
             options={dropdownOptionsByCategory}
             handleFilters={handleFilters}
-            menuLabel='Category'
+            menuLabel='Filter'
             wordAfterMenuLabel='All'
           />
           <PostDropDown
             options={dropdownOptionsByRole}
             handleFilters={handleFilters}
-            menuLabel='Post By'
+            menuLabel='Location'
             wordAfterMenuLabel='All'
           />
-
+          <ResetAllButton />
+          <PostSearchBox />
         </div>
         <DoctorPostGrid />
       </div>
