@@ -49,7 +49,7 @@ const LoginPhone = () => {
     return (
         <div className="verify-email-container">
             <div className='verify-title-container'>
-                <LoginRegisterTitle title={"Log In"}/>
+                <LoginRegisterTitle title={"Log In"} handleBackwards={()=>switchPopupTab("login")}/>
             </div>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">

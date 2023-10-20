@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
-import { FormControl, Text } from "@chakra-ui/react";
 import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import {useClickVerification} from '../../../hooks/useAuth';
 import './send-verify-email.styles.scss';
-import { Button } from 'react-bootstrap';
 import CustomInput from '../custom-input/custom-input.component';
 import { Form, InputGroup } from 'react-bootstrap';
 import NextButton from './next-button.component';
@@ -23,10 +20,12 @@ const SendVerifyEmail = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
+    var userRole;
+    useEffect(() => {
+        userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
+    });
     const onSubmit = (formData) => {
-        //console.log("formData ",formData);
-        // Set accountType in localstorage
-        localStorage.setItem('accountType', userInfo.accountType);
+        localStorage.setItem('email', formData.email);
         setEmail(formData.email);
         mutate({
             email: formData.email,
@@ -48,7 +47,7 @@ const SendVerifyEmail = () => {
     return (
         <div className='verify-email-container'>
             <div className='verify-title-container'>
-                <LoginRegisterTitle title={"Sign in"}/> 
+                <LoginRegisterTitle title={userRole==="USER"? "User Sign Up" : "Doctor Sign Up"}/> 
            </div>
            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">

@@ -63,7 +63,7 @@ const SendOtpVerification = () => {
     return (
         <div className="send-verification-outer-container">
             <div className="send-verification-title-container">
-                <LoginRegisterTitle title="Enter OTP" />
+                <LoginRegisterTitle title="Enter OTP" handleBackwards={()=>switchPopupTab("phoneNumberLogin")}/>
             </div>
             <Form onSubmit={onSubmit}>
                 <OtpInput
@@ -76,8 +76,8 @@ const SendOtpVerification = () => {
                 />
                 { !isValid && <p style={{ color: 'red' }}>{otpError}</p> }
                 <div className="verification-button-section">
-                    <div onClick={()=>switchPopupTab('phoneNumberLogin')}>go back</div>
-                    <div onClick={()=>switchPopupTab('login')}>go to login</div>
+                    {/* <div onClick={()=>switchPopupTab('phoneNumberLogin')}>go back</div> */}
+                    {/* <div onClick={()=>switchPopupTab('login')}>go to login</div> */}
                     <NextButton type="submit" title='Verify' width='180px' disabled={!isValid} />
                 </div>
             </Form>

@@ -13,12 +13,11 @@
     align-items: center;
 }
 .login-title-container{
-    // margin-top: 25px;
-    font-family: Open Sans;
-    font-size: 36px; 
-    font-weight: 600;
-    margin-bottom: 30px;
-
+   // margin-bottom: 30px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .input-label{
     color: #352C29;
@@ -29,25 +28,18 @@
     line-height: 100%; /* 16px */
 }
 
-// .custom-input {
-//     border: 1px solid #ccc; 
-//     padding: 8px 12px;
-//     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
-//     transition: border-color 0.3s; /* 平滑过渡 */
-//     height: 32px;
-//     width: 240px;
-// }
 .custom-input:focus {
     border-color: orange;
     outline: none; /* 移除默认的轮廓 */
 }
 .sign-in-form-container{
+    width: 100%;
     display: flex;
     flex-direction: column;
-   justify-content: center;
+    justify-content: center;
     align-items: center ;
-    padding-left: 85px; 
-    padding-right: 85px;
+    //padding-left: 85px; 
+    //padding-right: 85px;
     // gap: 10px;
 }
 
@@ -55,12 +47,4 @@
     font-size: 16px; /* Adjust this value according to your preference */
 }
 
-// .create-account {
-//     display: flex;      // makes children display in a row
-//     justify-content: center; // horizontally centers the children
-//     align-items: center; // vertically aligns the items in case they have different heights
-//     width: 100%;        // ensures it takes the full width of its parent
-//     font-size: 12px; 
-//     margin: 8px; 
-// }
 

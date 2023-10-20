@@ -31,29 +31,28 @@ export function useUserOptLogin() {
 
 
 export function useUserRegister() {
-    const fetchUserRegister = async (username,email,password,userRole) => {
+    const fetchUserRegister = async (email,password,userRole) => {
         const res = await axios.post(base.addUser, {
-            username,
             email,
             password,
             userRole
         });
         return res.data;
     };
-    return useMutation((credentials) => fetchUserRegister(credentials.username, credentials.email, credentials.password, credentials.userRole));
+    return useMutation((credentials) => fetchUserRegister(credentials.email, credentials.password, credentials.userRole));
 }
 
 export function useUserEmailLogin(){
-    const fetchEmailLogin = async (email, password,provider,identity) => {
+    const fetchEmailLogin = async (email, password,provider,userRole) => {
         const res = await axios.post(base.userEmailLogin, {
             email,
             password,
             provider,
-            identity
+            userRole
         });
         return res.data;
     };
-    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider, credentials.identity));
+    return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
 }
 export function useSocialLogin() {
     const fetchSocialLogin = async (googleAccessToken, provider) => {
@@ -133,4 +132,16 @@ export function useClickVerification(){
         return res.data;
     };
     return useMutation((credentials) => fetchClickVerification(credentials.email));
+}
+export function useDoctorLogin(){
+    const fetchDoctorLogin = async (email, password,provider,userRole) => {
+        const res = await axios.post(base.userEmailLogin, {
+            email,
+            password,
+            provider,
+            userRole
+        });
+        return res.data;
+    };
+    return useMutation((credentials) => fetchDoctorLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
 }

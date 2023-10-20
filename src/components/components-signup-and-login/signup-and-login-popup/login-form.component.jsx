@@ -11,11 +11,21 @@ import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
 import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
+import { useDoctorLogin } from '../../../hooks/useAuth';
 const LoginForm = (props) => {
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
-    var userRole = localStorage.getItem('accountType');
+    //var userRole = localStorage.getItem('accountType');
+    const [accountType, setAccountType] = useState(null);
+    useEffect(() => {
+        setAccountType(localStorage.getItem('accountType'));
+    }, []);
+
+    const userEmailLogin = useUserEmailLogin();
+    const doctorLogin = useDoctorLogin();
+
+    const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -32,13 +42,14 @@ const LoginForm = (props) => {
         resolver: zodResolver(schema),
         mode: 'onChange'
     });
-    const { mutate, data, isLoading, isError, error } = useUserEmailLogin();
+    const { mutate, isLoading, data, error } = authHook;
+    const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
         mutate({
             email: formData.email,
             password: formData.password,
             provider: 'email',
-            identity: userRole
+            userRole: userRole
         });
     };
     useEffect(() => {
@@ -63,11 +74,6 @@ const LoginForm = (props) => {
         alert(error.message);
     }
 
-    // const handleCreateAccountClick = () => {
-    //     switchPopupTab('accountType')
-    // };
-
-   
     return (
         <div className="sign-in-form-container">
             <div className='login-title-container'>
@@ -107,11 +113,6 @@ const LoginForm = (props) => {
                     <NextButton title='Log In' width='180px' disabled={!isValid} />
                 </div>
             </Form>
-            {/* <SocialSignUP onHide={props.onHide} /> */}
-            {/* <div className="create-account">
-                <span>Don't have an account?</span> 
-                <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '12px', marginLeft: '4px' }} onClick={handleCreateAccountClick}> Create one!</button>
-            </div> */}
        </div>
     );
 }

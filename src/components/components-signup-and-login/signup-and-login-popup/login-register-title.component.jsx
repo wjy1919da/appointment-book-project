@@ -5,11 +5,11 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 const LoginRegisterTitle = ({title, handleBackwards, handleSkip}) => {
   return (
      <div className='login-register-title-container'>
-       <FontAwesomeIcon icon={faArrowLeft} size="xl" onClick={handleBackwards}/>
-        {title && <div className='login-register-title'>
+       {handleBackwards &&<FontAwesomeIcon icon={faArrowLeft} size="xl" onClick={handleBackwards}/> }
+       {title && <div className='login-register-title'>
                 {title}
         </div>}
-       <div className='login-register-title-skip' onClick={handleSkip}>skip</div>
+       {handleSkip&&<div className='login-register-title-skip' onClick={handleSkip}>skip</div>}
     </div>
   )
 }
