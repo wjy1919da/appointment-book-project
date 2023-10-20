@@ -160,7 +160,7 @@
   .post-main-photograph-caption {
     position: absolute;
     left: 160px;
-    bottom: -340px;
+    bottom: -360px;
     z-index: 100;
     font-family: Open Sans;
     font-size: 16px;
@@ -173,7 +173,7 @@
     img {
       position: absolute;
       left: 160px;
-      bottom: -355px;
+      bottom: -380px;
       z-index: 100;
     }
   }
@@ -181,7 +181,7 @@
   .post-main-photograph-like {
     position: absolute;
     left: 186px;
-    bottom: -370px;
+    bottom: -395px;
     z-index: 100;
     color: var(--text-2-button, #675d59);
     font-family: Open Sans;
@@ -193,9 +193,9 @@
 
   .photo-girl {
     position: absolute;
-    z-index: 50;
-    top: 220px;
+    top: 240px;
     left: 160px;
+    z-index: 50;
   }
 
   .photo-1 {
