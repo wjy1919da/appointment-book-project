@@ -9,11 +9,10 @@ import FormButton from '../community-post-button/community-post-button';
 import './community-post-dropdown-contents.scss';
 
 // images
-import BreastProcedureImage from '../../../assets/post/dropdown_images/breast_procedures.svg';
-import BodyProcedureImage from '../../../assets/post/dropdown_images/body_procedures.svg';
-import FaceProcedureImage from '../../../assets/post/dropdown_images/face_procedures.svg';
-import SkinProcedureImage from '../../../assets/post/dropdown_images/skin_procedures.svg'
-
+import BreastProcedureImage from '../../../assets/procedure/breast_augmentation.svg';
+import BodyProcedureImage from '../../../assets/procedure/chemical_peels.svg';
+import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
+import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
 
 const PostDropDownContents = () => {
   const trendyProcedureData = [
@@ -80,7 +79,11 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-procedures-inner-container'>
           {trendyProcedureData.map((procedure, index) => (
             <figure id={procedure.id} className='procedure-container'>
-              <img src={procedure.src} alt={`Image-${index}`} className='procedure-image' />
+              <img
+                src={procedure.src}
+                alt={`Image-${index}`}
+                className='procedure-image'
+              />
               <figcaption className='procedure-name'>
                 {procedure.name}
               </figcaption>

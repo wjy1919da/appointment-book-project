@@ -42,10 +42,11 @@
         background-color: #fbfcff;
 
         .procedure-image {
-          object-fit: cover;
+          background-color: #fff;
           border-radius: 50%;
           box-shadow: rgba(211, 211, 211, 0.5) 0px 8px 8px -2px;
           margin-bottom: 10px;
+          padding: 23px;
           width: 150px;
           height: 150px;
         }
