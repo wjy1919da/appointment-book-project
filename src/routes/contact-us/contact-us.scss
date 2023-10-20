@@ -1,0 +1,175 @@
+.contact-us-container {
+    position: relative; // neceassary for the floating rounded orange piece
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-us-orange-rounded-column {
+    position: absolute;
+    z-index: 1;
+    width: 35%;
+    height: 20rem;
+    max-width: 40%;
+    left: 0;
+    top: 25%;
+    background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+    border-radius: 0px 1000px 1000px 0px;
+}
+
+.contact-upper-text-container {
+    text-align: center;
+    color: #352C29;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+}
+
+.contact-title {
+    font-weight: 700;
+    font-size: 60px;
+}
+
+.contact-subtitle-container {
+    width: 52.5%;
+}
+
+.contact-subtitle {
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.contact-large-modal-container {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 60%;
+    background: white;
+    margin-bottom: 10rem;
+    z-index: 2;
+    position: relative;
+}
+
+.contact-form-modal-container {
+    padding: 3.5rem;
+    padding-bottom: 3rem;
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.contact-form-half-column {
+    width: 50%;
+}
+
+.contact-form-title {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.contact-form-text {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.mailing-address-info {
+    width: 50%;
+}
+
+.contact-social-media-icon-container {
+    padding-top: 1rem;
+}
+
+.contact-social-media-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.contact-social-media-link {
+    width: 1.25rem;
+}
+
+.contact-social-media-icon {
+    width: 100%;
+    filter: brightness(0) saturate(100%) invert(0%) sepia(11%) saturate(7480%) hue-rotate(272deg) brightness(104%) contrast(99%);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.contact-form-message {
+    margin-bottom: 2rem;
+}
+
+.contact-form-label {
+    color: #352C29;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.contact-form-input {
+    border: 2px solid #898989;
+    border-radius: 8px;
+    padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.input-error {
+    border: 2px solid red;
+}
+
+.contact-form-submit-button {
+    color: white;
+    font-weight: 600;
+    font-size: 22px;
+    background: linear-gradient(to right, #F48C8A 0%, #F0A484 100%);
+    padding: 12px 40px;
+    border-radius: 8px;
+    width: auto;
+    max-width: 50%;
+}
+
+.contact-submitted-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 3.5rem;
+    align-items: center;
+    text-align: center;
+    row-gap: 1rem;
+}
+
+.contact-submitted-title {
+    font-weight: 600;
+    font-size: 48px;
+    margin-bottom: 0;
+}
+
+.contact-submitted-subtext {
+    color: #675D59;
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 1rem;
+}
+
+.contact-submitted-img-container {
+    width: 25%;
+    padding-bottom: 2rem;
+}
+
+.contact-submitted-img {
+    width: 100%;
+}
+
+.contact-submitted-button {
+    color: #F48C8A;
+    font-size: 22px;
+    font-weight: 600;
+    background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, #F48C8A 0%, #F0A484 100%) border-box;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    padding: 12px 40px;
+}
