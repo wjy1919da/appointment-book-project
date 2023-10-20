@@ -6,7 +6,6 @@ import PostPageMain from '../../components/components-posts/community-post-main/
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
-import PostDropDownContents from '../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx';
 import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
 import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
 
@@ -25,10 +24,10 @@ const Community = () => {
   //   { value: 'body', label: 'Body' },
   // ];
 
-  const dropdownOptionsByRole = [
-    { value: 'by user', label: 'By User' },
-    { value: 'by doctor', label: 'By Doctor' },
-  ];
+  // const dropdownOptionsByRole = [
+  //   { value: 'by user', label: 'By User' },
+  //   { value: 'by doctor', label: 'By Doctor' },
+  // ];
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -55,15 +54,18 @@ const Community = () => {
       <div className='doctor-post-outer-container'>
         <div className='doctor-post-header-container'>
           <PostDropDown
+            // optipns={dropdownOptionsByCategory}
             handleFilters={handleFilters}
             menuLabel='Filter'
             wordAfterMenuLabel='All'
+            className='filter-button'
           />
           <PostDropDown
-            options={dropdownOptionsByRole}
+            // options={dropdownOptionsByRole}
             handleFilters={handleFilters}
             menuLabel='Location'
             wordAfterMenuLabel='All'
+            className='location-button'
           />
           <ResetAllButton />
           <PostSearchBox />

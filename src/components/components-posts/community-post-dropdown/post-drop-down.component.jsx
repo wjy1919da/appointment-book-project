@@ -48,39 +48,35 @@ const PostDropdown = (props) => {
     props.handleFilters(value, isNowChecked);
   };
 
-  const CheckboxList = () =>
-    props.options &&
-    props.options.map((value, index) => (
-      // <React.Fragment key={index}> // React.Fragment allows to return multiple elements from a React component
-      // by allowing to group a list of children without adding extra nodes to the DOM.
-      // To return multiple elements from a React component, need to wrap the element in a root element.
-      // But this one will lead to the flashing blue borders when clicking the dropdown buttons.
-      <div className='form-check' key={index}>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          value=''
-          hasValidation='false'
-          checked={Checked.indexOf(value.value) !== -1 ? true : false}
-          onChange={() => handleToggle(value.value)}
-          style={{
-            backgroundColor:
-              Checked.indexOf(value.value) === -1 ? '#FFFFFF' : '#FAB25E',
-          }}
-        />
+  // const CheckboxList = () =>
+  //   props.options &&
+  //   props.options.map((value, index) => (
+  //     <div className='form-check' key={index}>
+  //       <input
+  //         className='form-check-input'
+  //         type='checkbox'
+  //         value=''
+  //         hasValidation='false'
+  //         checked={Checked.indexOf(value.value) !== -1 ? true : false}
+  //         onChange={() => handleToggle(value.value)}
+  //         style={{
+  //           backgroundColor:
+  //             Checked.indexOf(value.value) === -1 ? '#FFFFFF' : '#FAB25E',
+  //         }}
+  //       />
 
-        <label className='form-check-label' htmlFor='flexCheckDefault'>
-          {value.label}
-        </label>
-      </div>
-      // </React.Fragment>
-    ));
+  //       <label className='form-check-label' htmlFor='flexCheckDefault'>
+  //         {value.label}
+  //       </label>
+  //     </div>
+  //   ));
 
   return (
     <Dropdown
       className='post-dropdown-container'
       style={isMobile ? { width: dropdownContainerWidth + 'px' } : {}}
     >
+      {/* Filter, Location dropdown button */}
       <Dropdown.Toggle
         className='post-dropdown-button-section'
         style={isMobile ? { width: dropdownContainerWidth + 'px' } : {}}
