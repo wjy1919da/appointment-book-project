@@ -6,6 +6,7 @@ import PostPageMain from '../../components/components-posts/community-post-main/
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
+import PostDropDownContents from '../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx';
 import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
 import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
 
@@ -17,15 +18,18 @@ const Community = () => {
   const setFilterCondition = usePostQueryStore(
     (state) => state.setFilterCondition
   );
-  const dropdownOptionsByCategory = [
-    { value: 'facial', label: 'Facial' },
-    { value: 'breast', label: 'Breast' },
-    { value: 'body', label: 'Body' },
-  ];
+
+  // const dropdownOptionsByCategory = [
+  //   { value: 'facial', label: 'Facial' },
+  //   { value: 'breast', label: 'Breast' },
+  //   { value: 'body', label: 'Body' },
+  // ];
+
   const dropdownOptionsByRole = [
     { value: 'by user', label: 'By User' },
     { value: 'by doctor', label: 'By Doctor' },
   ];
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -44,13 +48,13 @@ const Community = () => {
     }
     setFilterCondition(updatedFilter);
   };
+
   return (
     <div>
       <PostPageMain />
       <div className='doctor-post-outer-container'>
         <div className='doctor-post-header-container'>
           <PostDropDown
-            options={dropdownOptionsByCategory}
             handleFilters={handleFilters}
             menuLabel='Filter'
             wordAfterMenuLabel='All'
