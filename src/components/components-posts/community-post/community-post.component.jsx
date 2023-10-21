@@ -3,6 +3,10 @@ import './community-post.styles.scss';
 import heartIcon from '../../../assets/post/heart.png';
 import { useMediaQuery } from 'react-responsive';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+
+// images
+import defaultImage from '../../../assets/post/default_image.png';
+
 const CommunityPost = ({
   imageURL,
   text,
@@ -16,6 +20,8 @@ const CommunityPost = ({
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
 
+  const [displayImage, setDisplayImage] = useState(imageURL);
+
   useEffect(() => {
     if (isMobile) {
       setWidth('240px');
@@ -23,18 +29,28 @@ const CommunityPost = ({
       setWidth('186px');
     }
   }, [isMobile]);
+
   const toggleLike = () => {
     setLiked((prevLiked) => !prevLiked);
     // If you want to navigate to another page when the heart is clicked, uncomment the next line.
     // window.location.href = "/download";
   };
+
+  const handleImageError = () => {
+    setDisplayImage(defaultImage);
+  };
+
   return (
     <div
       className='community-post-container'
       style={{ width: isProfile ? '240px' : '100%' }}
     >
       <div className='post-Image'>
-        <img src={imageURL} className='postImage'></img>
+        <img
+          src={displayImage}
+          className='postImage'
+          onError={handleImageError}
+        />
       </div>
       <div className='post-information'>
         <span className='post-text'>{text}</span>
