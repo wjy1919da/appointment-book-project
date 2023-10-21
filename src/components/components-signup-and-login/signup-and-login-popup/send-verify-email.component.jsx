@@ -20,10 +20,10 @@ const SendVerifyEmail = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setEmail = userInfoQueryStore(state=>state.setEmail);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-    var userRole;
-    useEffect(() => {
-        userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
-    });
+    // var userRole;
+    // useEffect(() => {
+    //     userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
+    // });
     const onSubmit = (formData) => {
         localStorage.setItem('email', formData.email);
         setEmail(formData.email);
@@ -47,7 +47,7 @@ const SendVerifyEmail = () => {
     return (
         <div className='verify-email-container'>
             <div className='verify-title-container'>
-                <LoginRegisterTitle title={userRole==="USER"? "User Sign Up" : "Doctor Sign Up"}/> 
+                <LoginRegisterTitle title={userInfo.accountType===1 ? "User Sign Up" : "Doctor Sign Up"} handleBackwards={()=>switchPopupTab("accountType")}/> 
            </div>
            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">

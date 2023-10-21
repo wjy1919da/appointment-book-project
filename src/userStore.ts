@@ -1,5 +1,5 @@
 import create from "zustand";
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 
 interface DecodedToken {
     sub: string;
@@ -23,12 +23,12 @@ interface userInfo {
     userId?: string;
     email?: string;
     phoneNumber?: string;
-    gender?: number;
+    gender?: number| null;
     accountType: number | null;
-    birthday?: string;
+    birthday?: string| null;
     username?: string;
     password?: string;
-    selectedInterests: Set<string>;
+    selectedInterests: Set<string>| null;
      // Used to control the register popup page and open/close
     popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin';
 }

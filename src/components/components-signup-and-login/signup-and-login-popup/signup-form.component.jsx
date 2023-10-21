@@ -18,7 +18,6 @@ const SignUpForm = () => {
     const setPassword = userInfoQueryStore(state=>state.setPassword);
     const setUsername = userInfoQueryStore(state=>state.setUsername);
     const setToken = userInfoQueryStore(state=>state.setToken);
-  
     const userInfo = userInfoQueryStore(state=>state.userInfo);
     const schema = z.object({
         password: z.string()
@@ -56,7 +55,7 @@ const SignUpForm = () => {
             alert("password not match");
             return;
         }
-        console.log("email before mutate ",email);
+        //console.log("email before mutate ",email);
         mutate({
             email: email,
             password: formData.password,
@@ -75,9 +74,13 @@ const SignUpForm = () => {
            Cookie.set('token', myToken);
            setToken(myToken);
            alert("register success ",data.code);
-           switchPopupTab('gender');
         }else if(data){
             alert(data.msg);
+        }
+        if(userInfo.accountType === "1"){
+            switchPopupTab('gender');
+        }else if(userInfo.accountType === "2"){
+            switchPopupTab('success');
         }
     }, [data]);
     
@@ -86,36 +89,40 @@ const SignUpForm = () => {
         <div className='login-title-container'>
             <LoginRegisterTitle title={"Sign in"} handleBackwards={()=>switchPopupTab('sendVerifyEmail')}/>
         </div>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group className="mb-3">
-                <div style={{ fontSize: "14px" }}>Password</div>
-                <InputGroup hasValidation>
-                    <CustomInput 
-                        {...register('password')} 
-                        type="password"
-                        className={`d-block ${errors.password ? 'is-invalid' : ''}`} 
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.password?.message}
-                    </Form.Control.Feedback>
-                </InputGroup>
-                <InputGroup hasValidation>
-                    <div style={{ fontSize: "14px" }}>Re-ented your password</div>
-                    <CustomInput 
-                        {...register('repassword')} 
-                        type="password"
-                        className={`d-block ${errors.repassword ? 'is-invalid' : ''}`} 
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.repassword?.message}
-                    </Form.Control.Feedback>
-                </InputGroup>
-                <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
-            </Form.Group>
-            <div className='signUp-download-button'>
-                <NextButton title='Log In' width='180px' disabled={!isValid} />
-            </div>
-        </Form>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <div className='sign-up-form-input-container'>
+                <Form.Group className="mb-3">
+                    <div style={{ fontSize: "14px" }}>Password</div>
+                    <InputGroup hasValidation>
+                        <CustomInput 
+                            {...register('password')} 
+                            type="password"
+                            className={`d-block ${errors.password ? 'is-invalid' : ''}`} 
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password?.message}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <InputGroup hasValidation>
+                        <div style={{ fontSize: "14px" }}>Re-ented your password</div>
+                        <CustomInput 
+                            {...register('repassword')} 
+                            type="password"
+                            className={`d-block ${errors.repassword ? 'is-invalid' : ''}`} 
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.repassword?.message}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
+                </Form.Group>
+                </div>
+                <div className='signUp-download-button'>
+                    <NextButton title='Log In' width='180px' disabled={!isValid} />
+                </div>
+            </Form>
+       
+        
     </div>
     )
 }

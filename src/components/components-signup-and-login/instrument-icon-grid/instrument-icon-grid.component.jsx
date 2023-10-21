@@ -18,7 +18,7 @@ const ProcedureIconGrid = (props) => {
             key={name}
             onClick={() => setInterested(name)}
         >
-            <img src={require(`../../../assets/sign/${name}.png`)} className= {`procedure-icon-pic ${selectedInterests.has(name) ? 'active' : ''}`} alt={name} style={{ width: '60px', height: '60px'}} />
+            <img src={require(`../../../assets/sign/${name}.png`)} className= {`procedure-icon-pic ${selectedInterests.has(name) ? 'active' : ''}`} alt={name} style={{ width: '100px', height: 'auto'}} />
             <div className = 'title'>{formatTitle(name)}</div>
         </div>
     );
