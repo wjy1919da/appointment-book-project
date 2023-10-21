@@ -66,10 +66,10 @@ const LoginForm = (props) => {
             alert(data.msg);  
         }
     }, [data]);
-     /* TODO: Need to improve */ 
-    if (isLoading) {
-        return <HomeSpinner />;
-    }
+    //  /* TODO: Need to improve */ 
+    // if (isLoading) {
+    //     return <HomeSpinner />;
+    // }
     if (error) {
         alert(error.message);
     }
@@ -79,36 +79,40 @@ const LoginForm = (props) => {
             <div className='login-title-container'>
                <LoginRegisterTitle title={"Log In"}/>
             </div>
+
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group className="mb-3">
-                {/* <Form.Label className="d-block">Email Address</Form.Label> */}
-                <div style={{ fontSize: "14px" }}>Email Address</div>
-                    <InputGroup hasValidation>
-                        <CustomInput 
-                            {...register('email')}
-                            className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.email?.message}
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
-                
-                <Form.Group className="mb-3">
-                    {/* <Form.Label className="d-block">Password</Form.Label> */}
-                    <div style={{ fontSize: "14px" }}>Password</div>
-                    <InputGroup hasValidation>
-                        <CustomInput 
-                            {...register('password')} 
-                            type="password"
-                            className={`d-block ${errors.password ? 'is-invalid' : ''}`} 
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password?.message}
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                     <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
-                </Form.Group>
+                <div className='login-input-container'>
+                    <Form.Group className="mb-3">
+                    {/* <Form.Label className="d-block">Email Address</Form.Label> */}
+                    <div style={{ fontSize: "14px" }}>Email Address</div>
+                        <InputGroup hasValidation>
+                            <CustomInput 
+                                {...register('email')}
+                                className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.email?.message}
+                            </Form.Control.Feedback>
+                        </InputGroup>
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-3">
+                        {/* <Form.Label className="d-block">Password</Form.Label> */}
+                        <div style={{ fontSize: "14px" }}>Password</div>
+                        <InputGroup hasValidation>
+                            <CustomInput 
+                                {...register('password')} 
+                                type="password"
+                                className={`d-block ${errors.password ? 'is-invalid' : ''}`} 
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password?.message}
+                            </Form.Control.Feedback>
+                        </InputGroup>
+                        <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
+                    </Form.Group>
+                </div>
+               
                 <div className='signUp-download-button'>
                     <NextButton title='Log In' width='180px' disabled={!isValid} />
                 </div>

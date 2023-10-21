@@ -11,17 +11,19 @@ import { Cookie } from "@mui/icons-material";
 
 const SendOtpVerification = () => {
     // const userInfo = userInfoQueryStore((state) => state.userInfo);
+    const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-    const userRole = localStorage.getItem('accountType');
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const [otp, setOtp] = useState('');
     const [isValid, setIsValid] = useState(false); // Start with false since OTP is initially empty
     const [otpError, setOtpError] = useState(''); 
     const setToken = userInfoQueryStore((state) => state.setToken);
-    console.log("userInfo ",userInfo);
+    var userRole = userInfo.accountType === 1 ? 'USER' : 'DOCTOR';
+    //console.log("userInfo ",userInfo);
     useEffect(() => { // <- useEffect to validate OTP in real-time
         validateOtp();
     }, [otp]);
+   
     const {mutate,data,isLoading,isError,error} = useUserOtpRegisterValidate();
     const validateOtp = () => {
         if (!otp) {
@@ -54,6 +56,7 @@ const SendOtpVerification = () => {
             Cookies.set('token', token);
             setToken(token);
             alert(data.msg);
+            togglePopup(false);
         }
         if (data?.code === 104 || data?.code === 501) {
             alert(data.msg);  

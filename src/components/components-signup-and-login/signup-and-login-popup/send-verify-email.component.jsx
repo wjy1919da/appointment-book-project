@@ -47,25 +47,27 @@ const SendVerifyEmail = () => {
     return (
         <div className='verify-email-container'>
             <div className='verify-title-container'>
-                <LoginRegisterTitle title={userInfo.accountType===1 ? "User Sign Up" : "Doctor Sign Up"} handleBackwards={()=>switchPopupTab("accountType")}/> 
+                <LoginRegisterTitle title={userInfo.accountType == "1" ? "User Sign Up" : "Doctor Sign Up"} handleBackwards={()=>switchPopupTab("accountType")}/> 
            </div>
-           <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group className="mb-3">
-                    <div style={{ fontSize: "14px" }}>Email Address</div>
-                        <InputGroup hasValidation>
-                            <CustomInput 
-                                {...register('email')}
-                                className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.email?.message}
-                            </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
-                <div>
-                    <NextButton type="submit" title='Verify ' width='180px' disabled={!isValid} />
-                </div>
-            </Form>
+           <div className='verify-email-content-container'>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form.Group className="mb-3">
+                        <div style={{ fontSize: "14px" }}>Email Address</div>
+                            <InputGroup hasValidation>
+                                <CustomInput 
+                                    {...register('email')}
+                                    className={`d-block ${errors.email ? 'is-invalid' : ''}`} 
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.email?.message}
+                                </Form.Control.Feedback>
+                        </InputGroup>
+                    </Form.Group>
+                    <div>
+                        <NextButton type="submit" title='Verify ' width='180px' disabled={!isValid} />
+                    </div>
+                </Form>
+           </div>
         </div>
     )
 }

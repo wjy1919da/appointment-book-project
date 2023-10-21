@@ -11,15 +11,11 @@ const ChooseInterestedArea = () => {
   const setInterested = userInfoQueryStore(state=>state.setInterested);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   console.log("userInfo in interested page",userInfo);
-
-  const procedures = ['breast-augmentation', 'botox-injections', 'chemical-peels','fox-eyes','lip-augmentation','laser-hair-removal','teeth-whitening','chin-implants','neck-contouring'];
-  
+  const procedures = ['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening','fox_eyes','laser_hair_removal'];
   const [selectedProcedures, setSelectedProcedures] = useState([]);
-
   useEffect(() => {
     getRandomProcedures();
   }, []);
-
   const getRandomProcedures = () => {
     setInterested(null);
     const shuffled = procedures.sort(() => 0.5 - Math.random());
@@ -38,7 +34,7 @@ const ChooseInterestedArea = () => {
            <LoginRegisterTitle title="Your Interests" handleBackwards={()=>switchPopupTab("gender")} handleSkip={handleSkip} /> 
         </div>
         <div className='choose-interested-refresh'>
-            <CreateAccount title="Do not like these?" subTitle="Refresh!" onClick={getRandomProcedures}/>
+            <CreateAccount title="Do not like these?" subTitle="Refresh!" onClick={getRandomProcedures} icon='true'/>
         </div>
         <div>
             <ProcedureIconGrid names={selectedProcedures}/> 

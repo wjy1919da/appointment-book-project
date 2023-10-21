@@ -55,12 +55,14 @@ const SignupVerify = () => {
    return (
         <div className='signip-varify-container'>        
             <div className='signup-varify-title-container'>
-                <LoginRegisterTitle title={ userRole==="USER"? "User Sign Up" : "Doctor Sign Up"} handleBackwards={()=>switchPopupTab("sendVerifyEmail")}/> 
+                <LoginRegisterTitle title={ userInfo.accountType == "1"? "User Sign Up" : "Doctor Sign Up"} handleBackwards={()=>switchPopupTab("sendVerifyEmail")}/> 
            </div>
-            <div className='signup-varify-resend'>{isTiming ? `Please wait for ${countdown} seconds` : "We have sent you an email to verify your email address."}</div>
-            <div>
-                <NextButton type="submit" title='resend' width='180px' disabled={isTiming} onClick={handleOnClick} />
-            </div> 
+           <div className='signup-varify-content-container'>
+                <div className='signup-varify-resend'>{isTiming ? `Please wait for ${countdown} seconds` : "We have sent you an email to verify your email address."}</div>
+                <div>
+                    <NextButton type="submit" title='resend' width='180px' disabled={isTiming} onClick={handleOnClick} />
+                </div> 
+           </div>
         </div>
   )
 }

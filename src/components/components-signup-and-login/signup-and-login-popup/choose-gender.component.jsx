@@ -37,33 +37,35 @@ const ChooseGender = () => {
         <div className="gender-outer-container">
                 <div className='choose-gender-title-container'>
                     <LoginRegisterTitle title={"Your Profile"} handleBackwards={()=>switchPopupTab('sendVerifyEmail')} handleSkip={handleSkip}/>
-                </div>   
-                <form>
-                    <div className="profile-section-container" style={{ marginTop:'-10px'}}>
-                        <div>Gender</div>
-                        <Radio.Group onChange={onChange} value={selectedGender}>
-                            <Space direction="horizontal" >
-                                <Radio className="gradient-radio" value={1}>Male</Radio>
-                                <Radio className="gradient-radio" value={2}>Female</Radio>
-                                <Radio className="gradient-radio" value={3}>Other</Radio>
-                            </Space>
-                        </Radio.Group>
-                    </div>
-                    <div className='profile-section-container'>
-                        <div>Birthday</div>
-                        <Input
-                            placeholder="Select Date and Time"
-                            size="md"
-                            type="date"
-                            className="calendar-input"
-                            value={birthday} 
-                            onChange={onChangeDate}
-                        />
-                    </div>
-                    <div className="next-button-section">
-                        <NextButton type="submit" title='Next' width='180px' onClick={handleOnClick}/>
-                    </div>  
-                </form>        
+                </div> 
+                <div className='profile-content-container'>
+                    <form>
+                        <div className="profile-section-container" style={{ marginTop:'-10px'}}>
+                            <div>Gender</div>
+                            <Radio.Group onChange={onChange} value={selectedGender}>
+                                <Space direction="horizontal" >
+                                    <Radio className="gradient-radio" value={1}>Male</Radio>
+                                    <Radio className="gradient-radio" value={2}>Female</Radio>
+                                    <Radio className="gradient-radio" value={3}>Other</Radio>
+                                </Space>
+                            </Radio.Group>
+                        </div>
+                        <div className='profile-section-container'>
+                            <div>Birthday</div>
+                            <Input
+                                placeholder="Select Date and Time"
+                                size="md"
+                                type="date"
+                                className="calendar-input"
+                                value={birthday} 
+                                onChange={onChangeDate}
+                            />
+                        </div>
+                        <div className="next-button-section">
+                            <NextButton type="submit" title='Next' width='180px' onClick={handleOnClick}/>
+                        </div>  
+                    </form>        
+                </div>  
             </div>
         )
 }

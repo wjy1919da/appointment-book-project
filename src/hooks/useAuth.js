@@ -10,23 +10,23 @@ const base = {
     addUser: 'http://api-dev.charm-life.com/register/email',
     otpRegister: 'http://api-dev.charm-life.com/register/phone/send-otp',
     otpRegisterValidate: 'http://api-dev.charm-life.com/register/phone/validate-otp',
+    otpLogin:'http://api-dev.charm-life.com/login/phone/validate-otp',
     emailRegisterValidate: 'http://api-dev.charm-life.com/register',
     setUserProfile:'http://api-dev.charm-life.com/user/set_user_profile',
     clickVerification:'http://api-dev.charm-life.com/register/clickVerification'
 };
 
 export function useUserOptLogin() {
-    const userInfo = userInfoQueryStore(s => s.userInfo);
-    const fetchUserLogin = async () => {
-        const res = await axios.post(base.userOtpLogin, {
-            "mobile": userInfo.mobile,
-            "otp": userInfo.otp
+    const fetchUserOtpRegisterValidate = async (mobile,otp,userRole) => {
+        //console.log('useUserOtpRegisterValidate',mobile,otp,userRole);
+        const res = await axios.post(base.otpLogin, {
+            mobile,
+            otp,
+            userRole
         });
         return res.data;
     };
-    return useQuery(['userLogin', userInfo.mobile, userInfo.otp], fetchUserLogin, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
+    return useMutation((credentials) => fetchUserOtpRegisterValidate(credentials.mobile, credentials.otp, credentials.userRole));
 }
 
 
@@ -77,6 +77,7 @@ export function useUserOtpRegister(){
 }
 export function useUserOtpRegisterValidate(){
     const fetchUserOtpRegisterValidate = async (mobile,otp,userRole) => {
+        //console.log('useUserOtpRegisterValidate',mobile,otp,userRole);
         const res = await axios.post(base.otpRegisterValidate, {
             mobile,
             otp,
