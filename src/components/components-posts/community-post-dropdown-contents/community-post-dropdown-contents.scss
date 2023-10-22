@@ -1,0 +1,81 @@
+// screen bigger than 1025px
+.post-dropdown-contents-container {
+  background-color: #fbfcff;
+  padding: 20px 40px;
+  width: 100%;
+  height: 841px;
+
+  .procedure-title {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .post-dropdown-contents-inner-container {
+    display: flex;
+    justify-content: space-between;
+
+    .post-dropdown-contents-left-container {
+      .post-dropdown-contents-up,
+      .post-dropdown-contents-down {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .post-dropdown-contents-procedures-container {
+    position: relative;
+
+    .post-dropdown-contents-procedures-inner-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      place-items: center;
+      gap: 20px;
+      margin-top: 30px;
+
+      .procedure-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fbfcff;
+
+        .procedure-image {
+          background-color: #fff;
+          border-radius: 50%;
+          box-shadow: rgba(211, 211, 211, 0.5) 0px 8px 8px -2px;
+          margin-bottom: 10px;
+          padding: 23px;
+          width: 130px;
+          height: 130px;
+        }
+
+        .procedure-name {
+          color: #352c29;
+          text-align: center;
+          font-family: Open Sans;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+
+    .post-dropdown-contents-procedures-button-container {
+      position: absolute;
+      bottom: -60px;
+      right: 0;
+    }
+  }
+}
+
+// screen 769px to 1024px
+@media (max-width: 1024px) {
+}
+
+// small screens
+@media (max-width: 768px) {
+}

@@ -34,9 +34,9 @@ const DoctorSearchDropDown = () => {
                 </div>
             ))}
         </div>
-        <div className='doctor-search-drop-down-map-container'>
+        {/* <div className='doctor-search-drop-down-map-container'>
             <img src={mapImg} alt="map" className='doctor-search-drop-down-map-pic' />  
-        </div>
+        </div> */}
     </div>
   );
 }
