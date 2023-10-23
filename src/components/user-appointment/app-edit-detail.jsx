@@ -1,7 +1,7 @@
 import './app-edit-detail.styles.scss'
 import './appointment-detail.styles.scss'
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+// import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
 import React, { useState } from 'react';
 import AppInfoQueryStore from '../../appointmentStore.ts'
 import doctorAvatar from '../../assets/user/doctor-profile-image.png'
@@ -53,7 +53,7 @@ const AppEditDetail = () => {
             <div style={{display:'flex',flexDirection:'column'}}>
             <div className='app-edit-main-section'>
                 <div className='app-edit-calendar-section'>
-                <Calendar onChange={onChange} value={value} className="react-calendar"/>
+                {/* <Calendar onChange={onChange} value={value} className="react-calendar"/> */}
                 </div>
                 <div className='app-edit-time-section'>
                     <div className='app-edit-time-list'>
