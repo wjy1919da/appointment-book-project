@@ -1,50 +1,71 @@
 import React from 'react'
-import SignupAndLoginButton from '../signup-and-login-button/signup-and-login-button.component';
-import MaleIcon from '../../../assets/sign/male-icon.jpg';
-import FemaleIcon from '../../../assets/sign/female-icon.jpg';
-import OtherIcon from '../../../assets/sign/other-icon.jpg';
+import NextButton from './next-button.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginRegisterTitle from './login-register-title.component';
+import {  Radio, Space } from 'antd';
+import { useState,useEffect } from 'react';
+import { Input} from '@chakra-ui/react'
 import './choose-gender.styles.scss';
+
 const ChooseGender = () => {
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     const setGender = userInfoQueryStore((state) => state.setGender);
+    const [birthday, setBirthdayValue] = useState(null);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
-    console.log("userInfo in gender", userInfo.gender);
+    const [selectedGender, setSelectedGender] = useState(userInfo.gender);
+    const setBirthday = userInfoQueryStore(state=>state.setBirthday);
+    const onChange = (e) => {
+        // console.log('radio checked', e.target.value);
+        setSelectedGender(e.target.value);  
+        setGender(e.target.value);  
+    };
+    const onChangeDate = (e) => {
+        // console.log('date checked', e.target.value);
+        setBirthdayValue(e.target.value);
+    };
+    // console.log("userInfo in gender page",userInfo);
+    const handleOnClick = ()=>{
+        setBirthday(birthday);
+        switchPopupTab('interest');
+    }
+    const handleSkip = ()=>{
+        setBirthday(null);
+        setGender(null);
+        switchPopupTab('interest');
+    }
     return (
         <div className="gender-outer-container">
                 <div className='choose-gender-title-container'>
-                    <LoginRegisterTitle title={"Sign UP"} subTitle={"Welcome to Charm Life!"} subText={"Knowing more about you will help us personalize our recommendations for you"}/>
-                </div>           
-                <div className="gender-option-section" style={{ marginTop:'-10px'}}>
-                    <div className='gender-image-container'>
-                    <img className={userInfo.gender === 1 ? 'gender-image active' : 'gender-image'} 
-                            src={MaleIcon} 
-                            alt='Male Option'
-                            onClick={() => setGender(1)}/>
-                    </div>
-                    <div className='gender-image-container'>
-                        <img className={userInfo.gender === 2 ? 'gender-image active' : 'gender-image'} 
-                            src={FemaleIcon} 
-                            alt='Female Option'
-                            onClick={() => setGender(2)}/>
-                    </div>
-                    <div className='gender-image-container'>
-                        <img className={userInfo.gender === 3 ? 'gender-image active' : 'gender-image'} 
-                            src={OtherIcon} 
-                            alt='Other Option'
-                            onClick={() => setGender(3)}/>
-                    </div>
-                </div>
-                <div className='skip-container'>
-                    <div className='skip' onClick={()=>{switchPopupTab('interest'); setGender(0)}}>skip</div> 
-                </div>
-                <div className='skip-container'>
-                    <div className='skip' onClick={()=>{switchPopupTab('verifyEmail')}}>previous</div> 
-                </div>
-                <div className="next-button-section">
-                    <SignupAndLoginButton onClick={()=>switchPopupTab('interest')} width='100px' height='35px' borderRadius='6px' title='Next'/>
-                </div>
+                    <LoginRegisterTitle title={"Your Profile"} handleBackwards={()=>switchPopupTab('sendVerifyEmail')} handleSkip={handleSkip}/>
+                </div> 
+                <div className='profile-content-container'>
+                    <form>
+                        <div className="profile-section-container" style={{ marginTop:'-10px'}}>
+                            <div>Gender</div>
+                            <Radio.Group onChange={onChange} value={selectedGender}>
+                                <Space direction="horizontal" >
+                                    <Radio className="gradient-radio" value={1}>Male</Radio>
+                                    <Radio className="gradient-radio" value={2}>Female</Radio>
+                                    <Radio className="gradient-radio" value={3}>Other</Radio>
+                                </Space>
+                            </Radio.Group>
+                        </div>
+                        <div className='profile-section-container'>
+                            <div>Birthday</div>
+                            <Input
+                                placeholder="Select Date and Time"
+                                size="md"
+                                type="date"
+                                className="calendar-input"
+                                value={birthday} 
+                                onChange={onChangeDate}
+                            />
+                        </div>
+                        <div className="next-button-section">
+                            <NextButton type="submit" title='Next' width='180px' onClick={handleOnClick}/>
+                        </div>  
+                    </form>        
+                </div>  
             </div>
         )
 }

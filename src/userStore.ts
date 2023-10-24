@@ -1,5 +1,5 @@
 import create from "zustand";
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 
 interface DecodedToken {
     sub: string;
@@ -22,19 +22,21 @@ interface userInfo {
     googleToken?: string;
     userId?: string;
     email?: string;
-    gender?: number;
+    phoneNumber?: string;
+    gender?: number| null;
     accountType: number | null;
-    birthday?: string;
+    birthday?: string| null;
     username?: string;
     password?: string;
-    selectedInterests: Set<string>;
+    selectedInterests: Set<string>| null;
      // Used to control the register popup page and open/close
-    popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail';
+    popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin';
 }
 
 interface userInfoQuery {
     userInfo: userInfo;
     setEmail: (email: string) => void;
+    setPhoneNumber: (phoneNumber: string) => void;
     setPassword: (password: string) => void;
     setGender: (gender: number) => void;
     setAccountType: (accountType: number) => void;
@@ -45,8 +47,8 @@ interface userInfoQuery {
     setToken: (token: string) => void;
     setUserId: (userId: string) => void;
     removeToken: () => void;
-    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail') => void;
-    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail') => void;
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin') =>  void;
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin') => void;
 }
 
 const userInfoQueryStore = create<userInfoQuery>((set) => ({
@@ -54,6 +56,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         token: "",
         userId: "",
         email: "",
+        phoneNumber: "",
         password: "",
         gender: 0,
         accountType: null,
@@ -67,6 +70,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     setEmail: (email: string) => {
         set((store) => ({
             userInfo: { ...store.userInfo, email }
+        }));
+    },
+    setPhoneNumber: (phoneNumber: string) => {
+        set((store) => ({
+            userInfo: { ...store.userInfo, phoneNumber }
         }));
     },
     setPassword: (password: string) => {
@@ -99,7 +107,8 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
             userInfo: { ...store.userInfo, birthday }
         }));
     },
-    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail') => {
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin') => {
+        console.log("togglePopup", open, initialState);
         if (open) {
             set((store) => ({
                 userInfo: { ...store.userInfo, popupState: initialState || 'gender' }
@@ -110,7 +119,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
             }));
         }
     },
-    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail') => {
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin') => {
         set((store) => ({
             userInfo: { ...store.userInfo, popupState: tab }
         }));

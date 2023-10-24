@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 const base = {
   postUrl: 'https://api-dev.charm-life.com/post/all_posts',
   // postUrl:'http://localhost:8080/post/posts:page',
+
   postDetailUrl: 'https://api-dev.charm-life.com/post/web/posts/',
   usePostedPostUrl:'http://localhost:8080/user_action/Myposts',
   useLikedPostUrl:'http://localhost:8080/user_action/likedPosts'

@@ -44,10 +44,15 @@ const App = () => {
   console.log('userInfo init', userInfo);
   const token = userInfoQueryStore((state) => state.userInfo.token);
   const setToken = userInfoQueryStore((state) => state.setToken);
+  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   useEffect(() => {
-    const cookieToken = Cookies.get('token');
+    var cookieToken = Cookies.get('token');
     if (cookieToken && cookieToken !== token) {
       setToken(cookieToken);
+    }
+    var accountType = localStorage.getItem('accountType');
+    if (accountType) {
+      setAccountType(accountType);
     }
   }, []);
 

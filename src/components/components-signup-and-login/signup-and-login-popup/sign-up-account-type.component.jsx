@@ -10,14 +10,13 @@ const SignUpAccountType = () => {
     const setAccountType = userInfoQueryStore((state) => state.setAccountType);
     const switchPopupTab = userInfoQueryStore(state => state.switchPopupTab);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-
-    const handleLoginButtonClick = () => {
-        // console.log("Login button clicked!");
-        switchPopupTab('login')
-    };
+    console.log("userInfo in account type page",userInfo);
+    
     useEffect(() => {
-        setAccountType(null);
-    },[]);
+        localStorage.removeItem('accountType');
+        const accountTypeFromLocalStorage = localStorage.getItem('accountType') || null;
+        setAccountType(accountTypeFromLocalStorage);
+    }, []);
     return (
         <div className="signup-account-type-container">
             <div className="group-title-buttons">
@@ -31,8 +30,10 @@ const SignUpAccountType = () => {
                             console.log('Doctor button clicked');  
                             //setAccountType(0);
                             if (userInfo.accountType === 2) {
+                                localStorage.setItem('accountType', null);
                                 setAccountType(null);
                             } else {
+                                localStorage.setItem('accountType', 2);
                                 setAccountType(2);
                             }
                         }}
@@ -44,8 +45,10 @@ const SignUpAccountType = () => {
                             console.log('Member button clicked');  
                             //setAccountType(0);
                             if (userInfo.accountType === 1) {
+                                localStorage.setItem('accountType', null);
                                 setAccountType(null);
                             } else {
+                                localStorage.setItem('accountType', 1);
                                 setAccountType(1);
                             }
                         }}
@@ -54,10 +57,6 @@ const SignUpAccountType = () => {
                 </div>
             </div>
             <NextButton title="Next" onClick={()=>switchPopupTab('sendVerifyEmail')} disabled={!userInfo.accountType} />
-            <div className="login-prompt-container">
-                <span>Already have an account? </span> 
-                <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none' }} onClick={handleLoginButtonClick}>  Log in</button>
-            </div>
         </div>
     );
 };
