@@ -15,6 +15,7 @@ const ContactUs = () => {
     const [message, setMessage] = useState("");
     const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [messageError, setMessageError] = useState(false);
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [submitted]);
@@ -22,17 +23,19 @@ const ContactUs = () => {
     const companyEmail = 'marketing@charm-life.com';
 
     const handleSubmit = () => {
-        if (!name || !email) {
-            if (!name && !email) {  // if neither was entered
-                setEmailError(true);
+        setNameError(false);
+        setEmailError(false);
+        setMessageError(false);
+        if (!name || !email || !message) {
+            if (!name) {  // if neither was entered
                 setNameError(true);
-            } else if (!name) {  // if just the name was not entered
-                setNameError(true);
-                setEmailError(false);
-            } else {  // else, jsut email wasn't entered
-                setEmailError(true);
-                setNameError(false);
             }
+            if (!email) {  // if just the name was not entered
+                setEmailError(true);
+            }
+            if (!message) {  // else, jsut email wasn't entered
+                setMessageError(true);
+            } 
             return;
         }
         setSubmitted(true);
@@ -107,12 +110,12 @@ const ContactUs = () => {
                                             value={email}
                                             className={`user-email-input contact-form-input ${emailError && 'input-error'}`} />
                                         <label htmlFor="contact-form-message" className='contact-message-label contact-form-label'>Message</label>
-                                        <textarea placeholder='Enter your message'
+                                        <textarea placeholder='Enter your message *'
                                             id='contact-form-message'
                                             onChange={(event) => setMessage(event.target.value)}
                                             value={message}
                                             rows={8}
-                                            className='contact-form-message contact-form-input' />
+                                            className={`contact-form-message contact-form-input ${messageError && 'input-error'}`} />
                                         <button type='button' className='contact-form-submit-button' onClick={() => handleSubmit()} >Submit</button>
                                     </form>
                                 </div>
