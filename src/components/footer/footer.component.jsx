@@ -63,9 +63,9 @@ const Footer = (props, ref)=> {
                 </div>
                 <div className='col-md-4 col-sm-12'>
                     <div className='footer-nav-container'>
-                        <p className='footer-nav-title'>
+                        <Link className='footer-nav-title' to='/contact-us'>
                             Contact Us
-                        </p>
+                        </Link >
                         <p className='footer-nav-contact-title'>
                             Address:
                         </p>

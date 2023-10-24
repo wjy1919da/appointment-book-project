@@ -23,6 +23,7 @@ import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
+import ContactUs from './routes/contact-us/contact-us.component.jsx';
 import { useMediaQuery } from 'react-responsive';
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
@@ -85,6 +86,7 @@ const App = () => {
         <Route path='AccountSetup' element={<AccountSetup/>} />
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
+        <Route path='contact-us' element={<ContactUs />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
