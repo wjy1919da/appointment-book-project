@@ -10,7 +10,7 @@ const SignUpAccountType = () => {
     const setAccountType = userInfoQueryStore((state) => state.setAccountType);
     const switchPopupTab = userInfoQueryStore(state => state.switchPopupTab);
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-    console.log("userInfo in account type page",userInfo);
+    //console.log("userInfo in account type page",userInfo);
     
     useEffect(() => {
         localStorage.removeItem('accountType');
@@ -56,7 +56,7 @@ const SignUpAccountType = () => {
                     />
                 </div>
             </div>
-            <NextButton title="Next" onClick={()=>switchPopupTab('sendVerifyEmail')} disabled={!userInfo.accountType} />
+            <NextButton title="Next" onClick={()=>switchPopupTab('login')} disabled={!userInfo.accountType} />
         </div>
     );
 };
