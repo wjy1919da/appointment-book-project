@@ -286,19 +286,19 @@ const CommunityPostDetailPopUP = ({
                 </div>
               </div>
 
-              {/* <div className='comment-send-msg-container'> */}
-              {/* <CommunitySendMsg isValid={isValid} /> */}
-              {/* </div> */}
+              {/* <div className='comment-send-msg-container'> 
+                <CommunitySendMsg isValid={isValid} />
+               </div> */}
 
-              {/* <Button
+               <Button
                 as='input'
                 type='submit'
                 value='send'
                 disabled={!isValid}
                 style={{ backgroundColor: 'orange', border: 'orange' }}
-              /> */}
+              /> 
             </div>
-            {/* <div className='new-comment-input'>
+             <div className='new-comment-input'>
               <input
                 {...register('comment')}
                 type='text'
@@ -307,7 +307,7 @@ const CommunityPostDetailPopUP = ({
                 onClick={handleInputClick}
               />
               <p>{errors.comment?.message}</p>
-            </div> */}
+            </div> 
           </form>
         </div>
       </div>

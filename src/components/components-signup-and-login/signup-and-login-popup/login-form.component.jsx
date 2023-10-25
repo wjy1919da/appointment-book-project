@@ -3,7 +3,6 @@ import './login-form.styles.scss';
 import Cookies from 'js-cookie';
 import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
-import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
@@ -13,6 +12,7 @@ import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
 import { useDoctorLogin } from '../../../hooks/useAuth';
 const LoginForm = (props) => {
+    // console.log("loginForm");
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
@@ -26,6 +26,7 @@ const LoginForm = (props) => {
     const doctorLogin = useDoctorLogin();
 
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
+    console.log("authhook",authHook === doctorLogin);
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -42,7 +43,9 @@ const LoginForm = (props) => {
         resolver: zodResolver(schema),
         mode: 'onChange'
     });
+   
     const { mutate, isLoading, data, error } = authHook;
+   
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
         mutate({

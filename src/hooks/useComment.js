@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useMutation, useQuery } from "react-query";
 import Cookies from 'js-cookie';
-import userInfoQueryStore from '../userStore.ts';
+import APIClient from '../services/api-client';
 const base = {
-    addComment: 'http://localhost:8080/user_action/actions/comment',
-    replyToComment: 'http://localhost:8080/user_action/actions/reply',
+    addComment: 'http://api-dev.charm-life.com/user_action/actions/comment',
+    replyToComment: 'http://api-dev.charm-life.com/user_action/actions/reply',
 }
+
+const apiClient = new APIClient('/games');
 /* Because dynamicId and text only use once, so I do not create zuztand store */
 export function useAddComment() {
     const token = Cookies.get('token');
@@ -28,15 +30,3 @@ export function useAddComment() {
     return useMutation((credentials) => fetchAddComment(credentials.dynamicId, credentials.text));
 }
 
-export function useReplyToComment(commentId,text) {
-    const fetchReplyToComment = async () => {
-        const res = await axios.post(base.replyToComment, {
-            "commentId": commentId,
-            "text": text,
-        });
-        return res.data;
-    };
-    return useQuery(['replyToComment', commentId, text], fetchReplyToComment, {
-        placeholderData: { data: {} }, // Default object to use before fetching completes
-    });
-}

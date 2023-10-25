@@ -10,7 +10,6 @@ import Cookie from 'js-cookie';
 import NextButton from './next-button.component';
 import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
-import SendVerifyEmail from './send-verify-email.component';
 //import DatePicker from "react-datepicker";
 const SignUpForm = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
@@ -47,7 +46,9 @@ const SignUpForm = () => {
     var userRole;
     var email;
     useEffect(() => {
-        userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
+        
+        userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
+        console.log("userRole in sign up form ",userRole,localStorage.getItem('accountType'));
         email = localStorage.getItem('email');
     });
     const onSubmit = (formData) => {
@@ -55,7 +56,7 @@ const SignUpForm = () => {
             alert("password not match");
             return;
         }
-        //console.log("email before mutate ",email);
+        console.log("userRole before mutate ",userRole);
         mutate({
             email: email,
             password: formData.password,
@@ -85,7 +86,7 @@ const SignUpForm = () => {
         }
         //console.log("userInfo in sign up form ", userInfo);
     }, [data]);
-    console.log("userInfo in sign up form ", userInfo);
+    //console.log("userInfo in sign up form ", userInfo);
     return (
         <div className='sign-in-form-container'>
             <div className='login-title-container'>

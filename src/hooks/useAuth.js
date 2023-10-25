@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 const base = {
     userOtpLogin: 'http://api-dev.charm-life.com/login/phone/validate-otp',
     userEmailLogin: 'http://api-dev.charm-life.com/login/user',
+    useDoctorLogin: 'http://api-dev.charm-life.com/login/doctor',
     userSendOtp: 'http://api-dev.charm-life.com/login/phone/send-otp',
     addUser: 'http://api-dev.charm-life.com/register/email',
     otpRegister: 'http://api-dev.charm-life.com/register/phone/send-otp',
@@ -136,7 +137,7 @@ export function useClickVerification(){
 }
 export function useDoctorLogin(){
     const fetchDoctorLogin = async (email, password,provider,userRole) => {
-        const res = await axios.post(base.userEmailLogin, {
+        const res = await axios.post(base.useDoctorLogin, {
             email,
             password,
             provider,
