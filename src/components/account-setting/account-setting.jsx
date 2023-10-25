@@ -5,6 +5,7 @@ import "./account-setting.styles.scss";
 const AccountSetup = () => {
     return (
         <div className="account-setting-container">
+            <button class="account-setting-button">Account Setting</button>
             <div className="account-setting-left-pink"></div>
             <div className="account-setting-right-pink">
                 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
@@ -69,16 +70,97 @@ const AccountSetup = () => {
                 </svg>
             </div>
             <div className="account-security-table">
-
+                <span className="heading-text">Security</span><br></br>
+                <br></br>
+                <br></br>
+                <span className="subtext">Change Password</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Security Questions</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Login History</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
             <div className="account-privacy-table">
-
+                <span className="heading-text">Privacy</span><br></br>
+                <br></br>
+                <br></br>
+                <span className="subtext">Profile Visibility</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Data Sharing</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Activity Status</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
             <div className="account-payment-table">
-
+                <span className="heading-text">Payment</span><br></br>
+                <br></br>
+                <br></br>
+                <span className="subtext">Payment Method</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Billing Address</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Subscription</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
             <div className="account-deactivation-and-deletion-table">
-
+                <span className="heading-text">Deactivation & Deletion</span><br></br>
+                <br></br>
+                <br></br>
+                <span className="subtext">Deactivate Account</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <hr className="line"></hr>
+                <span className="subtext">Delete Account</span><br></br>
+                <button className="subtext-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
             <Footer/>
         </div>
