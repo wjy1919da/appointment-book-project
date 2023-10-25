@@ -16,7 +16,7 @@ const AccountSetup = () => {
                         </linearGradient>
                     </defs>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none" transform="translate(25,-95)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none" transform="translate(24,-94)">
                     <g clip-path="url(#clip0_2443_10233)">
                         <g filter="url(#filter0_d_2443_10233)">
                         <path d="M36 4C18.36 4 4 18.36 4 36C4 53.64 18.36 68 36 68C53.64 68 68 53.64 68 36C68 18.36 53.64 4 36 4ZM36 64C20.56 64 8 51.44 8 36C8 20.56 20.56 8 36 8C51.44 8 64 20.56 64 36C64 51.44 51.44 64 36 64Z" fill="#FBFCFF"/>
