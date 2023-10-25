@@ -7,15 +7,16 @@ import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
 import Facebook from '../../assets/home/facebook.svg';
 import Linkedin from '../../assets/home/linkedin.svg';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 const ContactUs = () => {
     const [submitted, setSubmitted] = useState(false);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
-    const [nameError, setNameError] = useState(false);
-    const [emailError, setEmailError] = useState(false);
-    const [messageError, setMessageError] = useState(false);
+    const [name, setName] = useState("");  // for holding the entered name
+    const [email, setEmail] = useState("");  // for holding the entered email
+    const [message, setMessage] = useState("");  // for holding the entered message
+    const [nameError, setNameError] = useState(false);  // if they do not input anything into name field
+    const [emailError, setEmailError] = useState(false);  // if they do not input anything into email field
+    const [messageError, setMessageError] = useState(false);  // if they do not enter anything into message field
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [submitted]);
@@ -44,7 +45,7 @@ const ContactUs = () => {
             'email': email,
             'message': message
         };
-        console.log('User Submitted: ', userSubmission);
+        console.log('User Submitted: ', userSubmission);  // replace this with API call
     }
 
     return (
@@ -102,17 +103,21 @@ const ContactUs = () => {
                                             required
                                             id='personal-info'
                                             onChange={(event) => setName(event.target.value)}
+                                            onBlur={() => { if (nameError && name) setNameError(false)}} // if previously there was an error, and now we have input some text, remove the red border 
                                             value={name}
                                             className={`user-name-input contact-form-input ${nameError && 'input-error'}`} />
                                         <input placeholder='Email *'
                                             required
                                             onChange={(event) => setEmail(event.target.value)}
+                                            onBlur={() => { if (emailError && email) setEmail(false)}}
                                             value={email}
                                             className={`user-email-input contact-form-input ${emailError && 'input-error'}`} />
                                         <label htmlFor="contact-form-message" className='contact-message-label contact-form-label'>Message</label>
                                         <textarea placeholder='Enter your message *'
                                             id='contact-form-message'
+                                            required
                                             onChange={(event) => setMessage(event.target.value)}
+                                            onBlur={() => {if (messageError && message) setMessageError(false)}}
                                             value={message}
                                             rows={8}
                                             className={`contact-form-message contact-form-input ${messageError && 'input-error'}`} />
