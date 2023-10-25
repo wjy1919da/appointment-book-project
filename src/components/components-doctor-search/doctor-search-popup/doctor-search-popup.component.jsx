@@ -100,9 +100,9 @@ const DoctorSearchPopup = ({show,onHide,isMobile}) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    if (data === undefined) {
-        return <HomeSpinner />;
-    }
+    // if (data === undefined) {
+    //     return <HomeSpinner />;
+    // }
    //if (error) return <Text>{error.message}</Text>;
    const handleSubmit = (event) => {
       event.preventDefault();
