@@ -22,12 +22,18 @@
 FROM node:16 as build-deps
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm install
+# RUN npm install
 COPY . ./
-RUN npm run build
+ENV REACT_APP_NAME=CharmLife
+RUN yarn install
+RUN yarn run build
+
+# RUN npm run build
 
 # Stage 2 - the production environment
 FROM nginx:1.17.0-alpine
+# copy nginx config
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
