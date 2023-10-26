@@ -7,6 +7,8 @@ import './community-post-create-page.scss';
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
 import Footer from '../../footer/footer.component';
+import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
+
 // import { useAddPost } from '../../../hooks/useAddingPost';
 
 // hook
@@ -107,6 +109,15 @@ const CreatePostPage = () => {
     }
   };
 
+  // // tag, location button
+  // const handleClickTag = () => {
+  //   console.log('clicked');
+  // };
+
+  // const handleClickLocation = () => {
+  //   console.log('clicked');
+  // };
+
   // radio button
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
@@ -179,12 +190,8 @@ const CreatePostPage = () => {
                 })}
               ></textarea>
 
-              <div className='create-post-page-tag-container'>
-                <span className='create-post-page-tag-name'>#Tag</span>
-                <span className='create-post-page-location-tag-name'>
-                  Add Location
-                </span>
-              </div>
+                <PostDropDownFilter />
+                <PostDropDownFilter />
 
               <p className='description-error-validation'>
                 {errors.description?.message}

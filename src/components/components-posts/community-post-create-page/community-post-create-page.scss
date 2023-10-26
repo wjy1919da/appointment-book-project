@@ -130,8 +130,13 @@
   height: 260px;
 }
 
-.create-post-page-tag-container {
-  position: relative;
+  .create-post-page-tag-name {
+    left: 16px;
+  }
+
+  .create-post-page-location-tag-name {
+    right: 16px;
+  }
 
   .create-post-page-tag-name,
   .create-post-page-location-tag-name {
@@ -144,15 +149,6 @@
     font-weight: 600;
     line-height: normal;
   }
-
-  .create-post-page-tag-name {
-    left: 16px;
-  }
-
-  .create-post-page-location-tag-name {
-    right: 16px;
-  }
-}
 
 .wrapper {
   display: flex;
