@@ -3,10 +3,10 @@ import React from 'react';
 // scss
 import './community-post-button.scss';
 
-const FormButton = ({ buttonName, handlePostCreation }) => {
+const FormButton = ({ buttonName }) => {
   return (
     <div>
-      <button class='create-post-button' onClick={handlePostCreation}>
+      <button type='submit' class='create-post-button'>
         {buttonName}
       </button>
     </div>
