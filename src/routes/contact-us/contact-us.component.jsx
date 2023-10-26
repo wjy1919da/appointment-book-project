@@ -1,5 +1,6 @@
 import './contact-us.scss';
 import { useState, useLayoutEffect } from 'react';
+import { ContactSubmission } from '../../hooks/useContactForm';
 import companyLogo from '../../assets/home/logo.png';
 import Footer from '../../components/footer/footer.component';
 import { Link } from 'react-router-dom';
@@ -7,10 +8,11 @@ import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
 import Facebook from '../../assets/home/facebook.svg';
 import Linkedin from '../../assets/home/linkedin.svg';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 
 const ContactUs = () => {
     const [submitted, setSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
     const [name, setName] = useState("");  // for holding the entered name
     const [email, setEmail] = useState("");  // for holding the entered email
     const [message, setMessage] = useState("");  // for holding the entered message
@@ -23,29 +25,36 @@ const ContactUs = () => {
     const mailingAddress = '9100 Wilshire Blvd, Beverly Hills, CA 90212';
     const companyEmail = 'marketing@charm-life.com';
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setNameError(false);
         setEmailError(false);
         setMessageError(false);
         if (!name || !email || !message) {
-            if (!name) {  // if neither was entered
+            if (!name) {  
                 setNameError(true);
             }
-            if (!email) {  // if just the name was not entered
+            if (!email) {  
                 setEmailError(true);
             }
-            if (!message) {  // else, jsut email wasn't entered
+            if (!message) { 
                 setMessageError(true);
             } 
             return;
         }
-        setSubmitted(true);
         const userSubmission = {
             'name': name,
-            'email': email,
+            'email_address': email,
             'message': message
         };
-        console.log('User Submitted: ', userSubmission);  // replace this with API call
+        setIsLoading(true);
+        try {
+            await ContactSubmission(userSubmission);  // API call
+        } catch (error) {
+            setError(error);
+        } finally {
+            setSubmitted(true);
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -109,7 +118,7 @@ const ContactUs = () => {
                                         <input placeholder='Email *'
                                             required
                                             onChange={(event) => setEmail(event.target.value)}
-                                            onBlur={() => { if (emailError && email) setEmail(false)}}
+                                            onBlur={() => { if (emailError && email) setEmailError(false)}}
                                             value={email}
                                             className={`user-email-input contact-form-input ${emailError && 'input-error'}`} />
                                         <label htmlFor="contact-form-message" className='contact-message-label contact-form-label'>Message</label>
@@ -121,7 +130,7 @@ const ContactUs = () => {
                                             value={message}
                                             rows={8}
                                             className={`contact-form-message contact-form-input ${messageError && 'input-error'}`} />
-                                        <button type='button' className='contact-form-submit-button' onClick={() => handleSubmit()} >Submit</button>
+                                        <button type='button' disabled={isLoading} className={`contact-form-submit-button ${isLoading && 'contact-form-submit-button-loading'}`} onClick={() => handleSubmit()} >{isLoading ? 'Loading' : 'Submit'}</button>
                                     </form>
                                 </div>
                             </div>
