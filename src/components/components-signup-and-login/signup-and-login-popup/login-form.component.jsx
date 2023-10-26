@@ -82,7 +82,6 @@ const LoginForm = (props) => {
             <div className='login-title-container'>
                <LoginRegisterTitle title={"Log In"}/>
             </div>
-
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className='login-input-container'>
                     <Form.Group className="mb-3">
