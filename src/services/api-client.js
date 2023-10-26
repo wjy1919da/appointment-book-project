@@ -13,7 +13,7 @@ class APIClient {
         Authorization: this.token ? `Bearer ${this.token}` : undefined,
       },
     };
-    return axios.post(`${this.endpoint}`, data, config).then((response) => response.data);
+    return axiosInstance.post(this.endpoint, data, config).then((response) => response.data);
   }
 }
 export default APIClient;

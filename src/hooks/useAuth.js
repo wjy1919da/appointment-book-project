@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 import Cookies from 'js-cookie';
+import APIClient from '../services/api-client.js';
 const base = {
     userOtpLogin: 'http://api-dev.charm-life.com/login/phone/validate-otp',
     userEmailLogin: 'http://api-dev.charm-life.com/login/user',
@@ -44,14 +45,14 @@ export function useUserRegister() {
 }
 
 export function useUserEmailLogin(){
+    const apiClient = new APIClient('/login/user');
     const fetchEmailLogin = async (email, password,provider,userRole) => {
-        const res = await axios.post(base.userEmailLogin, {
+        return apiClient.post({
             email,
             password,
             provider,
             userRole
-        });
-        return res.data;
+        })
     };
     return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
 }

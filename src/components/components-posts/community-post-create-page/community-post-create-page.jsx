@@ -7,10 +7,6 @@ import './community-post-create-page.scss';
 import { useAddPost } from '../../../hooks/useAddingPost';
 import FormButton from '../../components-posts/community-post-button/community-post-button';
 import Footer from '../../footer/footer.component';
-
-// scss
-import './community-post-create-page.scss';
-
 // images
 import creatPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
