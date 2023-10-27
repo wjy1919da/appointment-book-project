@@ -55,7 +55,7 @@ const CreatePostPage = () => {
       lat: '',
       location: '',
       lon: '',
-      pictures: [],
+      pictures: hasSelectImage ? [selectedImage] : [],
       tags: [
         {
           tagId: 0,
@@ -108,15 +108,6 @@ const CreatePostPage = () => {
       setHasSelectImage(false);
     }
   };
-
-  // // tag, location button
-  // const handleClickTag = () => {
-  //   console.log('clicked');
-  // };
-
-  // const handleClickLocation = () => {
-  //   console.log('clicked');
-  // };
 
   // radio button
   const handleRadioClick = () => {
@@ -190,8 +181,8 @@ const CreatePostPage = () => {
                 })}
               ></textarea>
 
-                <PostDropDownFilter />
-                <PostDropDownFilter />
+              <PostDropDownFilter />
+              <PostDropDownFilter />
 
               <p className='description-error-validation'>
                 {errors.description?.message}
