@@ -6,7 +6,6 @@ import SignupVerify from './signup-varify.component';
 import SocialSignUP from './social-signup.component';
 import ChooseGender from './choose-gender.component';
 import ChooseInterestedArea from './choose-interested-area.component';
-import SignUpFinal from './sign-up-final.component';
 import userInfoQueryStore from '../../../userStore.ts';
 import LoginForm from './login-form.component';
 import SendVerifyEmail from './send-verify-email.component';
@@ -14,6 +13,7 @@ import SignUpAccountType from './sign-up-account-type.component';
 import SignUpDownloadPopUp from './signup-popUp-4-download';
 import CreateAccount from './create-account.component';
 import LoginPhone from './login-phone.component';
+import DoctorPersonalInformation from '../../doctor-signUp-process/doctor-personal-information.jsx'
 import SendOtpVerification from './send-otp-verification.component';
 const StepTracker = ({ currentStep }) => {
     const steps = ['accountType', 'signUp', 'verifyEmail', 'gender', 'interest', 'download'];
@@ -31,13 +31,23 @@ const StepTracker = ({ currentStep }) => {
 const SignupPopup3 = (props) => {
   const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const modalStyles = {
+    normal: {
+      maxWidth: '1200px',
+      marginTop: '100px' 
+    },
+  };
+
+  // const selectedStyle = condition ? modalStyles.small : modalStyles.large;
+  const selectStyle = modalStyles.normal;
   return (
     <Modal
       dialogClassName='signup-popup-modal'
       show={props.show}
       onHide={props.onHide}
       size='lg'
-      style={{ marginTop: '100px' }}
+      //style={selectStyle}
+      style = {selectStyle}
     >
       <Modal.Header closeButton style={{ borderBottom: 'none' }}></Modal.Header>
       <Modal.Body style={{ padding: "15px" }}>
@@ -51,6 +61,7 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
       {userInfo.popupState === 'phoneNumberLogin' && <LoginPhone />}
       {userInfo.popupState === 'sendOtpVerification' && <SendOtpVerification />}
+      {userInfo.popupState === 'doctorProfile' && <DoctorPersonalInformation />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login') && <SocialSignUP />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'sendVerifyEmail')&& <CreateAccount title="Already have an account?" subTitle="Login!" onClick={()=>switchPopupTab('login')}/>}
       {userInfo.popupState === 'login' && <CreateAccount title="Don't have an account?" subTitle="Sign up" onClick={()=>switchPopupTab('sendVerifyEmail')}/>}

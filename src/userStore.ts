@@ -30,7 +30,7 @@ interface userInfo {
     password?: string;
     selectedInterests: Set<string>| null;
      // Used to control the register popup page and open/close
-    popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin';
+    popupState: 'closed'| 'signUp' | 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin'| 'doctorInfo';
 }
 
 interface userInfoQuery {
@@ -47,8 +47,8 @@ interface userInfoQuery {
     setToken: (token: string) => void;
     setUserId: (userId: string) => void;
     removeToken: () => void;
-    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin') =>  void;
-    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin') => void;
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin'|'doctorInfo') =>  void;
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin'|'doctorInfo') => void;
 }
 
 const userInfoQueryStore = create<userInfoQuery>((set) => ({
@@ -107,7 +107,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
             userInfo: { ...store.userInfo, birthday }
         }));
     },
-    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin') => {
+    togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin'|'doctorInfo') => {
         console.log("togglePopup", open, initialState);
         if (open) {
             set((store) => ({
@@ -119,7 +119,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
             }));
         }
     },
-    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin') => {
+    switchPopupTab: (tab: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail' | 'phoneNumberLogin'|'doctorInfo') => {
         set((store) => ({
             userInfo: { ...store.userInfo, popupState: tab }
         }));

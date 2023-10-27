@@ -7,7 +7,6 @@ const apiClient = new APIClient('/user_action/actions/comment', Cookies.get('tok
 /* Because dynamicId and text only use once, so I do not create zuztand store */
 export function useAddComment() {
   const fetchAddComment = async ({ dynamicId, text }) => {
-    console.log('useAddComment', apiClient, apiClient.token);
     if (!apiClient.token) {
       alert('User not logged in');
       throw new Error('User not logged in');
