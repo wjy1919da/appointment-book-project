@@ -64,11 +64,14 @@ const SubProcedure = () => {
                     }
                 }
                 if (recommendationElement) {
+                    // 这里隐藏DOM后, 通过 getBoundingClientRect() 再获取DOM的大小和位置都为0，可以改为 visibility
                     const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
                     if (footerTop <= recommendationBottom) {
-                        recommendationElement.style.display = 'none';
+                        // recommendationElement.style.display = 'none';
+                        recommendationElement.style.visibility = 'hidden';
                     } else {
-                        recommendationElement.style.display = 'block';
+                        // recommendationElement.style.display = 'block';
+                        recommendationElement.style.visibility = 'visible';
                     }
                 }
             } else 
