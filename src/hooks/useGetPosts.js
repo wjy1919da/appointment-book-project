@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
-import Cookies from 'js-cookie';
+
 const base = {
   postUrl: 'https://api-dev.charm-life.com/post/all_posts',
   // postUrl:'http://localhost:8080/post/posts:page',
@@ -22,6 +22,7 @@ export function useGetPost() {
       //console.log("userIDdata", res.data);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     };
+
     return useInfiniteQuery(
      ['posts', postQuery], 
      fetchPost, {
@@ -39,11 +40,11 @@ export function useGetPost() {
     );
 }
 export function useGetUserPostedPost() {
-  console.log("DOI Call this hook?");
+  // console.log("DOI Call this hook?");
   const token ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
   const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
-    console.log("DOI Call this hook2?");
+    // console.log("DOI Call this hook2?");
     if (!token) {
       alert('user not login');
     } 
@@ -57,9 +58,10 @@ export function useGetUserPostedPost() {
       }
     }
     );
-    console.log("DOI Call this hook1?", res.data);
+    // console.log("DOI Call this hook1?", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
+  
   return useInfiniteQuery(
    ['posts', postQuery], 
    fetchPost, {
