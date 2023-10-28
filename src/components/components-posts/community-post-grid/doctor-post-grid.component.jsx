@@ -14,6 +14,7 @@ import { useMediaQuery } from 'react-responsive';
 import ErrorMsg from '../../error-msg/error-msg.component';
 
 const DoctorPostGrid = ({ isAbout }) => {
+
   const {
     data,
     error,
@@ -22,6 +23,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     isFetchingNextPage,
     hasNextPage,
   } = useGetPost();
+
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
@@ -33,17 +35,20 @@ const DoctorPostGrid = ({ isAbout }) => {
     ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
     : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
   const isMobileOrAbout = isMobile || isAbout;
+
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
+
   const setPostID = (ID, avatar, username) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(avatar);
     setUserName(username);
   };
+
   const postCardList = flatData.map((post) => (
     <div
       className='btn'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 // scss
 import './community-post-create-page.scss';
@@ -9,10 +10,9 @@ import FormButton from '../../components-posts/community-post-button/community-p
 import Footer from '../../footer/footer.component';
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
-// import { useAddPost } from '../../../hooks/useAddingPost';
-
 // hook
 import { useApiRequest } from '../../../hooks/useApiRequest';
+// import { useAddPost } from '../../../hooks/useAddingPost';
 
 // scss
 import './community-post-create-page.scss';
@@ -30,6 +30,8 @@ const CreatePostPage = () => {
   // const [tagDoctor, setTagDoctor] = useState('');
   // const [location, setLocation] = useState('');
   // const { mutate } = useAddPost();
+
+  const navigate = useNavigate();
 
   // react hook form
   const {
@@ -72,6 +74,11 @@ const CreatePostPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // back button
+  const handleClickCreatePostBack = () => {
+    navigate('/posts');
+  };
 
   // const handlePostCreation = () => {
   //   const newPost = {
@@ -122,7 +129,11 @@ const CreatePostPage = () => {
       <div className='pink-background-1'></div>
       <div className='pink-background-2'></div>
 
-      <button className='create-post-page-back-button-container'>
+      <button
+        type='button'
+        onClick={handleClickCreatePostBack}
+        className='create-post-page-back-button-container'
+      >
         <img src={Arrow} alt='Image-Arrow-Icon' className='arrow-back-button' />
         <span className='create-post-page-back-button'>Create a post</span>
       </button>
