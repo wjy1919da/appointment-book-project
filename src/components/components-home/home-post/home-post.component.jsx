@@ -1,6 +1,6 @@
 import Decoration from '../../../assets/home/decoration-post.png';
 import vector from '../../../assets/home/Vector.png';
-import PostContainerMobile from '../../../assets/home/post_container.svg';
+import PostContainerMobile from '../../../assets/home/post-container-ipad.png';
 import PostPic from '../../../assets/home/post-container.png';
 import Tag1 from '../../../assets/home/tag1.svg';
 import Tag2 from '../../../assets/home/tag2.svg';

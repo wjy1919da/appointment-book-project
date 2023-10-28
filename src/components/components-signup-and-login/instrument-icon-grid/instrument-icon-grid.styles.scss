@@ -9,7 +9,7 @@
       
     padding: 5px 10px;  
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns per row */
+    grid-template-columns: repeat(2, 1fr); /* Creates 3 columns per row */
     gap: 2px; 
     justify-content: space-around; 
     justify-items: center; /* 水平居中 */
@@ -23,24 +23,14 @@
     flex-grow: 0;
      
     .procedure-icon-section {
-        /* procedure */
-        /* Auto layout */
-
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 5px;
         gap: 0px;
-  
-        // width: 330px;
-        width: 1/9;
-        height: 1/9;
-  
-        /* Inside auto layout */
-        flex: none;
-        order: 0;
-        flex-grow: 0;
+        width: 120px;
+        height: auto;
     }
 
     
@@ -50,6 +40,7 @@
         order: 0;
         align-self: stretch;
         flex-grow: 0;
+        box-shadow: 0px 9px 12px 0px rgba(226, 227, 231, 0.25), 0px 0px 30px 0px rgba(255, 164, 163, 0.10);
     }
     .procedure-icon-pic:hover {
         border: 1.6px solid;
@@ -61,25 +52,12 @@
     }
     
     .title {
-        margin-top: -2%;
-        width: 60px;
-        // height: 29px;
-        padding: 0px 0px;
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 9px;
-        line-height: 160%;
-        /* identical to box height, or 29px */
-
+        color:  #352C29;
         text-align: center;
-        color: #000000;
-
-        /* Inside auto layout */
-
-        flex: none;
-        order: 1;
-        align-self: stretch;
-        flex-grow: 0;
+        font-family: Open Sans;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }  
   }

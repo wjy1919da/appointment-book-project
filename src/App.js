@@ -23,6 +23,7 @@ import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
 import DoctorProcudreMobile from './components/doctor-procedure-mobile/doctor-procedure-mobile';
 import PageNotFound from './routes/page-not-found/page-not-found.component';
+import ContactUs from './routes/contact-us/contact-us.component.jsx';
 import { useMediaQuery } from 'react-responsive';
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
@@ -35,8 +36,6 @@ import AccountSetup from './components/account-setting/account-setting';
 import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
 
-
-
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -44,10 +43,15 @@ const App = () => {
   console.log('userInfo init', userInfo);
   const token = userInfoQueryStore((state) => state.userInfo.token);
   const setToken = userInfoQueryStore((state) => state.setToken);
+  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   useEffect(() => {
-    const cookieToken = Cookies.get('token');
+    var cookieToken = Cookies.get('token');
     if (cookieToken && cookieToken !== token) {
       setToken(cookieToken);
+    }
+    var accountType = localStorage.getItem('accountType');
+    if (accountType) {
+      setAccountType(accountType);
     }
   }, []);
 
@@ -83,10 +87,13 @@ const App = () => {
         <Route path='/posts/create' element={<CreatePostPage />} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='userProfile' element={<UserProfilePage />} />
+
         <Route path='AccountSetup' element={<AccountSetup/>} />
         <Route path='AccountNotFound' element={<AccountNotFoundPage/>} />
+
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
+        <Route path='contact-us' element={<ContactUs />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>

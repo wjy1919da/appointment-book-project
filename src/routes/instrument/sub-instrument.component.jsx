@@ -204,9 +204,9 @@ const SubInstrument = () => {
                <h3 className='sub-instrument-top-text'>Instrument</h3>
              {/* Logo picture */}
                <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic' id='description'/>
-               {data.data.description&&
+               {data?.data?.description&&
                <div style={{ marginTop: '-40px' }}>
-                   <SubTxt text={data.data.description}/>
+                   <SubTxt text={data?.data?.description}/>
                </div>
                }
            </div>
