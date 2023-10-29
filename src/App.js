@@ -33,6 +33,7 @@ import { Create } from '@mui/icons-material';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 
 import AccountSetup from './components/account-setting/account-setting';
+import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
 
 const App = () => {
@@ -86,7 +87,10 @@ const App = () => {
         <Route path='/posts/create' element={<CreatePostPage />} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='userProfile' element={<UserProfilePage />} />
-        <Route path='AccountSetup' element={<AccountSetup />} />
+
+        <Route path='AccountSetup' element={<AccountSetup/>} />
+        <Route path='AccountNotFound' element={<AccountNotFoundPage/>} />
+
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='contact-us' element={<ContactUs />} />
