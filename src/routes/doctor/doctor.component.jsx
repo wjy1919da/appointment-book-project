@@ -1,6 +1,6 @@
 import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
-import DoctorSearchBackground from '../../assets/doctor/featureDoctor3.png';
+import DoctorImg from '../../assets/home/doctor_mobile.svg';  // we need better naming for this image file, not intuitive
 import IntroDoctor from '../../components/components-doctor-search/doctor-search-info/doctor-search-info.component';
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
 import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-card.component';
@@ -73,7 +73,7 @@ const Doctor = () => {
                                     <h1 className='doctor-upper-title'>Find the Right Doctor At Your Fingertip</h1>
                                 </div>
                                 <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
-                                    <img src={DoctorSearchBackground} alt='Doctor Search Background' className='doctor-search-header-pic' />
+                                    <img src={DoctorImg} alt='Doctor Search Background' className='doctor-search-header-pic' />
                                 </div>
                             </div>
                             <div className='doctor-intro-container'>

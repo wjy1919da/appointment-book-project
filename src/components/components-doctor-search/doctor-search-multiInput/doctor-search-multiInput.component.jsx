@@ -1,13 +1,13 @@
 import React, { useRef, useState,useReducer,useEffect} from 'react'
-import { InputGroup, Input } from "@chakra-ui/react";
+// import { InputGroup, Input } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../../store.ts';
-import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx'
+import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx';
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component.jsx';
 import searchReducer from '../../../reducer/searchReducer.ts';
-import VerticalDivider from './doctor-search-divider.component'
+// import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
-import FormInput from '../../form-input/form-input.component.jsx';
-import CloseButton from '../../../assets/post/pop-up-close-button.png';
+// import FormInput from '../../form-input/form-input.component.jsx';
+// import CloseButton from '../../../assets/post/pop-up-close-button.png';
 import './doctor-search-multiput-dropDown.styles.scss'
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
@@ -52,8 +52,8 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
         }
     }
     const defaultLocations = ["Los Angeles, CA", "Dallas, TX", "New York City, NY", "San Francisco, CA", "Las Vegas, NV", "Minneapolis, MI", "Atlanta, GA", "Phoenix, AZ"];
-    const defaultProcedures = [{"location": "Face", "procedures" : [{"procedureName": "Botox", "photoURL": ""}, {"procedureName": "Liposuction", "photoURL": ""}, {"procedureName": "Laser Removal", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}]}, 
-                               {"location": "Body", "procedures" : [{"procedureName": "CoolFreeze", "photoURL": ""}, {"procedureName": "Liposuction", "photoURL": ""}, {"procedureName": "Laser Removal", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}, {"procedureName": "Lorum ipsum", "photoURL": ""}]}
+    const proceduresNameAndImg = [{"location": "Face", "procedures" : [{"procedureName": "Botox", "photoURL": "botox_injections.svg"}, {"procedureName": "Chemical Peel", "photoURL": "chemical_peels.svg"}, {"procedureName": "Chin Implants", "photoURL": "Chin-Implants.svg"}, {"procedureName": "Face Life", "photoURL": "Facelift.svg"}, {"procedureName": "Fox Eyes", "photoURL": "fox_eyes.svg"}, {"procedureName": "Lip Augmentation", "photoURL": "lip_augmentation.svg"}, {"procedureName": "Otoplasty", "photoURL": "Otoplasty.svg"}, {"procedureName": "Teeth Whitening", "photoURL": "teeth_whitening.svg"}]}, 
+                               {"location": "Body", "procedures" : [{"procedureName": "Breast Augmentation", "photoURL": "breast_augmentation.svg"}, {"procedureName": "Laser Hair Removal", "photoURL": "laser_hair_removal.svg"}, {"procedureName": "Neck Contouring", "photoURL": "Neck_Contouring.svg"}, {"procedureName": "Tummy Tuck", "photoURL": "Tummy_Tuck.svg"}]}
                               ]
     const handleSubmit = () => {
         const obj = {'location': doctorQuery.location,
@@ -201,9 +201,9 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                 value={doctorQuery?.field}
                                 className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
                             <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
-                                {defaultProcedures.map((procedureObj, index) => {
+                                {proceduresNameAndImg.map((procedureObj, index) => {
                                     return <span className='procedure-dropdown-row-container'>
-                                        <ProcedureRow key={index} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
+                                        <ProcedureRow key={index+100} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
                                     </span>
                                 })}
                             </div>
@@ -227,9 +227,9 @@ const ProcedureRow = ({procedureObj, onClick}) => {
             <p className='procedure-dropdown-title'>{procedureObj.location}</p>
             <div className='procedure-dropdown-procedures-container'>
                 {procedureObj.procedures.map((item, index) => {
-                    return (<div className='procedure-wrapper' onClick={() => onClick(item)} key={index}>
+                    return (<div className='procedure-wrapper' onClick={() => onClick(item)} key={index+200}>
                                 <div className='procedure-photo-container'>
-                                    {item?.photoURL ? <img src={item?.photoURL} alt='procedure' /> : <div className='blank-procedure-photo'></div>}
+                                    {item?.photoURL ? <img src={require(`../../../assets/procedure/${item?.photoURL}`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
                                 </div>
                                 <p className='procedure-subtitle'>{item.procedureName}</p>
                             </div>

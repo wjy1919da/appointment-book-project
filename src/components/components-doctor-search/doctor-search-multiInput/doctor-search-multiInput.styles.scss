@@ -58,7 +58,22 @@
     color: #352C29;
 }
 
-.dropdown-container::-webkit-scrollbar {
+.dropdown-container::-webkit-scrollbar {  // -webkit-scrollbar is weird and you need modify the whole scrollbar before you can target specfically vertical/horizontal. This does nothing except allow me to make the vertical scrollbar disappear in another selector
+    opacity: 1;
+}
+
+.dropdown-container::-webkit-scrollbar:horizontal {
+    background-color: #FBFCFF;
+    border-radius: 6px;
+}
+
+.dropdown-container::-webkit-scrollbar-thumb:horizontal {
+    background-color: #675D59;
+    border-radius: 6px;
+    border: 1px solid #574f4c;
+}
+
+.dropdown-container::-webkit-scrollbar:vertical {
     display: none;
 }
 
@@ -91,7 +106,7 @@
 .procedure-dropdown-procedures-container {
     display: flex;
     justify-content: space-between;
-    column-gap: 3.5rem;
+    column-gap: 2.5rem;
 }
 
 .procedure-wrapper {
@@ -102,16 +117,18 @@
 }
 
 .procedure-photo-container {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
     margin-bottom: 1rem;
+    border-radius: 50%;
+    border: 1px solid black;
 }
 
 .blank-procedure-photo {
     width: 100%;
     height: 100%;
     background: #E2E3E7;
-    border-radius: 50%;
+    
 }
 
 .procedure-dropdown-title {
@@ -148,6 +165,11 @@
     column-gap: 0.5rem;
     justify-content: center;
     align-items: center;
+}
+
+.procedure-photo {
+    border-radius: 50%;
+    width: 100%;
 }
 
 
