@@ -101,7 +101,6 @@ export function useSetUserProfile(){
                 email,
                 birthday,
                 nickname
-
             },
         );
         return res.data;

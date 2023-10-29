@@ -21,10 +21,8 @@ const LoginForm = (props) => {
     useEffect(() => {
         setAccountType(localStorage.getItem('accountType'));
     }, []);
-
     const userEmailLogin = useUserEmailLogin();
     const doctorLogin = useDoctorLogin();
-
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     console.log("authhook",authHook === doctorLogin);
     const schema = z.object({
@@ -48,6 +46,7 @@ const LoginForm = (props) => {
    
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
+       
         mutate({
             email: formData.email,
             password: formData.password,
@@ -62,7 +61,8 @@ const LoginForm = (props) => {
             setToken(myToken);
             /* TODO：alert component */ 
             alert(data.msg);
-            togglePopup(false);
+            // togglePopup(false);
+            switchPopupTab("doctorProfile");
             //props.onHide();
         }
         if (data?.code === 500 || data?.code === 403) {

@@ -46,7 +46,6 @@ const SignUpForm = () => {
     var userRole;
     var email;
     useEffect(() => {
-        
         userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
         console.log("userRole in sign up form ",userRole,localStorage.getItem('accountType'));
         email = localStorage.getItem('email');
@@ -74,11 +73,13 @@ const SignUpForm = () => {
            Cookie.set('token', myToken);
            setToken(myToken);
            alert("register success ", data.code);
+          // switchPopupTab('gender');
+          console.log('userInfo in sign up form',userInfo);
            if (userInfo && userInfo.accountType) {
                 if (userInfo.accountType === "1") {
                     switchPopupTab('gender');
                 } else if (userInfo.accountType === "2") {
-                    switchPopupTab('success');
+                    switchPopupTab('doctorFinish');
                 }
             }
         } else if (data) {
