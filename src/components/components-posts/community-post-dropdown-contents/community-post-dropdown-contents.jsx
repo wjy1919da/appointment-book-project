@@ -88,30 +88,56 @@ const PostDropDownContents = () => {
     // console.log(postQuery);
   };
 
+  const isButtonClicked = (topic) => {
+    return filterTopic.includes(topic);
+  };
+
   return (
     <div className='post-dropdown-contents-container'>
       <div className='post-dropdown-contents-inner-container'>
         <div className='post-dropdown-contents-left-container'>
           <div className='post-dropdown-contents-up'>
             <h3 className='procedure-title'>Post By</h3>
-            <button type='button' onClick={() => handleToggleFilter('Member')}>Member</button>
-            <button type='button' onClick={() => handleToggleFilter('Authorized Doctor')}>Authorized Doctor</button>
+            <div className='post-by-button-container'>
+              {['Member', 'Authorized Doctor'].map((post) => (
+                <button
+                  key={post}
+                  onClick={() => handleToggleFilter(post)}
+                  className={isButtonClicked(post) ? 'clicked-button' : ''}
+                >
+                  {post}
+                </button>
+              ))}
+            </div>
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            {['Facial', 'Breast', 'Skin'].map((topic) => {
-              <button key={topic} type='button' onClick={() => handleToggleFilter(topic)}>{topic}</button>
-            })}
+            <div className='topic-button-container'>
+              {['Facial', 'Breast', 'Skin'].map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => handleToggleFilter(topic)}
+                  className={isButtonClicked(topic) ? 'clicked-button' : ''}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
           <h3 className='procedure-title'>Body Area</h3>
-          <p>Lorum ipsum Lorum ipum</p>
-          <p>Lorum ipsum Lorum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
+          <div className='body-area-button-container'>
+            {['A', 'B', 'C', 'D', 'E', 'F'].map((area) => (
+              <button
+                key={area}
+                onClick={() => handleToggleFilter(area)}
+                className={isButtonClicked(area) ? 'clicked-button' : ''}
+              >
+                {area}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className='post-dropdown-contents-procedures-container'>
