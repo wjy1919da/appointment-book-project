@@ -1,7 +1,12 @@
 @media (min-width: 1024px) {
+    .home-component-container
+    {
+        background: var(--background-gradient-color, linear-gradient(180deg, #FFF2ED 24.48%, rgba(255, 248, 244, 0.00) 100%));
+        mix-blend-mode: multiply;
+    }
     .home {
         width: 100%;
-        background: white;
+
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -100,7 +105,6 @@
             height: 56px;
             //width: 15vw;
             //height: 5vw;
-            background-color: white;
             border-radius: 8px;
             font-family: 'Open Sans';
             font-style: normal;
@@ -109,9 +113,11 @@
             //font-size: 2.2vw;
             line-height: 140%;
             margin-right: 10px;
-            border: 2px solid #352C29;
+            border: 2px solid var(--new-gradient, #F48C8A);
+            color: var(--new-gradient, #F48C8A);
 
             .button-text {
+                
                 position: relative;
                 bottom: 25px;
                 left: 15px;

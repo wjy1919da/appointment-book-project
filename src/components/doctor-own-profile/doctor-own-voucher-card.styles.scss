@@ -1,0 +1,73 @@
+.doctor-own-voucher-card-container
+{
+    display: flex;
+    align-items: center;
+    gap:30px;
+    width: 470px;
+    height: 190px;
+    flex-shrink: 0;
+    border-radius: 4.899px;
+    background: var(--White, #FBFCFF);
+    box-shadow: 0px 7.34837px 9.79783px 0px rgba(226, 227, 231, 0.25), 0px 0px 24.49457px 0px rgba(255, 164, 163, 0.10);
+    .voucher-card-avartar
+    {
+        padding-left: 20px;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .voucher-card-info
+    {
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+}
+.voucher-card-price
+{
+    display: flex;
+    justify-content: space-between;
+}
+.voucher-card-original-price
+{
+    color: var(--text-1-footer, #352C29);
+    font-family: Open Sans;
+    font-size: 12.86px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: line-through;
+}
+.voucher-card-promotion
+{
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+}
+.original-price-text
+{
+    color: var(--text-2-button, #675D59);
+    font-family: Open Sans;
+    font-size: 11.023px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.hour-left-text
+{
+    color: var(--like, #F48C8A);
+    font-family: Open Sans;
+    font-size: 11.023px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

@@ -27,6 +27,7 @@
     "antd": "^5.5.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",
     "hashids": "^2.3.0",
     "js-cookie": "^3.0.5",

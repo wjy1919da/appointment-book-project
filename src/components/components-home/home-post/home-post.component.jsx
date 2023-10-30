@@ -6,6 +6,7 @@ import Tag1 from '../../../assets/home/tag1.svg'
 import Tag2 from '../../../assets/home/tag2.svg'
 import Tag4 from '../../../assets/home/tag4.svg' 
 import { Link } from 'react-router-dom';
+import HomeButtonPink from '../../home-button-pink/home-button-pink';
 import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
 import './home-post.styles.scss';
 import HomeLink from '../home-link/home-link.component';
@@ -63,8 +64,9 @@ const HomePost = () => {
                     </div> 
                     <div className='home-post-link'>
                         {/* <span className="underline-link">View More Posts</span> */}
-                        <HomeLink title="View More Posts" href="/posts" />
-                        <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img>
+                        {/* <HomeLink title="View More Posts" href="/posts" />
+                        <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img> */}
+                        <HomeButtonPink title = 'View more post'/>
                     </div>                    
                 </Fragment>}
                 {/* Mobile */}

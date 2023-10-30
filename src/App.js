@@ -9,6 +9,7 @@ import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import UserInfo from "./routes/user-info/user-info.component";
 import Doctor from './routes/doctor/doctor.component';
+import DocotorOwnMain from './components/doctor-own-profile/doctor-own-profile-main';
 import DoctorPost from  './routes/community/community.component';
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
@@ -59,6 +60,7 @@ const App = () => {
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
+        <Route path='doctorProfile' element={<DocotorOwnMain />} />
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
         <Route path="userProfile" element={
           <PrivateRoute>
