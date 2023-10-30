@@ -1,18 +1,19 @@
 import React, { useRef, useState,useReducer,useEffect} from 'react'
-import { InputGroup } from "@chakra-ui/react";
+// import { InputGroup, Input } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../../store.ts';
-import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx'
+import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx';
 import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.component.jsx';
 import searchReducer from '../../../reducer/searchReducer.ts';
-import VerticalDivider from './doctor-search-divider.component'
+// import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
-import FormInput from '../../form-input/form-input.component.jsx';
+// import FormInput from '../../form-input/form-input.component.jsx';
+// import CloseButton from '../../../assets/post/pop-up-close-button.png';
 import './doctor-search-multiput-dropDown.styles.scss'
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-const DoctorSearchMultiInput = () => {
+const DoctorSearchMultiInput = ({searchCallback}) => {
     const locationRef = useRef(null);
     const specializationRef = useRef(null);
     const doctorNameRef = useRef(null);
@@ -22,7 +23,8 @@ const DoctorSearchMultiInput = () => {
     const setLocation = useDoctorQueryStore(state=>state.setLocation);
     const [dropdownIsOpen, dispatchDropdown] = useReducer(searchReducer, false);
     const [IsModalOpen,setIsModelOpen] = useState(false);
-    const topLocations = ['Los Angeles, CA', 'Chicago, IL', 'Houston, TX'];
+    const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+    const [isFieldModalOpen, setIsFieldModalOpen] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
@@ -40,6 +42,7 @@ const DoctorSearchMultiInput = () => {
     }
     const handleDropdownLocationClick = (item) => {
         setLocation(item);
+        closeLocationModal();
     }
     const handleBlur = () => {
         if (dropdownIsOpen) {
@@ -47,6 +50,38 @@ const DoctorSearchMultiInput = () => {
                 dispatchDropdown({type: 'CLOSE_DROPDOWN'});
             }, 100);
         }
+    }
+    const defaultLocations = ["Los Angeles, CA", "Dallas, TX", "New York City, NY", "San Francisco, CA", "Las Vegas, NV", "Minneapolis, MI", "Atlanta, GA", "Phoenix, AZ"];
+    const proceduresNameAndImg = [{"location": "Face", "procedures" : [{"procedureName": "Botox", "photoURL": "botox_injections.svg"}, {"procedureName": "Chemical Peel", "photoURL": "chemical_peels.svg"}, {"procedureName": "Chin Implants", "photoURL": "Chin-Implants.svg"}, {"procedureName": "Face Life", "photoURL": "Facelift.svg"}, {"procedureName": "Fox Eyes", "photoURL": "fox_eyes.svg"}, {"procedureName": "Lip Augmentation", "photoURL": "lip_augmentation.svg"}, {"procedureName": "Otoplasty", "photoURL": "Otoplasty.svg"}, {"procedureName": "Teeth Whitening", "photoURL": "teeth_whitening.svg"}]}, 
+                               {"location": "Body", "procedures" : [{"procedureName": "Breast Augmentation", "photoURL": "breast_augmentation.svg"}, {"procedureName": "Laser Hair Removal", "photoURL": "laser_hair_removal.svg"}, {"procedureName": "Neck Contouring", "photoURL": "Neck_Contouring.svg"}, {"procedureName": "Tummy Tuck", "photoURL": "Tummy_Tuck.svg"}]}
+                              ]
+    const handleSubmit = () => {
+        const obj = {'location': doctorQuery.location,
+                      'field':   doctorQuery.field,
+                      'name': doctorQuery.doctorName
+                    }
+        console.log('Now calling multiInput callback...');
+        searchCallback(obj);
+    }
+    const toggleLocationModal = () => {
+        setIsLocationModalOpen(!isLocationModalOpen);
+    }
+    const closeLocationModal = () => {
+        setTimeout(() => {
+            setIsLocationModalOpen(false);
+        }, 100); // need the timeout here or else the modal would close before we could grab the data from clicking the modal
+    }
+    const toggleFieldModal = () => {
+        setIsFieldModalOpen(!isFieldModalOpen);
+    }
+    const closeFieldModal = () => {
+        setTimeout(() => {
+            setIsFieldModalOpen(false);
+        }, 100); // need the timeout here or else the modal would close before we could grab the data from clicking the modal
+    }
+    const proceduresGetInfo = (item) => {
+        // console.log(item);
+        setField(item.procedureName);
     }
     return (
         <div>
@@ -71,7 +106,7 @@ const DoctorSearchMultiInput = () => {
                                     onChange = {(event) => setLocation(event.target.value)}
                                 />
                             </Form.Group>
-                            {topLocations.map((item, index) => (
+                            {/* {topLocations.map((item, index) => (
                                     <Button 
                                         key={index}
                                         className="search-location-button mb-3"  
@@ -80,7 +115,7 @@ const DoctorSearchMultiInput = () => {
                                     >
                                         {item}
                                     </Button>
-                                ))}
+                                ))} */}
                             </Form>
                         </Dropdown.Menu>
                         </Dropdown>
@@ -140,40 +175,69 @@ const DoctorSearchMultiInput = () => {
                         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
                     </div>
                 </div>
-            ):(
-                <div>
-                    <InputGroup display="flex" alignItems="center">
-                        <FormInput 
-                            ref = {locationRef}
-                            onClick = {()=> { dispatchDropdown({type: 'TOGGLE_DROPDOWN'}); }}
-                            onBlur = {handleBlur}
-                            value = {doctorQuery.location || ''}
-                            onChange = {(event) => setLocation(event.target.value)}
-                            focusBorderColor="orange.200"
-                            label = "ZIP Code"  />
-                            {dropdownIsOpen && <DoctorSearchDropDown/>}
-                        <VerticalDivider/>
-                        <FormInput 
-                            ref = {specializationRef}
-                            value={doctorQuery.field || ''}
-                            onChange = {(event) => setField(event.target.value)}
-                            label = "Specialization"  />
-                        <VerticalDivider/>
-                        <FormInput 
-                            ref = {doctorNameRef}
-                            value={doctorQuery.doctorName || ''}
-                            onChange = {(event) => setDoctorName(event.target.value)}
-                            label = "Doctor Name"  />
-                        <button className='doctor-search-button' onClick = {handleOnClick}>
-                            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-                            search
-                        </button>
-                            <HomeButton title='Search' onClick={handleOnClick} isIcon={SearchIcon} width='150px'height='40px'/>
-                    </InputGroup>
-                    {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
+            ):(  
+                <div className='doctor-multiInput-container'> {/* I did not touch the mobile version above. Once the UI team completes the wireframe for it I can come back to this page */}
+                    <form className='doctor-input-form'>
+                        <span className='location-input-container' >  {/* Has position set to relative to allow the absolute position of the dropdown */}
+                            <input placeholder='ZIP or City, State' 
+                                name='location' 
+                                onChange={(event) => setLocation(event.target.value)}
+                                onClick={() => toggleLocationModal()}  // clicking the input will open and close the modal
+                                onBlur={() => closeLocationModal()}  // moving focus away from the input will close the modal
+                                value={doctorQuery?.location}
+                                className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
+                            <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {defaultLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
+                                    return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
+                                })}
+                            </div>
+                        </span>
+                        <span className='field-input-container'>
+                            <input placeholder='Specialization' 
+                                name='specialization' 
+                                onChange={(event) => setField(event.target.value)}
+                                onClick={() => toggleFieldModal()} 
+                                onBlur={() => closeFieldModal()}
+                                value={doctorQuery?.field}
+                                className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
+                            <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {proceduresNameAndImg.map((procedureObj, index) => {
+                                    return <span className='procedure-dropdown-row-container'>
+                                        <ProcedureRow key={index+100} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
+                                    </span>
+                                })}
+                            </div>
+                        </span>
+                        <input placeholder='Doctor' 
+                            name='doctor' 
+                            onChange={(event) => setDoctorName(event.target.value)} 
+                            className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
+                        
+                        <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
+                    </form>
                 </div>
         )}
         </div>
     )
 }
+
+const ProcedureRow = ({procedureObj, onClick}) => {
+    return (
+        <div className='procedure-dropdown-row'>
+            <p className='procedure-dropdown-title'>{procedureObj.location}</p>
+            <div className='procedure-dropdown-procedures-container'>
+                {procedureObj.procedures.map((item, index) => {
+                    return (<div className='procedure-wrapper' onClick={() => onClick(item)} key={index+200}>
+                                <div className='procedure-photo-container'>
+                                    {item?.photoURL ? <img src={require(`../../../assets/procedure/${item?.photoURL}`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
+                                </div>
+                                <p className='procedure-subtitle'>{item.procedureName}</p>
+                            </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
 export default DoctorSearchMultiInput;

@@ -3,14 +3,14 @@ import { useQuery } from "react-query";
 import useProcedureQueryStore from "../procedureStore.ts";
 
 const base = {
-    procedureUrl:'https://api.charm-life.com/procedure',
-    procedureCategoriesUrl:'https://api.charm-life.com/procedure',
-    faqUrl:'https://api.charm-life.com/faq'
+    procedureUrl:'https://api-dev.charm-life.com/procedure',
+    procedureCatsegoriesUrl:'https://api-dev.charm-life.com/procedure',
+    faqUrl:'https://api-dev.charm-life.com/faq'
 }
 
 export function useGetProcedureCategories(){
     const fetchProcedureCategories = async () => {
-      const res = await axios.get(base.procedureCategoriesUrl);
+      const res = await axios.get(base.procedureCatsegoriesUrl);
     //  console.log("fetch Data:", res.data);
       return res.data;
     };

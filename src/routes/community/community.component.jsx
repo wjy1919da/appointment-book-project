@@ -2,29 +2,33 @@ import usePostQueryStore from '../../postStore.ts';
 import React, { useLayoutEffect } from 'react';
 
 // components
+import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
-
-import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
-import './community.styles.scss'
-
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
+import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
+import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
 
+// scss
+import './community.styles.scss';
 
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const setFilterCondition = usePostQueryStore(
     (state) => state.setFilterCondition
   );
-  const dropdownOptionsByCategory = [
-    { value: 'facial', label: 'Facial' },
-    { value: 'breast', label: 'Breast' },
-    { value: 'body', label: 'Body' },
-  ];
-  const dropdownOptionsByRole = [
-    { value: 'by user', label: 'By User' },
-    { value: 'by doctor', label: 'By Doctor' },
-  ];
+
+  // const dropdownOptionsByCategory = [
+  //   { value: 'facial', label: 'Facial' },
+  //   { value: 'breast', label: 'Breast' },
+  //   { value: 'body', label: 'Body' },
+  // ];
+
+  // const dropdownOptionsByRole = [
+  //   { value: 'by user', label: 'By User' },
+  //   { value: 'by doctor', label: 'By Doctor' },
+  // ];
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -43,24 +47,28 @@ const Community = () => {
     }
     setFilterCondition(updatedFilter);
   };
+
   return (
     <div>
       <PostPageMain />
       <div className='doctor-post-outer-container'>
         <div className='doctor-post-header-container'>
           <PostDropDown
-            options={dropdownOptionsByCategory}
+            // optipns={dropdownOptionsByCategory}
             handleFilters={handleFilters}
-            menuLabel='Category'
+            menuLabel='Filter'
             wordAfterMenuLabel='All'
+            className='filter-button'
           />
           <PostDropDown
-            options={dropdownOptionsByRole}
+            // options={dropdownOptionsByRole}
             handleFilters={handleFilters}
-            menuLabel='Post By'
+            menuLabel='Location'
             wordAfterMenuLabel='All'
+            className='location-button'
           />
-
+          <ResetAllButton />
+          <PostSearchBox />
         </div>
         <DoctorPostGrid />
       </div>

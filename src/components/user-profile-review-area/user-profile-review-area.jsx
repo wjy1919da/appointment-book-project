@@ -235,7 +235,7 @@ const UserProfileReview = () => {
           ))}
         </div>
 
-        <div className='section-container'>
+        <div className='section-container-user-profile'>
           <span className='section-1'>
             Face
             <img src={RightArrow} alt='Image-Arrow' />

@@ -43,6 +43,7 @@ const Header = () => {
     'Arm Lift',
   ];
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  console.log('userInfo in header', userInfo);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   const facialDropDownMenuMobile = facialProcedures.map((procedure) => (
     <NavDropdown.Item
@@ -267,11 +268,11 @@ const Header = () => {
               <span className='header-nav-divider'>|</span>
               <Link
                 className={`header-nav-link2 ${
-                  location.pathname === '/instrument/coolsculpting'
+                  location.pathname === '/instrument'
                     ? 'active-link'
                     : ''
                 }`}
-                to='/instrument/coolsculpting'
+                to='/instrument'
               >
                 Instruments
               </Link>
@@ -296,7 +297,7 @@ const Header = () => {
                             </a>
                         </div>
                         <div className="header-login-text">
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, 'accountType')}>login</div>}
+                            {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
                             {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                             {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
                         </div>

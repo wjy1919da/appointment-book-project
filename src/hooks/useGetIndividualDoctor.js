@@ -2,10 +2,9 @@ import axios from 'axios';
 import { useInfiniteQuery, useQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
 const base = {
-  reviewsUrl: 'https://api.charm-life.com/evaluate/evaluations:page',
-  //aboutUrl: 'https://api.charm-life.com/info/doctor-details',
-  infoUrl: 'http://localhost:8080/doctor/search',
-  aboutUrl: 'http://localhost:8080/info/doctor-details'
+  reviewsUrl: 'https://api-dev.charm-life.com/evaluate/evaluations:page',
+  infoUrl: 'http://api-dev.charm-life.com/doctor/search',
+  aboutUrl: 'http://api-dev.charm-life.com/info/doctor-details'
 }
 // Reviews
 export function useGetDoctorReviews() {

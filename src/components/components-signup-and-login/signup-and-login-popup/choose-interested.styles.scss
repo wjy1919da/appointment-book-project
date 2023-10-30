@@ -1,0 +1,24 @@
+.choose-interested-title-container{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    // margin-bottom:60px;
+}
+.choose-interested-outer-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.choose-interested-refresh{
+    margin-top: -20px;
+}
+.choose-interested-button-section{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
