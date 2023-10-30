@@ -9,6 +9,7 @@ import PrivateRoute from './private-route.component';
 // components
 import Header from './routes/header/header.component';
 import Home from './routes/home/home.component';
+// import OriginalFooter from './components/footer/footer.component';
 import FacialProcedure from './routes/procedure/facial-procedure.component';
 import BreastProcedure from './routes/procedure/breast-procedure.component';
 import BodyProcedure from './routes/procedure/body-procedure.component';
@@ -61,6 +62,7 @@ const App = () => {
     // <DataRouter>
     <Routes>
       <Route path='/' element={<Header />}>
+      {/* <Route path='/' element={<OriginalFooter />}> */}
         {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
         <Route index element={<Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />

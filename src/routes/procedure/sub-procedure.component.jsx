@@ -78,7 +78,7 @@ const SubProcedure = () => {
             {
                 //console.log("window.scrollY < 280",recommendationElement,slideElement);
                 if (slideElement) {
-                    slideElement.style.top = '390px';
+                    slideElement.style.top = '350px';
                     slideElement.style.position = 'absolute';
 
                     if (recommendationElement) {
@@ -201,7 +201,8 @@ const SubProcedure = () => {
     }
     else if (data.data && data.data.subcategories) {
     return (
-     <div className='home-container'>
+    <div>
+        <div className='home-container'>
         <div className='section-container'>
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
@@ -339,14 +340,15 @@ const SubProcedure = () => {
                     {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
                         <RecommendationGrid isMobile={false} height={'210px'} />
                     </div>}
-            </div>
-        </div> 
-        <SubProcedureMobileExtraBottom />  
-        {isMobile && <div className='procedure-recommendation-container'>
-                        <RecommendationGrid isMobile={false}  height={'300px'} />
-                    </div>} 
-                    <Footer ref={footerRef} />
-    </div>
+                </div>
+            </div> 
+            <SubProcedureMobileExtraBottom />  
+            {isMobile && <div className='procedure-recommendation-container'>
+                            <RecommendationGrid isMobile={false}  height={'300px'} />
+            </div>}     
+      </div>
+       <Footer ref={footerRef} />
+     </div>
     )
 }}
 export default SubProcedure;

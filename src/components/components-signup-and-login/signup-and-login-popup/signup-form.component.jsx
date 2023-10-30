@@ -63,29 +63,33 @@ const SignUpForm = () => {
         setUsername(formData.username);
     };
     //console.log("sign up form errors ",errors);
-    
     useEffect(() => {
-        if (data?.msg && data.code === 100) {
-           const myToken = data.data.token;
-           console.log("myToken in new register ", myToken);
-           Cookie.set('token', myToken);
-           setToken(myToken);
-           alert("register success ", data.code);
-          // switchPopupTab('gender');
-          console.log('userInfo in sign up form',userInfo);
-           if (userInfo && userInfo.accountType) {
-                if (userInfo.accountType === "1") {
-                    switchPopupTab('gender');
-                } else if (userInfo.accountType === "2") {
-                    switchPopupTab('doctorFinish');
-                }
-            }
-        } else if (data) {
+        if (data?.msg) {
             alert(data.msg);
-        }
-        //console.log("userInfo in sign up form ", userInfo);
+            if (data.code === 100) {
+                const { token } = data.data || {};
+                if (token) {
+                    //console.log("myToken in new register ", token);
+                    Cookie.set('token', token);
+                    setToken(token);
+                } else {
+                    console.error('Token not found in data');
+                }
+                alert("register success ", data.code);
+                //console.log('userInfo in sign up form', userInfo);
+                const accountTypeTabMap = {
+                    "1": 'gender',
+                    "2": 'doctorFinish'
+                };
+                const nextTab = accountTypeTabMap[userInfo?.accountType];
+                if (nextTab) switchPopupTab(nextTab);
+            }
+        }        
     }, [data]);
     //console.log("userInfo in sign up form ", userInfo);
+    if(error){
+        alert(error.message);
+    }
     return (
         <div className='sign-in-form-container'>
             <div className='login-title-container'>

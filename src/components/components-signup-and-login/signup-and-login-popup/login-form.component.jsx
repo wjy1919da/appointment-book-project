@@ -40,10 +40,8 @@ const LoginForm = (props) => {
     });
    
     const { mutate, isLoading, data, error } = authHook;
-   
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
-       
         mutate({
             email: formData.email,
             password: formData.password,
@@ -52,18 +50,19 @@ const LoginForm = (props) => {
         });
     };
     useEffect(() => {
-        if (data?.code === 100) {
-            const myToken = data.data.token;
-            Cookies.set('token', myToken);
-            setToken(myToken);
-            /* TODO：alert component */ 
-            alert(data.msg);
-            togglePopup(false);
-            //switchPopupTab("doctorProfile");
-            //props.onHide();
-        }
-        if (data?.code === 500 || data?.code === 403) {
-            alert(data.msg);  
+        if (data?.msg) {
+            if(data?.code === 100){
+                const myToken = data.data.token;
+                Cookies.set('token', myToken);
+                setToken(myToken);
+                /* TODO：alert component */ 
+                alert(data.msg);
+                togglePopup(false);
+                //switchPopupTab("doctorProfile");
+                //props.onHide();
+            }else{
+                alert(data.msg);
+            }
         }
     }, [data]);
     //  /* TODO: Need to improve */ 
