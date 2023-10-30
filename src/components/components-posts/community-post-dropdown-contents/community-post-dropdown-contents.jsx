@@ -94,14 +94,14 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-left-container'>
           <div className='post-dropdown-contents-up'>
             <h3 className='procedure-title'>Post By</h3>
-            <p>Member</p>
-            <p>Authorized Doctor</p>
+            <button type='button' onClick={() => handleToggleFilter('Member')}>Member</button>
+            <button type='button' onClick={() => handleToggleFilter('Authorized Doctor')}>Authorized Doctor</button>
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            <p onClick={() => handleToggleFilter('Facial')}>Facial</p>
-            <p onClick={() => handleToggleFilter('Breast')}>Breast</p>
-            <p onClick={() => handleToggleFilter('Skin')}>Skin</p>
+            {['Facial', 'Breast', 'Skin'].map((topic) => {
+              <button key={topic} type='button' onClick={() => handleToggleFilter(topic)}>{topic}</button>
+            })}
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
