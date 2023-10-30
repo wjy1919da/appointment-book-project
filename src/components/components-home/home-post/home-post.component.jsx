@@ -51,31 +51,29 @@ const HomePost = () => {
                 </div>
               </div>
             </div>
-            <div className='home-post-container'>
-                {/* Web */}
-                {!isMobileOrIpad&&<Fragment>
-                    <div className='home-post-text'>
-                        <span className='home-post-text1'>Share Your Post</span>
-                    </div>
-                    <div className ='home-post-subText'>
-                        <span className='postText'> Our platform is a transparent community where beauty 
-                        lovers can connect and empower each other. 
-                        Share your cosmetic experience and explore others' posts. 
-                        Know the market and stay on-trend. Discover exceptional savings and exclusive offers.
-                        </span>
-                    </div> 
-                    <div className='home-post-link'>
-                        {/* <span className="underline-link">View More Posts</span> */}
-                        {/* <HomeLink title="View More Posts" href="/posts" />
-                        <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img> */}
-                        <HomeButtonPink title = 'View more post'/>
-                    </div>                    
-                </Fragment>}
-                {/* Mobile */}
-                {isMobileOrIpad&&<Fragment>
-                    <HomeMobileSubText title='Share' content='Our platform is a transparent community where beauty lovers can connect and empower each other.'></HomeMobileSubText>
-                    <Link to='/posts' className='home-mobile-share-link'>View More Posts</Link>
-                </Fragment>}
+          </Fragment>
+        )}
+        {isMobile && (
+          <Fragment>
+            <div className='home-post-pic animate__animated animate__slideInUp'></div>
+            <img
+              src={PostContainerMobile}
+              alt='postcontainermobile'
+              className='home-mobile-share-postContainer'
+            ></img>
+            <img src={Tag1} className='home-mobile-share-tag1'></img>
+            <img src={Tag4} className='home-mobile-share-tag4'></img>
+            <img src={Tag2} className='home-mobile-share-tag2'></img>
+          </Fragment>
+        )}
+      </div>
+      <div className='home-post-container'>
+        {/* Web */}
+        {!isMobileOrIpad && (
+          <Fragment>
+            <div className='home-post-text'>
+              <span className='home-post-text1'>Share Your Post</span>
+
             </div>
             <div className='home-post-subText'>
               <span className='postText'>
