@@ -34,7 +34,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   } = useApiRequestPostFilter();
 
   if (data) {
-    console.log(data);
+    // console.log(data);
   }
 
   // const {

@@ -80,12 +80,16 @@ const PostDropDownContents = () => {
 
     try {
       const response = await apiRequestPostFilter.fetchNextPage();
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.error('API request failed:', error);
+      // console.error('API request failed:', error);
     }
     // console.log(filterTopic);
     // console.log(postQuery);
+  };
+
+  const isButtonClicked = (topic) => {
+    return filterTopic.includes(topic);
   };
 
   return (
@@ -94,24 +98,46 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-left-container'>
           <div className='post-dropdown-contents-up'>
             <h3 className='procedure-title'>Post By</h3>
-            <button type='button' onClick={() => handleToggleFilter('Member')}>Member</button>
-            <button type='button' onClick={() => handleToggleFilter('Authorized Doctor')}>Authorized Doctor</button>
+            <div className='post-by-button-container'>
+              {['Member', 'Authorized Doctor'].map((post) => (
+                <button
+                  key={nanoid()}
+                  onClick={() => handleToggleFilter(post)}
+                  className={isButtonClicked(post) ? 'clicked-button' : ''}
+                >
+                  {post}
+                </button>
+              ))}
+            </div>
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            {['Facial', 'Breast', 'Skin'].map((topic) => {
-              <button key={topic} type='button' onClick={() => handleToggleFilter(topic)}>{topic}</button>
-            })}
+            <div className='topic-button-container'>
+              {['Facial', 'Breast', 'Skin'].map((topic) => (
+                <button
+                  key={nanoid()}
+                  onClick={() => handleToggleFilter(topic)}
+                  className={isButtonClicked(topic) ? 'clicked-button' : ''}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
           <h3 className='procedure-title'>Body Area</h3>
-          <p>Lorum ipsum Lorum ipum</p>
-          <p>Lorum ipsum Lorum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
+          <div className='body-area-button-container'>
+            {['A', 'B', 'C', 'D', 'E', 'F'].map((area) => (
+              <button
+                key={nanoid()}
+                onClick={() => handleToggleFilter(area)}
+                className={isButtonClicked(area) ? 'clicked-button' : ''}
+              >
+                {area}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className='post-dropdown-contents-procedures-container'>

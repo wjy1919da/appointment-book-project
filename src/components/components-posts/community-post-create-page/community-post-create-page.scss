@@ -136,25 +136,25 @@
   height: 260px;
 }
 
-  .create-post-page-tag-name {
-    left: 16px;
-  }
+.create-post-page-tag-name {
+  left: 16px;
+}
 
-  .create-post-page-location-tag-name {
-    right: 16px;
-  }
+.create-post-page-location-tag-name {
+  right: 16px;
+}
 
-  .create-post-page-tag-name,
-  .create-post-page-location-tag-name {
-    position: absolute;
-    bottom: 20px;
-    color: #675d59;
-    font-family: Open Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
+.create-post-page-tag-name,
+.create-post-page-location-tag-name {
+  position: absolute;
+  bottom: 20px;
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 
 .wrapper {
   display: flex;

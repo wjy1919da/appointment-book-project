@@ -9,7 +9,7 @@ export function useApiRequestPostFilter() {
   const token = Cookies.get('token');
 
   const postQuery = usePostQueryStore((s) => s.postQuery);
-  console.log(postQuery);
+//   console.log(postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
     const requestData = {
