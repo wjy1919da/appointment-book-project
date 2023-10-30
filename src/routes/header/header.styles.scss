@@ -1,3 +1,183 @@
+
+.header-navbar {
+    display: none;
+}
+
+.header-container {
+    width: 100%;
+    background: rgba($color: #FFFFFF, $alpha: 0.8);
+    display: flex;
+    justify-content:space-between;
+    border: 0;
+    position: absolute;
+    height: 64px;
+    left: 0%;
+    right: 0%;
+    top: 0px;
+    z-index: 999;
+    position:fixed;
+    align-items: center;
+
+
+    .header-logo-container {
+        display: flex;
+        order:0;
+        // width: 37.83px;
+        // height: 40px;
+        // left: 40px;
+        // top: calc(50% - 40px/2);
+        margin-left: 90px;
+        align-items: center;
+        .logo {
+            height: 40px;
+            width:37.83px;
+            object-fit: contain;
+        }
+        .logo-title {
+            margin-left: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #352C29;
+        }
+    }
+
+    .header-nav-container {
+
+        order:1;
+        display: flex;
+        list-style: none;
+        height: 100%;
+        align-items: center;
+        margin-left: 40px;
+        .header-nav{
+            margin: 0 20px;
+            flex: 1;
+            height: 100%;
+        }
+
+        .header-nav-link {
+            padding: 6px 0;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 140%;
+            color: #675D59;
+            text-decoration: none;
+            height: max-content;
+            &::after {
+                display: block;
+                content: attr(title);
+                font-weight: bold;
+                height: 0;
+                overflow: hidden;
+            }
+            &:hover,:active
+            {
+                font-weight: bold;
+                /* 鼠标悬停时变为粗体 */
+                border-bottom: 4px solid orange;
+                /* 鼠标悬停时添加下划线，使用橙色线条 */
+                // color: orange; // 鼠标悬停时的文本颜色 
+            }
+        }
+
+        .active-link {
+            font-weight: bold;
+            border-bottom: 4px solid orange;
+            // font-weight:bold;
+            // font-size: 18px;
+            // padding-bottom: 11px;
+            // background-image: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
+            // background-size: 100% 2px; /* This ensures the gradient is only 2px tall */
+            // background-repeat: no-repeat; /* Prevents the gradient from repeating */
+            // background-position: bottom; /* Positions the gradient at the bottom */
+            // border-bottom: 2px solid transparent; /* This ensures space for our gradient */
+        }
+
+    }
+    .header-login{
+        order:2;
+        margin-left: auto;
+        
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        .header-search
+        {
+            flex-basis: 60%;
+            margin-top: 8px;
+        }
+        .header-login-logo
+        {
+            margin-top: 8px;
+            margin-right: -20px;
+
+        }
+        .header-login-text
+        {
+            margin-top: 8px;
+            margin-right: 40px;
+            font-family: 'Open Sans';
+        }
+        input[type=text] {
+            
+            width: 100%;
+            box-sizing: border-box;
+            border-left: none;
+            border-top: none;
+            border-right: none;
+            font-size: 20px;
+            padding: 10px,10px;
+            border-bottom:1px solid #C0C0C0;
+            background-image: url("../../assets/home/search_icon.png");
+            background-position: right center; /* position the icon to the right */
+            background-repeat: no-repeat;
+            background-size: 18px; /* set the size of the icon */
+            box-sizing: border-box; /* include padding in the width of the input field */
+            background-origin: content-box; /* position the background image relative to the content box */
+            background-clip: padding-box;
+            
+          }
+    }
+
+
+
+    .header-nav-link:hover {
+        color: #352C29;
+    }
+
+    .header-nav-link:focus {
+        color: #352C29;
+    }
+
+    .dropdown-menu {
+        background: rgba($color: #FFFFFF, $alpha: 0.8);
+        border: 0;
+        border-radius: 0;
+        text-align: center;
+        padding: 0;
+    }
+    
+    .dropdown-center{
+        display: flex;
+        list-style: none;
+        align-items: center;
+    }
+
+    .dropdown-center:hover .dropdown-menu {
+        display: block;
+        animation: fadeIn;
+        animation-duration: 0.6s;
+    }
+
+    .header-nav-divider {
+        font-size: 10px;
+        color: #666666;
+        margin: 0 20px;
+    }
+}
+
 @media (max-width: 992px) {
     .header-container-mobile
     {
@@ -101,301 +281,77 @@
        
     }
 
-    .header-navbar {
-        display: none;
-    }
 
     .header-container {
-        width: 100%;
-        background: rgba($color: #FFFFFF, $alpha: 0.8);
-        display: flex;
-        justify-content:space-between;
-        border: 0;
-        position: absolute;
-        height: 64px;
-        left: 0%;
-        right: 0%;
-        top: 0px;
-        z-index: 999;
-        position:fixed;
-        align-items: center;
-
-    
+        
         .header-logo-container {
-            order:0;
-            width: 37.83px;
-            height: 40px;
-            left: 40px;
-            top: calc(50% - 40px/2);
-            margin-left: 20px;
-            .logo { 
-                height: 40px;
-                width:37.83px;
-                object-fit: contain;
+            .logo {
             }
         }
     
         .header-nav-container {
-            
-            order:1;
-            margin: 8px 9.5% 8px 70px;
 
-            .header-nav-link1 {
-                width: 86px;
-                height: 22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
-            }
-            .header-nav-link2
-            {
-                width:59px;
-                height:22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
-            }
-            .header-nav-link3
-            {
-                width:91px;
-                height:22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
-            }
+            .header-nav-link {}
             
         }
         .header-login{
-            order:2;
-            margin-left: auto;
             
-            display: flex;
-            flex-direction: row;
-            gap: 30px;
             .header-search
             {
-                flex-basis: 60%;
-                margin-top: 8px;
             }
             .header-login-logo
             {
-                margin-top: 8px;
-                margin-right: -20px;
 
             }
             .header-login-text
             {
-                margin-top: 8px;
-                margin-right: 40px;
-                font-family: 'Open Sans';
             }
             input[type=text] {
-                
-                width: 100%;
-                box-sizing: border-box;
-                border-left: none;
-                border-top: none;
-                border-right: none;
-                font-size: 20px;
-                padding: 10px,10px;
-                border-bottom:1px solid #C0C0C0;
-                background-image: url("../../assets/home/search_icon.png");
-                background-position: right center; /* position the icon to the right */
-                background-repeat: no-repeat;
-                background-size: 18px; /* set the size of the icon */
-                box-sizing: border-box; /* include padding in the width of the input field */
-                background-origin: content-box; /* position the background image relative to the content box */
-                background-clip: padding-box;
-                
-              }
+            }
         }
-    
 
-    
         .header-nav-link:hover {
-            color: #3397B9;
         }
 
         .header-nav-link:focus {
-            color: #3397B9;
         }
-    
+
         .dropdown-menu {
-            background: rgba($color: #FFFFFF, $alpha: 0.8);
-            border: 0;
-            border-radius: 0;
-            text-align: center;
-            padding: 0;
         }
-        
-    
+
         .dropdown-center:hover .dropdown-menu {
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 32px;
-            animation: fadeIn;
-            animation-duration: 0.6s;
         }
     
         .header-nav-divider {
-            font-size: 10px;
-            color: #666666;
-            margin: 0 20px;
         }
     }
 }
 
 @media (min-width: 992px) {
-    .header-navbar {
-        display: none;
-    }
 
     .header-container {
-        width: 100%;
-        background: rgba($color: #FFFFFF, $alpha: 0.8);
-        display: flex;
-        justify-content:space-between;
-        border: 0;
-        position: absolute;
-        height: 64px;
-        left: 0%;
-        right: 0%;
-        top: 0px;
-        z-index: 999;
-        position:fixed;
-        align-items: center;
-        
-    
+
         .header-logo-container {
-            order:0;
-            width: 37.83px;
-            height: 40px;
-            left: 40px;
-            top: calc(50% - 40px/2);
-            margin-left: 20px;
-            .logo { 
-                height: 40px;
-                width:37.83px;
-                object-fit: contain;
+            .logo {
                 border: none;
             }
         }
-    
+
         .header-nav-container {
-            
-            order:1;
-            margin: 8px 9.5% 8px 70px;
-            border-radius: 0;
 
-            .header-nav-link1 {
-                width: 86px;
-                // height: 22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                // line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
 
-                text-decoration: none;
-                transition: font-weight 0.2s ease, border-bottom 0.2s ease; /* 过渡效果 */
-            }
-
-            .header-nav-link2
-            {
-                width:59px;
-                // height:22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                // line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
-            }
-            
-            .header-nav-link3
-            {
-                width:91px;
-                // height:22px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-size: 16px;
-                font-weight: 400;
-                // line-height: 140%;
-                color: #333333;
-                text-decoration: none;
-                padding-bottom: 13px;
-            }
-
-            .header-nav-link1:hover,      
-            .header-nav-link2:hover,
-            .header-nav-link3:hover,
-            .header-nav-link1:active,
-            .header-nav-link2:active,
-            .header-nav-link3:active
-            {
-                font-weight: bold;
-                /* 鼠标悬停时变为粗体 */
-                border-bottom: 2px solid orange;
-                /* 鼠标悬停时添加下划线，使用橙色线条 */
-                // color: orange; // 鼠标悬停时的文本颜色 
-            }
-            .active-link {
-                font-weight:bold;
-                font-size: 18px;
-                padding-bottom: 11px;
-                background-image: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%);
-                background-size: 100% 2px; /* This ensures the gradient is only 2px tall */
-                background-repeat: no-repeat; /* Prevents the gradient from repeating */
-                background-position: bottom; /* Positions the gradient at the bottom */
-                border-bottom: 2px solid transparent; /* This ensures space for our gradient */
-            }
-            
         }
         .header-login{
-            order:2;
-            margin-left: auto;
-            
-            display: flex;
-            flex-direction: row;
-            gap: 30px;
             .header-search
             {
-                flex-basis: 60%;
-                margin-top: 8px;
             }
             .header-login-logo
             {
-                margin-top: 8px;
-                margin-right: -20px;
 
             }
             .header-login-text
             {
                 font-size:18px;
-                margin-top: 8px;
-                margin-right: 40px;
-                font-family: 'Open Sans';
             }
             .header-login-text a,
             .header-login-text a:visited,
@@ -405,60 +361,21 @@
             .header-login-text a.clicked {
                 font-weight: 600;
             }
-            input[type=text] {
-                
-                width: 100%;
-                box-sizing: border-box;
-                border-left: none;
-                border-top: none;
-                border-right: none;
-                font-size: 20px;
-                padding: 10px,10px;
-                border-bottom:1px solid #C0C0C0;
-                background-image: url("../../assets/home/search_icon.png");
-                background-position: right center; /* position the icon to the right */
-                background-repeat: no-repeat;
-                background-size: 18px; /* set the size of the icon */
-                box-sizing: border-box; /* include padding in the width of the input field */
-                background-origin: content-box; /* position the background image relative to the content box */
-                background-clip: padding-box;
-                
-              }
+            input[type=text] {}
         }
-    
-
-    
         .header-nav-link:hover {
-            color: #3397B9;
         }
 
         .header-nav-link:focus {
-            color: #3397B9;
         }
-    
         .dropdown-menu {
-            background: rgba($color: #FFFFFF, $alpha: 0.8);
-            border: 0;
-            border-radius: 0;
-            text-align: center;
-            padding: 0;
         }
-        
-    
         .dropdown-center:hover .dropdown-menu {
-            display: block ;
             width: max-content;
-            position: absolute;
-            left: 0;
-            top: 32px;
-            animation: fadeIn;
-            animation-duration: 0.6s;
         }
     
         .header-nav-divider {
             font-size: 15px;
-            color: #666666;
-            margin: 0 20px;
         }
     }
 }

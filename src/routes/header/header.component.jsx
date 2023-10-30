@@ -229,11 +229,12 @@ const Header = () => {
           <div className='header-container'>
             <Link className='header-logo-container' to='/'>
               <img className='logo' src={Logo} alt='logo' />
+              <span className='logo-title'>Charm</span>
             </Link>
             <div className='header-nav-container' id='#navbarTogglerDemo02'>
-              <span className='dropdown-center'>
+              <span className='header-nav dropdown-center'>
                 <Link
-                  className={`header-nav-link1 ${
+                  className={`header-nav-link ${
                     location.pathname.startsWith('/procedure/')
                       ? 'active-link'
                       : ''
@@ -243,6 +244,7 @@ const Header = () => {
                   aria-expanded='false'
                   //onMouseOver={() => setIsModelOpen(true)}
                   onClick={() => setIsModalOpen(true)}
+                  title='Procedure'
                 >
                   Procedure
                 </Link>
@@ -256,56 +258,50 @@ const Header = () => {
                   {/* <DropdownMenu /> */}
                 </ul>
               </span>
-              <span className='header-nav-divider'>|</span>
               <Link
-                className={`header-nav-link2 ${
+                className={`header-nav header-nav-link ${
                   location.pathname === '/doctor' ? 'active-link' : ''
                 }`}
-                to='/doctor'
-              >
-                Doctors
+                to='/doctor' title="Doctors"
+              >Doctors
               </Link>
-              <span className='header-nav-divider'>|</span>
               <Link
-                className={`header-nav-link2 ${
-                  location.pathname === '/instrument'
-                    ? 'active-link'
-                    : ''
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/instrument' ? 'active-link' : ''
                 }`}
-                to='/instrument'
+                to='/instrument' title="Instruments"
               >
                 Instruments
               </Link>
-              <span className='header-nav-divider'>|</span>
               <Link
-                className={`header-nav-link2 ${
+                className={`header-nav header-nav-link ${
                   location.pathname === '/posts' ? 'active-link' : ''
                 }`}
-                to='/posts'
+                to='/posts' title='Posts'
               >
                 Posts
               </Link>
             </div>
             <div className='header-login'>
               {/* <div className="header-search">
-                            <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                            </input>
-                        </div>  */}
-                         <div className="header-login-logo">
-                            <a href="/userProfile">
-                                <img src={loginIcon} alt="login Image"></img>
-                            </a>
-                        </div>
-                        <div className="header-login-text">
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
-                            {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
-                            {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
-                        </div>
-                    </div> 
-                </div>
-                <Outlet />
-            </Fragment>
-            )}          
+                    <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                    </input>
+                </div>  */}
+              <div className="header-login-logo">
+                <a href="/userProfile">
+                    <img src={loginIcon} alt="login Image"></img>
+                </a>
+              </div>
+              <div className="header-login-text">
+                  {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
+                  {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
+                  {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
+              </div>
+            </div> 
+          </div>
+          <Outlet />
+        </Fragment>
+            )}
             {isPopupOpen &&
                     <SignupPopup3
                     show = {isPopupOpen}
