@@ -80,9 +80,9 @@ const PostDropDownContents = () => {
 
     try {
       const response = await apiRequestPostFilter.fetchNextPage();
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.error('API request failed:', error);
+      // console.error('API request failed:', error);
     }
     // console.log(filterTopic);
     // console.log(postQuery);
@@ -101,7 +101,7 @@ const PostDropDownContents = () => {
             <div className='post-by-button-container'>
               {['Member', 'Authorized Doctor'].map((post) => (
                 <button
-                  key={post}
+                  key={nanoid()}
                   onClick={() => handleToggleFilter(post)}
                   className={isButtonClicked(post) ? 'clicked-button' : ''}
                 >
@@ -115,7 +115,7 @@ const PostDropDownContents = () => {
             <div className='topic-button-container'>
               {['Facial', 'Breast', 'Skin'].map((topic) => (
                 <button
-                  key={topic}
+                  key={nanoid()}
                   onClick={() => handleToggleFilter(topic)}
                   className={isButtonClicked(topic) ? 'clicked-button' : ''}
                 >
@@ -130,7 +130,7 @@ const PostDropDownContents = () => {
           <div className='body-area-button-container'>
             {['A', 'B', 'C', 'D', 'E', 'F'].map((area) => (
               <button
-                key={area}
+                key={nanoid()}
                 onClick={() => handleToggleFilter(area)}
                 className={isButtonClicked(area) ? 'clicked-button' : ''}
               >

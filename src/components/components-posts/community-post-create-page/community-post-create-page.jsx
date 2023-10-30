@@ -147,7 +147,18 @@ const CreatePostPage = () => {
           onChange={handleImageChange}
         />
         {hasSelectImage ? (
-          <img src={selectedImage} onClick={handleIconClick} alt='Selected' />
+          <img
+            src={selectedImage}
+            onClick={handleIconClick}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              width: '330px',
+              height: '330px',
+              objectFit: 'contain',
+            }}
+            alt='Selected'
+          />
         ) : (
           <>
             <div className='left-container'>
