@@ -7,6 +7,7 @@ import APIClient from '../services/api-client';
 
 export function useApiRequestPostFilter() {
   const token = Cookies.get('token');
+  const postQuery = usePostQueryStore((s) => s.postQuery);
   const apiClient = new APIClient('/post/posts', token);
   const fetchUserPostFilterData = async ({
     categories,
@@ -30,8 +31,7 @@ export function useApiRequestPostFilter() {
     return res.data;
 
   };
-
-  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+  return useInfiniteQuery(['posts', postQuery], fetchUserPostFilterData, {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {
