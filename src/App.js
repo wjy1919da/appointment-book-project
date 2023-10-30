@@ -17,12 +17,9 @@ import Instrument from './routes/instrument/instrument.component';
 import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import Doctor from './routes/doctor/doctor.component';
-<<<<<<< HEAD
 import DocotorOwnMain from './components/doctor-own-profile/doctor-own-profile-main';
 import DoctorPost from  './routes/community/community.component';
-=======
-import DoctorPost from './routes/community/community.component';
->>>>>>> b99dc530e2281b493e01291cc9ad88390d0d8737
+
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -79,19 +76,14 @@ const App = () => {
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
-<<<<<<< HEAD
         <Route path='doctorProfile' element={<DocotorOwnMain />} />
         <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-        <Route path="userProfile" element={
-=======
-        <Route path='doctor/:encodedMemberId' element={<IndividualDoctor />} />
-
         {/* <Route path="userProfile" element={
->>>>>>> b99dc530e2281b493e01291cc9ad88390d0d8737
+
           <PrivateRoute>
             <UserProfilePage />
           </PrivateRoute>
-        }/> */}
+        }/>  */}
 
         <Route path='download' element={<Download />} />
         <Route path='create-post' element={<CreatePostOfUser />} />

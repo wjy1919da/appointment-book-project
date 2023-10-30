@@ -51,7 +51,6 @@ const HomePost = () => {
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
             <div className='home-post-container'>
                 {/* Web */}
                 {!isMobileOrIpad&&<Fragment>
@@ -77,30 +76,6 @@ const HomePost = () => {
                     <HomeMobileSubText title='Share' content='Our platform is a transparent community where beauty lovers can connect and empower each other.'></HomeMobileSubText>
                     <Link to='/posts' className='home-mobile-share-link'>View More Posts</Link>
                 </Fragment>}
-=======
-          </Fragment>
-        )}
-        {isMobile && (
-          <Fragment>
-            <div className='home-post-pic animate__animated animate__slideInUp'></div>
-            <img
-              src={PostContainerMobile}
-              alt='postcontainermobile'
-              className='home-mobile-share-postContainer'
-            ></img>
-            <img src={Tag1} className='home-mobile-share-tag1'></img>
-            <img src={Tag4} className='home-mobile-share-tag4'></img>
-            <img src={Tag2} className='home-mobile-share-tag2'></img>
-          </Fragment>
-        )}
-      </div>
-      <div className='home-post-container'>
-        {/* Web */}
-        {!isMobileOrIpad && (
-          <Fragment>
-            <div className='home-post-text'>
-              <span className='home-post-text1'>Share Your Post</span>
->>>>>>> b99dc530e2281b493e01291cc9ad88390d0d8737
             </div>
             <div className='home-post-subText'>
               <span className='postText'>
