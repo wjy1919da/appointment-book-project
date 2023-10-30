@@ -24,7 +24,9 @@ const PostDropDownContents = () => {
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
 
-  const [internalFilterType, setInternalFilterType] = useState([]);
+  const [filterTopic, setFilterTopic] = useState([]);
+
+  const apiRequestPostFilter = useApiRequestPostFilter();
 
   // data
   const trendyProcedureData = [
@@ -60,34 +62,31 @@ const PostDropDownContents = () => {
     },
   ];
 
-  // store the value in this component (for performance)
-  // const handleClickFilter = () => {
-  //   setInternalFilterType();
-  // };
-
-  const handleClickApplyFilter = () => {
-    setFilterCondition(internalFilterType);
-    console.log(internalFilterType);
+  // filter
+  const handleToggleFilter = (topicValue) => {
+    // console.log(topicValue);
+    if (filterTopic.includes(topicValue)) {
+      setFilterTopic((prevState) =>
+        prevState.filter((topic) => topic !== topicValue)
+      );
+    } else {
+      setFilterTopic((prevState) => [...prevState, topicValue]);
+    }
   };
 
-  // const { mutate: apiMutate } = useApiRequestPostFilter({
-  //   onError: (error) => {
-  //     console.error('API request error', error);
-  //   },
-  // });
+  // apply filter
+  const handleClickApplyFilter = async () => {
+    setFilterCondition(filterTopic);
 
-  // const handleOnClickPostFilter = (data) => {
-  //   const postFilterData = {
-  //     categories: '',
-  //     currentPage: '',
-  //     pageSize: '',
-  //     postBy: '',
-  //   };
-  //   // console.log('payload - postFilterData:', postFilterData);
-  //   console.log(data);
-  //   console.log('clicked')
-  //   apiMutate(postFilterData);
-  // };
+    try {
+      const response = await apiRequestPostFilter.fetchNextPage();
+      console.log(response);
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+    // console.log(filterTopic);
+    // console.log(postQuery);
+  };
 
   return (
     <div className='post-dropdown-contents-container'>
@@ -95,14 +94,14 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-left-container'>
           <div className='post-dropdown-contents-up'>
             <h3 className='procedure-title'>Post By</h3>
-            <p>Member</p>
-            <p>Authorized Doctor</p>
+            <button type='button' onClick={() => handleToggleFilter('Member')}>Member</button>
+            <button type='button' onClick={() => handleToggleFilter('Authorized Doctor')}>Authorized Doctor</button>
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            <p onClick={() => setInternalFilterType('Facial')}>Facial</p>
-            <p>Breast</p>
-            <p>Skin</p>
+            {['Facial', 'Breast', 'Skin'].map((topic) => {
+              <button key={topic} type='button' onClick={() => handleToggleFilter(topic)}>{topic}</button>
+            })}
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
@@ -119,7 +118,7 @@ const PostDropDownContents = () => {
         <h3 className='procedure-title'>Trendy Procedure</h3>
         <div className='post-dropdown-contents-procedures-inner-container'>
           {trendyProcedureData.map((procedure, index) => (
-            <figure id={procedure.id} className='procedure-container'>
+            <figure id={index} className='procedure-container'>
               <img
                 src={procedure.src}
                 alt={`Image-${index}`}

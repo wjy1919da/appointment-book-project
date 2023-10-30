@@ -145,24 +145,18 @@ const CreatePostPage = () => {
           style={{ display: 'none' }}
           onChange={handleImageChange}
         />
-        {hasSelectImage ? (
-          <img src={selectedImage} onClick={handleIconClick} alt='Selected' />
-        ) : (
-          <>
-            <div className='left-container'>
-              <div className='create-post-page-add'>
-                <img
-                  src={creatPostIcon}
-                  onClick={handleIconClick}
-                  alt='Image-Create-Post'
-                />
-              </div>
-              <div className='create-post-page-text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing
-              </div>
-            </div>
-          </>
-        )}
+        <div className='left-container'>
+          <div className='create-post-page-add'>
+            {
+              hasSelectImage ?
+              (<img src={selectedImage} onClick={handleIconClick} alt='Selected' />) :
+              (<img src={creatPostIcon} onClick={handleIconClick} alt='Create-Post' />)
+            }
+          </div>
+          <div className='create-post-page-text'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing
+          </div>
+        </div>
 
         <div className='right-container'>
           <div>

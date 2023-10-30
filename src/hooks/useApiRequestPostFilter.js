@@ -1,8 +1,8 @@
-import { useMutation } from 'react-query';
 import axios from 'axios';
+import usePostQueryStore from '../postStore.ts';
+import { useInfiniteQuery } from 'react-query';
 import Cookies from 'js-cookie';
 import APIClient from '../services/api-client';
-
 //const endpoint = 'https://api-dev.charm-life.com/post/posts';
 
 export function useApiRequestPostFilter() {
@@ -28,6 +28,14 @@ export function useApiRequestPostFilter() {
       }
     );
     return res.data;
+
   };
-  return useMutation(fetchUserPostFilterData);
+
+  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+    staleTime: 1 * 6 * 1000 * 60 * 3,
+    keepPreviousData: true,
+    getNextPageParam: (lastPage, allPages) => {
+      return undefined;
+    },
+  });
 }

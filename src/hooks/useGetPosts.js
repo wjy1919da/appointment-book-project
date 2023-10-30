@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
+
 import Cookies from 'js-cookie';
 import APIClient from '../services/api-client.js';
+
 
 export function useGetPost() {
     const apiClient = new APIClient('/post/all_posts');
@@ -16,6 +18,7 @@ export function useGetPost() {
       //console.log("userIDdata", res.data);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     };
+
     return useInfiniteQuery(
      ['posts', postQuery], 
      fetchPost, {
@@ -51,6 +54,7 @@ export function useGetUserPostedPost() {
     //console.log("DOI Call this hook1?", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
+  
   return useInfiniteQuery(
    ['posts', postQuery], 
    fetchPost, {
