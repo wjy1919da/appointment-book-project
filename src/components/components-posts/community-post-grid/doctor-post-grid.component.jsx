@@ -32,6 +32,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     fetchNextPage,
     hasNextPage,
   } = useApiRequestPostFilter();
+
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
