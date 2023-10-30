@@ -289,14 +289,14 @@ const CommunityPostDetailPopUP = ({
               {/* <div className='comment-send-msg-container'> 
                 <CommunitySendMsg isValid={isValid} />
                </div> */}
-
+{/* 
                <Button
                 as='input'
                 type='submit'
                 value='send'
                 disabled={!isValid}
                 style={{ backgroundColor: 'orange', border: 'orange' }}
-              /> 
+              />  */}
             </div>
              <div className='new-comment-input'>
               <input
