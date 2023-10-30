@@ -24,7 +24,7 @@ const LoginForm = (props) => {
     const userEmailLogin = useUserEmailLogin();
     const doctorLogin = useDoctorLogin();
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
-    console.log("authhook",authHook === doctorLogin);
+    //console.log("authhook",authHook === doctorLogin);
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -58,21 +58,15 @@ const LoginForm = (props) => {
                 /* TODO：alert component */ 
                 alert(data.msg);
                 togglePopup(false);
-                //switchPopupTab("doctorProfile");
-                //props.onHide();
+                
             }else{
                 alert(data.msg);
             }
         }
     }, [data]);
-    //  /* TODO: Need to improve */ 
-    // if (isLoading) {
-    //     return <HomeSpinner />;
-    // }
     if (error) {
         alert(error.message);
     }
-
     return (
         <div className="sign-in-form-container">
             <div className='login-title-container'>

@@ -13,7 +13,7 @@ import ErrorMsg from '../../error-msg/error-msg.component';
 
 // hook
 import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
-// import { useGetPost } from '../../../hooks/useGetPosts';
+ import { useGetPost } from '../../../hooks/useGetPosts';
 
 // scss
 import './doctor-post-grid.styles.scss';
@@ -21,36 +21,22 @@ import './doctor-post-grid.styles.scss';
 // images
 import Arrow from '../../../assets/post/arrow_grid.png';
 import Arrow1 from '../../../assets/post/arrow1_grid.png';
+// import userInfoQueryStore from '../../../userStore.ts';
+// import Cookie from 'js-cookie';
 
 const DoctorPostGrid = ({ isAbout }) => {
-
   const {
     data,
     error,
     isLoading,
     fetchNextPage,
-    // isFetchingNextPage,
     hasNextPage,
   } = useApiRequestPostFilter();
-
-  if (data) {
-    console.log(data);
-  }
-
-  // const {
-  //   data,
-  //   error,
-  //   isLoading,
-  //   fetchNextPage,
-  //   isFetchingNextPage,
-  //   hasNextPage,
-  // } = useGetPost();
-
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
-  const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
   const breakPoint = isAbout
@@ -70,19 +56,20 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserAvatar(avatar);
     setUserName(username);
   };
+  
 
   const postCardList = flatData.map((post) => (
     <div
       className='btn'
       onClick={() => setPostID(post.id, post.avatar, post.username)}
-      key={post.id} // Moved key prop to the outermost element being returned from .map()
+      key={post.id}
     >
       <CommunityPost
-        imageURL={post.pictures}
-        text={post.title}
-        profileImage={post.avatar}
-        authorName={post.username}
-        likes={post.likeCount}
+        imageURL={post.pictures || []} 
+        text={post.title || ""} 
+        profileImage={post.avatar || ""}
+        authorName={post.username || ""}
+        likes={post.likeCount || 0} 
       />
     </div>
   ));

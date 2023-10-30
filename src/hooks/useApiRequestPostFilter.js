@@ -7,31 +7,23 @@ import APIClient from '../services/api-client';
 
 export function useApiRequestPostFilter() {
   const token = Cookies.get('token');
-  const postQuery = usePostQueryStore((s) => s.postQuery);
   const apiClient = new APIClient('/post/posts', token);
-  const fetchUserPostFilterData = async ({
-    categories,
-    currentPage,
-    pageSize,
-    postBy,
-  }) => {
-    if (!token) {
-      alert('Error.');
-      return;
+  const postQuery = usePostQueryStore((s) => s.postQuery);
+  const fetchPost = async ({ pageParam = 1 }) => {
+    const requestData = {
+      categories: postQuery.filterCondition,
+      currentPage: pageParam,
+      pageSize: postQuery.pageSize,
+      postBy: postQuery.postBy,
+    };
+    try {
+      const res = await apiClient.post(requestData);
+      return { data: res.data.data, pageInfo: res.data.pageInfo };
+    } catch (error) {
+      throw error;
     }
-
-    const res = await apiClient.post(
-      {
-        categories,
-        currentPage,
-        pageSize,
-        postBy,
-      }
-    );
-    return res.data;
-
   };
-  return useInfiniteQuery(['posts', postQuery], fetchUserPostFilterData, {
+  return useInfiniteQuery(['posts', postQuery], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {
