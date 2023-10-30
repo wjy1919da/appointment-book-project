@@ -76,15 +76,15 @@
             {
                 font-weight: bold;
                 /* 鼠标悬停时变为粗体 */
-                border-bottom: 4px solid orange;
+                border-bottom: 4px solid #F48C8A;
                 /* 鼠标悬停时添加下划线，使用橙色线条 */
-                // color: orange; // 鼠标悬停时的文本颜色 
+                // color: #F48C8A; // 鼠标悬停时的文本颜色
             }
         }
 
         .active-link {
             font-weight: bold;
-            border-bottom: 4px solid orange;
+            border-bottom: 4px solid #F48C8A;
             // font-weight:bold;
             // font-size: 18px;
             // padding-bottom: 11px;

@@ -210,7 +210,7 @@ const Header = () => {
                 >
                   <img
                     src={loginIcon}
-                    alt='login-Image'
+                    alt='login'
                     style={{ width: '34px', height: '36px', marginTop: '-15%' }}
                   ></img>
                 </Dropdown.Toggle>
@@ -232,6 +232,18 @@ const Header = () => {
               <span className='logo-title'>Charm</span>
             </Link>
             <div className='header-nav-container' id='#navbarTogglerDemo02'>
+              <Link
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/doctor' ? 'active-link' : ''
+                }`}
+                to='/doctor' title="Doctors"
+              >Doctors</Link>
+              <Link
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/posts' ? 'active-link' : ''
+                }`}
+                to='/posts' title='Posts'
+              >Posts</Link>
               <span className='header-nav dropdown-center'>
                 <Link
                   className={`header-nav-link ${
@@ -260,27 +272,10 @@ const Header = () => {
               </span>
               <Link
                 className={`header-nav header-nav-link ${
-                  location.pathname === '/doctor' ? 'active-link' : ''
-                }`}
-                to='/doctor' title="Doctors"
-              >Doctors
-              </Link>
-              <Link
-                className={`header-nav header-nav-link ${
                   location.pathname === '/instrument' ? 'active-link' : ''
                 }`}
                 to='/instrument' title="Instruments"
-              >
-                Instruments
-              </Link>
-              <Link
-                className={`header-nav header-nav-link ${
-                  location.pathname === '/posts' ? 'active-link' : ''
-                }`}
-                to='/posts' title='Posts'
-              >
-                Posts
-              </Link>
+              >Instruments</Link>
             </div>
             <div className='header-login'>
               {/* <div className="header-search">
@@ -289,7 +284,7 @@ const Header = () => {
                 </div>  */}
               <div className="header-login-logo">
                 <a href="/userProfile">
-                    <img src={loginIcon} alt="login Image"></img>
+                    <img src={loginIcon} alt="login"></img>
                 </a>
               </div>
               <div className="header-login-text">
@@ -297,17 +292,17 @@ const Header = () => {
                   {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
                   {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
               </div>
-            </div> 
+            </div>
           </div>
           <Outlet />
         </Fragment>
-            )}
-            {isPopupOpen &&
-                    <SignupPopup3
-                    show = {isPopupOpen}
-                    onHide={() => {togglePopup(false)}}
-                />  
-            }
+        )}
+        {isPopupOpen &&
+                <SignupPopup3
+                show = {isPopupOpen}
+                onHide={() => {togglePopup(false)}}
+            />  
+        }
      </div>
    );
  }; 
