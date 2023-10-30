@@ -125,12 +125,6 @@ const SubProcedure = () => {
             clearTimeout(timeout);
         };
     }, []);
-    
-
-    
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll, { passive: true });
-    // });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
    
