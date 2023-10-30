@@ -17,7 +17,9 @@ import Instrument from './routes/instrument/instrument.component';
 import SubInstrument from './routes/instrument/sub-instrument.component';
 import Authentication from './routes/authentication/authentication.component';
 import Doctor from './routes/doctor/doctor.component';
-import DoctorPost from './routes/community/community.component';
+import DocotorOwnMain from './components/doctor-own-profile/doctor-own-profile-main';
+import DoctorPost from  './routes/community/community.component';
+
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -33,9 +35,8 @@ import { Create } from '@mui/icons-material';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 
 import AccountSetup from './components/account-setting/account-setting';
+import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
-
-
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -75,20 +76,24 @@ const App = () => {
         <Route path='instrument/:name' element={<SubInstrument />} />
         <Route path='sign-in' element={<Authentication />} />
         <Route path='posts' element={<DoctorPost />} />
-        <Route path='doctor/:encodedMemberId' element={<IndividualDoctor />} />
-
+        <Route path='doctorProfile' element={<DocotorOwnMain />} />
+        <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
         {/* <Route path="userProfile" element={
+
           <PrivateRoute>
             <UserProfilePage />
           </PrivateRoute>
-        }/> */}
+        }/>  */}
 
         <Route path='download' element={<Download />} />
         <Route path='create-post' element={<CreatePostOfUser />} />
         <Route path='/posts/create' element={<CreatePostPage />} />
         <Route path='health-check' element={<HealthCheck />} />
         <Route path='userProfile' element={<UserProfilePage />} />
+
         <Route path='AccountSetup' element={<AccountSetup/>} />
+        <Route path='AccountNotFound' element={<AccountNotFoundPage/>} />
+
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />
         <Route path='contact-us' element={<ContactUs />} />

@@ -1,9 +1,12 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import usePostQueryStore from '../../../postStore';
 import { nanoid } from 'nanoid';
 
 // components
 import FormButton from '../community-post-button/community-post-button';
+
+// hook
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
 
 // scss
 import './community-post-dropdown-contents.scss';
@@ -15,6 +18,15 @@ import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
 import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
 
 const PostDropDownContents = () => {
+  const setFilterCondition = usePostQueryStore(
+    (state) => state.setFilterCondition
+  );
+
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+
+  const [internalFilterType, setInternalFilterType] = useState([]);
+
+  // data
   const trendyProcedureData = [
     {
       id: nanoid(),
@@ -48,6 +60,35 @@ const PostDropDownContents = () => {
     },
   ];
 
+  // store the value in this component (for performance)
+  // const handleClickFilter = () => {
+  //   setInternalFilterType();
+  // };
+
+  const handleClickApplyFilter = () => {
+    setFilterCondition(internalFilterType);
+    console.log(internalFilterType);
+  };
+
+  // const { mutate: apiMutate } = useApiRequestPostFilter({
+  //   onError: (error) => {
+  //     console.error('API request error', error);
+  //   },
+  // });
+
+  // const handleOnClickPostFilter = (data) => {
+  //   const postFilterData = {
+  //     categories: '',
+  //     currentPage: '',
+  //     pageSize: '',
+  //     postBy: '',
+  //   };
+  //   // console.log('payload - postFilterData:', postFilterData);
+  //   console.log(data);
+  //   console.log('clicked')
+  //   apiMutate(postFilterData);
+  // };
+
   return (
     <div className='post-dropdown-contents-container'>
       <div className='post-dropdown-contents-inner-container'>
@@ -59,9 +100,9 @@ const PostDropDownContents = () => {
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            <p>Lorum ipsum Lorum ipsum</p>
-            <p>Lorum ipsum Lorum</p>
-            <p>Lorum ipsum Lorum ipsum</p>
+            <p onClick={() => setInternalFilterType('Facial')}>Facial</p>
+            <p>Breast</p>
+            <p>Skin</p>
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
@@ -91,7 +132,10 @@ const PostDropDownContents = () => {
           ))}
         </div>
         <div className='post-dropdown-contents-procedures-button-container'>
-          <FormButton buttonName='Apply Filter' />
+          <FormButton
+            buttonName='Apply Filter'
+            onClick={handleClickApplyFilter}
+          />
         </div>
       </div>
     </div>

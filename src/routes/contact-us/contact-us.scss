@@ -132,6 +132,15 @@
     max-width: 50%;
 }
 
+.contact-form-submit-button:active {
+    transform: translateY(0.25rem);
+}
+
+.contact-form-submit-button-loading {
+    background: grey;
+    cursor: wait;
+}
+
 .contact-submitted-modal {
     display: flex;
     flex-direction: column;
