@@ -6,7 +6,7 @@ import StarRate from '../../starRate/starRate';
 import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
-
+import HomeButtonPink from '../../home-button-pink/home-button-pink';
 import { Fragment } from 'react';
 
 const HomeDoctorPage = () => {
@@ -49,8 +49,9 @@ const HomeDoctorPage = () => {
                             coupons, and more.
                         </span>
                         <div className='home-doctor-page-link'>
-                            <HomeLink title= "View More Doctors" href = "/doctor"/>
-                            <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img>
+                            {/* <HomeLink title= "View More Doctors" href = "/doctor"/> */}
+                            <HomeButtonPink title='Consult a doctor'/>
+                            {/* <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img> */}
                         </div>
                     </div>
                 </Fragment>}
@@ -59,6 +60,7 @@ const HomeDoctorPage = () => {
                             you with expert advice and support.'></HomeMobileSubText>
                     <div style={{marginTop: '10px'}}>
                         <Link to='/doctor' className='home-mobile-share-link'>View More Doctors</Link>
+                        
                     </div>
                 </Fragment>}
             </div>

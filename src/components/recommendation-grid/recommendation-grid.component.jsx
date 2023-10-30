@@ -41,15 +41,9 @@ const RecommendationGrid = ({ isMobile}) => {
         // :
         <div className="recommendation-grid-outer-container">
             <div className='recommendation-title'>Suggested</div>
-            <SimpleGrid 
-              columns={1} 
-              spacing={0} 
-              height="15vh"
-              //width="250px"
-              overflowY="auto"
-            >
-                {doctorList}
-            </SimpleGrid>
+            <div className='recommendation-list-container'>
+              {doctorList}
+            </div>
         </div>
   )
 }

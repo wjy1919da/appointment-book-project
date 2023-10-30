@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './download.styles.scss';
-import iPhone from '../../assets/download/iPhone.svg';
+import iPhone from '../../assets/download/iphone.png';
 import QRiOS from '../../assets/download/QR-code-iOS.png';
 import BadgeiOS from '../../assets/download/iOS-Badges.png';
 import QRAndroid from '../../assets/download/QR-code-Android.png';

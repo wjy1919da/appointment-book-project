@@ -1,5 +1,6 @@
 import './contact-us.scss';
 import { useState, useLayoutEffect } from 'react';
+import { ContactSubmission } from '../../hooks/useContactForm';
 import companyLogo from '../../assets/home/logo.png';
 import Footer from '../../components/footer/footer.component';
 import { Link } from 'react-router-dom';
@@ -10,38 +11,50 @@ import Linkedin from '../../assets/home/linkedin.svg';
 
 const ContactUs = () => {
     const [submitted, setSubmitted] = useState(false);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
-    const [nameError, setNameError] = useState(false);
-    const [emailError, setEmailError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
+    const [name, setName] = useState("");  // for holding the entered name
+    const [email, setEmail] = useState("");  // for holding the entered email
+    const [message, setMessage] = useState("");  // for holding the entered message
+    const [nameError, setNameError] = useState(false);  // if they do not input anything into name field
+    const [emailError, setEmailError] = useState(false);  // if they do not input anything into email field
+    const [messageError, setMessageError] = useState(false);  // if they do not enter anything into message field
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [submitted]);
     const mailingAddress = '9100 Wilshire Blvd, Beverly Hills, CA 90212';
     const companyEmail = 'marketing@charm-life.com';
 
-    const handleSubmit = () => {
-        if (!name || !email) {
-            if (!name && !email) {  // if neither was entered
-                setEmailError(true);
+    const handleSubmit = async () => {
+        setNameError(false);
+        setEmailError(false);
+        setMessageError(false);
+        if (!name || !email || !message) {
+            if (!name) {  
                 setNameError(true);
-            } else if (!name) {  // if just the name was not entered
-                setNameError(true);
-                setEmailError(false);
-            } else {  // else, jsut email wasn't entered
-                setEmailError(true);
-                setNameError(false);
             }
+            if (!email) {  
+                setEmailError(true);
+            }
+            if (!message) { 
+                setMessageError(true);
+            } 
             return;
         }
-        setSubmitted(true);
         const userSubmission = {
             'name': name,
-            'email': email,
+            'email_address': email,
             'message': message
         };
-        console.log('User Submitted: ', userSubmission);
+        setIsLoading(true);
+        try {
+            await ContactSubmission(userSubmission);  // API call
+        } catch (error) {
+            setError(error);
+        } finally {
+            setSubmitted(true);
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -99,21 +112,25 @@ const ContactUs = () => {
                                             required
                                             id='personal-info'
                                             onChange={(event) => setName(event.target.value)}
+                                            onBlur={() => { if (nameError && name) setNameError(false)}} // if previously there was an error, and now we have input some text, remove the red border 
                                             value={name}
                                             className={`user-name-input contact-form-input ${nameError && 'input-error'}`} />
                                         <input placeholder='Email *'
                                             required
                                             onChange={(event) => setEmail(event.target.value)}
+                                            onBlur={() => { if (emailError && email) setEmailError(false)}}
                                             value={email}
                                             className={`user-email-input contact-form-input ${emailError && 'input-error'}`} />
                                         <label htmlFor="contact-form-message" className='contact-message-label contact-form-label'>Message</label>
-                                        <textarea placeholder='Enter your message'
+                                        <textarea placeholder='Enter your message *'
                                             id='contact-form-message'
+                                            required
                                             onChange={(event) => setMessage(event.target.value)}
+                                            onBlur={() => {if (messageError && message) setMessageError(false)}}
                                             value={message}
                                             rows={8}
-                                            className='contact-form-message contact-form-input' />
-                                        <button type='button' className='contact-form-submit-button' onClick={() => handleSubmit()} >Submit</button>
+                                            className={`contact-form-message contact-form-input ${messageError && 'input-error'}`} />
+                                        <button type='button' disabled={isLoading} className={`contact-form-submit-button ${isLoading && 'contact-form-submit-button-loading'}`} onClick={() => handleSubmit()} >{isLoading ? 'Loading' : 'Submit'}</button>
                                     </form>
                                 </div>
                             </div>

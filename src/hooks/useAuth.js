@@ -4,16 +4,16 @@ import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 import Cookies from 'js-cookie';
 const base = {
-    userOtpLogin: 'http://api-dev.charm-life.com/login/phone/validate-otp',
-    userEmailLogin: 'http://api-dev.charm-life.com/login/user',
-    userSendOtp: 'http://api-dev.charm-life.com/login/phone/send-otp',
-    addUser: 'http://api-dev.charm-life.com/register/email',
-    otpRegister: 'http://api-dev.charm-life.com/register/phone/send-otp',
-    otpRegisterValidate: 'http://api-dev.charm-life.com/register/phone/validate-otp',
-    otpLogin:'http://api-dev.charm-life.com/login/phone/validate-otp',
-    emailRegisterValidate: 'http://api-dev.charm-life.com/register',
-    setUserProfile:'http://api-dev.charm-life.com/user/set_user_profile',
-    clickVerification:'http://api-dev.charm-life.com/register/clickVerification'
+    userOtpLogin: 'https://api-dev.charm-life.com/login/phone/validate-otp',
+    userEmailLogin: 'https://api-dev.charm-life.com/login/user',
+    userSendOtp: 'https://api-dev.charm-life.com/login/phone/send-otp',
+    addUser: 'https://api-dev.charm-life.com/register/email',
+    otpRegister: 'https://api-dev.charm-life.com/register/phone/send-otp',
+    otpRegisterValidate: 'https://api-dev.charm-life.com/register/phone/validate-otp',
+    otpLogin:'https://api-dev.charm-life.com/login/phone/validate-otp',
+    emailRegisterValidate: 'https://api-dev.charm-life.com/register',
+    setUserProfile:'https://api-dev.charm-life.com/user/set_user_profile',
+    clickVerification:'https://api-dev.charm-life.com/register/clickVerification'
 };
 
 export function useUserOptLogin() {
