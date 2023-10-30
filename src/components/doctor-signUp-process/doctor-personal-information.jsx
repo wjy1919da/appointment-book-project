@@ -128,7 +128,7 @@ const DoctorPersonalInformation = () => {
                             Password
                         </span>
                         <input
-                                type="text"
+                                type="password"
                                 {...register('password')}
                                 className="doctor-information-customInput"
                                 placeholder="8 or more characters"

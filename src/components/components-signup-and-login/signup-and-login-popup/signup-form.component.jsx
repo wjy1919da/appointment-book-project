@@ -22,25 +22,19 @@ const SignUpForm = () => {
         password: z.string()
             .min(6)
             .max(18)
-            .refine(password => 
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{6,18}$/.test(password),
-                {
-                    message: "Password must contain both letters and numbers."
-                }
-        ),  
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        }),
         repassword: z.string()
             .min(6)
             .max(18)
-            .refine(repassword => 
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{6,18}$/.test(repassword),
-                {
-                    message: "Password must contain both letters and numbers."
-                }
-            )
-    }).refine(data => data.password === data.repassword, {
-        message: "Passwords don't match",
-        path: ["repassword"],
-    });
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        })
+      }).refine(data => data.password === data.repassword, {
+        message: "Passwords do not match",
+        path: ["repassword"]
+      });
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
         mode: 'onChange'

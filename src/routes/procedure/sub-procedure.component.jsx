@@ -78,7 +78,7 @@ const SubProcedure = () => {
             {
                 //console.log("window.scrollY < 280",recommendationElement,slideElement);
                 if (slideElement) {
-                    slideElement.style.top = '450px';
+                    slideElement.style.top = '390px';
                     slideElement.style.position = 'absolute';
 
                     if (recommendationElement) {

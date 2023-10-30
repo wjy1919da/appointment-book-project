@@ -6,7 +6,8 @@ import {  Radio, Space } from 'antd';
 import { useState,useEffect } from 'react';
 import { Input} from '@chakra-ui/react'
 import './choose-gender.styles.scss';
-import Calendar from '../../user-appointment/calendar';
+// import Calendar from '../../user-appointment/calendar';
+import CalendarProfile from '../calendar-profile/calendar-profile.component';
 const ChooseGender = () => {
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     const setGender = userInfoQueryStore((state) => state.setGender);
@@ -52,15 +53,16 @@ const ChooseGender = () => {
                         </div>
                         <div className='profile-section-container'>
                             <div>Birthday</div>
-                            <Input
+                            {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
                                 type="date"
                                 className="calendar-input"
                                 value={birthday} 
                                 onChange={onChangeDate}
-                            />
+                            /> */}
                             {/* <Calendar/> */}
+                            <CalendarProfile/>
                         </div>
                         <div className="next-button-section">
                             <NextButton type="submit" title='Next' width='180px' onClick={handleOnClick}/>

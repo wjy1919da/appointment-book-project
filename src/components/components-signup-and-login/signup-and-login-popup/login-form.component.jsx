@@ -30,12 +30,9 @@ const LoginForm = (props) => {
         password: z.string()
             .min(6)
             .max(18)
-            .refine(password => 
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
-                {
-                    message: "Password must contain both letters and numbers."
-                }
-            ),
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        })
     });
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),

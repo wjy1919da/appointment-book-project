@@ -42,8 +42,11 @@ const SignupPopup3 = (props) => {
   } else if (userInfo.popupState === 'doctorVerification') {
       modalClass = 'signup-popup-doctor-verification'; 
       modalStyle = { marginTop: '0px' };
-  } else if (userInfo.popupState === 'doctorFinish') {
+  } else if (userInfo.popupState === 'doctorFinish'|| userInfo.popupState === 'doctorSuccess') {
       modalClass = 'signup-popup-doctor-finish'; 
+      modalStyle = { marginTop: '100px' };
+  } else if (userInfo.popupState === 'gender') {
+      modalClass = 'signup-popup-user-profile-gender';
       modalStyle = { marginTop: '100px' };
   }
   return (
@@ -69,6 +72,7 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'doctorProfile' && <DoctorPersonalInformation />}
       {userInfo.popupState === 'doctorVerification' && <DoctorVerification />}
       {userInfo.popupState === 'doctorFinish' && <DoctorSignUpFinish />}
+      {userInfo.popupState === 'doctorSuccess' && <DoctorSignUpFinish />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'login') && <SocialSignUP />}
       {(userInfo.popupState === 'signUp' || userInfo.popupState === 'sendVerifyEmail')&& <CreateAccount title="Already have an account?" subTitle="Login!" onClick={()=>switchPopupTab('login')}/>}
       {userInfo.popupState === 'login' && <CreateAccount title="Don't have an account?" subTitle="Sign up" onClick={()=>switchPopupTab('sendVerifyEmail')}/>}
