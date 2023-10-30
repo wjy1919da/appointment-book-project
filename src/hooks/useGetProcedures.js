@@ -3,12 +3,6 @@ import { useQuery } from "react-query";
 import useProcedureQueryStore from "../procedureStore.ts";
 import APIClient from '../services/api-client.js';
 
-const base = {
-    procedureUrl:'https://api-dev.charm-life.com/procedure',
-    procedureCatsegoriesUrl:'https://api-dev.charm-life.com/procedure',
-    faqUrl:'https://api-dev.charm-life.com/faq'
-}
-
 export function useGetProcedureCategories(){
     const apiClient = new APIClient('/procedure');
     const fetchProcedureCategories = async () => {

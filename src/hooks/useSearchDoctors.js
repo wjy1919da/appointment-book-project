@@ -2,32 +2,27 @@ import useDebounce from "./useDebounce";
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
-
-const base = {
-
-}
-
-
+import APIClient from "../services/api-client";
+/*This function is used to fetch popular area, not used */
 export function useSearchLocation(){
     const location = useDoctorQueryStore(s => s.doctorQuery.location);
+    const apiClient = new APIClient('/location');
     //console.log("useSearchLocation",location)
     const debouncedSearchTerm = useDebounce(location, 700);
     const fetchLocations = async () => {
-      let url;
+      //let url;
      // console.log("LocationQuery");
-      if (!location || !debouncedSearchTerm) {
-          //console.log("default Location");
-          url = base.locationDefaultUrl;
-      } else {
-         // console.log("search Location");
-         // console.log("params", debouncedSearchTerm);
-          url = base.locationSearchUrl;
-      }
-      const res = await axios.get(url,
+      // if (!location || !debouncedSearchTerm) {
+      //     //console.log("default Location");
+      //     url = base.locationDefaultUrl;
+      // } else {
+      //    // console.log("search Location");
+      //    // console.log("params", debouncedSearchTerm);
+      //     url = base.locationSearchUrl;
+      // }
+      const res = await apiClient.get(
         {
-          params: {
             location: debouncedSearchTerm || ''
-          }
         });
       //console.log('dataInSearchAPI:', res.data);
       return res.data;
@@ -41,13 +36,13 @@ export function useSearchLocation(){
 // search doctor part
 export function useSearchMultiConditionsPopUp() {
   const doctorQuery = useDoctorQueryStore(s => s.doctorQuery);
+  const apiClient = new APIClient('/doctor/search');
   const fetchDoctors = async ({pageParam = 1}) => {
       let filterType = []; 
       if (doctorQuery.location !== "") filterType.push(1);
       if (doctorQuery.field !== "") filterType.push(2);
       if (doctorQuery.doctorName !== "") filterType.push(3);
-     const res = await axios.post('https://api-dev.charm-life.com/doctor/search',
-      //const res = await axios.post('http://localhost:8080/doctor/search',
+     const res = await apiClient.post(
       {
         "address": doctorQuery.location,
         "nickname": doctorQuery.doctorName,

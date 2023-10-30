@@ -1,15 +1,17 @@
 import userInfoStore from "../userStore";
 import { useQuery } from "react-query";
 import axios from 'axios';
+import APIClient from '../services/api-client.js';
 
-const base = {
-    followUser: 'http://localhost:8080/user_action/actions/follow',
-    unfollowUser: 'http://localhost:8080/user_action/actions/unfollow',
-};
+// const base = {
+//     followUser: 'http://localhost:8080/user_action/actions/follow',
+//     unfollowUser: 'http://localhost:8080/user_action/actions/unfollow',
+// };
 /* UserId is the user that you want to follow */
 export function useFollowUser(userId) {
+    const apiClient = new APIClient('/user_action/actions/follow');
     const fetchFollowUser = async () => {
-        const res = await axios.post(base.followUser, {
+        const res = await apiClient.post({
             "userId": userId,
         });
         return res.data;
@@ -17,8 +19,9 @@ export function useFollowUser(userId) {
     return useQuery(['followUser', userId], fetchFollowUser);
 }
 export function useUnfollowUser(userId) {
+    const apiClient = new APIClient('/user_action/actions/unfollow');
     const fetchUnfollowUser = async () => {
-        const res = await axios.post(base.unfollowUser, {
+        const res = await apiClient.post({
             "userId": userId,
         });
         return res.data;
