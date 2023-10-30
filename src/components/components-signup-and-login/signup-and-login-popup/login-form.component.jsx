@@ -61,8 +61,8 @@ const LoginForm = (props) => {
             setToken(myToken);
             /* TODO：alert component */ 
             alert(data.msg);
-            // togglePopup(false);
-            switchPopupTab("doctorProfile");
+            togglePopup(false);
+            //switchPopupTab("doctorProfile");
             //props.onHide();
         }
         if (data?.code === 500 || data?.code === 403) {

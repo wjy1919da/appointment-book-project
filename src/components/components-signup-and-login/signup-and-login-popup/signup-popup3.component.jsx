@@ -37,7 +37,7 @@ const SignupPopup3 = (props) => {
   let modalStyle = { marginTop: '100px' };
   if (userInfo.popupState === 'doctorProfile') {
       modalClass = 'signup-popup-doctor-profile';
-      modalStyle = { marginTop: '0px' };
+      modalStyle = { marginTop: '120px' };
   } else if (userInfo.popupState === 'doctorVerification') {
       modalClass = 'signup-popup-doctor-verification'; 
       modalStyle = { marginTop: '0px' };
