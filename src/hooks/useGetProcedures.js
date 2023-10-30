@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import useProcedureQueryStore from "../procedureStore.ts";
 
 const base = {
-    procedureUrl:'http://api-dev.charm-life.com/procedure',
-    procedureCatsegoriesUrl:'http://api-dev.charm-life.com/procedure',
-    faqUrl:'http://api-dev.charm-life.com/faq'
+    procedureUrl:'https://api-dev.charm-life.com/procedure',
+    procedureCatsegoriesUrl:'https://api-dev.charm-life.com/procedure',
+    faqUrl:'https://api-dev.charm-life.com/faq'
 }
 
 export function useGetProcedureCategories(){
