@@ -18,12 +18,12 @@ import { useApiRequest } from '../../../hooks/useApiRequest';
 import './community-post-create-page.scss';
 
 // images
-import creatPostIcon from '../../../assets/post/create-post-icon.png';
+import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 import { ErrorSharp } from '@mui/icons-material';
 
 const CreatePostPage = () => {
-  const [selectedImage, setSelectedImage] = useState(creatPostIcon);
+  const [selectedImage, setSelectedImage] = useState(createPostIcon);
   const [hasSelectImage, setHasSelectImage] = useState(false);
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [text, setText] = useState('');
@@ -149,7 +149,6 @@ const CreatePostPage = () => {
         {hasSelectImage ? (
           <img
             src={selectedImage}
-            onClick={handleIconClick}
             style={{
               maxWidth: '100%',
               maxHeight: '100%',
@@ -157,6 +156,7 @@ const CreatePostPage = () => {
               height: '330px',
               objectFit: 'contain',
             }}
+            onClick={handleIconClick}
             alt='Selected'
           />
         ) : (
@@ -164,8 +164,12 @@ const CreatePostPage = () => {
             <div className='left-container'>
               <div className='create-post-page-add'>
                 <img
-                  src={creatPostIcon}
+                  src={createPostIcon}
                   onClick={handleIconClick}
+                  style={{
+                    width: '157px',
+                    height: '157px',
+                  }}
                   alt='Image-Create-Post'
                 />
               </div>
