@@ -27,8 +27,12 @@
     "antd": "^5.5.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+<<<<<<< HEAD
     "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",
+=======
+    "framer-motion": "^10.16.4",
+>>>>>>> b99dc530e2281b493e01291cc9ad88390d0d8737
     "hashids": "^2.3.0",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",

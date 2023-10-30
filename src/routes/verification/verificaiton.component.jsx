@@ -30,6 +30,7 @@ const Verification = () => {
             navigate('/');
         }
     }, [data, isLoading, isError, error]);
+    console.log("data in verification", data);
     if (isLoading) {
         return <HomeSpinner />;
     }

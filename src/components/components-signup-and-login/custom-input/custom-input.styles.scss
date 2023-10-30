@@ -1,0 +1,12 @@
+.underline-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #675D59; /* You can adjust this as needed */
+    border-radius: 0; /* To remove default styling in some browsers */
+    outline: none;    /* Optional: remove the focus outline */
+    box-shadow: none; /* Optional: remove any focus shadow */
+    width: 300px;
+    padding-top: 25px;
+    margin-bottom: 10px; 
+   
+}

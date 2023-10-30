@@ -19,7 +19,9 @@ const SignUpForm = () => {
     const setUsername = userInfoQueryStore(state=>state.setUsername);
     const setToken = userInfoQueryStore(state=>state.setToken);
     const setBirthday = userInfoQueryStore(state=>state.setBirthday);
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
     const [startDate, setStartDate] = useState(new Date());
+    var accountType;
     const schema = z.object({
         username: z.string().nonempty("Username is required"),
         email: z.string().email(),
@@ -39,19 +41,24 @@ const SignUpForm = () => {
         mode: 'onChange'
     });
     const {mutate,data,isLoading,isError,error} = useUserRegister();
+    //Load accountType from localstorage
+    useEffect(() => {
+        accountType = localStorage.getItem('accountType');
+    })
     const onSubmit = (formData) => {
         //console.log("formData ",formData);
         mutate({
             username: formData.username,  
             email: formData.email,
-            password: formData.password
+            password: formData.password,
+            userRole: accountType
         });
         setEmail(formData.email);
         setPassword(formData.password); 
         setUsername(formData.username);
         setBirthday(formData.birthday);
     };
-    console.log("sign up form errors ",errors);
+    //console.log("sign up form errors ",errors);
     
     useEffect(() => {
         if (data?.msg && data.code === 100) {

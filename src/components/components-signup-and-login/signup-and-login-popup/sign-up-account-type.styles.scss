@@ -1,0 +1,59 @@
+.signup-account-type-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    //vw vh
+    //height:300px;
+    padding-top: 20px;
+    //padding-bottom: 20px;
+}
+
+.group-title-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px; // Adjusted the spacing between the title and the buttons, increase as needed
+}
+
+.title-container {
+    margin: 0; // No margin, we're using gap in the .group-title-buttons for spacing
+    // font-family: Open Sans;
+    // font-size: 30px;
+    // font-style: normal;
+    // font-weight: 600;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    position: relative;
+}
+
+.button-container > .btn {
+    width: 100%; 
+}
+
+.button-container > .btn:last-child { 
+    width: 50%; 
+    position: absolute;
+    right: 0; 
+    top: calc(100% + 20px); 
+}
+.login-prompt-container {
+    text-align: center;
+    width: 100%; 
+    padding: 10px 0;
+
+    span {
+        color: black;
+    }
+
+    // Specific styles for the "Log in" link
+    button {
+        color: #F48C8A;
+        text-decoration: none; // This can also be included for extra safety, even though we've added it inline in JSX
+    }
+}
