@@ -1,0 +1,36 @@
+.home-recommande-container
+{
+    padding-left: 30px;
+    padding-right: 30px;
+    .home-recommande-title
+    {
+        color: var(--text-1-footer, #352C29);
+        /* NEW TYPE/NEW sub heading */
+        font-family: Open Sans;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .home-recommande-sub-area
+    {
+        display: flex;
+    }
+    .home-recommande-procedureCard
+    {
+        margin-top: 50px;
+        margin-left: 100px;
+    }
+    .watch-video-link
+    {
+        color: var(--text-1-footer, #352C29);
+        text-align: center;
+        /* Interactive 1 */
+        font-family: Open Sans;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%; 
+        border-bottom: 1px solid var(--text-1-footer, #352C29);
+    }
+}

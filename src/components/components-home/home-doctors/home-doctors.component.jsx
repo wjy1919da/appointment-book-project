@@ -2,9 +2,11 @@ import backgroundImage from '../../../assets/home/ring.svg'
 import  PhoneImage from '../../../assets/home/iphone.svg'
 import HomeText from '../home-text/home-text.component';
 import HomeButton from '../../home-button/home-button.component';
-import './home-doctors.styles.scss'
+import './home-doctors.styles.scss';
+import arrowLeft from '../../../assets/home/appleLinkArrow.png'
 import videoURL from '../../../assets/home/vertical-video.mp4';
-import React, { useRef, useEffect, Fragment } from 'react';
+import React, { useRef, useEffect, Fragment} from 'react';
+import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 const HomeDoctors = () => {
     const videoRef = useRef(null);
@@ -38,15 +40,36 @@ const HomeDoctors = () => {
     return (
         <div className = 'home-doctors-container'>
           {!isMobile&&<Fragment>
-            <div  className='home-doctors-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+            <div  className='home-doctors-background'>
                 <div className = 'home-doctor-apple-section'>
                     <img className='phone-image' src={PhoneImage} alt="Phone" />
-                    <div className='home-doctor-video'>
+                    {/* <div className='home-doctor-video'>
                       <video ref={videoRef} src = {videoURL}  controls autoPlay muted/>
+                    </div> */}
+                    <div  className='phone-image-background'>     
                     </div>
                 </div>
+                <div className='home-doctor-apple-link-section'>
+                    <div className='home-doctor-apple-link-subArea1'></div>
+                    <div className='home-doctor-apple-link-left-area'>
+                      <div className='home-doctor-apple-link-textArea'>
+                        <span className='apple-link-text1'>Try Charm</span>
+                        <span className='apple-link-text2'>Scan to download</span>
+                      </div>
+                      <div className='home-doctor-left-area-arrow'> 
+                        <img src = {arrowLeft}></img>
+                      </div>
+                    </div>
+                    <div className='home-doctor-apple-link-subArea2'>
+                    </div>
+                </div>
+
             </div>
-            <div className='home-doctors-text'>
+            <div className='home-doctor-apple-link-signUp-area'>
+                  <Link className='signUp-link'>Sign up as a Doctor</Link>
+                  <Link className='signUp-link'>Sign up as a member</Link>
+            </div>
+            {/* <div className='home-doctors-text'>
                     <HomeText 
                         title="Community" 
                         content={`Our app is a welcoming community of beauty lovers like you.
@@ -55,7 +78,7 @@ const HomeDoctors = () => {
                     <div className='home-doctors-button'>
                         <HomeButton height="56px" title="Download App" href = "/download"/>
                     </div>
-            </div>
+            </div> */}
           </Fragment>
         }
           {isMobile&&<Fragment>

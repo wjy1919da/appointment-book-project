@@ -4,6 +4,9 @@ import Footer from '../../components/footer/footer.component';
 import arrow from '../../assets/home/arrow.png'
 import { useState } from 'react';
 import './home.styles.scss';
+import HomeRecommande from '../../components/components-home/home-recommende/home-recommende';
+import VectorPink from '../../assets/home/Vector-pink.png'
+import HomeButtonPink from '../../components/home-button-pink/home-button-pink';
 import HomeMobileSubText from '../../components/components-home/home-text-mobile/home-mobile-subText.component';
 import HomePost from '../../components/components-home/home-post/home-post.component';
 import HomeDoctorPage from '../../components/components-home/home-doctor-page/home-doctor-page.component';
@@ -30,6 +33,7 @@ const Home = () => {
     }
     return (
         <Fragment>
+            <div className='home-component-container'>
             <div className='home'>
              <div className='home-mobile-intro-container'>
                 <div className='home-title-container'>
@@ -48,9 +52,9 @@ const Home = () => {
                         {isMobileOrIpad&& <div className='home-mobile-text-container'><HomeMobileSubText title='Charm' content='Charm is a thriving community that embraces the diversity of beauty and offers a seamless experience for all beauty enthusiasts.'></HomeMobileSubText></div>}
                         <div className='home-title-buttons'>
                         {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
-                            {!isMobile&&<HomeButton height="56px" title = "Start Charm life" href = '/download'/>}
+                            {!isMobile&&<HomeButtonPink height="56px" title = "Start Charm life" href = '/download'/>}
                             <button type="button" onClick={handleShow} className='button home-title-button2'>
-                                <img src={arrow} alt="Button" className="button-image"></img>
+                                <img src={VectorPink} alt="Button" className="button-image"></img>
                                 {!isMobile&&<span className="button-text">Video</span>}
                                 {isMobile&&<span className="button-text">Watch Video</span>}
                             </button>
@@ -68,12 +72,14 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <HomePost/>
             <HomeDoctorPage/>
-            <HomeDoctors />
+            <HomePost/>
+            <HomeRecommande/>
             <HomeInstruments />
+            <HomeDoctors />
             <div className='home-footer-container'>
                 <Footer/> 
+            </div>
             </div>
         </Fragment>
     )
