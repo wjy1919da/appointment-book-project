@@ -33,6 +33,7 @@ const StepTracker = ({ currentStep }) => {
 const SignupPopup3 = (props) => {
   const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   let modalClass = 'signup-popup-modal';
   let modalStyle = { marginTop: '100px' };
   if (userInfo.popupState === 'doctorProfile') {

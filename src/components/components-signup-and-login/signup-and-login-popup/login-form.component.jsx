@@ -111,7 +111,7 @@ const LoginForm = (props) => {
                                 {errors.password?.message}
                             </Form.Control.Feedback>
                         </InputGroup>
-                        <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
+                        <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('signUp')}>Forgot Password?</button>
                     </Form.Group>
                 </div>
                

@@ -3,10 +3,7 @@ import { useQuery } from "react-query";
 import axios from 'axios';
 import APIClient from '../services/api-client.js';
 
-// const base = {
-//     followUser: 'http://localhost:8080/user_action/actions/follow',
-//     unfollowUser: 'http://localhost:8080/user_action/actions/unfollow',
-// };
+
 /* UserId is the user that you want to follow */
 export function useFollowUser(userId) {
     const apiClient = new APIClient('/user_action/actions/follow');
