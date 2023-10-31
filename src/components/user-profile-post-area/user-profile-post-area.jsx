@@ -14,7 +14,7 @@ import UserProfileReview from '../user-profile-review-area/user-profile-review-a
 import { useMediaQuery } from 'react-responsive';
 
 // images
-import ArchiveFilter from '../../assets/post/archive_filter.svg';
+// import ArchiveFilter from '../../assets/post/archive_filter.svg';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
@@ -136,11 +136,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
               {/* archive posts button */}
               <div className='archive-posts-button-container'>
                 <div className='archive-posts-button-inner-container'>
-                  {/* <img
-                    src={ArchiveFilter}
-                    className='archive-filter-image'
-                    alt='Image-Archive-Posts'
-                  /> */}
                   <span className='archive-title'>Archived Posts</span>
                 </div>
               </div>
