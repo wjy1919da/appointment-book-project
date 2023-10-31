@@ -3,13 +3,13 @@ import usePostQueryStore from '../postStore.ts';
 import { useInfiniteQuery } from 'react-query';
 import Cookies from 'js-cookie';
 
-const endpoint = 'https://api-dev.charm-life.com//post/filter';
+const endpoint = 'https://api-dev.charm-life.com/post/filter';
 
 export function useApiRequestPostFilter() {
   const token = Cookies.get('token');
 
   const postQuery = usePostQueryStore((s) => s.postQuery);
-//   console.log(postQuery);
+  //   console.log(postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
     const requestData = {

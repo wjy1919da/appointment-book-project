@@ -27,6 +27,13 @@
     color: #f29b87;
   }
 
+  .clicked-image-button {
+    border: 3px solid #f29b87;
+    border-radius: 50%;
+    width: 136px;
+    height: 136px;
+  }
+
   .post-dropdown-contents-inner-container {
     display: flex;
     justify-content: space-between;

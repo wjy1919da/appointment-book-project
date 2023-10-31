@@ -11,7 +11,7 @@ import Footer from '../../footer/footer.component';
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequest } from '../../../hooks/useApiRequest';
+import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
 // import { useAddPost } from '../../../hooks/useAddingPost';
 
 // scss
@@ -41,7 +41,7 @@ const CreatePostPage = () => {
   } = useForm({ mode: 'onChange' });
 
   // api
-  const { mutate: apiMutate } = useApiRequest({
+  const { mutate: apiMutate } = useApiRequestPost({
     onError: (error) => {
       console.error('API request error', error);
     },

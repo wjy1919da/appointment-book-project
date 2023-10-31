@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 const endpoint = 'https://api-dev.charm-life.com/post/posts';
 
-export function useApiRequest() {
+export function useApiRequestPost() {
   const token = Cookies.get('token');
 
   const fetchUserData = async ({
