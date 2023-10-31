@@ -165,7 +165,7 @@ const CommunityPostDetailPopUP = ({
                 <img src={UserImage} alt='Image-User-Picture' />
                 <span>Anna</span>
               </div>
-              <div>
+              <div className='user-detail-button-container'>
                 <button className='button-archive'>
                   Archive
                 </button>
