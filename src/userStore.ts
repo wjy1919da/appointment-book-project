@@ -1,4 +1,4 @@
-import create from "zustand";
+import {create} from "zustand";
 import jwt_decode from "jwt-decode";
 
 interface DecodedToken {

@@ -1,0 +1,49 @@
+.error-page-common{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+}
+.error-page-common-container {
+    flex: 1;
+}
+
+.error-page-common-orange-rounded-column {
+    position: absolute;
+    z-index: 1;
+    width: 35%;
+    height: 20rem;
+    max-width: 40%;
+    left: 0;
+    top: 64px;
+    background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
+    border-radius: 0px 1000px 1000px 0px;
+}
+
+.error-page-common-upper-text-container {
+    margin-top: 20vh;
+    z-index: 2;
+    text-align: center;
+    color: #352C29;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // padding-top: 8rem;
+    // padding-bottom: 2rem;
+}
+
+.error-page-common-title {
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.error-page-common-subtitle-container {
+    // width: 52.5%;
+}
+
+.error-page-common-subtitle {
+    font-weight: 600;
+    font-size: 21px;
+}

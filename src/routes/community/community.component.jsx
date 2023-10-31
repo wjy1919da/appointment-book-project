@@ -29,6 +29,7 @@ const Community = () => {
   //   { value: 'by user', label: 'By User' },
   //   { value: 'by doctor', label: 'By Doctor' },
   // ];
+  
  // Handle the situation of user not login but still want to see the post
 //  const userInfo = userInfoQueryStore((state) => state.userInfo);
 //  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
@@ -45,6 +46,7 @@ const Community = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
+
 
   const handleFilters = (value, isChecked) => {
     const updatedFilter = [...postQuery.filterCondition];

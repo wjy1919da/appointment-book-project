@@ -50,6 +50,7 @@ const LoginForm = (props) => {
         });
     };
     useEffect(() => {
+
         if (data?.msg) {
             if(data?.code === 100){
                 const myToken = data.data.token;
@@ -62,6 +63,7 @@ const LoginForm = (props) => {
             }else{
                 alert(data.msg);
             }
+
         }
     }, [data]);
     if (error) {

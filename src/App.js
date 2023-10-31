@@ -38,6 +38,7 @@ import UserProfileSubArea from './components/user-profile-subArea/user-profile-s
 import AccountSetup from './components/account-setting/account-setting';
 import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
+import ScrollToTop from './routes/ScrollToTop.js';
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -48,26 +49,27 @@ const App = () => {
   const setToken = userInfoQueryStore((state) => state.setToken);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   useEffect(() => {
-    var cookieToken = Cookies.get('token');
+    const cookieToken = localStorage.getItem('token');
     if (cookieToken && cookieToken !== token) {
       setToken(cookieToken);
     }
-    var accountType = localStorage.getItem('accountType');
+    const accountType = localStorage.getItem('accountType');
     if (accountType) {
       setAccountType(accountType);
     }
   }, []);
 
   return (
-    // <DataRouter>
+    <>
+    <ScrollToTop />
     <Routes>
       <Route path='/' element={<Header />}>
       {/* <Route path='/' element={<OriginalFooter />}> */}
         {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
         <Route index element={<Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />
-        <Route path='procedure/breast' element={<BreastProcedure />} />
-        <Route path='procedure/body' element={<BodyProcedure />} />
+        {/* <Route path='procedure/breast' element={<BreastProcedure />} /> */}
+        {/* <Route path='procedure/body' element={<BodyProcedure />} /> */}
         <Route path='procedure/:name' element={<SubProcedure />} />
         <Route
           path='/procedureMobile'
@@ -102,7 +104,7 @@ const App = () => {
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
-    // </DataRouter>
+    </>
   );
 };
 

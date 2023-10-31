@@ -65,6 +65,9 @@
             color: #675D59;
             text-decoration: none;
             height: max-content;
+            transition: 200ms all;
+            border-bottom: 4px solid transparent;
+            text-align: center;
             &::after {
                 display: block;
                 content: attr(title);

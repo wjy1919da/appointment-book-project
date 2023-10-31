@@ -14,7 +14,7 @@ const SubDoctor = () => {
 
     useEffect(() => {
         fetchDoctor();
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
         // eslint-disable-next-line
     }, []);
 

@@ -312,7 +312,12 @@
     text-decoration-line: underline;
   }
 
-  .anchor-archive {
+  .button-archive,
+  .button-edit {
+    text-decoration: underline;
+  }
+
+  .button-archive {
     margin-right: 24px;
   }
 }
