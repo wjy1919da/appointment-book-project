@@ -70,7 +70,7 @@ const SignUpForm = () => {
         if (data?.msg && data.code === 100) {
            const myToken = data.data.token;
            console.log("myToken in new register ", myToken);
-           Cookie.set('token', myToken);
+           localStorage.setItem('token', myToken);
            setToken(myToken);
            alert("register success ", data.code);
            if (userInfo && userInfo.accountType) {

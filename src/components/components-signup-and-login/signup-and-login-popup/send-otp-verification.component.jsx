@@ -53,7 +53,7 @@ const SendOtpVerification = () => {
     useEffect(() => {
         if (data?.code === 100) {
             const token = data.data.token;
-            Cookies.set('token', token);
+            localStorage.setItem('token', token);
             setToken(token);
             alert(data.msg);
             togglePopup(false);

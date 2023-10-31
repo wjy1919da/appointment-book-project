@@ -55,7 +55,7 @@ const LoginForm = (props) => {
     useEffect(() => {
         if (data?.code === 100) {
             const myToken = data.data.token;
-            Cookies.set('token', myToken);
+            localStorage.setItem('token', myToken);
             setToken(myToken);
             /* TODO：alert component */ 
             alert(data.msg);

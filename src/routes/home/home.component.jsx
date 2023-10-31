@@ -19,9 +19,9 @@ import HomePicIpad from '../../assets/home/5-ipad.png';
 import HomePicMobile from '../../assets/home/5.png';
 import { useMediaQuery } from 'react-responsive';
 const Home = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // });
     const [show, setShow] = useState(false);
     const handleClose = () =>setShow(false);
     const handleShow = () => setShow(true);

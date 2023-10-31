@@ -92,7 +92,7 @@ const SignInForm = () => {
     useEffect(() => {
         if(data?.data){
             let myToken = data.data.token;
-            Cookies.set('token', myToken);
+            localStorage.setItem('token', myToken);
             //const token = Cookies.get('token');
             //console.log("my token",token);
         }

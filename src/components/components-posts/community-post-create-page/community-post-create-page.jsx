@@ -71,9 +71,9 @@ const CreatePostPage = () => {
     apiMutate(formData);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   // back button
   const handleClickCreatePostBack = () => {

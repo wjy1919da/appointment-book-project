@@ -7,7 +7,7 @@ import SignupAndLoginButton from "./signup-and-login-button.component";
 // clientId :com.longcai.charm
 const AppleLoginBtnWrap = (props) => (
     <AppleLogin
-        usePopup={true}
+        usePopup={false}
         clientId="com.longcai.charm.sign"
         redirectURI="https://local.test:3000"
         // redirectURI="https://localhost:3000"
