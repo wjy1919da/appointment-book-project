@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import userInfoQueryStore from '../../userStore.ts';
 import Cookies from 'js-cookie';
+import ErrorPageCommon from '../error-page-common/error-page-common.component';
 const Verification = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -35,10 +36,10 @@ const Verification = () => {
         return <HomeSpinner />;
     }
     return (
-        <div style={{diplay:'flex', justifyContent: 'center', alignItems: 'center' }}>
-            Email verification in process...
-        </div>
-
+        // <div style={{diplay:'flex', justifyContent: 'center', alignItems: 'center' }}>
+        //     Email verification in process...
+        // </div>
+        <ErrorPageCommon title="The email url is expired." context="please try agein"></ErrorPageCommon>
     );
 };
 
