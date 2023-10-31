@@ -133,10 +133,16 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
                 />
               </div>
 
-              {/* Archive Posts Button */}
+              {/* archive posts button */}
               <div className='archive-posts-button-container'>
-                <img src={ArchiveFilter} alt='Image-Archive-Posts' />
-                <span className='archive-title'>Archived Posts</span>
+                <div className='archive-posts-button-inner-container'>
+                  {/* <img
+                    src={ArchiveFilter}
+                    className='archive-filter-image'
+                    alt='Image-Archive-Posts'
+                  /> */}
+                  <span className='archive-title'>Archived Posts</span>
+                </div>
               </div>
 
               {/* Rest of the posts */}

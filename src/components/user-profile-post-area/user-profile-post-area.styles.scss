@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .user-profile-post-area-container-post {
   position: absolute;
   top: 100px;
@@ -26,9 +32,9 @@
   width: 50%; // Or whatever size you want for the create-post icon within the box
   height: auto;
 }
-.choose-picture-section-post {
-  width: 50%;
-}
+// .choose-picture-section-post {
+//   width: 50%;
+// }
 
 // archive posts button
 .archive-posts-button-container {
@@ -37,28 +43,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../assets/post/archive_girl.svg');
-  background-repeat: no-repeat;
+  background-image: url('../../assets/post/archive_filter.svg'),
+    url('../../assets/post/archive_girl.svg');
+  background-size: cover;
   border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   width: 240px;
   height: 240px;
-  background-size: 100% 100%;
-}
-
-.archived-posts-button-container img {
-  border-radius: 8px;
-  width: 100%;
-  height: 100%;
 }
 
 .archive-title {
   position: absolute;
   z-index: 100;
-  color: var(--White, #fbfcff);
+  color: #fbfcff;
   font-family: Open Sans;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
