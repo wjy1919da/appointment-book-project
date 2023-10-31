@@ -30,16 +30,16 @@ const Community = () => {
   //   { value: 'by doctor', label: 'By Doctor' },
   // ];
  // Handle the situation of user not login but still want to see the post
- const userInfo = userInfoQueryStore((state) => state.userInfo);
- const togglePopup = userInfoQueryStore((state) => state.togglePopup);
- var token = Cookie.get('token');
- useEffect(() => {
-    //console.log("doctor-post-grid");
-    //console.log("userInfo in doctor-post-grid",userInfo);
-    if(!token){
-      togglePopup(true,"accountType");
-    }
- },[userInfo.token]);
+//  const userInfo = userInfoQueryStore((state) => state.userInfo);
+//  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+//  var token = Cookie.get('token');
+//  useEffect(() => {
+//     //console.log("doctor-post-grid");
+//     //console.log("userInfo in doctor-post-grid",userInfo);
+//     if(!token){
+//       togglePopup(true,"accountType");
+//     }
+//  },[userInfo.token]);
  //console.log("userInfo in doctor-post-grid outside",userInfo);
   
   useLayoutEffect(() => {
@@ -63,30 +63,30 @@ const Community = () => {
 
   return (
     <div>
-      <PostPageMain />
-      <div className='doctor-post-outer-container'>
-        <div className='doctor-post-header-container'>
-          <PostDropDown
-            // optipns={dropdownOptionsByCategory}
-            handleFilters={handleFilters}
-            menuLabel='Filter'
-            wordAfterMenuLabel='All'
-            className='filter-button'
-          />
-          <PostDropDown
-            // options={dropdownOptionsByRole}
-            handleFilters={handleFilters}
-            menuLabel='Location'
-            wordAfterMenuLabel='All'
-            className='location-button'
-          />
-          <ResetAllButton />
-          <PostSearchBox />
-        </div>
-        {userInfo.token&&<DoctorPostGrid />}
+    <PostPageMain />
+    <div className='doctor-post-outer-container'>
+      <div className='doctor-post-header-container'>
+        <PostDropDown
+          // optipns={dropdownOptionsByCategory}
+          handleFilters={handleFilters}
+          menuLabel='Filter'
+          wordAfterMenuLabel='All'
+          className='filter-button'
+        />
+        <PostDropDown
+          // options={dropdownOptionsByRole}
+          handleFilters={handleFilters}
+          menuLabel='Location'
+          wordAfterMenuLabel='All'
+          className='location-button'
+        />
+        <ResetAllButton />
+        <PostSearchBox />
       </div>
-      <Footer />
+      <DoctorPostGrid />
     </div>
+    <Footer />
+  </div>
   );
 };
 
