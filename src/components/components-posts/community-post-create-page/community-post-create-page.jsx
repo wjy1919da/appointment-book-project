@@ -18,12 +18,12 @@ import { useApiRequest } from '../../../hooks/useApiRequest';
 import './community-post-create-page.scss';
 
 // images
-import creatPostIcon from '../../../assets/post/create-post-icon.png';
+import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 import { ErrorSharp } from '@mui/icons-material';
 
 const CreatePostPage = () => {
-  const [selectedImage, setSelectedImage] = useState(creatPostIcon);
+  const [selectedImage, setSelectedImage] = useState(createPostIcon);
   const [hasSelectImage, setHasSelectImage] = useState(false);
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [text, setText] = useState('');
@@ -146,18 +146,39 @@ const CreatePostPage = () => {
           style={{ display: 'none' }}
           onChange={handleImageChange}
         />
-        <div className='left-container'>
-          <div className='create-post-page-add'>
-            {
-              hasSelectImage ?
-              (<img src={selectedImage} onClick={handleIconClick} alt='Selected' />) :
-              (<img src={creatPostIcon} onClick={handleIconClick} alt='Create-Post' />)
-            }
-          </div>
-          <div className='create-post-page-text'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing
-          </div>
-        </div>
+        {hasSelectImage ? (
+          <img
+            src={selectedImage}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              width: '330px',
+              height: '330px',
+              objectFit: 'contain',
+            }}
+            onClick={handleIconClick}
+            alt='Selected'
+          />
+        ) : (
+          <>
+            <div className='left-container'>
+              <div className='create-post-page-add'>
+                <img
+                  src={createPostIcon}
+                  onClick={handleIconClick}
+                  style={{
+                    width: '157px',
+                    height: '157px',
+                  }}
+                  alt='Image-Create-Post'
+                />
+              </div>
+              <div className='create-post-page-text'>
+                Lorem ipsum dolor sit amet, consectetur adipiscing
+              </div>
+            </div>
+          </>
+        )}
 
         <div className='right-container'>
           <div>

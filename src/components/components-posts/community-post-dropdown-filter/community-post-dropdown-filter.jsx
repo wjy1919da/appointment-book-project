@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // components
 import PostSearchBox from '../community-post-search-box/community-post-search-box';
@@ -12,6 +12,8 @@ const PostDropDownFilter = () => {
   const [isLocationTagContainerVisible, setIsLocationTagContainerVisible] =
     useState(false);
 
+  const containerRef = useRef(null);
+
   // tag, location button
   const handleClickTag = () => {
     setIsTagContainerVisible(!isTagContainerVisible);
@@ -21,9 +23,24 @@ const PostDropDownFilter = () => {
     setIsLocationTagContainerVisible(!isLocationTagContainerVisible);
   };
 
+  const closeContainer = (e) => {
+    if (containerRef.current && !containerRef.current.contains(e.target)) {
+      setIsTagContainerVisible(false);
+      setIsLocationTagContainerVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', closeContainer);
+
+    return () => {
+      document.removeEventListener('click', closeContainer);
+    };
+  }, []);
+
   return (
     <>
-      <div className='post-dropdown-filter-container'>
+      <div className='post-dropdown-filter-container' ref={containerRef}>
         <div className='post-dropdown-filter-inner-container'>
           <PostDropDownTagButton
             buttonTagName='#Tag'
