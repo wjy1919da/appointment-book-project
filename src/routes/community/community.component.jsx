@@ -68,7 +68,9 @@ const Community = () => {
             className='location-button'
           />
           <ResetAllButton />
-          <PostSearchBox />
+          <div className='post-search-box-position-container'>
+            <PostSearchBox className='post-search-box' />
+          </div>
         </div>
         <DoctorPostGrid />
       </div>
