@@ -6,29 +6,34 @@
         //justify-content: center;
         align-items: center;
         position: relative;
-        width: 100%; 
-        margin-bottom: 100px;
+        width: 100%;
+        margin-top: 200px;
+        //margin-bottom: 100px;
     }
     .home-doctors-background{
-        transform: scale(0.8);  
-        background-size: 100% 100%; 
-        width: 100%; 
-        height: 40vw;
-        padding: 80px 0px; 
+        //transform: scale(0.8);
+        //background-size: 100% 100%;
+        //width: 100%;
+        //height: 40vw;
+        //padding: 80px 0px;
+        width: 1440px;
         display: flex;
-        flex-direction: column;
+        //flex-direction: column;
         align-items: center;
+        justify-content: center;
     }    
     .home-doctor-apple-section {
-        width: 30vw;
-        height: 90px;
+        width: 695px;
+        height: 772px;
+        margin-left: -80px;
+        position: relative;
         // display: flex;
         // justify-content: center;
         // align-items: center;
         //margin-left: 0vw;
         //padding: 50px; 
         //box-sizing: border-box; 
-        display: flex;
+        //display: flex;
 
     }
     .home-doctor-video {
@@ -43,13 +48,13 @@
     {
         border-radius: 594px;
         background: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
-        width: 500px;
-        height: 500px;
-        flex-shrink: 0;
+        width: 594px;
+        height: 594px;
+        //flex-shrink: 0;
         z-index: 1;
         position: absolute;
-        left:-230px;
-        top:100px;
+        left: 0;
+        bottom: 0;
     }
     
    
@@ -66,16 +71,21 @@
         left: 50px;
     }
     .phone-image {
+        //position: absolute;
+        //top: 0;
+        //left: 0;
+        //z-index: 10;
+        //height:600px;
+        //pointer-events: none;
+        //width:110vh;
+        //position: absolute;
+        //top:-40px;
+        //left:-150px;
+        width: 389px;
+        height: 747px;
+        z-index: 2;
         position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        height:600px;
-        pointer-events: none;
-        width:110vh;      
-        position: absolute;
-        top:-40px;
-        left:-150px; 
+        left: 309px;
     }
     .home-doctors-text{
         display: flex;
@@ -103,9 +113,9 @@
     .home-doctor-apple-link-signUp-area
     {
         display: flex;
-        gap:200px;
-        width:100%;
-        margin-top: 50px;
+        gap: 200px;
+        //width:100%;
+        padding: 200px 0 150px 0;
         justify-content: space-between;
         align-items: center;
         justify-content: center;
@@ -127,50 +137,61 @@
     .home-doctor-apple-link-section
     {
         border-radius: 12px;
-        width: 640px;
-        height: 240px;
+        width: 687px;
+        height: 271px;
         border: 4px solid var(--new-gradient, #F48C8A);
-        margin-left: 500px;
-        margin-top:-100px;
+        margin-left: 80px;
+        //margin-top:-100px;
         position: relative;
         overflow: hidden;
         display: flex;
+        align-items: center;
         .home-doctor-apple-link-subArea1
         {
-            margin-left: -600px;
-            margin-top: -350px;
+            left: -600px;
+            top: -350px;
             border-radius: 973px;
             width: 973px;
             height: 973px;
             background: linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+            position: absolute;
+            z-index: -1;
         }
         .home-doctor-apple-link-subArea2
         {
             border-radius: 12px;
             width:150px;
-            margin-top: 30px;
-            margin-left: 50px;
+            //margin-top: 30px;
+            //margin-left: 50px;
             height:150px;
             background: var(--avatar-color-image, #E2E3E7);
+            //flex: 1;
+            margin-left: 55px;
+            margin-right: 69px;
         }
         .home-doctor-apple-link-left-area
         {
-            position: absolute;
-            margin-left: 0px;
-            margin-top: 0px;
-            width:100%;
+            //position: absolute;
+            //margin-left: 0px;
+            //margin-top: 0px;
+            //width:100%;
+            align-self: stretch;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
         }
         .home-doctor-apple-link-textArea
         {
-            position: absolute;
-            margin-left: 100px;
-            margin-top: 20px;
+            //position: absolute;
+            //margin-left: 100px;
+            //margin-top: 20px;
             display: flex;
             flex-direction: column;
-            width:100%;
+            //width:100%;
             align-items: center;
-            margin-top: 60px;
-            margin-left: -170px;
+            //margin-top: 60px;
+            //margin-left: -170px;
         }
         .apple-link-text1
         {
@@ -199,9 +220,10 @@
         }
         .home-doctor-left-area-arrow
         {
-            position: absolute;
-            top:80px;
-            left:300px;
+            //position: absolute;
+            //top:80px;
+            //left:300px;
+            margin-left: 55px;
         }
         .home-doctor-apple-link-signUp-area
         {
