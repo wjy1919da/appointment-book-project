@@ -12,7 +12,7 @@ const Footer = (props, ref)=> {
     //const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     return (
-        <div ref={ref}>
+        <div ref={ref} className='home-footer-container'>
         {isMobile?(
                 <div className='footer-mobile-container'>
                     <div className='footer-mobile-text'>
