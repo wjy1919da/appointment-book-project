@@ -20,7 +20,6 @@ import './community-post-create-page.scss';
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import { ErrorSharp } from '@mui/icons-material';
 
 const CreatePostPage = () => {
   const [selectedImage, setSelectedImage] = useState(createPostIcon);

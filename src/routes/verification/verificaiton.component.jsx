@@ -5,7 +5,6 @@ import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import userInfoQueryStore from '../../userStore.ts';
-import Cookies from 'js-cookie';
 import ErrorPageCommon from '../error-page-common/error-page-common.component';
 const Verification = () => {
     const location = useLocation();

@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookie from 'js-cookie';
 import NextButton from './next-button.component';
 import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
