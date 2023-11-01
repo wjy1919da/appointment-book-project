@@ -9,7 +9,7 @@ import './community-post-search-box.scss';
 // images
 import SearchIcon from '../../../assets/post/search_icon.svg';
 
-const PostSearchBox = ({ className }) => {
+const PostSearchBox = () => {
   const [input, setInput] = useState('');
   const [showContainer, setShowContainer] = useState(false);
   const [isSearchContainerVisible, setIsSearchContainerVisible] =
@@ -41,10 +41,7 @@ const PostSearchBox = ({ className }) => {
   };
 
   return (
-    <div
-      className={`community-post-search-box-container ${className}`}
-      ref={containerRef}
-    >
+    <div className='community-post-search-box-container' ref={containerRef}>
       <input
         type='text'
         value={input}
