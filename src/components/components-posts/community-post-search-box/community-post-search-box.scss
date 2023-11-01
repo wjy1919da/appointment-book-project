@@ -1,46 +1,18 @@
-// .community-post-search-box-container {
-//   position: relative;
-//   width: 60%;
-
-//   .community-post-search-box-input {
-//     position: absolute;
-//     right: 0;
-//     background: transparent;
-//     border: none;
-//     border-bottom: 1px solid #352c29;
-//     outline: none;
-//     padding: 3px 6px;
-//     width: 260px;
-//     height: 30px;
-//   }
-
-//   .community-post-search-box-icon {
-//     position: absolute;
-//     right: 0;
-//     bottom: 16px;
-//   }
-// }
-
-/* PostSearchBox.scss */
-.post-search-box-container {
+.community-post-search-box-container {
   position: relative;
-  width: 60%;
 
-  .post-search-box-input {
-    position: absolute;
-    right: 0;
+  .community-post-search-box-input {
     background: transparent;
     border: none;
     border-bottom: 1px solid #352c29;
     outline: none;
     padding: 3px 6px;
     width: 260px;
-    height: 30px;
   }
 
-  .post-search-box-icon {
+  .community-post-search-box-icon {
     position: absolute;
     right: 0;
-    bottom: 16px;
+    bottom: 10px;
   }
 }
