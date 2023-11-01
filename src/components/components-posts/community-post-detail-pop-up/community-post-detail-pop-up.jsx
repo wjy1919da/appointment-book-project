@@ -166,10 +166,10 @@ const CommunityPostDetailPopUP = ({
                 <span>Anna</span>
               </div>
               <div>
-                <a href='#' className='anchor-archive'>
+                <button className='button-archive'>
                   Archive
-                </a>
-                <a href='#'>Edit your Post</a>
+                </button>
+                <button className='button-edit'>Edit your Post</button>
               </div>
             </div>
           </>

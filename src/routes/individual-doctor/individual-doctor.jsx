@@ -11,9 +11,9 @@ import DoctorReviewGrid from '../../components/component-individual-doctor/docto
 import Footer from '../../components/footer/footer.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 const IndividualDoctor = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // });
     const {memberId} = useParams(); 
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);

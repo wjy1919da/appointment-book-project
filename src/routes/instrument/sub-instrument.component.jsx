@@ -151,7 +151,7 @@ const SubInstrument = () => {
     const slideRef = useRef(null);
     const recommendationGridRef = useRef(null);
     const footerRef = useRef(null);
-   
+ 
     const handleScroll = () => {
         const slideElement = document.getElementById("slide");
         const recommendationElement = document.getElementById("recommendation");
@@ -228,9 +228,10 @@ const SubInstrument = () => {
             </div>
         )
     }    
+
     return (
         <div className='outer-container'>
-        <div className='sub-instrument-container'>
+        <div className='sub-instrument-container container'>
        <div className='sub-instrument-left-container'>
            <div className='sub-instrument-title-container'>
                <h3 className='sub-instrument-top-text'>Instrument</h3>
@@ -310,49 +311,47 @@ const SubInstrument = () => {
            </div>}
        </div>
        <div className='sub-instrument-right-container'>
-         <div>
-           {/* Card of right container */}
-           {isMediumOrLarge && cardInfo &&<div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
-           {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
-                   <div className="introduction-icon"></div>
-                   <div className="introduction-catalog">
-                       <a
-                           href="#description"
-                           className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                           //onClick={() => setSelectedSection("description")}
-                           >Introduction</a>
-                       <a
-                           href="#consider"
-                           className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                          // onClick={() => setSelectedSection("consider")}
-                           >Why consider {formatTitle(name)}</a>
+        {/* Card of right container */}
+        {isMediumOrLarge && cardInfo &&<div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
+        {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
+                <div className="introduction-icon"></div>
+                <div className="introduction-catalog">
+                    <a
+                        href="#description"
+                        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                        //onClick={() => setSelectedSection("description")}
+                        >Introduction</a>
+                    <a
+                        href="#consider"
+                        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                        // onClick={() => setSelectedSection("consider")}
+                        >Why consider {formatTitle(name)}</a>
 
-                       {optionsContent &&
-                       <a
-                           href="#options"
-                           className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                    {optionsContent &&
+                    <a
+                        href="#options"
+                        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
 
-                           //onClick={() => setSelectedSection("options")}
-                           >Procedure options</a>}
+                        //onClick={() => setSelectedSection("options")}
+                        >Procedure options</a>}
 
-                       {beforeAndAfterImage &&
-                       <a
-                           href="#beforeAndAfter"
-                           className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                           //onClick={() => setSelectedSection("beforeAndAfter")}
-                           >Before and After</a>} 
-                       <a
-                           href="#faq"
-                           className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
-                           //onClick={() => setSelectedSection("faq")}
-                           >FAQ</a>
-                    </div>  
-               </div>}
-              
-               {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
-                   <RecommendationGrid isMobile={false} height={'250px'} />
-               </div>}
-           </div>
+                    {beforeAndAfterImage &&
+                    <a
+                        href="#beforeAndAfter"
+                        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                        //onClick={() => setSelectedSection("beforeAndAfter")}
+                        >Before and After</a>} 
+                    <a
+                        href="#faq"
+                        className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
+                        //onClick={() => setSelectedSection("faq")}
+                        >FAQ</a>
+                </div>  
+            </div>}
+            
+            {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
+                <RecommendationGrid isMobile={false} height={'250px'} />
+            </div>}
        </div>
    </div>
    <div className='instrument-footer-container' ref={footerRef}>

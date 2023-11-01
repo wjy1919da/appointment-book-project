@@ -1,6 +1,5 @@
 import React, { useState, useEffect,useCallback } from 'react';
 import './login-form.styles.scss';
-import Cookies from 'js-cookie';
 import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
 import HomeSpinner from '../../home-spinner/home-spinner.component';
@@ -55,10 +54,11 @@ const LoginForm = (props) => {
     useEffect(() => {
         if (data?.code === 100) {
             const myToken = data.data.token;
-            Cookies.set('token', myToken);
+            localStorage.setItem('token', myToken);
             setToken(myToken);
             /* TODO：alert component */ 
-            alert(data.msg);
+            // alert(data.msg);
+            console.log(' login successful ...', data.msg);
             togglePopup(false);
             //props.onHide();
         }

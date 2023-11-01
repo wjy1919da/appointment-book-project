@@ -1,0 +1,49 @@
+.not-found-page-screen {
+    width: 1440px;
+    height: 908px;
+    flex-shrink: 0;
+    background: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
+    .back-home-button
+    {
+        content: "";
+        background-image: url('../../assets/user/arrow-left.png');
+        width: 24px; /* Set the width of the arrow image */
+        height: 24px; /* Set the height of the arrow image */
+        display: inline-block;
+        background-size: cover;
+        position: relative;
+        top: 87px;
+        left: 47px;
+
+    }
+    .not-found-text
+    {
+        top: 304px;
+        margin-left: 167px;
+        color: var(--White, #FBFCFF);
+        /* gradient button text shadow */
+        text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.10);
+        /* NEW TYPE/NEW sub heading */
+        font-family: Open Sans;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        position:relative;
+    }
+    .feature-coming-soon-text
+    {
+        top: 426px;
+        margin-left: 52px;
+        color: var(--White, #FBFCFF);
+        /* gradient button text shadow */
+        text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.10);
+        /* NEW TYPE/NEW heading */
+        font-family: Open Sans;
+        font-size: 60px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        position:relative;
+    }
+}

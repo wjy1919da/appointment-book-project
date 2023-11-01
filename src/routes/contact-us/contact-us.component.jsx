@@ -19,9 +19,9 @@ const ContactUs = () => {
     const [nameError, setNameError] = useState(false);  // if they do not input anything into name field
     const [emailError, setEmailError] = useState(false);  // if they do not input anything into email field
     const [messageError, setMessageError] = useState(false);  // if they do not enter anything into message field
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, [submitted]);
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, [submitted]);
     const mailingAddress = '9100 Wilshire Blvd, Beverly Hills, CA 90212';
     const companyEmail = 'marketing@charm-life.com';
 

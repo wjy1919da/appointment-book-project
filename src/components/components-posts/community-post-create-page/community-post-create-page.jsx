@@ -1,51 +1,101 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 // scss
 import './community-post-create-page.scss';
 
 // components
-import { useAddPost } from '../../../hooks/useAddingPost';
 import FormButton from '../../components-posts/community-post-button/community-post-button';
 import Footer from '../../footer/footer.component';
+import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
+
+// hook
+import { useApiRequest } from '../../../hooks/useApiRequest';
+// import { useAddPost } from '../../../hooks/useAddingPost';
 
 // scss
 import './community-post-create-page.scss';
 
 // images
-import creatPostIcon from '../../../assets/post/create-post-icon.png';
+import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 
 const CreatePostPage = () => {
-  const [selectedImage, setSelectedImage] = useState(creatPostIcon);
+  const [selectedImage, setSelectedImage] = useState(createPostIcon);
   const [hasSelectImage, setHasSelectImage] = useState(false);
-  const { mutate } = useAddPost();
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
-  const [tagDoctor, setTagDoctor] = useState('');
-  const [location, setLocation] = useState('');
   const [clickedRadio, setClickedRadio] = useState(false);
+  // const [text, setText] = useState('');
+  // const [tagDoctor, setTagDoctor] = useState('');
+  // const [location, setLocation] = useState('');
+  // const { mutate } = useAddPost();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const navigate = useNavigate();
 
-  const handlePostCreation = () => {
-    const newPost = {
-      title: title,
-      brief: text,
-      tags: [{ tagId: 0, tagName: tagDoctor }],
-      location: location,
-      pictures: hasSelectImage ? [selectedImage] : [],
+  // react hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onChange' });
+
+  // api
+  const { mutate: apiMutate } = useApiRequest({
+    onError: (error) => {
+      console.error('API request error', error);
+    },
+  });
+
+  const onSubmit = (data) => {
+    const formData = {
       address: '',
+      brief: data.description,
       coverImg: '',
       id: 0,
       isDisplay: 0,
       lat: '',
+      location: '',
       lon: '',
+      pictures: hasSelectImage ? [selectedImage] : [],
+      tags: [
+        {
+          tagId: 0,
+          tagName: '',
+        },
+      ],
+      title: data.title,
     };
-    console.log('Sending payload:', newPost);
-    mutate(newPost);
+    // console.log('payload - formData:', formData);
+    console.log(data);
+    apiMutate(formData);
   };
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
+  // back button
+  const handleClickCreatePostBack = () => {
+    navigate('/posts');
+  };
+
+  // const handlePostCreation = () => {
+  //   const newPost = {
+  //     title: title,
+  //     brief: text,
+  //     tags: [{ tagId: 0, tagName: tagDoctor }],
+  //     location: location,
+  //     pictures: hasSelectImage ? [selectedImage] : [],
+  //     address: '',
+  //     coverImg: '',
+  //     id: 0,
+  //     isDisplay: 0,
+  //     lat: '',
+  //     lon: '',
+  //   };
+  //   console.log('Sending payload:', newPost);
+  //   mutate(newPost);
+  // };
 
   const handleIconClick = () => {
     document.getElementById('imageUpload').click();
@@ -71,13 +121,22 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div className='create-post-page-container'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='create-post-page-container'
+    >
       <div className='pink-background-1'></div>
       <div className='pink-background-2'></div>
-      <button className='create-post-page-back-button-container'>
+
+      <button
+        type='button'
+        onClick={handleClickCreatePostBack}
+        className='create-post-page-back-button-container'
+      >
         <img src={Arrow} alt='Image-Arrow-Icon' className='arrow-back-button' />
         <span className='create-post-page-back-button'>Create a post</span>
       </button>
+
       <div className='create-post-page-inner-container'>
         <input
           type='file'
@@ -87,14 +146,29 @@ const CreatePostPage = () => {
           onChange={handleImageChange}
         />
         {hasSelectImage ? (
-          <img src={selectedImage} onClick={handleIconClick} alt='Selected' />
+          <img
+            src={selectedImage}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              width: '330px',
+              height: '330px',
+              objectFit: 'contain',
+            }}
+            onClick={handleIconClick}
+            alt='Selected'
+          />
         ) : (
           <>
             <div className='left-container'>
               <div className='create-post-page-add'>
                 <img
-                  src={creatPostIcon}
+                  src={createPostIcon}
                   onClick={handleIconClick}
+                  style={{
+                    width: '157px',
+                    height: '157px',
+                  }}
                   alt='Image-Create-Post'
                 />
               </div>
@@ -104,29 +178,42 @@ const CreatePostPage = () => {
             </div>
           </>
         )}
+
         <div className='right-container'>
-          <form className='form'>
+          <div>
             <input
               type='text'
               placeholder='Title'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
               className='create-post-page-title'
+              {...register('title', {
+                required: '* Title is required.',
+                maxLength: {
+                  value: 20,
+                  message: '* Maximum limit for characters is 20.',
+                },
+              })}
             />
-            <textarea
-              name='description'
-              id='description'
-              placeholder='Description'
-              className='create-post-page-description'
-            ></textarea>
+            <p className='title-error-validation'>{errors.title?.message}</p>
 
-            <div className='create-post-page-tag-container'>
-              <span className='create-post-page-tag-name'>#Tag</span>
-              <span className='create-post-page-location-tag-name'>
-                Add Location
-              </span>
+            <div className='description-container'>
+              <textarea
+                name='brief'
+                id='description'
+                placeholder='Description'
+                className='create-post-page-description'
+                {...register('description', {
+                  required: '* Description is required.',
+                })}
+              ></textarea>
+
+              <PostDropDownFilter />
+              <PostDropDownFilter />
+
+              <p className='description-error-validation'>
+                {errors.description?.message}
+              </p>
             </div>
-          </form>
+          </div>
 
           <div className='wrapper'>
             {/* --- radio button --- */}
@@ -136,7 +223,7 @@ const CreatePostPage = () => {
                 type='radio'
                 name='input-radio-button'
                 checked={clickedRadio}
-                onClick={handleRadioClick}
+                onChange={handleRadioClick}
                 className='create-post-input-radio-button'
               />
               <label
@@ -150,18 +237,18 @@ const CreatePostPage = () => {
             {/* --- button --- */}
             <div className='post-information-sendButton'>
               <FormButton
-                buttonName="Post"
-                handlePostCreation={handlePostCreation}
+                buttonName='Post'
                 className='create-post-custom-button'
               />
             </div>
           </div>
         </div>
       </div>
+
       <div className='footer-container'>
         <Footer />
       </div>
-    </div>
+    </form>
   );
 };
 

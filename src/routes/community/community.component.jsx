@@ -2,7 +2,7 @@ import usePostQueryStore from '../../postStore.ts';
 import React, { useLayoutEffect } from 'react';
 
 // components
-import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.component';
+import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import Footer from '../../components/footer/footer.component';
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
@@ -29,9 +29,9 @@ const Community = () => {
   //   { value: 'by doctor', label: 'By Doctor' },
   // ];
 
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0, 0);
+  // });
 
   const handleFilters = (value, isChecked) => {
     const updatedFilter = [...postQuery.filterCondition];

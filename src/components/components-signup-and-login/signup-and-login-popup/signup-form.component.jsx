@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookie from 'js-cookie';
 import NextButton from './next-button.component';
 import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
@@ -70,7 +69,7 @@ const SignUpForm = () => {
         if (data?.msg && data.code === 100) {
            const myToken = data.data.token;
            console.log("myToken in new register ", myToken);
-           Cookie.set('token', myToken);
+           localStorage.setItem('token', myToken);
            setToken(myToken);
            alert("register success ", data.code);
            if (userInfo && userInfo.accountType) {

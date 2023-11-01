@@ -3,7 +3,6 @@
     .Home-post{
         width: 100%;
         //height: 800px;
-        background:white;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -142,7 +141,6 @@
         //top: 400px;
         //left:900px;
         width: 50%;
-        background: #FEFFFF;
         // margin-left: 200px;
         // margin-top: 250px;
         // // margin-left: 330px;
@@ -465,9 +463,10 @@
     }
     .home-mobile-share-postContainer{
         position: absolute;
-        top: 420px;
-        left: 0;
+        top: 450px;
+        left: -26px;
         z-index: 1;
+        width: 200px;
     }
     .p-topic{
         display: none;

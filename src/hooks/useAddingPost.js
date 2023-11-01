@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import useBlogStore from '../blogStore.ts';
-import Cookies from 'js-cookie';
+import useBlogStore from '../blogStore';
+
 export function useAddPost() {
 
     const addPost = useBlogStore(state => state.addPost);

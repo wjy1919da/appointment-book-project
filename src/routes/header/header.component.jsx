@@ -10,7 +10,6 @@ import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
-import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
 const Header = () => {
   const location = useLocation();
@@ -114,9 +113,9 @@ const Header = () => {
   const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
 
   const handleLogOutClick = () => {
-    Cookies.remove('token');
+    localStorage.removeItem('token');
     removeToken();
-    alert('Log out successfully!');
+    // alert('Log out successfully!');
   };
   const MenuItems = [
     {
@@ -210,7 +209,7 @@ const Header = () => {
                 >
                   <img
                     src={loginIcon}
-                    alt='login-Image'
+                    alt='login'
                     style={{ width: '34px', height: '36px', marginTop: '-15%' }}
                   ></img>
                 </Dropdown.Toggle>
@@ -229,11 +228,24 @@ const Header = () => {
           <div className='header-container'>
             <Link className='header-logo-container' to='/'>
               <img className='logo' src={Logo} alt='logo' />
+              <span className='logo-title'>Charm</span>
             </Link>
             <div className='header-nav-container' id='#navbarTogglerDemo02'>
-              <span className='dropdown-center'>
+              <Link
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/doctor' ? 'active-link' : ''
+                }`}
+                to='/doctor' title="Doctors"
+              >Doctors</Link>
+              <Link
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/posts' ? 'active-link' : ''
+                }`}
+                to='/posts' title='Posts'
+              >Posts</Link>
+              <span className='header-nav dropdown-center'>
                 <Link
-                  className={`header-nav-link1 ${
+                  className={`header-nav-link ${
                     location.pathname.startsWith('/procedure/')
                       ? 'active-link'
                       : ''
@@ -243,6 +255,7 @@ const Header = () => {
                   aria-expanded='false'
                   //onMouseOver={() => setIsModelOpen(true)}
                   onClick={() => setIsModalOpen(true)}
+                  title='Procedure'
                 >
                   Procedure
                 </Link>
@@ -256,62 +269,39 @@ const Header = () => {
                   {/* <DropdownMenu /> */}
                 </ul>
               </span>
-              <span className='header-nav-divider'>|</span>
               <Link
-                className={`header-nav-link2 ${
-                  location.pathname === '/doctor' ? 'active-link' : ''
+                className={`header-nav header-nav-link ${
+                  location.pathname === '/instrument' ? 'active-link' : ''
                 }`}
-                to='/doctor'
-              >
-                Doctors
-              </Link>
-              <span className='header-nav-divider'>|</span>
-              <Link
-                className={`header-nav-link2 ${
-                  location.pathname === '/instrument'
-                    ? 'active-link'
-                    : ''
-                }`}
-                to='/instrument'
-              >
-                Instruments
-              </Link>
-              <span className='header-nav-divider'>|</span>
-              <Link
-                className={`header-nav-link2 ${
-                  location.pathname === '/posts' ? 'active-link' : ''
-                }`}
-                to='/posts'
-              >
-                Posts
-              </Link>
+                to='/instrument' title="Instruments"
+              >Instruments</Link>
             </div>
             <div className='header-login'>
               {/* <div className="header-search">
-                            <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                            </input>
-                        </div>  */}
-                         <div className="header-login-logo">
-                            <a href="/userProfile">
-                                <img src={loginIcon} alt="login Image"></img>
-                            </a>
-                        </div>
-                        <div className="header-login-text">
-                            {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
-                            {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
-                            {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
-                        </div>
-                    </div> 
-                </div>
-                <Outlet />
-            </Fragment>
-            )}          
-            {isPopupOpen &&
-                    <SignupPopup3
-                    show = {isPopupOpen}
-                    onHide={() => {togglePopup(false)}}
-                />  
-            }
+                    <input class="form-control me-2" className='input' type="text"  aria-label="Search">
+                    </input>
+                </div>  */}
+              <div className="header-login-logo">
+                <a href="/userProfile">
+                    <img src={loginIcon} alt="login"></img>
+                </a>
+              </div>
+              <div className="header-login-text">
+                  {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
+                  {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
+                  {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
+              </div>
+            </div>
+          </div>
+          <Outlet />
+        </Fragment>
+        )}
+        {isPopupOpen &&
+                <SignupPopup3
+                show = {isPopupOpen}
+                onHide={() => {togglePopup(false)}}
+            />  
+        }
      </div>
    );
  }; 

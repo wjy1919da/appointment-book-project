@@ -9,9 +9,9 @@ import Footer from "../../components/footer/footer.component";
 import './procedure.styles.scss';
 
 const FacialProcedure = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0)
+    // });
 
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring']
     const sections = facialProcedures.map((procedure, index) => {

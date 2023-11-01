@@ -1,0 +1,39 @@
+// screen bigger than 1025px
+.post-dropdown-filter-container {
+  position: relative;
+}
+
+.post-dropdown-filter-search-container,
+.post-dropdown-location-filter-search-container {
+  position: absolute;
+  background: #fbfcff;
+  border-radius: 8px;
+  border: 1px solid #675d59;
+  width: 330px;
+  height: 260px;
+}
+
+.post-dropdown-filter-search-container {
+  top: 0;
+  left: 16px;
+}
+
+.post-dropdown-location-filter-search-container {
+  top: 0;
+  right: 14px;
+}
+
+.post-dropdown-filter-search-inner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+// screen 769px to 1024px
+@media (max-width: 1024px) {
+}
+
+// small screens
+@media (max-width: 768px) {
+}

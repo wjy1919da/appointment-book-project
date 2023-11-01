@@ -1,27 +1,51 @@
-import './doctor-post-grid.styles.scss';
-import CommunityPost from '../community-post/community-post.component';
-import { useGetPost } from '../../../hooks/useGetPosts';
-import HomeSpinner from '../../home-spinner/home-spinner.component';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import React, { useState, useEffect } from 'react';
-import PostDetail from '../community-post-detail/community-post-detail.component';
-import usePostQueryStore from '../../../postStore.ts';
-import Arrow from '../../../assets/post/arrow_grid.png';
-import Arrow1 from '../../../assets/post/arrow1_grid.png';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import usePostQueryStore from '../../../postStore.ts';
+
+// components
+import CommunityPost from '../community-post/community-post.component';
+import PostDetail from '../community-post-detail/community-post-detail.component';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ErrorMsg from '../../error-msg/error-msg.component';
 
+// hook
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
+// import { useGetPost } from '../../../hooks/useGetPosts';
+
+// scss
+import './doctor-post-grid.styles.scss';
+
+// images
+import Arrow from '../../../assets/post/arrow_grid.png';
+import Arrow1 from '../../../assets/post/arrow1_grid.png';
+
 const DoctorPostGrid = ({ isAbout }) => {
+
   const {
     data,
     error,
     isLoading,
     fetchNextPage,
-    isFetchingNextPage,
+    // isFetchingNextPage,
     hasNextPage,
-  } = useGetPost();
+  } = useApiRequestPostFilter();
+
+  if (data) {
+    // console.log(data);
+  }
+
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   fetchNextPage,
+  //   isFetchingNextPage,
+  //   hasNextPage,
+  // } = useGetPost();
+
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
@@ -33,17 +57,20 @@ const DoctorPostGrid = ({ isAbout }) => {
     ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
     : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
   const isMobileOrAbout = isMobile || isAbout;
+
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
+
   const setPostID = (ID, avatar, username) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(avatar);
     setUserName(username);
   };
+
   const postCardList = flatData.map((post) => (
     <div
       className='btn'
