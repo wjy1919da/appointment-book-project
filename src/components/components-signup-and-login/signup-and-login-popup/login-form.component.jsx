@@ -2,7 +2,6 @@ import React, { useState, useEffect,useCallback } from 'react';
 import './login-form.styles.scss';
 import { useUserEmailLogin } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
-import HomeSpinner from '../../home-spinner/home-spinner.component';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
@@ -12,6 +11,7 @@ import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
 import { useDoctorLogin } from '../../../hooks/useAuth';
 const LoginForm = (props) => {
+    // console.log("loginForm");
     const setToken = userInfoQueryStore((state) => state.setToken);
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
@@ -20,27 +20,24 @@ const LoginForm = (props) => {
     useEffect(() => {
         setAccountType(localStorage.getItem('accountType'));
     }, []);
-
     const userEmailLogin = useUserEmailLogin();
     const doctorLogin = useDoctorLogin();
-
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
+    //console.log("authhook",authHook === doctorLogin);
     const schema = z.object({
         email: z.string().email(),
         password: z.string()
             .min(6)
             .max(18)
-            .refine(password => 
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
-                {
-                    message: "Password must contain both letters and numbers."
-                }
-            ),
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        })
     });
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
         mode: 'onChange'
     });
+   
     const { mutate, isLoading, data, error } = authHook;
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
@@ -52,34 +49,29 @@ const LoginForm = (props) => {
         });
     };
     useEffect(() => {
-        if (data?.code === 100) {
-            const myToken = data.data.token;
-            localStorage.setItem('token', myToken);
-            setToken(myToken);
-            /* TODO：alert component */ 
-            // alert(data.msg);
-            console.log(' login successful ...', data.msg);
-            togglePopup(false);
-            //props.onHide();
-        }
-        if (data?.code === 500 || data?.code === 403) {
-            alert(data.msg);  
+        if (data?.msg) {
+            if(data?.code === 100){
+                const myToken = data.data.token;
+                localStorage.setItem('token', myToken);
+                setToken(myToken);
+                /* TODO：alert component */ 
+               // alert(data.msg);
+                console.log(' login successful ...', data.msg);
+                togglePopup(false);
+                
+            }else{
+                alert(data.msg);
+            }
         }
     }, [data]);
-    //  /* TODO: Need to improve */ 
-    // if (isLoading) {
-    //     return <HomeSpinner />;
-    // }
     if (error) {
         alert(error.message);
     }
-
     return (
         <div className="sign-in-form-container">
             <div className='login-title-container'>
                <LoginRegisterTitle title={"Log In"}/>
             </div>
-
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className='login-input-container'>
                     <Form.Group className="mb-3">
@@ -109,7 +101,7 @@ const LoginForm = (props) => {
                                 {errors.password?.message}
                             </Form.Control.Feedback>
                         </InputGroup>
-                        <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('phoneNumberLogin')}>Forgot Password?</button>
+                        <button style={{ color: '#F48C8A', textDecoration: 'none', background: 'none', border: 'none', fontSize: '14px' }} onClick={()=>switchPopupTab('sendVerifyEmail')}>Forgot Password?</button>
                     </Form.Group>
                 </div>
                

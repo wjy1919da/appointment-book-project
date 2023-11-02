@@ -278,6 +278,7 @@ const Header = () => {
             </div>
             <div className='header-login'>
               {/* <div className="header-search">
+
                     <input class="form-control me-2" className='input' type="text"  aria-label="Search">
                     </input>
                 </div>  */}

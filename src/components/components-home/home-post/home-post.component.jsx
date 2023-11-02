@@ -6,7 +6,6 @@ import Tag1 from '../../../assets/home/tag1.svg';
 import Tag2 from '../../../assets/home/tag2.svg';
 import Tag4 from '../../../assets/home/tag4.svg';
 import { Link } from 'react-router-dom';
-import HomeButtonPink from '../../home-button-pink/home-button-pink';
 import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
 import './home-post.styles.scss';
 import HomeLink from '../home-link/home-link.component';

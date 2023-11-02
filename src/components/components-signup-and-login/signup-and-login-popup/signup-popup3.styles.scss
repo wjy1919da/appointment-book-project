@@ -3,80 +3,92 @@
         border: none;
     }
     .signup-popup-modal {
-        /*
-        .modal-lg {
-            max-width: 50%; 
-        }
-        */
-
         .modal-content {
-            // border-color: 3px solid var(--unnamed, #FFA4A3);
-            border-color: #FFA4A3;
-            border-width: thin;
             border-radius: 20px;
-            min-width: 400px;
-            max-width: 430px;
-            // min-height: 520px;
-            // max-height: 650px;
+            width: 430px;
             height: 600px; 
+            margin-left: auto;
+            margin-right: auto;
         }
     }
-
-    .signup-popup-lable {
-        color: #352C29;
-        font-family: Lora;
-        font-style: normal;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 0px;
-        margin-bottom: -17px;
-        margin-left: 80px;
-        flex-shrink: 0;
+    .signup-popup-doctor-profile{
+        .modal-content {
+            border-radius: 20px;
+            width: 1100px;
+            height: 650px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
-
-    .next-button-section {
-        margin-top: -10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+    .signup-popup-doctor-verification{
+        .modal-content {
+            border-radius: 20px;
+            width: 800px;
+            height: 1000px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
+    .signup-popup-doctor-finish{
+        .modal-content {
+            border-radius: 20px;
+            width: 900px;
+            height: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .signup-popup-user-profile-gender{
+        .modal-content {
+            border-radius: 20px;
+            width: 500px;
+            height: 600px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    // .next-button-section {
+    //     margin-top: -10px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
     
-    .or-label {
-        color: #AAA;
-        font-family: Lora;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        margin-top: 20px;
-        text-align: center;
-        // flex-grow: 1;
-        flex-shrink: 0;
-    }
+    // .or-label {
+    //     color: #AAA;
+    //     font-family: Lora;
+    //     font-size: 12px;
+    //     font-style: normal;
+    //     font-weight: 500;
+    //     line-height: normal;
+    //     margin-top: 20px;
+    //     text-align: center;
+    //     // flex-grow: 1;
+    //     flex-shrink: 0;
+    // }
 
-    .signin-with-apple-section {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .signin-with-google-section {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .signin-with-facebook-section {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+    // .signin-with-apple-section {
+    //     margin-top: 10px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+    // .signin-with-google-section {
+    //     margin-top: 8px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+    // .signin-with-facebook-section {
+    //     margin-top: 8px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
     .step-tracker {
         display: flex;
         align-items: center;

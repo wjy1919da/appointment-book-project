@@ -1,11 +1,10 @@
 import { useMutation } from 'react-query';
 import axios from 'axios';
-
-const endpoint = 'https://api-dev.charm-life.com/post/posts';
+import APIClient from '../services/api-client';
 
 export function useApiRequestPost() {
   const token = localStorage.getItem('token');
-
+  const apiClient = new APIClient('/post/posts', token);
   const fetchUserData = async ({
     address,
     brief,
@@ -23,11 +22,8 @@ export function useApiRequestPost() {
       alert('Error.');
       return;
     }
-
     console.log(brief, title);
-
-    const res = await axios.post(
-      endpoint,
+    const res = await apiClient.post(
       {
         address,
         brief,
@@ -41,11 +37,6 @@ export function useApiRequestPost() {
         tags,
         title,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
     );
     return res.data;
   };

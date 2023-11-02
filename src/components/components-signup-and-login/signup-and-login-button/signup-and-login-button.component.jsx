@@ -24,7 +24,7 @@ const SignupAndLoginButton = (props) => {
       };
     
     return (
-        <button className='signup-and-login-button' onClick={handleClick} style={buttonStyle}>
+        <button type={props.type} className='signup-and-login-button' onClick={handleClick} style={buttonStyle}>
             {props.isIcon&&<img src={props.isIcon} className='signup-and-login-button-icon' alt='search'/>}
             {props.title}
         </button>

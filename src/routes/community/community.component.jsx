@@ -1,5 +1,6 @@
 import usePostQueryStore from '../../postStore.ts';
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect,useEffect } from 'react';
+import Cookie from 'js-cookie';
 
 // components
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
@@ -8,7 +9,7 @@ import Footer from '../../components/footer/footer.component';
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
 import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
 import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
-
+import userInfoQueryStore from '../../userStore.ts';
 // scss
 import './community.styles.scss';
 
@@ -28,10 +29,24 @@ const Community = () => {
   //   { value: 'by user', label: 'By User' },
   //   { value: 'by doctor', label: 'By Doctor' },
   // ];
+  
+ // Handle the situation of user not login but still want to see the post
+//  const userInfo = userInfoQueryStore((state) => state.userInfo);
+//  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+//  var token = Cookie.get('token');
+//  useEffect(() => {
+//     //console.log("doctor-post-grid");
+//     //console.log("userInfo in doctor-post-grid",userInfo);
+//     if(!token){
+//       togglePopup(true,"accountType");
+//     }
+//  },[userInfo.token]);
+ //console.log("userInfo in doctor-post-grid outside",userInfo);
+  
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
-  // useLayoutEffect(() => {
-  //   window.scrollTo(0, 0);
-  // });
 
   const handleFilters = (value, isChecked) => {
     const updatedFilter = [...postQuery.filterCondition];
@@ -50,6 +65,7 @@ const Community = () => {
 
   return (
     <div>
+      <div>
       <PostPageMain />
       <div className='doctor-post-outer-container'>
         <div className='doctor-post-header-container'>
@@ -76,8 +92,10 @@ const Community = () => {
         </div>
         <DoctorPostGrid />
       </div>
-      <Footer />
+      <DoctorPostGrid />
     </div>
+    <Footer />
+  </div>
   );
 };
 

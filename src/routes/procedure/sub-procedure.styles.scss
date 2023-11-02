@@ -201,7 +201,7 @@
         flex-direction: row;
         order: 1;
         flex: none;
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .introduction-slide .introduction-catalog {
@@ -302,6 +302,16 @@
 // Desktop
 @media(min-width: 1280px){
     // 基于1280px设计
+    .home-container {
+        position: relative;
+        width: 100%;
+        padding-top: 64px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .sub-procedure-title-container {
         .sub-procedure-top-text {
             width: 700px;
@@ -315,6 +325,11 @@
         .sub-text {
         }
     }
+    .section-container {
+        display: flex;
+        width: 1280px;
+    }
+
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {

@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
 }
-.dropdown {
+.calendar-profile-dropdown {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -105,4 +105,50 @@
 .cell.disabled .number {
     background-color: transparent;
     color: #ccc;
+}
+
+.picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-container {
+    display: flex;
+    overflow-x: scroll;
+    width: 200px; /* adjust this value as per your design */
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+}
+
+.slide-container div {
+    // scroll-snap-align: start;
+    // padding: 10px;
+    // border: 1px solid #ddd;
+    // cursor: pointer;
+    color:  #352C29;
+    text-align: center;
+
+    /* NEW TYPE/NEW caption */
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.slide-container div.active {
+    background-color: #f5a623;
+    color: #fff;
+}
+.picker-switcher{
+    width: 18px;
+    height: 18px;
+    background-color: #F48C8A;
+    color: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 30%; 
+    font-size: 12px;
 }

@@ -65,13 +65,15 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     avatar = avatar;
     setUserID(143);
   };
+  
 
-  console.log('userpostedCallBackdata', data);
+  //console.log('userpostedCallBackdata', data);
 
   const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  
 
-  console.log('userPostedpostin', flatData);
-
+  //console.log('userPostedpostin', flatData);
+  
   useEffect(() => {
     const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
@@ -91,6 +93,9 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       };
     });
   }, []);
+  // if (flatData.length === 0) {
+  //   return null; // 或者你可以选择返回null来完全不渲染组件
+  // }
 
   const samplePosts = Array(10).fill({
     pictures: post1,
