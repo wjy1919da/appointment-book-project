@@ -50,7 +50,7 @@ const PostDropDownFilter = () => {
           {isTagContainerVisible && (
             <div className='post-dropdown-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
-                <PostSearchBox />
+                <PostSearchBox className="search-reverse"/>
               </div>
             </div>
           )}
@@ -63,7 +63,7 @@ const PostDropDownFilter = () => {
           {isLocationTagContainerVisible && (
             <div className='post-dropdown-location-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
-                <PostSearchBox />
+                <PostSearchBox className="search-reverse" />
               </div>
             </div>
           )}

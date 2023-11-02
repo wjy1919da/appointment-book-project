@@ -33,6 +33,10 @@
   margin-top: 20px;
 }
 
+.search-reverse {
+  flex-direction: row-reverse;
+}
+
 // screen 769px to 1024px
 @media (max-width: 1024px) {
 }
