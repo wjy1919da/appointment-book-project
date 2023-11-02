@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import APIClient from '../services/api-client';
 
-export function useApiRequest() {
+export function useApiRequestPost() {
   const token = localStorage.getItem('token');
   const apiClient = new APIClient('/post/posts', token);
   const fetchUserData = async ({
