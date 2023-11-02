@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 const axiosInstance = axios.create({
-    baseURL: 'http://api-dev.charm-life.com/'
+    baseURL: 'https://api-dev.charm-life.com/'
    //baseURL: 'http://localhost:8080/'
 });
 class APIClient {
