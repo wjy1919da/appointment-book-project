@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
-import Cookies from 'js-cookie';
 import Verification from './routes/verification/verificaiton.component';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './private-route.component';
@@ -32,7 +31,6 @@ import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
 import UserInfo from './routes/user-info/user-info.component';
-import { Create } from '@mui/icons-material';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 
 import AccountSetup from './components/account-setting/account-setting';

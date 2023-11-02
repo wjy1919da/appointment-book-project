@@ -5,9 +5,7 @@ import LoginRegisterTitle from "./login-register-title.component";
 import NextButton from "./next-button.component";
 import { useUserOtpRegisterValidate } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookies from 'js-cookie';
 import { Form, InputGroup } from 'react-bootstrap'
-import { Cookie } from "@mui/icons-material";
 
 const SendOtpVerification = () => {
     // const userInfo = userInfoQueryStore((state) => state.userInfo);

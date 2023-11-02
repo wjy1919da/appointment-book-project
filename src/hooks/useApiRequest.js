@@ -1,12 +1,12 @@
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import APIClient from '../services/api-client';
+
 
 //const endpoint = 'https://api-dev.charm-life.com/post/posts';
 
 export function useApiRequest() {
-  const token = Cookies.get('token');
+  const token = localStorage.getItem('token');
   const apiClient = new APIClient('/post/posts', token);
   const fetchUserData = async ({
     address,

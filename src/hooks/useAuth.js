@@ -2,8 +2,8 @@ import userInfoQueryStore from '../userStore.ts';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
-import Cookies from 'js-cookie';
 import APIClient from '../services/api-client.js';
+
 
 
 export function useUserOptLogin() {
@@ -90,8 +90,8 @@ export function useUserEmailRegisterValidate(token) {
     return useQuery(['userEmailRegisterValidate', token], (token)=>fetchUserEmailRegisterValidate(token));
 }
 export function useSetUserProfile(){
-    const token = Cookies.get('token');
     const apiClient = new APIClient('/user/set_user_profile', token);
+    const token = localStorage.getItem('token');
     const fetchSetUserProfile = async (gender, interestArea, email,birthday,nickname) => {
             if (!token) {
                 alert('user not login');
