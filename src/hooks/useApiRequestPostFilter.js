@@ -1,12 +1,11 @@
 import axios from 'axios';
 import usePostQueryStore from '../postStore.ts';
 import { useInfiniteQuery } from 'react-query';
-import Cookies from 'js-cookie';
 
 const endpoint = 'https://api-dev.charm-life.com/post/filter';
 
 export function useApiRequestPostFilter() {
-  const token = Cookies.get('token');
+  const token = localStorage.getItem('token');
 
   const postQuery = usePostQueryStore((s) => s.postQuery);
   //   console.log(postQuery);

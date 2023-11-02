@@ -10,7 +10,6 @@ import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
-import Cookies from 'js-cookie';
 import userInfoQueryStore from '../../userStore.ts';
 const Header = () => {
   const location = useLocation();
@@ -114,9 +113,9 @@ const Header = () => {
   const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
 
   const handleLogOutClick = () => {
-    Cookies.remove('token');
+    localStorage.removeItem('token');
     removeToken();
-    alert('Log out successfully!');
+    // alert('Log out successfully!');
   };
   const MenuItems = [
     {

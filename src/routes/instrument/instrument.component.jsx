@@ -10,9 +10,9 @@ import './instrument.styles.scss';
 import instrumentJSONData from './instrument-text-new.json';
 
 const Instrument = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // });
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     console.log(instrumentJSONData);
     const thermageObj = instrumentJSONData[0];

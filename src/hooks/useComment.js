@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useMutation, useQuery } from "react-query";
-import Cookies from 'js-cookie';
 import userInfoQueryStore from '../userStore.ts';
 const base = {
     addComment: 'http://localhost:8080/user_action/actions/comment',
@@ -8,7 +7,7 @@ const base = {
 }
 /* Because dynamicId and text only use once, so I do not create zuztand store */
 export function useAddComment() {
-    const token = Cookies.get('token');
+    const token = localStorage.getItem('token');
     const fetchAddComment = async (dynamicId,text) => {
             if (!token) {
                 alert('user not login');

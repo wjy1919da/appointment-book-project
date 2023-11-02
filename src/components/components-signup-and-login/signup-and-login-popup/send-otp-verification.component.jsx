@@ -5,9 +5,7 @@ import LoginRegisterTitle from "./login-register-title.component";
 import NextButton from "./next-button.component";
 import { useUserOtpRegisterValidate } from '../../../hooks/useAuth';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookies from 'js-cookie';
 import { Form, InputGroup } from 'react-bootstrap'
-import { Cookie } from "@mui/icons-material";
 
 const SendOtpVerification = () => {
     // const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -53,7 +51,7 @@ const SendOtpVerification = () => {
     useEffect(() => {
         if (data?.code === 100) {
             const token = data.data.token;
-            Cookies.set('token', token);
+            localStorage.setItem('token', token);
             setToken(token);
             alert(data.msg);
             togglePopup(false);

@@ -18,7 +18,7 @@ const HomeRecommande = () => {
                 <span className='home-recommande-title'>Recommended Cosmetic Procedures</span>
             </div>
             <div className='home-recommande-sub-area'>
-                <div>
+                <div className='home-recommande-sub-area-left'>
                     <SubTxt title = 'Facial Rejuvenation'  text = 'Various means to restore a youthful appearance to an aging face A high-safety procedure that helps patients regain their best youthful appearance by removing excess or sagging skin, smoothing deep folds, and lifting and tightening deep facial tissues.' />
                     <SubTxt title = 'What is Facial Rejuvenation?'  text = 'Various means to restore a youthful appearance to an aging face. A high-safety procedure that helps patients regain their best youthful appearance by removing excess or sagging skin, smoothing deep folds, and lifting and tightening deep facial tissues.' />
                     <Link className='watch-video-link'>Watch video</Link>

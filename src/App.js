@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import userInfoQueryStore from './userStore.ts';
-import Cookies from 'js-cookie';
 import Verification from './routes/verification/verificaiton.component';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './private-route.component';
@@ -31,12 +30,12 @@ import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
 import UserInfo from './routes/user-info/user-info.component';
-import { Create } from '@mui/icons-material';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 
 import AccountSetup from './components/account-setting/account-setting';
 import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
+import ScrollToTop from './routes/ScrollToTop.js';
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -47,25 +46,26 @@ const App = () => {
   const setToken = userInfoQueryStore((state) => state.setToken);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   useEffect(() => {
-    var cookieToken = Cookies.get('token');
+    const cookieToken = localStorage.getItem('token');
     if (cookieToken && cookieToken !== token) {
       setToken(cookieToken);
     }
-    var accountType = localStorage.getItem('accountType');
+    const accountType = localStorage.getItem('accountType');
     if (accountType) {
       setAccountType(accountType);
     }
   }, []);
 
   return (
-    // <DataRouter>
+    <>
+    <ScrollToTop />
     <Routes>
       <Route path='/' element={<Header />}>
         {/* <Route index element={isMobile ? <HomeMobile /> : <Home />} /> */}
         <Route index element={<Home />} />
         <Route path='procedure/facial' element={<FacialProcedure />} />
-        <Route path='procedure/breast' element={<BreastProcedure />} />
-        <Route path='procedure/body' element={<BodyProcedure />} />
+        {/* <Route path='procedure/breast' element={<BreastProcedure />} /> */}
+        {/* <Route path='procedure/body' element={<BodyProcedure />} /> */}
         <Route path='procedure/:name' element={<SubProcedure />} />
         <Route
           path='/procedureMobile'
@@ -100,7 +100,7 @@ const App = () => {
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>
-    // </DataRouter>
+    </>
   );
 };
 

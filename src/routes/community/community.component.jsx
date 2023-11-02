@@ -29,9 +29,9 @@ const Community = () => {
   //   { value: 'by doctor', label: 'By Doctor' },
   // ];
 
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0, 0);
+  // });
 
   const handleFilters = (value, isChecked) => {
     const updatedFilter = [...postQuery.filterCondition];

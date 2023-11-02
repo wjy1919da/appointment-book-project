@@ -3,7 +3,6 @@ import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userInfoQueryStore from '../../userStore.ts';
-import Cookies from 'js-cookie';
 import { useUserEmailLogin } from '../../hooks/useAuth';
 // REDIRECT URL must be same with URL where the (reactjs-social-login) components is locate
 // MAKE SURE the (reactjs-social-login) components aren't unmounted or destroyed before the ask permission dialog closes
@@ -92,7 +91,7 @@ const SignInForm = () => {
     useEffect(() => {
         if(data?.data){
             let myToken = data.data.token;
-            Cookies.set('token', myToken);
+            localStorage.setItem('token', myToken);
             //const token = Cookies.get('token');
             //console.log("my token",token);
         }

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import doctorInfoQueryStore from '../doctorStore.ts';  // Assuming this is the correct path
-import Cookies from 'js-cookie';
 
 export function useDoctorAddProfile() {
 

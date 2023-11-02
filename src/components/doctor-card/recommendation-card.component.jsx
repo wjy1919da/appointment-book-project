@@ -23,15 +23,15 @@ const RecommendationCard = ({doctor}) => {
             <div className='recommendation-card-body'>
                 <span className='recommendation-card-title'>{doctor.nickname}</span>
                 <span className='recommendation-card-text'>
-                    <img src={locationIcon} style={{height:"10px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt="location" />
+                    <img src={locationIcon} style={{height:"15px", marginTop:"4px", marginInlineStart:"2px", marginInlineEnd:"2px"}} alt="location" />
                     {doctor.address}
                 </span>
                 <span className='recommendation-card-text'>
-                    <img src={glassIcon} style={{height:"10px", marginTop:"4px"}} alt="glass" />
+                    <img src={glassIcon} style={{height:"15px", marginTop:"4px"}} alt="glass" />
                     {displayText}
                 </span>
                 <span className='recommendation-card-text'>
-                    <img src={badgeIcon} style={{height:"10px", marginTop:"4px"}} alt="badge" />
+                    <img src={badgeIcon} style={{height:"15px", marginTop:"4px"}} alt="badge" />
                     {doctor.mechName}
                 </span>
                 <span className='recommendation-card-text'>
