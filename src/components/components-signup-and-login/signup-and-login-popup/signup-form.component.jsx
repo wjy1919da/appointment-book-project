@@ -69,7 +69,7 @@ const SignUpForm = () => {
                 const { token } = data.data || {};
                 if (token) {
                     //console.log("myToken in new register ", token);
-                    Cookie.set('token', token);
+                    localStorage.setItem('token', token);
                     setToken(token);
                 } else {
                     console.error('Token not found in data');
