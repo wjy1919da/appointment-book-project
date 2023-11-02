@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const endpoint = 'https://api-dev.charm-life.com/post/posts';
 
-export function useApiRequest() {
+export function useApiRequestPost() {
   const token = localStorage.getItem('token');
 
   const fetchUserData = async ({
