@@ -53,21 +53,23 @@ const Community = () => {
       <PostPageMain />
       <div className='doctor-post-outer-container'>
         <div className='doctor-post-header-container'>
-          <PostDropDown
-            // optipns={dropdownOptionsByCategory}
-            handleFilters={handleFilters}
-            menuLabel='Filter'
-            wordAfterMenuLabel='All'
-            className='filter-button'
-          />
-          <PostDropDown
-            // options={dropdownOptionsByRole}
-            handleFilters={handleFilters}
-            menuLabel='Location'
-            wordAfterMenuLabel='All'
-            className='location-button'
-          />
-          <ResetAllButton />
+          <div className='doctor-post-header-button-container'>
+            <PostDropDown
+              // optipns={dropdownOptionsByCategory}
+              handleFilters={handleFilters}
+              menuLabel='Filter'
+              wordAfterMenuLabel='All'
+              className='filter-button'
+            />
+            <PostDropDown
+              // options={dropdownOptionsByRole}
+              handleFilters={handleFilters}
+              menuLabel='Location'
+              wordAfterMenuLabel='All'
+              className='location-button'
+            />
+            <ResetAllButton />
+          </div>
           <div className='post-search-box-position-container'>
             <PostSearchBox />
           </div>
