@@ -150,7 +150,9 @@ const PostDropDownContents = () => {
               <button
                 onClick={() => handleToggleFilter(procedure.src)}
                 className={
-                  isButtonClicked(procedure.src) ? 'clicked-image-button' : ''
+                  isButtonClicked(procedure.src)
+                    ? 'clicked-image-button clicked'
+                    : ''
                 }
               >
                 <img
