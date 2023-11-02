@@ -1,5 +1,4 @@
 import './doctor-verification.styles.scss';
-import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import CloseButton from '../../assets/doctor/doctor-verification-close-Icon.png'
 import UploadIcon from '../../assets/doctor/Upload.png'

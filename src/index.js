@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from './theme';
 
-//import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +37,6 @@ root.render(
           </ChakraProvider> 
         </QueryParamProvider>
       </BrowserRouter>
-      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );
