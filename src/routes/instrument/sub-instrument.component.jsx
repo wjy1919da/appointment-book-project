@@ -106,7 +106,7 @@ const SubInstrument = () => {
         if (subCategory5) {
             // const parsed = safeJsonParse(subCategory5.other);
             beforeAndAfterImage = subCategory5.other ? subCategory5.other : undefined;  
-            console.log('Before and After: ', beforeAndAfterImage);
+            // console.log('Before and After: ', beforeAndAfterImage);
         }
         const subCategory6 = getSubCategory(6);
         if (subCategory6) {
@@ -123,6 +123,7 @@ const SubInstrument = () => {
     const isLarge = useMediaQuery({ query: `(min-width: 1024px)` });
     const isMediumOrLarge = isMedium || isLarge;
     const [selectedSection, setSelectedSection] = useState("description");
+    const [screenAtBottom, setScreenAtBottom] = useState(false);
     // Todo: video need to be replace
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     const formatTitle = (title) => {
@@ -173,15 +174,26 @@ const SubInstrument = () => {
                 if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
                     recommendationElement.style.top = '270px';
                     recommendationElement.style.position = 'fixed';
-                    recommendationElement.style.display = 'block';  // 确保元素是可见的
-                } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
-                    if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
-                        recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
-                    } else {
-                        recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
-                        recommendationElement.style.position = 'absolute';
-                        recommendationElement.style.display = 'block';  // 确保元素是可见的
-                    }
+                    //console.log('HERE HERE HERE!')
+                    // console.log('ScreenAtBottom is: ', screenAtBottom);
+                    setScreenAtBottom(false);
+
+                    // recommendationElement.style.display = 'block';  // 确保元素是可见的
+                } else if (recommendationElement && footerTop <= recommendationElement.getBoundingClientRect().bottom) {
+                    setScreenAtBottom(true);
+                    // console.log('recommendationElement.getBoundingClientRect().bottom: ', recommendationElement.getBoundingClientRect().bottom);
+                    // console.log('footerTop: ', footerTop);
+                    // if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
+                    //     // recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
+                    //     console.log('Setting screenAtBottom to TRUE');
+                    //     setScreenAtBottom(true);
+                    // } else {
+                    //     // recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
+                    //     // recommendationElement.style.position = 'absolute';
+                    //     // recommendationElement.style.display = 'block';  // 确保元素是可见的
+                    //     console.log('Setting screen at bottom to FALSE');
+                    //     setScreenAtBottom(false);
+                    // }
                 }
             } else {
                 if (recommendationElement) {
@@ -231,8 +243,8 @@ const SubInstrument = () => {
 
     return (
         <div className='outer-container'>
-        <div className='sub-instrument-container container'>
-       <div className='sub-instrument-left-container'>
+        <div className='sub-instrument-container'>
+        <div className='sub-instrument-left-container'>
            <div className='sub-instrument-title-container'>
                <h3 className='sub-instrument-top-text'>Instrument</h3>
              {/* Logo picture */}
@@ -335,23 +347,24 @@ const SubInstrument = () => {
                         //onClick={() => setSelectedSection("options")}
                         >Procedure options</a>}
 
-                    {beforeAndAfterImage &&
-                    <a
-                        href="#beforeAndAfter"
-                        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                        //onClick={() => setSelectedSection("beforeAndAfter")}
-                        >Before and After</a>} 
-                    <a
-                        href="#faq"
-                        className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
-                        //onClick={() => setSelectedSection("faq")}
-                        >FAQ</a>
-                </div>  
-            </div>}
-            
-            {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
-                <RecommendationGrid isMobile={false} height={'250px'} />
-            </div>}
+                       {beforeAndAfterImage &&
+                       <a
+                           href="#beforeAndAfter"
+                           className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                           //onClick={() => setSelectedSection("beforeAndAfter")}
+                           >Before and After</a>} 
+                       <a
+                           href="#faq"
+                           className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
+                           //onClick={() => setSelectedSection("faq")}
+                           >FAQ</a>
+                    </div>  
+               </div>}
+              
+               {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
+                   <RecommendationGrid isMobile={false} height={'250px'} />
+               </div>}
+           </div>
        </div>
    </div>
    <div className='instrument-footer-container' ref={footerRef}>

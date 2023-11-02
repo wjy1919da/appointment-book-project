@@ -5,8 +5,9 @@ import IntroDoctor from '../../components/components-doctor-search/doctor-search
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
 import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-card.component';
 import BlankSearchCard from '../../components/doctor-search-card/blank-search-card.component';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { retrieveMultiInputResults } from '../../hooks/useGetMultiInputResults';
 import DoctorMobilWebpage from '../../components/components-doctor-search/doctor-mobile-webpage/doctor-mobile-web';
 import DoctorSearchLoadingBar from '../../components/doctor-search-loading-bar/doctor-search-loading-bar.component';
 const Doctor = () => {
@@ -14,10 +15,23 @@ const Doctor = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+    const searchLocations = [];
+    useEffect(() => {
+        // const retrieveLocations = async () => {
+        //     try {
+        //         const locations = await retrieveSearchResults();
+        //         // maybe do some data manipulation here if necessary, to get an array of city names?
+        //         searchLocations = locations;
+        //     } catch (err) {
+        //         // what to do if we can't retrieve location possibilities? default to basic cities?
+        //     }
+        // }
+    }, [])
     async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
         setIsLoading(true);
         try {
-            await delay(3000);  // used to simulate an API call to return information, remove when we actually get the API call
+            const data = await retrieveMultiInputResults(results);
+            // console.log('Data for multiInput results is: ', data);
             // CALL API HERE ONCE BACKEND IMPLEMENTS API!
             // pass results to API call, then pass returned values as an array to setSearchResults below
             setSearchResults(doctorArray); // CHANGE doctorArray TO THE RESULTS OF THE API CALL
@@ -63,39 +77,35 @@ const Doctor = () => {
     return (
         <div className='doctor-container animate__animated animate__fadeIn'>
             <div>
-                {isMobile ? (
-                    <DoctorMobilWebpage/>
-                ) : (
-                    <div className='doctor-search-outer-container'>
-                        <div className='gradient-background'>
-                            <div className='doctor-search-header-container'>
-                                <div className='doctor-search-header-title-container'>
-                                    <h1 className='doctor-upper-title'>Find the Right Doctor At Your Fingertip</h1>
-                                </div>
-                                <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
-                                    <img src={DoctorImg} alt='Doctor Search Background' className='doctor-search-header-pic' />
-                                </div>
+                <div className='doctor-search-outer-container'>
+                    <div className='gradient-background'>
+                        <div className='doctor-search-header-container'>
+                            <div className='doctor-search-header-title-container'>
+                                <h1 className='doctor-upper-title'>Find the Right Doctor At Your Fingertip</h1>
                             </div>
-                            <div className='doctor-intro-container'>
-                                <IntroDoctor isMobile={isMobile}/>
-                            </div>
-                            <div className='doctor-search-search-bar-container'>
-                                <h2 className='doctor-search-title'>Find your doctors</h2>
-                                {isLoading && <DoctorSearchLoadingBar />}
-                                <div className='doctor-search-container'>
-                                    <DoctorSearchMultiInput searchCallback={retrieveSearchResults} />
-                                </div>
+                            <div className='doctor-search-header-pic-container animate__animated animate__slideInUp'>
+                                <img src={DoctorImg} alt='Doctor Search Background' className='doctor-search-header-pic' />
                             </div>
                         </div>
-                        <div className='doctor-search-results-container'>
-                            {!isLoading ? searchResults?.map((doctorObj, index) => 
-                                <DoctorSearchCard doctorObj={doctorObj} key={index} />
-                            ) : doctorArray.map((doctorObj, index) => 
-                                <BlankSearchCard doctorObj={doctorObj} key={index} />
-                            )}
+                        <div className='doctor-intro-container'>
+                            <IntroDoctor isMobile={isMobile}/>
+                        </div>
+                        <div className='doctor-search-search-bar-container'>
+                            <h2 className='doctor-search-title'>Find your doctors</h2>
+                            {isLoading && <DoctorSearchLoadingBar />}
+                            <div className='doctor-search-container'>
+                                <DoctorSearchMultiInput searchCallback={retrieveSearchResults} />
+                            </div>
                         </div>
                     </div>
-                )}
+                    <div className='doctor-search-results-container'>
+                        {!isLoading ? searchResults?.map((doctorObj, index) => 
+                            <DoctorSearchCard doctorObj={doctorObj} key={index} />
+                        ) : doctorArray.map((doctorObj, index) => 
+                            <BlankSearchCard doctorObj={doctorObj} key={index} />
+                        )}
+                    </div>
+                </div>
             </div>
             <Footer isMobile={isMobile} />
         </div>
