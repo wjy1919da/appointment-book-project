@@ -1,7 +1,5 @@
 import { useMutation } from 'react-query';
 import APIClient from '../services/api-client.js';
-import Cookies from 'js-cookie';
-
 export function useDoctorAddProfile() {
     const token = localStorage.getItem('token');
     const sendProfileToServer = async (doctorData) => {

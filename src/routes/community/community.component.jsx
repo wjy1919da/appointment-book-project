@@ -1,6 +1,5 @@
 import usePostQueryStore from '../../postStore.ts';
 import React, { useLayoutEffect,useEffect } from 'react';
-import Cookie from 'js-cookie';
 
 // components
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
-
-import Cookies from 'js-cookie';
 import APIClient from '../services/api-client.js';
 
 
