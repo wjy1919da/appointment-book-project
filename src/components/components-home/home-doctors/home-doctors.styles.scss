@@ -37,12 +37,16 @@
 
     }
     .home-doctor-video {
+        width: 314px;
+        height: 675px;
+        z-index: 2;
         position: absolute;
-        right:6%;
-        left:6%;
-        top: 3.5vw;
-        border-radius:5px;
-        overflow: hidden;
+        left: 347px;
+        top: 37px;
+        video {
+            height: 100%;
+            object-fit: cover;
+        }
     }
     .phone-image-background
     {
@@ -83,7 +87,7 @@
         //left:-150px;
         width: 389px;
         height: 747px;
-        z-index: 2;
+        z-index: 3;
         position: absolute;
         left: 309px;
     }
