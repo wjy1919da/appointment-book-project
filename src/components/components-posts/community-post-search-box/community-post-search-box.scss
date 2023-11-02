@@ -1,18 +1,31 @@
+// .community-post-search-box-container {
+//   position: relative;
+
+//   .community-post-search-box-input {
+//     background: transparent;
+//     border: none;
+//     border-bottom: 1px solid #352c29;
+//     outline: none;
+//     padding: 3px 6px;
+//     width: 260px;
+//   }
+
+//   .community-post-search-box-icon {
+//     position: absolute;
+//     right: 0;
+//     bottom: 10px;
+//   }
+// }
+
 .community-post-search-box-container {
-  position: relative;
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px solid #352c29;
 
   .community-post-search-box-input {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #352c29;
     outline: none;
-    padding: 3px 6px;
-    width: 260px;
-  }
-
-  .community-post-search-box-icon {
-    position: absolute;
-    right: 0;
-    bottom: 10px;
+    padding: 0 6px;
   }
 }
