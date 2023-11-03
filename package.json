@@ -13,21 +13,14 @@
     "@greatsumini/react-facebook-login": "^3.3.3",
     "@hookform/resolvers": "^3.3.1",
     "@react-oauth/google": "^0.11.1",
-    "@tanstack/react-query": "4.28",
-    "@tanstack/react-query-devtools": "4.28",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/react-responsive": "^8.0.5",
     "animate.css": "^4.1.1",
-    "antd": "^5.5.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "hashids": "^2.3.0",
     "jwt-decode": "^3.1.2",
-    "nodemailer": "^6.9.1",
     "react": "^18.0.2",
     "react-apple-login": "^1.1.6",
     "react-bootstrap": "^2.8.0",
@@ -48,11 +41,7 @@
     "react-responsive-masonry": "2.1.7",
     "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
-    "react-select": "^5.7.7",
     "react-social-login-buttons": "^3.6.1",
-    "react-stack-grid": "^0.7.1",
-    "react-sticky": "^6.0.3",
-    "react-tabs": "^6.0.2",
     "react-waterfall": "^4.0.4",
     "reactjs-social-login": "^2.6.3",
     "sass": "^1.55.0",
@@ -88,8 +77,5 @@
     ]
   },
   "devDependencies": {
-    "@ant-design/icons": "^5.1.4",
-    "@babel/preset-env": "^7.22.7",
-    "@babel/preset-react": "^7.22.5"
   }
 }

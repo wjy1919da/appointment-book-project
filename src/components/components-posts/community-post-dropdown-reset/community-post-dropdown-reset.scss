@@ -1,19 +1,17 @@
 .post-dropdown-button-reset-container {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid #675d59;
-  padding: 4px 0px;
-  width: 7%;
 
   .post-dropdown-button-reset {
-    color: var(--text-2-button, #675d59);
+    color: #675d59;
     text-align: center;
     font-family: Open Sans;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
+    border-bottom: 1px solid #675d59;
+    padding-bottom: 3px;
   }
 }

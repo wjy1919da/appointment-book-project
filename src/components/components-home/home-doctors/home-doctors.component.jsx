@@ -43,9 +43,9 @@ const HomeDoctors = () => {
             <div  className='home-doctors-background'>
                 <div className = 'home-doctor-apple-section'>
                     <img className='phone-image' src={PhoneImage} alt="Phone" />
-                    {/* <div className='home-doctor-video'>
+                    <div className='home-doctor-video'>
                       <video ref={videoRef} src = {videoURL}  controls autoPlay muted/>
-                    </div> */}
+                    </div>
                     <div  className='phone-image-background'>     
                     </div>
                 </div>

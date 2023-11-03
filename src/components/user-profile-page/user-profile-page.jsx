@@ -1,7 +1,6 @@
 // components
 import UserProfileBasic from '../user-profile-basic/user-profile-basic';
 import UserProfileSubArea from '../user-profile-subArea/user-profile-subArea';
-import Footer from '../footer/footer.component';
 
 // scss
 import './user-profile-page.style.scss';
@@ -13,7 +12,6 @@ const UserProfilePage = () => {
         <UserProfileBasic />
         <UserProfileSubArea />
       </div>
-      <Footer />
     </div>
   );
 };

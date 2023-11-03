@@ -3,6 +3,7 @@
   position: relative;
 }
 
+// dropdown box
 .post-dropdown-filter-search-container,
 .post-dropdown-location-filter-search-container {
   position: absolute;
@@ -13,11 +14,13 @@
   height: 260px;
 }
 
+// tag dropdown box position
 .post-dropdown-filter-search-container {
   top: 0;
   left: 16px;
 }
 
+// location dropdown position
 .post-dropdown-location-filter-search-container {
   top: 0;
   right: 14px;
@@ -28,6 +31,10 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+
+.search-reverse {
+  flex-direction: row-reverse;
 }
 
 // screen 769px to 1024px

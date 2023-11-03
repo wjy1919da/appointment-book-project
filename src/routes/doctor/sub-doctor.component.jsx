@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import DoctorDetail from '../../components/doctor-detail/doctor-detail.component';
-import Footer from '../../components/footer/footer.component';
 
 import './sub-doctor.styles.scss';
 import { useState } from 'react';
@@ -91,7 +90,7 @@ const SubDoctor = () => {
                 <div className='sub-doctor-detail-container'>
                     <DoctorDetail doctorImg={doctor.profilePic} doctorName={doctorName} doctorIntro={doctor.intro} />
                 </div> 
-                <Footer />
+                 />
             </div> } */}
         </div>
     )

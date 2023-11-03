@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from './theme';
 
-//import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,12 +32,11 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'top' } }}>
             <App />
-          </ChakraProvider> 
+          </ChakraProvider>
         </QueryParamProvider>
       </BrowserRouter>
-      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

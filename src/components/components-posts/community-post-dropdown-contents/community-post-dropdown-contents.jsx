@@ -14,8 +14,10 @@ import './community-post-dropdown-contents.scss';
 // images
 import BreastProcedureImage from '../../../assets/procedure/breast_augmentation.svg';
 import BodyProcedureImage from '../../../assets/procedure/chemical_peels.svg';
+import BotoxProcedureImage from '../../../assets/procedure/botox_injections.svg';
 import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
 import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
+import NeckProcedureImage from '../../../assets/procedure/Neck_Contouring.svg';
 
 const PostDropDownContents = () => {
   const setFilterCondition = usePostQueryStore(
@@ -42,8 +44,8 @@ const PostDropDownContents = () => {
     },
     {
       id: nanoid(),
-      name: 'Body Procedures',
-      src: BodyProcedureImage,
+      name: 'Botox Procedures',
+      src: BotoxProcedureImage,
     },
     {
       id: nanoid(),
@@ -57,8 +59,8 @@ const PostDropDownContents = () => {
     },
     {
       id: nanoid(),
-      name: 'Skin Procedures',
-      src: SkinProcedureImage,
+      name: 'Neck Procedures',
+      src: NeckProcedureImage,
     },
   ];
 
@@ -144,12 +146,21 @@ const PostDropDownContents = () => {
         <h3 className='procedure-title'>Trendy Procedure</h3>
         <div className='post-dropdown-contents-procedures-inner-container'>
           {trendyProcedureData.map((procedure, index) => (
-            <figure id={index} className='procedure-container'>
-              <img
-                src={procedure.src}
-                alt={`Image-${index}`}
-                className='procedure-image'
-              />
+            <figure id={procedure.id} className='procedure-container'>
+              <button
+                onClick={() => handleToggleFilter(procedure.src)}
+                className={
+                  isButtonClicked(procedure.src)
+                    ? 'clicked-image-button clicked'
+                    : ''
+                }
+              >
+                <img
+                  src={procedure.src}
+                  alt={`Image-${index}`}
+                  className='procedure-image'
+                />
+              </button>
               <figcaption className='procedure-name'>
                 {procedure.name}
               </figcaption>

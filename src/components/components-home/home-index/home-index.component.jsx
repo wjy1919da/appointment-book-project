@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./home.styles.scss";
+import "./home-index.styles.scss";
 import VectorPink from "../../../assets/home/Vector-pink.png";
-import HomeButtonPink from "../../../components/home-button-pink/home-button-pink";
-import HomeMobileSubText from "../../../components/components-home/home-text-mobile/home-mobile-subText.component";
+import HomeButtonPink from "../../home-button-pink/home-button-pink";
+import HomeMobileSubText from "../home-text-mobile/home-mobile-subText.component";
 import Modal from "react-bootstrap/Modal";
 import videoUrl from "../../../assets/home/App-Demo-V10.mp4";
 import HomePic from "../../../assets/home/home-pic1.png";

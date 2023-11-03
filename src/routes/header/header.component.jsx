@@ -11,6 +11,7 @@ import { useMediaQuery } from 'react-responsive';
 import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import userInfoQueryStore from '../../userStore.ts';
+import HeaderUser from '../header-user/header-user.component';
 const Header = () => {
   const location = useLocation();
   const loginIcon = require('../../assets/home/login-user.png');
@@ -138,7 +139,7 @@ const Header = () => {
     setDropdown(!dropdown);
   };
   return (
-    <div>
+    <>
       {isMobile ? (
         <>
           <div className='header-container-mobile'>
@@ -223,7 +224,7 @@ const Header = () => {
           <Outlet />
         </>
       ) : (
-        <Fragment>
+        <>
           {/* desktop */}
           <div className='header-container'>
             <Link className='header-logo-container' to='/'>
@@ -276,25 +277,10 @@ const Header = () => {
                 to='/instrument' title="Instruments"
               >Instruments</Link>
             </div>
-            <div className='header-login'>
-              {/* <div className="header-search">
-                    <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-                    </input>
-                </div>  */}
-              <div className="header-login-logo">
-                <a href="/userProfile">
-                    <img src={loginIcon} alt="login"></img>
-                </a>
-              </div>
-              <div className="header-login-text">
-                  {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>login</div>}
-                  {userInfo.userId && <div >{`Hello, ${userInfo.userId}`}</div>}
-                  {userInfo.userId && <div onClick={() => handleLogOutClick()}>Log out</div>}
-              </div>
-            </div>
+            <HeaderUser />
           </div>
           <Outlet />
-        </Fragment>
+        </>
         )}
         {isPopupOpen &&
                 <SignupPopup3
@@ -302,7 +288,7 @@ const Header = () => {
                 onHide={() => {togglePopup(false)}}
             />  
         }
-     </div>
+     </>
    );
  }; 
 

@@ -1,5 +1,4 @@
 import './error-page-common.scss';
-import Footer from '../../components/footer/footer.component';
 
 const ErrorPage = (props) => {
     const title = props.title || 'Error Page'
@@ -18,7 +17,6 @@ const ErrorPage = (props) => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

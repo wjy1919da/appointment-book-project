@@ -12,10 +12,8 @@ const SignupVerify = () => {
    const [countdown, setCountdown] = useState(10);
    const [isTiming, setIsTiming] = useState(false);
    var email;
-   var userRole;
    useEffect(() => {
        email = localStorage.getItem('email');
-       userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
    });
    const handleOnClick = () => {
         if(!email){
@@ -30,16 +28,10 @@ const SignupVerify = () => {
         setIsTiming(true);
    }; 
    useEffect(() => {
-        if (data?.code === 100) {
-        //  切换到下一个tab
-            alert("sending email ",data.msg);
-            // switchPopupTab('gender');
-        }
-        if (data?.data && 400<=data.code <=500) {
+        if (data?.msg) {
             alert(data.msg);
-        }
+        }     
     }, [data]);
-   
     useEffect(() => {
         if (isTiming) {
             if (countdown > 0) {
@@ -52,6 +44,9 @@ const SignupVerify = () => {
             }
         }
     }, [isTiming, countdown]); 
+    if(error){
+        alert(error);
+    }
    return (
         <div className='signip-varify-container'>        
             <div className='signup-varify-title-container'>

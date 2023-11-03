@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 // components
 import CommunityPost from '../components-posts/community-post/community-post.component';
-import Footer from '../footer/footer.component';
 
 // scss
 import '../user-profile-post-area/user-profile-post-area.styles.scss';

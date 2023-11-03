@@ -2,7 +2,6 @@ import './contact-us.scss';
 import { useState, useLayoutEffect } from 'react';
 import { ContactSubmission } from '../../hooks/useContactForm';
 import companyLogo from '../../assets/home/logo.png';
-import Footer from '../../components/footer/footer.component';
 import { Link } from 'react-router-dom';
 import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
@@ -138,7 +137,6 @@ const ContactUs = () => {
                     )}
                 </div>
             </div>
-            <Footer />
         </div>
         
     )

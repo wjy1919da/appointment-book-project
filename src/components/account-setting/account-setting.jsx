@@ -1,4 +1,3 @@
-import Footer from '../../components/footer/footer.component';
 import "./account-setting.styles.scss";
 
 
@@ -162,7 +161,6 @@ const AccountSetup = () => {
                     </svg>
                 </button>
             </div>
-            <Footer/>
         </div>
     )
 }

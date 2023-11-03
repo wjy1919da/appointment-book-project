@@ -7,15 +7,13 @@ import './community-post-create-page.scss';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-import Footer from '../../footer/footer.component';
+
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequest } from '../../../hooks/useApiRequest';
+import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
 // import { useAddPost } from '../../../hooks/useAddingPost';
 
-// scss
-import './community-post-create-page.scss';
 
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
@@ -40,7 +38,7 @@ const CreatePostPage = () => {
   } = useForm({ mode: 'onChange' });
 
   // api
-  const { mutate: apiMutate } = useApiRequest({
+  const { mutate: apiMutate } = useApiRequestPost({
     onError: (error) => {
       console.error('API request error', error);
     },
@@ -243,10 +241,6 @@ const CreatePostPage = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className='footer-container'>
-        <Footer />
       </div>
     </form>
   );

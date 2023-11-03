@@ -83,18 +83,13 @@ const SocialSignUP = ({onHide}) => {
         <div className="login-popup-gfa-section">
             <div className="signin-with-apple-section">
                 <AppleLoginBtnWrap width='50px' height='50px' borderRadius='50px'  isIcon={ AppleLogo }/>
-             </div>
-
+            </div>
             <div className="signin-with-google-section">
                 <GoogleLoginBtnWrap width='50px' height='50px' borderRadius='50px' isIcon={ GoogleLogo }  />
             </div>
             <div className="signin-with-facebook-section">
                 <FacebookLoginBtnWrap width='50px' height='50px' borderRadius='50px' isIcon={ FacebookLogo } />
-
-       
-   
- </div>
-
+            </div>
         </div>
   )
 }

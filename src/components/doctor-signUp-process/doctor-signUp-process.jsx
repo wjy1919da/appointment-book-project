@@ -2,7 +2,6 @@ import './doctor-signUp-process.styles.scss';
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import DoctorVerification from './doctor-verification';
-import Footer from '../footer/footer.component.jsx';
 import doctorInfoQueryStore from '../../doctorStore.ts';
 import HomeLogo from '../../assets/home/logo.png'
 import DoctorSignUpFinish from './doctor-signUp-finish';
@@ -46,9 +45,6 @@ const DoctorSignUpProcess = () => {
             </div>
             <div className='doctor-signUp-process-left-orange-render'>
             </div>     
-            <div className='doctor-signUp-footer-component'>
-                <Footer/>
-            </div>   
         </div>   
     )
 }

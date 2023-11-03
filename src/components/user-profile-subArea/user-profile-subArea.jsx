@@ -16,7 +16,7 @@ const UserProfileSubArea = () => {
   const [showCreatePost, setShowCreatePost] = useState(false);
 
   return (
-    <div className='user-profile-subArea-container'>
+    <div className='user-profile-subArea-container container'>
       <div className='navbar'>
         <div
           onClick={() => setActiveTab('like')}

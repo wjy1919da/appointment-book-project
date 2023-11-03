@@ -1,0 +1,21 @@
+// screen bigger than 1025px
+.community-post-search-box-dropdown-container {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, #352c29 40%, #FBFCFF 40%);
+  border: 1px solid #675D59;
+  border-radius: 8px;
+  box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.10);
+  width: 260px;
+  height: 300px;
+}
+
+// screen 769px to 1024px
+@media (max-width: 1024px) {
+}
+
+// small screens
+@media (max-width: 768px) {
+}

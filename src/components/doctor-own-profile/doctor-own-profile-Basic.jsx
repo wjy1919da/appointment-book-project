@@ -10,7 +10,7 @@ import certified from '../../assets/user/Certificate.png'
 import './doctor-own-profile-Basic.styles.scss'
 const DocotorOwnBasic = () => {
     return (
-        <div className='doctor-own-basic-conatiner'>
+        <div className='doctor-own-basic-conatiner '>
             <div className='doctor-own-basic-avatar'>
                 <img src= {doctorAvartar} className='doctor-own-avatar-img'style={{width:'180px',height:'180px'}}></img>
             </div>

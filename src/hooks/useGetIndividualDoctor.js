@@ -1,20 +1,17 @@
 import axios from 'axios';
 import { useInfiniteQuery, useQuery} from "react-query";
 import useDoctorQueryStore from '../store.ts';
-const base = {
-  reviewsUrl: 'https://api-dev.charm-life.com/evaluate/evaluations:page',
-  infoUrl: 'http://api-dev.charm-life.com/doctor/search',
-  aboutUrl: 'http://api-dev.charm-life.com/info/doctor-details'
-}
+import APIClient from "../services/api-client";
+
 // Reviews
 export function useGetDoctorReviews() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   //console.log("useGetDoctorReviewsDoctorQuery",doctorQuery)
   const clearnickName = doctorQuery.nickName.replace(":", "")
+  const apiClient = new APIClient('/evaluate/evaluations:page');
   const fetchDoctorReviews = async ({ pageParam = 1 }) => {
     try {
-      const response = await axios.post(
-        base.reviewsUrl,
+      const response = await apiClient.post(
         {
           "currentPage": pageParam,
           "memberId": doctorQuery.memberId,
@@ -45,11 +42,12 @@ export function useGetDoctorReviews() {
 // Projects, Counpons, About
 export function useGetDoctorAbout() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+  const apiClient = new APIClient(`/info/doctor-details/${doctorQuery.memberId}`);
   //console.log("useGetDoctorAbout: ",doctorQuery)
-  const clearnickName = doctorQuery.nickName.replace(":", "")
+  //const clearnickName = doctorQuery.nickName.replace(":", "")
   const fetchDoctorAbout = async ({ pageParam = 1 }) => {
     try {
-      const response = await axios.get(`${base.aboutUrl}/${doctorQuery.memberId}`)
+      const response = await apiClient.get()
       //console.log("doctor about data",response.data);
       return { data: response.data.data, pageInfo: response.data.pageInfo };
     } catch (error) {
@@ -69,7 +67,7 @@ export function useGetDoctorAbout() {
 // Get all doctor info
 export function useGetDoctorInfo() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-
+  const apiClient = new APIClient(`/doctor/search/${doctorQuery.memberId}`);
   const fetchDoctorInfo = async () => {
     try {
       const response = await axios.get(`${base.infoUrl}/${doctorQuery.memberId}`);

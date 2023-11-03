@@ -8,7 +8,6 @@ import useDoctorQueryStore from '../../store.ts';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
 import DoctorReviewGrid from '../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
-import Footer from '../../components/footer/footer.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 const IndividualDoctor = () => {
     useLayoutEffect(() => {
@@ -35,7 +34,6 @@ const IndividualDoctor = () => {
         return (
             <div>
                 <ErrorMsg/>
-                <Footer/>
             </div>
         );
     }
@@ -61,6 +59,7 @@ const IndividualDoctor = () => {
                         {
                             tabs.map((item, index) => (
                                 <div
+                                    key={index}
                                     className={`individual-doctor-tab ${activeTab === index ? 'active' : ''}`}
                                     onClick={() => selectTab(index)}>
                                     {item}
@@ -76,7 +75,6 @@ const IndividualDoctor = () => {
                     {activeTab === 2 && < DoctorReviewGrid/>}
                 </div>
             </div>
-            <Footer/>
         </div>
         
     );

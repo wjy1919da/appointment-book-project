@@ -6,9 +6,8 @@ const DocotorOwnSpecialization = () => {
         return title.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
     const instruments_names = ['Chin-Implants', 'Chin-Implants', 'Chin-Implants', 'Chin-Implants'];
-    const instrumentsGrid = instruments_names.map((name) => {
-        return (
-            <Box as="div" className='home-instrument' key={name}>
+    const instrumentsGrid = instruments_names.map((name, index) => 
+            <Box as="div" className='home-instrument' key={index}>
                 <Image 
                     src={require(`../../assets/procedure/${name}.svg`)} 
                     alt={name} 
@@ -17,10 +16,9 @@ const DocotorOwnSpecialization = () => {
                 />
                 <div className='title' style={{fontSize:'14px'}}>{(name)}</div>
             </Box>
-        );
-    })
+    )
     return (
-        <div style={{display:'flex',flexDirection:'column',gap:'30px',paddingLeft:'50px',marginTop:'50px'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:'30px',marginTop:'50px'}}>
             <span style={{
                 fontFamily:'Open Sans',
                 fontSize:'20px;',
@@ -31,7 +29,7 @@ const DocotorOwnSpecialization = () => {
             }}
             >Specialization</span>
             <div>
-                <SimpleGrid style={{ marginLeft: '20px',marginTop:'10px', width:'80vw'}} columns={7} spacing={2}>
+                <SimpleGrid style={{ marginTop:'10px', width:'80vw'}} columns={7} spacing={2}>
                         {instrumentsGrid}
                 </SimpleGrid>
             </div>

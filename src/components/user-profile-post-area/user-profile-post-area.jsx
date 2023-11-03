@@ -14,7 +14,7 @@ import UserProfileReview from '../user-profile-review-area/user-profile-review-a
 import { useMediaQuery } from 'react-responsive';
 
 // images
-import ArchiveFilter from '../../assets/post/archive_filter.svg';
+// import ArchiveFilter from '../../assets/post/archive_filter.svg';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
@@ -65,13 +65,15 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     avatar = avatar;
     setUserID(143);
   };
+  
 
-  console.log('userpostedCallBackdata', data);
+  //console.log('userpostedCallBackdata', data);
 
   const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  
 
-  console.log('userPostedpostin', flatData);
-
+  //console.log('userPostedpostin', flatData);
+  
   useEffect(() => {
     const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
 
@@ -91,6 +93,9 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       };
     });
   }, []);
+  // if (flatData.length === 0) {
+  //   return null; // 或者你可以选择返回null来完全不渲染组件
+  // }
 
   const samplePosts = Array(10).fill({
     pictures: post1,
@@ -133,10 +138,9 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
                 />
               </div>
 
-              {/* Archive Posts Button */}
+              {/* archive posts button */}
               <div className='archive-posts-button-container'>
-                <img src={ArchiveFilter} alt='Image-Archive-Posts' />
-                <span className='archive-title'>Archived Posts</span>
+                  <span className='archive-title'>Archived Posts</span>
               </div>
 
               {/* Rest of the posts */}

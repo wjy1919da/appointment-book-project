@@ -46,18 +46,85 @@ const SubProcedure = () => {
             }
         }
     };
-    const handleScroll = () => {}
     //const result = {"optionsForm":[{"header":[{},{"name":"Workstations"},{"name":"Technologies Covered"},{"name":"Technologies Included"}]},{"body":[{"name":"Workstations","value":["InMode Forma","InMode Evoke","InMode Morpheus8","InMode Votiva","InMode Lumecca","InMode DiolazeXL","InMode Triton","InMode Optimas","InMode Avance"]},{"name":"Technologies Covered","value":["Radiofrequency","Microneedling","IPL","Diode Laser","Fractional Coagulation","Temperature Monitoring","Auto-adjusting","Multi-Wavelength","Pulse Control"]},{"name":"Technologies Included","value":["Radiofrequency for skin tightening","Microneedling for collagen production","IPL for pigmentation and vascular lesions","Diode Laser for hair removal","Fractional Coagulation for skin resurfacing","Temperature Monitoring for safety","Auto-adjusting for custom treatment","Multi-Wavelength for various treatments","Pulse Control for optimized output"]}]}]};
-    
+    const handleScroll = () => {
+        //console.log('scroll');
+        const slideElement = document.getElementById("slide");
+        const recommendationElement = document.getElementById("recommendation");
+        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+        
+        if (!isMobile) {
+            if (window.scrollY >= 280) {
+                if (slideElement) {
+                    slideElement.style.top = '64px';
+                    slideElement.style.position = 'fixed';
+                    if (recommendationElement) {
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';  // Introduction slide's top + 400px
+                        recommendationElement.style.position = 'fixed';
+                    }
+                }
+                if (recommendationElement) {
+                    // 这里隐藏DOM后, 通过 getBoundingClientRect() 再获取DOM的大小和位置都为0，可以改为 visibility
+                    const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
+                    if (footerTop <= recommendationBottom) {
+                        // recommendationElement.style.display = 'none';
+                        recommendationElement.style.visibility = 'hidden';
+                    } else {
+                        // recommendationElement.style.display = 'block';
+                        recommendationElement.style.visibility = 'visible';
+                    }
+                }
+            } else 
+            {
+                //console.log("window.scrollY < 280",recommendationElement,slideElement);
+                if (slideElement) {
+                    slideElement.style.top = '350px';
+                    slideElement.style.position = 'absolute';
+
+                    if (recommendationElement) {
+                        //console.log("recommendationElement adjust");
+                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
+                        recommendationElement.style.position = 'absolute';
+                    }
+                }
+            }
+
+            checkWhichSectionInView();
+        }
+    };    
     const [loadingTimeout, setLoadingTimeout] = useState(false);
     const footerRef = useRef(null);
+    useEffect(() => {
+        const initialize = () => {
+            //console.log('initialize');
+            handleScroll();
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+        const handleResize = () => {
+            window.removeEventListener('scroll', handleScroll);
+            handleScroll(); // 重新调整位置
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+        if (document.readyState === "complete") {
+            //console.log('complete');
+            initialize();
+        } else {
+            //console.log('not complete');
+            window.onload = initialize;
+        }
     
+        const timeout = setTimeout(() => {
+            setLoadingTimeout(true);
+        }, 5000);
     
-
-    
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll, { passive: true });
-    // });
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timeout);
+        };
+    }, []);
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
    
@@ -128,14 +195,14 @@ const SubProcedure = () => {
         return (
             <div>
                 <ErrorMsg/>
-                <Footer/>
             </div>
         );
     }
     else if (data.data && data.data.subcategories) {
     return (
-     <div className='home-container'>
-        <div className='section-container container'>
+    <div>
+        <div className='home-container'>
+        <div className='section-container'>
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
                 <h3 className="sub-procedure-top-text">Procedure</h3>
@@ -168,7 +235,7 @@ const SubProcedure = () => {
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
                         { prosAndCons[0]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" >
+                            <li className="list-group-item d-flex justify-content-between align-items-start" >
                             <div style={{color: "#A5A6A8"}}>Pros:</div>
                                 <div className="ms-2 me-auto" style={{}}>
                                     {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
@@ -176,9 +243,9 @@ const SubProcedure = () => {
                             </li> 
                         }
                         {prosAndCons[1]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                            <li className="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
                                         <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                        <div className="ms-2 me-auto" style={{color:"#000000"}}>
                                     {prosAndCons[1]} 
                                 </div>
                             </li> }
@@ -221,7 +288,6 @@ const SubProcedure = () => {
                          <ProcedureCard cardInfo={cardInfo}/>
                     </div>
                 }
-                <div className="introduction-slide-container">
                     <div className="introduction-slide" id='slide'>
                         <div className="introduction-icon"></div>
                         <div className="introduction-catalog">
@@ -274,14 +340,13 @@ const SubProcedure = () => {
                         <RecommendationGrid isMobile={false} height={'210px'} />
                     </div>}
                 </div>
-            </div>
-        </div> 
-        <SubProcedureMobileExtraBottom />  
-        {isMobile && <div className='procedure-recommendation-container'>
-                        <RecommendationGrid isMobile={false}  height={'300px'} />
-                    </div>} 
-                    <Footer ref={footerRef} />
-    </div>
+            </div> 
+            <SubProcedureMobileExtraBottom />  
+            {isMobile && <div className='procedure-recommendation-container'>
+                            <RecommendationGrid isMobile={false}  height={'300px'} />
+            </div>}     
+      </div>
+     </div>
     )
 }}
 export default SubProcedure;

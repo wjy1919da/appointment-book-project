@@ -2,12 +2,14 @@
     .download-div {
         display: flex;
         justify-content: space-between;
-        width: 100%;
+        //width: 100%;
+        align-self: stretch;
         margin-top: 64px;
         margin-bottom: 150px;
     
         .download-pics {
             width: 30%;
+            flex-shrink: 0;
     
             .decorator {
                 display: block;
@@ -32,13 +34,18 @@
         }
     
         .QR-codes-div {
-            margin-right: 99px;
-            margin-top: 20px;
+            //margin-right: 99px;
+            margin-top: 120px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: flex-start;
             z-index: 1;
     
             .QR-title {
-                width: 581px;
-                height: 86px;
+                //width: 581px;
+                //height: 86px;
     
                 font-family: 'Playfair Display';
                 font-style: normal;
@@ -53,8 +60,8 @@
             }
     
             .QR-subtitle {
-                width: 581px;
-                height: 54px;
+                //width: 581px;
+                //height: 54px;
     
                 font-family: 'Playfair Display';
                 font-style: normal;
@@ -70,24 +77,42 @@
     
             .QR-codes {
                 display: flex;
-                justify-content: space-between;
-                width: 85%;
+                justify-content: center;
+                //width: 85%;
                 margin: 40px auto 0;
     
                 .QR-code {
                     width: 200px;
+                    margin: 0 60px;
         
                     .QR-code-pic {
                         width: 200px;
-                        margin-bottom: 40px;
                         border: none;
                         border-radius: 0;
                     }
+                    .download-link {
+                        width: 200px;
+                        margin-top: 40px;
+                        border: none;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:first-child {
+                            img {
+                                width: 168px;
+                                height: 56px;
+                            }
+                        }
+                        &:last-child {
+                            img {
+                                width: 169px;
+                                height: 56px;
+                            }
+                        }
+                    }
             
                     .download-btn {
-                        width: 200px;
-                        border: none;
-                        border-radius: 0;
+
                     }
                 }
             }

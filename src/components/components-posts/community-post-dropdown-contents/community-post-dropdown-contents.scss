@@ -23,8 +23,22 @@
     gap: 10px;
   }
 
+  // text button
   .clicked-button {
     color: #f29b87;
+  }
+
+  // image button
+  .clicked-image-button {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+
+    &.clicked {
+      outline: 3px solid #f29b87;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
   }
 
   .post-dropdown-contents-inner-container {

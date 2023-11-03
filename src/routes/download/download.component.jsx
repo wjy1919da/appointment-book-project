@@ -5,7 +5,6 @@ import QRiOS from '../../assets/download/QR-code-iOS.png';
 import BadgeiOS from '../../assets/download/iOS-Badges.png';
 import QRAndroid from '../../assets/download/QR-code-Android.png';
 import BadgeAndroid from '../../assets/download/Android-Badges.png';
-import Footer from '../../components/footer/footer.component';
 import iPhoneMobile from '../../assets/download/iphone.png'
 import { useMediaQuery } from 'react-responsive';
 //src/assets/download/iphone.png
@@ -39,7 +38,6 @@ const Download = () => {
                         </div>
                     </div>
             </div>
-            <Footer/>
         </div>
     )
 }
