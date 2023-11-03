@@ -32,9 +32,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'top' } }}>
             <App />
-          </ChakraProvider> 
+          </ChakraProvider>
         </QueryParamProvider>
       </BrowserRouter>
     </QueryClientProvider>

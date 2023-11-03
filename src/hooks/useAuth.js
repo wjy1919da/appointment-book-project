@@ -41,7 +41,7 @@ export function useUserEmailLogin(){
             password,
             provider,
             userRole
-        })
+        }).then(res => res.data);
     };
     return useMutation((credentials) => fetchEmailLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
 }

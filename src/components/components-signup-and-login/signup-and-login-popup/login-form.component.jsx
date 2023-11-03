@@ -10,6 +10,8 @@ import CustomInput from '../custom-input/custom-input.component';
 import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
 import { useDoctorLogin } from '../../../hooks/useAuth';
+import { useToast } from '@chakra-ui/react'
+
 const LoginForm = (props) => {
     // console.log("loginForm");
     const setToken = userInfoQueryStore((state) => state.setToken);
@@ -17,6 +19,8 @@ const LoginForm = (props) => {
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     //var userRole = localStorage.getItem('accountType');
     const [accountType, setAccountType] = useState(null);
+    const toast = useToast()
+
     useEffect(() => {
         setAccountType(localStorage.getItem('accountType'));
     }, []);
@@ -38,7 +42,7 @@ const LoginForm = (props) => {
         mode: 'onChange'
     });
    
-    const { mutate, isLoading, data, error } = authHook;
+    const { mutate, isLoading, data: resp, error } = authHook;
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
         mutate({
@@ -49,21 +53,25 @@ const LoginForm = (props) => {
         });
     };
     useEffect(() => {
-        if (data?.msg) {
-            if(data?.code === 100){
-                const myToken = data.data.token;
-                localStorage.setItem('token', myToken);
-                setToken(myToken);
-                /* TODO：alert component */ 
-               // alert(data.msg);
-                console.log(' login successful ...', data.msg);
-                togglePopup(false);
-                
+        console.log('data::', resp);
+        if ( resp ){
+            if (resp?.code === 100) {
+                const token = resp?.data?.token;
+                if (token) {
+                    localStorage.setItem('token', token);
+                    setToken(token);
+                    togglePopup(false);
+                    toast({title: 'Login Success',status: 'success'});
+                }else {
+                    toast({title: 'Login Failed, please try again',status: 'error',})
+                    console.error('token is not found.')
+                }
             }else{
-                alert(data.msg);
+                const msg = resp?.msg || 'failed, please try again'
+                toast({title: msg, status: 'error',})
             }
         }
-    }, [data]);
+    }, [resp]);
     if (error) {
         alert(error.message);
     }
