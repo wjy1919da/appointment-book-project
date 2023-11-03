@@ -15,7 +15,7 @@ import HomeButton from '../home-button/home-button.component';
 
 const UserProfileBasic = () => {
   return (
-    <div className='user-profile-basic-container'>
+    <div className='user-profile-basic-container container'>
       <div className='user-profile-basic-avatar'>
         <img src={UserProfilePicture} alt='User-Image'></img>
       </div>

@@ -4,7 +4,6 @@ import FacialProcedurePic from '../../assets/procedure/facial.jpg';
 
 import ProcedureSectionV1 from "../../components/procedure-section/procedure-section-v1.component";
 import ProcedureSectionV2 from "../../components/procedure-section/procedure-section-v2.component";
-import Footer from "../../components/footer/footer.component";
 
 import './procedure.styles.scss';
 
@@ -15,16 +14,20 @@ const FacialProcedure = () => {
 
     const facialProcedures = ['Facial Rejuvenation', 'Deep Plane Facelift', 'Eye Reshaping', 'Fox Eyes', 'Rhinoplasty', 'Lip Enhancement', 'Lip Augmentation', 'Otoplasty', 'Chin Implants', 'Neck Contouring']
     const sections = facialProcedures.map((procedure, index) => {
+        console.log('procedure::', procedure);
+
+        let img;
+        try {
+            img = require(`../../assets/procedure/${procedure.toLowerCase().replaceAll(' ', '-')}.jpg`);
+        } catch (error) {
+            img = '' // default image
+            console.error(error)
+        }
         return (
             index % 2 === 0 ?
-            <ProcedureSectionV1 
-                procedureSectionPic={require(`../../assets/procedure/${procedure.toLowerCase().replaceAll(' ', '-')}.jpg`)}
-                title={procedure}
-                key={procedure} /> :
-            <ProcedureSectionV2 
-                procedureSectionPic={require(`../../assets/procedure/${procedure.toLowerCase().replaceAll(' ', '-')}.jpg`)}
-                title={procedure}
-                key={procedure} />
+            <ProcedureSectionV1 procedureSectionPic={img} title={procedure} key={procedure} />
+            :
+            <ProcedureSectionV2 procedureSectionPic={img} title={procedure} key={procedure} />
         )
     });
 
@@ -39,7 +42,6 @@ const FacialProcedure = () => {
             </h2>
             <hr className='procedure-divider' />
             {sections}
-            <Footer />
         </div>
     )
 }

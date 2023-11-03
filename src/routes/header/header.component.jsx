@@ -139,7 +139,7 @@ const Header = () => {
     setDropdown(!dropdown);
   };
   return (
-    <div>
+    <>
       {isMobile ? (
         <>
           <div className='header-container-mobile'>
@@ -224,7 +224,7 @@ const Header = () => {
           <Outlet />
         </>
       ) : (
-        <Fragment>
+        <>
           {/* desktop */}
           <div className='header-container'>
             <Link className='header-logo-container' to='/'>
@@ -280,7 +280,7 @@ const Header = () => {
             <HeaderUser />
           </div>
           <Outlet />
-        </Fragment>
+        </>
         )}
         {isPopupOpen &&
                 <SignupPopup3
@@ -288,7 +288,7 @@ const Header = () => {
                 onHide={() => {togglePopup(false)}}
             />  
         }
-     </div>
+     </>
    );
  }; 
 

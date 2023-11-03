@@ -195,7 +195,6 @@ const SubProcedure = () => {
         return (
             <div>
                 <ErrorMsg/>
-                <Footer/>
             </div>
         );
     }
@@ -347,7 +346,6 @@ const SubProcedure = () => {
                             <RecommendationGrid isMobile={false}  height={'300px'} />
             </div>}     
       </div>
-       <Footer ref={footerRef} />
      </div>
     )
 }}

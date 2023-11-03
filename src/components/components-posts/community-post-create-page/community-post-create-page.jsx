@@ -7,7 +7,6 @@ import './community-post-create-page.scss';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-import Footer from '../../footer/footer.component';
 
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
@@ -242,10 +241,6 @@ const CreatePostPage = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className='footer-container'>
-        <Footer />
       </div>
     </form>
   );

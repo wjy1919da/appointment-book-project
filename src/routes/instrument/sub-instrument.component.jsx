@@ -1,6 +1,5 @@
 import './sub-instrument.styles.scss';
 import SubTxt from '../../components/sub-txt/sub-txt.component';
-import Footer from '../../components/footer/footer.component';
 import { Link, useParams } from 'react-router-dom';
 import coolsculpting from '../../assets/instrument/coolsculpting.svg';
 import thermage from '../../assets/instrument/thermage.svg';
@@ -353,9 +352,6 @@ const SubInstrument = () => {
                 <RecommendationGrid isMobile={false} height={'250px'} />
             </div>}
        </div>
-   </div>
-   <div className='instrument-footer-container' ref={footerRef}>
-       <Footer />
    </div>
    </div>
   

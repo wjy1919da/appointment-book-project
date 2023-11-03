@@ -1,4 +1,3 @@
-import Footer from '../../components/footer/footer.component';
 import './doctor.styles.scss';
 import DoctorImg from '../../assets/home/doctor_mobile.svg';  // we need better naming for this image file, not intuitive
 import IntroDoctor from '../../components/components-doctor-search/doctor-search-info/doctor-search-info.component';
@@ -97,7 +96,6 @@ const Doctor = () => {
                     </div>
                 )}
             </div>
-            <Footer isMobile={isMobile} />
         </div>
     )
 };

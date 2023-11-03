@@ -4,7 +4,6 @@ import React, { useLayoutEffect,useEffect } from 'react';
 // components
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
-import Footer from '../../components/footer/footer.component';
 import PostDropDown from '../../components/components-posts/community-post-dropdown/post-drop-down.component';
 import ResetAllButton from '../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx';
 import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
@@ -93,7 +92,6 @@ const Community = () => {
       </div>
       <DoctorPostGrid />
     </div>
-    <Footer />
   </div>
   );
 };
