@@ -193,6 +193,7 @@ const UserProfileReview = () => {
         <div className='recommend-doctor-box-wrapper'>
           {doctorsCard.map((x, index) => (
             <div
+              key={index}
               className={`recommend-doctor-box ${
                 clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
               }`}

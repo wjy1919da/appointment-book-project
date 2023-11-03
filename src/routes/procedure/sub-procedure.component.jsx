@@ -236,7 +236,7 @@ const SubProcedure = () => {
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
                         { prosAndCons[0]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" >
+                            <li className="list-group-item d-flex justify-content-between align-items-start" >
                             <div style={{color: "#A5A6A8"}}>Pros:</div>
                                 <div className="ms-2 me-auto" style={{}}>
                                     {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
@@ -244,9 +244,9 @@ const SubProcedure = () => {
                             </li> 
                         }
                         {prosAndCons[1]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                            <li className="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
                                         <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                        <div className="ms-2 me-auto" style={{color:"#000000"}}>
                                     {prosAndCons[1]} 
                                 </div>
                             </li> }

@@ -18,7 +18,7 @@ const RecommendationCard = ({doctor}) => {
     return (
         <div className='recommendation-card-container'>
             <div className='recommendation-profile-img'>
-               <img src={DoctorProfileImage} class="recommendation-img rounded-start" alt='recommendation-profile'></img>
+               <img src={DoctorProfileImage} className="recommendation-img rounded-start" alt='recommendation-profile'></img>
             </div>
             <div className='recommendation-card-body'>
                 <span className='recommendation-card-title'>{doctor.nickname}</span>
