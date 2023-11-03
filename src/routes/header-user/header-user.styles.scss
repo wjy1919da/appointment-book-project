@@ -1,0 +1,71 @@
+.header-login {
+    order: 2;
+    margin-left: auto;
+
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    .header-search {
+        flex-basis: 60%;
+        margin-top: 8px;
+    }
+    .header-login-logo {
+        margin-top: 8px;
+        margin-right: -20px;
+    }
+    .header-login-text {
+        margin-top: 8px;
+        margin-right: 40px;
+        font-family: "Open Sans";
+    }
+    input[type="text"] {
+        width: 100%;
+        box-sizing: border-box;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        font-size: 20px;
+        padding: 10px, 10px;
+        border-bottom: 1px solid #c0c0c0;
+        background-image: url("../../assets/home/search_icon.png");
+        background-position: right center; /* position the icon to the right */
+        background-repeat: no-repeat;
+        background-size: 18px; /* set the size of the icon */
+        box-sizing: border-box; /* include padding in the width of the input field */
+        background-origin: content-box; /* position the background image relative to the content box */
+        background-clip: padding-box;
+    }
+}
+
+.logout-title {
+
+}
+.chakra-modal__content-container{
+    align-items: center !important;
+}
+
+@media (max-width: 992px) {
+}
+
+@media (min-width: 992px) {
+    .header-login {
+        .header-search {
+        }
+        .header-login-logo {
+        }
+        .header-login-text {
+            font-size: 18px;
+        }
+        .header-login-text a,
+        .header-login-text a:visited,
+        .header-login-text a:active {
+            color: black; /* keeps the color black */
+        }
+        .header-login-text a.clicked {
+            font-weight: 600;
+        }
+        input[type="text"] {
+        }
+    }
+}
+
