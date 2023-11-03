@@ -11,10 +11,10 @@ import DoctorReviewGrid from '../../components/component-individual-doctor/docto
 import Footer from '../../components/footer/footer.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 const IndividualDoctor = () => {
-    // useLayoutEffect(() => {
-    //     window.scrollTo(0, 0);
-    // });
-    const {memberId} = useParams(); 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    });
+    const {encodedMemberId} = useParams(); 
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
@@ -23,11 +23,11 @@ const IndividualDoctor = () => {
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
     useEffect(() => {
-        setMemberId(memberId);
+        setMemberId(encodedMemberId);
         if (data) {
            setNickName(data.nickname);
         }
-    }, [memberId, data]);     
+    }, [encodedMemberId, data]);     
     if (isLoading) {
         return <HomeSpinner/>;
     }

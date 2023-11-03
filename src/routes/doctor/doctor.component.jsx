@@ -42,7 +42,7 @@ const Doctor = () => {
         }
     }
     const testDoctor1 = {'name': 'Dr. Strange',
-                            'memberId': 9001,
+                            'memberId': 84,
                             'rating': 3,
                             'location': 'New York City',
                             'field': 'Time Manipulation'
