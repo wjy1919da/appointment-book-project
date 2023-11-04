@@ -13,7 +13,15 @@ import {
   ModalCloseButton,
   Button,
   Text,
-  useDisclosure
+  useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
 } from '@chakra-ui/react'
 const HeaderUser = () => {
   const location = useLocation();
@@ -45,21 +53,31 @@ const HeaderUser = () => {
 
   return (
     <div className='header-login'>
-    {/* <div className="header-search">
-
-          <input class="form-control me-2" className='input' type="text"  aria-label="Search">
-          </input>
-      </div>  */}
-    <div className="header-login-logo">
-      <a href="/userProfile">
-          <img src={loginIcon} alt="login"></img>
-      </a>
-    </div>
-    <div className="header-login-text">
-        {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")}>Login/Sign up</div>}
-        {userInfo.userId && <div >{`${userInfo.userId}`}</div>}
-        {userInfo.userId && <div onClick={onOpen}>Log out</div>}
-    </div>
+        {!userInfo.token && <div onClick={()=>togglePopup(true, "gender")} className='header-login-default'>
+            <img src={loginIcon} alt="login" className='header-login-default-icon'></img>
+            <div className="header-login-text">Login/Sign up</div>
+          </div>}
+       <Menu>
+         {userInfo.userId && <MenuButton as={Button} style={{ backgroundColor: 'transparent' }}>
+                   {userInfo.userId}
+          </MenuButton>} 
+        <MenuList>
+          <MenuGroup title={`Hello, ${userInfo && userInfo.userId ? userInfo.userId : ''}`}>
+            <MenuItem>
+              <Link to="/userProfile" style={{ textDecoration: 'none', color: 'inherit' }}>Account Setting</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/userProfile" style={{ textDecoration: 'none', color: 'inherit' }}>Your Profile</Link>
+            </MenuItem>
+          </MenuGroup>
+          <MenuDivider />
+          <MenuGroup >
+            <MenuItem>
+                <div onClick={onOpen}>Log out</div>
+            </MenuItem>
+          </MenuGroup>
+        </MenuList>
+      </Menu>
 
     <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
