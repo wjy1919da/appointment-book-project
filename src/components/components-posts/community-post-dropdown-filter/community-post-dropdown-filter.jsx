@@ -56,10 +56,22 @@ const PostDropDownFilter = () => {
             className='create-post-page-tag-name'
             onClick={handleClickTag}
           />
+
           {isTagContainerVisible && !isLoading && !isError && (
             <div className='post-dropdown-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
                 <PostSearchBox className='search-reverse' />
+                <div className='search-results'>
+                  <ul>
+                    {data ? (
+                      data.map((item) => (
+                        <li key={item.tagId}>{item.tagName}</li>
+                      ))
+                    ) : (
+                      <li>No data available</li>
+                    )}
+                  </ul>
+                </div>
               </div>
             </div>
           )}
