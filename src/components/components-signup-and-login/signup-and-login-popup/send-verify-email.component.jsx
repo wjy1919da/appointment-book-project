@@ -26,9 +26,11 @@ const SendVerifyEmail = () => {
     // });
     const onSubmit = (formData) => {
         localStorage.setItem('email', formData.email);
+        let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
         setEmail(formData.email);
         mutate({
             email: formData.email,
+            userRole: userRole
         });
     };
     useEffect(() => {

@@ -111,13 +111,14 @@ export function useSetUserProfile(){
 }
 export function useClickVerification(){
     const apiClient = new APIClient('/register/clickVerification');
-    const fetchClickVerification = async (email) => {
+    const fetchClickVerification = async (email, userRole) => {
         const res = await apiClient.post({
             email,
+            userRole
         });
         return res.data;
     };
-    return useMutation((credentials) => fetchClickVerification(credentials.email));
+    return useMutation((credentials) => fetchClickVerification(credentials.email, credentials.userRole));
 }
 export function useDoctorLogin(){
     const apiClient = new APIClient('/login/doctor');
