@@ -10,6 +10,7 @@
   background: #fbfcff;
   border-radius: 8px;
   border: 1px solid #675d59;
+  padding: 0 50px;
   width: 330px;
   height: 260px;
 }
@@ -36,6 +37,29 @@
 
 .search-reverse {
   flex-direction: row-reverse;
+}
+
+.search-result {
+  .search-result-title {
+    color: #675d59;
+  }
+
+  p {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 14px;
+    margin-bottom: 0;
+    padding: 3px;
+  }
+
+  .search-result-list {
+    border-bottom: 1px solid #e2e3e7;
+    padding: 6px 0;
+  }
 }
 
 // screen 769px to 1024px
