@@ -7,7 +7,7 @@ export function useSearchTags() {
   const token = localStorage.getItem('token');
   const apiClient = new APIClient('/post/fuzzySearchTags', token);
   const postQuery = usePostQueryStore((s) => s.postQuery);
-  const debouncedSearchTerm = useDebounce(postQuery, 10);
+  const debouncedSearchTerm = useDebounce(postQuery, 300);
 
   const fetchTags = async ({ pageParam = 1 }) => {
     const res = await apiClient.post({

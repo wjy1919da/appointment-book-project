@@ -58,14 +58,17 @@ const PostDropDownFilter = () => {
           />
 
           {isTagContainerVisible && (
+          {isTagContainerVisible && (
             <div className='post-dropdown-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
                 <PostSearchBox className='search-reverse' />
                 <div className='search-results'>
                   <ul>
-                    {data?.data?.map((item) => (
-                      <li key={item.tagId}>{item.tagName}</li>
-                    ))}
+                    {
+                      data?.data?.map((item) => (
+                        <li key={item.tagId}>{item.tagName}</li>
+                      ))
+                     }
                   </ul>
                 </div>
               </div>
