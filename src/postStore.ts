@@ -7,11 +7,13 @@ interface PostQuery {
   filterCondition?: Array<string>;
   trigger: number;
   postBy?: Array<string>;
+  tag: string;
 }
 interface postQueryStore {
   postQuery: PostQuery;
   setFilterType: (filterType: number) => void;
   setPostBy: (postBy: Array<string>) => void;
+  setTag: (tag: string) => void;
   setPageSize: (pageSize: number) => void;
   setUserID: (userID: number) => void;
   setFilterCondition?: (filterCondition: Array<string>) => void;
@@ -24,6 +26,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     userID: 0,
     filterCondition: [],
     postBy: ['doctor'],
+    tag: '',
     trigger: 0,
   },
   setFilterType: (filterType) =>
@@ -36,6 +39,8 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, filterCondition } })),
   setPostBy: (postBy) =>
     set((state) => ({ postQuery: { ...state.postQuery, postBy } })),
+    setTag: (tag) =>
+    set((state) => ({ postQuery: { ...state.postQuery, tag } })),
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },
