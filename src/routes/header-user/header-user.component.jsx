@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './header-user.styles.scss';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useGetUserInfo } from '../../hooks/useAuth';
 import userInfoQueryStore from '../../userStore.ts';
 import {
   Modal,
@@ -49,7 +50,11 @@ const HeaderUser = () => {
     onClose()
     // alert('Log out successfully!');
   };
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {data, isLoading, isError, error} = useGetUserInfo();
+  if(data){
+    console.log("userInfo data in header",data);
+  }
 
   return (
     <div className='header-login'>
@@ -58,11 +63,11 @@ const HeaderUser = () => {
             <div className="header-login-text">Login/Sign up</div>
           </div>}
        <Menu>
-         {userInfo.userId && <MenuButton as={Button} style={{ backgroundColor: 'transparent' }}>
-                   {userInfo.userId}
+         {userInfo.userId && data?.data?.nickname&&<MenuButton as={Button} style={{ backgroundColor: 'transparent' }}>
+                   {data?.data?.nickname}
           </MenuButton>} 
         <MenuList>
-          <MenuGroup title={`Hello, ${userInfo && userInfo.userId ? userInfo.userId : ''}`}>
+          <MenuGroup title={`Hello, ${userInfo && data?.data?.nickname ? data?.data?.nickname : ''}`}>
             <MenuItem>
               <Link to="/userProfile" style={{ textDecoration: 'none', color: 'inherit' }}>Account Setting</Link>
             </MenuItem>

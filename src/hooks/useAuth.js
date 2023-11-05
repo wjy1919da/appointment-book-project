@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 import APIClient from '../services/api-client.js';
+import UserInfo from '../routes/user-info/user-info.component.jsx';
 
 
 
@@ -130,4 +131,17 @@ export function useDoctorLogin(){
         return res.data;
     };
     return useMutation((credentials) => fetchDoctorLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
+}
+export function useGetUserInfo(){  
+    const token = localStorage.getItem('token');
+    const apiClient = new APIClient('/user/fetch_user_profile',token);
+    const userInfo = userInfoQueryStore(s => s.userInfo);
+    const fetchGetUserInfo = async () => {
+        if (!token) {
+            alert('user not login');
+        }
+        const res = await apiClient.post();
+        return res.data;
+    };
+    return useQuery(['getUserInfo', UserInfo.token], fetchGetUserInfo);
 }
