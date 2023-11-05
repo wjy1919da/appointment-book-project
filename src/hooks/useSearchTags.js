@@ -18,10 +18,12 @@ export function useSearchTags() {
     console.log('APIレスポンス:', res);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
+
   // return useQuery({
   //   queryKey: ['tags', debouncedSearchTerm],
   //   queryFn: fetchTags,
   // });
+  
   return useQuery(['tags', debouncedSearchTerm], fetchTags, {
     // placeholderData: { data: {} },
     cacheTime: 1000,
