@@ -23,11 +23,12 @@ const PostDropDownFilter = () => {
     console.log(data);
   }, [data]);
 
-  // tag, location button
+  // tag button
   const handleClickTag = () => {
     setIsTagContainerVisible(!isTagContainerVisible);
   };
 
+  // location button
   const handleClickLocation = () => {
     setIsLocationTagContainerVisible(!isLocationTagContainerVisible);
   };
@@ -64,7 +65,7 @@ const PostDropDownFilter = () => {
               </div>
 
               <div className='search-result'>
-                <p className='search-result.title'>#Trendy</p>
+                <p className='search-result-title'>#Trendy</p>
                   {data?.data?.map((item) => (
                     <div key={item.tagId} className='search-result-list'>{item.tagName}</div>
                   ))}
