@@ -7,12 +7,21 @@ import PostDropDownTagButton from '../community-post-dropdown-tag-button/communi
 // scss
 import './community-post-dropdown-filter.scss';
 
+// hook
+import useSearchTags from '../../../hooks/useSearchTags';
+
 const PostDropDownFilter = () => {
   const [isTagContainerVisible, setIsTagContainerVisible] = useState(false);
   const [isLocationTagContainerVisible, setIsLocationTagContainerVisible] =
     useState(false);
 
   const containerRef = useRef(null);
+
+  const { data, isLoading, isError } = useSearchTags();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   // tag, location button
   const handleClickTag = () => {
@@ -47,10 +56,18 @@ const PostDropDownFilter = () => {
             className='create-post-page-tag-name'
             onClick={handleClickTag}
           />
+
           {isTagContainerVisible && (
             <div className='post-dropdown-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
-                <PostSearchBox className="search-reverse"/>
+                <PostSearchBox className='search-reverse' />
+              </div>
+
+              <div className='search-result'>
+                <p className='search-result.title'>#Trendy</p>
+                  {data?.data?.map((item) => (
+                    <div key={item.tagId} className='search-result-list'>{item.tagName}</div>
+                  ))}
               </div>
             </div>
           )}
@@ -63,7 +80,7 @@ const PostDropDownFilter = () => {
           {isLocationTagContainerVisible && (
             <div className='post-dropdown-location-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
-                <PostSearchBox className="search-reverse" />
+                <PostSearchBox className='search-reverse' />
               </div>
             </div>
           )}

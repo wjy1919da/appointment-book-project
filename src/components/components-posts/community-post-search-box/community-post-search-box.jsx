@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import usePostQueryStore from '../../../postStore';
 
 // component
-import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
+// import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
 
 // scss
 import './community-post-search-box.scss';
@@ -31,9 +32,20 @@ const PostSearchBox = ({ className }) => {
     };
   }, []);
 
-  const handleChangeInput = (e) => {
-    setInput(e.target.value);
+  const handleTagChange = (input) => {
+    usePostQueryStore.getState().setTag(input);
   };
+
+  const handleChangeInput = (e) => {
+    const newInput = e.target.value;
+    setInput(newInput);
+    handleTagChange(newInput);
+  };
+
+  // const handleChangeInput = (e) => {
+  //   usePostQueryStore.getState().setTag(input);
+  //   // setTag(e.target.value);
+  // };
 
   const handleShowContainer = () => {
     setShowContainer(!showContainer);
@@ -51,14 +63,14 @@ const PostSearchBox = ({ className }) => {
         onChange={handleChangeInput}
         className='community-post-search-box-input'
       />
-      <button onClick={handleShowContainer}>
+      <button type='button' onClick={handleShowContainer}>
         <img
           src={SearchIcon}
           alt='Image-Search-Icon'
           className='community-post-search-box-icon'
         />
       </button>
-      {isSearchContainerVisible && <PostSearchBoxDropDown />}
+      {/* {isSearchContainerVisible && <PostSearchBoxDropDown />} */}
     </div>
   );
 };
