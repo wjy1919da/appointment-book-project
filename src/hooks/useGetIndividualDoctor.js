@@ -70,7 +70,8 @@ export function useGetDoctorInfo() {
   const apiClient = new APIClient(`/doctor/search/${doctorQuery.memberId}`);
   const fetchDoctorInfo = async () => {
     try {
-      const response = await apiClient.get();
+      const response = await axios.get(`${base.infoUrl}/${doctorQuery.memberId}`);
+      if (response?.data?.code === 100) throw new Error();
       return response.data.data;
     } catch (error) {
       throw new Error("Failed to fetch doctor about");

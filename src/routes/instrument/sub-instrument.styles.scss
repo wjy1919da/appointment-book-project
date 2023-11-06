@@ -221,6 +221,15 @@
 }
 
 /* Large Screen  */
+
+.hidden-recommendation-grid {
+    opacity: 0;
+}
+
+.shown-recommendation-grid {
+    opacity: 1;
+}
+
 @media(min-width: 1280px){
     .sub-instrument-container{
     }

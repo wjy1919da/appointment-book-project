@@ -1,4 +1,5 @@
-import React, { useRef, useState,useReducer,useEffect} from 'react'
+import React, { useRef, useState,useReducer,useEffect} from 'react';
+import axios from 'axios';
 // import { InputGroup, Input } from "@chakra-ui/react";
 import useDoctorQueryStore from '../../../store.ts';
 import DoctorSearchDropDown from './doctor-search-dropdown.component.jsx';
@@ -25,18 +26,53 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     const [IsModalOpen,setIsModelOpen] = useState(false);
     const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
     const [isFieldModalOpen, setIsFieldModalOpen] = useState(false);
+    const [dropdownLocations, setDropdownLocations] = useState([]);
+    const [dropdownProcedures, setDropdownProcedures] = useState([]);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
     const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
     const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
     const searchButtonWidth = isIpad ? '257px' : (isPhone ? '150px' : 'defaultWidth');
     const searchButtonHeight = isIpad ? '52px' : (isPhone ? '40px' : 'defaultWidth');
     useEffect(() => {
-        if (!IsModalOpen) {
-            setDoctorName('');
-            setField('');
-            setLocation('');
+        const body = {
+            pageReq: 0
+        };
+        const getProcedures = async () => {
+            try {
+                const res1 = await axios.post('https://api-dev.charm-life.com/doctor/search/procedure', body);
+                console.log('Res1: ', res1);
+                if (!res1?.data?.code === 100) throw new Error();
+                const procedures = res1?.data?.data;
+                const locationsDict = {};
+                const proceduresArray = [];
+                for (let i = 0; i < procedures.length; i++) {
+                    const procedure = procedures[i];
+                    const location = procedure.groupName.split(' ')[0].toLowerCase();
+                    if (!locationsDict[location]) {  // if we haven't seen the current location
+                        locationsDict[location] = 1;  // mark that we've seen the location
+                        proceduresArray.push({ 'location': location, 'procedures': [procedure.categoryName]}); // create a new location object, and start the array with the current procedure
+                    } else {  // else if we've seen this location before
+                        for (let j = 0; j < proceduresArray.length; j++) { // cycle through the array
+                            if (proceduresArray[j].location === location) {  // when we found the correct location object
+                                proceduresArray[j].procedures.push(procedure.categoryName);  // add the current procedure to the list
+                            }
+                        }
+                    }
+                }
+                setDropdownProcedures(proceduresArray);
+            } catch (err) {
+                console.log('Unable to retrieve procedure data for multiInput dropdown');
+            }   
+            
         }
-    }, [IsModalOpen]);
+        const getLocations = async () => {
+            const res2 = await axios.post('https://api-dev.charm-life.com/doctor/search/address', body);
+            const newLocations = res2?.data?.data?.map((locationObj) => `${locationObj?.city}, ${locationObj?.state}`);
+            setDropdownLocations(newLocations);
+        }
+        getProcedures();
+        getLocations();
+    }, []);
     const handleOnClick = () => {
         setIsModelOpen(true);
     }
@@ -56,9 +92,10 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                {"location": "Body", "procedures" : [{"procedureName": "Breast Augmentation", "photoURL": "breast_augmentation.svg"}, {"procedureName": "Laser Hair Removal", "photoURL": "laser_hair_removal.svg"}, {"procedureName": "Neck Contouring", "photoURL": "Neck_Contouring.svg"}, {"procedureName": "Tummy Tuck", "photoURL": "Tummy_Tuck.svg"}]}
                               ]
     const handleSubmit = () => {
-        const obj = {'location': doctorQuery.location,
-                      'field':   doctorQuery.field,
-                      'name': doctorQuery.doctorName
+        const obj = { 
+                      'address': doctorQuery.location,
+                      'name':   doctorQuery.field,
+                      'nickname': doctorQuery.doctorName
                     }
         console.log('Now calling multiInput callback...');
         searchCallback(obj);
@@ -80,8 +117,10 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
         }, 100); // need the timeout here or else the modal would close before we could grab the data from clicking the modal
     }
     const proceduresGetInfo = (item) => {
-        // console.log(item);
-        setField(item.procedureName);
+        const splitItem = item.split('_');
+        const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+        const procedureTitle = upperCased.join(' ');
+        setField(procedureTitle);
     }
     return (
         <div>
@@ -179,7 +218,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                 <div className='doctor-multiInput-container'> {/* I did not touch the mobile version above. Once the UI team completes the wireframe for it I can come back to this page */}
                     <form className='doctor-input-form'>
                         <span className='location-input-container' >  {/* Has position set to relative to allow the absolute position of the dropdown */}
-                            <input placeholder='ZIP or City, State' 
+                            <input placeholder='City, State' 
                                 name='location' 
                                 onChange={(event) => setLocation(event.target.value)}
                                 onClick={() => toggleLocationModal()}  // clicking the input will open and close the modal
@@ -187,7 +226,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                 value={doctorQuery?.location}
                                 className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
                             <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
-                                {defaultLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
+                                {dropdownLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
                                     return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
                                 })}
                             </div>
@@ -201,7 +240,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                                 value={doctorQuery?.field}
                                 className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
                             <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
-                                {proceduresNameAndImg.map((procedureObj, index) => {
+                                {dropdownProcedures.map((procedureObj, index) => {
                                     return <span className='procedure-dropdown-row-container'>
                                         <ProcedureRow key={index+100} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
                                     </span>
@@ -222,16 +261,20 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
 }
 
 const ProcedureRow = ({procedureObj, onClick}) => {
+    const location = procedureObj.location.charAt(0).toUpperCase() + procedureObj.location.slice(1);
     return (
         <div className='procedure-dropdown-row'>
-            <p className='procedure-dropdown-title'>{procedureObj.location}</p>
+            <p className='procedure-dropdown-title'>{location}</p>
             <div className='procedure-dropdown-procedures-container'>
                 {procedureObj.procedures.map((item, index) => {
+                    const splitItem = item.split('_');
+                    const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+                    const procedureTitle = upperCased.join(' ');
                     return (<div className='procedure-wrapper' onClick={() => onClick(item)} key={index+200}>
                                 <div className='procedure-photo-container'>
-                                    {item?.photoURL ? <img src={require(`../../../assets/procedure/${item?.photoURL}`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
+                                    {item ? <img src={require(`../../../assets/procedure/${item}.svg`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
                                 </div>
-                                <p className='procedure-subtitle'>{item.procedureName}</p>
+                                <p className='procedure-subtitle'>{procedureTitle}</p>
                             </div>
                     )
                 })}
