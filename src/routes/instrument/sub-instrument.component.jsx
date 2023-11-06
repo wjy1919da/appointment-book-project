@@ -366,7 +366,6 @@ const SubInstrument = () => {
            </div>
        </div>
    </div>
-   </div>
   
 )
 }
