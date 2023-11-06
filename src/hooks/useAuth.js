@@ -139,7 +139,8 @@ export function useGetUserInfo(){
     const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchGetUserInfo = async () => {
         if (!token) {
-            alert('user not login');
+            // alert('user not login');
+            return null;
         }
         const res = await apiClient.post();
         return res.data;
