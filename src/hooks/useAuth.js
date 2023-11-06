@@ -145,5 +145,5 @@ export function useGetUserInfo(){
         const res = await apiClient.post();
         return res.data;
     };
-    return useQuery(['getUserInfo', UserInfo.token], fetchGetUserInfo);
+    return useQuery(['getUserInfo', userInfo.token], fetchGetUserInfo);
 }
