@@ -64,7 +64,7 @@ const PostDropDownFilter = () => {
               </div>
 
               <div className='search-result'>
-                <p className='search-result.title'>#Trendy</p>
+                <p className='search-result-title'>#Trendy</p>
                   {data?.data?.map((item) => (
                     <div key={item.tagId} className='search-result-list'>{item.tagName}</div>
                   ))}
