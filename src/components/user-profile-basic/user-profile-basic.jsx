@@ -13,7 +13,10 @@ import BookingIcon from '../../assets/post/booking-icon.png';
 // components
 import HomeButton from '../home-button/home-button.component';
 
+import { useGetUserInfo } from '../../hooks/useAuth';
 const UserProfileBasic = () => {
+  const {data, isLoading, isError, error} = useGetUserInfo();
+
   return (
     <div className='user-profile-basic-container container'>
       <div className='user-profile-basic-avatar'>
@@ -23,14 +26,14 @@ const UserProfileBasic = () => {
         <div className='user-profile-basic-name-and-editButton'>
           <div className='user-profile-basic-name'>
             <div className='user-profile-basic-name-title'>
-              <span className='user-profile-basic-user-name'>Charlotte</span>
+              {data?.data?.nickname && <span className='user-profile-basic-user-name'>{data?.data?.nickname}</span>}
               {/* <img
                 src={userVerified}
                 style={{ width: '34px', height: '34px' }}
               ></img> */}
             </div>
             <div className='user-profile-basic-name-text'>
-              <span className='user-profile-basic-create-name'>@username</span>
+              <span className='user-profile-basic-create-name'>@{data?.data?.nickname}</span>
             </div>
           </div>
           <div className='wrapper'>
@@ -52,21 +55,20 @@ const UserProfileBasic = () => {
 
         <div className='user-profile-basic-info-text'>
           <span className='user-profile-basic-description'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {data?.data?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
           </span>
         </div>
         <div className='user-profile-basic-info-following-section'>
           <div className='user-profile-number-cate-combimation'>
-            <span className='user-profile-black-text'>3</span>
+            <span className='user-profile-black-text'>{data?.data?.postsNumber || 0}</span>
             <span className='user-profile-gray-text'>Posts</span>
           </div>
           <div className='user-profile-number-cate-combimation'>
-            <span className='user-profile-black-text'>3</span>
+            <span className='user-profile-black-text'>{data?.data?.followers || 0}</span>
             <span className='user-profile-gray-text'>follower</span>
           </div>
           <div className='user-profile-number-cate-combimation'>
-            <span className='user-profile-black-text'>3</span>
+            <span className='user-profile-black-text'>{data?.data?.followings || 0}</span>
             <span className='user-profile-gray-text'>following</span>
           </div>
         </div>
