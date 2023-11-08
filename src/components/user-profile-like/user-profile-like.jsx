@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CommunityPost from '../components-posts/community-post/community-post.component';
 
 // hook
-import { useGetUserPostedPost } from '../../hooks/useGetPosts';
+import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 
 // scss
 import '../user-profile-post-area/user-profile-post-area.styles.scss';
@@ -27,14 +27,27 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 const UserProfileLike = () => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  //const [showCreatePost, setShowCreatePost] = useState(false);
+  
+  // const [showCreatePost, setShowCreatePost] = useState(false);
 
   // calling hook
-  const { data, isLoading, isError } = useGetUserPostedPost();
+  const { data, isLoading, isError } = useGetUserLikededPost();
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+    // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   fetchNextPage,
+  //   isFetchingNextPage,
+  //   hasNextPage,
+  // } = useGetUserLikededPost();
+  // console.log('userCallBackdata', data);
+  // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  // console.log('userPostedpostin', flatData);
 
   const [gutterwidth, setGutterWidth] = useState('10px');
   const breakPoint = {
@@ -47,20 +60,8 @@ const UserProfileLike = () => {
     430: 2,
   };
 
-  // const {
-  //   data,
-  //   error,
-  //   isLoading,
-  //   fetchNextPage,
-  //   isFetchingNextPage,
-  //   hasNextPage,
-  // } = useGetUserLikededPost();
-  // console.log('userCallBackdata', data);
-  // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
-  // console.log('userPostedpostin', flatData);
-
   useEffect(() => {
-    const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
+    const images = [creatPostIcon, post1, userPostAvatar];
 
     let loadedImagesCount = 0;
     images.forEach((src) => {
@@ -75,22 +76,22 @@ const UserProfileLike = () => {
     });
   }, []);
 
-  const samplePosts = Array(10).fill({
-    pictures: post1,
-    title: 'Sample Title',
-    avatar: userPostAvatar,
-    username: 'Sample Author',
-    likeCount: 42,
-  });
+  // const samplePosts = Array(10).fill({
+  //   pictures: post1,
+  //   title: 'Sample Title',
+  //   avatar: userPostAvatar,
+  //   username: 'Sample Author',
+  //   likeCount: 42,
+  // });
 
-  const postList = samplePosts.map((post, index) => (
+  const postList = data?.data?.map((post, index) => (
     <CommunityPost
       key={index}
-      imageURL={post.pictures}
+      imageURL={post.coverImg}
       text={post.title}
-      profileImage={post.avatar}
-      authorName={post.username}
-      likes={post.likeCount}
+      profileImage={userPostAvatar}
+      authorName='Anna'
+      likes={10}
       isLike={true}
       isProfile={true}
     />
