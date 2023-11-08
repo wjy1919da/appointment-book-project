@@ -27,17 +27,19 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 const UserProfileLike = () => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  
+
   // const [showCreatePost, setShowCreatePost] = useState(false);
 
   // calling hook
   const { data, isLoading, isError } = useGetUserLikededPost();
 
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+
   useEffect(() => {
     console.log(data);
   }, [data]);
 
-    // const {
+  // const {
   //   data,
   //   error,
   //   isLoading,
@@ -84,16 +86,22 @@ const UserProfileLike = () => {
   //   likeCount: 42,
   // });
 
-  const postList = data?.data?.map((post, index) => (
+  const postList = flatData.map((post, index) => (
     <CommunityPost
-      key={index}
-      imageURL={post.coverImg}
-      text={post.title}
-      profileImage={userPostAvatar}
-      authorName='Anna'
-      likes={10}
-      isLike={true}
-      isProfile={true}
+      imageURL={post.pictures || []}
+      text={post.title || ''}
+      profileImage={post.avatar || ''}
+      authorName={post.username || ''}
+      likes={post.likeCount || 0}
+
+      // key={index}
+      // imageURL={post.coverImg}
+      // text={post.title}
+      // profileImage={userPostAvatar}
+      // authorName='Anna'
+      // likes={10}
+      // isLike={true}
+      // isProfile={true}
     />
   ));
 

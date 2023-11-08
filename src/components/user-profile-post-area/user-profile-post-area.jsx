@@ -58,9 +58,11 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     hasNextPage,
   } = useGetUserPostedPost();
 
-    useEffect(() => {
-      console.log('dataの中身', data);
-    }, [data]);
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+
+  useEffect(() => {
+    console.log('dataの中身', data);
+  }, [data]);
 
   var userName;
   var avatar;
@@ -74,7 +76,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
 
   //console.log('userpostedCallBackdata', data);
 
-  const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
 
   //console.log('userPostedpostin', flatData);
 
@@ -110,15 +112,21 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   //   likeCount: 42,
   // });
 
-  const postList = data?.data?.map((post, index) => (
+  const postList = flatData.map((post, index) => (
     <div key={index}>
       <CommunityPost
-        imageURL={post.coverImg}
-        text={post.title}
-        profileImage={userPostAvatar}
-        authorName='Anna'
-        likes={10}
-        isProfile={true}
+        imageURL={post.pictures || []}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.username || ''}
+        likes={post.likeCount || 0}
+
+        // imageURL={post.coverImg}
+        // text={post.title}
+        // profileImage={userPostAvatar}
+        // authorName='Anna'
+        // likes={10}
+        // isProfile={true}
       />
     </div>
   ));
