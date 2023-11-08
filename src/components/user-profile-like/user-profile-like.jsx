@@ -36,7 +36,7 @@ const UserProfileLike = () => {
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
-    console.log(data);
+    console.log('Likesページ', data);
   }, [data]);
 
   // const {

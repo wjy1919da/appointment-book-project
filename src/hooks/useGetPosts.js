@@ -57,7 +57,7 @@ export function useGetUserPostedPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+  return useInfiniteQuery(['GetPostsPost', postQuery], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -94,7 +94,7 @@ export function useGetUserLikededPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+  return useInfiniteQuery(['GetLikesPost', postQuery], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts

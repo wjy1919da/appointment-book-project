@@ -13,7 +13,7 @@ import ErrorMsg from '../../error-msg/error-msg.component';
 
 // hook
 import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
- import { useGetPost } from '../../../hooks/useGetPosts';
+//  import { useGetPost } from '../../../hooks/useGetPosts';
 
 // scss
 import './doctor-post-grid.styles.scss';
@@ -21,6 +21,7 @@ import './doctor-post-grid.styles.scss';
 // images
 import Arrow from '../../../assets/post/arrow_grid.png';
 import Arrow1 from '../../../assets/post/arrow1_grid.png';
+
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
 
@@ -58,7 +59,6 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserName(username);
   };
   
-
   const postCardList = flatData.map((post) => (
     <div
       className='btn'

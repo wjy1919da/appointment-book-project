@@ -61,7 +61,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
-    console.log('dataの中身', data);
+    console.log('Postsページ', data);
   }, [data]);
 
   var userName;
