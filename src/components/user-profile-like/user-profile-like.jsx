@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 // components
 import CommunityPost from '../components-posts/community-post/community-post.component';
 
+// hook
+import { useGetUserPostedPost } from '../../hooks/useGetPosts';
+
 // scss
 import '../user-profile-post-area/user-profile-post-area.styles.scss';
 import '../create-post/create-post.style.scss';
@@ -12,7 +15,6 @@ import post1 from '../../assets/doctor/post3.png';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 // utils
-import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import creatPostIcon from '../../assets/post/create-post-icon.png';
 
@@ -20,10 +22,19 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import CreatePostOfUser from '../create-post/create-post';
 // import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
+// import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 
 const UserProfileLike = () => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   //const [showCreatePost, setShowCreatePost] = useState(false);
+
+  // calling hook
+  const { data, isLoading, isError } = useGetUserPostedPost();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const [gutterwidth, setGutterWidth] = useState('10px');
   const breakPoint = {
@@ -36,18 +47,17 @@ const UserProfileLike = () => {
     430: 2,
   };
 
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useGetUserLikededPost();
-  console.log('userCallBackdata', data);
-  const flatData = data ? data.pages.flatMap((page) => page.data) : [];
-  console.log('userPostedpostin', flatData);
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   fetchNextPage,
+  //   isFetchingNextPage,
+  //   hasNextPage,
+  // } = useGetUserLikededPost();
+  // console.log('userCallBackdata', data);
+  // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  // console.log('userPostedpostin', flatData);
 
   useEffect(() => {
     const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
