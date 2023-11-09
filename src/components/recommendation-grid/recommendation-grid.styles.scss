@@ -20,3 +20,17 @@
     flex-direction: column;
     gap: 15px;
 }
+
+.simple-grid-test {
+    width: 21rem;
+    height: 18rem;
+}
+
+.simple-grid-test::-webkit-scrollbar {
+    width: 3px;
+}
+
+.simple-grid-test::-webkit-scrollbar-thumb {
+    background: #D9D9D9;
+    border-radius: 30px;
+}

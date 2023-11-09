@@ -6,11 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import LoginRegisterTitle from './login-register-title.component';
 import userInfoQueryStore from '../../../userStore.ts';
-import Cookie from 'js-cookie';
 import NextButton from './next-button.component';
 import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
-import SendVerifyEmail from './send-verify-email.component';
 //import DatePicker from "react-datepicker";
 const SignUpForm = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
@@ -23,21 +21,19 @@ const SignUpForm = () => {
         password: z.string()
             .min(6)
             .max(18)
-            .refine(password => 
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
-                {
-                    message: "Password must contain both letters and numbers."
-                }
-        ),  
-        repassword: z.string().min(6)
-        .max(18)
-        .refine(password => 
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(password),
-            {
-                message: "Password must contain both letters and numbers."
-            }
-        )
-    });    
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        }),
+        repassword: z.string()
+            .min(6)
+            .max(18)
+            .refine(password => /^(?=.*\d)(?=.*[A-Za-z]|[!@#¥%^&*()_+=-~`])[A-Za-z\d!@#¥%^&*()_+=-~`]{6,18}$/.test(password), {
+            message: "Password must contain numbers and (letters or special characters)."
+        })
+      }).refine(data => data.password === data.repassword, {
+        message: "Passwords do not match",
+        path: ["repassword"]
+      });
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
         mode: 'onChange'
@@ -47,7 +43,8 @@ const SignUpForm = () => {
     var userRole;
     var email;
     useEffect(() => {
-        userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
+        userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
+        console.log("userRole in sign up form ",userRole,localStorage.getItem('accountType'));
         email = localStorage.getItem('email');
     });
     const onSubmit = (formData) => {
@@ -55,7 +52,7 @@ const SignUpForm = () => {
             alert("password not match");
             return;
         }
-        //console.log("email before mutate ",email);
+        console.log("userRole before mutate ",userRole);
         mutate({
             email: email,
             password: formData.password,
@@ -65,27 +62,33 @@ const SignUpForm = () => {
         setUsername(formData.username);
     };
     //console.log("sign up form errors ",errors);
-    
     useEffect(() => {
-        if (data?.msg && data.code === 100) {
-           const myToken = data.data.token;
-           console.log("myToken in new register ", myToken);
-           Cookie.set('token', myToken);
-           setToken(myToken);
-           alert("register success ", data.code);
-           if (userInfo && userInfo.accountType) {
-                if (userInfo.accountType === "1") {
-                    switchPopupTab('gender');
-                } else if (userInfo.accountType === "2") {
-                    switchPopupTab('success');
-                }
-            }
-        } else if (data) {
+        if (data?.msg) {
             alert(data.msg);
-        }
-        //console.log("userInfo in sign up form ", userInfo);
+            if (data.code === 100) {
+                const { token } = data.data || {};
+                if (token) {
+                    //console.log("myToken in new register ", token);
+                    localStorage.setItem('token', token);
+                    setToken(token);
+                } else {
+                    console.error('Token not found in data');
+                }
+                alert("register success ", data.code);
+                //console.log('userInfo in sign up form', userInfo);
+                const accountTypeTabMap = {
+                    "1": 'gender',
+                    "2": 'doctorFinish'
+                };
+                const nextTab = accountTypeTabMap[userInfo?.accountType];
+                if (nextTab) switchPopupTab(nextTab);
+            }
+        }        
     }, [data]);
-    console.log("userInfo in sign up form ", userInfo);
+    //console.log("userInfo in sign up form ", userInfo);
+    if(error){
+        alert(error.message);
+    }
     return (
         <div className='sign-in-form-container'>
             <div className='login-title-container'>

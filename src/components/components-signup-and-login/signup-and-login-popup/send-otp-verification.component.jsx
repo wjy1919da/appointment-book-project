@@ -1,13 +1,11 @@
-// import React, { useState,useEffect } from "react";
-// import OtpInput from 'react-otp-input';
-// import './send-otp-verification.styles.scss';
-// import LoginRegisterTitle from "./login-register-title.component";
-// import NextButton from "./next-button.component";
-// import { useUserOtpRegisterValidate } from '../../../hooks/useAuth';
-// import userInfoQueryStore from '../../../userStore.ts';
-// import Cookies from 'js-cookie';
-// import { Form, InputGroup } from 'react-bootstrap'
-// import { Cookie } from "@mui/icons-material";
+import React, { useState,useEffect } from "react";
+import OtpInput from 'react-otp-input';
+import './send-otp-verification.styles.scss';
+import LoginRegisterTitle from "./login-register-title.component";
+import NextButton from "./next-button.component";
+import { useUserOtpRegisterValidate } from '../../../hooks/useAuth';
+import userInfoQueryStore from '../../../userStore.ts';
+import { Form, InputGroup } from 'react-bootstrap'
 
 // const SendOtpVerification = () => {
 //     // const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -38,30 +36,31 @@
 //         }
 //     };
 
-//     const onSubmit = (e) => {
-//         console.log("onSubmit");
-//         e.preventDefault(); 
-//         // if (validateOtp()) {
-//             // console.log("otp is valid");
-//             mutate({
-//                 mobile: userInfo.phoneNumber,
-//                 otp: otp,
-//                 userRole: userRole
-//             });
-//         // }
-//     };
-//     useEffect(() => {
-//         if (data?.code === 100) {
-//             const token = data.data.token;
-//             Cookies.set('token', token);
-//             setToken(token);
-//             alert(data.msg);
-//             togglePopup(false);
-//         }
-//         if (data?.code === 104 || data?.code === 501) {
-//             alert(data.msg);  
-//         }
-//     }, [data]);
+
+    const onSubmit = (e) => {
+        console.log("onSubmit");
+        e.preventDefault(); 
+        // if (validateOtp()) {
+            // console.log("otp is valid");
+            mutate({
+                mobile: userInfo.phoneNumber,
+                otp: otp,
+                userRole: userRole
+            });
+        // }
+    };
+    useEffect(() => {
+        if (data?.code === 100) {
+            const token = data.data.token;
+            localStorage.setItem('token', token);
+            setToken(token);
+            alert(data.msg);
+            togglePopup(false);
+        }
+        if (data?.code === 104 || data?.code === 501) {
+            alert(data.msg);  
+        }
+    }, [data]);
 
 //     return (
 //         <div className="send-verification-outer-container">

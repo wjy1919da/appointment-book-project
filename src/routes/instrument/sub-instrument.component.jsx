@@ -1,6 +1,5 @@
 import './sub-instrument.styles.scss';
 import SubTxt from '../../components/sub-txt/sub-txt.component';
-import Footer from '../../components/footer/footer.component';
 import { Link, useParams } from 'react-router-dom';
 import coolsculpting from '../../assets/instrument/coolsculpting.svg';
 import thermage from '../../assets/instrument/thermage.svg';
@@ -18,6 +17,8 @@ import ProcedureCard from '../../components/procedure-card/procedure-card.compon
 import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.component'
 import SubProcedureMobileExtraBottom from '../../components/sub-procedure-mobile-extra-bottom/sub-procedure-mobile-extra-bottom.component';
 import useGetProcedures from '../../hooks/useGetProcedures';
+import { useGetInstruments } from '../../hooks/useGetInstruments';
+import { GetDetailedInstruments } from '../../hooks/useGetDetailedInstruments';
 import useProcedureQueryStore from '../../procedureStore.ts'
 function safeJsonParse(str) {
     try {
@@ -28,6 +29,9 @@ function safeJsonParse(str) {
     }
 }
 const SubInstrument = () => {
+    const [data, setData] = useState({});
+    const [subcategories, setSubcategories] = useState([]);
+    const [error, setError] = useState(false);
     const images = {
         coolsculpting,
         inmode,
@@ -38,40 +42,59 @@ const SubInstrument = () => {
     const result = {"optionsForm":[{"header":[{"name":"Workstations"},{"name":"Technologies Covered"},{"name":"Technologies Included"}]},{"body":[{"name":"InMode Forma","value":["Radiofrequency","Radiofrequency for skin tightening"]},{"name":"InMode Evoke","value":["Microneedling","Microneedling for collagen production"]},{"name":"InMode Morpheus8","value":["IPL","IPL for pigmentation and vascular lesions"]},{"name":"InMode Votiva","value":["Diode Laser","Diode Laser for hair removal"]},{"name":"InMode Lumecca","value":["Fractional Coagulation","Fractional Coagulation for skin resurfacing"]},{"name":"InMode DiolazeXL","value":["Temperature Monitoring","Temperature Monitoring for safety"]},{"name":"InMode Triton","value":["Auto-adjusting","Auto-adjusting for custom treatment"]},{"name":"InMode Optimas","value":["Multi-Wavelength","Multi-Wavelength for various treatments"]},{"name":"InMode Avance","value":["Pulse Control","Pulse Control for optimized output"]}]}]};
     const { name } = useParams();
     const setCategories = useProcedureQueryStore(state=>state.setCategories);
-    const { data, isLoading, error } = useGetProcedures();
-    const subcategories = data?.data?.subcategories || [];
+    // const { data, isLoading, error } = useGetProcedures();
+    // const data = GetDetailedInstruments(name);
+    // console.log('Data is: ', data);
+    // let subcategories = data?.data?.data?.subcategories;
+    // console.log('Subcategories is: ', subcategories);
     useEffect(() => {
+        window.scroll(0, 0);
         setCategories(name);
+        const getData = async () => {
+            try {
+                const res = await GetDetailedInstruments(name);
+                console.log('res is: ', res);
+                if (res?.code === 104) throw new Error();
+                setData(res);
+                setSubcategories(res.data.subcategories);
+            } catch (err) {
+                setError(true);
+            }
+        }
+        getData();
     }, [name]);
-    console.log('instrument-data',data);
 
     const imageToUse = images[name];
     function getSubCategory(index) {
-        if (data.data && Array.isArray(data.data.subcategories) && data.data.subcategories.length > index) {
-            return data.data.subcategories[index];
+        if (data && subcategories.length > index) {
+            return subcategories[index];
         }
         return null;
     }
     var prosAndCons, mechanism,optionsContent, potentialAffetc,beforeAndAfterImage, reference, alternativeTreatmentForm, cardInfo;
-    if (data.data && data.data.subcategories) {
+    if (data && subcategories) {
        //console.log('optionsContentdata',data.data.subcategories[2].other)
+       console.log('Creating subcategories!');
        const subCategory1 = getSubCategory(1);
        if (subCategory1) {
-            prosAndCons = subCategory1.explanation ? safeJsonParse(subCategory1.explanation) : undefined;
+            // prosAndCons = subCategory1.explanation ? safeJsonParse(subCategory1.explanation) : undefined;
+            prosAndCons = subCategory1.explanation ? subCategory1.explanation : undefined;
         }
        const subCategory2 = getSubCategory(2);
          if (subCategory2) {
+            //  mechanism = subCategory2.other ? safeJsonParse(subCategory2.other) : undefined;
              mechanism = subCategory2.other ? safeJsonParse(subCategory2.other) : undefined;
               //console.log('optionsContentdata',optionsContent)
           }
         const subCategory3 = getSubCategory(3);
         if (subCategory3) {
-            optionsContent = subCategory3.other ? safeJsonParse(subCategory2.other) : undefined;
-             
+            // optionsContent = subCategory3.other ? safeJsonParse(subCategory2.other) : undefined;
+            optionsContent = subCategory3.other ? safeJsonParse(subCategory3.other) : undefined;
         }
         const subCategory4 = getSubCategory(4);
         if (subCategory4) {
-            potentialAffetc  = subCategory4.explanation ? safeJsonParse(subCategory2.explanation) : undefined;
+            // potentialAffetc  = subCategory4.explanation ? safeJsonParse(subCategory2.explanation) : undefined;
+            potentialAffetc  = subCategory4.explanation ? subCategory4.explanation : undefined;
         }
         // const subCategory4 = getSubCategory(4);
         // if (subCategory4) {
@@ -80,17 +103,17 @@ const SubInstrument = () => {
         // }
         const subCategory5 = getSubCategory(5);
         if (subCategory5) {
-            const parsed = safeJsonParse(subCategory5.other);
-            beforeAndAfterImage = parsed ? parsed.beforeAndAfterImage : undefined;  
-          
+            // const parsed = safeJsonParse(subCategory5.other);
+            beforeAndAfterImage = subCategory5.other ? subCategory5.other : undefined;  
+            // console.log('Before and After: ', beforeAndAfterImage);
         }
         const subCategory6 = getSubCategory(6);
         if (subCategory6) {
-            reference = subCategory6.other ? safeJsonParse(subCategory6.other) : undefined;
+            reference = subCategory6.other ? [subCategory6.other] : undefined;
         }
         const subCategory7 = getSubCategory(7);
         if (subCategory7) {
-            cardInfo=data.data.subcategories[7].other ? safeJsonParse(subCategory7.other) : undefined;
+            cardInfo = subCategory7.other ? safeJsonParse(subCategory7.other) : undefined;
         }
     }
 
@@ -99,6 +122,7 @@ const SubInstrument = () => {
     const isLarge = useMediaQuery({ query: `(min-width: 1024px)` });
     const isMediumOrLarge = isMedium || isLarge;
     const [selectedSection, setSelectedSection] = useState("description");
+    const [screenAtBottom, setScreenAtBottom] = useState(false);
     // Todo: video need to be replace
     const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     const formatTitle = (title) => {
@@ -127,7 +151,7 @@ const SubInstrument = () => {
     const slideRef = useRef(null);
     const recommendationGridRef = useRef(null);
     const footerRef = useRef(null);
-   
+ 
     const handleScroll = () => {
         const slideElement = document.getElementById("slide");
         const recommendationElement = document.getElementById("recommendation");
@@ -149,15 +173,26 @@ const SubInstrument = () => {
                 if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
                     recommendationElement.style.top = '270px';
                     recommendationElement.style.position = 'fixed';
-                    recommendationElement.style.display = 'block';  // 确保元素是可见的
-                } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
-                    if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
-                        recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
-                    } else {
-                        recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
-                        recommendationElement.style.position = 'absolute';
-                        recommendationElement.style.display = 'block';  // 确保元素是可见的
-                    }
+                    //console.log('HERE HERE HERE!')
+                    // console.log('ScreenAtBottom is: ', screenAtBottom);
+                    setScreenAtBottom(false);
+
+                    // recommendationElement.style.display = 'block';  // 确保元素是可见的
+                } else if (recommendationElement && footerTop <= recommendationElement.getBoundingClientRect().bottom) {
+                    setScreenAtBottom(true);
+                    // console.log('recommendationElement.getBoundingClientRect().bottom: ', recommendationElement.getBoundingClientRect().bottom);
+                    // console.log('footerTop: ', footerTop);
+                    // if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
+                    //     // recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
+                    //     console.log('Setting screenAtBottom to TRUE');
+                    //     setScreenAtBottom(true);
+                    // } else {
+                    //     // recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
+                    //     // recommendationElement.style.position = 'absolute';
+                    //     // recommendationElement.style.display = 'block';  // 确保元素是可见的
+                    //     console.log('Setting screen at bottom to FALSE');
+                    //     setScreenAtBottom(false);
+                    // }
                 }
             } else {
                 if (recommendationElement) {
@@ -195,11 +230,20 @@ const SubInstrument = () => {
             window.removeEventListener('scroll', handleScroll);
         }
     }, []);
-        
+
+
+    if (error) {
+        return (
+            <div className='instrument-error-page'>
+                <h1 className='instrument-error-title'>Unable to find this instrument. Please try again later.</h1>
+            </div>
+        )
+    }    
+
     return (
         <div className='outer-container'>
         <div className='sub-instrument-container'>
-       <div className='sub-instrument-left-container'>
+        <div className='sub-instrument-left-container'>
            <div className='sub-instrument-title-container'>
                <h3 className='sub-instrument-top-text'>Instrument</h3>
              {/* Logo picture */}
@@ -256,7 +300,7 @@ const SubInstrument = () => {
            <div className='sub-instrument-scroll-container' id = 'beforeAndAfter'>
               <SubTxt title={subcategories[5].subCategoryTitle} text={subcategories[5].explanation}/>
               {/* <SubProcedureScroll data={beforeAndAfterImage.beforeAndAfterImage} /> */}
-              <SubProcedureScroll data={beforeAndAfterImage} />
+              {/* <SubProcedureScroll data={beforeAndAfterImage} /> UNCOMMENT THIS AFTER WE ACTUALLY HAVE PICTURES! */}  
               <HomeLink title = "View More Post" href = '/posts'/>  
            </div>
             }
@@ -269,7 +313,7 @@ const SubInstrument = () => {
                <div className='sub-instrument-title'>
                    References and resources
                </div>
-               <SubProcedureReference reference = {reference} id = ''/>
+               <SubProcedureReference reference={reference} id = ''/>
            </div>
            }
            {isMobile && <SubProcedureMobileExtraBottom />  }
@@ -278,30 +322,29 @@ const SubInstrument = () => {
            </div>}
        </div>
        <div className='sub-instrument-right-container'>
-         <div>
-           {/* Card of right container */}
-           {isMediumOrLarge && cardInfo &&<div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
-           {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
-                   <div className="introduction-icon"></div>
-                   <div className="introduction-catalog">
-                       <a
-                           href="#description"
-                           className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                           //onClick={() => setSelectedSection("description")}
-                           >Introduction</a>
-                       <a
-                           href="#consider"
-                           className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                          // onClick={() => setSelectedSection("consider")}
-                           >Why consider {formatTitle(name)}</a>
+        {/* Card of right container */}
+        {isMediumOrLarge && cardInfo &&<div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
+        {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
+                <div className="introduction-icon"></div>
+                <div className="introduction-catalog">
+                    <a
+                        href="#description"
+                        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                        //onClick={() => setSelectedSection("description")}
+                        >Introduction</a>
+                    <a
+                        href="#consider"
+                        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                        // onClick={() => setSelectedSection("consider")}
+                        >Why consider {formatTitle(name)}</a>
 
-                       {optionsContent &&
-                       <a
-                           href="#options"
-                           className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                    {optionsContent &&
+                    <a
+                        href="#options"
+                        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
 
-                           //onClick={() => setSelectedSection("options")}
-                           >Procedure options</a>}
+                        //onClick={() => setSelectedSection("options")}
+                        >Procedure options</a>}
 
                        {beforeAndAfterImage &&
                        <a
@@ -322,10 +365,6 @@ const SubInstrument = () => {
                </div>}
            </div>
        </div>
-   </div>
-   <div className='instrument-footer-container' ref={footerRef}>
-       <Footer />
-   </div>
    </div>
   
 )

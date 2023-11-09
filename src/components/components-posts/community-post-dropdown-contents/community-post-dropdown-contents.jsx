@@ -1,9 +1,12 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import usePostQueryStore from '../../../postStore';
 import { nanoid } from 'nanoid';
 
 // components
 import FormButton from '../community-post-button/community-post-button';
+
+// hook
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
 
 // scss
 import './community-post-dropdown-contents.scss';
@@ -11,10 +14,23 @@ import './community-post-dropdown-contents.scss';
 // images
 import BreastProcedureImage from '../../../assets/procedure/breast_augmentation.svg';
 import BodyProcedureImage from '../../../assets/procedure/chemical_peels.svg';
+import BotoxProcedureImage from '../../../assets/procedure/botox_injections.svg';
 import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
 import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
+import NeckProcedureImage from '../../../assets/procedure/neck_contouring.svg';
 
 const PostDropDownContents = () => {
+  const setFilterCondition = usePostQueryStore(
+    (state) => state.setFilterCondition
+  );
+
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+
+  const [filterTopic, setFilterTopic] = useState([]);
+
+  const apiRequestPostFilter = useApiRequestPostFilter();
+
+  // data
   const trendyProcedureData = [
     {
       id: nanoid(),
@@ -28,8 +44,8 @@ const PostDropDownContents = () => {
     },
     {
       id: nanoid(),
-      name: 'Body Procedures',
-      src: BodyProcedureImage,
+      name: 'Botox Procedures',
+      src: BotoxProcedureImage,
     },
     {
       id: nanoid(),
@@ -43,10 +59,40 @@ const PostDropDownContents = () => {
     },
     {
       id: nanoid(),
-      name: 'Skin Procedures',
-      src: SkinProcedureImage,
+      name: 'Neck Procedures',
+      src: NeckProcedureImage,
     },
   ];
+
+  // filter
+  const handleToggleFilter = (topicValue) => {
+    // console.log(topicValue);
+    if (filterTopic.includes(topicValue)) {
+      setFilterTopic((prevState) =>
+        prevState.filter((topic) => topic !== topicValue)
+      );
+    } else {
+      setFilterTopic((prevState) => [...prevState, topicValue]);
+    }
+  };
+
+  // apply filter
+  const handleClickApplyFilter = async () => {
+    setFilterCondition(filterTopic);
+
+    try {
+      const response = await apiRequestPostFilter.fetchNextPage();
+      // console.log(response);
+    } catch (error) {
+      // console.error('API request failed:', error);
+    }
+    // console.log(filterTopic);
+    // console.log(postQuery);
+  };
+
+  const isButtonClicked = (topic) => {
+    return filterTopic.includes(topic);
+  };
 
   return (
     <div className='post-dropdown-contents-container'>
@@ -54,24 +100,46 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-left-container'>
           <div className='post-dropdown-contents-up'>
             <h3 className='procedure-title'>Post By</h3>
-            <p>Member</p>
-            <p>Authorized Doctor</p>
+            <div className='post-by-button-container'>
+              {['Member', 'Authorized Doctor'].map((post) => (
+                <button
+                  key={nanoid()}
+                  onClick={() => handleToggleFilter(post)}
+                  className={isButtonClicked(post) ? 'clicked-button' : ''}
+                >
+                  {post}
+                </button>
+              ))}
+            </div>
           </div>
           <div className='post-dropdown-contents-down'>
             <h3 className='procedure-title'>Topic</h3>
-            <p>Lorum ipsum Lorum ipsum</p>
-            <p>Lorum ipsum Lorum</p>
-            <p>Lorum ipsum Lorum ipsum</p>
+            <div className='topic-button-container'>
+              {['Facial', 'Breast', 'Skin'].map((topic) => (
+                <button
+                  key={nanoid()}
+                  onClick={() => handleToggleFilter(topic)}
+                  className={isButtonClicked(topic) ? 'clicked-button' : ''}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className='post-dropdown-contents-right-container'>
           <h3 className='procedure-title'>Body Area</h3>
-          <p>Lorum ipsum Lorum ipum</p>
-          <p>Lorum ipsum Lorum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
-          <p>Lorum ipsum Lorum ipsum</p>
+          <div className='body-area-button-container'>
+            {['A', 'B', 'C', 'D', 'E', 'F'].map((area) => (
+              <button
+                key={nanoid()}
+                onClick={() => handleToggleFilter(area)}
+                className={isButtonClicked(area) ? 'clicked-button' : ''}
+              >
+                {area}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className='post-dropdown-contents-procedures-container'>
@@ -79,11 +147,20 @@ const PostDropDownContents = () => {
         <div className='post-dropdown-contents-procedures-inner-container'>
           {trendyProcedureData.map((procedure, index) => (
             <figure id={procedure.id} className='procedure-container'>
-              <img
-                src={procedure.src}
-                alt={`Image-${index}`}
-                className='procedure-image'
-              />
+              <button
+                onClick={() => handleToggleFilter(procedure.src)}
+                className={
+                  isButtonClicked(procedure.src)
+                    ? 'clicked-image-button clicked'
+                    : ''
+                }
+              >
+                <img
+                  src={procedure.src}
+                  alt={`Image-${index}`}
+                  className='procedure-image'
+                />
+              </button>
               <figcaption className='procedure-name'>
                 {procedure.name}
               </figcaption>
@@ -91,7 +168,10 @@ const PostDropDownContents = () => {
           ))}
         </div>
         <div className='post-dropdown-contents-procedures-button-container'>
-          <FormButton buttonName='Apply Filter' />
+          <FormButton
+            buttonName='Apply Filter'
+            onClick={handleClickApplyFilter}
+          />
         </div>
       </div>
     </div>

@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 // scss
 import './community-post-create-page.scss';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-import Footer from '../../footer/footer.component';
+
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
+// hook
+import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
 // import { useAddPost } from '../../../hooks/useAddingPost';
 
-// hook
-import { useApiRequest } from '../../../hooks/useApiRequest';
-
-// scss
-import './community-post-create-page.scss';
 
 // images
-import creatPostIcon from '../../../assets/post/create-post-icon.png';
+import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import { ErrorSharp } from '@mui/icons-material';
 
 const CreatePostPage = () => {
-  const [selectedImage, setSelectedImage] = useState(creatPostIcon);
+  const [selectedImage, setSelectedImage] = useState(createPostIcon);
   const [hasSelectImage, setHasSelectImage] = useState(false);
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [text, setText] = useState('');
   // const [tagDoctor, setTagDoctor] = useState('');
   // const [location, setLocation] = useState('');
   // const { mutate } = useAddPost();
+
+  const navigate = useNavigate();
 
   // react hook form
   const {
@@ -39,7 +38,7 @@ const CreatePostPage = () => {
   } = useForm({ mode: 'onChange' });
 
   // api
-  const { mutate: apiMutate } = useApiRequest({
+  const { mutate: apiMutate } = useApiRequestPost({
     onError: (error) => {
       console.error('API request error', error);
     },
@@ -69,9 +68,14 @@ const CreatePostPage = () => {
     apiMutate(formData);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
+  // back button
+  const handleClickCreatePostBack = () => {
+    navigate('/posts');
+  };
 
   // const handlePostCreation = () => {
   //   const newPost = {
@@ -122,7 +126,11 @@ const CreatePostPage = () => {
       <div className='pink-background-1'></div>
       <div className='pink-background-2'></div>
 
-      <button className='create-post-page-back-button-container'>
+      <button
+        type='button'
+        onClick={handleClickCreatePostBack}
+        className='create-post-page-back-button-container'
+      >
         <img src={Arrow} alt='Image-Arrow-Icon' className='arrow-back-button' />
         <span className='create-post-page-back-button'>Create a post</span>
       </button>
@@ -136,14 +144,29 @@ const CreatePostPage = () => {
           onChange={handleImageChange}
         />
         {hasSelectImage ? (
-          <img src={selectedImage} onClick={handleIconClick} alt='Selected' />
+          <img
+            src={selectedImage}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              width: '330px',
+              height: '330px',
+              objectFit: 'contain',
+            }}
+            onClick={handleIconClick}
+            alt='Selected'
+          />
         ) : (
           <>
             <div className='left-container'>
               <div className='create-post-page-add'>
                 <img
-                  src={creatPostIcon}
+                  src={createPostIcon}
                   onClick={handleIconClick}
+                  style={{
+                    width: '157px',
+                    height: '157px',
+                  }}
                   alt='Image-Create-Post'
                 />
               </div>
@@ -218,10 +241,6 @@ const CreatePostPage = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className='footer-container'>
-        <Footer />
       </div>
     </form>
   );

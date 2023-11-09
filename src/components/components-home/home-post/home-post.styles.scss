@@ -3,7 +3,6 @@
     .Home-post{
         width: 100%;
         //height: 800px;
-        background:white;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -142,7 +141,6 @@
         //top: 400px;
         //left:900px;
         width: 50%;
-        background: #FEFFFF;
         // margin-left: 200px;
         // margin-top: 250px;
         // // margin-left: 330px;
@@ -518,6 +516,15 @@
         font-style: normal;
         font-weight: 600;
         line-height: 100%;
+    }
+
+    .home-mobile-share-postContainer,
+    .home-mobile-share-tag1,
+    .home-mobile-share-tag2,
+    .home-mobile-share-tag4,
+    .doctor-page-img,
+    .doctor-page-name-card{
+        display: none;
     }
 
 
