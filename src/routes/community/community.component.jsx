@@ -90,7 +90,7 @@ const Community = () => {
         </div>
         <DoctorPostGrid />
       </div>
-      <DoctorPostGrid />
+      {/* <DoctorPostGrid /> */}
     </div>
   </div>
   );
