@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import usePostQueryStore from '../../postStore.ts';
 
 // components
 import CommunityPost from '../components-posts/community-post/community-post.component';
+import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
 
 // hook
 import { useGetUserLikededPost } from '../../hooks/useGetPosts';
@@ -27,6 +29,9 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 const UserProfileLike = () => {
   const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [IsModalOpen, setIsModelOpen] = useState(false);
+
+  const setUserID = usePostQueryStore((state) => state.setUserID);
 
   // const [showCreatePost, setShowCreatePost] = useState(false);
 
@@ -38,6 +43,13 @@ const UserProfileLike = () => {
   useEffect(() => {
     console.log('Likesページ', data);
   }, [data]);
+
+  const handleOnClick = (userName, avatar) => {
+    setIsModelOpen(true);
+    userName = userName;
+    avatar = avatar;
+    setUserID(143);
+  };
 
   // const {
   //   data,
@@ -87,22 +99,24 @@ const UserProfileLike = () => {
   // });
 
   const postList = flatData.map((post, index) => (
-    <CommunityPost
-      imageURL={post.pictures || []}
-      text={post.title || ''}
-      profileImage={post.avatar || ''}
-      authorName={post.username || ''}
-      likes={post.likeCount || 0}
+    <div key={index} onClick={handleOnClick}>
+      <CommunityPost
+        imageURL={post.pictures || []}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.username || ''}
+        likes={post.likeCount || 0}
 
-      // key={index}
-      // imageURL={post.coverImg}
-      // text={post.title}
-      // profileImage={userPostAvatar}
-      // authorName='Anna'
-      // likes={10}
-      // isLike={true}
-      // isProfile={true}
-    />
+        // key={index}
+        // imageURL={post.coverImg}
+        // text={post.title}
+        // profileImage={userPostAvatar}
+        // authorName='Anna'
+        // likes={10}
+        // isLike={true}
+        // isProfile={true}
+      />
+    </div>
   ));
 
   return (
@@ -121,6 +135,16 @@ const UserProfileLike = () => {
             </Masonry>
           </ResponsiveMasonry>
         </div>
+      )}
+
+      {IsModalOpen && (
+        <PostDetail
+          show={IsModalOpen}
+          onHide={() => setIsModelOpen(false)}
+          // isMobile={isMobile}
+          // postUserName={userName}
+          // postAvatar={avatar}
+        />
       )}
     </div>
   );

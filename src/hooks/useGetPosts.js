@@ -19,7 +19,7 @@ export function useGetPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+  return useInfiniteQuery(['GetAllPosts', postQuery], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -52,7 +52,7 @@ export function useGetUserPostedPost() {
       return {};
     }
 
-    console.log('APIレスポンス:', res);
+    // console.log(res);
 
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };

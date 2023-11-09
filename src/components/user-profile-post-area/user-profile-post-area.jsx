@@ -113,7 +113,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   // });
 
   const postList = flatData.map((post, index) => (
-    <div key={index}>
+    <div key={index} onClick={handleOnClick}>
       <CommunityPost
         imageURL={post.pictures || []}
         text={post.title || ''}
