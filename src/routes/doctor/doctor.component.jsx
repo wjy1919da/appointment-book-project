@@ -15,25 +15,24 @@ const Doctor = () => {
     const [error, setError] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     const searchLocations = [];
-    useEffect(() => {
-        // const retrieveLocations = async () => {
-        //     try {
-        //         const locations = await retrieveSearchResults();
-        //         // maybe do some data manipulation here if necessary, to get an array of city names?
-        //         searchLocations = locations;
-        //     } catch (err) {
-        //         // what to do if we can't retrieve location possibilities? default to basic cities?
-        //     }
-        // }
-    }, [])
+    // useEffect(() => {
+    //     // const retrieveLocations = async () => {
+    //     //     try {
+    //     //         const locations = await retrieveSearchResults();
+    //     //         // maybe do some data manipulation here if necessary, to get an array of city names?
+    //     //         searchLocations = locations;
+    //     //     } catch (err) {
+    //     //         // what to do if we can't retrieve location possibilities? default to basic cities?
+    //     //     }
+    //     // }
+    // }, [])
     async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
         setIsLoading(true);
         try {
             const data = await retrieveMultiInputResults(results);
-            // console.log('Data for multiInput results is: ', data);
-            // CALL API HERE ONCE BACKEND IMPLEMENTS API!
-            // pass results to API call, then pass returned values as an array to setSearchResults below
-            setSearchResults(doctorArray); // CHANGE doctorArray TO THE RESULTS OF THE API CALL
+            if (data?.data?.msg !== "Success") throw new Error();
+            const newArray = data?.data?.data;
+            setSearchResults(newArray);
         } catch (err) {
             setError(true);
         } finally {

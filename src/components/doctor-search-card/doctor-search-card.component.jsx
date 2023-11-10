@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import './doctor-search-card.scss';
 
 const DoctorSearchCard = ({doctorObj}) => { // based on Figma, doctorObj should preferably have: name, doctorId, photoUrl, rating, location, specialization/field, license/verification
-    const name = doctorObj?.name;           // ^I would assume doctorQuerys would be passed in here, from store.ts, which dont contain their rating. I'll have to ask how we will store that
-    const photoUrl = doctorObj?.photoUrl;
+    const name = doctorObj?.nickname;           // ^I would assume doctorQuerys would be passed in here, from store.ts, which dont contain their rating. I'll have to ask how we will store that
+    const photoUrl = doctorObj?.img;
     const id = doctorObj?.memberId;
     const rating = doctorObj?.rating;
-    const location = doctorObj?.location;
-    const field = doctorObj?.field;
+    const location = doctorObj?.address;
+    const field = doctorObj?.name[0]; // change this later to list all fields?
     return (
         <div className='doctor-sc-container'>
             <div className='doctor-sc'>
