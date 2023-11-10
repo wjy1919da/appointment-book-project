@@ -8,13 +8,12 @@ import useDoctorQueryStore from '../../store.ts';
 import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
 import {useGetDoctorInfo} from '../../hooks/useGetIndividualDoctor.js';
 import DoctorReviewGrid from '../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
-import Footer from '../../components/footer/footer.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 const IndividualDoctor = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
-    const {memberId} = useParams(); 
+    const {encodedMemberId} = useParams(); 
     const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
     const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
     const setNickName = useDoctorQueryStore((state) => state.setNickName);
@@ -23,11 +22,11 @@ const IndividualDoctor = () => {
     const [activeTab, setActiveTab] = useState(0);
     const tabs = ['About', 'Posts', 'Reviews'];
     useEffect(() => {
-        setMemberId(memberId);
+        setMemberId(encodedMemberId);
         if (data) {
            setNickName(data.nickname);
         }
-    }, [memberId, data]);     
+    }, [encodedMemberId, data]);     
     if (isLoading) {
         return <HomeSpinner/>;
     }
@@ -35,7 +34,6 @@ const IndividualDoctor = () => {
         return (
             <div>
                 <ErrorMsg/>
-                <Footer/>
             </div>
         );
     }
@@ -61,6 +59,7 @@ const IndividualDoctor = () => {
                         {
                             tabs.map((item, index) => (
                                 <div
+                                    key={index}
                                     className={`individual-doctor-tab ${activeTab === index ? 'active' : ''}`}
                                     onClick={() => selectTab(index)}>
                                     {item}
@@ -76,7 +75,6 @@ const IndividualDoctor = () => {
                     {activeTab === 2 && < DoctorReviewGrid/>}
                 </div>
             </div>
-            <Footer/>
         </div>
         
     );

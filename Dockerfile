@@ -24,6 +24,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 # RUN npm install
 COPY . ./
+
 RUN yarn install
 RUN yarn run build
 
@@ -36,3 +37,6 @@ COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
+
+

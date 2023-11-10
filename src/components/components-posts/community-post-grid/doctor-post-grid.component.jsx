@@ -1,17 +1,28 @@
-import './doctor-post-grid.styles.scss';
-import CommunityPost from '../community-post/community-post.component';
-import { useGetPost } from '../../../hooks/useGetPosts';
-import HomeSpinner from '../../home-spinner/home-spinner.component';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import React, { useState, useEffect } from 'react';
-import PostDetail from '../community-post-detail/community-post-detail.component';
-import usePostQueryStore from '../../../postStore.ts';
-import Arrow from '../../../assets/post/arrow_grid.png';
-import Arrow1 from '../../../assets/post/arrow1_grid.png';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import usePostQueryStore from '../../../postStore.ts';
+
+// components
+import CommunityPost from '../community-post/community-post.component';
+import PostDetail from '../community-post-detail/community-post-detail.component';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ErrorMsg from '../../error-msg/error-msg.component';
+
+// hook
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
+ import { useGetPost } from '../../../hooks/useGetPosts';
+
+// scss
+import './doctor-post-grid.styles.scss';
+
+// images
+import Arrow from '../../../assets/post/arrow_grid.png';
+import Arrow1 from '../../../assets/post/arrow1_grid.png';
+// import userInfoQueryStore from '../../../userStore.ts';
+// import Cookie from 'js-cookie';
 
 const DoctorPostGrid = ({ isAbout }) => {
   const {
@@ -19,43 +30,47 @@ const DoctorPostGrid = ({ isAbout }) => {
     error,
     isLoading,
     fetchNextPage,
-    isFetchingNextPage,
     hasNextPage,
-  } = useGetPost();
+  } = useApiRequestPostFilter();
+
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
-  const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
   const breakPoint = isAbout
     ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
     : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
   const isMobileOrAbout = isMobile || isAbout;
+
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
+
   const setPostID = (ID, avatar, username) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(avatar);
     setUserName(username);
   };
+  
+
   const postCardList = flatData.map((post) => (
     <div
       className='btn'
       onClick={() => setPostID(post.id, post.avatar, post.username)}
-      key={post.id} // Moved key prop to the outermost element being returned from .map()
+      key={post.id}
     >
       <CommunityPost
-        imageURL={post.pictures}
-        text={post.title}
-        profileImage={post.avatar}
-        authorName={post.username}
-        likes={post.likeCount}
+        imageURL={post.pictures || []} 
+        text={post.title || ""} 
+        profileImage={post.avatar || ""}
+        authorName={post.username || ""}
+        likes={post.likeCount || 0} 
       />
     </div>
   ));

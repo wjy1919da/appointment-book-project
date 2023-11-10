@@ -301,6 +301,10 @@
     height: 49px;
   }
 
+  .user-detail-button-container {
+    display: none;
+  }
+
   span {
     color: var(--text-1-footer, #352c29);
     font-size: 21px;
@@ -312,7 +316,12 @@
     text-decoration-line: underline;
   }
 
-  .anchor-archive {
+  .button-archive,
+  .button-edit {
+    text-decoration: underline;
+  }
+
+  .button-archive {
     margin-right: 24px;
   }
 }

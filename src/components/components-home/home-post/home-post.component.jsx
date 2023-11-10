@@ -72,6 +72,7 @@ const HomePost = () => {
           <Fragment>
             <div className='home-post-text'>
               <span className='home-post-text1'>Share Your Post</span>
+
             </div>
             <div className='home-post-subText'>
               <span className='postText'>

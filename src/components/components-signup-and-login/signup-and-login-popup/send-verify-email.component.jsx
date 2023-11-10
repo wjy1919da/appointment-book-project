@@ -26,24 +26,21 @@ const SendVerifyEmail = () => {
     // });
     const onSubmit = (formData) => {
         localStorage.setItem('email', formData.email);
+        let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
         setEmail(formData.email);
         mutate({
             email: formData.email,
+            userRole: userRole
         });
     };
     useEffect(() => {
-        if (data?.code === 100) {
-           //  切换到下一个tab
-           alert("sending email ",data.msg);
-           switchPopupTab('verifyEmail');
-        }
-        if (data?.data && 400<=data.code <=500) {
+        if (data?.msg) {
             alert(data.msg);
-        }
+            if (data.code === 100 && data.msg !== "Already verified") {
+                switchPopupTab('verifyEmail');
+            }
+        }        
     }, [data]);
-    if (error) {
-        alert(error.message);
-    }
     return (
         <div className='verify-email-container'>
             <div className='verify-title-container'>

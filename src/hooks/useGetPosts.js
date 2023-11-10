@@ -1,20 +1,14 @@
 import axios from 'axios';
 import { useQuery, useInfiniteQuery} from "react-query";
 import usePostQueryStore from "../postStore.ts";
-import Cookies from 'js-cookie';
-const base = {
-  postUrl: 'https://api-dev.charm-life.com/post/all_posts',
-  // postUrl:'http://localhost:8080/post/posts:page',
+import APIClient from '../services/api-client.js';
 
-  postDetailUrl: 'https://api-dev.charm-life.com/post/web/posts/',
-  usePostedPostUrl:'http://localhost:8080/user_action/Myposts',
-  useLikedPostUrl:'http://localhost:8080/user_action/likedPosts'
-}
 
 export function useGetPost() {
+    const apiClient = new APIClient('/post/all_posts');
     const postQuery = usePostQueryStore(s => s.postQuery);
     const fetchPost = async ({ pageParam = 1 }) => {
-      const res = await axios.post(base.postUrl, {
+      const res = await apiClient.post({
         currentPage: pageParam,
         pageSize: postQuery.pageSize,
         filterType: postQuery.filterType,
@@ -22,6 +16,7 @@ export function useGetPost() {
       //console.log("userIDdata", res.data);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
     };
+
     return useInfiniteQuery(
      ['posts', postQuery], 
      fetchPost, {
@@ -39,27 +34,25 @@ export function useGetPost() {
     );
 }
 export function useGetUserPostedPost() {
-  console.log("DOI Call this hook?");
-  const token ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
+  //console.log("DOI Call this hook?");
+  //const token ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
+  const token = localStorage.getItem('token');
+  const apiClient = new APIClient('/user_action/Myposts',token);
   const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
-    console.log("DOI Call this hook2?");
-    if (!token) {
-      alert('user not login');
-    } 
-    const res = await axios.post(base.usePostedPostUrl, {
-      currentPage: pageParam,
-      pageSize: postQuery.pageSize,
-    },
-    {
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
-    }
+      if (!token) {
+        alert('user not login');
+        return {};
+      } 
+      const res = await apiClient.post( {
+        currentPage: pageParam,
+        pageSize: postQuery.pageSize,
+      },
     );
-    console.log("DOI Call this hook1?", res.data);
+    //console.log("DOI Call this hook1?", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
+  
   return useInfiniteQuery(
    ['posts', postQuery], 
    fetchPost, {
@@ -77,23 +70,22 @@ export function useGetUserPostedPost() {
   );
 }
 export function useGetUserLikededPost() {
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
+ // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
+  const token = localStorage.getItem('token');
+  const apiClient = new APIClient('/user_action/likedPosts',token);
   const postQuery = usePostQueryStore(s => s.postQuery);
   const fetchPost = async ({ pageParam = 1 }) => {
-    if (!token) {
-      alert('user not login');
-    } 
-    const res = await axios.post(base.useLikedPostUrl, {
-      currentPage: pageParam,
-      pageSize: postQuery.pageSize,
-    },
-    {
-      headers: {
-          Authorization: `Bearer ${token}`
+      if (!token) {
+        alert('user not login');
+        //return undefined;
+        return {};
+      } 
+      const res = await apiClient.post({
+        currentPage: pageParam,
+        pageSize: postQuery.pageSize,
       }
-    }
     );
-    console.log("UserLikedPostData", res.data);
+    //console.log("UserLikedPostData", res.data);
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
   return useInfiniteQuery(
@@ -116,16 +108,16 @@ export function useGetUserLikededPost() {
 
 export function usePostDetail() {
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  const apiClient = new APIClient(`/post/web/posts/${postQuery.userID}`);
   //console.log("postQuery.trigger", postQuery.trigger);
   const fetchPostDetail = async () => {
-    let url = `${base.postDetailUrl}${postQuery.userID}`;
+    //let url = `${base.postDetailUrl}${postQuery.userID}`;
     try {
-      const res = await axios.get(url);
+      const res = await apiClient.get();
       return res.data;
     } catch (error) {
       return { data: {} };
     }
-
   };
   return useQuery(['postDetail', postQuery.userID,postQuery.trigger], fetchPostDetail, {
     placeholderData: { data: {} }, // Default object to use before fetching completes

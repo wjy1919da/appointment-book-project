@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from './theme';
 
-//import { ReactQueryDevtools } from '@tanstack/react-query/devtools';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,20 +25,20 @@ const queryClient = new QueryClient({
   }
 });
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'top' } }}>
             <App />
-          </ChakraProvider> 
+          </ChakraProvider>
         </QueryParamProvider>
       </BrowserRouter>
-      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

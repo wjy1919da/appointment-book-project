@@ -64,11 +64,14 @@ const SubProcedure = () => {
                     }
                 }
                 if (recommendationElement) {
+                    // 这里隐藏DOM后, 通过 getBoundingClientRect() 再获取DOM的大小和位置都为0，可以改为 visibility
                     const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
                     if (footerTop <= recommendationBottom) {
-                        recommendationElement.style.display = 'none';
+                        // recommendationElement.style.display = 'none';
+                        recommendationElement.style.visibility = 'hidden';
                     } else {
-                        recommendationElement.style.display = 'block';
+                        // recommendationElement.style.display = 'block';
+                        recommendationElement.style.visibility = 'visible';
                     }
                 }
             } else 
@@ -122,12 +125,6 @@ const SubProcedure = () => {
             clearTimeout(timeout);
         };
     }, []);
-    
-
-    
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll, { passive: true });
-    // });
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
    
@@ -198,13 +195,13 @@ const SubProcedure = () => {
         return (
             <div>
                 <ErrorMsg/>
-                <Footer/>
             </div>
         );
     }
     else if (data.data && data.data.subcategories) {
     return (
-     <div className='home-container'>
+    <div>
+        <div className='home-container'>
         <div className='section-container'>
             <div className='sub-procedure-left-container'>
             <div className='sub-procedure-title-container'>
@@ -238,7 +235,7 @@ const SubProcedure = () => {
                     {prosAndCons && <ol className='pros-and-cons'>
                         {/*list-group-item  */}
                         { prosAndCons[0]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" >
+                            <li className="list-group-item d-flex justify-content-between align-items-start" >
                             <div style={{color: "#A5A6A8"}}>Pros:</div>
                                 <div className="ms-2 me-auto" style={{}}>
                                     {prosAndCons[0]}  {/* Render the first item from the parsed array here */}
@@ -246,9 +243,9 @@ const SubProcedure = () => {
                             </li> 
                         }
                         {prosAndCons[1]&&
-                            <li class="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
+                            <li className="list-group-item d-flex justify-content-between align-items-start" style={{marginTop:"16px"}}>
                                         <div style={{color: "#A5A6A8"}}>Cons:</div>
-                                        <div class="ms-2 me-auto" style={{color:"#000000"}}>
+                                        <div className="ms-2 me-auto" style={{color:"#000000"}}>
                                     {prosAndCons[1]} 
                                 </div>
                             </li> }
@@ -342,14 +339,14 @@ const SubProcedure = () => {
                     {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
                         <RecommendationGrid isMobile={false} height={'210px'} />
                     </div>}
-            </div>
-        </div> 
-        <SubProcedureMobileExtraBottom />  
-        {isMobile && <div className='procedure-recommendation-container'>
-                        <RecommendationGrid isMobile={false}  height={'300px'} />
-                    </div>} 
-                    <Footer ref={footerRef} />
-    </div>
+                </div>
+            </div> 
+            <SubProcedureMobileExtraBottom />  
+            {isMobile && <div className='procedure-recommendation-container'>
+                            <RecommendationGrid isMobile={false}  height={'300px'} />
+            </div>}     
+      </div>
+     </div>
     )
 }}
 export default SubProcedure;

@@ -3,16 +3,15 @@ import InstrumentPic from '../../assets/instrument/instrument-pic.jpg';
 import HomeTitle from '../../components/home-title/home-title.component';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
-import Footer from '../../components/footer/footer.component';
 import InstrumentGrid from '../../components/instrument-grid/instrument-grid.component';
 import InstrumentDoctor from '../../assets/doctor/featureDoctor1.png'
 import './instrument.styles.scss';
 import instrumentJSONData from './instrument-text-new.json';
 
 const Instrument = () => {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // });
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     console.log(instrumentJSONData);
     const thermageObj = instrumentJSONData[0];
@@ -64,7 +63,6 @@ const Instrument = () => {
             <div className='instrument-grid-container'>
                 <InstrumentGrid />
             </div> */}
-            <Footer isMobile={isMobile} />
         </div>
     )
 }

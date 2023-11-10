@@ -52,15 +52,12 @@ const SignUpDownloadPopUp = () => {
         });
     }
     useEffect(() => {
-        if (data?.data && data.code === 100) {
+       if(data?.msg){
             alert(data.msg);
-            togglePopup(false);
-            //props.onHide();
-        }
-        if (data?.data && data.code === 500) {
-            alert(data.msg);
-            togglePopup(false);
-        }
+            if(data.code === 100){
+                togglePopup(false);
+            }
+       }
     }, [data]);
     return (
         <div className='signUp-download'>

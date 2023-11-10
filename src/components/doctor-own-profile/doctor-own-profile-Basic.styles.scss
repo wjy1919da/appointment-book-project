@@ -1,0 +1,187 @@
+.doctor-own-basic-conatiner
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    gap:30px;
+
+}
+.doctor-own-basic-avatar
+{
+    .img
+    {
+        width:250px;
+        height:250px;
+    }
+}
+.doctor-own-basic-info
+{
+    display: flex;
+    flex-direction: column;
+    width:70%;
+}
+.doctor-own-basic-top-name
+{
+    display: flex;
+    justify-content: space-between;
+}
+.doctor-own-basic-name
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap:10px;
+}
+.doctor-own-basic-edits-buttons
+{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+.doctor-own-basic-top-text
+{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.doctor-own-basic-specialization
+{
+
+}
+.doctor-own-basic-app-button
+{
+
+}
+.doctor-own-basic-medium
+{
+    display: flex;
+    margin-top: 10px;
+    gap:30px;
+}
+.doctor-follow-like-follower
+{
+    display: flex;
+    display: flex;
+    gap:8px;
+}
+.doctor-own-basic-bottom
+{
+    display: flex;
+    gap:10px;
+    margin-top: 20px;
+}
+.doctor-info-category
+{
+    display: flex;
+    gap:5px;
+}
+.doctor-own-name-text
+{
+    color: var(--text-1-footer, #352C29);
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.top-edit-button-1
+{
+    display: inline-flex;
+    padding: 12px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--White, #FBFCFF);
+/* gradient button text shadow */
+    text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.10);
+    /* NEW TYPE/NEW button */
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    width:150px;
+    height:45px;
+    background-color: #675D59 ;
+    border-radius: 8px;
+}
+.top-edit-button-2
+{
+    display: inline-flex;
+    padding: 10px 22px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    width:70px;
+    height:45px;
+    border: 2px solid var(--new-gradient, #F48C8A);
+}
+.text-management-button
+{
+    color: var(--text-1-footer, #352C29);
+        /* NEW TYPE/NEW input, navi */
+        font-family: Open Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    width: 170px;
+    height: 34px;
+    border-radius: 3.303px;
+    background: var(--White, #FBFCFF);
+    box-shadow: 0px 4.95427px 6.60569px 0px rgba(226, 227, 231, 0.25), 0px 0px 16.51423px 0px rgba(255, 164, 163, 0.10);
+}
+.doctor-calendar-img
+{
+
+}
+.doctor-specialization-text
+{
+    color: #000;
+
+    /* NEW TYPE/NEW body2 */
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.doctor-follow-number
+{
+    color: var(--text-2-button, #675D59);
+    /* NEW TYPE/NEW sub title */
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.doctor-own-follow-text
+{
+    color: var(--text-2-button, #675D59);
+    /* NEW TYPE/NEW sub title */
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.doctor-own-info-icon
+{
+    width: 16.578px;
+    height: 16.578px;
+}
+.doctor-own-info-text
+{
+    overflow: hidden;
+    color: var(--text-2-button, #675D59);
+    text-overflow: ellipsis;
+    /* NEW TYPE/NEW caption */
+    font-family: Open Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

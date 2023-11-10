@@ -1,9 +1,10 @@
 .create-post-container
 {
     width:100%;
-    position: absolute;
-    top:150px;
-    left:0px;
+    // position: absolute;
+    // top:150px;
+    margin-top: 150px;
+    // left:0px;
     display: flex;
     flex-direction: row;
     padding-left: 10%;
@@ -20,6 +21,7 @@
         border-radius: 13.829px;
         background: var(--, #FBFCFF);
         box-shadow: 0px 27.65764px 69.1441px 0px rgba(32, 32, 33, 0.20), 0px 13.82882px 27.65764px 0px rgba(32, 32, 33, 0.10), 0px 0px 69.1441px 0px rgba(255, 164, 163, 0.10);
+        overflow: hidden;
         .choose-picture-section-title
         {
             margin-top: 20px;

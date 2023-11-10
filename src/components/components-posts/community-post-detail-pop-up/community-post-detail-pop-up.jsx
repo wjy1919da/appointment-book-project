@@ -165,11 +165,11 @@ const CommunityPostDetailPopUP = ({
                 <img src={UserImage} alt='Image-User-Picture' />
                 <span>Anna</span>
               </div>
-              <div>
-                <a href='#' className='anchor-archive'>
+              <div className='user-detail-button-container'>
+                <button className='button-archive'>
                   Archive
-                </a>
-                <a href='#'>Edit your Post</a>
+                </button>
+                <button className='button-edit'>Edit your Post</button>
               </div>
             </div>
           </>
@@ -286,19 +286,19 @@ const CommunityPostDetailPopUP = ({
                 </div>
               </div>
 
-              {/* <div className='comment-send-msg-container'> */}
-              {/* <CommunitySendMsg isValid={isValid} /> */}
-              {/* </div> */}
-
-              {/* <Button
+              {/* <div className='comment-send-msg-container'> 
+                <CommunitySendMsg isValid={isValid} />
+               </div> */}
+{/* 
+               <Button
                 as='input'
                 type='submit'
                 value='send'
                 disabled={!isValid}
                 style={{ backgroundColor: 'orange', border: 'orange' }}
-              /> */}
+              />  */}
             </div>
-            {/* <div className='new-comment-input'>
+             <div className='new-comment-input'>
               <input
                 {...register('comment')}
                 type='text'
@@ -307,7 +307,7 @@ const CommunityPostDetailPopUP = ({
                 onClick={handleInputClick}
               />
               <p>{errors.comment?.message}</p>
-            </div> */}
+            </div> 
           </form>
         </div>
       </div>

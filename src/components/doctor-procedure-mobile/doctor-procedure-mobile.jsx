@@ -6,7 +6,6 @@ import SearchIcon from '../../assets/doctor/doctor-search-button-icon.png';
 import ProcesureInstrumentMobile from "../procedure-mobile-instrument/procedure-mobile-instrument";
 import ProcedureSearchMenuMobile from "../procedure-search-menu-mobile/procedure-search-menu-mobile";
 import {  Dropdown, Form } from 'react-bootstrap';
-import Footer from "../footer/footer.component";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useProcedureQueryStore from "../../procedureStore.ts"
@@ -77,9 +76,7 @@ const DoctorProcudreMobile =()=>
             <div>
                 <ProcesureInstrumentMobile names={['botox_injections', 'breast_augmentation','chemical_peels','lip_augmentation','teeth_whitening','fox_eyes','laser_hair_removal','Chin-Implants','Facelift','Neck_Contouring','Tummy_Tuck','Otoplasty']} option="procedure"/>
             </div>
-            <Footer/>
         </div>
-        
     );
 
 }

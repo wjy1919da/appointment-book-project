@@ -1,13 +1,14 @@
 import './doctor-verification.styles.scss';
-import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import CloseButton from '../../assets/doctor/doctor-verification-close-Icon.png'
 import UploadIcon from '../../assets/doctor/Upload.png'
 import { Button, Dropdown, Form } from 'react-bootstrap';
-import doctorInfoQueryStore from '../../doctorStore.ts';
+import userInfoQueryStore from '../../userStore';
+// import doctorInfoQueryStxore from '../../doctorStore.ts';
 import SignupAndLoginButton from '../components-signup-and-login/signup-and-login-button/signup-and-login-button.component';
 const DoctorVerification = () => {
-      const togglePopup = doctorInfoQueryStore(state=>state.togglePopup);
+      //const togglePopup = doctorInfoQueryStore(state=>state.togglePopup);
+    const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
       
     return (
         <div className='doctor-verification-main-container'>
@@ -63,7 +64,7 @@ const DoctorVerification = () => {
                     </div>
             </div>
             <div className='doctor-verification-upload-button'>
-                <button className="doctor-verification-upload-button" onClick={()=>togglePopup(true, 'finish')}>UPLOAD FILES</button>
+                <button className="doctor-verification-upload-button" onClick={()=>switchPopupTab("doctorSuccess")}>UPLOAD FILES</button>
             </div>
         </div>  
     )
