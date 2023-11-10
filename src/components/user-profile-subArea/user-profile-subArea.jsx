@@ -12,7 +12,7 @@ import UserProfileLike from '../user-profile-like/user-profile-like';
 // import CreatePostOfUser from '../create-post/create-post';
 
 const UserProfileSubArea = () => {
-  const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+  const [activeTab, setActiveTab] = useState('like');
   const [showCreatePost, setShowCreatePost] = useState(false);
 
   return (
@@ -27,7 +27,7 @@ const UserProfileSubArea = () => {
         <div
           onClick={() => {
             setActiveTab('posted');
-            setShowCreatePost(false); // Add this line
+            setShowCreatePost(false);
             console.log(showCreatePost);
           }}
           className={`item ${activeTab === 'posted' ? 'active' : ''}`}
