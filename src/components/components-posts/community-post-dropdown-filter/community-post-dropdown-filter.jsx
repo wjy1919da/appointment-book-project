@@ -24,6 +24,7 @@ const PostDropDownFilter = () => {
     console.log(data);
   }, [data]);
 
+
   // tag button
   const handleClickTag = () => {
     setIsTagContainerVisible(!isTagContainerVisible);
@@ -78,12 +79,14 @@ const PostDropDownFilter = () => {
             onClick={handleClickTag}
           />
 
+
           {isTagContainerVisible && (
             <div className='post-dropdown-filter-search-container'>
               <div className='post-dropdown-filter-search-inner-container'>
                 <PostSearchBox className='search-reverse' />
               </div>
               <div className='search-result'>
+
                 <p className='search-result-title'>#Trendy</p>
                 {data?.data?.map((item) => (
                   <div key={item.tagId} className='search-result-list'>
