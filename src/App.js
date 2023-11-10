@@ -31,6 +31,7 @@ import CreatePostPage from './components/components-posts/community-post-create-
 import UserInfo from './routes/user-info/user-info.component';
 import { Create } from '@mui/icons-material';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
+import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx'
 
 import AccountSetup from './components/account-setting/account-setting';
 // import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
@@ -88,6 +89,7 @@ const App = () => {
         <Route path='userProfile' element={<UserProfilePage />} />
 
         <Route path='AccountSetup' element={<AccountSetup/>} />
+        <Route path='userProfileEdit' element={<UserProfileEdit/>} />
 
         {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
         <Route path='register/verifyEmail' element={<Verification />} />

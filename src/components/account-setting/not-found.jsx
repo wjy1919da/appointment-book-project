@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../../components/footer/footer.component';
 import AccountSetup from './account-setting';
 import "./not-found.styles.scss";
@@ -6,6 +6,10 @@ import "./not-found.styles.scss";
 const AccountNotFoundPage = () => {
     const [showAccountSetting, setShowAccountSetting] = useState(false);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    
     const handleClick = () => {
         setShowAccountSetting(true);
     };
