@@ -1,4 +1,3 @@
-import Footer from '../../components/footer/footer.component';
 import "./user-profile-edit.styles.scss"
 
 const UserProfileEdit = () => {
@@ -17,7 +16,6 @@ const UserProfileEdit = () => {
 
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

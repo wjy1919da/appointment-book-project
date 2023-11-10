@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Footer from '../../components/footer/footer.component';
 import AccountSetup from './account-setting';
 import "./not-found.styles.scss";
 
@@ -24,7 +23,6 @@ const AccountNotFoundPage = () => {
                     <span className='not-found-text'>404 Not Found</span>
                     <span className='feature-coming-soon-text'>Feature is Coming Soon!</span>
                 </div>
-                <Footer/>
             </div>
             )}
         </div>
