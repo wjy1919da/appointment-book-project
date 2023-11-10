@@ -62,7 +62,7 @@ const HeaderUser = () => {
 
   return (
     <div className='header-login'>
-        {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")} className='header-login-default'>
+        {!userInfo.token && <div onClick={()=>togglePopup(true, "doctorVerification")} className='header-login-default'>
             <img src={loginIcon} alt="login" className='header-login-default-icon'></img>
             <div className="header-login-text">Login/Sign up</div>
           </div>}
