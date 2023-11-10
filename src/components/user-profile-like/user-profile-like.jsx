@@ -27,29 +27,8 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 // import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 
 const UserProfileLike = () => {
-  const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [IsModalOpen, setIsModelOpen] = useState(false);
-
-  const setUserID = usePostQueryStore((state) => state.setUserID);
-
-  // const [showCreatePost, setShowCreatePost] = useState(false);
-
   // calling hook
   const { data, isLoading, isError } = useGetUserLikededPost();
-
-  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
-
-  useEffect(() => {
-    console.log('Likesページ', data);
-  }, [data]);
-
-  const handleOnClick = (userName, avatar) => {
-    setIsModelOpen(true);
-    userName = userName;
-    avatar = avatar;
-    setUserID(143);
-  };
 
   // const {
   //   data,
@@ -62,6 +41,25 @@ const UserProfileLike = () => {
   // console.log('userCallBackdata', data);
   // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
   // console.log('userPostedpostin', flatData);
+
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [IsModalOpen, setIsModelOpen] = useState(false);
+  // const [showCreatePost, setShowCreatePost] = useState(false);
+  // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+
+  const setUserID = usePostQueryStore((state) => state.setUserID);
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+
+  useEffect(() => {
+    console.log('Likes Page Data', data);
+  }, [data]);
+
+  const handleOnClick = (userName, avatar) => {
+    setIsModelOpen(true);
+    userName = userName;
+    avatar = avatar;
+    setUserID(143);
+  };
 
   const [gutterwidth, setGutterWidth] = useState('10px');
   const breakPoint = {
