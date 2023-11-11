@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import usePostQueryStore from '../../../postStore';
+import usePostQueryStore from '../../../postStore.ts';
 
 // component
 // import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';

@@ -1,7 +1,7 @@
 import './doctor-signUp-finish.styles.scss'
 import SignupAndLoginButton from '../components-signup-and-login/signup-and-login-button/signup-and-login-button.component';
 import HomeLogo from '../../assets/home/logo.png'
-import userInfoQueryStore from '../../userStore';
+import userInfoQueryStore from '../../userStore.ts';
 const DoctorSignUpFinish = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const userInfo = userInfoQueryStore(state=>state.userInfo);

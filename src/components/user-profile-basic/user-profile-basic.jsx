@@ -3,7 +3,7 @@
 // scss
 import './user-profile-page.styles.scss';
 import '../components-posts/community-post/community-post.styles.scss';
-
+import { useNavigate } from 'react-router-dom';
 // images
 import UserProfilePicture from '../../assets/post/user_profile_pic.png';
 import BookingIcon from '../../assets/post/booking-icon.png';
@@ -12,11 +12,20 @@ import BookingIcon from '../../assets/post/booking-icon.png';
 
 // components
 import HomeButton from '../home-button/home-button.component';
-
+import AppInfoQueryStore from '../../appointmentStore.ts'
 import { useGetUserInfo } from '../../hooks/useAuth';
+import { useState } from 'react';
 const UserProfileBasic = () => {
   const {data, isLoading, isError, error} = useGetUserInfo();
+  const appInfo = AppInfoQueryStore(state => state.appointInfo);
+  const togglePopup = AppInfoQueryStore(state=>state.togglePopup);
+  //const [isCardClicked, setIsCardClicked] = useState(false);
+  const navigate = useNavigate();
 
+  const navigateToAppointment = () => {
+    togglePopup(true,'mainSection')
+    navigate('/userAppointment');
+  };
   return (
     <div className='user-profile-basic-container container'>
       <div className='user-profile-basic-avatar'>
@@ -41,7 +50,9 @@ const UserProfileBasic = () => {
               <HomeButton title='Edit Profile' width='176px' height='56px' />
             </div>
             <div className='user-profile-basic-booking-button-container'>
-              <button className='user-profile-basic-booking-button'>
+              <button className='user-profile-basic-booking-button'
+                      onClick={navigateToAppointment}
+              >
                 <img
                   src={BookingIcon}
                   alt='Booking-Icon'

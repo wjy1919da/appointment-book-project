@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CloseButton from '../../assets/doctor/doctor-verification-close-Icon.png'
 import UploadIcon from '../../assets/doctor/Upload.png'
 import { Button, Dropdown, Form } from 'react-bootstrap';
-import userInfoQueryStore from '../../userStore';
+import userInfoQueryStore from '../../userStore.ts';
 // import doctorInfoQueryStxore from '../../doctorStore.ts';
 import SignupAndLoginButton from '../components-signup-and-login/signup-and-login-button/signup-and-login-button.component';
 const DoctorVerification = () => {
