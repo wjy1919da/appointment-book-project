@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import AccountNotFoundPage from './not-found';
 import "./account-setting.styles.scss";
-
+import UserProfilePage from '../../components/user-profile-page/user-profile-page';
 
 const AccountSetup = () => {
     const [showNotFound, setShowNotFound] = useState(false);
+    const [showProfilePage, setShowProfilePage] = useState(false);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -12,13 +13,18 @@ const AccountSetup = () => {
     const handleClick = () => {
         setShowNotFound(true);
     };
+    const goToUserProfile = () => {
+        setShowProfilePage(true);
+    }
     return (
         <div className="account-setting-container">
-            {showNotFound ? (
+            {showProfilePage ? (<UserProfilePage/>) : (
+            showNotFound ? (
                 <AccountNotFoundPage/>
             ) : (
+            
                 <div>
-                    <button class="account-setting-button">Account Setting</button>
+                    <button class="account-setting-button" onClick={goToUserProfile}>Account Setting</button>
                     <div className="account-setting-left-pink"></div>
                     <div className="account-setting-right-pink">
                         <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
@@ -176,7 +182,7 @@ const AccountSetup = () => {
                         </button>
                     </div>
                 </div>
-            )}
+            ))}
         </div>
     )
 }
