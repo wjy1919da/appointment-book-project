@@ -1,3 +1,4 @@
+/*
 import React, { useState,useEffect } from "react";
 import OtpInput from 'react-otp-input';
 import './send-otp-verification.styles.scss';
@@ -36,6 +37,7 @@ const SendOtpVerification = () => {
         }
     };
 
+
     const onSubmit = (e) => {
         console.log("onSubmit");
         e.preventDefault(); 
@@ -60,7 +62,8 @@ const SendOtpVerification = () => {
             alert(data.msg);  
         }
     }, [data]);
-
+*/
+/*
     return (
         <div className="send-verification-outer-container">
             <div className="send-verification-title-container">
@@ -77,13 +80,14 @@ const SendOtpVerification = () => {
                 />
                 { !isValid && <p style={{ color: 'red' }}>{otpError}</p> }
                 <div className="verification-button-section">
-                    {/* <div onClick={()=>switchPopupTab('phoneNumberLogin')}>go back</div> */}
-                    {/* <div onClick={()=>switchPopupTab('login')}>go to login</div> */}
+                    {/* <div onClick={()=>switchPopupTab('phoneNumberLogin')}>go back</div> }*/
+                    {/* <div onClick={()=>switchPopupTab('login')}>go to login</div> */}/*
                     <NextButton type="submit" title='Verify' width='180px' disabled={!isValid} />
                 </div>
             </Form>
-        </div>
+       </div>
     );
 }
 
 export default SendOtpVerification;
+*/

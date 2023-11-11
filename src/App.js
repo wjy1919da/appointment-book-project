@@ -32,6 +32,7 @@ import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
 import UserInfo from './routes/user-info/user-info.component';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
+import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx'
 
 import AccountSetup from './components/account-setting/account-setting';
 import AccountNotFoundPage from './components/account-setting/not-found';
@@ -86,19 +87,20 @@ const App = () => {
             <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
             {/* <Route path="userProfile" element={
 
-              <PrivateRoute>
-                <UserProfilePage />
-              </PrivateRoute>
-            }/>  */}
+        {/* <Route path="userProfile" element={
+          <PrivateRoute>
+            <UserProfilePage />
+          </PrivateRoute>
+        }/> */}
+        
+        <Route path='download' element={<Download />} />
+        <Route path='create-post' element={<CreatePostOfUser />} />
+        <Route path='/posts/create' element={<CreatePostPage />} />
+        <Route path='health-check' element={<HealthCheck />} />
+        <Route path='userProfile' element={<UserProfilePage />} />
 
-            <Route path='download' element={<Download />} />
-            <Route path='create-post' element={<CreatePostOfUser />} />
-            <Route path='/posts/create' element={<CreatePostPage />} />
-            <Route path='health-check' element={<HealthCheck />} />
-            <Route path='userProfile' element={<UserProfilePage />} />
-
-            <Route path='AccountSetup' element={<AccountSetup/>} />
-            <Route path='AccountNotFound' element={<AccountNotFoundPage/>} />
+        <Route path='AccountSetup' element={<AccountSetup/>} />
+        <Route path='userProfileEdit' element={<UserProfileEdit/>} />
 
             {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
             <Route path='register/verifyEmail' element={<Verification />} />

@@ -69,6 +69,7 @@ const HeaderUser = () => {
           {/* On Mouse Leave is not work */}
           <Menu isOpen={menuDisclosure.isOpen} onClose={menuDisclosure.onClose} onMouseLeave={menuDisclosure.onClose}>
             <img src={data?.data?.image || defaultAvatar} alt="User avatar" className='header-avatar'/>
+
             {userInfo.userId && (
               <MenuButton as={Button} style={{ backgroundColor: 'transparent' }} 
                 onMouseEnter={menuDisclosure.onOpen} 

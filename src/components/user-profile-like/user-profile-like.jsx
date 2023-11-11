@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import usePostQueryStore from '../../postStore.ts';
 
 // components
 import CommunityPost from '../components-posts/community-post/community-post.component';
+import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
+
+// hook
+import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 
 // scss
 import '../user-profile-post-area/user-profile-post-area.styles.scss';
@@ -12,7 +17,6 @@ import post1 from '../../assets/doctor/post3.png';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 // utils
-import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import creatPostIcon from '../../assets/post/create-post-icon.png';
 
@@ -20,10 +24,42 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import CreatePostOfUser from '../create-post/create-post';
 // import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
+// import { useGetUserLikededPost } from '../../hooks/useGetPosts';
 
 const UserProfileLike = () => {
-  const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
-  //const [showCreatePost, setShowCreatePost] = useState(false);
+  // calling hook
+  const { data, isLoading, isError } = useGetUserLikededPost();
+
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   fetchNextPage,
+  //   isFetchingNextPage,
+  //   hasNextPage,
+  // } = useGetUserLikededPost();
+  // console.log('userCallBackdata', data);
+  // const flatData = data ? data.pages.flatMap((page) => page.data) : [];
+  // console.log('userPostedpostin', flatData);
+
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [IsModalOpen, setIsModelOpen] = useState(false);
+  // const [showCreatePost, setShowCreatePost] = useState(false);
+  // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+
+  const setUserID = usePostQueryStore((state) => state.setUserID);
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+
+  useEffect(() => {
+    console.log('Likes Page Data', data);
+  }, [data]);
+
+  const handleOnClick = (userName, avatar) => {
+    setIsModelOpen(true);
+    userName = userName;
+    avatar = avatar;
+    setUserID(143);
+  };
 
   const [gutterwidth, setGutterWidth] = useState('10px');
   const breakPoint = {
@@ -36,21 +72,8 @@ const UserProfileLike = () => {
     430: 2,
   };
 
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useGetUserLikededPost();
-  console.log('userCallBackdata', data);
-  const flatData = data ? data.pages.flatMap((page) => page.data) : [];
-  console.log('userPostedpostin', flatData);
-
   useEffect(() => {
-    const images = [creatPostIcon, post1, userPostAvatar]; // Add all images here
+    const images = [creatPostIcon, post1, userPostAvatar];
 
     let loadedImagesCount = 0;
     images.forEach((src) => {
@@ -65,25 +88,33 @@ const UserProfileLike = () => {
     });
   }, []);
 
-  const samplePosts = Array(10).fill({
-    pictures: post1,
-    title: 'Sample Title',
-    avatar: userPostAvatar,
-    username: 'Sample Author',
-    likeCount: 42,
-  });
+  // const samplePosts = Array(10).fill({
+  //   pictures: post1,
+  //   title: 'Sample Title',
+  //   avatar: userPostAvatar,
+  //   username: 'Sample Author',
+  //   likeCount: 42,
+  // });
 
-  const postList = samplePosts.map((post, index) => (
-    <CommunityPost
-      key={index}
-      imageURL={post.pictures}
-      text={post.title}
-      profileImage={post.avatar}
-      authorName={post.username}
-      likes={post.likeCount}
-      isLike={true}
-      isProfile={true}
-    />
+  const postList = flatData.map((post, index) => (
+    <div key={index} onClick={handleOnClick}>
+      <CommunityPost
+        imageURL={post.pictures || []}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.username || ''}
+        likes={post.likeCount || 0}
+
+        // key={index}
+        // imageURL={post.coverImg}
+        // text={post.title}
+        // profileImage={userPostAvatar}
+        // authorName='Anna'
+        // likes={10}
+        // isLike={true}
+        // isProfile={true}
+      />
+    </div>
   ));
 
   return (
@@ -102,6 +133,16 @@ const UserProfileLike = () => {
             </Masonry>
           </ResponsiveMasonry>
         </div>
+      )}
+
+      {IsModalOpen && (
+        <PostDetail
+          show={IsModalOpen}
+          onHide={() => setIsModelOpen(false)}
+          // isMobile={isMobile}
+          // postUserName={userName}
+          // postAvatar={avatar}
+        />
       )}
     </div>
   );
