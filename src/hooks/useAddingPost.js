@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import useBlogStore from '../blogStore';
+import useBlogStore from '../blogStore.ts';
 
 export function useAddPost() {
 

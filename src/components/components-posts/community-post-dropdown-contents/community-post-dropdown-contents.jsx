@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import usePostQueryStore from '../../../postStore';
+import usePostQueryStore from '../../../postStore.ts';
 import { nanoid } from 'nanoid';
 
 // components

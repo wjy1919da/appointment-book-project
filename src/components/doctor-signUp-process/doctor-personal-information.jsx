@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import { useDoctorAddProfile } from '../../hooks/useDoctorAddProfile';
-import userInfoQueryStore from '../../userStore';
+import userInfoQueryStore from '../../userStore.ts';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import SignupAndLoginButton from '../components-signup-and-login/signup-and-login-button/signup-and-login-button.component';
