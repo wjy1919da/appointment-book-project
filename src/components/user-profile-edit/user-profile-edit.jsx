@@ -42,6 +42,24 @@ const UserProfileEdit = () => {
                     <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} placeholder="(xxx)-xxxx-xxxx" />
                     <textarea style={{width: '504px', height: '178px', top: '685px', left:'55px', padding: "8px 12px 148px 12px"}} placeholder="Description" />
                     <span className='table-body' style={{top: '124px', left: '281px' }}>Name</span>
+                    <div className="other-gender-marker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '479px', top: '264px'}}>
+                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div className="male-gender-marker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '389px', top: '240px'}}>
+                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div className="female-gender-marker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '281px', top: '216px'}}>
+                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#F48C8A" stroke-width="2"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ position: 'relative', left: '287px', top: '198px'}}>
+                            <circle cx="6" cy="6" r="6" fill="#F48C8A" stroke="#FBFCFF"/>
+                        </svg>
+                    </div>
                     <span className='table-body' style={{top: '223px', left: '281px' }}>Gender</span>
                     <span className='table-body' style={{top: '323px', left: '55px' }}>Age</span>
                     <span className='table-body' style={{top: '430px', left: '55px' }}>Email</span>

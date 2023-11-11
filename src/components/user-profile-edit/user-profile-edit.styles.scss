@@ -188,6 +188,12 @@
         height: 100%;
         outline: none;
     }
+    .gender-marker
+    {
+        fill: var(--White, #FBFCFF);
+        stroke-width: 2px;
+        stroke: var(--text-2-button, #675D59);
+    }
     .gender-text
     {
         color: var(--text-1-footer, #352C29);
@@ -197,5 +203,11 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+    }
+    .female-gender-marker
+    {
+        fill: var(--White, #FBFCFF);
+        stroke-width: 2px;
+        stroke: var(--new-gradient, #F48C8A);
     }
 }
