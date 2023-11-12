@@ -3,9 +3,21 @@ import React, { useState } from 'react';
 
 const UserProfileEdit = () => {
     const [changePic, setChangePic] = useState(false);
+    const [isTextClicked, setIsTextClicked] = useState([false, false, false, false, false, false]);
+    const interests = ["Body", "Face", "Lorum", "Lorum", "Lorum", "Lorum"];
+    const [underlinePosition, setUnderlinePosition] = useState({ left: 50, top: 106 });
     const handleHover = (isHovered) => {
         setChangePic(isHovered);
-    }
+    };
+    const changeTextColor = (index) => {
+        const updatedStates = isTextClicked.map((_, i) => (i === index ? true : false));
+        setIsTextClicked(updatedStates);
+        if (index < 3) {
+            setUnderlinePosition({ left: 50 + 63*index});
+        } else {
+            setUnderlinePosition({ left: 50 + 63*2 + 74*(index-2)});
+        }
+    };
     return (
         <div className='user-profile-edit-container'>
             <div className='user-profile-edit-screen'>
@@ -42,17 +54,18 @@ const UserProfileEdit = () => {
                     <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} placeholder="(xxx)-xxxx-xxxx" />
                     <textarea style={{width: '504px', height: '178px', top: '685px', left:'55px', padding: "8px 12px 148px 12px"}} placeholder="Description" />
                     <span className='table-body' style={{top: '124px', left: '281px' }}>Name</span>
-                    <div className="other-gender-marker">
+                    <div className="other-gender-marker" style={{cursor: "pointer"}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '479px', top: '264px'}}>
                             <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
                         </svg>
+                        {/* stroke={selectedGender === "Other" ? "#F48C8A" : "#675D59"} */}
                     </div>
-                    <div className="male-gender-marker">
+                    <div className="male-gender-marker" style={{cursor: "pointer"}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '389px', top: '240px'}}>
                             <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div className="female-gender-marker">
+                    <div className="female-gender-marker" style={{cursor: "pointer"}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '281px', top: '216px'}}>
                             <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#F48C8A" stroke-width="2"/>
                         </svg>
@@ -68,6 +81,32 @@ const UserProfileEdit = () => {
                 </div>
                 <div className='interests-table'>
                     <span className='table-subheading'>Interests</span>
+                    {isTextClicked.map((isClicked, index) => (
+                        <span
+                        className="interest-options"
+                        key={index}
+                        style={{
+                            color: isClicked ? 'var(--text-1-footer, #352C29)' : 'var(--text-2-button, #675D59)',
+                            top: '102px',
+                            left: '48px',
+                            marginRight: '24px'
+                        }}
+                        onClick={() => changeTextColor(index)}
+                        >
+                        {interests[index]}
+                        </span>
+                    ))}
+                    <div className="underline" style={{ position: 'relative', left: `${underlinePosition.left}px`, top: `${underlinePosition.top}px` }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="4" viewBox="0 0 34 4" fill="none">
+                            <path d="M2 2H32" stroke="url(#paint0_linear_3221_24210)" stroke-width="4" stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="paint0_linear_3221_24210" x1="2" y1="2.5" x2="32" y2="2.50001" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#F48C8A" />
+                                    <stop offset="1" stop-color="#F0A484" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
