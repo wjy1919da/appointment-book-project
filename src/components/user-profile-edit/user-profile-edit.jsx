@@ -58,7 +58,6 @@ const UserProfileEdit = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '479px', top: '264px'}}>
                             <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
                         </svg>
-                        {/* stroke={selectedGender === "Other" ? "#F48C8A" : "#675D59"} */}
                     </div>
                     <div className="male-gender-marker" style={{cursor: "pointer"}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '389px', top: '240px'}}>
@@ -107,6 +106,48 @@ const UserProfileEdit = () => {
                             </defs>
                         </svg>
                     </div>
+                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
+                        Breast Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
+                        Body Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
+                        Skin Procedures
+                        <br/>
+                    </span>
+                    <span className='procedure-text' style={{top: '401px', left: '49px', marginRight: '52px' }}>
+                        Face Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '401px', left: '49px', marginRight: '40px'}}>
+                        Face Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '401px', left: '49px' }}>
+                        Face Procedures
+                        <br/>
+                    </span>
+                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
+                        Breast Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
+                        Body Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
+                        Skin Procedures
+                        <br/>
+                    </span>
+                    <span className='procedure-text' style={{top: '713px', left: '49px', marginRight: '52px' }}>
+                        Face Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '713px', left: '49px', marginRight: '40px'}}>
+                        Face Procedures
+                    </span>
+                    <span className='procedure-text' style={{top: '713px', left: '49px' }}>
+                        Face Procedures
+                    </span>
+                    <div className="breast-procedures" style={{top: '40px', left: '76px' }}></div>
+                    <div className="body-procedures" style={{top: '40px', left: '76px' }}></div>
+                    <div className="face-procedures" style={{top: '40px', left: '20px' }}></div>
                 </div>
             </div>
         </div>
