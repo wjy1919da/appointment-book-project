@@ -65,7 +65,7 @@ const HeaderUser = () => {
         menuDisclosure.onOpen();
      }
   }
-  console.log("user Info in header",userInfo);
+  //console.log("user Info in header",userInfo);
 
   return (
     <div className='header-login'>

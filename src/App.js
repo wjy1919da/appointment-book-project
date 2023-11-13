@@ -44,7 +44,7 @@ const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   /* Load token from cookie*/
-  console.log('userInfo init', userInfo);
+  //console.log('userInfo init', userInfo);
   const token = userInfoQueryStore((state) => state.userInfo.token);
   const setToken = userInfoQueryStore((state) => state.setToken);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
@@ -96,14 +96,14 @@ const App = () => {
               </PrivateRoute>
             }/> 
         
-        <Route path='download' element={<Download />} />
-        <Route path='create-post' element={<CreatePostOfUser />} />
-        <Route path='/posts/create' element={<CreatePostPage />} />
-        <Route path='health-check' element={<HealthCheck />} />
-        {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
+            <Route path='download' element={<Download />} />
+            <Route path='create-post' element={<CreatePostOfUser />} />
+            <Route path='/posts/create' element={<CreatePostPage />} />
+            <Route path='health-check' element={<HealthCheck />} />
+            {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
 
-        <Route path='AccountSetup' element={<AccountSetup/>} />
-        <Route path='userProfileEdit' element={<UserProfileEdit/>} />
+            <Route path='AccountSetup' element={<AccountSetup/>} />
+            <Route path='userProfileEdit' element={<UserProfileEdit/>} />
 
             {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
             <Route path='register/verifyEmail' element={<Verification />} />
