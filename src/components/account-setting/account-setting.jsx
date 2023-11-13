@@ -26,7 +26,7 @@ const AccountSetup = () => {
                 <div>
                     <button class="account-setting-button" onClick={goToUserProfile}>Account Setting</button>
                     <div className="account-setting-left-pink"></div>
-                    <div className="account-setting-right-pink">
+                    {/* <div className="account-setting-right-pink">
                         <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
                             <circle opacity="0.8" cx="60" cy="60" r="60" fill="url(#paint0_linear_2443_10240)"/>
                             <defs>
@@ -87,7 +87,7 @@ const AccountSetup = () => {
                                 </clipPath>
                             </defs>
                         </svg>
-                    </div>
+                    </div> */}
                     <div className="account-security-table">
                         <span className="heading-text">Security</span><br></br>
                         <br></br>
