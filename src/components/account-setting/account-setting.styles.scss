@@ -1,6 +1,8 @@
 .account-setting-container
 {
     width:100%;
+    background: var(--White, #FBFCFF);
+    z-index: 0;
     .account-setting-button
     {
         color: var(--White, #FBFCFF);

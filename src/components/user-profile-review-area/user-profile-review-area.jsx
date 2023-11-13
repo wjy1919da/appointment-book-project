@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 // components
 import StarRate from '../starRate/starRate';
 import UserProfileReviewCard from '../user-profile-review-card/user-profile-review-card';
-import DoctorCard from '../doctor-card/doctor-card.component';
+// import DoctorCard from '../doctor-card/doctor-card.component';
+import DoctorSearchCard from '../doctor-search-card/doctor-search-card.component';
+import HomeSpinner from '../home-spinner/home-spinner.component';
 
 // scss
 import './user-profile-review-area.style.scss';
@@ -150,7 +152,9 @@ const UserProfileReview = () => {
   // const mergedData = useMemo(() => {
   //     return data ? mergeDoctorsByNickname(data.pages) : [];
   //    }, [data]);
+  const dataArray = data?.pages[0].data;
 
+  if (isLoading) return <HomeSpinner />
   return (
     <div className='user-profile-review-container'>
       <div className='review-recommande-doctor'>
@@ -191,48 +195,49 @@ const UserProfileReview = () => {
       </div>
       <div className='recommande-doctor-summary'>
         <div className='recommend-doctor-box-wrapper'>
-          {doctorsCard.map((x, index) => (
-            <div
-              key={index}
-              className={`recommend-doctor-box ${
-                clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
-              }`}
-              onClick={() => handleClickRecommendDoctor(index)}
-            >
-              <div className='box-1'>
-                <img src={DoctorProfilePicture} alt='' />
-                <div className='username-review-card-rate-star'>
-                  <StarRate rateScore={5} />
-                </div>
-              </div>
-              <div className='box-2'>
-                <div className='location-box'>
-                  <img
-                    src={LocationPinIcon}
-                    alt=''
-                    className='doctor-recommend-icon'
-                  />
-                  <span className='city-name'>{x.cityName}</span>
-                </div>
-                <h1 className='doctor-name'>{x.name}</h1>
-                <div className='specialization-box'>
-                  <img
-                    src={SpecializationIcon}
-                    alt=''
-                    className='doctor-recommend-icon'
-                  />
-                  <span>{x.field}</span>
-                </div>
-                <div className='verification-box'>
-                  <img
-                    src={VerficationIcon}
-                    alt=''
-                    className='doctor-recommend-icon'
-                  />
-                  <span>{x.license}</span>
-                </div>
-              </div>
-            </div>
+          {dataArray?.map((x, index) => (
+            <DoctorSearchCard doctorObj={x} key={index} />
+          //   <div
+          //     key={index}
+          //     className={`recommend-doctor-box ${
+          //       clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
+          //     }`}
+          //     onClick={() => handleClickRecommendDoctor(index)}
+          //   >
+          //     <div className='box-1'>
+          //       <img src={DoctorProfilePicture} alt='' />
+          //       <div className='username-review-card-rate-star'>
+          //         <StarRate rateScore={5} />
+          //       </div>
+          //     </div>
+          //     <div className='box-2'>
+          //       <div className='location-box'>
+          //         <img
+          //           src={LocationPinIcon}
+          //           alt=''
+          //           className='doctor-recommend-icon'
+          //         />
+          //         <span className='city-name'>{x.cityName}</span>
+          //       </div>
+          //       <h1 className='doctor-name'>{x.name}</h1>
+          //       <div className='specialization-box'>
+          //         <img
+          //           src={SpecializationIcon}
+          //           alt=''
+          //           className='doctor-recommend-icon'
+          //         />
+          //         <span>{x.field}</span>
+          //       </div>
+          //       <div className='verification-box'>
+          //         <img
+          //           src={VerficationIcon}
+          //           alt=''
+          //           className='doctor-recommend-icon'
+          //         />
+          //         <span>{x.license}</span>
+          //       </div>
+          //     </div>
+          //   </div>
           ))}
         </div>
 

@@ -14,7 +14,7 @@ import SignUpDownloadPopUp from './signup-popUp-4-download';
 import CreateAccount from './create-account.component';
 import LoginPhone from './login-phone.component';
 import DoctorPersonalInformation from '../../doctor-signUp-process/doctor-personal-information.jsx'
-import SendOtpVerification from './send-otp-verification.component';
+// import SendOtpVerification from './send-otp-verification.component';
 import DoctorSignUpFinish from '../../doctor-signUp-process/doctor-signUp-finish';
 import DoctorVerification from '../../doctor-signUp-process/doctor-verification';
 const StepTracker = ({ currentStep }) => {
@@ -57,7 +57,7 @@ const SignupPopup3 = (props) => {
       size='lg'
       style={modalStyle}
     >
-      <Modal.Header closeButton style={{ borderBottom: 'none' }}></Modal.Header>
+      <Modal.Header style={{ borderBottom: 'none' }}></Modal.Header>
       <Modal.Body style={{ padding: "15px" }}>
       {userInfo.popupState === 'accountType' && <SignUpAccountType />}
       {userInfo.popupState === 'login' && <LoginForm />}
@@ -68,7 +68,7 @@ const SignupPopup3 = (props) => {
       {userInfo.popupState === 'interest' && <ChooseInterestedArea />}
       {userInfo.popupState === 'success' && <SignUpDownloadPopUp />}
       {userInfo.popupState === 'phoneNumberLogin' && <LoginPhone />}
-      {userInfo.popupState === 'sendOtpVerification' && <SendOtpVerification />}
+      {/* {userInfo.popupState === 'sendOtpVerification' && <SendOtpVerification />} */}
       {userInfo.popupState === 'doctorProfile' && <DoctorPersonalInformation />}
       {userInfo.popupState === 'doctorVerification' && <DoctorVerification />}
       {userInfo.popupState === 'doctorFinish' && <DoctorSignUpFinish />}

@@ -19,7 +19,7 @@ import Authentication from './routes/authentication/authentication.component';
 import Doctor from './routes/doctor/doctor.component';
 import DocotorOwnMain from './components/doctor-own-profile/doctor-own-profile-main';
 import DoctorPost from  './routes/community/community.component';
-
+import UserAppointmentMain from './components/user-appointment/user-appointment-main.jsx';
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -32,6 +32,7 @@ import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
 import UserInfo from './routes/user-info/user-info.component';
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
+import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx'
 
 import AccountSetup from './components/account-setting/account-setting';
 import AccountNotFoundPage from './components/account-setting/not-found';
@@ -43,7 +44,7 @@ const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   /* Load token from cookie*/
-  console.log('userInfo init', userInfo);
+  //console.log('userInfo init', userInfo);
   const token = userInfoQueryStore((state) => state.userInfo.token);
   const setToken = userInfoQueryStore((state) => state.setToken);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
@@ -78,27 +79,31 @@ const App = () => {
               element={isMobile ? <DoctorProcudreMobile /> : <Download />}
             />
             <Route path='doctor' element={<Doctor />} />
+            <Route path='userAppointment' element={<UserAppointmentMain />} />
             <Route path='instrument' element={<Instrument />} />
             <Route path='instrument/:name' element={<SubInstrument />} />
             <Route path='sign-in' element={<Authentication />} />
             <Route path='posts' element={<DoctorPost />} />
-            <Route path='doctorProfile' element={<DocotorOwnMain />} />
             <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-            {/* <Route path="userProfile" element={
-
+            <Route path='doctorProfile' element={
+               <PrivateRoute>
+                <DocotorOwnMain />
+              </PrivateRoute> 
+            } />
+            <Route path="userProfile" element={
               <PrivateRoute>
                 <UserProfilePage />
               </PrivateRoute>
-            }/>  */}
-
+            }/> 
+        
             <Route path='download' element={<Download />} />
             <Route path='create-post' element={<CreatePostOfUser />} />
             <Route path='/posts/create' element={<CreatePostPage />} />
             <Route path='health-check' element={<HealthCheck />} />
-            <Route path='userProfile' element={<UserProfilePage />} />
+            {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
 
             <Route path='AccountSetup' element={<AccountSetup/>} />
-            <Route path='AccountNotFound' element={<AccountNotFoundPage/>} />
+            <Route path='userProfileEdit' element={<UserProfileEdit/>} />
 
             {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
             <Route path='register/verifyEmail' element={<Verification />} />

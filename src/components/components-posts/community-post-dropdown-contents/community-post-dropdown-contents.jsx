@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import usePostQueryStore from '../../../postStore';
+import usePostQueryStore from '../../../postStore.ts';
 import { nanoid } from 'nanoid';
 
 // components
@@ -17,7 +17,7 @@ import BodyProcedureImage from '../../../assets/procedure/chemical_peels.svg';
 import BotoxProcedureImage from '../../../assets/procedure/botox_injections.svg';
 import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
 import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
-import NeckProcedureImage from '../../../assets/procedure/Neck_Contouring.svg';
+import NeckProcedureImage from '../../../assets/procedure/neck_contouring.svg';
 
 const PostDropDownContents = () => {
   const setFilterCondition = usePostQueryStore(

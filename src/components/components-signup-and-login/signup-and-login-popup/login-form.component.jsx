@@ -78,7 +78,7 @@ const LoginForm = (props) => {
     return (
         <div className="sign-in-form-container">
             <div className='login-title-container'>
-               <LoginRegisterTitle title={"Log In"}/>
+               <LoginRegisterTitle title={"Log In"} handleBackwards={()=>switchPopupTab("accountType")}/>
             </div>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className='login-input-container'>
