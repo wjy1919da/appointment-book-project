@@ -1,6 +1,6 @@
 import './user-appoinment-section1.style.scss'
 import arrowLeft from '../../assets/user/arrow-left.png';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import AppointmentDetail from './appointment-detail';
 import AppInfoQueryStore from '../../appointmentStore.ts'
 import AppDetailDescription from './appointment-detail-description';
@@ -15,6 +15,11 @@ const UserAppoinmentSection1 = () => {
         setIsCardClicked(true); // Set state to true when card is clicked
         togglePopup(true,'appointmentDetail')
       };
+      useEffect(() => {
+        if (appInfo.popupState === 'mainSection') {
+            setIsCardClicked(false);
+        }
+    }, [appInfo.popupState]); 
     return (
         <div className='user-appointment-section1-main-container'>
         {!isCardClicked&&<div className='user-appointment-section1-container'>

@@ -57,7 +57,7 @@ const SignupPopup3 = (props) => {
       size='lg'
       style={modalStyle}
     >
-      <Modal.Header closeButton style={{ borderBottom: 'none' }}></Modal.Header>
+      <Modal.Header style={{ borderBottom: 'none' }}></Modal.Header>
       <Modal.Body style={{ padding: "15px" }}>
       {userInfo.popupState === 'accountType' && <SignUpAccountType />}
       {userInfo.popupState === 'login' && <LoginForm />}

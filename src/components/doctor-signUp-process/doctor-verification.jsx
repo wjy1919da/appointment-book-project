@@ -17,6 +17,10 @@ const s3Client = new S3Client({
     logger: console // 这会输出日志到控制台
 });
   
+import userInfoQueryStore from '../../userStore.ts';
+// import doctorInfoQueryStxore from '../../doctorStore.ts';
+import SignupAndLoginButton from '../components-signup-and-login/signup-and-login-button/signup-and-login-button.component';
+
 const DoctorVerification = () => {
    // console.log("process", process.env);
     const [selectedFiles, setSelectedFiles] = useState([]);

@@ -19,7 +19,7 @@ import Authentication from './routes/authentication/authentication.component';
 import Doctor from './routes/doctor/doctor.component';
 import DocotorOwnMain from './components/doctor-own-profile/doctor-own-profile-main';
 import DoctorPost from  './routes/community/community.component';
-
+import UserAppointmentMain from './components/user-appointment/user-appointment-main.jsx';
 import IndividualDoctor from './routes/individual-doctor/individual-doctor';
 import Download from './routes/download/download.component';
 import HealthCheck from './routes/health-check/health-check.component';
@@ -79,6 +79,7 @@ const App = () => {
               element={isMobile ? <DoctorProcudreMobile /> : <Download />}
             />
             <Route path='doctor' element={<Doctor />} />
+            <Route path='userAppointment' element={<UserAppointmentMain />} />
             <Route path='instrument' element={<Instrument />} />
             <Route path='instrument/:name' element={<SubInstrument />} />
             <Route path='sign-in' element={<Authentication />} />

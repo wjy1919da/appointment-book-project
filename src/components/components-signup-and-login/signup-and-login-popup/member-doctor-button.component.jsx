@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap'; 
 
-const MemberAndDoctorButton = (props) => {
-    const [isActive, setIsActive] = useState(false);
+const MemberAndDoctorButton = ({ title, onClick, isActive, disabled }) => {
+    //const [isActive, setIsActive] = useState(false);
 
     const activeStyle = {
         borderRadius: '8px',
@@ -23,11 +23,8 @@ const MemberAndDoctorButton = (props) => {
     };    
 
     const handleButtonClick = () => {
-        setIsActive(!isActive);
-        // If there's an additional onClick handler passed as a prop, call it
-        if (props.onClick) {
-            props.onClick();
-        }
+        onClick();
+        //setIsActive(!isActive);
     }
 
     return (
@@ -35,9 +32,9 @@ const MemberAndDoctorButton = (props) => {
             variant="primary"
             style={isActive ? activeStyle : defaultStyle}
             onClick={handleButtonClick}
-            disabled={props.disabled}
+            disabled={disabled}
         >
-            {props.title}
+            {title}
         </Button>
     );
 };

@@ -33,11 +33,11 @@ class Calendar extends React.Component {
         
         return (
             <div className="header row flex-middle">
-            <div className="dropdown-container">  {/* Add this wrapper */}
+            <div className="dropdown-calendar-container">  {/* Add this wrapper */}
               <div className="dropdown" onClick={this.toggleMonthDropdown}>
                   <span>{monthNames[currentMonth.getMonth()]}</span>
                   {this.state.dropdownVisible === 'month' && (
-                      <div className="dropdown-content">
+                      <div className="dropdown-calendar-content">
                           {monthNames.map((month, index) => (
                               <div key={index} onClick={() => this.selectMonth(index)}>{month}</div>
                           ))}
@@ -47,7 +47,7 @@ class Calendar extends React.Component {
               <div className="dropdown" onClick={this.toggleYearDropdown}>
                   <span>{currentYear}</span>
                   {this.state.dropdownVisible === 'year' && (
-                      <div className="dropdown-content">
+                      <div className="dropdown-calendar-content">
                           {years.map(year => (
                               <div key={year} onClick={() => this.selectYear(year)}>{year}</div>
                           ))}
