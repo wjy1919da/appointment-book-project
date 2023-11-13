@@ -54,11 +54,11 @@ const UserProfileLike = () => {
     console.log('Likes Page Data', data);
   }, [data]);
 
-  const handleOnClick = (userName, avatar) => {
+  const handleOnClick = (id) => {
     setIsModelOpen(true);
-    userName = userName;
-    avatar = avatar;
-    setUserID(143);
+    //userName = userName;
+    //avatar = avatar;
+    setUserID(id);
   };
 
   const [gutterwidth, setGutterWidth] = useState('10px');
@@ -97,9 +97,9 @@ const UserProfileLike = () => {
   // });
 
   const postList = flatData.map((post, index) => (
-    <div key={index} onClick={handleOnClick}>
+    <div key={index} onClick={()=>handleOnClick(post.id)}>
       <CommunityPost
-        imageURL={post.pictures || []}
+        imageURL={post.coverImg || []}
         text={post.title || ''}
         profileImage={post.avatar || ''}
         authorName={post.username || ''}
@@ -140,8 +140,8 @@ const UserProfileLike = () => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           // isMobile={isMobile}
-          // postUserName={userName}
-          // postAvatar={avatar}
+          postUserName="userName"
+          postAvatar={userPostAvatar}
         />
       )}
     </div>

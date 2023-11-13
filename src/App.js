@@ -84,21 +84,23 @@ const App = () => {
             <Route path='instrument/:name' element={<SubInstrument />} />
             <Route path='sign-in' element={<Authentication />} />
             <Route path='posts' element={<DoctorPost />} />
-            <Route path='doctorProfile' element={<DocotorOwnMain />} />
             <Route path="doctor/:encodedMemberId" element={<IndividualDoctor />} />
-            {/* <Route path="userProfile" element={
-
-        {/* <Route path="userProfile" element={
-          <PrivateRoute>
-            <UserProfilePage />
-          </PrivateRoute>
-        }/> */}
+            <Route path='doctorProfile' element={
+               <PrivateRoute>
+                <DocotorOwnMain />
+              </PrivateRoute> 
+            } />
+            <Route path="userProfile" element={
+              <PrivateRoute>
+                <UserProfilePage />
+              </PrivateRoute>
+            }/> 
         
         <Route path='download' element={<Download />} />
         <Route path='create-post' element={<CreatePostOfUser />} />
         <Route path='/posts/create' element={<CreatePostPage />} />
         <Route path='health-check' element={<HealthCheck />} />
-        <Route path='userProfile' element={<UserProfilePage />} />
+        {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
 
         <Route path='AccountSetup' element={<AccountSetup/>} />
         <Route path='userProfileEdit' element={<UserProfileEdit/>} />

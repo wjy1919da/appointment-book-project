@@ -58,21 +58,30 @@ const HeaderUser = () => {
   const menuDisclosure = useDisclosure();
 
   const {data, isLoading, isError, error} = useGetUserInfo();
-  
+  const toggle =  () => {
+     if(menuDisclosure.isOpen){
+        menuDisclosure.onClose();
+     }else{
+        menuDisclosure.onOpen();
+     }
+  }
+  console.log("user Info in header",userInfo);
 
   return (
     <div className='header-login'>
-        {!userInfo.token && <div onClick={()=>togglePopup(true, "doctorVerification")} className='header-login-default'>
+        {!userInfo.token && <div onClick={()=>togglePopup(true, "accountType")} className='header-login-default'>
             <img src={loginIcon} alt="login" className='header-login-default-icon'></img>
             <div className="header-login-text">Login/Sign up</div>
           </div>}
           {/* On Mouse Leave is not work */}
           <Menu isOpen={menuDisclosure.isOpen} onClose={menuDisclosure.onClose} onMouseLeave={menuDisclosure.onClose}>
-            <img src={data?.data?.image || defaultAvatar} alt="User avatar" className='header-avatar'/>
+            <img onMouseEnter={menuDisclosure.onOpen}  src={data?.data?.image || defaultAvatar} alt="User avatar" className='header-avatar'/>
 
             {userInfo.userId && (
-              <MenuButton as={Button} style={{ backgroundColor: 'transparent' }} 
+              <MenuButton as={Button} 
+                style={{ backgroundColor: 'transparent' }} 
                 onMouseEnter={menuDisclosure.onOpen} 
+                onClick={toggle}
               >
                 {data?.data?.nickname || 'User'}
               </MenuButton>
@@ -80,12 +89,15 @@ const HeaderUser = () => {
             <MenuList>
               <MenuGroup title={`Hello, ${userInfo && data?.data?.nickname ? data?.data?.nickname : ''}`}>
                 <MenuItem>
-                  <Link to="/userProfile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Link to="/AccountSetup" style={{ textDecoration: 'none', color: 'inherit' }}>
                     Account Setting
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link to="/userProfile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Link 
+                    to={userInfo.accountType === "2" ? "/doctorProfile" : "/userProfile"}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
                     Your Profile
                   </Link>
                 </MenuItem>

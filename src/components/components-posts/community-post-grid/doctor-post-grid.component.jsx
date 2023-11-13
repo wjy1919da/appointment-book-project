@@ -21,6 +21,7 @@ import './doctor-post-grid.styles.scss';
 // images
 import Arrow from '../../../assets/post/arrow_grid.png';
 import Arrow1 from '../../../assets/post/arrow1_grid.png';
+import { useGetPost } from '../../../hooks/useGetPosts.js';
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -33,6 +34,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     fetchNextPage,
     hasNextPage,
   } = useApiRequestPostFilter();
+  
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
@@ -66,11 +68,11 @@ const DoctorPostGrid = ({ isAbout }) => {
       key={post.id}
     >
       <CommunityPost
-        imageURL={post.pictures || []} 
+        imageURL={post.coverImg || []} 
         text={post.title || ""} 
         profileImage={post.avatar || ""}
-        authorName={post.username || ""}
-        likes={post.likeCount || 0} 
+        authorName={post.nickname || ""}
+        likes={post.likedCount || 0} 
       />
     </div>
   ));

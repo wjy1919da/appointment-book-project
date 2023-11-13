@@ -81,7 +81,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       onClick={() => setPostID(post.id, post.avatar, post.username)}
     >
       <CommunityPost
-        imageURL={post.pictures || []}
+        imageURL={post.coverImg || []}
         text={post.title || ''}
         profileImage={post.avatar || ''}
         authorName={post.username || ''}
