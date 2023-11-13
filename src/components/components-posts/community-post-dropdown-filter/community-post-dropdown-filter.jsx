@@ -26,11 +26,13 @@ const PostDropDownFilter = () => {
 
   // tag button
   const handleClickTag = () => {
+    setIsLocationTagContainerVisible(false);
     setIsTagContainerVisible(!isTagContainerVisible);
   };
 
   // location button
   const handleClickLocation = () => {
+    setIsTagContainerVisible(false);
     // get location
     getUserLocation();
     setIsLocationTagContainerVisible(!isLocationTagContainerVisible);
