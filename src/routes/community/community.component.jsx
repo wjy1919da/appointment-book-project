@@ -42,10 +42,6 @@ const Community = () => {
   //  },[userInfo.token]);
   //console.log("userInfo in doctor-post-grid outside",userInfo);
 
-  // useLayoutEffect(() => {
-  //   window.scrollTo(0, 0);
-  // });
-
   const handleFilters = (value, isChecked) => {
     const updatedFilter = [...postQuery.filterCondition];
     if (isChecked) {

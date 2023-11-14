@@ -43,20 +43,20 @@
         flex-shrink: 0;
         z-index: -1; /* This value might need to be adjusted based on other elements */
     }
-    .account-setting-right-pink
-    {
-        width: 120px;
-        height: 120px;
-        flex-shrink: 0;
-        fill: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
-        opacity: 0.8;
-        position:absolute;
-        top:811px;
-        left:90%;
-        // right:-700px;
-        border-radius: 236px;
-        z-index: 1; /* This value might need to be adjusted based on other elements */
-    }
+    // .account-setting-right-pink
+    // {
+    //     width: 120px;
+    //     height: 120px;
+    //     flex-shrink: 0;
+    //     fill: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
+    //     opacity: 0.8;
+    //     position:absolute;
+    //     top:811px;
+    //     left:90%;
+    //     // right:-700px;
+    //     border-radius: 236px;
+    //     z-index: 1; /* This value might need to be adjusted based on other elements */
+    // }
     .account-security-table
     {
         position: relative;
