@@ -86,13 +86,10 @@ const PostDropDownFilter = () => {
                 <PostSearchBox className='search-reverse' />
               </div>
               <div className='search-result'>
-
                 <p className='search-result-title'>#Trendy</p>
-                {data?.data?.map((item) => (
-                  <div key={item.tagId} className='search-result-list'>
-                    {item.tagName}
-                  </div>
-                ))}
+                  {data?.data?.map((item) => (
+                    <div key={item.tagId} className='search-result-list'>{item.tagName}</div>
+                  ))}
               </div>
             </div>
           )}
