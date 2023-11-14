@@ -34,7 +34,7 @@ class Calendar extends React.Component {
         return (
             <div className="header row flex-middle">
             <div className="dropdown-calendar-container">  {/* Add this wrapper */}
-              <div className="dropdown" onClick={this.toggleMonthDropdown}>
+              <div className="dropdown-appointment" onClick={this.toggleMonthDropdown}>
                   <span>{monthNames[currentMonth.getMonth()]}</span>
                   {this.state.dropdownVisible === 'month' && (
                       <div className="dropdown-calendar-content">
@@ -44,7 +44,7 @@ class Calendar extends React.Component {
                       </div>
                   )}
               </div>
-              <div className="dropdown" onClick={this.toggleYearDropdown}>
+              <div className="dropdown-appointment" onClick={this.toggleYearDropdown}>
                   <span>{currentYear}</span>
                   {this.state.dropdownVisible === 'year' && (
                       <div className="dropdown-calendar-content">

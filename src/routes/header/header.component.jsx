@@ -43,7 +43,7 @@ const Header = () => {
     'Arm Lift',
   ];
   const userInfo = userInfoQueryStore((state) => state.userInfo);
-  console.log('userInfo in header', userInfo);
+  //console.log('userInfo in header', userInfo);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   const facialDropDownMenuMobile = facialProcedures.map((procedure) => (
     <NavDropdown.Item
