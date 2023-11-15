@@ -15,6 +15,7 @@ import HomeButton from '../home-button/home-button.component';
 import AppInfoQueryStore from '../../appointmentStore.ts'
 import { useGetUserInfo } from '../../hooks/useAuth';
 import { useState } from 'react';
+
 const UserProfileBasic = () => {
   const {data, isLoading, isError, error} = useGetUserInfo();
   const appInfo = AppInfoQueryStore(state => state.appointInfo);
@@ -27,7 +28,7 @@ const UserProfileBasic = () => {
     navigate('/userAppointment');
   };
   return (
-    <div className='user-profile-basic-container container'>
+    <div className='user-profile-basic-container'>
       <div className='user-profile-basic-avatar'>
         <img src={UserProfilePicture} alt='User-Image'></img>
       </div>
