@@ -72,7 +72,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(userPostAvatar);
-    setUserName("wyj");
+    setUserName('wyj');
   };
 
   const postList = flatData.map((post, index) => (
@@ -85,7 +85,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
         text={post.title || ''}
         profileImage={post.avatar || ''}
         authorName={post.username || ''}
-        likes={post.likeCount || 0}
+        likes={post.like_count || 0}
 
         // imageURL={post.coverImg}
         // text={post.title}

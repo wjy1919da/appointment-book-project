@@ -103,7 +103,7 @@ const UserProfileLike = () => {
         text={post.title || ''}
         profileImage={post.avatar || ''}
         authorName={post.username || ''}
-        likes={post.likeCount || 0}
+        likes={post.like_count || 0}
 
         // key={index}
         // imageURL={post.coverImg}
