@@ -13,6 +13,7 @@ const Doctor = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [noResults, setNoResults] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     const searchLocations = [];
     // useEffect(() => {
@@ -28,13 +29,28 @@ const Doctor = () => {
     // }, [])
     async function retrieveSearchResults(results) {  // callback function passed to search bar to retrieve results
         setIsLoading(true);
+        setSearchResults([]);
+        if (noResults) setNoResults(false);
         try {
+            await delay(1500);
             const data = await retrieveMultiInputResults(results);
-            if (data?.data?.msg !== "Success") throw new Error();
+            console.log('multiinput results are: ', data);
+            if (data?.data?.msg !== "Success") {
+                if (data?.data?.msg === 'No recording') {
+                    throw new Error('No results found')
+                } else {
+                    throw new Error('Backend error');
+                }
+            } 
             const newArray = data?.data?.data;
             setSearchResults(newArray);
         } catch (err) {
-            setError(true);
+            if (err.message === 'No results found') {
+                setNoResults(true);
+            } else {
+                setError(true);
+            }
+            
         } finally {
             setIsLoading(false);
         }
@@ -96,6 +112,7 @@ const Doctor = () => {
                             </div>
                         </div>
                     </div>
+                    {noResults && <span className='doctor-search-no-results'>No results found, please try another filter.</span>}
                     <div className='doctor-search-results-container'>
                         {!isLoading ? searchResults?.map((doctorObj, index) => 
                             <DoctorSearchCard doctorObj={doctorObj} key={index} />

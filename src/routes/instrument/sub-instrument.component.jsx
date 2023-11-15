@@ -64,7 +64,7 @@ const SubInstrument = () => {
         getData();
     }, [name]);
 
-    const imageToUse = images[name];
+    // const imageToUse = images[name.toLowerCase()];
     function getSubCategory(index) {
         if (data && subcategories.length > index) {
             return subcategories[index];
@@ -235,7 +235,8 @@ const SubInstrument = () => {
            <div className='sub-instrument-title-container'>
                <h3 className='sub-instrument-top-text'>Instrument</h3>
              {/* Logo picture */}
-               <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic' id='description'/>
+             <img src={require(`../../assets/instrument/${name.toLowerCase()}.svg`)} alt={`${name} logo`} className='sub-instrument-logo-pic' id='description'/>
+               {/* <img src={imageToUse} alt={`${name} logo`} className='sub-instrument-logo-pic' id='description'/> */}
                {data?.data?.description&&
                <div style={{ marginTop: '-40px' }}>
                    <SubTxt text={data?.data?.description}/>
