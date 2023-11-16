@@ -1,7 +1,5 @@
 .user-profile-subArea-container {
   .navbar {
-    // margin-left: 100px;
-    width: 300px;
     display: flex;
     justify-content: space-between;
     color: #000;
@@ -11,7 +9,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
-    margin: 0 109px;
+    margin: 30px 109px 0 109px;
+    width: 300px;
   }
 
   .item {
