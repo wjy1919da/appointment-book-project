@@ -11,6 +11,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
+    margin: 0 109px;
   }
 
   .item {
@@ -29,14 +30,12 @@
       background-position: bottom; /* Position the background at the bottom, like a border */
     }
   }
+
   .bottom-rendering {
     margin-top: 24px;
     // max-width: 90%; /* Example property */
     // padding: 60px;
     //background-color: #f5f5f5; /* Just an example, you can set to your preference */
     /* Add any other styles you want for the bottom rendering area */
-  }
-  .bottom-rendering-post {
-    // margin-top: -50px;
   }
 }
