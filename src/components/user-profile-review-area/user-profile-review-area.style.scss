@@ -11,6 +11,27 @@
   width: 100%;
 }
 
+.recommend-doctor-highly-rated-container {
+  display: flex;
+  align-items: center;
+  margin: 0 0 30px 110px;
+
+  .recommend-doctor-highly-rated-title {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0 10px 0 0;
+  }
+
+  img {
+    transform: rotate(90deg);
+    margin: 0 10px 0 0;
+  }
+}
+
 .review-recommande-doctor-list-container {
   width: 100%;
   overflow-x: auto;

@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
 import Hashids from 'hashids';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // components
-import StarRate from '../starRate/starRate';
-import UserProfileReviewCard from '../user-profile-review-card/user-profile-review-card';
-// import DoctorCard from '../doctor-card/doctor-card.component';
 import DoctorSearchCard from '../doctor-search-card/doctor-search-card.component';
 import HomeSpinner from '../home-spinner/home-spinner.component';
+// import DoctorCard from '../doctor-card/doctor-card.component';
+// import StarRate from '../starRate/starRate';
+// import UserProfileReviewCard from '../user-profile-review-card/user-profile-review-card';
 
 // scss
 import './user-profile-review-area.style.scss';
@@ -20,11 +20,11 @@ import {
 } from '../../hooks/useSearchDoctors';
 
 // images
-import DoctorProfilePicture from '../../assets/post/doctor_profile_picture.svg';
-import LocationPinIcon from '../../assets/post/location_pin.svg';
-import SpecializationIcon from '../../assets/post/glasses.svg';
-import VerficationIcon from '../../assets/post/verified_badge_icon.svg';
 import RightArrow from '../../assets/post/arrow-right.svg';
+// import DoctorProfilePicture from '../../assets/post/doctor_profile_picture.svg';
+// import LocationPinIcon from '../../assets/post/location_pin.svg';
+// import SpecializationIcon from '../../assets/post/glasses.svg';
+// import VerficationIcon from '../../assets/post/verified_badge_icon.svg';
 
 // others
 // import { useMemo } from 'react';
@@ -154,7 +154,8 @@ const UserProfileReview = () => {
   //    }, [data]);
   const dataArray = data?.pages[0].data;
 
-  if (isLoading) return <HomeSpinner />
+  if (isLoading) return <HomeSpinner />;
+
   return (
     <div className='user-profile-review-container'>
       <div className='review-recommande-doctor'>
@@ -193,51 +194,57 @@ const UserProfileReview = () => {
           &gt;
         </div> */}
       </div>
+      <div className='recommend-doctor-highly-rated-container'>
+        <h3 className='recommend-doctor-highly-rated-title'>
+          Highly Rated by Charlotte
+        </h3>
+        <img src={RightArrow} alt='DownArrow' />
+      </div>
       <div className='recommande-doctor-summary'>
         <div className='recommend-doctor-box-wrapper'>
           {dataArray?.map((x, index) => (
             <DoctorSearchCard doctorObj={x} key={index} />
-          //   <div
-          //     key={index}
-          //     className={`recommend-doctor-box ${
-          //       clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
-          //     }`}
-          //     onClick={() => handleClickRecommendDoctor(index)}
-          //   >
-          //     <div className='box-1'>
-          //       <img src={DoctorProfilePicture} alt='' />
-          //       <div className='username-review-card-rate-star'>
-          //         <StarRate rateScore={5} />
-          //       </div>
-          //     </div>
-          //     <div className='box-2'>
-          //       <div className='location-box'>
-          //         <img
-          //           src={LocationPinIcon}
-          //           alt=''
-          //           className='doctor-recommend-icon'
-          //         />
-          //         <span className='city-name'>{x.cityName}</span>
-          //       </div>
-          //       <h1 className='doctor-name'>{x.name}</h1>
-          //       <div className='specialization-box'>
-          //         <img
-          //           src={SpecializationIcon}
-          //           alt=''
-          //           className='doctor-recommend-icon'
-          //         />
-          //         <span>{x.field}</span>
-          //       </div>
-          //       <div className='verification-box'>
-          //         <img
-          //           src={VerficationIcon}
-          //           alt=''
-          //           className='doctor-recommend-icon'
-          //         />
-          //         <span>{x.license}</span>
-          //       </div>
-          //     </div>
-          //   </div>
+            //   <div
+            //     key={index}
+            //     className={`recommend-doctor-box ${
+            //       clicked[index] ? 'recommend-doctor-filtered-box-1' : ''
+            //     }`}
+            //     onClick={() => handleClickRecommendDoctor(index)}
+            //   >
+            //     <div className='box-1'>
+            //       <img src={DoctorProfilePicture} alt='' />
+            //       <div className='username-review-card-rate-star'>
+            //         <StarRate rateScore={5} />
+            //       </div>
+            //     </div>
+            //     <div className='box-2'>
+            //       <div className='location-box'>
+            //         <img
+            //           src={LocationPinIcon}
+            //           alt=''
+            //           className='doctor-recommend-icon'
+            //         />
+            //         <span className='city-name'>{x.cityName}</span>
+            //       </div>
+            //       <h1 className='doctor-name'>{x.name}</h1>
+            //       <div className='specialization-box'>
+            //         <img
+            //           src={SpecializationIcon}
+            //           alt=''
+            //           className='doctor-recommend-icon'
+            //         />
+            //         <span>{x.field}</span>
+            //       </div>
+            //       <div className='verification-box'>
+            //         <img
+            //           src={VerficationIcon}
+            //           alt=''
+            //           className='doctor-recommend-icon'
+            //         />
+            //         <span>{x.license}</span>
+            //       </div>
+            //     </div>
+            //   </div>
           ))}
         </div>
 

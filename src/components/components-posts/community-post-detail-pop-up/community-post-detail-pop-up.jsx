@@ -1,20 +1,20 @@
 import React, { useRef } from 'react';
 import './community-post-detail-pop-up.styles.scss';
 import CommentCard from '../../comment-card/comment-card';
-import heartIcon from '../../../assets/post/heart.png';
-import commentIcon from '../../../assets/post/chat_bubble.png';
+// import heartIcon from '../../../assets/post/heart.png';
+// import commentIcon from '../../../assets/post/chat_bubble.png';
 import DownArrow from '../../../assets/post/down-arrow.png';
-import collectIcon from '../../../assets/post/star.png';
+// import collectIcon from '../../../assets/post/star.png';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
+// import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAddComment } from '../../../hooks/useComment';
 import usePostQueryStore from '../../../postStore.ts';
 import userInfoQueryStore from '../../../userStore.ts';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 
 // images
 import UserImage from '../../../assets/post/user_image.svg';
@@ -42,13 +42,16 @@ const CommunityPostDetailPopUP = ({
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+
   const schema = z.object({
     comment: z
       .string()
       .nonempty('Comment is required')
       .min(5, 'Comment must be at least 5 characters long'),
   });
+
   //console.log("userInfo in post detail ",userInfo);
+
   const {
     register,
     handleSubmit,
@@ -57,6 +60,7 @@ const CommunityPostDetailPopUP = ({
   } = useForm({
     resolver: zodResolver(schema),
   });
+
   const onSubmit = (formData) => {
     //console.log("formData ",formData);
     // set post id and comment text
@@ -73,7 +77,9 @@ const CommunityPostDetailPopUP = ({
       text: formData.comment,
     });
   };
+
   const { mutate, data, isLoading, isError, error } = useAddComment();
+
   useEffect(() => {
     if (data?.code === 100) {
       //alert("send comment ",data.msg);
@@ -83,6 +89,7 @@ const CommunityPostDetailPopUP = ({
       alert(data.msg);
     }
   }, [data]);
+
   const handleInputClick = (e) => {
     //console.log("handleInputClick ",userInfo.token);
     if (!userInfo.token) {
@@ -90,21 +97,35 @@ const CommunityPostDetailPopUP = ({
       togglePopup(true, 'login');
     }
   };
+
+  // pop up height adjustment
   const adjustContainerHeight = () => {
     const container = containerRef.current;
     const image = imageRef.current;
     if (container && image) {
-      container.style.height = image.offsetHeight + 70 + 'px';
+      container.style.height = '400px'; 
+      image.style.maxHeight = '100%'; 
     }
   };
+
+  // const adjustContainerHeight = () => {
+  //   const container = containerRef.current;
+  //   const image = imageRef.current;
+  //   if (container && image) {
+  //     container.style.height = image.offsetHeight + 70 + 'px';
+  //   }
+  // };
+
   const handleImageLoad = () => {
     adjustContainerHeight();
   };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleDateString('en-US');
     return formattedDate;
   };
+
   const ndate = formatDate(postDate);
   if (
     !picture &&
@@ -118,6 +139,7 @@ const CommunityPostDetailPopUP = ({
   ) {
     return null;
   }
+
   function convertUnicode(input) {
     if (!input) return ''; // Return an empty string if input is null, undefined, or empty string
     return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a, b) =>
@@ -166,9 +188,7 @@ const CommunityPostDetailPopUP = ({
                 <span>Anna</span>
               </div>
               <div className='user-detail-button-container'>
-                <button className='button-archive'>
-                  Archive
-                </button>
+                <button className='button-archive'>Archive</button>
                 <button className='button-edit'>Edit your Post</button>
               </div>
             </div>
@@ -289,7 +309,7 @@ const CommunityPostDetailPopUP = ({
               {/* <div className='comment-send-msg-container'> 
                 <CommunitySendMsg isValid={isValid} />
                </div> */}
-{/* 
+              {/* 
                <Button
                 as='input'
                 type='submit'
@@ -298,7 +318,7 @@ const CommunityPostDetailPopUP = ({
                 style={{ backgroundColor: 'orange', border: 'orange' }}
               />  */}
             </div>
-             <div className='new-comment-input'>
+            <div className='new-comment-input'>
               <input
                 {...register('comment')}
                 type='text'
@@ -307,7 +327,7 @@ const CommunityPostDetailPopUP = ({
                 onClick={handleInputClick}
               />
               <p>{errors.comment?.message}</p>
-            </div> 
+            </div>
           </form>
         </div>
       </div>
