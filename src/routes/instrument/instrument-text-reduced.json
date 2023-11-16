@@ -1,0 +1,30 @@
+[
+    {
+        "name": "thermage",
+        "shownName": "Thermage",
+        "heading": "ADDRESS THE VISIBLE SIGNS OF AGING IN MINUTES",
+        "subheading": "The Thermage® system is a non-invasive radiofrequency (RF) therapy that can help smooth, tighten and contour skin for an overall younger-looking appearance.",
+        "hasSubImage": true
+    },
+    {
+        "name": "inmode",
+        "shownName": "InMode",
+        "heading": "InMode can remove fat and firm the skin. It adopts advanced patented radio frequency technology, which has been clinically proven to permanently destroy the fat and cause adipocyte apoptosis, remove the amount of fat, precisely explode fat, and stimulate collagen hyperplasia.",
+        "subheading": "• It is non-invasive, which means it does not need cutting or needles;\n• Avoid the risks associated with traditional surgery;\n• There is little or even no downtime, which means patients can go back to their work immediately;\n• It can treat multiple areas in a single treatment for an outstanding result.",
+        "hasSubImage": false
+    },
+    {
+        "name": "coolsculpting",
+        "shownName": "CoolSculpting",
+        "heading": "CoolSculpting is an effective technique for removing stubborn fat deposits on specific body parts. It cools the subcutaneous tissue to 5°C, so the fat cells age in advance and are excreted out of the body through metabolism to achieve the effect of weight loss.",
+        "subheading": "• It is non-invasive, which means it does not need cutting or needles;\n• Avoid the risks associated with traditional surgery; \n• There is little or even no downtime, which means patients can go back to their work immediately; \n• It can treat multiple areas in a single treatment for an outstanding result.",
+        "hasSubImage": false
+    },
+    {
+        "name": "fraxel_laser",
+        "shownName": "Fraxel Laser",
+        "heading": "Fraxel Laser uses non-ablative fractional skin resurfacing treatment to make people look young. It creates countless wounds on parts of the skin that are so small that they are invisible to the naked eye. Through extrusion and regeneration, the old tissue of the epidermis is removed. At the same time, the collagen in the dermis is stimulated to remodel to achieve skin regeneration.",
+        "subheading": "• It is non-invasive, which means it does not need cutting or needles;\n• Avoid the risks associated with traditional surgery;\n• It usually only takes 30-90 minutes (depending on the treatment area) in a single treatment for an outstanding result;\n• There is little or even no downtime, which means patients can go back to their work immediately;\n• Not only on the face: It can treat wrinkles and loose skin on the face and any part of the human body.",
+        "hasSubImage": true
+    }
+]

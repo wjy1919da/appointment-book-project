@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import InstrumentGrid from '../../components/instrument-grid/instrument-grid.component';
 import InstrumentDoctor from '../../assets/doctor/featureDoctor1.png'
 import './instrument.styles.scss';
-import instrumentJSONData from './instrument-text-new.json';
+import instrumentJSONData from './instrument-text-reduced.json';  // revert back to other json file when we add other backend instrument data!
 
 const Instrument = () => {
     // useLayoutEffect(() => {
@@ -14,7 +14,7 @@ const Instrument = () => {
     // });
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     console.log(instrumentJSONData);
-    const thermageObj = instrumentJSONData[0];
+    // const thermageObj = instrumentJSONData[0];
 
     return (
         <div className='instrument-container animate__animated animate__fadeIn'>
