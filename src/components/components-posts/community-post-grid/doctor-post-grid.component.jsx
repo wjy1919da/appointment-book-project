@@ -21,20 +21,13 @@ import './doctor-post-grid.styles.scss';
 // images
 import Arrow from '../../../assets/post/arrow_grid.png';
 import Arrow1 from '../../../assets/post/arrow1_grid.png';
-import { useGetPost } from '../../../hooks/useGetPosts.js';
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
 
 const DoctorPostGrid = ({ isAbout }) => {
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useApiRequestPostFilter();
-  
+  const { data, error, isLoading, fetchNextPage, hasNextPage } =
+    useApiRequestPostFilter();
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
@@ -47,7 +40,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
     : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
   const isMobileOrAbout = isMobile || isAbout;
-  
+
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
@@ -60,7 +53,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserAvatar(avatar);
     setUserName(username);
   };
-  
+
   const postCardList = flatData.map((post) => (
     <div
       className='btn'
@@ -68,11 +61,11 @@ const DoctorPostGrid = ({ isAbout }) => {
       key={post.id}
     >
       <CommunityPost
-        imageURL={post.coverImg || []} 
-        text={post.title || ""} 
-        profileImage={post.avatar || ""}
-        authorName={post.nickname || ""}
-        likes={post.likedCount || 0} 
+        imageURL={post.coverImg || []}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.nickname || ''}
+        likes={post.likedCount || 0}
       />
     </div>
   ));
