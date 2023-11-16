@@ -146,8 +146,17 @@ const UserProfileEdit = () => {
                         Face Procedures
                     </span>
                     <div className="breast-procedures" style={{top: '40px', left: '76px' }}></div>
-                    <div className="body-procedures" style={{top: '40px', left: '76px' }}></div>
                     <div className="face-procedures" style={{top: '40px', left: '20px' }}></div>
+                    <div className="face-procedures" style={{top: '-10px', left: '98px' }}></div>
+                    <div className="face-procedures" style={{top: '-60px', left: '168px' }}></div>
+                    <div className="face-procedures" style={{top: '35px', left: '168px' }}></div>
+                    <div className="face-procedures" style={{top: '-15px', left: '98px' }}></div>
+                    <div className="face-procedures" style={{top: '-65px', left: '20px' }}></div>
+                    <div className="breast-procedures" style={{top: '-450px', left: '76px' }}></div>
+                    <div className="skin-procedures" style={{top: '-925px', left: '425px' }}></div>
+                    <div className="skin-procedures" style={{top: '-685px', left: '425px' }}></div>
+                    <div className="body-procedures" style={{top: '-800px', left: '250px' }}></div>
+                    <div className="body-procedures" style={{top: '-1280px', left: '250px' }}></div>
                 </div>
             </div>
         </div>
