@@ -1,12 +1,14 @@
+.user-profile-post-area-container {
+  margin: 0 110px;
+}
+
 .user-profile-post-area-container-post {
   position: absolute;
   top: 100px;
   left: 200px;
   width: 80%;
 }
-.choose-picture-conatiner-post {
-  //display: flex;
-}
+
 .choose-picture-section-image-post {
   width: 240px;
   height: 240px; // Height of your CommunityPost items
