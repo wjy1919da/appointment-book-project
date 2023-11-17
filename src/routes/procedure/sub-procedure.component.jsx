@@ -47,84 +47,85 @@ const SubProcedure = () => {
         }
     };
     //const result = {"optionsForm":[{"header":[{},{"name":"Workstations"},{"name":"Technologies Covered"},{"name":"Technologies Included"}]},{"body":[{"name":"Workstations","value":["InMode Forma","InMode Evoke","InMode Morpheus8","InMode Votiva","InMode Lumecca","InMode DiolazeXL","InMode Triton","InMode Optimas","InMode Avance"]},{"name":"Technologies Covered","value":["Radiofrequency","Microneedling","IPL","Diode Laser","Fractional Coagulation","Temperature Monitoring","Auto-adjusting","Multi-Wavelength","Pulse Control"]},{"name":"Technologies Included","value":["Radiofrequency for skin tightening","Microneedling for collagen production","IPL for pigmentation and vascular lesions","Diode Laser for hair removal","Fractional Coagulation for skin resurfacing","Temperature Monitoring for safety","Auto-adjusting for custom treatment","Multi-Wavelength for various treatments","Pulse Control for optimized output"]}]}]};
-    const handleScroll = () => {
-        //console.log('scroll');
-        const slideElement = document.getElementById("slide");
-        const recommendationElement = document.getElementById("recommendation");
-        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+    const handleScroll = () => {};
+    // const handleScroll = () => {
+    //     //console.log('scroll');
+    //     const slideElement = document.getElementById("slide");
+    //     const recommendationElement = document.getElementById("recommendation");
+    //     const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
         
-        if (!isMobile) {
-            if (window.scrollY >= 280) {
-                if (slideElement) {
-                    slideElement.style.top = '64px';
-                    slideElement.style.position = 'fixed';
-                    if (recommendationElement) {
-                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';  // Introduction slide's top + 400px
-                        recommendationElement.style.position = 'fixed';
-                    }
-                }
-                if (recommendationElement) {
-                    // 这里隐藏DOM后, 通过 getBoundingClientRect() 再获取DOM的大小和位置都为0，可以改为 visibility
-                    const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
-                    if (footerTop <= recommendationBottom) {
-                        // recommendationElement.style.display = 'none';
-                        recommendationElement.style.visibility = 'hidden';
-                    } else {
-                        // recommendationElement.style.display = 'block';
-                        recommendationElement.style.visibility = 'visible';
-                    }
-                }
-            } else 
-            {
-                //console.log("window.scrollY < 280",recommendationElement,slideElement);
-                if (slideElement) {
-                    slideElement.style.top = '350px';
-                    slideElement.style.position = 'absolute';
+    //     if (!isMobile) {
+    //         if (window.scrollY >= 280) {
+    //             if (slideElement) {
+    //                 slideElement.style.top = '64px';
+    //                 slideElement.style.position = 'fixed';
+    //                 if (recommendationElement) {
+    //                     recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';  // Introduction slide's top + 400px
+    //                     recommendationElement.style.position = 'fixed';
+    //                 }
+    //             }
+    //             if (recommendationElement) {
+    //                 // 这里隐藏DOM后, 通过 getBoundingClientRect() 再获取DOM的大小和位置都为0，可以改为 visibility
+    //                 const recommendationBottom = recommendationElement.getBoundingClientRect().bottom;
+    //                 if (footerTop <= recommendationBottom) {
+    //                     // recommendationElement.style.display = 'none';
+    //                     recommendationElement.style.visibility = 'hidden';
+    //                 } else {
+    //                     // recommendationElement.style.display = 'block';
+    //                     recommendationElement.style.visibility = 'visible';
+    //                 }
+    //             }
+    //         } else 
+    //         {
+    //             //console.log("window.scrollY < 280",recommendationElement,slideElement);
+    //             if (slideElement) {
+    //                 slideElement.style.top = '350px';
+    //                 slideElement.style.position = 'absolute';
 
-                    if (recommendationElement) {
-                        //console.log("recommendationElement adjust");
-                        recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
-                        recommendationElement.style.position = 'absolute';
-                    }
-                }
-            }
+    //                 if (recommendationElement) {
+    //                     //console.log("recommendationElement adjust");
+    //                     recommendationElement.style.top = (parseInt(slideElement.style.top, 10) + 330) + 'px';
+    //                     recommendationElement.style.position = 'absolute';
+    //                 }
+    //             }
+    //         }
 
-            checkWhichSectionInView();
-        }
-    };    
+    //         checkWhichSectionInView();
+    //     }
+    // };    
     const [loadingTimeout, setLoadingTimeout] = useState(false);
     const footerRef = useRef(null);
-    useEffect(() => {
-        const initialize = () => {
-            //console.log('initialize');
-            handleScroll();
-            window.addEventListener('resize', handleResize);
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }
-        const handleResize = () => {
-            window.removeEventListener('scroll', handleScroll);
-            handleScroll(); // 重新调整位置
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }
-        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
-        if (document.readyState === "complete") {
-            //console.log('complete');
-            initialize();
-        } else {
-            //console.log('not complete');
-            window.onload = initialize;
-        }
+    // useEffect(() => {
+    //     const initialize = () => {
+    //         //console.log('initialize');
+    //         handleScroll();
+    //         window.addEventListener('resize', handleResize);
+    //         window.addEventListener('scroll', handleScroll, { passive: true });
+    //     }
+    //     const handleResize = () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //         handleScroll(); // 重新调整位置
+    //         window.addEventListener('scroll', handleScroll, { passive: true });
+    //     }
+    //     // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+    //     if (document.readyState === "complete") {
+    //         //console.log('complete');
+    //         initialize();
+    //     } else {
+    //         //console.log('not complete');
+    //         window.onload = initialize;
+    //     }
     
-        const timeout = setTimeout(() => {
-            setLoadingTimeout(true);
-        }, 5000);
+    //     const timeout = setTimeout(() => {
+    //         setLoadingTimeout(true);
+    //     }, 5000);
     
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('scroll', handleScroll);
-            clearTimeout(timeout);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //         window.removeEventListener('scroll', handleScroll);
+    //         clearTimeout(timeout);
+    //     };
+    // }, []);
     const n =50;
     const [selectedSection, setSelectedSection] = useState("description");
    
@@ -288,57 +289,59 @@ const SubProcedure = () => {
                          <ProcedureCard cardInfo={cardInfo}/>
                     </div>
                 }
-                    <div className="introduction-slide" id='slide'>
-                        <div className="introduction-icon"></div>
-                        <div className="introduction-catalog">
-                            <a
-                                href="#description"
-                                className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                                //onClick={() => setSelectedSection("description")}
-                                >Introduction</a>
-                            <a
-                                href="#consider"
-                                className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                                //onClick={() => setSelectedSection("consider")}
-                                >Why consider {formatTitle(name)}</a>
-                            {optionsContent &&
-                            <a
-                                href="#options"
-                                className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
-                                //onClick={() => setSelectedSection("options")}
-                                >Procedure options</a>}
-                            <a
-                                href="#sideEffects"
-                                className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
-                                //onClick={() => setSelectedSection("sideEffects")}
-                                >Potential Side Effects</a>
-                            {beforeAndAfterImage &&
-                            <a
-                                href="#beforeAndAfter"
-                                className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                                //onClick={() => setSelectedSection("beforeAndAfter")}
-                                >Before and After</a>} {alternativeTreatmentForm &&
-                            <a
-                                href="#alternative"
-                                className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
-                                //onClick={() => setSelectedSection("alternative")}
-                                >Alternative Treatments</a>}
-                            {/* NOTICE: Window.innerHeight can not access to these 2 sections */}
-                            <a
-                                href="#faq"
-                                className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
-                                //onClick={() => setSelectedSection("faq")}
-                            >FAQ</a>
+                    <div className="introduction-slide-container">
+                        <div className="introduction-slide" id='slide'>
+                            <div className="introduction-icon"></div>
+                            <div className="introduction-catalog">
+                                <a
+                                    href="#description"
+                                    className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                                    //onClick={() => setSelectedSection("description")}
+                                    >Introduction</a>
+                                <a
+                                    href="#consider"
+                                    className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                                    //onClick={() => setSelectedSection("consider")}
+                                    >Why consider {formatTitle(name)}</a>
+                                {optionsContent &&
+                                <a
+                                    href="#options"
+                                    className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                                    //onClick={() => setSelectedSection("options")}
+                                    >Procedure options</a>}
+                                <a
+                                    href="#sideEffects"
+                                    className={selectedSection === "sideEffects" ? 'introduction-section active' : 'introduction-section'}
+                                    //onClick={() => setSelectedSection("sideEffects")}
+                                    >Potential Side Effects</a>
+                                {beforeAndAfterImage &&
+                                <a
+                                    href="#beforeAndAfter"
+                                    className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                                    //onClick={() => setSelectedSection("beforeAndAfter")}
+                                    >Before and After</a>} {alternativeTreatmentForm &&
+                                <a
+                                    href="#alternative"
+                                    className={selectedSection === "alternative" ?  'introduction-section active ' :'introduction-section'}
+                                    //onClick={() => setSelectedSection("alternative")}
+                                    >Alternative Treatments</a>}
+                                {/* NOTICE: Window.innerHeight can not access to these 2 sections */}
+                                <a
+                                    href="#faq"
+                                    className={selectedSection === "faq" ? 'introduction-section active' :'introduction-section'}
+                                    //onClick={() => setSelectedSection("faq")}
+                                >FAQ</a>
 
-                            {/* <a
-                                href="#reference"
-                                className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
-                                onClick={() => setSelectedSection("reference")}>Reference</a> */}
+                                {/* <a
+                                    href="#reference"
+                                    className={selectedSection === "reference" ? 'introduction-section active ' : 'introduction-section'}
+                                    onClick={() => setSelectedSection("reference")}>Reference</a> */}
+                            </div>
                         </div>
+                        {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
+                            <RecommendationGrid isMobile={false} height={'210px'} />
+                        </div>}
                     </div>
-                    {isPadAndWeb && <div className='procedure-recommendation-container' id='recommendation'>
-                        <RecommendationGrid isMobile={false} height={'210px'} />
-                    </div>}
                 </div>
             </div> 
             <SubProcedureMobileExtraBottom />  
