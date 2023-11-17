@@ -1,33 +1,65 @@
+.individual-doctor-container {
+  margin-top: 126px;
+}
+.individual-doctor-container {
+    display: flex;
+    flex-direction: column;
+
+    .individual-doctor-left-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        // padding: 0 50px;
+        // width: 100%;
+        // margin: auto;
+        position: relative;
+        left: 0;
+    }
+    .individual-doctor-right-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 10px;
+        // gap: 40px;
+        // width: 100%;
+
+        position: relative;
+        //top: 700px;
+        right: 0;
+        flex: 1;
+        margin-left: 40px;
+
+        .individual-doctor-right-about {
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .individual-doctor-posts{
+            width: 100%;
+        }
+    }
+}
 @media(min-width: 768px){
     .individual-doctor-container {
-        display: flex;
         flex-direction: row;
-        padding: 10vw 0vw 0vw 4vw;
-        gap: 8vw;
+        // gap: 8vw;
         box-sizing: border-box;
         .individual-doctor-left-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0 0 64px;
-            //position: absolute;
+            // padding: 0 0 64px;
             position: relative;
-            width: 30vw;
+            // width: 30vw;
             height: 920px;
             //left: 80px;
             //top: 104px;
         }
         .individual-doctor-right-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             padding: 0;
-            gap: 40px;
+            // gap: 40px;
     
             //position: absolute;
             position: relative;
-            width: 50vw;
+            // width: 50vw;
             //height: 920px;
             //right: 80px;
             //top: 104px;
@@ -99,9 +131,9 @@
     
             .individual-doctor-posts {
                 position: relative;
-                top: -30px;
-                left: -30px;
-                width: 55vw;
+                // top: -30px;
+                // left: -30px;
+                // width: 55vw;
             }
     
         }
@@ -132,23 +164,13 @@
         flex-direction: column;
 
         .individual-doctor-left-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0 50px;
-            width: 100%;
-            margin: auto;
-            position: relative;
-            
-            left: 0;
         }
         .individual-doctor-right-container {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             padding: 0 10px;
-            gap: 40px;
+            // gap: 40px;
             width: 100%;
             
             position: relative;
@@ -224,13 +246,13 @@
             .individual-doctor-posts {
                 position: relative;
                 //margin-top: -20px;
-                left: 1vh;
-                right: 1vh;
+                // left: 1vh;
+                // right: 1vh;
                 // display: flex;
                 // flex-direction: row;
                 // justify-content: center;
                 // align-items: center;
-                width: 100%;
+                // width: 100%;
             }
         }
     }
