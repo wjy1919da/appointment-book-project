@@ -8,6 +8,7 @@ import useDoctorPostQueryStore from '../store';
 
 //const endpoint = 'https://api-dev.charm-life.com/post/posts';
 
+// doctor post grid (community posts section)
 export function useApiRequestPostFilter() {
   const token = localStorage.getItem('token');
   const apiClient = new APIClient('/post/filter', token);
@@ -62,7 +63,7 @@ export function useGetDoctorPost() {
     }
   };
 
-  return useInfiniteQuery(['doctorPost', postQuery], fetchPost, {
+  return useInfiniteQuery(['doctorPost', doctorQuery.memberId], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {
