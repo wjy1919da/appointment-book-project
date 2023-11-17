@@ -151,73 +151,73 @@ const SubInstrument = () => {
     const recommendationGridRef = useRef(null);
     const footerRef = useRef(null);
  
-    const handleScroll = () => {
-        const slideElement = document.getElementById("slide");
-        const recommendationElement = document.getElementById("recommendation");
-        const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
-        if(!isMobile){
-            if (window.scrollY >= 280) {
-                if (slideElement) {
-                    slideElement.style.top = '60px';
-                    slideElement.style.position = 'fixed';
-                }
-            } else {
-                if (slideElement) {
-                    slideElement.style.top = '300px';
-                    slideElement.style.position = 'absolute';
-                }
-            }
+    // const handleScroll = () => {
+    //     const slideElement = document.getElementById("slide");
+    //     const recommendationElement = document.getElementById("recommendation");
+    //     const footerTop = footerRef.current ? footerRef.current.getBoundingClientRect().top : 0;
+    //     if(!isMobile){
+    //         if (window.scrollY >= 280) {
+    //             if (slideElement) {
+    //                 slideElement.style.top = '60px';
+    //                 slideElement.style.position = 'fixed';
+    //             }
+    //         } else {
+    //             if (slideElement) {
+    //                 slideElement.style.top = '300px';
+    //                 slideElement.style.position = 'absolute';
+    //             }
+    //         }
         
-            if (window.scrollY >= 350) {
-                if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
-                    recommendationElement.style.top = '270px';
-                    recommendationElement.style.position = 'fixed';
-                    recommendationElement.style.display = 'block';  // 确保元素是可见的
-                } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
-                    if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
-                        recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
-                    } else {
-                        recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
-                        recommendationElement.style.position = 'absolute';
-                        recommendationElement.style.display = 'block';  // 确保元素是可见的
-                    }
-                }
-            } else {
-                if (recommendationElement) {
-                    recommendationElement.style.top = '510px';
-                    recommendationElement.style.position = 'absolute';
-                    //recommendationElement.style.display = 'block';  // 确保元素是可见的
-                }
-            }
-            checkWhichSectionInView();
-        }
-    };
+    //         if (window.scrollY >= 350) {
+    //             if (recommendationElement && (footerTop - 15 > recommendationElement.getBoundingClientRect().bottom)) {
+    //                 recommendationElement.style.top = '270px';
+    //                 recommendationElement.style.position = 'fixed';
+    //                 recommendationElement.style.display = 'block';  // 确保元素是可见的
+    //             } else if (recommendationElement && footerTop - 15 <= recommendationElement.getBoundingClientRect().bottom) {
+    //                 if (footerTop - recommendationElement.getBoundingClientRect().top < 15) {
+    //                     recommendationElement.style.display = 'none';  // 如果间隔小于15px，隐藏元素
+    //                 } else {
+    //                     recommendationElement.style.top = `${footerTop - recommendationElement.offsetHeight - 15}px`;
+    //                     recommendationElement.style.position = 'absolute';
+    //                     recommendationElement.style.display = 'block';  // 确保元素是可见的
+    //                 }
+    //             }
+    //         } else {
+    //             if (recommendationElement) {
+    //                 recommendationElement.style.top = '510px';
+    //                 recommendationElement.style.position = 'absolute';
+    //                 //recommendationElement.style.display = 'block';  // 确保元素是可见的
+    //             }
+    //         }
+    //         checkWhichSectionInView();
+    //     }
+    // };
     
-    useEffect(() => {
-        const handleResize = () => {
-            window.removeEventListener('scroll', handleScroll);
-            handleScroll(); // 重新调整位置
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //         handleScroll(); // 重新调整位置
+    //         window.addEventListener('scroll', handleScroll, { passive: true });
+    //     }
     
-        const initialize = () => {
-            handleScroll();
-            window.addEventListener('resize', handleResize);
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }
+    //     const initialize = () => {
+    //         handleScroll();
+    //         window.addEventListener('resize', handleResize);
+    //         window.addEventListener('scroll', handleScroll, { passive: true });
+    //     }
     
-        // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
-        if (document.readyState === "complete") {
-            initialize();
-        } else {
-            window.onload = initialize;
-        }
+    //     // 如果页面已加载，则直接调用initialize。否则，等待页面加载完成后再调用。
+    //     if (document.readyState === "complete") {
+    //         initialize();
+    //     } else {
+    //         window.onload = initialize;
+    //     }
     
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('scroll', handleScroll);
-        }
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //         window.removeEventListener('scroll', handleScroll);
+    //     }
+    // }, []);
 
 
     if (error) {
@@ -313,45 +313,47 @@ const SubInstrument = () => {
        <div className='sub-instrument-right-container'>
         {/* Card of right container */}
         {isMediumOrLarge && cardInfo &&<div className='instrument-card-container'><ProcedureCard cardInfo={cardInfo}/></div>}
-        {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
-                <div className="introduction-icon"></div>
-                <div className="introduction-catalog">
-                    <a
-                        href="#description"
-                        className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
-                        //onClick={() => setSelectedSection("description")}
-                        >Introduction</a>
-                    <a
-                        href="#consider"
-                        className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
-                        // onClick={() => setSelectedSection("consider")}
-                        >Why consider {formatTitle(name)}</a>
+        <div className='instrument-introduction-slide-container'>
+            {isMediumOrLarge &&<div className="instrument-introduction-slide" id='slide' >
+                    <div className="introduction-icon"></div>
+                    <div className="introduction-catalog">
+                        <a
+                            href="#description"
+                            className={selectedSection === "description" ? 'introduction-section active ' : 'introduction-section'}
+                            //onClick={() => setSelectedSection("description")}
+                            >Introduction</a>
+                        <a
+                            href="#consider"
+                            className={selectedSection === "consider" ? 'introduction-section active' : 'introduction-section'}
+                            // onClick={() => setSelectedSection("consider")}
+                            >Why consider {formatTitle(name)}</a>
 
-                    {optionsContent &&
-                    <a
-                        href="#options"
-                        className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
+                        {optionsContent &&
+                        <a
+                            href="#options"
+                            className={selectedSection === "options" ? 'introduction-section active'  : 'introduction-section'}
 
-                        //onClick={() => setSelectedSection("options")}
-                        >Procedure options</a>}
+                            //onClick={() => setSelectedSection("options")}
+                            >Procedure options</a>}
 
-                    {beforeAndAfterImage &&
-                    <a
-                        href="#beforeAndAfter"
-                        className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
-                        //onClick={() => setSelectedSection("beforeAndAfter")}
-                        >Before and After</a>} 
-                    <a
-                        href="#faq"
-                        className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
-                        //onClick={() => setSelectedSection("faq")}
-                        >FAQ</a>
-                </div>  
-            </div>}
-            
-            {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
-                <RecommendationGrid isMobile={false} height={'250px'} />
-            </div>}
+                        {beforeAndAfterImage &&
+                        <a
+                            href="#beforeAndAfter"
+                            className={selectedSection === "beforeAndAfter" ? 'introduction-section active' : 'introduction-section'}
+                            //onClick={() => setSelectedSection("beforeAndAfter")}
+                            >Before and After</a>} 
+                        <a
+                            href="#faq"
+                            className={selectedSection === "faq" ? 'introduction-section active' : 'introduction-section'}
+                            //onClick={() => setSelectedSection("faq")}
+                            >FAQ</a>
+                    </div>  
+                </div>}
+                
+                {isMediumOrLarge && <div className='instrument-recommendation-container' id='recommendation'>
+                    <RecommendationGrid isMobile={false} height={'250px'} />
+                </div>}
+            </div>
        </div>
    </div>
    </div>
