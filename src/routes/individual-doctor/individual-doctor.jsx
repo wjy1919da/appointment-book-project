@@ -33,8 +33,46 @@ const IndividualDoctor = () => {
   }
   if (error) {
     return (
-      <div>
-        <ErrorMsg />
+      <div className='container'>
+        <div className='individual-doctor-container'>
+          <div className='individual-doctor-left-container'>
+            {data && (
+              <DoctorProfile
+                nickname={data.nickname}
+                projects={data.name}
+                mechName={data.mechName}
+                address={data.address}
+              />
+            )}
+          </div>
+          <div className='individual-doctor-right-container'>
+            <div className='individual-doctor-tabs'>
+              {tabs.map((item, index) => (
+                <div
+                  key={index}
+                  className={`individual-doctor-tab ${
+                    activeTab === index ? 'active' : ''
+                  }`}
+                  onClick={() => selectTab(index)}
+                >
+                  {item}
+                  <div className='individual-doctor-tab-underline'></div>
+                </div>
+              ))}
+            </div>
+            {activeTab === 0 && (
+              <div className='individual-doctor-right-about'>
+                <DoctorAbout />
+              </div>
+            )}
+            {activeTab === 1 && (
+              <div className='individual-doctor-posts'>
+                <DoctorPostGrid isAbout={true} />
+              </div>
+            )}
+            {activeTab === 2 && <DoctorReviewGrid />}
+          </div>
+        </div>
       </div>
     );
   }
