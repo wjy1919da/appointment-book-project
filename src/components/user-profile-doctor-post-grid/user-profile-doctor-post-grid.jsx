@@ -30,7 +30,7 @@ const UserProfileDoctorPostGrid = ({ isAbout }) => {
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   // const setUserID = usePostQueryStore((state) => state.setUserID);
-  const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
+  // const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
@@ -73,7 +73,7 @@ const UserProfileDoctorPostGrid = ({ isAbout }) => {
 
   return (
     <div className='doctor-post-grid-inner-container'>
-      {data?.data && (
+      {data && (
         <InfiniteScroll
           dataLength={flatData.length}
           next={fetchNextPage}
