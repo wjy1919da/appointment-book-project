@@ -7,6 +7,7 @@ import InstrumentGrid from '../../components/instrument-grid/instrument-grid.com
 import InstrumentDoctor from '../../assets/doctor/featureDoctor1.png'
 import './instrument.styles.scss';
 import instrumentJSONData from './instrument-text-reduced.json';  // revert back to other json file when we add other backend instrument data!
+import MainPageIntro from '../../components/main-page-intro/main-page-intro.component';
 
 const Instrument = () => {
     // useLayoutEffect(() => {
@@ -24,7 +25,7 @@ const Instrument = () => {
                     'Mobile Component here!'
                 ) : 
                 (   <>
-                        <div className='instrument-top-container'>
+                        {/* <div className='instrument-top-container'>
                             <div className='instrument-title-container'>
                                 <h2 className='instrument-text instrument-page-title'>Discover our most up-to-date instruments</h2>
                             </div>
@@ -38,7 +39,10 @@ const Instrument = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        <MainPageIntro 
+                            title="Discover our most up-to-date instruments"
+                            description="CharmLife helps you discover our instruments." />
                         <div className='instrument-body-container'>
                             <div className='instrument-body-title-container'>
                                 <h2 className='instrument-text instrument-body-title'>Our Instruments</h2>

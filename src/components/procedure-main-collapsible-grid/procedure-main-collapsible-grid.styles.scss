@@ -1,0 +1,67 @@
+.collapse-button-container {
+    width: 100%;
+    cursor: pointer;
+}
+.procedure-main-icons-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* This will create 5 columns with equal width */
+    justify-content: center; /* Center the items horizontally */
+    align-items: start; /* Align the items to the start vertically */
+    gap: 40px; /* Space between grid items */
+    padding: 5px 10px;
+
+    /* max-height: none; This property is not needed for horizontal alignment */
+}
+.procedure-main-icons-container collapsed {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* This will create 5 columns with equal width */
+    justify-content: center; /* Center the items horizontally */
+    align-items: start; /* Align the items to the start vertically */
+    gap: 50px; /* Space between grid items */
+    padding: 5px 10px;
+    height: 100px;
+    overflow: hidden;
+    display: hidden;
+
+    /* max-height: none; This property is not needed for horizontal alignment */
+}
+.procedure-main-icons-container.expanded {
+    max-height: none; /* 取消最大高度限制，显示所有内容 */
+    
+}
+
+.procedure-main-icon-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    /* width: 120px; This property is not needed as grid-template-columns is setting the width */
+}
+
+.procedure-main-icon-pic {
+    border-radius: 100%;
+    /* flex: none; These flex properties are not needed */
+    /* order: 0; */
+    /* align-self: stretch; */
+    /* flex-grow: 0; */
+    box-shadow: 0px 9px 12px 0px rgba(226, 227, 231, 0.25), 0px 0px 30px 0px rgba(255, 164, 163, 0.10);
+    // width: auto; /* Set width to auto so that the image scales within the container */
+    // max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto; /* Maintain aspect ratio */
+    width: 150px;
+}
+
+.procedure-main-title-container {
+    text-align: center; /* Ensure the title is centered */
+    width: auto; /* Set width to auto to fill the width of the .procedure-main-icon-section */
+}
+.procedure-main-title {
+    color:  #352C29;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}  

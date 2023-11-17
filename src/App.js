@@ -39,6 +39,8 @@ import AccountNotFoundPage from './components/account-setting/not-found';
 import DoctorSignUpProcess from './components/doctor-signUp-process/doctor-signUp-process';
 import ScrollToTop from './routes/ScrollToTop.js';
 import Footer from './components/footer/footer.component.jsx';
+import ProcedureMainPage from './routes/procedure/procedure-main-page.component.jsx';
+
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -78,6 +80,7 @@ const App = () => {
               path='/procedureMobile'
               element={isMobile ? <DoctorProcudreMobile /> : <Download />}
             />
+            <Route path='procedure' element = {<ProcedureMainPage/>}/>
             <Route path='doctor' element={<Doctor />} />
             <Route path='userAppointment' element={<UserAppointmentMain />} />
             <Route path='instrument' element={<Instrument />} />

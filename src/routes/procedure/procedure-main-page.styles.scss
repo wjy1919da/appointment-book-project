@@ -1,0 +1,29 @@
+.procedure-main-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 100px; /* 左右内边距 100px，上下 0 */
+}
+
+.procedure-main-title-container {
+    display: flex;
+    justify-content: space-between; /* 使用 space-between 使子元素分布在两端 */
+    align-items: center; /* 垂直居中 */
+    flex-direction: row;
+    //width: 100%; /* 容器宽度受限于父元素的 padding */
+    margin-bottom: 24px;
+    gap: 24px;
+    //margin-left: 24px;
+}
+
+
+.procedure-main-header-title {
+    color: #352C29;
+    /* NEW TYPE/NEW sub heading */
+    font-family: Open Sans;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

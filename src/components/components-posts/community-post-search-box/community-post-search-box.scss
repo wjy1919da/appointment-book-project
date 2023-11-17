@@ -2,6 +2,7 @@
   display: flex;
   padding: 8px;
   border-bottom: 1px solid #352c29;
+  margin-left: auto;
 
   .community-post-search-box-input {
     background: transparent;
@@ -10,4 +11,11 @@
     padding: 0 6px;
     width: 230px;
   }
+}
+.search-dropdown-container{
+  //position: absolute;
+ 
+  position: absolute;
+  margin-top: 45px;
+  margin-left: -10px;
 }
