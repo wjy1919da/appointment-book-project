@@ -9,6 +9,7 @@ interface PostQuery {
   postBy?: Array<string>;
   tag: string;
 }
+
 interface postQueryStore {
   postQuery: PostQuery;
   setFilterType: (filterType: number) => void;

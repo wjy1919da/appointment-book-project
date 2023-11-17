@@ -29,7 +29,7 @@ export function useApiRequestPostFilter() {
     }
   };
 
-  return useInfiniteQuery(['posts', postQuery], fetchPost, {
+  return useInfiniteQuery(['filterPost', postQuery], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {
@@ -38,12 +38,12 @@ export function useApiRequestPostFilter() {
   });
 }
 
-// doctor post
+// user doctor post
 export function useGetDoctorPost() {
   const token = localStorage.getItem('token');
   const apiClient = new APIClient('/post/filter', token);
   const postQuery = usePostQueryStore((s) => s.postQuery);
-  const doctorQuery = useDoctorPostQueryStore((s) => s.postQuery);
+  const doctorQuery = useDoctorPostQueryStore((s) => s.doctorQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
     const requestData = {
@@ -51,7 +51,7 @@ export function useGetDoctorPost() {
       currentPage: pageParam,
       pageSize: postQuery.DoctorPageSize,
       postBy: ['doctor', 'user'],
-      memberIDs: doctorQuery.memberId,
+      memberIDs: [parseInt(doctorQuery.memberId)],
     };
 
     try {
