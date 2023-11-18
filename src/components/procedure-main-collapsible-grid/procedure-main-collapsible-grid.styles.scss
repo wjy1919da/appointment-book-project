@@ -1,6 +1,7 @@
 .collapse-button-container {
     width: 100%;
     cursor: pointer;
+    margin-left: -70px;
 }
 .procedure-main-icons-container {
     display: grid;
@@ -12,23 +13,13 @@
 
     /* max-height: none; This property is not needed for horizontal alignment */
 }
-.procedure-main-icons-container collapsed {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* This will create 5 columns with equal width */
-    justify-content: center; /* Center the items horizontally */
-    align-items: start; /* Align the items to the start vertically */
-    gap: 50px; /* Space between grid items */
-    padding: 5px 10px;
-    height: 100px;
-    overflow: hidden;
-    display: hidden;
+.procedure-main-icons-container.hidden {
+    display: none; /* Initially hide the second grid */
+}
+.procedure-main-icons-container.visible {
+    display: grid; /* Show the second grid when visible */
+}
 
-    /* max-height: none; This property is not needed for horizontal alignment */
-}
-.procedure-main-icons-container.expanded {
-    max-height: none; /* 取消最大高度限制，显示所有内容 */
-    
-}
 
 .procedure-main-icon-section {
     display: flex;

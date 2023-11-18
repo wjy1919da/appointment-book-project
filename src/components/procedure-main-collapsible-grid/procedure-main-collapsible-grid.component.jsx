@@ -6,14 +6,32 @@ const formatTitle = (title) => {
   title = title.replace(/_/g, ' ');
   return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); 
 }
+const formatTitleToFirstWord = (title) => {
+  return title.split(' ')[0]; // 分割字符串并返回第一个单词
+};
+
 const ProcedureMainCollapsibleGrid = ({procedures, title}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-
+  const showProcedures = procedures.slice(0, 5);
+  const remainingProcedures = procedures.slice(5);
+  const formattedTitle = formatTitleToFirstWord(title).charAt(0).toUpperCase() + formatTitleToFirstWord(title).slice(1).toLowerCase();
   const handleCollapseClick = () => {
     setIsCollapsed(!isCollapsed);
   };
-  let containerClass = isCollapsed ? 'collapsed' : 'expanded';
-  const procedureList = procedures.map((name) => 
+  let isRemaining = isCollapsed ? 'hidden' : 'visible';
+  const showProceduresList = showProcedures.map((name) => 
+    <Link 
+        className= "procedure-main-icon-section"
+        key={name}
+        to={`/procedure/${name}`}
+    >
+        <img src={require(`../../assets/procedure/${name}.svg`)} className= "procedure-main-icon-pic" alt={name} />
+        <div className='procedure-main-title-container'>
+          <div className = 'procedure-main-pic-title'>{formatTitle(name)}</div>
+        </div>
+    </Link>
+  );
+  const remainingProceduresList = remainingProcedures.map((name) =>
     <Link 
         className= "procedure-main-icon-section"
         key={name}
@@ -28,10 +46,13 @@ const ProcedureMainCollapsibleGrid = ({procedures, title}) => {
   return (
     <div>
         <div className='collapse-button-container' onClick={handleCollapseClick}>
-          <CollapseButton title={title} />
+          <CollapseButton title={formattedTitle} />
         </div>
-        <div className={`procedure-main-icons-container ${containerClass}`}>
-          {procedureList}
+        <div className= "procedure-main-icons-container">
+          {showProceduresList}
+        </div>
+        <div className={`procedure-main-icons-container ${isRemaining}`}>
+          {remainingProceduresList}
         </div>
     </div>
      

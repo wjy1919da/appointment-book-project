@@ -12,15 +12,14 @@ import './community-post-search-box.scss';
 // images
 import SearchIcon from '../../../assets/post/search_icon.svg';
 import useProcedureQueryStore from '../../../procedureStore';
+const toUrlParam = (text) => {
+  return text.toLowerCase().replace(/\s+/g, '_');
+};
 
+const toDisplayFormat = (param) => {
+  return param.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+};
 const PostSearchBox = ({ className, isProcedure }) => {
-  const [input, setInput] = useState('');
-  //const [showContainer, setShowContainer] = useState(false);
-  const navigate = useNavigate();
-  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
-  const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
-
-  const containerRef = useRef(null);
   // console.log('isProcedure', procedureQuery);
 
   // const closeContainer = (e) => {
@@ -29,42 +28,50 @@ const PostSearchBox = ({ className, isProcedure }) => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closeContainer);
-
-  //   return () => {
-  //     document.removeEventListener('click', closeContainer);
-  //   };
-  // }, []);
 
   // const handleTagChange = (input) => {
   //   usePostQueryStore.getState().setTag(input);
   // };
-
-  // const handleChangeInput = (e) => {
-  //   const newInput = e.target.value;
-  //   setInput(newInput);
-  //   handleTagChange(newInput);
-  // };
-
-  // const handleChangeInput = (e) => {
-  //   usePostQueryStore.getState().setTag(input);
-  //   // setTag(e.target.value);
-  // };
-  const handleOnClick = () => {
-      if (!procedureQuery.procedureSearchParam) {
-          alert('Error: input can not be empty!');
-      } else {
-          //setInternalProcedure(internalProcedure.replace(/ /g, '_'));
-          //let cleanProcedure = internalProcedure.replace(/ /g, '_');
-          navigate(`/procedure/${procedureQuery.procedureSearchParam}`);
-          // onHide();// Close the modal
-      }  
+  const navigate = useNavigate();
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
+  const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
+  const setProcedureSearchParam = useProcedureQueryStore((state) => state.setProcedureSearchParam);
+  const containerRef = useRef(null);
+  
+  const handleSearch = () => {
+    let searchParam = toUrlParam(procedureQuery.procedureSearchParam);
+    let historyParam = toDisplayFormat(procedureQuery.procedureSearchParam)
+    if (!searchParam) {
+      alert('Error: input can not be empty!');
+    } else {
+      const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+      if (!searchHistory.includes(historyParam)) {
+        searchHistory.push(historyParam);
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+      }
+      navigate(`/procedure/${searchParam}`);
+      setProcedureSearchParam("");
+    }  
   }
 
   const handleShowContainer = () => {
      setIsSearchContainerVisible(!isSearchContainerVisible);
   };
+  const handleInputChange = (e) => {
+    setProcedureSearchParam(e.target.value);
+    setIsSearchContainerVisible(true);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsSearchContainerVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [containerRef]);  
 
   return (
     <div
@@ -73,9 +80,9 @@ const PostSearchBox = ({ className, isProcedure }) => {
     >
       <input
         type='text'
-        value={procedureQuery.procedureSearchParam}
-        // onChange={handleChangeInput}
-        onClick = {handleShowContainer}
+        value={toDisplayFormat(procedureQuery.procedureSearchParam)}
+        onChange={handleInputChange}
+        onClick={handleShowContainer}
         className='community-post-search-box-input'
       />
       <button type='button'>
@@ -83,7 +90,7 @@ const PostSearchBox = ({ className, isProcedure }) => {
           src={SearchIcon}
           alt='Image-Search-Icon'
           className='community-post-search-box-icon'
-          onClick={handleShowContainer}
+          onClick={handleSearch}
         />
       </button>
       <div className='search-dropdown-container'>

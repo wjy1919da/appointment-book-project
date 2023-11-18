@@ -1,18 +1,14 @@
 .procedure-search-dropdown-container{
     z-index: 1;
     background: linear-gradient(to bottom, #352c29 40%, #FBFCFF 40%);
+    
     border: 1px solid #675D59;
     border-radius: 8px;
     box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.10);
     width: 350px;
-    height: 300px;
-    padding: 10px;
-}
-.procedure-search-dropdown-trendy {
-    display: flex;
-    flex-wrap: wrap; /* Allow the items to wrap to the next line */
-    height: 30%; /* Make sure the container has a defined height */
-    flex-direction: column;
+    height: 360px;
+    padding: 15px;
+    // gap: 10px;
 }
 .procedure-search-dropdown-title{
     font-family: Open Sans;
@@ -67,4 +63,28 @@
     flex-basis: 100%; /* Title takes full width */
     text-align: left; /* Align text to the left */
     padding-bottom: 10px; /* Add some space below the title */
+}
+.procedure-search-item-previous {
+    border-bottom: 1px solid #e2e3e7;
+    padding: 6px 0;
+    text-align: left;
+    //margin-top: 20px;
+}
+.procedure-search-dropdown-title-previous {
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: black;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    flex-basis: 100%; /* Title takes full width */
+    text-align: left; /* Align text to the left */
+    padding-bottom: 10px; /* Add some space below the title */
+}
+.procedure-search-dropdown-previous-container{
+    margin-top: 50px;
 }

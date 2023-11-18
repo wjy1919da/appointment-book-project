@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 100px; /* 左右内边距 100px，上下 0 */
+    padding: 0 60px; /* 左右内边距 100px，上下 0 */
+    gap: 52px;
 }
 
 .procedure-main-title-container {
@@ -26,4 +27,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+.procedure-main-collapse-container{
+    margin-bottom: 52px;
 }

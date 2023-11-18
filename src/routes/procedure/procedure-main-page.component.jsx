@@ -20,8 +20,10 @@ function groupByGroupName(data) {
 }
 const ProcedureMainPage = () => {
     const { data, isLoading, error } = useGetProcedureCategories();
+    /* Do not delete this */
     // const procedures = data ? groupByGroupName(data.data) : [];
     // console.log("procedure Main",procedures);
+    /* Test data */
     const procedures = [
         {
             "groupName": "SKIN PROCEDURES",
@@ -86,6 +88,20 @@ const ProcedureMainPage = () => {
         {
             "groupName": "BREAST PROCEDURES",
             "items": [
+                {
+                    "categoryName": "breast_augmentation",
+                    "description": null,
+                    "subcategories": null,
+                    "groupId": 1,
+                    "groupName": "BREAST PROCEDURES"
+                },
+                {
+                    "categoryName": "breast_augmentation",
+                    "description": null,
+                    "subcategories": null,
+                    "groupId": 1,
+                    "groupName": "BREAST PROCEDURES"
+                },
                 {
                     "categoryName": "breast_augmentation",
                     "description": null,
@@ -211,10 +227,7 @@ const ProcedureMainPage = () => {
       procedures: group.items.map(item => item.categoryName)
     })) : [];
   
-    // Log the structured data to see if it's correct
-    //console.log("procedure data",proceduresData);
-  
-    // Render the ProcedureMainCollapsibleGrid components
+   
     const procedureGrids = proceduresData.map(group => (
       <ProcedureMainCollapsibleGrid key={group.groupName} title={group.groupName} procedures={group.procedures} />
     ));

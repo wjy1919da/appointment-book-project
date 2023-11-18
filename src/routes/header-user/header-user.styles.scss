@@ -14,10 +14,14 @@
         margin-right: -20px;
     }
     .header-login-text {
-        margin-top: 8px;
-        margin-right: 40px;
-        font-family: "Open Sans";
+        color: #675D59;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 100%; /* 16px */
         width: 100%;
+        margin-top: 13px;
     }
     input[type="text"] {
         width: 100%;
