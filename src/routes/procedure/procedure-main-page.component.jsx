@@ -4,6 +4,7 @@ import MainPageIntro from '../../components/main-page-intro/main-page-intro.comp
 import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
 import ProcedureMainCollapsibleGrid from '../../components/procedure-main-collapsible-grid/procedure-main-collapsible-grid.component'
 import { useGetProcedureCategories } from '../../hooks/useGetProcedures';
+import useProcedureQueryStore from '../../procedureStore';
 function groupByGroupName(data) {
     const grouped = {};
     data.forEach(item => {
@@ -18,6 +19,9 @@ function groupByGroupName(data) {
         items: grouped[key]
     }));
 }
+const formatCategoryName = (name) => {
+    return name.toLowerCase().replace(/\s+/g, '_');
+};
 const ProcedureMainPage = () => {
     const { data, isLoading, error } = useGetProcedureCategories();
     /* Do not delete this */
@@ -221,12 +225,17 @@ const ProcedureMainPage = () => {
             ]
         }
     ]
+    const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
+    let formatSearchParam = formatCategoryName(procedureQuery.procedureSearchParam);
     // Convert the procedures data into the required format for ProcedureMainCollapsibleGrid
-    const proceduresData = procedures? procedures.map(group => ({
-      groupName: group.groupName,
-      procedures: group.items.map(item => item.categoryName)
-    })) : []; 
-    const procedureGrids = proceduresData.map(group => (
+    const filteredProcedures = procedures.map(group => ({
+        groupName: group.groupName,
+        procedures: group.items
+          .filter(item => formatCategoryName(item.categoryName).includes(formatSearchParam))
+          .map(item => item.categoryName)
+      })).filter(group => group.procedures.length > 0);
+
+    const procedureGrids = filteredProcedures.map(group => (
       <ProcedureMainCollapsibleGrid key={group.groupName} title={group.groupName} procedures={group.procedures} />
     ));
   
