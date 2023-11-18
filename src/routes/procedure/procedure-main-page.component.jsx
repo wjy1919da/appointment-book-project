@@ -5,6 +5,8 @@ import PostSearchBox from '../../components/components-posts/community-post-sear
 import ProcedureMainCollapsibleGrid from '../../components/procedure-main-collapsible-grid/procedure-main-collapsible-grid.component'
 import { useGetProcedureCategories } from '../../hooks/useGetProcedures';
 import useProcedureQueryStore from '../../procedureStore';
+import HomeSpinner from '../../components/home-spinner/home-spinner.component';
+import ErrorMsg from '../../components/error-msg/error-msg.component';
 function groupByGroupName(data) {
     const grouped = {};
     data.forEach(item => {
@@ -27,8 +29,21 @@ const ProcedureMainPage = () => {
     /* Do not delete this */
     // console.log("procedure Main",data);
     
-    const procedures = data.data ? groupByGroupName(data.data) : [];
- 
+    const procedures = data && data.data ? groupByGroupName(data.data) : [];
+    const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
+    let formatSearchParam = formatCategoryName(procedureQuery.procedureSearchParam);
+    // Convert the procedures data into the required format for ProcedureMainCollapsibleGrid
+   
+    if (isLoading) {
+        return <HomeSpinner/>;
+    }
+    if(error){
+        return (
+            <div>
+                <ErrorMsg/>
+            </div>
+        );
+    }
     
     // console.log("procedure Main data",procedures);
     /* Test data */
@@ -229,9 +244,6 @@ const ProcedureMainPage = () => {
     //         ]
     //     }
     // ]
-    const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
-    let formatSearchParam = formatCategoryName(procedureQuery.procedureSearchParam);
-    // Convert the procedures data into the required format for ProcedureMainCollapsibleGrid
     const filteredProcedures = procedures.map(group => ({
         groupName: group.groupName,
         procedures: group.items

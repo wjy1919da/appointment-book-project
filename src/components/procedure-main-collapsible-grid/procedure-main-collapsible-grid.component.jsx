@@ -19,7 +19,6 @@ const ProcedureMainCollapsibleGrid = ({procedures, title}) => {
     setIsCollapsed(!isCollapsed);
   };
   useEffect(() => {
-    // 重置 isCollapsed 为 true 当 procedures 改变
     setIsCollapsed(true);
   }, [procedures]);
   
