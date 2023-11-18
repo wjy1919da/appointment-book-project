@@ -41,7 +41,7 @@ const IndividualDoctor = () => {
         setActiveTab(index);
     }
     return (
-        <div className='individual-page-container'>
+        <div className='container'>
             <div className="individual-doctor-container">
                 <div className="individual-doctor-left-container">
                     {
@@ -68,7 +68,11 @@ const IndividualDoctor = () => {
                             ))
                         }
                     </div>
-                    {activeTab === 0 && <DoctorAbout/>}
+                    {activeTab === 0 && 
+                    <div className='individual-doctor-right-about'>
+                        <DoctorAbout/>
+                    </div>
+                    }
                     {activeTab === 1 && <div className="individual-doctor-posts">
                             <DoctorPostGrid isAbout={true}/> 
                     </div>}
