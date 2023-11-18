@@ -225,9 +225,7 @@ const ProcedureMainPage = () => {
     const proceduresData = procedures? procedures.map(group => ({
       groupName: group.groupName,
       procedures: group.items.map(item => item.categoryName)
-    })) : [];
-  
-   
+    })) : []; 
     const procedureGrids = proceduresData.map(group => (
       <ProcedureMainCollapsibleGrid key={group.groupName} title={group.groupName} procedures={group.procedures} />
     ));

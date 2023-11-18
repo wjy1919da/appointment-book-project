@@ -37,11 +37,15 @@ const ProcedureSearchDropDown = () => {
             </div>
             <div className='procedure-search-dropdown-previous-container'>
                 <div className='procedure-search-dropdown-title-previous'>Previous Search</div>
-                {filteredHistoryProcedures.map((history, index) => (
-                    <div key={index} className='procedure-search-item-previous' onClick={() => setProcedureSearchParam(history)}>
-                      {formatTitle(history)}
-                    </div>
-                ))}
+                {filteredHistoryProcedures && filteredHistoryProcedures.length > 0 ? (
+                    filteredHistoryProcedures.map((history, index) => (
+                        <div key={index} className='procedure-search-item-previous' onClick={() => setProcedureSearchParam(history)}>
+                            {formatTitle(history)}
+                        </div>
+                    ))
+                ) : (
+                    <div className='procedure-search-item-previous'>No search history</div>
+                )}
             </div>
         </div>
   )
