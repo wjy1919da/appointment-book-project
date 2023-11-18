@@ -1,11 +1,16 @@
 import "./user-profile-edit.styles.scss"
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const UserProfileEdit = () => {
     const [changePic, setChangePic] = useState(false);
     const [isTextClicked, setIsTextClicked] = useState([false, false, false, false, false, false]);
     const interests = ["Body", "Face", "Lorum", "Lorum", "Lorum", "Lorum"];
     const [underlinePosition, setUnderlinePosition] = useState({ left: 50, top: 106 });
+    const navigate = useNavigate();
+    const navigateToBasicProfile = () =>
+    {
+      navigate('/userProfile');
+    }
     const handleHover = (isHovered) => {
         setChangePic(isHovered);
     };
@@ -21,7 +26,9 @@ const UserProfileEdit = () => {
     return (
         <div className='user-profile-edit-container'>
             <div className='user-profile-edit-screen'>
-                <button class="button-to-userprofile"></button>
+                <button class="button-to-userprofile"
+                        onClick={navigateToBasicProfile}                
+                ></button>
                 <span className='edit-profile-text'>Edit Profile</span>
                 <button class="button-save-changes">
                     <span className='subtext-save-changes'>Save Changes</span>

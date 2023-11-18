@@ -3,6 +3,7 @@ import  PhoneImage from '../../../assets/home/iphone.svg'
 import HomeText from '../home-text/home-text.component';
 import HomeButton from '../../home-button/home-button.component';
 import './home-doctors.styles.scss';
+import userInfoQueryStore from '../../../userStore.ts';
 import arrowLeft from '../../../assets/home/appleLinkArrow.png'
 import videoURL from '../../../assets/home/vertical-video.mp4';
 import React, { useRef, useEffect, Fragment} from 'react';
@@ -10,6 +11,10 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 const HomeDoctors = () => {
     const videoRef = useRef(null);
+    const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+    const setAccountType = userInfoQueryStore((state) => state.setAccountType);
+    const switchPopupTab = userInfoQueryStore(state => state.switchPopupTab);
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
     const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
     // const videoUrl = "https://www.youtube.com/embed/AZprJCr5FE0";
     useEffect(() => {
@@ -66,8 +71,27 @@ const HomeDoctors = () => {
 
             </div>
             <div className='home-doctor-apple-link-signUp-area'>
-                  <Link className='signUp-link'>Sign up as a Doctor</Link>
-                  <Link className='signUp-link'>Sign up as a member</Link>
+                  <Link className='signUp-link'
+                        onClick={() => {
+                          //console.log('Doctor button clicked');  
+                          //setAccountType(0);
+                          let newType = userInfo.accountType === 2 ? null : 2;
+                          localStorage.setItem('accountType', newType);
+                          setAccountType(newType);
+                          togglePopup(true,'sendVerifyEmail');
+                      }}
+                  >Sign up as a Doctor</Link>
+                  <Link className='signUp-link'
+                        onClick={() => {
+                        // console.log('Member button clicked');  
+                          //setAccountType(0);
+                          let newType = userInfo.accountType === 1 ? null : 1;
+                          localStorage.setItem('accountType', newType);
+                          setAccountType(newType);
+                          togglePopup(true,'sendVerifyEmail');
+                        
+                      }}
+                  >Sign up as a member</Link>
             </div>
             {/* <div className='home-doctors-text'>
                     <HomeText 
