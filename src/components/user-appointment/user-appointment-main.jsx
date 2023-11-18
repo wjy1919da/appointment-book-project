@@ -27,8 +27,10 @@ const UserAppointmentMain = () => {
                 
             </div>
             <div className='user-appointment-previous-step-arrow' onClick={navigateToPreviousStep}>
-                <img src = {arrowLeft} style={{width:'20px', height:'20px'}}></img>
-                <span>My Appointment</span>   
+                <button className='user-app-go-back-arrow'>
+                    <img src = {arrowLeft} style={{width:'20px', height:'20px'}}></img>
+                    <span style={{color:'white'}}>My Appointment</span>  
+                </button> 
             </div>
             <div className='user-appointment-content-container'>
                 <UserAppoinmentSection1/>
