@@ -27,6 +27,10 @@ const UserProfileBasic = () => {
     togglePopup(true,'mainSection')
     navigate('/userAppointment');
   };
+  const navigateToEditProfile = () =>
+  {
+    navigate('/userProfileEdit');
+  }
   return (
     <div className='user-profile-basic-container'>
       <div className='user-profile-basic-avatar'>
@@ -48,7 +52,9 @@ const UserProfileBasic = () => {
           </div>
           <div className='wrapper'>
             <div className='user-profile-basic-edit-button'>
-              <HomeButton title='Edit Profile' width='176px' height='56px' />
+              <HomeButton title='Edit Profile' width='176px' height='56px' 
+                  onClick={navigateToEditProfile}
+              />
             </div>
             <div className='user-profile-basic-booking-button-container'>
               <button className='user-profile-basic-booking-button'
