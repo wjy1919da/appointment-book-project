@@ -25,206 +25,210 @@ const formatCategoryName = (name) => {
 const ProcedureMainPage = () => {
     const { data, isLoading, error } = useGetProcedureCategories();
     /* Do not delete this */
-    // const procedures = data ? groupByGroupName(data.data) : [];
-    // console.log("procedure Main",procedures);
+    // console.log("procedure Main",data);
+    
+    const procedures = data.data ? groupByGroupName(data.data) : [];
+ 
+    
+    // console.log("procedure Main data",procedures);
     /* Test data */
-    const procedures = [
-        {
-            "groupName": "SKIN PROCEDURES",
-            "items": [
-                {
-                    "categoryName": "botox_injections",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "chemical_peels",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "laser_hair_removal",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "chin_implants",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "neck_contouring",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },{
-                    "categoryName": "laser_hair_removal",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "chin_implants",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                },
-                {
-                    "categoryName": "neck_contouring",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 4,
-                    "groupName": "SKIN PROCEDURES"
-                }
-            ]
-        },
-        {
-            "groupName": "BREAST PROCEDURES",
-            "items": [
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 1,
-                    "groupName": "BREAST PROCEDURES"
-                }
-            ]
-        },
-        {
-            "groupName": "FACE PROCEDURES",
-            "items": [
-                {
-                    "categoryName": "fox_eyes",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 3,
-                    "groupName": "FACE PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 3,
-                    "groupName": "FACE PROCEDURES"
-                },
-                {
-                    "categoryName": "otoplasty",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 3,
-                    "groupName": "FACE PROCEDURES"
-                },
-                {
-                    "categoryName": "breast_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 3,
-                    "groupName": "FACE PROCEDURES"
-                },
-                {
-                    "categoryName": "otoplasty",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 3,
-                    "groupName": "FACE PROCEDURES"
-                }
-            ]
-        },
-        {
-            "groupName": "BODY PROCEDURES",
-            "items": [
-                {
-                    "categoryName": "lip_augmentation",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 2,
-                    "groupName": "BODY PROCEDURES"
-                },
-                {
-                    "categoryName": "teeth_whitening",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 2,
-                    "groupName": "BODY PROCEDURES"
-                },
-                {
-                    "categoryName": "tummy_tuck",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 2,
-                    "groupName": "BODY PROCEDURES"
-                },
-                {
-                    "categoryName": "teeth_whitening",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 2,
-                    "groupName": "BODY PROCEDURES"
-                },
-                {
-                    "categoryName": "tummy_tuck",
-                    "description": null,
-                    "subcategories": null,
-                    "groupId": 2,
-                    "groupName": "BODY PROCEDURES"
-                }
+    // const procedures = [
+    //     {
+    //         "groupName": "SKIN PROCEDURES",
+    //         "items": [
+    //             {
+    //                 "categoryName": "botox_injections",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "chemical_peels",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "laser_hair_removal",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "chin_implants",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "neck_contouring",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },{
+    //                 "categoryName": "laser_hair_removal",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "chin_implants",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "neck_contouring",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 4,
+    //                 "groupName": "SKIN PROCEDURES"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "groupName": "BREAST PROCEDURES",
+    //         "items": [
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 1,
+    //                 "groupName": "BREAST PROCEDURES"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "groupName": "FACE PROCEDURES",
+    //         "items": [
+    //             {
+    //                 "categoryName": "fox_eyes",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 3,
+    //                 "groupName": "FACE PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 3,
+    //                 "groupName": "FACE PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "otoplasty",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 3,
+    //                 "groupName": "FACE PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "breast_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 3,
+    //                 "groupName": "FACE PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "otoplasty",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 3,
+    //                 "groupName": "FACE PROCEDURES"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "groupName": "BODY PROCEDURES",
+    //         "items": [
+    //             {
+    //                 "categoryName": "lip_augmentation",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 2,
+    //                 "groupName": "BODY PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "teeth_whitening",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 2,
+    //                 "groupName": "BODY PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "tummy_tuck",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 2,
+    //                 "groupName": "BODY PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "teeth_whitening",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 2,
+    //                 "groupName": "BODY PROCEDURES"
+    //             },
+    //             {
+    //                 "categoryName": "tummy_tuck",
+    //                 "description": null,
+    //                 "subcategories": null,
+    //                 "groupId": 2,
+    //                 "groupName": "BODY PROCEDURES"
+    //             }
                 
-            ]
-        }
-    ]
+    //         ]
+    //     }
+    // ]
     const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
     let formatSearchParam = formatCategoryName(procedureQuery.procedureSearchParam);
     // Convert the procedures data into the required format for ProcedureMainCollapsibleGrid
@@ -249,9 +253,9 @@ const ProcedureMainPage = () => {
                   <div className='procedure-main-header-title'>Our Cosmetic Procedures</div>
                   <PostSearchBox isProcedure={true}/>
               </div>
-              <div className='procedure-main-collapse-container'>
+              {data?.data &&<div className='procedure-main-collapse-container'>
                   {procedureGrids}
-              </div>
+              </div>}
           </div>
       </div>
     );

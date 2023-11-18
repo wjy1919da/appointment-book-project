@@ -32,7 +32,7 @@ const HeaderUser = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   //console.log('userInfo in header', userInfo);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-
+  // let isUser = userInfo.accountType === "1";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
   const menuContainerRef = useRef();
@@ -93,14 +93,22 @@ const HeaderUser = () => {
                     Account Setting
                   </Link>
                 </MenuItem>
-                <MenuItem>
+                {localStorage.getItem('accountType') === "1" && <MenuItem>
                   <Link 
-                    to={userInfo.accountType === "2" ? "/doctorProfile" : "/userProfile"}
+                    to='/userProfile'
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     Your Profile
                   </Link>
-                </MenuItem>
+                </MenuItem>}
+                {localStorage.getItem('accountType') === "2" && <MenuItem>
+                  <Link 
+                    to='/doctorProfile'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Your Profile
+                  </Link>
+                </MenuItem>}
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>

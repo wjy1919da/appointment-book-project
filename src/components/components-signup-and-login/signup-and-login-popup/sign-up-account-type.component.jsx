@@ -15,8 +15,8 @@ const SignUpAccountType = () => {
     
     useEffect(() => {
         localStorage.removeItem('accountType');
-        const accountTypeFromLocalStorage = localStorage.getItem('accountType') || null;
-        setAccountType(accountTypeFromLocalStorage);
+        //const accountTypeFromLocalStorage = localStorage.getItem('accountType') || null;
+        setAccountType(null);
     }, []);
     return (
         <div className="signup-account-type-container">
@@ -31,8 +31,8 @@ const SignUpAccountType = () => {
                             //console.log('Doctor button clicked');  
                             //setAccountType(0);
                             let newType = userInfo.accountType === 2 ? null : 2;
-                            localStorage.setItem('accountType', newType);
                             setAccountType(newType);
+                            localStorage.setItem('accountType', newType);
                             setActiveButtonType(newType === 2 ? 'doctor' : null);
                         }}
                         isActive={activeButtonType === 'doctor'}

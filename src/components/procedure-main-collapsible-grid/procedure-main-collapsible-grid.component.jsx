@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './procedure-main-collapsible-grid.styles.scss';
 import CollapseButton from '../collapse-button/collapse-button.component';
 import {Link} from 'react-router-dom';
@@ -7,7 +7,7 @@ const formatTitle = (title) => {
   return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); 
 }
 const formatTitleToFirstWord = (title) => {
-  return title.split(' ')[0]; // 分割字符串并返回第一个单词
+  return title.split(' ')[0]; 
 };
 
 const ProcedureMainCollapsibleGrid = ({procedures, title}) => {
@@ -18,6 +18,11 @@ const ProcedureMainCollapsibleGrid = ({procedures, title}) => {
   const handleCollapseClick = () => {
     setIsCollapsed(!isCollapsed);
   };
+  useEffect(() => {
+    // 重置 isCollapsed 为 true 当 procedures 改变
+    setIsCollapsed(true);
+  }, [procedures]);
+  
   let isRemaining = isCollapsed ? 'hidden' : 'visible';
   const showProceduresList = showProcedures.map((name) => 
     <Link 

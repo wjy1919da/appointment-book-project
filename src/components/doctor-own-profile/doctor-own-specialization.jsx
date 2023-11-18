@@ -9,7 +9,7 @@ const DocotorOwnSpecialization = () => {
     const instrumentsGrid = instruments_names.map((name, index) => 
             <Box as="div" className='home-instrument' key={index}>
                 <Image 
-                    src={require(`../../assets/procedure/${name}.svg`)} 
+                    src={require(`../../assets/procedure/${name}.png`)} 
                     alt={name} 
                     className='home-instrument-pic' 
                     style={{width:'150px',height:'150px'}}
