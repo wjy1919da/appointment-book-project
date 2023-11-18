@@ -35,10 +35,8 @@ export function useGetPost() {
 
 // get posts
 export function useGetUserPostedPost() {
-  //console.log("DOI Call this hook?");
-  //const token ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/user_action/Myposts', token);
+
+  const apiClient = new APIClient('/user_action/Myposts');
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -46,14 +44,6 @@ export function useGetUserPostedPost() {
       currentPage: pageParam,
       pageSize: postQuery.pageSize,
     });
-
-     if (!token) {
-      alert('user not login');
-      return {};
-    }
-
-    // console.log(res);
-
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
@@ -72,18 +62,11 @@ export function useGetUserPostedPost() {
 }
 
 export function useGetUserLikededPost() {
-  // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOTciLCJleHAiOjE2OTYxMjE2MDcsImlhdCI6MTY5NjAzNTIwN30.W0w8HIyrtYUknJyeGC-ijTcEOZnQCtFbKPFmclO-s6I";
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/user_action/likedPosts', token);
+
+  const apiClient = new APIClient('/user_action/likedPosts');
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
-    if (!token) {
-      alert('user not login');
-      //return undefined;
-      return {};
-    }
-
     const res = await apiClient.post({
       currentPage: pageParam,
       pageSize: postQuery.pageSize,

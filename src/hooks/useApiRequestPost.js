@@ -3,8 +3,8 @@ import axios from 'axios';
 import APIClient from '../services/api-client';
 
 export function useApiRequestPost() {
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/post/posts', token);
+  //const token = localStorage.getItem('token');
+  const apiClient = new APIClient('/post/posts');
   const fetchUserData = async ({
     address,
     brief,
@@ -18,10 +18,6 @@ export function useApiRequestPost() {
     tags,
     title,
   }) => {
-    if (!token) {
-      alert('Error.');
-      return;
-    }
     console.log(brief, title);
     const res = await apiClient.post(
       {
