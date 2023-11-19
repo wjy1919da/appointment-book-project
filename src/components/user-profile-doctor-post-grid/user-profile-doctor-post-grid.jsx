@@ -22,15 +22,13 @@ import Arrow1 from '../../assets/post/arrow1_grid.png';
 // scss
 import './user-profile-doctor-post-grid.scss';
 
-const UserProfileDoctorPostGrid = ({ isAbout }) => {
+const UserProfileDoctorPostGrid = ({ isAbout, memberId }) => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useGetDoctorPost();
 
   console.log(data);
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
-  // const setUserID = usePostQueryStore((state) => state.setUserID);
-  // const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
@@ -49,8 +47,6 @@ const UserProfileDoctorPostGrid = ({ isAbout }) => {
 
   const setPostID = (ID, avatar, username) => {
     setIsModelOpen(true);
-    // setUserID(ID);
-    // setMemberId(ID);
     setUserAvatar(avatar);
     setUserName(username);
   };
@@ -97,20 +93,23 @@ const UserProfileDoctorPostGrid = ({ isAbout }) => {
           postAvatar={userAvatar}
         />
       )}
-      <div className='down-load-more-container'>
-        {!isMobile && (
-          <img src={Arrow} alt='arrow' className='arrow-containter' />
-        )}
-        {isMobile && (
-          <img src={Arrow1} alt='arrow1' className='arrow1-containter' />
-        )}
-        <div className='download-text'>Join Charm community to view more</div>
-        <Link to='/download'>
-          <button className='download-button'>
-            <div className='download-button-text'>DownLoad APP</div>
-          </button>
-        </Link>
-      </div>
+
+      {flatData.length > 0 && flatData[0].coverImg && (
+        <div className='down-load-more-container'>
+          {!isMobile && (
+            <img src={Arrow} alt='arrow' className='arrow-containter' />
+          )}
+          {isMobile && (
+            <img src={Arrow1} alt='arrow1' className='arrow1-containter' />
+          )}
+          <div className='download-text'>Join Charm community to view more</div>
+          <Link to='/download'>
+            <button className='download-button'>
+              <div className='download-button-text'>DownLoad APP</div>
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
