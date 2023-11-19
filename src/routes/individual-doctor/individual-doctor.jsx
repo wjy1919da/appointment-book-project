@@ -84,7 +84,7 @@ const IndividualDoctor = () => {
           {activeTab === 0 && <DoctorAbout />}
           {activeTab === 1 && (
             <div className='individual-doctor-posts'>
-              <UserProfileDoctorPostGrid isAbout={true} />
+              <UserProfileDoctorPostGrid />
             </div>
           )}
           {activeTab === 2 && <DoctorReviewGrid />}
