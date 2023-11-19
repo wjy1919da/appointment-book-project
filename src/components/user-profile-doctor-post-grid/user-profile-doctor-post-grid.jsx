@@ -22,7 +22,7 @@ import Arrow1 from '../../assets/post/arrow1_grid.png';
 // scss
 import './user-profile-doctor-post-grid.scss';
 
-const UserProfileDoctorPostGrid = ({ isAbout, memberId }) => {
+const UserProfileDoctorPostGrid = () => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useGetDoctorPost();
 
@@ -34,14 +34,17 @@ const UserProfileDoctorPostGrid = ({ isAbout, memberId }) => {
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
-  const breakPoint = isAbout
-    ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
-    : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
-  const isMobileOrAbout = isMobile || isAbout;
 
-  useEffect(() => {
-    setGutterWidth(isMobileOrAbout ? '0px' : '10px');
-  }, [isMobile]);
+  // const breakPoint = isAbout
+  //   ? { default: 3, 2500: 6, 2047: 5, 1700: 4, 1024: 3, 600: 2 }
+  //   : { default: 5, 2500: 8, 2047: 7, 1700: 6, 1024: 5, 767: 3, 430: 2 };
+
+  // const isMobileOrAbout = isMobile || isAbout;
+
+  // useEffect(() => {
+  //   setGutterWidth(isMobileOrAbout ? '0px' : '10px');
+  // }, [isMobile]);
+
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
 
@@ -77,7 +80,7 @@ const UserProfileDoctorPostGrid = ({ isAbout, memberId }) => {
           scrollThreshold={0.8}
         >
           <ResponsiveMasonry
-            columnsCountBreakPoints={breakPoint}
+            // columnsCountBreakPoints={breakPoint}
             gutter={gutterwidth}
           >
             <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
@@ -88,7 +91,7 @@ const UserProfileDoctorPostGrid = ({ isAbout, memberId }) => {
         <PostDetail
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
-          isMobile={isMobile}
+          // isMobile={isMobile}
           postUserName={userName}
           postAvatar={userAvatar}
         />
