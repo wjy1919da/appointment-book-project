@@ -44,7 +44,7 @@ const UserProfileDoctorPostGrid = () => {
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
 
-  const setPostID = (ID, avatar, username) => {
+  const setPostID = (avatar, username) => {
     setIsModelOpen(true);
     setUserAvatar(avatar);
     setUserName(username);
