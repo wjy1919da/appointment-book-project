@@ -1,0 +1,90 @@
+.procedure-search-dropdown-container{
+    z-index: 1;
+    background: linear-gradient(to bottom, #352c29 40%, #FBFCFF 40%);
+    
+    border: 1px solid #675D59;
+    border-radius: 8px;
+    box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.10);
+    width: 350px;
+    height: 360px;
+    padding: 15px;
+    // gap: 10px;
+}
+.procedure-search-dropdown-title{
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    flex-basis: 100%; /* Title takes full width */
+    text-align: left; /* Align text to the left */
+    padding-bottom: 10px; /* Add some space below the title */
+}
+.procedure-search-dropdown-trendy-items {
+    display: flex; 
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: flex-start; /* Align items to the start of the container */
+}
+.procedure-search-dropdown-trendy .procedure-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% - 10px); /* Adjust the width to account for the margin */
+    height: calc(50% - 10px); /* Adjust the height to account for the margin */
+    margin: 5px; /* Add a margin for spacing */
+    box-sizing: border-box;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.procedure-search-dropdown-title-previous{
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: black;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    flex-basis: 100%; /* Title takes full width */
+    text-align: left; /* Align text to the left */
+    padding-bottom: 10px; /* Add some space below the title */
+}
+.procedure-search-item-previous {
+    border-bottom: 1px solid #e2e3e7;
+    padding: 6px 0;
+    text-align: left;
+    //margin-top: 20px;
+}
+.procedure-search-dropdown-title-previous {
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: black;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    flex-basis: 100%; /* Title takes full width */
+    text-align: left; /* Align text to the left */
+    padding-bottom: 10px; /* Add some space below the title */
+}
+.procedure-search-dropdown-previous-container{
+    margin-top: 50px;
+}

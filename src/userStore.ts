@@ -108,7 +108,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
         }));
     },
     togglePopup: (open: boolean, initialState?: 'gender' | 'interest' | 'birthday' | 'success' | 'verifyEmail' | 'login'| 'sendVerifyEmail'| 'phoneNumberLogin'| 'doctorProfile' |'doctorFinish'|'doctorSuccess') => {
-        console.log("togglePopup", open, initialState);
+        //console.log("togglePopup", open, initialState);
         if (open) {
             set((store) => ({
                 userInfo: { ...store.userInfo, popupState: initialState || 'gender' }

@@ -10,8 +10,8 @@ import useDoctorPostQueryStore from '../store';
 
 // doctor post grid (community posts section)
 export function useApiRequestPostFilter() {
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/post/filter', token);
+  //const token = localStorage.getItem('token');
+  const apiClient = new APIClient('/post/filter');
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {

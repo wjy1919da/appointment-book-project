@@ -6,7 +6,6 @@ import APIClient from "../services/api-client";
 // Reviews
 export function useGetDoctorReviews() {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  //console.log("useGetDoctorReviewsDoctorQuery",doctorQuery)
   const clearnickName = doctorQuery.nickName.replace(":", "")
   const apiClient = new APIClient('/evaluate/evaluations:page');
   const fetchDoctorReviews = async ({ pageParam = 1 }) => {

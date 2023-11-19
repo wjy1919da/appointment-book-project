@@ -5,6 +5,7 @@ import Hashids from 'hashids';
 // components
 import DoctorSearchCard from '../doctor-search-card/doctor-search-card.component';
 import HomeSpinner from '../home-spinner/home-spinner.component';
+import CollapseButton from '../collapse-button/collapse-button.component';
 // import DoctorCard from '../doctor-card/doctor-card.component';
 // import StarRate from '../starRate/starRate';
 // import UserProfileReviewCard from '../user-profile-review-card/user-profile-review-card';
@@ -249,18 +250,9 @@ const UserProfileReview = () => {
         </div>
 
         <div className='section-container-user-profile'>
-          <span className='section-1'>
-            Face
-            <img src={RightArrow} alt='Image-Arrow' />
-          </span>
-          <span className='section-2'>
-            Lorum
-            <img src={RightArrow} alt='Image-Arrow' />
-          </span>
-          <span className='section-3'>
-            Lorum
-            <img src={RightArrow} alt='Image-Arrow' />
-          </span>
+          <CollapseButton title = "Face"/>
+          <CollapseButton title = "Breast"/>
+          <CollapseButton title = "Body"/>
         </div>
 
         {/* <div className='summary-title'>

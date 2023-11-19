@@ -72,9 +72,9 @@ const UserProfileBasic = () => {
         </div>
 
         <div className='user-profile-basic-info-text'>
-          <span className='user-profile-basic-description'>
-            {data?.data?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
-          </span>
+          {data?.data?.description &&<span className='user-profile-basic-description'>
+            data.data.description
+          </span>}
         </div>
         <div className='user-profile-basic-info-following-section'>
           <div className='user-profile-number-cate-combimation'>

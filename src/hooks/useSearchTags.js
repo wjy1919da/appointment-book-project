@@ -4,8 +4,7 @@ import APIClient from '../services/api-client.js';
 import useDebounce from './useDebounce.js';
 
 export function useSearchTags() {
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/post/fuzzySearchTags', token);
+  const apiClient = new APIClient('/post/fuzzySearchTags');
   const postQuery = usePostQueryStore((s) => s.postQuery);
   const debouncedSearchTerm = useDebounce(postQuery.tag, 300);
 

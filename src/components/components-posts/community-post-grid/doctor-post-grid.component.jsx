@@ -38,7 +38,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState('');
   const isMobileOrAbout = isMobile || isAbout;
-
+  console.log("doctor post grid", flatData)
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
@@ -70,7 +70,7 @@ const DoctorPostGrid = ({ isAbout }) => {
 
   return (
     <div className='doctor-post-grid-inner-container'>
-      {data && (
+      {flatData && (
         <InfiniteScroll
           dataLength={flatData.length}
           next={fetchNextPage}

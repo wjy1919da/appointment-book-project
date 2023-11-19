@@ -15,129 +15,12 @@ import HeaderUser from '../header-user/header-user.component';
 const Header = () => {
   const location = useLocation();
   const loginIcon = require('../../assets/home/login-user.png');
-  const [expanded, setExpanded] = useState(false);
-  const facialProcedures = [
-    'Facial Rejuvenation',
-    'Deep Plane Facelift',
-    'Eye Reshaping',
-    'Fox Eyes',
-    'Rhinoplasty',
-    'Lip Enhancement',
-    'Lip Augmentation',
-    'Otoplasty',
-    'Chin Implants',
-    'Neck Contouring',
-    'CO2 Laser Resurfacing',
-  ];
-  const breastProcedures = [
-    'Breast Augmentation',
-    'Breast Lift',
-    'Breast Reconstruction',
-    'En Bloc Capsulectomy',
-  ];
-  const bodyProcedures = [
-    'Liposuction',
-    'Butt Lift',
-    'Feminine Rejuvenation',
-    'Tummy Tuck',
-    'Arm Lift',
-  ];
   const userInfo = userInfoQueryStore((state) => state.userInfo);
-  //console.log('userInfo in header', userInfo);
-  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-  const facialDropDownMenuMobile = facialProcedures.map((procedure) => (
-    <NavDropdown.Item
-      className='nav-link'
-      as={Link}
-      to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')}
-      onClick={() => setExpanded(expanded ? false : 'expanded')}
-      key={procedure}
-    >
-      {procedure}
-      <span>
-        <img
-          className='dropdown-item-icon'
-          src={ArrowIcon}
-          alt='go to detail'
-        />
-      </span>
-    </NavDropdown.Item>
-  ));
-  const breastDropDownMenuMobile = breastProcedures.map((procedure) => (
-    <NavDropdown.Item
-      className='nav-link'
-      as={Link}
-      to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')}
-      onClick={() => setExpanded(expanded ? false : 'expanded')}
-      key={procedure}
-    >
-      {procedure}
-      <span>
-        <img
-          className='dropdown-item-icon'
-          src={ArrowIcon}
-          alt='go to detail'
-        />
-      </span>
-    </NavDropdown.Item>
-  ));
-  const bodyDropDownMenuMobile = bodyProcedures.map((procedure) => (
-    <NavDropdown.Item
-      className='nav-link'
-      as={Link}
-      to={'/procedure/' + procedure.toLowerCase().replaceAll(' ', '-')}
-      onClick={() => setExpanded(expanded ? false : 'expanded')}
-      key={procedure}
-    >
-      {procedure}
-      <span>
-        <img
-          className='dropdown-item-icon'
-          src={ArrowIcon}
-          alt='go to detail'
-        />
-      </span>
-    </NavDropdown.Item>
-  ));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-
-  const [loginClick, setLoginClick] = useState(false);
-  const [verifyEmailClick, setVerifyEmailClick] = useState(false);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isPopupOpen = userInfo.popupState !== 'closed';
 
-  const removeToken = userInfoQueryStore((state) => state.removeToken);
-  const [dropdown, setDropdown] = useState(false);
-  const handleLoginClick = () => setLoginClick(!loginClick);
-  const [activeTab, setActiveTab] = useState('');
-  const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
-
-  const handleLogOutClick = () => {
-    localStorage.removeItem('token');
-    removeToken();
-    // alert('Log out successfully!');
-  };
-  const MenuItems = [
-    {
-      title: 'Login',
-      path: 'sign-in',
-      cName: 'dropdown-link',
-    },
-    {
-      title: 'Doctor',
-      path: 'doctor',
-      cName: 'dropdown-link',
-    },
-    {
-      title: 'Post',
-      path: 'posts',
-      cName: 'dropdown-link',
-    },
-  ];
-  const onClick = () => {
-    setDropdown(!dropdown);
-  };
   return (
     <>
       {isMobile ? (
@@ -255,7 +138,8 @@ const Header = () => {
                   data-bs-toggle='dropdown disabled'
                   aria-expanded='false'
                   //onMouseOver={() => setIsModelOpen(true)}
-                  onClick={() => setIsModalOpen(true)}
+                  // onClick={() => setIsModalOpen(true)}
+                  to = '/procedure'
                   title='Procedure'
                 >
                   Procedure

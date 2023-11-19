@@ -1,16 +1,11 @@
 import userInfoQueryStore from '../userStore.ts';
-import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 import APIClient from '../services/api-client.js';
-import UserInfo from '../routes/user-info/user-info.component.jsx';
-
-
 
 export function useUserOptLogin() {
     const apiClient = new APIClient('/login/phone/validate-otp');
     const fetchUserOtpRegisterValidate = async (mobile,otp,userRole) => {
-        //console.log('useUserOtpRegisterValidate',mobile,otp,userRole);
         const res = await apiClient.post({
             mobile,
             otp,
@@ -91,12 +86,12 @@ export function useUserEmailRegisterValidate(token) {
     return useQuery(['userEmailRegisterValidate', token], (token)=>fetchUserEmailRegisterValidate(token));
 }
 export function useSetUserProfile(){
-    const apiClient = new APIClient('/user/set_user_profile', token);
-    const token = localStorage.getItem('token');
+    const apiClient = new APIClient('/user/set_user_profile');
+    //const token = localStorage.getItem('token');
     const fetchSetUserProfile = async (gender, interestArea, email,birthday,nickname) => {
-            if (!token) {
-                alert('user not login');
-            }
+            // if (!token) {
+            //     alert('user not login');
+            // }
             const res = await apiClient.post({
                 gender,
                 interestArea,
@@ -134,14 +129,9 @@ export function useDoctorLogin(){
     return useMutation((credentials) => fetchDoctorLogin(credentials.email, credentials.password, credentials.provider, credentials.userRole));
 }
 export function useGetUserInfo(){  
-    const token = localStorage.getItem('token');
-    const apiClient = new APIClient('/user/fetch_user_profile',token);
+    const apiClient = new APIClient('/user/fetch_user_profile');
     const userInfo = userInfoQueryStore(s => s.userInfo);
     const fetchGetUserInfo = async () => {
-        if (!token) {
-            // alert('user not login');
-            return null;
-        }
         const res = await apiClient.post();
         return res.data;
     };
