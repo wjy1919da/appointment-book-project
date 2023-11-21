@@ -1,0 +1,58 @@
+.account-setting-security-questions-container {
+  min-height: 100vh;
+
+  .account-setting-security-questions-right-container {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 50px;
+  }
+
+  .account-setting-security-questions-button {
+    margin-left: auto;
+  }
+
+  .account-setting-security-questions-form {
+    display: flex;
+    flex-direction: column;
+    background: var(--White, #fbfcff);
+    border-radius: 12px;
+    border: 2px solid var(--text-2-button, #675d59);
+    margin-top: 50px;
+    padding: 30px 36px;
+    // max-width: 800px;
+    // width: 100%;
+
+    .account-setting-security-questions-title {
+      margin-bottom: 10px;
+    }
+
+    .account-setting-security-questions-select {
+      background: #fbfcff;
+      border-radius: 6px;
+      border: 0.833px solid #675d59;
+      display: flex;
+      align-items: center;
+      margin: 16px 0;
+      padding-left: 10px;
+      height: 48px;
+    }
+
+    .account-setting-security-questions-input {
+      background: var(--White, #fbfcff);
+      border-radius: 6px;
+      border: 0.833px solid #675d59;
+      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+      padding: 13px 460px 13px 12px;
+      height: 48px;
+    }
+
+    .account-setting-security-questions-label {
+      padding: 12px 0;
+    }
+  }
+}
