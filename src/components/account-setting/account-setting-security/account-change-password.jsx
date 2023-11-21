@@ -3,6 +3,7 @@ import React from 'react';
 // components
 import PinkBackground from '../account-setting-background/account-setting-background';
 import Button from '../../components-posts/community-post-button/community-post-button';
+import AccountSettingSubMenu from '../account-setting-sub-menu/account-setting-sub-menu';
 
 // scss
 import './account-change-password.scss';
@@ -12,6 +13,7 @@ const ChangePassword = () => {
   return (
     <div className='account-setting-change-password-container'>
       <PinkBackground />
+      <AccountSettingSubMenu />
       <BackButton backButtonName='Account Setting' />
       <div className='account-setting-change-password-right-container'>
         <Button
