@@ -13,8 +13,11 @@ const BackButton = ({ backButtonName, onClick }) => {
         src={Arrow}
         alt='Icon-Image'
         className='account-setting-back-button-icon'
+        onClick={onClick}
       />
-      <button className='account-setting-back-button'>{backButtonName}</button>
+      <button className='account-setting-back-button' onClick={onClick}>
+        {backButtonName}
+      </button>
     </div>
   );
 };

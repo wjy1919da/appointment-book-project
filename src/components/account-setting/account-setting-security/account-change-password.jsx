@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // components
 import PinkBackground from '../account-setting-background/account-setting-background';
@@ -10,11 +11,17 @@ import './account-change-password.scss';
 import BackButton from '../account-setting-back-button/account-setting-back-button';
 
 const ChangePassword = () => {
+  const navigate = useNavigate();
+
+  const handleClickGoBack = () => {
+    navigate('/AccountSetup');
+  };
+
   return (
     <div className='account-setting-change-password-container'>
       <PinkBackground />
       <AccountSettingSubMenu />
-      <BackButton backButtonName='Account Setting' />
+      <BackButton backButtonName='Account Setting' onClick={handleClickGoBack} />
       <div className='account-setting-change-password-right-container'>
         <Button
           buttonName='Save Changes'
