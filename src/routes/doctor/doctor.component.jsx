@@ -4,6 +4,7 @@ import IntroDoctor from '../../components/components-doctor-search/doctor-search
 import DoctorSearchMultiInput from '../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component';
 import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-card.component';
 import BlankSearchCard from '../../components/doctor-search-card/blank-search-card.component';
+import ErrorMsg from '../../components/error-msg/error-msg.component';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { retrieveMultiInputResults } from '../../hooks/useGetMultiInputResults';
@@ -83,9 +84,7 @@ const Doctor = () => {
     
     if (error) {  // do we have a generic error page?
         return (
-            <div className='error-page'>
-                <h1>Error</h1>
-            </div>
+            <ErrorMsg />
         )
     }
     return (

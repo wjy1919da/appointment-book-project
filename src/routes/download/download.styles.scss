@@ -24,12 +24,21 @@
     
             .phone-pic {
                 //width: 350px;
-                width: 25vw;
+                width: 26vw;
                 position: relative;
+                z-index: 3;
                 top: 64px;
                 left: 80px;
                 border: none;
                 border-radius: 0;
+            }
+
+            .phone-screen {
+                position: absolute;
+                z-index: 2;
+                width: 22vw;
+                top: 165px;
+                left: 112px;
             }
         }
     
