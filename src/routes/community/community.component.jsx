@@ -74,6 +74,13 @@ const Community = () => {
               <PostDropDown
                 // options={dropdownOptionsByRole}
                 handleFilters={handleFilters}
+                menuLabel='Procedure'
+                wordAfterMenuLabel='All'
+                className='location-button'
+              />
+              <PostDropDown
+                // options={dropdownOptionsByRole}
+                handleFilters={handleFilters}
                 menuLabel='Location'
                 wordAfterMenuLabel='All'
                 className='location-button'
