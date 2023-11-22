@@ -65,7 +65,7 @@ const HeaderUser = () => {
   const menuDisclosure = useDisclosure();
 
   const { data, isLoading, isError, error } = useGetUserInfo();
-  console.log("userInfo in header", userInfo);
+  // console.log("userInfo in header", userInfo);
   useEffect(() => {
     if (data?.data) {
       console.log("data setting is called", data);
@@ -90,7 +90,7 @@ const HeaderUser = () => {
     <div className="header-login">
       {!userInfo.token && (
         <div
-          onClick={() => togglePopup(true, "accountType")}
+          onClick={() => togglePopup(true, "doctorVerification")}
           className="header-login-default"
         >
           <img

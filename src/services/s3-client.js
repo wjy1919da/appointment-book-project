@@ -9,6 +9,13 @@ const s3Client = new S3Client({
   logger: console,
 });
 const uploadToS3 = async (file) => {
+  const maxFileSize = 8 * 1024 * 1024; // 8MB
+  if (file.size > maxFileSize) {
+    return {
+      success: false,
+      message: "File size is too large. Max file size is 8MB.",
+    };
+  }
   const fileName = `${Date.now()}-${file.name}`;
   const upload = new Upload({
     client: s3Client,
@@ -17,8 +24,8 @@ const uploadToS3 = async (file) => {
       Key: fileName,
       Body: file,
     },
-    partSize: 8 * 1024 * 1024, // 设置每个部分大小为 1MB
-    queueSize: 4, // 同时上传的部分数量
+    partSize: 8 * 1024 * 1024,
+    queueSize: 4,
   });
 
   upload.on("httpUploadProgress", (progress) => {
@@ -32,12 +39,11 @@ const uploadToS3 = async (file) => {
   try {
     const data = await upload.done();
     if (data.$metadata.httpStatusCode === 200) {
-      console.log("upload success", data);
-      return data;
+      return { success: true, message: "Upload successful!" };
     }
+    return { success: false, message: "Upload failed. Please try again." };
   } catch (err) {
-    console.error("upload faild", err);
-    /* TODO: Error handling */
+    return { success: false, message: "Upload failed. Please try again." };
   }
 };
 // export default s3Client;

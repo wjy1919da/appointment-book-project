@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import CloseButton from "../../assets/doctor/doctor-verification-close-Icon.png";
 import UploadIcon from "../../assets/doctor/Upload.png";
 import { Button, Dropdown, Form } from "react-bootstrap";
-
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 import { uploadToS3 } from "../../services/s3-client";
 
 const DoctorVerification = () => {
   // console.log("process", process.env);
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
   const [uploadingFiles, setUploadingFiles] = useState([]);
@@ -29,14 +34,24 @@ const DoctorVerification = () => {
   const handleUploadClick = async () => {
     console.log(`uploading ${selectedFiles.length} files...`);
     const uploadPromises = selectedFiles.map((file) => uploadToS3(file));
-
     try {
       const uploadResults = await Promise.all(uploadPromises);
+      uploadResults.forEach((result) => {
+        if (result.success) {
+          setAlert({ show: true, type: "success", message: result.message });
+        } else {
+          setAlert({ show: true, type: "error", message: result.message });
+        }
+      });
       console.log("all the files uploaded successfully", uploadResults);
       setUploadingFiles(selectedFiles);
       setSelectedFiles([]);
     } catch (err) {
-      console.error("faild uploaded ", err);
+      setAlert({
+        show: true,
+        type: "error",
+        message: "Failed to upload files.",
+      });
     }
   };
   const handleRemoveFile = (fileName) => {
@@ -57,6 +72,15 @@ const DoctorVerification = () => {
   };
   return (
     <div className="doctor-verification-main-container">
+      {alert.show && (
+        <Alert status={alert.type}>
+          <AlertIcon />
+          <AlertTitle mr={2}>
+            {alert.type === "success" ? "Success!" : "Error!"}
+          </AlertTitle>
+          <AlertDescription>{alert.message}</AlertDescription>
+        </Alert>
+      )}
       <div className="doctor-verification-title">
         <span className="doctor-verification-text">Verification</span>
       </div>
