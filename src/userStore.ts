@@ -30,6 +30,10 @@ interface userInfo {
   password?: string;
   selectedInterests: Set<string> | null;
   profile?: string;
+  postCount?: number;
+  followerCount?: number;
+  followingCount?: number;
+  description?: string;
   // Used to control the register popup page and open/close
   popupState:
     | "closed"
@@ -61,7 +65,11 @@ interface userInfoQuery {
   setToken: (token: string) => void;
   setUserId: (userId: string) => void;
   removeToken: () => void;
-  setProfile: (profile: string) => void;
+  // setProfile: (profile: string) => void;
+  setPostCount: (postCount: number) => void;
+  setFollowerCount: (followerCount: number) => void;
+  setFollowingCount: (followingCount: number) => void;
+  setDescription: (description: string) => void;
   togglePopup: (
     open: boolean,
     initialState?:
@@ -105,7 +113,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     birthday: "",
     googleToken: "",
     selectedInterests: new Set<string>(),
-    profile: "",
+    // profile: "",
+    postCount: 0,
+    followerCount: 0,
+    followingCount: 0,
+    description: "",
     // Initial state is closed
     popupState: "closed",
   },
@@ -150,12 +162,27 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
       userInfo: { ...store.userInfo, birthday },
     }));
   },
-  setProfile: (profile: string) => {
+
+  setPostCount: (postCount: number) => {
     set((store) => ({
-      userInfo: { ...store.userInfo, profile },
+      userInfo: { ...store.userInfo, postCount },
     }));
   },
-
+  setFollowerCount: (followerCount: number) => {
+    set((store) => ({
+      userInfo: { ...store.userInfo, followerCount },
+    }));
+  },
+  setFollowingCount: (followingCount: number) => {
+    set((store) => ({
+      userInfo: { ...store.userInfo, followingCount },
+    }));
+  },
+  setDescription: (description: string) => {
+    set((store) => ({
+      userInfo: { ...store.userInfo, description },
+    }));
+  },
   togglePopup: (
     open: boolean,
     initialState?:

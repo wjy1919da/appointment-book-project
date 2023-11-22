@@ -189,10 +189,7 @@ export function useGetUserInfo() {
     const res = await apiClient.post();
     return res.data;
   };
-  return useQuery(
-    ["getUserInfo", userInfo.token, userInfo.profile],
-    fetchGetUserInfo
-  );
+  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo);
 }
 export function useGetDoctorInfo() {
   const userInfo = userInfoQueryStore((s) => s.userInfo);
@@ -203,8 +200,5 @@ export function useGetDoctorInfo() {
     return res.data;
   };
 
-  return useQuery(
-    ["getDoctorInfo", userInfo.token, userInfo.profile],
-    fetchGetDoctorInfo
-  );
+  return useQuery(["getDoctorInfo", userInfo.token], fetchGetDoctorInfo);
 }
