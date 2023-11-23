@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Dropdown } from 'react-bootstrap';
 
 // components
-import PostDropDownContents from '../../components-posts/community-post-dropdown-contents/community-post-dropdown-contents';
+import PostDropDownContents from '../community-post-dropdown-contents/community-post-dropdown-contents';
 
 // scss
 import './post-drop-down.styles.scss';
