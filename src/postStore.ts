@@ -8,7 +8,7 @@ interface PostQuery {
   trigger: number;
   postBy?: Array<string>;
   tag: string;
-  postSearchParam: string;
+  postSearchParam: Array<string>;
   tempSearchParam: string;
 }
 
@@ -20,7 +20,7 @@ interface postQueryStore {
   setPageSize: (pageSize: number) => void;
   setUserID: (userID: number) => void;
   setFilterCondition: (filterCondition: Array<string>) => void;
-  setPostSearchParam: (postSearchParam: string) => void;
+  setPostSearchParam: (postSearchParam: Array<string>) => void;
   setTempSearchParam: (tempSearchParam: string) => void;
   refresh: () => void;
 }
@@ -34,7 +34,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     postBy: ['doctor'],
     tag: '',
     trigger: 0,
-    postSearchParam: '',
+    postSearchParam: [],
     tempSearchParam: '',
   },
   setFilterType: (filterType) =>
