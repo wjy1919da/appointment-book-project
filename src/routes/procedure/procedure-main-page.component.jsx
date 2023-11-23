@@ -7,6 +7,7 @@ import { useGetProcedureCategories } from "../../hooks/useGetProcedures";
 import useProcedureQueryStore from "../../procedureStore";
 import HomeSpinner from "../../components/home-spinner/home-spinner.component";
 import ErrorMsg from "../../components/error-msg/error-msg.component";
+import { useEffect } from "react";
 function groupByGroupName(data) {
   const grouped = {};
   data.forEach((item) => {
@@ -30,9 +31,17 @@ const ProcedureMainPage = () => {
   const procedureQuery = useProcedureQueryStore(
     (state) => state.procedureQuery
   );
+  const setProcedureSearchParam = useProcedureQueryStore(
+    (s) => s.setProcedureSearchParam
+  );
   let formatSearchParam = formatCategoryName(
     procedureQuery.procedureSearchParam
   );
+  useEffect(() => {
+    return () => {
+      setProcedureSearchParam("");
+    };
+  }, [setProcedureSearchParam]);
   if (isLoading) {
     return <HomeSpinner />;
   }

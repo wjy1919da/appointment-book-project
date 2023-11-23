@@ -12,24 +12,24 @@ const formatTitle = (title) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 };
-const ProcedureSearchDropDown = ({ isProcedure }) => {
+const ProcedureSearchDropDown = () => {
   const procedureQuery = useProcedureQueryStore(
     (state) => state.procedureQuery
   );
   const setProcedureSearchParam = useProcedureQueryStore(
     (state) => state.setProcedureSearchParam
   );
-  const setTempSearchParam = useProcedureQueryStore(
-    (state) => state.setTempSearchParam
-  );
-
   const trendyProcedures = [
     'botox_injections',
     'breast_augmentation',
     'chemical_peels',
     'fox_eyes',
+    'lip_augmentation',
+    'liposuction',
+    'rhinoplasty',
+    'tummy_tuck',
+    'vaginal_rejuvenation',
   ];
-
   const historyProcedures = JSON.parse(localStorage.getItem('searchHistory'));
   const formattedInput = formatInputForFilter(
     procedureQuery.procedureSearchParam
@@ -37,21 +37,19 @@ const ProcedureSearchDropDown = ({ isProcedure }) => {
   const filteredHistoryProcedures = historyProcedures
     ?.filter((procedure) => procedure.toLowerCase().includes(formattedInput))
     .slice(0, 5);
-
+  const filteredTrendyProcedures = trendyProcedures
+    .filter((procedure) => procedure.toLowerCase().includes(formattedInput))
+    .slice(0, 6);
   return (
     <div className='procedure-search-dropdown-container'>
       <div className='procedure-search-dropdown-title'>Trendy</div>
       <div className='procedure-search-dropdown-trendy'>
         <div className='procedure-search-dropdown-trendy-items'>
-          {trendyProcedures.map((procedure, index) => (
+          {filteredTrendyProcedures.map((procedure, index) => (
             <div
               key={index}
               className='procedure-item'
-              onClick={() =>
-                isProcedure
-                  ? setProcedureSearchParam(procedure)
-                  : setTempSearchParam(procedure)
-              }
+              onClick={() => setProcedureSearchParam(procedure)}
             >
               {formatTitle(procedure)}
             </div>
@@ -67,11 +65,7 @@ const ProcedureSearchDropDown = ({ isProcedure }) => {
             <div
               key={index}
               className='procedure-search-item-previous'
-              onClick={() =>
-                isProcedure
-                  ? setProcedureSearchParam(history)
-                  : setTempSearchParam(history)
-              }
+              onClick={() => setProcedureSearchParam(history)}
             >
               {formatTitle(history)}
             </div>

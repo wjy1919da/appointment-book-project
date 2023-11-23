@@ -1,25 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
-import usePostQueryStore from '../../../postStore.ts';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import usePostQueryStore from "../../../postStore.ts";
+import { useNavigate } from "react-router-dom";
 
 // component
 import ProcedureSearchDropDown from '../../procedure-search-dropdown/procedure-search-dropdown.component';
 // import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
 
 // scss
-import './community-post-search-box.scss';
+import "./community-post-search-box.scss";
 
 // images
-import SearchIcon from '../../../assets/post/search_icon.svg';
-import useProcedureQueryStore from '../../../procedureStore';
+import SearchIcon from "../../../assets/post/search_icon.svg";
+import useProcedureQueryStore from "../../../procedureStore";
+
 const toUrlParam = (text) => {
-  return text.toLowerCase().replace(/\s+/g, '_');
+  return text.toLowerCase().replace(/\s+/g, "_");
 };
 
 const toDisplayFormat = (param) => {
   return param.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 };
-const PostSearchBox = ({ className }) => {
+
+// const PostSearchBox = ({ className }) => {
   // console.log('isProcedure', procedureQuery);
 
   // const closeContainer = (e) => {
@@ -32,30 +34,29 @@ const PostSearchBox = ({ className }) => {
   //   usePostQueryStore.getState().setTag(input);
   // };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const pathName = location.pathname;
-  const isProcedure = location.pathname.includes('/procedure');
-  const isPost = location.pathname.includes('/post');
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const pathName = location.pathname;
+  // const isProcedure = location.pathname.includes('/procedure');
+  // const isPost = location.pathname.includes('/post');
 
-  const [isSearchContainerVisible, setIsSearchContainerVisible] =
-    useState(false);
-  const procedureQuery = useProcedureQueryStore(
-    (state) => state.procedureQuery
-  );
-  const setProcedureSearchParam = useProcedureQueryStore(
-    (state) => state.setProcedureSearchParam
-  );
+//   return param.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+// };
+
+const PostSearchBox = ({ className, isProcedure }) => {
+  const navigate = useNavigate();
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
+  const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
+  const setProcedureSearchParam = useProcedureQueryStore((state) => state.setProcedureSearchParam);
   const containerRef = useRef(null);
 
   const handleSearch = () => {
     let searchParam = toUrlParam(procedureQuery.procedureSearchParam);
     let historyParam = toDisplayFormat(procedureQuery.procedureSearchParam);
     if (!searchParam) {
-      alert('Error: input can not be empty!');
+      alert('Error: input cannot be empty!');
     } else {
-      const searchHistory =
-        JSON.parse(localStorage.getItem('searchHistory')) || [];
+      const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
       if (!searchHistory.includes(historyParam)) {
         searchHistory.push(historyParam);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
@@ -76,10 +77,7 @@ const PostSearchBox = ({ className }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
         setIsSearchContainerVisible(false);
       }
     };
@@ -90,32 +88,25 @@ const PostSearchBox = ({ className }) => {
   }, [containerRef]);
 
   return (
-    <div
-      className={`community-post-search-box-container ${className}`}
-      ref={containerRef}
-    >
+    <div className={`community-post-search-box-container ${className}`} ref={containerRef}>
       <input
-        type='text'
+        type="text"
         value={toDisplayFormat(procedureQuery.procedureSearchParam)}
         onChange={handleInputChange}
         onClick={handleShowContainer}
-        className='community-post-search-box-input'
+        className="community-post-search-box-input"
       />
-      <button type='button'>
+      <button type="button">
         <img
           src={SearchIcon}
-          alt='Image-Search-Icon'
-          className='community-post-search-box-icon'
+          alt="Image-Search-Icon"
+          className="community-post-search-box-icon"
           onClick={handleSearch}
         />
       </button>
       <div className='search-dropdown-container'>
-        {isSearchContainerVisible && (isProcedure || isPost) && (
-          <ProcedureSearchDropDown />
-        )}
-        {/* {isSearchContainerVisible && isProcedure && <ProcedureSearchDropDown />} */}
+        {isSearchContainerVisible && isProcedure && <ProcedureSearchDropDown />}
       </div>
-      {/* {isSearchContainerVisible && !isProcedure && <PostSearchBoxDropDown />} */}
     </div>
   );
 };
