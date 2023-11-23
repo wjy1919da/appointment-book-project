@@ -57,6 +57,10 @@ const Community = () => {
     setFilterCondition(updatedFilter);
   };
 
+  const handleSearch = () => {
+    setPostSearchParam(tempSearchParam);
+  };
+
   return (
     <div>
       <div>
@@ -81,7 +85,7 @@ const Community = () => {
               <ResetAllButton />
             </div>
             <div className='post-search-box-position-container'>
-              <PostSearchBox />
+              <PostSearchBox onClick={handleSearch} />
             </div>
           </div>
           <DoctorPostGrid />

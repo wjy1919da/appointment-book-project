@@ -20,6 +20,7 @@ export function useApiRequestPostFilter() {
       currentPage: pageParam,
       pageSize: postQuery.pageSize,
       postBy: postQuery.postBy,
+      content: postQuery.postSearchParam,
     };
 
     try {
@@ -30,13 +31,17 @@ export function useApiRequestPostFilter() {
     }
   };
 
-  return useInfiniteQuery(['filterPost', postQuery], fetchPost, {
-    staleTime: 1 * 6 * 1000 * 60 * 3,
-    keepPreviousData: true,
-    getNextPageParam: (lastPage, allPages) => {
-      return undefined;
-    },
-  });
+  return useInfiniteQuery(
+    ['filterPost', postQuery.filterCondition, postQuery.postSearchParam],
+    fetchPost,
+    {
+      staleTime: 1 * 6 * 1000 * 60 * 3,
+      keepPreviousData: true,
+      getNextPageParam: (lastPage, allPages) => {
+        return undefined;
+      },
+    }
+  );
 }
 
 // user doctor post

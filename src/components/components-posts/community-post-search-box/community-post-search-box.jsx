@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import usePostQueryStore from '../../../postStore.ts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // component
-import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
 import ProcedureSearchDropDown from '../../procedure-search-dropdown/procedure-search-dropdown.component';
+// import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
 
 // scss
 import './community-post-search-box.scss';
@@ -17,9 +17,9 @@ const toUrlParam = (text) => {
 };
 
 const toDisplayFormat = (param) => {
-  return param.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  return param.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 };
-const PostSearchBox = ({ className, isProcedure }) => {
+const PostSearchBox = ({ className }) => {
   // console.log('isProcedure', procedureQuery);
 
   // const closeContainer = (e) => {
@@ -28,50 +28,66 @@ const PostSearchBox = ({ className, isProcedure }) => {
   //   }
   // };
 
-
   // const handleTagChange = (input) => {
   //   usePostQueryStore.getState().setTag(input);
   // };
+
   const navigate = useNavigate();
-  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
-  const procedureQuery = useProcedureQueryStore((state) => state.procedureQuery);
-  const setProcedureSearchParam = useProcedureQueryStore((state) => state.setProcedureSearchParam);
+  const location = useLocation();
+  const pathName = location.pathname;
+  const isProcedure = location.pathname.includes('/procedure');
+  const isPost = location.pathname.includes('/post');
+
+  const [isSearchContainerVisible, setIsSearchContainerVisible] =
+    useState(false);
+  const procedureQuery = useProcedureQueryStore(
+    (state) => state.procedureQuery
+  );
+  const setProcedureSearchParam = useProcedureQueryStore(
+    (state) => state.setProcedureSearchParam
+  );
   const containerRef = useRef(null);
-  
+
   const handleSearch = () => {
     let searchParam = toUrlParam(procedureQuery.procedureSearchParam);
-    let historyParam = toDisplayFormat(procedureQuery.procedureSearchParam)
+    let historyParam = toDisplayFormat(procedureQuery.procedureSearchParam);
     if (!searchParam) {
       alert('Error: input can not be empty!');
     } else {
-      const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+      const searchHistory =
+        JSON.parse(localStorage.getItem('searchHistory')) || [];
       if (!searchHistory.includes(historyParam)) {
         searchHistory.push(historyParam);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
       }
       navigate(`/procedure/${searchParam}`);
-      setProcedureSearchParam("");
-    }  
-  }
+      setProcedureSearchParam('');
+    }
+  };
 
   const handleShowContainer = () => {
-     setIsSearchContainerVisible(!isSearchContainerVisible);
+    setIsSearchContainerVisible(!isSearchContainerVisible);
   };
+
   const handleInputChange = (e) => {
     setProcedureSearchParam(e.target.value);
     setIsSearchContainerVisible(true);
   };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
         setIsSearchContainerVisible(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [containerRef]);  
+  }, [containerRef]);
 
   return (
     <div
@@ -94,7 +110,10 @@ const PostSearchBox = ({ className, isProcedure }) => {
         />
       </button>
       <div className='search-dropdown-container'>
-        {isSearchContainerVisible && isProcedure && <ProcedureSearchDropDown />}
+        {isSearchContainerVisible && (isProcedure || isPost) && (
+          <ProcedureSearchDropDown />
+        )}
+        {/* {isSearchContainerVisible && isProcedure && <ProcedureSearchDropDown />} */}
       </div>
       {/* {isSearchContainerVisible && !isProcedure && <PostSearchBoxDropDown />} */}
     </div>
