@@ -1,27 +1,31 @@
-import { useInfiniteQuery } from 'react-query';
-import APIClient from '../services/api-client';
+import { useInfiniteQuery } from "react-query";
+import APIClient from "../services/api-client";
 
 // stores
-import usePostQueryStore from '../postStore';
-import useDoctorPostQueryStore from '../store';
-// import axios from 'axios';
+import usePostQueryStore from "../postStore";
+import useDoctorPostQueryStore from "../store";
+const toDisplayFormat = (param) => {
+  return param.replace(/_/g, " ");
+};
 
-//const endpoint = 'https://api-dev.charm-life.com/post/posts';
-
-// doctor post grid (community posts section)
 export function useApiRequestPostFilter() {
   //const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/post/filter');
+  const apiClient = new APIClient("/post/filter");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
+    var content = [];
+    if (postQuery.postSearchParam) {
+      content.push(toDisplayFormat(postQuery.postSearchParam));
+    }
     const requestData = {
       categories: postQuery.filterCondition,
+      contents: content,
       currentPage: pageParam,
       pageSize: postQuery.pageSize,
+      memberIDs: [],
       postBy: postQuery.postBy,
     };
-
     try {
       const res = await apiClient.post(requestData);
       return { data: res.data.data, pageInfo: res.data.pageInfo };
@@ -30,19 +34,23 @@ export function useApiRequestPostFilter() {
     }
   };
 
-  return useInfiniteQuery(['filterPost', postQuery], fetchPost, {
-    staleTime: 1 * 6 * 1000 * 60 * 3,
-    keepPreviousData: true,
-    getNextPageParam: (lastPage, allPages) => {
-      return undefined;
-    },
-  });
+  return useInfiniteQuery(
+    ["filterPost", postQuery.filterCondition, postQuery.postSearchParam],
+    fetchPost,
+    {
+      // staleTime: 1 * 6 * 1000 * 60 * 3,
+      // keepPreviousData: true,
+      getNextPageParam: (lastPage, allPages) => {
+        return undefined;
+      },
+    }
+  );
 }
 
 // user doctor post
 export function useGetDoctorPost() {
-  const token = localStorage.getItem('token');
-  const apiClient = new APIClient('/post/filter', token);
+  const token = localStorage.getItem("token");
+  const apiClient = new APIClient("/post/filter", token);
   const postQuery = usePostQueryStore((s) => s.postQuery);
   const doctorQuery = useDoctorPostQueryStore((s) => s.doctorQuery);
 
@@ -51,7 +59,7 @@ export function useGetDoctorPost() {
       categories: [],
       currentPage: pageParam,
       pageSize: postQuery.DoctorPageSize,
-      postBy: ['doctor', 'user'],
+      postBy: ["doctor", "user"],
       memberIDs: [parseInt(doctorQuery.memberId)],
     };
 
@@ -63,7 +71,7 @@ export function useGetDoctorPost() {
     }
   };
 
-  return useInfiniteQuery(['doctorPost', doctorQuery.memberId], fetchPost, {
+  return useInfiniteQuery(["doctorPost", doctorQuery.memberId], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {

@@ -15,54 +15,21 @@ import useProcedureQueryStore from "../../../procedureStore";
 const toUrlParam = (text) => {
   return text.toLowerCase().replace(/\s+/g, "_");
 };
-const toDisplayFormat = (param) => {
-  return param.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
-};
 
-const PostSearchBox = ({ className, isProcedure, handleSearch }) => {
-  const navigate = useNavigate();
-  const [isSearchContainerVisible, setIsSearchContainerVisible] =
-    useState(false);
-  const procedureQuery = useProcedureQueryStore(
-    (state) => state.procedureQuery
-  );
-  const setProcedureSearchParam = useProcedureQueryStore(
-    (state) => state.setProcedureSearchParam
-  );
-  const containerRef = useRef(null);
-
-  const handleShowContainer = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
-  const handleInputChange = (e) => {
-    setProcedureSearchParam(e.target.value);
-    setIsSearchContainerVisible(true);
-  };
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target)
-      ) {
-        setIsSearchContainerVisible(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [containerRef]);
-
+const PostSearchBox = ({
+  className,
+  handleSearch,
+  value,
+  onChange,
+  onClick,
+}) => {
   return (
-    <div
-      className={`community-post-search-box-container ${className}`}
-      ref={containerRef}
-    >
+    <div className={`community-post-search-box-container ${className}`}>
       <input
         type="text"
-        value={toDisplayFormat(procedureQuery.procedureSearchParam)}
-        onChange={handleInputChange}
-        onClick={handleShowContainer}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onClick={onClick}
         className="community-post-search-box-input"
       />
       <button type="button">
@@ -73,10 +40,6 @@ const PostSearchBox = ({ className, isProcedure, handleSearch }) => {
           onClick={handleSearch}
         />
       </button>
-      <div className="search-dropdown-container">
-        {isSearchContainerVisible && isProcedure && <ProcedureSearchDropDown />}
-      </div>
-      {/* {isSearchContainerVisible && !isProcedure && <PostSearchBoxDropDown />} */}
     </div>
   );
 };

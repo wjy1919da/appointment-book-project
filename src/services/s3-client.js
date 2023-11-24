@@ -37,13 +37,26 @@ const uploadToS3 = async (file) => {
   });
 
   try {
-    const data = await upload.done();
+    var data = await upload.done();
+    console.log("upload done", data);
     if (data.$metadata.httpStatusCode === 200) {
-      return { success: true, message: "Upload successful!" };
+      return {
+        success: true,
+        message: "Upload successful!",
+        location: data.Location,
+      };
     }
-    return { success: false, message: "Upload failed. Please try again." };
+    return {
+      success: false,
+      message: "Upload failed. Please try again.",
+      location: data.Location,
+    };
   } catch (err) {
-    return { success: false, message: "Upload failed. Please try again." };
+    return {
+      success: false,
+      message: "Upload failed. Please try again.",
+      location: data.Location,
+    };
   }
 };
 // export default s3Client;

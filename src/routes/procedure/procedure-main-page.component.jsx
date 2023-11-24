@@ -7,7 +7,10 @@ import { useGetProcedureCategories } from "../../hooks/useGetProcedures";
 import useProcedureQueryStore from "../../procedureStore";
 import HomeSpinner from "../../components/home-spinner/home-spinner.component";
 import ErrorMsg from "../../components/error-msg/error-msg.component";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRef } from "react";
+import ProcedureSearchDropDown from "../../components/procedure-search-dropdown/procedure-search-dropdown.component";
+
 function groupByGroupName(data) {
   const grouped = {};
   data.forEach((item) => {
@@ -22,6 +25,9 @@ function groupByGroupName(data) {
     items: grouped[key],
   }));
 }
+const toDisplayFormat = (param) => {
+  return param.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+};
 const formatCategoryName = (name) => {
   return name.toLowerCase().replace(/\s+/g, "_");
 };
@@ -31,6 +37,8 @@ const ProcedureMainPage = () => {
   const procedureQuery = useProcedureQueryStore(
     (state) => state.procedureQuery
   );
+  const [isSearchContainerVisible, setIsSearchContainerVisible] =
+    useState(false);
   const setProcedureSearchParam = useProcedureQueryStore(
     (s) => s.setProcedureSearchParam
   );
@@ -42,6 +50,26 @@ const ProcedureMainPage = () => {
       setProcedureSearchParam("");
     };
   }, [setProcedureSearchParam]);
+  const containerRef = useRef(null);
+  const handleShowContainer = () => {
+    setIsSearchContainerVisible(!isSearchContainerVisible);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setIsSearchContainerVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [containerRef]);
+
   if (isLoading) {
     return <HomeSpinner />;
   }
@@ -71,7 +99,10 @@ const ProcedureMainPage = () => {
       procedures={group.procedures}
     />
   ));
-
+  const handleInputChange = (e) => {
+    setProcedureSearchParam(e);
+    setIsSearchContainerVisible(true);
+  };
   return (
     <div>
       <MainPageIntro
@@ -83,7 +114,15 @@ const ProcedureMainPage = () => {
           <div className="procedure-main-header-title">
             Our Cosmetic Procedures
           </div>
-          <PostSearchBox isProcedure={true} />
+          <div ref={containerRef} className="">
+            <PostSearchBox
+              isProcedure={true}
+              value={toDisplayFormat(procedureQuery.procedureSearchParam)}
+              onChange={handleInputChange}
+              onClick={handleShowContainer}
+            />
+            {isSearchContainerVisible && <ProcedureSearchDropDown />}
+          </div>
         </div>
         {data?.data && (
           <div className="procedure-main-collapse-container">

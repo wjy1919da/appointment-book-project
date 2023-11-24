@@ -2,6 +2,7 @@ import React from "react";
 import "./procedure-search-dropdown.styles.scss";
 import { useGetProcedureCategories } from "../../hooks/useGetProcedures";
 import useProcedureQueryStore from "../../procedureStore";
+import { set } from "date-fns";
 const formatInputForFilter = (input) => {
   return input.toLowerCase().replace(/\s+/g, "_");
 };
@@ -19,6 +20,7 @@ const ProcedureSearchDropDown = () => {
   const setProcedureSearchParam = useProcedureQueryStore(
     (state) => state.setProcedureSearchParam
   );
+  // wait for back api for trendy procedures
   const trendyProcedures = [
     "botox_injections",
     "breast_augmentation",
@@ -37,9 +39,13 @@ const ProcedureSearchDropDown = () => {
   const filteredHistoryProcedures = historyProcedures
     ?.filter((procedure) => procedure.toLowerCase().includes(formattedInput))
     .slice(0, 5);
+  //   const filteredHistoryProcedures = searchHistory
+  //         ?.filter((procedure) => procedure.toLowerCase().includes(formattedInput))
+  //         .slice(0, 5);
   const filteredTrendyProcedures = trendyProcedures
     .filter((procedure) => procedure.toLowerCase().includes(formattedInput))
     .slice(0, 6);
+
   return (
     <div className="procedure-search-dropdown-container">
       <div className="procedure-search-dropdown-title">Trendy</div>
@@ -49,6 +55,7 @@ const ProcedureSearchDropDown = () => {
             <div
               key={index}
               className="procedure-item"
+              //   onClick={() => setProcedureSearchParam(procedure)}
               onClick={() => setProcedureSearchParam(procedure)}
             >
               {formatTitle(procedure)}
