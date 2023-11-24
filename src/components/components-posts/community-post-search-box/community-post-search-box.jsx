@@ -119,7 +119,7 @@ const PostSearchBox = ({ className }) => {
         value={toDisplayFormat(
           isProcedure
             ? procedureQuery.procedureSearchParam
-            : postQuery.postSearchParam
+            : postQuery.postTempParam
         )}
         onChange={handleInputChange}
         onClick={handleShowContainer}
