@@ -108,7 +108,7 @@ const PostDropdown = (props) => {
           className='post-dropdown-menu-list-section'
           style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
         >
-          <PostDropDownContents />
+          {/* <PostDropDownContents /> */}
         </div>
       </Dropdown.Menu>
     </Dropdown>
