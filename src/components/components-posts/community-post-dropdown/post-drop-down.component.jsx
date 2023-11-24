@@ -3,7 +3,8 @@ import { useMediaQuery } from 'react-responsive';
 import { Dropdown } from 'react-bootstrap';
 
 // components
-import PostDropDownContents from '../../components-posts/community-post-dropdown-contents/community-post-dropdown-contents';
+import DropdownFilterContents from '../community-post-dropdown-contents/filter/dropdown-filter-contents';
+import DropdownProcedureContents from '../community-post-dropdown-contents/procedure/dropdown-procedure-contents';
 
 // scss
 import './post-drop-down.styles.scss';
@@ -48,6 +49,19 @@ const PostDropdown = (props) => {
     props.handleFilters(value, isNowChecked);
   };
 
+  const dropdownContentsByFilter = () => {
+    switch (props.menuLabel) {
+      case 'Filter':
+        return <DropdownFilterContents options={props.options} />;
+      case 'Procedure':
+        return <DropdownProcedureContents />;
+      // case 'Location':
+      //   return <LocationComponent />;
+      default:
+        return null;
+    }
+  };
+
   // const CheckboxList = () =>
   //   props.options &&
   //   props.options.map((value, index) => (
@@ -86,12 +100,15 @@ const PostDropdown = (props) => {
         align='start'
         background-color='black'
       >
+        {/* filter, procedure, location button label */}
         <span
           className='post-dropdown-button-text1-section'
           style={isMobile ? { width: dropdownButtonText1Width + 'px' } : {}}
         >
           {props.menuLabel}
         </span>
+
+        {/* all button label */}
         <span
           className='post-dropdown-button-text2-section'
           style={isMobile ? { width: dropdownButtonText2Width + 'px' } : {}}
@@ -108,7 +125,9 @@ const PostDropdown = (props) => {
           className='post-dropdown-menu-list-section'
           style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
         >
-          <PostDropDownContents />
+          {/* <PostDropDownContents /> */}
+          {/* {CheckboxList()} */}
+          {dropdownContentsByFilter()}
         </div>
       </Dropdown.Menu>
     </Dropdown>

@@ -11,6 +11,7 @@ import PostSearchBox from '../../components/components-posts/community-post-sear
 
 // scss
 import './community.styles.scss';
+import PostDropDownContents from '../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx';
 
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -18,16 +19,25 @@ const Community = () => {
     (state) => state.setFilterCondition
   );
 
-  // const dropdownOptionsByCategory = [
+  const dropdownContentsByFilter = () => {
+    return <PostDropDownContents />;
+  };
+
+  // const dropdownContentsByFilter = [
   //   { value: 'facial', label: 'Facial' },
   //   { value: 'breast', label: 'Breast' },
   //   { value: 'body', label: 'Body' },
   // ];
 
-  // const dropdownOptionsByRole = [
-  //   { value: 'by user', label: 'By User' },
-  //   { value: 'by doctor', label: 'By Doctor' },
-  // ];
+  const dropdownContentsByProcedure = [
+    { value: 'by user', label: 'By User' },
+    { value: 'by doctor', label: 'By Doctor' },
+  ];
+
+  const dropdownContentsByLocation = [
+    { value: 'by user', label: 'OK' },
+    { value: 'by doctor', label: 'NO' },
+  ];
 
   // Handle the situation of user not login but still want to see the post
   //  const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -57,6 +67,21 @@ const Community = () => {
     setFilterCondition(updatedFilter);
   };
 
+  // const handleFilters = (value, isChecked) => {
+  //   const updatedFilter = [...postQuery.filterCondition];
+  //   if (isChecked) {
+  //     if (!updatedFilter.includes(value)) {
+  //       updatedFilter.push(value);
+  //     }
+  //   } else {
+  //     const index = updatedFilter.indexOf(value);
+  //     if (index !== -1) {
+  //       updatedFilter.splice(index, 1);
+  //     }
+  //   }
+  //   setFilterCondition(updatedFilter);
+  // };
+
   return (
     <div>
       <div>
@@ -65,21 +90,21 @@ const Community = () => {
           <div className='doctor-post-header-container'>
             <div className='doctor-post-header-button-container'>
               <PostDropDown
-                // optipns={dropdownOptionsByCategory}
+                options={dropdownContentsByFilter}
                 handleFilters={handleFilters}
                 menuLabel='Filter'
                 wordAfterMenuLabel='All'
                 className='filter-button'
               />
               <PostDropDown
-                // options={dropdownOptionsByRole}
+                options={dropdownContentsByProcedure}
                 handleFilters={handleFilters}
                 menuLabel='Procedure'
                 wordAfterMenuLabel='All'
                 className='location-button'
               />
               <PostDropDown
-                // options={dropdownOptionsByRole}
+                options={dropdownContentsByLocation}
                 handleFilters={handleFilters}
                 menuLabel='Location'
                 wordAfterMenuLabel='All'
