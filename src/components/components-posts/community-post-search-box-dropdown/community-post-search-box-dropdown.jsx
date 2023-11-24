@@ -6,10 +6,7 @@ const formatInputForFilter = (input) => {
 };
 
 const formatTitle = (title) => {
-  return title
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  return title.replace(/_/g, " ");
 };
 
 const PostSearchBoxDropDown = () => {
@@ -68,7 +65,7 @@ const PostSearchBoxDropDown = () => {
               className="post-search-item-previous"
               onClick={() => setTempSearchParam(history)}
             >
-              {history}
+              {formatTitle(history)}
             </div>
           ))
         ) : (
