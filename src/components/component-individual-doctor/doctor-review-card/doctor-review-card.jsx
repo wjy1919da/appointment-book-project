@@ -16,7 +16,7 @@ const DoctorReview = ({profileImage,name,starRate,reviewText,date}) => {
         return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) =>
             String.fromCharCode(parseInt(b, 16)));
     }
-    console.log('Date is: ', date);
+
     function dateConverter(input) {
         const splitDate = input.split('/');
         if (splitDate.length === 3) return `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;

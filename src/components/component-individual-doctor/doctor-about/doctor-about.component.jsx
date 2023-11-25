@@ -1,4 +1,5 @@
 import './doctor-about.styles.scss';
+import { useState } from 'react';
 import DoctorAboutSection from '../../doctor-about-section/doctor-about-section.component';
 import DocotorOwnVoucherCard from '../../doctor-own-profile/doctor-profile-voucher-card';
 import DoctorReviewGrid from '../../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
@@ -8,7 +9,10 @@ import highlightVerified from '../../../assets/doctor/highlight-verified.png';
 import highlightAppointment from '../../../assets/doctor/highlight-appointment.png';
 
 const DoctorAbout = () => {
+    const [voucherExpanded, setVoucherExpanded] = useState(false);
     const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
+    const { programs, interesteds, methods, actual, isAuth, method } = data.pages[0].data;
+    const [vouchers, setVouchers] = useState(programs);
     console.log('doctor about data is: ', data);
 
     if (isLoading) {
@@ -22,8 +26,9 @@ const DoctorAbout = () => {
     if (!data || !data.pages[0]?.data) {
         return <div>No data available</div>;
     }
-
-    const { programs, interesteds, methods, actual, isAuth, method } = data.pages[0].data;
+    const toggleVoucherExpanded = () => {
+        setVoucherExpanded(!voucherExpanded);
+    }
 
     const abouts = [
         {'title': 'Coupons', 'items': programs},
@@ -50,7 +55,31 @@ const DoctorAbout = () => {
              'title': method !== null ? 'To make an appointment' : ''}
         )
     }
-    const specializations = ['breast_augmentation', 'facelift', 'fox_eyes', 'teeth_whitening'];
+    let specializations = interesteds;
+    // setVouchers(programs);
+
+    const printTest = () => {
+        console.log('Testing prints...');
+    }
+    const voucherClick = (item) => {
+        console.log('item is: ', item);
+        const holder = vouchers.filter((voucher) => voucher === item);
+        setVouchers(holder);
+    }
+
+    if (voucherExpanded) {
+        return (
+            <div className='indv-doctor-about-container' >
+                <div className='indv-vouchers-big-container' >
+                    <div className='vouchers-container' >
+                    {vouchers.length > 0 ? vouchers.map((item, index) => {
+                        return <DocotorOwnVoucherCard key={index} />
+                    }) : <h3 className='indv-no-vouchers-title' >No vouchers currently available, check back later for more great deals!</h3>}
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className='indv-doctor-about-container' >
@@ -59,8 +88,11 @@ const DoctorAbout = () => {
                     <h3 className='indv-vouchers-title' >Vouchers</h3>
                 </div>
                 <div className='vouchers-container' >
-                    <DocotorOwnVoucherCard />
-                    <DocotorOwnVoucherCard />
+                    {vouchers.length > 0 ? vouchers.map((item, index) => {
+                        return <DocotorOwnVoucherCard key={index} onClick={() => voucherClick(item)}/>
+                    }) : <h3 className='indv-no-vouchers-title' >No vouchers currently available, check back later for more great deals!</h3>}
+                    {/* <DocotorOwnVoucherCard onClick={printTest}/>
+                    <DocotorOwnVoucherCard /> */}
                 </div>
             </div>
             <div className='indv-specialization-big-container' >
@@ -69,7 +101,7 @@ const DoctorAbout = () => {
                 </div>
                 <div className='specialization-tabs-container' >
                     {specializations.map((item, index) => {
-                        return <SpecializationIcon procedureName={item} key={index} />
+                        return <SpecializationIcon specialization={item} key={index} />
                     })}
                 </div>
             </div>
@@ -122,21 +154,16 @@ const DoctorAbout = () => {
     )
 }
 
-const SpecializationIcon = (procedureName) => {
-    console.log('Attempting to create icon for: ', procedureName.procedureName);
-    const convertName = (procedureTitle) => {
-        let splitTitle = procedureTitle.split("_");
-        splitTitle = splitTitle.map((item) => item.charAt(0).toUpperCase() + item.slice(1));
-        console.log('split title array is: ', splitTitle);
-        return splitTitle.join(' ');
-    }
+const SpecializationIcon = ({specialization}) => {
+    const imgUrl = specialization.content;
+    const title = specialization.title;
     return (
         <div className='indv-procedure-icon-container' >
             <div className='indv-procedure-icon-img-container' >
-                <img className='indv-procedure-icon-img' src={require(`../../../assets/procedure/${procedureName.procedureName}.svg`)} alt='procedure' />
+                <img className='indv-procedure-icon-img' src={imgUrl} alt='procedure' />
             </div>
             <div className='indv-procedure-icon-title-container' >
-                <h3 className='indv-procedure-icon-title' >{convertName(procedureName.procedureName)}</h3>
+                <h3 className='indv-procedure-icon-title' >{title}</h3>
             </div>
         </div>
     )
