@@ -1,39 +1,46 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 const axiosInstance = axios.create({
   // baseURL: 'https://api-dev.charm-life.com/'
+<<<<<<< HEAD
   baseURL: 'http://localhost:8080/'
+=======
+  baseURL: "http://localhost:8080/",
+>>>>>>> AWS-frontend-postSearch
 });
 
 class APIClient {
-    constructor(endpoint) {
-      this.endpoint = endpoint;
-    }
+  constructor(endpoint) {
+    this.endpoint = endpoint;
+  }
 
-    getToken() {
-      return localStorage.getItem('token');
-    }
+  getToken() {
+    return localStorage.getItem("token");
+  }
 
-    post(data) {
-      const token = this.getToken();
-      const config = {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : undefined,
-        },
-      };
-      return axiosInstance.post(this.endpoint, data, config).then((response) => response);
-    }
+  post(data) {
+    const token = this.getToken();
+    const config = {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    };
+    return axiosInstance
+      .post(this.endpoint, data, config)
+      .then((response) => response);
+  }
 
-    get(params) {
-      const token = this.getToken();
-      const config = {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : undefined,
-        },
-        params,
-      };
-      return axiosInstance.get(this.endpoint, config).then((response) => response);
-    } 
+  get(params) {
+    const token = this.getToken();
+    const config = {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+      params,
+    };
+    return axiosInstance
+      .get(this.endpoint, config)
+      .then((response) => response);
+  }
 }
 
 export default APIClient;
-
