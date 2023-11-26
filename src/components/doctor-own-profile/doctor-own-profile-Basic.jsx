@@ -9,7 +9,9 @@ import gradIcon from "../../assets/user/Graduation Cap.png";
 import certified from "../../assets/user/Certificate.png";
 import "./doctor-own-profile-Basic.styles.scss";
 import { useGetUserInfo } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import userInfoQueryStore from "../../userStore";
 import HomeSpinner from "../home-spinner/home-spinner.component";
 const DocotorOwnBasic = () => {
@@ -21,6 +23,10 @@ const DocotorOwnBasic = () => {
   //     return <HomeSpinner />;
   //   }
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const [showManageButton, setShowManageButton] = useState(false);
+  const handleFirstButtonClick = () => {
+    setShowManageButton(true); // This will show the second button
+  };
   return (
     <div className="doctor-own-basic-conatiner ">
       <div className="doctor-own-basic-avatar">
@@ -42,12 +48,12 @@ const DocotorOwnBasic = () => {
             ></img>
           </div>
           <div className="doctor-own-basic-edits-buttons">
-            <Link to="/userProfileEdit" className="top-edit-button-1">
+            <Link to="/doctorProfileEdit" className="top-edit-button-1">
               edit profile
             </Link>
-            <Link to="/userAppointment" className="top-edit-button-2">
+            <button onClick={handleFirstButtonClick} className="top-edit-button-2">
               <img src={calendar} className="doctor-calendar-img"></img>
-            </Link>
+            </button>
           </div>
         </div>
         <div className="doctor-own-basic-top-text">
@@ -59,9 +65,9 @@ const DocotorOwnBasic = () => {
             )}
           </div>
           <div className="doctor-own-basic-app-button">
-            <button className="text-management-button">
+          {showManageButton &&(<button className="text-management-button">
               Manage Appointments
-            </button>
+            </button>)}
           </div>
         </div>
         <div className="doctor-own-basic-medium">
