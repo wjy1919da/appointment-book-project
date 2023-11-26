@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Dropdown } from 'react-bootstrap';
 
 // components
-import PostDropDownContents from '../../components-posts/community-post-dropdown-contents/community-post-dropdown-contents';
+// import PostDropDownContents from '../community-post-dropdown-contents/community-post-dropdown-contents';
 
 // scss
 import './post-drop-down.styles.scss';
@@ -108,7 +108,6 @@ const PostDropdown = (props) => {
           className='post-dropdown-menu-list-section'
           style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
         >
-          <PostDropDownContents />
         </div>
       </Dropdown.Menu>
     </Dropdown>

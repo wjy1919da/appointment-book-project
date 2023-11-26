@@ -1,0 +1,44 @@
+.account-setting-login-history-container {
+  min-height: 100vh;
+
+  .account-setting-login-history-right-container {
+    position: absolute;
+    top: 140px;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 50px;
+  }
+
+  .account-setting-login-history-button {
+    margin-left: auto;
+  }
+
+  .account-setting-login-history-form {
+    display: flex;
+    flex-direction: column;
+    background: var(--White, #fbfcff);
+    border-radius: 12px;
+    border: 2px solid var(--text-2-button, #675d59);
+    margin-top: 50px;
+    padding: 30px 36px;
+  }
+}
+
+.account-setting-login-history-list-title {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #675d59;
+  margin: 10px 0 30px 0;
+  width: 650px;
+}
+
+.account-setting-login-hitosry-list {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--avatar-color-image, #e2e3e7);
+  list-style: none;
+  margin-top: 10px;
+}

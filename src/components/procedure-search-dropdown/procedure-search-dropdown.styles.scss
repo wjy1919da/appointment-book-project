@@ -9,6 +9,8 @@
   height: 360px;
   padding: 15px;
   // gap: 10px;
+  position: absolute;
+  top: 835px;
 }
 .procedure-search-dropdown-title {
   font-family: Open Sans;
@@ -86,5 +88,8 @@
   padding-bottom: 10px; /* Add some space below the title */
 }
 .procedure-search-dropdown-previous-container {
-  margin-top: 50px;
+  // margin-top: 50px;
+  z-index: 1;
+  position: absolute;
+  top: 150px;
 }

@@ -1,8 +1,8 @@
 .community-post-search-box-container {
   display: flex;
-  padding: 8px;
   border-bottom: 1px solid #352c29;
   margin-left: auto;
+  padding: 8px;
 
   .community-post-search-box-input {
     background: transparent;
@@ -12,10 +12,8 @@
     width: 230px;
   }
 }
-.search-dropdown-container{
-  //position: absolute;
- 
+
+.search-dropdown-container {
   position: absolute;
-  margin-top: 45px;
-  margin-left: -10px;
+  margin: 45px 0 0 -10px;
 }
