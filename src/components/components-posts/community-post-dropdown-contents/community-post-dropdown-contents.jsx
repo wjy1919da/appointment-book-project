@@ -19,14 +19,14 @@ import FaceProcedureImage from '../../../assets/procedure/fox_eyes.svg';
 import SkinProcedureImage from '../../../assets/procedure/teeth_whitening.svg';
 import NeckProcedureImage from '../../../assets/procedure/neck_contouring.svg';
 
-const PostDropDownContents = () => {
+const PostDropDownContents = ({ menuLabel }) => {
   const setFilterCondition = usePostQueryStore(
     (state) => state.setFilterCondition
   );
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
 
-  const [filterTopic, setFilterTopic] = useState([]);
+  const [filterTopics, setFilterTopics] = useState([]);
 
   const apiRequestPostFilter = useApiRequestPostFilter();
 
@@ -65,34 +65,82 @@ const PostDropDownContents = () => {
   ];
 
   // filter
+  // const handleToggleFilter = (topicValue) => {
+  //   // console.log(topicValue);
+  //   if (filterTopic.includes(topicValue)) {
+  //     setFilterTopic((prevState) =>
+  //       prevState.filter((topic) => topic !== topicValue)
+  //     );
+  //   } else {
+  //     setFilterTopic((prevState) => [...prevState, topicValue]);
+  //   }
+  // };
+
   const handleToggleFilter = (topicValue) => {
-    // console.log(topicValue);
-    if (filterTopic.includes(topicValue)) {
-      setFilterTopic((prevState) =>
-        prevState.filter((topic) => topic !== topicValue)
+    if (filterTopics.includes(topicValue)) {
+      setFilterTopics((prevTopics) =>
+        prevTopics.filter((topic) => topic !== topicValue)
       );
     } else {
-      setFilterTopic((prevState) => [...prevState, topicValue]);
+      setFilterTopics((prevTopics) => [...prevTopics, topicValue]);
     }
   };
 
+  // const handleToggleFilter = (topicValue) => {
+  //   if (filterTopics.includes(topicValue)) {
+  //     setFilterTopics((prevTopics) => prevTopics.filter((topic) => topic !== topicValue));
+  //   } else {
+  //     setFilterTopics((prevTopics) => [...prevTopics, topicValue]);
+  //   }
+  // };
+
   // apply filter
   const handleClickApplyFilter = async () => {
-    setFilterCondition(filterTopic);
-
+    setFilterCondition(filterTopics);
+  
     try {
       const response = await apiRequestPostFilter.fetchNextPage();
       // console.log(response);
     } catch (error) {
       // console.error('API request failed:', error);
     }
-    // console.log(filterTopic);
-    // console.log(postQuery);
   };
+  
+  // const handleClickApplyFilter = async () => {
+  //   setFilterCondition(filterTopics);
+
+  //   try {
+  //     const response = await apiRequestPostFilter.fetchNextPage();
+  //     // console.log(response);
+  //   } catch (error) {
+  //     // console.error('API request failed:', error);
+  //   }
+  // };
+
+  // const handleClickApplyFilter = async () => {
+  //   setFilterCondition(filterTopic);
+
+  //   try {
+  //     const response = await apiRequestPostFilter.fetchNextPage();
+  //     // console.log(response);
+  //   } catch (error) {
+  //     // console.error('API request failed:', error);
+  //   }
+  //   // console.log(filterTopic);
+  //   // console.log(postQuery);
+  // };
 
   const isButtonClicked = (topic) => {
-    return filterTopic.includes(topic);
+    return filterTopics.includes(topic);
   };
+
+  // const isButtonClicked = (topic) => {
+  //   return filterTopics.includes(topic);
+  // };
+
+  // const isButtonClicked = (topic) => {
+  //   return filterTopic.includes(topic);
+  // };
 
   return (
     <div className='post-dropdown-contents-container'>
@@ -106,6 +154,7 @@ const PostDropDownContents = () => {
                   key={nanoid()}
                   onClick={() => handleToggleFilter(post)}
                   className={isButtonClicked(post) ? 'clicked-button' : ''}
+
                 >
                   {post}
                 </button>

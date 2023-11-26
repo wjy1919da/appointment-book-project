@@ -1,62 +1,23 @@
 // screen bigger than 1025px
-.post-dropdown-contents-container {
+.post-dropdown-procedure-contents-wrapper {
   background-color: #fbfcff;
   padding: 20px 40px;
   width: 100%;
-  height: 360px;
+  height: 530px;
 
-  .procedure-title {
-    color: #352c29;
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  .post-by-button-container,
-  .topic-button-container,
-  .body-area-button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  // text button
-  .clicked-button {
-    color: #f29b87;
-  }
-
-  // image button
-  .clicked-image-button {
-    border-radius: 50%;
-    width: 130px;
-    height: 130px;
-
-    &.clicked {
-      outline: 3px solid #f29b87;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
-  }
-
-  .post-dropdown-contents-inner-container {
-    display: flex;
-    justify-content: space-between;
-
-    .post-dropdown-contents-left-container {
-      .post-dropdown-contents-up,
-      .post-dropdown-contents-down {
-        margin-bottom: 30px;
-      }
-    }
-  }
-
-  .post-dropdown-contents-procedures-container {
+  .post-dropdown-procedure-contents-container {
     position: relative;
 
-    .post-dropdown-contents-procedures-inner-container {
+    .procedure-title {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .post-dropdown-procedure-contents-inner-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       place-items: center;
@@ -91,7 +52,20 @@
       }
     }
 
-    .post-dropdown-contents-procedures-button-container {
+    // image button
+    .clicked-image-button {
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+
+      &.clicked {
+        outline: 3px solid #f29b87;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+    }
+
+    .post-dropdown-procedure-contents-button-container {
       display: flex;
       justify-content: flex-end;
     }

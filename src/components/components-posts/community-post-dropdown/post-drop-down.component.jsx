@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import { Dropdown } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import { Dropdown } from "react-bootstrap";
 
 // components
-// import PostDropDownContents from '../community-post-dropdown-contents/community-post-dropdown-contents';
+import DropdownFilterContents from "../community-post-dropdown-contents/filter/dropdown-filter-contents";
+import DropdownProcedureContents from "../community-post-dropdown-contents/procedure/dropdown-procedure-contents";
 
 // scss
-import './post-drop-down.styles.scss';
+import "./post-drop-down.styles.scss";
 
 const PostDropdown = (props) => {
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
@@ -17,10 +18,10 @@ const PostDropdown = (props) => {
     const handleWindowResize = () => {
       setWindowWidth(window.innerWidth);
     };
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
     // cleanup function to remove event listener when component unmounts
     return () => {
-      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
 
@@ -48,6 +49,19 @@ const PostDropdown = (props) => {
     props.handleFilters(value, isNowChecked);
   };
 
+  const dropdownContentsByFilter = () => {
+    switch (props.menuLabel) {
+      case "Filter":
+        return <DropdownFilterContents options={props.options} />;
+      case "Procedure":
+        return <DropdownProcedureContents />;
+      // case 'Location':
+      //   return <LocationComponent />;
+      default:
+        return null;
+    }
+  };
+
   // const CheckboxList = () =>
   //   props.options &&
   //   props.options.map((value, index) => (
@@ -73,41 +87,47 @@ const PostDropdown = (props) => {
 
   return (
     <Dropdown
-      className='post-dropdown-container'
-      style={isMobile ? { width: dropdownContainerWidth + 'px' } : {}}
+      className="post-dropdown-container"
+      style={isMobile ? { width: dropdownContainerWidth + "px" } : {}}
     >
       {/* Filter, Location dropdown button */}
       <Dropdown.Toggle
-        className='post-dropdown-button-section'
-        style={isMobile ? { width: dropdownContainerWidth + 'px' } : {}}
-        id='post-dropdown-button'
-        data-bs-auto-close='outside'
-        aria-expanded='false'
-        align='start'
-        background-color='black'
+        className="post-dropdown-button-section"
+        style={isMobile ? { width: dropdownContainerWidth + "px" } : {}}
+        id="post-dropdown-button"
+        data-bs-auto-close="outside"
+        aria-expanded="false"
+        align="start"
+        background-color="black"
       >
+        {/* filter, procedure, location button label */}
         <span
-          className='post-dropdown-button-text1-section'
-          style={isMobile ? { width: dropdownButtonText1Width + 'px' } : {}}
+          className="post-dropdown-button-text1-section"
+          style={isMobile ? { width: dropdownButtonText1Width + "px" } : {}}
         >
           {props.menuLabel}
         </span>
+
+        {/* all button label */}
         <span
-          className='post-dropdown-button-text2-section'
-          style={isMobile ? { width: dropdownButtonText2Width + 'px' } : {}}
+          className="post-dropdown-button-text2-section"
+          style={isMobile ? { width: dropdownButtonText2Width + "px" } : {}}
         >
           {props.wordAfterMenuLabel}
         </span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        className='post-dropdown-menu-section'
-        style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
+        className="post-dropdown-menu-section"
+        style={isMobile ? { width: dropdownMenuWidth + "px" } : {}}
       >
         <div
-          className='post-dropdown-menu-list-section'
-          style={isMobile ? { width: dropdownMenuWidth + 'px' } : {}}
+          className="post-dropdown-menu-list-section"
+          style={isMobile ? { width: dropdownMenuWidth + "px" } : {}}
         >
+          {/* <PostDropDownContents /> */}
+          {/* {CheckboxList()} */}
+          {dropdownContentsByFilter()}
         </div>
       </Dropdown.Menu>
     </Dropdown>
