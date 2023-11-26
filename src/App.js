@@ -41,6 +41,7 @@ import Footer from "./components/footer/footer.component.jsx";
 import ProcedureMainPage from "./routes/procedure/procedure-main-page.component.jsx";
 // import { useGetUserInfo } from "./hooks/useAuth.js";
 import userInfoQueryStore from "./userStore.ts";
+import DoctorProfileEdit from "./components/doctor-own-profile/doctor-profile-edit/doctor-own-profile-edit";
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -89,6 +90,7 @@ const App = () => {
               <Route path="instrument/:name" element={<SubInstrument />} />
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
+              <Route path="doctorProfileEdit" element={<DoctorProfileEdit />} />
               <Route
                 path="doctor/:encodedMemberId"
                 element={<IndividualDoctor />}

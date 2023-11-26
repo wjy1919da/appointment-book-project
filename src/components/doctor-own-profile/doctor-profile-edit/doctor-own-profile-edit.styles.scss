@@ -1,0 +1,280 @@
+.user-profile-edit-screen {
+    width: 1440px;
+    height: 4001px;
+    background: var(--White, #FBFCFF);
+    .button-to-userprofile
+    {
+        content: "";
+        color: #352C29;
+        background-image: url('../../../assets/post/iconoir_arrow-left.svg');
+        width: 24px; /* Set the width of the arrow image */
+        height: 24px; /* Set the height of the arrow image */
+        background-size: cover;
+        position: relative;
+        top: 87px;
+        left: 47px;
+        filter: drop-shadow(0px 2px 2px rgba(48, 48, 48, 0.10));
+        flex-shrink: 0;
+    }
+    .edit-profile-text
+    {
+        color: #000;
+        width: 187px;
+        height: 46px;
+        /* NEW TYPE/NEW title */
+        font-family: Open Sans;
+        font-size: 34px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        top: 87px;
+        left: 101px;
+        position:relative;
+    }
+    .button-save-changes
+    {
+        display: inline-flex;
+        padding: 12px 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 8px;
+        background  : var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
+        top: 87px;
+        right: 76px;
+        position:absolute;
+    }
+    .subtext-save-changes
+    {
+        color: var(--White, #FBFCFF);
+        /* gradient button text shadow */
+        text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.10);
+        /* NEW TYPE/NEW button */
+        font-family: Open Sans;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .personal-info-table
+    {
+        width: 614px;
+        height: 1301px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        border: 2px solid var(--text-2-button, #675D59);
+        background: var(--White, #FBFCFF);
+        top: 241px;
+        left: 76px;
+        position: absolute;
+    }
+    .interests-table
+    {
+        width: 614px;
+        height: 1301px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        border: 2px solid var(--text-2-button, #675D59);
+        background: var(--White, #FBFCFF);
+        top: 241px;
+        right: 76px;
+        position: absolute;
+    }
+    .table-subheading
+    {
+        color: var(--text-1-footer, #352C29);
+        /* NEW TYPE/NEW sub title */
+        font-family: Open Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        top: 30px;
+        left: 36px;
+        position: absolute;
+    }
+    .avatar-picture
+    {
+        border-radius: 200px;
+        background: url('../../../assets/post/user-profile-avatar.png'), lightgray 50% / cover no-repeat;
+        width: 200px;
+        height: 200px;
+        top: 105px;
+        left: 55px;
+        position:absolute;
+        background-size: 100% 100%;
+        flex-shrink: 0;
+    }
+    .avatar-picture-on-hover
+    {
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+        fill: var(--before-input, rgba(20, 20, 20, 0.50));
+        position:absolute;
+        top: 105px;
+        left: 55px;
+    }
+    .click-to-change-text
+    {
+        color: #FFF;
+        cursor: pointer;
+        /* NEW TYPE/NEW input, navi */
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        width: 119px;
+        height: 22px;
+        top: 89px;
+        left: 40px;
+        position:absolute;
+    }
+    .delete-pic
+    {
+        background-image: url('../../../assets/sign/delete.svg');
+        cursor:pointer;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        position: absolute;
+        top:159px;
+        left:84px;
+    }
+    .table-body
+    {
+        color: var(--text-1-footer, #352C29);
+        /* NEW TYPE/NEW body1 */
+        font-family: Open Sans;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        position:absolute;
+    }
+    .name-text
+    {
+        border-radius: 8px;
+        border: 1px solid var(--text-2-button, #675D59);
+        background: var(--White, #FBFCFF);
+        flex-shrink: 0;
+        position:absolute;
+    }
+    textarea
+    {
+        position:absolute;
+        resize:none;
+        border-radius: 8px;
+        border: 1px solid var(--text-2-button, #675D59);
+        background: var(--White, #FBFCFF);
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 6px;
+        border: 1px solid var(--text-2-button, #675D59);
+        background: var(--White, #FBFCFF);
+        
+        /* NEW shadow */
+        box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.10);
+        color: var(--after-input, #675D59);
+        color: var(--before-input, rgba(20, 20, 20, 0.50));
+        /* NEW TYPE/NEW input, navi */
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        width: 100%;
+        height: 100%;
+        outline: none;
+    }
+    .gender-marker
+    {
+        fill: var(--White, #FBFCFF);
+        stroke-width: 2px;
+        stroke: var(--text-2-button, #675D59);
+    }
+    .gender-text
+    {
+        color: var(--text-1-footer, #352C29);
+        /* NEW TYPE/NEW input, navi */
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .female-gender-marker
+    {
+        fill: var(--White, #FBFCFF);
+        stroke-width: 2px;
+        stroke: var(--new-gradient, #F48C8A);
+    }
+    .interest-options
+    {
+        color: var(--text-2-button, #675D59);
+        cursor: pointer;
+        /* NEW TYPE/NEW input, navi */
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        position:relative;
+    }
+    .breast-procedures
+    {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+        background: url('../../../assets/sign/breast-augmentation.png'), lightgray 50% / cover no-repeat;
+        position:relative;
+    }
+    .procedure-text
+    {
+        position: relative;
+        color: var(--text-1-footer, #352C29);
+        text-align: center;
+        /* NEW TYPE/NEW body2 */
+        font-family: Open Sans;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        width: 160px;
+        height: 25px;
+        margin-right: 36px;
+    }
+    .face-procedures
+    {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+        background: url('../../../assets/procedure/fox_eyes.svg'), lightgray 50% / cover no-repeat;
+        position:relative;
+        zoom: 2.5;
+    }
+    .skin-procedures
+    {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+        background: url('../../../assets/procedure/teeth_whitening 1.png'), lightgray 50% / cover no-repeat;
+        position:relative;
+    }
+    .body-procedures
+    {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+        background: url('../../../assets/procedure/chemical_peels 1.png'), lightgray 50% / cover no-repeat;
+        position:relative;
+    }
+    .doctor-edit-profile-interest-category-mapping
+    {
+        margin-top: 130px;
+    }
+}

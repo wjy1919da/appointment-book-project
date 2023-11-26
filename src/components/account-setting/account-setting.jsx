@@ -1,32 +1,40 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AccountNotFoundPage from './not-found';
-import "./account-setting.styles.scss";
+import './account-setting.styles.scss';
 import UserProfilePage from '../../components/user-profile-page/user-profile-page';
 
 const AccountSetup = () => {
-    const [showNotFound, setShowNotFound] = useState(false);
-    const [showProfilePage, setShowProfilePage] = useState(false);
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  const [showNotFound, setShowNotFound] = useState(false);
+  const [showProfilePage, setShowProfilePage] = useState(false);
 
-    const handleClick = () => {
-        setShowNotFound(true);
-    };
-    const goToUserProfile = () => {
-        setShowProfilePage(true);
-    }
-    return (
-        <div className="account-setting-container">
-            {showProfilePage ? (<UserProfilePage/>) : (
-            showNotFound ? (
-                <AccountNotFoundPage/>
-            ) : (
-            
-                <div>
-                    <button class="account-setting-button" onClick={goToUserProfile}>Account Setting</button>
-                    <div className="account-setting-left-pink"></div>
-                    {/* <div className="account-setting-right-pink">
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleClick = (path) => {
+    navigate(path);
+  };
+
+  const goToUserProfile = () => {
+    setShowProfilePage(true);
+  };
+
+  return (
+    <div className='account-setting-container'>
+      {showProfilePage ? (
+        <UserProfilePage />
+      ) : showNotFound ? (
+        <AccountNotFoundPage />
+      ) : (
+        <div>
+          <button class='account-setting-button' onClick={goToUserProfile}>
+            Account Setting
+          </button>
+          <div className='account-setting-left-pink'></div>
+          {/* <div className="account-setting-right-pink">
                         <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
                             <circle opacity="0.8" cx="60" cy="60" r="60" fill="url(#paint0_linear_2443_10240)"/>
                             <defs>
@@ -88,103 +96,259 @@ const AccountSetup = () => {
                             </defs>
                         </svg>
                     </div> */}
-                    <div className="account-security-table">
-                        <span className="heading-text">Security</span><br></br>
-                        <br></br>
-                        <br></br>
-                        <span className="subtext">Change Password</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Security Questions</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Login History</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="account-privacy-table">
-                        <span className="heading-text">Privacy</span><br></br>
-                        <br></br>
-                        <br></br>
-                        <span className="subtext">Profile Visibility</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Data Sharing</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Activity Status</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="account-payment-table">
-                        <span className="heading-text">Payment</span><br></br>
-                        <br></br>
-                        <br></br>
-                        <span className="subtext">Payment Method</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Billing Address</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Subscription</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="account-deactivation-and-deletion-table">
-                        <span className="heading-text">Deactivation & Deletion</span><br></br>
-                        <br></br>
-                        <br></br>
-                        <span className="subtext">Deactivate Account</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <hr className="line"></hr>
-                        <span className="subtext">Delete Account</span><br></br>
-                        <button className="subtext-button" onClick={handleClick}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#675D59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            ))}
+          <div className='account-security-table'>
+            <span className='heading-text'>Security</span>
+            <br></br>
+            <br></br>
+            <br></br>
+            <span className='subtext'>Change Password</span>
+            <br></br>
+            <button
+              className='subtext-button'
+              onClick={() => handleClick('/AccountSetup/change-password')}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Security Questions</span>
+            <br></br>
+            <button
+              className='subtext-button'
+              onClick={() => handleClick('/AccountSetup/security-questions')}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Login History</span>
+            <br></br>
+            <button
+              className='subtext-button'
+              onClick={() => handleClick('/AccountSetup/login-history')}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+          </div>
+          <div className='account-privacy-table'>
+            <span className='heading-text'>Privacy</span>
+            <br></br>
+            <br></br>
+            <br></br>
+            <span className='subtext'>Profile Visibility</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Data Sharing</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Activity Status</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+          </div>
+          <div className='account-payment-table'>
+            <span className='heading-text'>Payment</span>
+            <br></br>
+            <br></br>
+            <br></br>
+            <span className='subtext'>Payment Method</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Billing Address</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Subscription</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+          </div>
+          <div className='account-deactivation-and-deletion-table'>
+            <span className='heading-text'>Deactivation & Deletion</span>
+            <br></br>
+            <br></br>
+            <br></br>
+            <span className='subtext'>Deactivate Account</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+            <hr className='line'></hr>
+            <span className='subtext'>Delete Account</span>
+            <br></br>
+            <button className='subtext-button' onClick={handleClick}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+              >
+                <path
+                  d='M3 12H21M21 12L12.5 3.5M21 12L12.5 20.5'
+                  stroke='#675D59'
+                  stroke-width='2.4'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
 export default AccountSetup;

@@ -90,7 +90,7 @@ const HeaderUser = () => {
     <div className="header-login">
       {!userInfo.token && (
         <div
-          onClick={() => togglePopup(true, "doctorVerification")}
+          onClick={() => togglePopup(true, "accountType")}
           className="header-login-default"
         >
           <img

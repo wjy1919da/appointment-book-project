@@ -1,0 +1,15 @@
+.account-setting-pink-background-container {
+
+  .account-setting-pink-background {
+    position: absolute;
+    top: 0;
+    left: -500px;
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    border-radius: 0 236px 236px 0;
+    width: 1011px;
+    height: 350px;
+  }
+}

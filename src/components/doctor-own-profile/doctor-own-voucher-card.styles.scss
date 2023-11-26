@@ -8,7 +8,7 @@
     flex-shrink: 0;
     border-radius: 4.899px;
     background: var(--White, #FBFCFF);
-    box-shadow: 0px 7.34837px 9.79783px 0px rgba(226, 227, 231, 0.25), 0px 0px 24.49457px 0px rgba(255, 164, 163, 0.10);
+    box-shadow: 0px 2px 8px lightgray;
     .voucher-card-avartar
     {
         padding-left: 20px;
@@ -70,4 +70,92 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.doctor-own-expanded-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 16px lightgray;
+    border-radius: 2px;
+    padding: 2rem 5rem;
+}
+
+.doctor-own-expanded-header-container {
+    position: relative;
+}
+
+.doctor-own-expanded-back-arrow-container {
+    width: 1.25rem;
+    position: absolute;
+    top: 0.5rem;
+    cursor: pointer;
+}
+
+.doctor-own-expanded-back-arrow {
+    width: 100%;
+}
+
+.doctor-own-expanded-timelimit-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.doctor-own-expanded-timelimit {
+    color: #FF1212;
+}
+
+.doctor-own-expanded-pricing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.doctor-own-expanded-pricing-container > p {
+    margin-bottom: 0.25rem;
+}
+
+.doctor-own-expanded-promotional {
+    font-size: 24px;
+    color: #675D59;
+}
+
+.doctor-own-expanded-new-cost {
+    font-size: 44px;
+    color: #F48C8A;
+    font-weight: 700;
+}
+
+.doctor-own-expanded-original-cost {
+    color: #675D59;
+    text-decoration: line-through;
+    font-size: 22px;
+}
+
+.doctor-own-expanded-info-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+}
+
+.doctor-own-expanded-procedure-title {
+    color: #352C29;
+    font-weight: 700;
+    font-size: 34px;
+}
+
+.doctor-own-expanded-coupon-details-container {
+    padding-bottom: 2rem;
+}
+
+.doctor-own-expanded-coupon-details {
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.doctor-own-expanded-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

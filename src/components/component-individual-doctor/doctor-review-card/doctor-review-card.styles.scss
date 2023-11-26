@@ -6,9 +6,8 @@
     align-items: flex-start;
     padding-top: 24px;
     gap: 12px;
-    width: 50vw;
-    height: 199px;
-    border-bottom: 1px solid #E2E3E7;
+    width: 100%;
+    padding-bottom: 2rem;
 
     .reviewer-information-date
     {
@@ -16,7 +15,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 50vw;
+        width: 100%;
         .reviewer-information
         {
             height: 40px;
@@ -41,7 +40,8 @@
             }
 
             .reviewer-Name {
-                width: 117px;
+                padding-right: 1.5rem;
+                color: #352C29;
             }
             .verified-symbol
             {
@@ -64,12 +64,17 @@
             margin-left: auto;
             align-items: right;
             width: fit-content;
-            height: 26px;
+            // height: 26px;
             color: #A5A6A8;
-            font-weight: 500;
+            font-weight: 400;
+            font-size: 14px;
             //left:700px;
             //position: absolute;
 
+        }
+        .reviewer-text {
+            font-size: 18px;
+            color: #352C29;
         }
     }
 }

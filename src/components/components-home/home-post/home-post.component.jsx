@@ -1,3 +1,16 @@
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { Fragment } from 'react';
+
+// components
+import HomeLink from '../home-link/home-link.component';
+import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
+import Button from '../../components-posts/community-post-button/community-post-button';
+
+// scss
+import './home-post.styles.scss';
+
+// images
 import Decoration from '../../../assets/home/decoration-post.png';
 import vector from '../../../assets/home/Vector.png';
 import PostContainerMobile from '../../../assets/home/post-container-ipad.png';
@@ -5,20 +18,17 @@ import PostPic from '../../../assets/home/post-container.png';
 import Tag1 from '../../../assets/home/tag1.svg';
 import Tag2 from '../../../assets/home/tag2.svg';
 import Tag4 from '../../../assets/home/tag4.svg';
-import { Link } from 'react-router-dom';
-import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
-import './home-post.styles.scss';
-import HomeLink from '../home-link/home-link.component';
-import { useMediaQuery } from 'react-responsive';
 import HomePostPic from '../../../assets/home/trendings.png';
-import { Fragment } from 'react';
+
 const HomePost = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
   const isIpad = useMediaQuery({
     query: `(min-width: 768px) and (max-width: 1023px)`,
   });
+
   const isMobileOrIpad = isMobile || isIpad;
   const selectedImage = isIpad ? PostPic : HomePostPic;
+
   return (
     <div className='Home-post'>
       <div className='home-mobile-share-pic-container'>
@@ -72,7 +82,6 @@ const HomePost = () => {
           <Fragment>
             <div className='home-post-text'>
               <span className='home-post-text1'>Share Your Post</span>
-
             </div>
             <div className='home-post-subText'>
               <span className='postText'>
@@ -84,9 +93,10 @@ const HomePost = () => {
               </span>
             </div>
             <div className='home-post-link'>
+            <Button buttonName='View More Posts' />
               {/* <span className="underline-link">View More Posts</span> */}
-              <HomeLink title='View More Posts' href='/posts' />
-              <img
+              {/* <HomeLink title='View More Posts' href='/posts' /> */}
+              {/* <img
                 src={vector}
                 alt='arrow'
                 style={{
@@ -96,7 +106,7 @@ const HomePost = () => {
                   marginLeft: '10px',
                   border: 'None',
                 }}
-              ></img>
+              ></img> */}
             </div>
           </Fragment>
         )}
