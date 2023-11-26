@@ -5,8 +5,7 @@ const DocotorOwnMain = () => {
     return (
         <div className='doctor-own-profile-main-conatiner container'>
             <DocotorOwnBasic/>
-                <DoctorProfileSubArea/>
-            
+            <DoctorProfileSubArea/>
             
         </div>
     );

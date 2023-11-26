@@ -1,273 +1,426 @@
-.individual-doctor-container {
-  margin-top: 126px;
+.indv-doctor-page-container {
+  width: 85%;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
-
-  .individual-doctor-left-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    // padding: 0 50px;
-    // width: 100%;
-    // margin: auto;
-    position: relative;
-    left: 0;
-  }
-  .individual-doctor-right-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 10px;
-    // gap: 40px;
-    // width: 100%;
-
-    position: relative;
-    //top: 700px;
-    right: 0;
-    flex: 1;
-    margin-left: 40px;
-
-    .individual-doctor-right-about {
-      margin-top: 40px;
-      width: 100%;
-    }
-
-    .individual-doctor-posts {
-      width: 100%;
-    }
-  }
+  padding-top: 9rem;
 }
-.individual-page-container {
+
+.indv-doctor-info-container {
+  width: 100%;
+  display: flex;
+}
+
+.indv-doctor-profile-picture-container {
+  width: 14rem;
+  height: 14rem;
+}
+
+.indv-doctor-profile-picture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.indv-doctor-info-sub-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3rem;
+  width: 80%;
+}
+
+.indv-doctor-info-row {
   display: flex;
   width: 100%;
-  flex-direction: column;
+}
+
+.indv-top-row-left-side {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.indv-top-row-right-side {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 2rem;
+}
+
+.indv-doctor-name {
+  color: #352C29;
+  font-weight: 700;
+}
+
+.indv-doctor-verified-container {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.indv-edit-profile-button {
+  background-color: #675D59;
+  color: white;
+  border-radius: 8px;
+  padding: 12px 40px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.indv-appointment-management-container {
+  display: flex;
   align-items: center;
   justify-content: center;
-}
-@media (min-width: 768px) {
-  .individual-doctor-container {
-    flex-direction: row;
-    // gap: 8vw;
-    box-sizing: border-box;
-    .individual-doctor-left-container {
-      // padding: 0 0 64px;
-      position: relative;
-      // width: 30vw;
-      height: 920px;
-      //left: 80px;
-      //top: 104px;
-    }
-    .individual-doctor-right-container {
-      padding: 0;
-      // gap: 40px;
-
-      //position: absolute;
-      position: relative;
-      // width: 50vw;
-      //height: 920px;
-      //right: 80px;
-      //top: 104px;
-
-      .individual-doctor-tabs {
-        display: flex;
-        flex-direction: row;
-        gap: 40px;
-
-        .individual-doctor-tab {
-          //styleName: Interactive 3 Bold;
-          font-family: "Open Sans";
-          font-size: 16px;
-          font-weight: 600;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-        }
-
-        .individual-doctor-tab {
-          //styleName: Interactive 3 Bold;
-          font-family: "Open Sans";
-          font-size: 16px;
-          font-weight: 600;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-
-          .individual-doctor-tab-underline {
-            height: 3px;
-            background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%);
-            border-bottom: 3px;
-            border-radius: 50px;
-            margin-top: 5px;
-            display: none;
-          }
-        }
-
-        .individual-doctor-tab:hover {
-          //styleName: Interactive 3 Bold;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-          cursor: pointer;
-
-          .individual-doctor-tab-underline {
-            display: block;
-          }
-        }
-
-        .active,
-        .individual-doctor-tab:hover {
-          //styleName: Interactive 3 Bold;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-
-          .individual-doctor-tab-underline {
-            display: block;
-          }
-        }
-      }
-
-      .individual-doctor-posts {
-        position: relative;
-        // top: -30px;
-        // left: -30px;
-        // width: 55vw;
-      }
-    }
-  }
-  .doctor-post-container {
-    transform: scale(0.7) !important;
-  }
-  //   .individual-page-container {
-  //     display: flex;
-  //     width: 100%;
-  //     flex-direction: column;
-  //     align-items: center;
-  //     justify-content: center;
-  //     //min-height: 150vh;
-  //     /* This allows the footer to be sticked at the bottom if there's not enough content */
-  //   }
+  border: 2px solid #F48C8A;
+  border-radius: 8px;
+  padding: 10px 22px;
+  cursor: pointer;
 }
 
-// Phone
-@media (max-width: 767px) {
-  .individual-page-container {
-    margin-top: 61px;
-    display: flex;
-    flex-direction: column;
-    min-height: 150vh;
-    /* This allows the footer to be sticked at the bottom if there's not enough content */
-  }
-  .individual-doctor-container {
-    display: flex;
-    flex-direction: column;
-
-    .individual-doctor-left-container {
-    }
-    .individual-doctor-right-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0 10px;
-      // gap: 40px;
-      width: 100%;
-
-      position: relative;
-      margin-top: 400px;
-      //top: 700px;
-      right: 0;
-
-      .individual-doctor-tabs {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-        gap: 20px;
-        .individual-doctor-tab {
-          //styleName: Interactive 3 Bold;
-          font-family: "Open Sans";
-          font-size: 16px;
-          font-weight: 600;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-        }
-
-        .individual-doctor-tab {
-          //styleName: Interactive 3 Bold;
-          font-family: "Open Sans";
-          font-size: 16px;
-          font-weight: 600;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-
-          .individual-doctor-tab-underline {
-            height: 3px;
-            background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%);
-            border-bottom: 3px;
-            border-radius: 50px;
-            margin-top: 5px;
-            display: none;
-          }
-        }
-
-        .individual-doctor-tab:hover {
-          //styleName: Interactive 3 Bold;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-          cursor: pointer;
-
-          .individual-doctor-tab-underline {
-            display: block;
-          }
-        }
-
-        .active,
-        .individual-doctor-tab:hover {
-          //styleName: Interactive 3 Bold;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 16px;
-          letter-spacing: 0;
-          text-align: left;
-
-          .individual-doctor-tab-underline {
-            display: block;
-          }
-        }
-      }
-
-      .individual-doctor-posts {
-        position: relative;
-        //margin-top: -20px;
-        // left: 1vh;
-        // right: 1vh;
-        // display: flex;
-        // flex-direction: row;
-        // justify-content: center;
-        // align-items: center;
-        // width: 100%;
-      }
-    }
-  }
-  .infinite-scroll-component__outerdiv {
-    width: 100%;
-  }
-  .individual-doctor-container {
-    width: 100%;
-  }
+.indv-second-row {
+  padding-top: 2rem;
 }
+
+.indv-doctor-description {
+  font-size: 18px;
+  color: black;
+}
+
+.indv-third-row {
+  column-gap: 2rem;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.gray-text-container {
+  color: #A5A6A8
+}
+
+.indv-fourth-row {
+  padding-top: 2rem;
+  column-gap: 5%;
+}
+
+.indv-doctor-info-subrow {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.indv-doctor-info {
+  color: #675D59;
+  font-size: 14px;
+}
+
+.indv-consultation-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 2rem;
+}
+
+.indv-consultation-button {
+  color: #FBFCFF;
+  font-weight: 600;
+  background: linear-gradient(to right,#F48C8A, #F0A484);
+  width: 60%;
+  padding: 0.75rem 0;
+  border-radius: 8px;
+}
+
+// THE ABOVE IS FOR THE DOCTOR PROFILE INFO COMPONENT
+
+.indv-doctor-navbar {
+  display: flex;
+  column-gap: 2rem;
+  padding: 2rem 0;
+}
+
+.indv-doctor-navbar-item {
+  font-size: 16px;
+  font-weight: 600;
+  color: #675D59;
+}
+
+.indv-active {
+  padding-bottom: 0.25rem;
+  color: #352C29;
+  background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%) no-repeat;
+  background-size: 100% 3px;  /* Make the background only 4px high */
+  background-position: bottom;  /* Position the background at the bottom, like a border */
+}
+
+
+// .individual-doctor-container {
+//   margin-top: 126px;
+//   display: flex;
+//   flex-direction: column;
+//   //justify-content: center;
+//   //align-items: center;
+
+//   .individual-doctor-left-container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     align-items: flex-start;
+//     // padding: 0 50px;
+//     // width: 100%;
+//     // margin: auto;
+//     position: relative;
+//     left: 0;
+//   }
+//   .individual-doctor-right-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     padding: 0 10px;
+//     // gap: 40px;
+//     // width: 100%;
+
+//     position: relative;
+//     //top: 700px;
+//     right: 0;
+//     flex: 1;
+//     margin-left: 40px;
+
+//     .individual-doctor-right-about {
+//       margin-top: 40px;
+//       width: 100%;
+//     }
+
+//     .individual-doctor-posts {
+//       width: 100%;
+//     }
+//   }
+// }
+// .individual-page-container {
+//   display: flex;
+//   width: 100%;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+// @media (min-width: 768px) {
+//   .individual-doctor-container {
+//     flex-direction: row;
+//     // gap: 8vw;
+//     box-sizing: border-box;
+//     .individual-doctor-left-container {
+//       // padding: 0 0 64px;
+//       position: relative;
+//       // width: 30vw;
+//       height: 920px;
+//       //left: 80px;
+//       //top: 104px;
+//     }
+//     .individual-doctor-right-container {
+//       padding: 0;
+//       // gap: 40px;
+
+//       //position: absolute;
+//       position: relative;
+//       // width: 50vw;
+//       //height: 920px;
+//       //right: 80px;
+//       //top: 104px;
+
+//       .individual-doctor-tabs {
+//         display: flex;
+//         flex-direction: row;
+//         gap: 40px;
+
+//         .individual-doctor-tab {
+//           //styleName: Interactive 3 Bold;
+//           font-family: "Open Sans";
+//           font-size: 16px;
+//           font-weight: 600;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+//         }
+
+//         .individual-doctor-tab {
+//           //styleName: Interactive 3 Bold;
+//           font-family: "Open Sans";
+//           font-size: 16px;
+//           font-weight: 600;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+
+//           .individual-doctor-tab-underline {
+//             height: 3px;
+//             background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%);
+//             border-bottom: 3px;
+//             border-radius: 50px;
+//             margin-top: 5px;
+//             display: none;
+//           }
+//         }
+
+//         .individual-doctor-tab:hover {
+//           //styleName: Interactive 3 Bold;
+//           font-family: Inter;
+//           font-size: 16px;
+//           font-weight: 700;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+//           cursor: pointer;
+
+//           .individual-doctor-tab-underline {
+//             display: block;
+//           }
+//         }
+
+//         .active,
+//         .individual-doctor-tab:hover {
+//           //styleName: Interactive 3 Bold;
+//           font-family: Inter;
+//           font-size: 16px;
+//           font-weight: 700;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+
+//           .individual-doctor-tab-underline {
+//             display: block;
+//           }
+//         }
+//       }
+
+//       .individual-doctor-posts {
+//         position: relative;
+//         // top: -30px;
+//         // left: -30px;
+//         // width: 55vw;
+//       }
+//     }
+//   }
+//   .doctor-post-container {
+//     transform: scale(0.7) !important;
+//   }
+//   //   .individual-page-container {
+//   //     display: flex;
+//   //     width: 100%;
+//   //     flex-direction: column;
+//   //     align-items: center;
+//   //     justify-content: center;
+//   //     //min-height: 150vh;
+//   //     /* This allows the footer to be sticked at the bottom if there's not enough content */
+//   //   }
+// }
+
+// // Phone
+// @media (max-width: 767px) {
+//   .individual-page-container {
+//     margin-top: 61px;
+//     display: flex;
+//     flex-direction: column;
+//     min-height: 150vh;
+//     /* This allows the footer to be sticked at the bottom if there's not enough content */
+//   }
+//   .individual-doctor-container {
+//     display: flex;
+//     flex-direction: column;
+
+//     .individual-doctor-left-container {
+//     }
+//     .individual-doctor-right-container {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: flex-start;
+//       padding: 0 10px;
+//       // gap: 40px;
+//       width: 100%;
+
+//       position: relative;
+//       margin-top: 400px;
+//       //top: 700px;
+//       right: 0;
+
+//       .individual-doctor-tabs {
+//         display: flex;
+//         flex-direction: row;
+//         margin: 0 auto;
+//         gap: 20px;
+//         .individual-doctor-tab {
+//           //styleName: Interactive 3 Bold;
+//           font-family: "Open Sans";
+//           font-size: 16px;
+//           font-weight: 600;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+//         }
+
+//         .individual-doctor-tab {
+//           //styleName: Interactive 3 Bold;
+//           font-family: "Open Sans";
+//           font-size: 16px;
+//           font-weight: 600;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+
+//           .individual-doctor-tab-underline {
+//             height: 3px;
+//             background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%);
+//             border-bottom: 3px;
+//             border-radius: 50px;
+//             margin-top: 5px;
+//             display: none;
+//           }
+//         }
+
+//         .individual-doctor-tab:hover {
+//           //styleName: Interactive 3 Bold;
+//           font-family: Inter;
+//           font-size: 16px;
+//           font-weight: 700;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+//           cursor: pointer;
+
+//           .individual-doctor-tab-underline {
+//             display: block;
+//           }
+//         }
+
+//         .active,
+//         .individual-doctor-tab:hover {
+//           //styleName: Interactive 3 Bold;
+//           font-family: Inter;
+//           font-size: 16px;
+//           font-weight: 700;
+//           line-height: 16px;
+//           letter-spacing: 0;
+//           text-align: left;
+
+//           .individual-doctor-tab-underline {
+//             display: block;
+//           }
+//         }
+//       }
+
+//       .individual-doctor-posts {
+//         position: relative;
+//         //margin-top: -20px;
+//         // left: 1vh;
+//         // right: 1vh;
+//         // display: flex;
+//         // flex-direction: row;
+//         // justify-content: center;
+//         // align-items: center;
+//         // width: 100%;
+//       }
+//     }
+//   }
+//   .infinite-scroll-component__outerdiv {
+//     width: 100%;
+//   }
+//   .individual-doctor-container {
+//     width: 100%;
+//   }
+// }
