@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 import usePostQueryStore from '../../postStore.ts';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useState, useEffect, useRef } from 'react';
 
 // components
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
@@ -15,25 +14,6 @@ import './community.styles.scss';
 const toDisplayFormat = (param) => {
   return param.replace(/_/g, ' ');
 };
-
-=======
-import usePostQueryStore from "../../postStore.ts";
-import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
-
-// components
-import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
-import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
-import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
-import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
-import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
-import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
-
-// scss
-import "./community.styles.scss";
-const toDisplayFormat = (param) => {
-  return param.replace(/_/g, " ");
-};
->>>>>>> AWS-frontend-postSearch
 const Community = () => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -61,8 +41,8 @@ const Community = () => {
     }
     setFilterCondition(updatedFilter);
   };
-  const handleInputChange = (value) => {
-    setTempSearchParam(value);
+  const handleInputChange = (e) => {
+    setTempSearchParam(e.target.value);
     setIsPostDropDownOpen(true);
   };
   useEffect(() => {
@@ -75,15 +55,9 @@ const Community = () => {
       }
     };
 
-<<<<<<< HEAD
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-=======
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
->>>>>>> AWS-frontend-postSearch
     };
   }, [postContainerRef]);
 
@@ -93,66 +67,50 @@ const Community = () => {
   const handleSearch = () => {
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
-<<<<<<< HEAD
       JSON.parse(localStorage.getItem('postSearchHistory')) || [];
     if (!postSearchHistory.includes(postQuery.tempSearchParam)) {
       postSearchHistory.push(postQuery.tempSearchParam);
       localStorage.setItem(
         'postSearchHistory',
-=======
-      JSON.parse(localStorage.getItem("postSearchHistory")) || [];
-    if (!postSearchHistory.includes(postQuery.tempSearchParam)) {
-      postSearchHistory.push(postQuery.tempSearchParam);
-      localStorage.setItem(
-        "postSearchHistory",
->>>>>>> AWS-frontend-postSearch
         JSON.stringify(postSearchHistory)
       );
     }
     // setTempSearchParam("");
-<<<<<<< HEAD
     console.log('postQuery', postQuery);
-=======
-    console.log("postQuery", postQuery);
->>>>>>> AWS-frontend-postSearch
   };
 
   return (
     <div>
       <div>
         <PostPageMain />
-        <div className="doctor-post-outer-container">
-          <div className="doctor-post-header-container">
-            <div className="doctor-post-header-button-container">
+        <div className='doctor-post-outer-container'>
+          <div className='doctor-post-header-container'>
+            <div className='doctor-post-header-button-container'>
               <PostDropDown
                 // optipns={dropdownOptionsByCategory}
                 handleFilters={handleFilters}
-                menuLabel="Filter"
-                wordAfterMenuLabel="All"
-                className="filter-button"
+                menuLabel='Filter'
+                wordAfterMenuLabel='All'
+                className='filter-button'
               />
               <PostDropDown
                 // options={dropdownOptionsByRole}
                 handleFilters={handleFilters}
-                menuLabel="Procedure"
-                wordAfterMenuLabel="All"
-                className="location-button"
+                menuLabel='Procedure'
+                wordAfterMenuLabel='All'
+                className='location-button'
               />
               <PostDropDown
                 // options={dropdownOptionsByRole}
                 handleFilters={handleFilters}
-                menuLabel="Location"
-                wordAfterMenuLabel="All"
-                className="location-button"
+                menuLabel='Location'
+                wordAfterMenuLabel='All'
+                className='location-button'
               />
               <ResetAllButton />
             </div>
             <div
-<<<<<<< HEAD
               className='post-search-box-position-container'
-=======
-              className="post-search-box-position-container"
->>>>>>> AWS-frontend-postSearch
               ref={postContainerRef}
             >
               <PostSearchBox

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import './procedure-main-page.styles.scss';
 import MainPageIntro from '../../components/main-page-intro/main-page-intro.component';
@@ -11,20 +10,6 @@ import ErrorMsg from '../../components/error-msg/error-msg.component';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import ProcedureSearchDropDown from '../../components/procedure-search-dropdown/procedure-search-dropdown.component';
-=======
-import React from "react";
-import "./procedure-main-page.styles.scss";
-import MainPageIntro from "../../components/main-page-intro/main-page-intro.component";
-import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
-import ProcedureMainCollapsibleGrid from "../../components/procedure-main-collapsible-grid/procedure-main-collapsible-grid.component";
-import { useGetProcedureCategories } from "../../hooks/useGetProcedures";
-import useProcedureQueryStore from "../../procedureStore";
-import HomeSpinner from "../../components/home-spinner/home-spinner.component";
-import ErrorMsg from "../../components/error-msg/error-msg.component";
-import { useEffect, useState } from "react";
-import { useRef } from "react";
-import ProcedureSearchDropDown from "../../components/procedure-search-dropdown/procedure-search-dropdown.component";
->>>>>>> AWS-frontend-postSearch
 
 function groupByGroupName(data) {
   const grouped = {};
@@ -41,11 +26,7 @@ function groupByGroupName(data) {
   }));
 }
 const toDisplayFormat = (param) => {
-<<<<<<< HEAD
   return param.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
-=======
-  return param.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
->>>>>>> AWS-frontend-postSearch
 };
 const formatCategoryName = (name) => {
   return name.toLowerCase().replace(/\s+/g, '_');
@@ -70,9 +51,7 @@ const ProcedureMainPage = () => {
     };
   }, [setProcedureSearchParam]);
   const containerRef = useRef(null);
-  const handleShowContainer = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -83,15 +62,9 @@ const ProcedureMainPage = () => {
       }
     };
 
-<<<<<<< HEAD
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-=======
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
->>>>>>> AWS-frontend-postSearch
     };
   }, [containerRef]);
 
@@ -125,8 +98,11 @@ const ProcedureMainPage = () => {
     />
   ));
   const handleInputChange = (e) => {
-    setProcedureSearchParam(e);
+    setProcedureSearchParam(e.target.value);
     setIsSearchContainerVisible(true);
+  };
+  const handleShowContainer = () => {
+    setIsSearchContainerVisible(!isSearchContainerVisible);
   };
   return (
     <div>
@@ -139,11 +115,7 @@ const ProcedureMainPage = () => {
           <div className='procedure-main-header-title'>
             Our Cosmetic Procedures
           </div>
-<<<<<<< HEAD
           <div ref={containerRef} className=''>
-=======
-          <div ref={containerRef} className="">
->>>>>>> AWS-frontend-postSearch
             <PostSearchBox
               isProcedure={true}
               value={toDisplayFormat(procedureQuery.procedureSearchParam)}

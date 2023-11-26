@@ -1,43 +1,29 @@
-import React from 'react';
-import useProcedureQueryStore from '../../../procedureStore';
+import React, { useState, useEffect, useRef } from 'react';
+import usePostQueryStore from '../../../postStore.ts';
+import { useNavigate } from 'react-router-dom';
+
+// component
+import PostSearchBoxDropDown from '../community-post-search-box-dropdown/community-post-search-box-dropdown';
+import ProcedureSearchDropDown from '../../procedure-search-dropdown/procedure-search-dropdown.component';
 
 // scss
 import './community-post-search-box.scss';
 
 // images
 import SearchIcon from '../../../assets/post/search_icon.svg';
-
+import useProcedureQueryStore from '../../../procedureStore';
 const toUrlParam = (text) => {
-<<<<<<< HEAD
-  return text.toLowerCase().replace(/\s+/g, '_');
-=======
-  return text.toLowerCase().replace(/\s+/g, "_");
->>>>>>> AWS-frontend-postSearch
+  if (text === '') return '';
+  else return text.replace(/_/g, ' ');
 };
-
-const PostSearchBox = ({
-  className,
-  handleSearch,
-  value,
-  onChange,
-  onClick,
-}) => {
+const PostSearchBox = ({ value = '', handleSearch, ...otherProps }) => {
   return (
-    <div className={`community-post-search-box-container ${className}`}>
+    <div className='community-post-search-box-container'>
       <input
-<<<<<<< HEAD
         type='text'
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onClick={onClick}
+        {...otherProps}
         className='community-post-search-box-input'
-=======
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onClick={onClick}
-        className="community-post-search-box-input"
->>>>>>> AWS-frontend-postSearch
       />
       <button type='button'>
         <img

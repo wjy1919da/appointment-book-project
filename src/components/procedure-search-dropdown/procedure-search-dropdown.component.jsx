@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import React from 'react';
 import './procedure-search-dropdown.styles.scss';
 import { useGetProcedureCategories } from '../../hooks/useGetProcedures';
 import useProcedureQueryStore from '../../procedureStore';
 import { set } from 'date-fns';
-=======
-import React from "react";
-import "./procedure-search-dropdown.styles.scss";
-import { useGetProcedureCategories } from "../../hooks/useGetProcedures";
-import useProcedureQueryStore from "../../procedureStore";
-import { set } from "date-fns";
->>>>>>> AWS-frontend-postSearch
 const formatInputForFilter = (input) => {
   return input.toLowerCase().replace(/\s+/g, '_');
 };
@@ -62,11 +54,7 @@ const ProcedureSearchDropDown = () => {
           {filteredTrendyProcedures.map((procedure, index) => (
             <div
               key={index}
-<<<<<<< HEAD
               className='procedure-item'
-=======
-              className="procedure-item"
->>>>>>> AWS-frontend-postSearch
               //   onClick={() => setProcedureSearchParam(procedure)}
               onClick={() => setProcedureSearchParam(procedure)}
             >
