@@ -32,7 +32,7 @@ import CreatePostPage from "./components/components-posts/community-post-create-
 
 import UserProfileSubArea from "./components/user-profile-subArea/user-profile-subArea.jsx";
 import UserProfileEdit from "./components/user-profile-edit/user-profile-edit.jsx";
-
+import DoctorProfileEdit from "./components/doctor-own-profile/doctor-profile-edit/doctor-own-profile-edit";
 import AccountSetup from "./components/account-setting/account-setting";
 import AccountNotFoundPage from "./components/account-setting/not-found";
 import DoctorSignUpProcess from "./components/doctor-signUp-process/doctor-signUp-process";
@@ -118,7 +118,7 @@ const App = () => {
 
               <Route path="AccountSetup" element={<AccountSetup />} />
               <Route path="userProfileEdit" element={<UserProfileEdit />} />
-
+              <Route path = "doctorProfileEdit" element ={<DoctorProfileEdit/>}/>
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
               <Route path="contact-us" element={<ContactUs />} />

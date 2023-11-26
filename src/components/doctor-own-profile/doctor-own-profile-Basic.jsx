@@ -42,7 +42,7 @@ const DocotorOwnBasic = () => {
             ></img>
           </div>
           <div className="doctor-own-basic-edits-buttons">
-            <Link to="/userProfileEdit" className="top-edit-button-1">
+            <Link to="/doctorProfileEdit" className="top-edit-button-1">
               edit profile
             </Link>
             <Link to="/userAppointment" className="top-edit-button-2">
