@@ -44,7 +44,11 @@
   width: 50%;
   display: flex;
   justify-content: flex-end;
-  column-gap: 2rem;
+  column-gap: 1rem;
+}
+
+.indv-doctor-info-icon-container {
+  cursor: pointer;
 }
 
 .indv-doctor-name {
@@ -112,20 +116,32 @@
   font-size: 14px;
 }
 
-.indv-consultation-button-container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding-top: 2rem;
-}
+// .indv-button-container {
+//   width: 100%;
+//   // display: flex;
+//   // justify-content: flex-start;
+//   padding-top: 2rem;
+// }
 
-.indv-consultation-button {
+.indv-button {
   color: #FBFCFF;
   font-weight: 600;
   background: linear-gradient(to right,#F48C8A, #F0A484);
-  width: 60%;
   padding: 0.75rem 0;
   border-radius: 8px;
+}
+
+.indv-consultation-button {
+  width: 40%;
+}
+
+.indv-follow-button {
+  width: 12%;
+}
+
+.indv-fifth-row {
+  padding-top: 2rem;
+  column-gap: 2rem;
 }
 
 // THE ABOVE IS FOR THE DOCTOR PROFILE INFO COMPONENT
@@ -140,6 +156,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #675D59;
+  cursor: pointer;
 }
 
 .indv-active {

@@ -4,6 +4,9 @@ import useDoctorQueryStore from '../../store.ts';
 
 //images
 import glassIcon from "../../assets/user/glassesIcon.png";
+import mailIcon from "../../assets/doctor/mailIcon.svg";
+import phoneIcon from "../../assets/doctor/phoneIcon.svg";
+import stripedGlobeIcon from "../../assets/doctor/stripedGlobeIcon.svg";
 import badgeIcon from "../../assets/user/badgeIcon.png";
 import locationIcon from "../../assets/user/locationIcon.png";
 import gradIcon from "../../assets/user/Graduation Cap.png";
@@ -68,9 +71,9 @@ const IndividualDoctor = () => {
     );
   }
 
-  console.log('Doctor Data is: ', data);
-  console.log('Doctor data2 is: ', data2);
-  console.log('Doctor data3 is: ', data3);
+  // console.log('Doctor Data is: ', data);
+  // console.log('Doctor data2 is: ', data2);
+  // console.log('Doctor data3 is: ', data3);
 
   const selectTab = (index) => {
     setActiveTab(index);
@@ -81,9 +84,9 @@ const IndividualDoctor = () => {
       <DoctorProfileInfo data={data} data3={data3} />
       
       <div className="indv-doctor-navbar">
-          <div onClick={() => setActiveTab(0)} className={`indv-doctor-navbar-item ${activeTab === 0 ? "indv-active" : ""}`}>About</div>
-          <div onClick={() => setActiveTab(1)} className={`indv-doctor-navbar-item ${activeTab === 1 ? "indv-active" : ""}`}>Posts</div>
-          <div onClick={() => setActiveTab(2)} className={`indv-doctor-navbar-item ${activeTab === 2 ? "indv-active" : ""}`}>Like</div>
+          <div onClick={() => selectTab(0)} className={`indv-doctor-navbar-item ${activeTab === 0 ? "indv-active" : ""}`}>About</div>
+          <div onClick={() => selectTab(1)} className={`indv-doctor-navbar-item ${activeTab === 1 ? "indv-active" : ""}`}>Posts</div>
+          <div onClick={() => selectTab(2)} className={`indv-doctor-navbar-item ${activeTab === 2 ? "indv-active" : ""}`}>Like</div>
       </div>
       {activeTab === 0 && <DoctorAbout />}
       {activeTab === 1 && (
@@ -135,10 +138,10 @@ const IndividualDoctor = () => {
 //   );
 };
 
-const DoctorProfileInfo = (data, data3) => {
-  data3 = data?.data3;
-  data = data?.data;
-  console.log('data3 is: ', data3);
+const DoctorProfileInfo = ({data, data3}) => {
+  // data3 = data?.data3;
+  // data = data?.data;
+  // console.log('data3 is: ', data3);
   const { doctorStars } = data3?.pages[0]?.data?.data || {};
   const {postNumber} = data3?.pages[0]?.data?.data || 0;
   const {followers} = data3?.pages[0]?.data?.data || 0;
@@ -156,17 +159,23 @@ const DoctorProfileInfo = (data, data3) => {
           <div className='indv-doctor-info-row indv-top-row' >
             <div className='indv-top-row-left-side' >
               <div className='indv-doctor-name-container'>
-                {data?.nickname && <h2 className='indv-doctor-name'>Dr. {data.nickname}</h2>}
+                {data?.nickname ? <h2 className='indv-doctor-name'>Dr. {data.nickname}</h2> : <h2 className='indv-doctor-name'>Doctor</h2>}
               </div>
               <div className='indv-doctor-verified-container' >
                 <img className='indv-doctor-verified-badge' src={verifiedBadge} alt='verified' />
               </div>
             </div>
             <div className='indv-top-row-right-side' >
-              {/* <div className='indv-edit-profile-button-container' >
-                <button type='button' className='indv-edit-profile-button'>Edit Profile</button>
+              <div className='indv-doctor-info-icon-container' >
+                <img src={mailIcon} className='indv-doctor-info-icon' alt='email' />
               </div>
-              <div className='indv-appointment-management-container' >
+              <div className='indv-doctor-info-icon-container' >
+                <img src={phoneIcon} className='indv-doctor-info-icon' alt='phone' />
+              </div>
+              <div className='indv-doctor-info-icon-container' >
+                <img src={stripedGlobeIcon} className='indv-doctor-info-icon' alt='globe' />
+              </div>
+              {/* <div className='indv-appointment-management-container' >
                 <img className='indv-appointment-mangament' src={appointmentCalendar} alt='calendar appointments' />
               </div> */}
             </div>
@@ -210,9 +219,8 @@ const DoctorProfileInfo = (data, data3) => {
             </div>
           </div>
           <div className='indv-doctor-info-row indv-fifth-row'>
-            <div className='indv-consultation-button-container' >
-              <button type='button' className='indv-consultation-button'>Book A Consultation</button>
-            </div>
+            <button type='button' className='indv-button indv-follow-button'>Follow</button>
+            <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button>
           </div>
         </div>
       </div>

@@ -25,7 +25,14 @@
 
 .vouchers-container {
     display: flex;
-    column-gap: 3rem;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    padding-top: 1rem;
+    column-gap: 2rem;
+}
+
+.indv-no-vouchers-title {
+    font-size: 18px;
 }
 
 .indv-specialization-title {
