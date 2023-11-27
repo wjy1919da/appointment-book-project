@@ -23,7 +23,9 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  CloseButton,
 } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
 const CreatePostPage = () => {
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
@@ -34,7 +36,6 @@ const CreatePostPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
-
   // react hook form
   const {
     register,
@@ -104,11 +105,11 @@ const CreatePostPage = () => {
         }
       });
       console.log("all the files uploaded successfully", uploadResults);
-      setAlert({
-        show: true,
-        type: "success",
-        message: "All the files uploaded successfully.",
-      });
+      // setAlert({
+      //   show: true,
+      //   type: "success",
+      //   message: "All the files uploaded successfully.",
+      // });
       setSelectedFiles([]);
     } catch (err) {
       setAlert({
@@ -144,10 +145,21 @@ const CreatePostPage = () => {
         <Alert
           status={alert.type}
           variant="solid"
-          style={{ zIndex: "100", position: "fixed" }}
+          style={{
+            zIndex: "100",
+            position: "fixed",
+            top: "65px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%", // Adjust the width as needed
+          }}
         >
-          <AlertIcon />
-          <AlertDescription>{alert.message}</AlertDescription>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <AlertIcon />
+            <AlertDescription>{alert.message}</AlertDescription>
+          </div>
+          <CloseButton onClick={() => setAlert({ ...alert, show: false })} />
         </Alert>
       )}
       <form
