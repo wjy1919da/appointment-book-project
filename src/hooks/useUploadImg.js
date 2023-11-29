@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { uploadToS3 } from "../services/s3-client.js";
+import { uploadImgToS3 } from "../services/s3-client.js";
 
 const useUploadImg = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -12,19 +12,17 @@ const useUploadImg = () => {
     setUploadedFiles([]);
     setUploadingFiles([]);
   };
-
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
     setSelectedFiles(newFiles);
     setUploadingFiles(newFiles);
     setIsError(false);
     setIsLoading(true);
-
     try {
       await Promise.all(
         newFiles.map(async (file) => {
           try {
-            const result = await uploadToS3(file);
+            const result = await uploadImgToS3(file);
             if (result.success) {
               setUploadedFiles((prevFiles) => [...prevFiles, result.location]);
             } else {
