@@ -158,6 +158,11 @@
     margin-right: 10px;
   }
 }
+
+.user-detail-profile-image {
+  border-radius: 50%;
+}
+
 @media (max-width: 1024px) {
   .post-detail-popUp-container {
     display: flex;

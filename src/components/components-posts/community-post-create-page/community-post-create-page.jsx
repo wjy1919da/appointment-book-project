@@ -1,18 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import userInfoQueryStore from '../../../userStore';
-// import { useDisclosure } from "@chakra-ui/react";
+
+// scss
+import './community-post-create-page.scss';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
+
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
-
-// scss
-import './community-post-create-page.scss';
+// import { useAddPost } from '../../../hooks/useAddingPost';
 
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
@@ -25,7 +25,8 @@ import {
   AlertDescription,
   CloseButton,
 } from '@chakra-ui/react';
-
+import { useDisclosure } from '@chakra-ui/react';
+import userInfoQueryStore from '../../../userStore';
 const CreatePostPage = () => {
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
   const [clickedRadio, setClickedRadio] = useState(false);
@@ -35,7 +36,6 @@ const CreatePostPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
-
   // react hook form
   const {
     register,
@@ -83,7 +83,6 @@ const CreatePostPage = () => {
     apiMutate(formData);
     setUploadingFiles([]);
   };
-
   // back button
   const handleClickCreatePostBack = () => {
     navigate('/posts');
@@ -120,10 +119,8 @@ const CreatePostPage = () => {
       });
     }
   };
-
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
-
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -142,24 +139,6 @@ const CreatePostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  const renderThumbnails = () => {
-    return selectedFiles.slice(0, 3).map((file, index) => (
-      <img
-        key={index}
-        src={URL.createObjectURL(file)}
-        alt={`Thumbnail ${index + 1}`}
-        style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
-          width: '80px',
-          height: '80px',
-          objectFit: 'contain',
-          marginRight: '10px',
-        }}
-      />
-    ));
-  };
-
   return (
     <div>
       {alert.show && (
@@ -173,7 +152,7 @@ const CreatePostPage = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            width: '100%',
+            width: '100%', // Adjust the width as needed
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -233,6 +212,17 @@ const CreatePostPage = () => {
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
                 >
+                  {selectedFiles.length > 0 && (
+                    <img
+                      src={URL.createObjectURL(selectedFiles[0])}
+                      style={{
+                        width: '70px',
+                        height: '70px',
+                      }}
+                      className='test'
+                      alt='Selected Thumbnail'
+                    />
+                  )}
                   <img
                     src={createPostIcon}
                     style={{
@@ -253,7 +243,6 @@ const CreatePostPage = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing
                 </div>
               </div>
-              <div className='thumbnail-container'>{renderThumbnails()}</div>
             </>
           )}
 

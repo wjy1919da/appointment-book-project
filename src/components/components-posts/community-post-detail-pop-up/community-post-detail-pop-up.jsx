@@ -1,27 +1,34 @@
-import React, { useRef } from 'react';
-import './community-post-detail-pop-up.styles.scss';
-import CommentCard from '../../comment-card/comment-card';
-// import heartIcon from '../../../assets/post/heart.png';
-// import commentIcon from '../../../assets/post/chat_bubble.png';
-import DownArrow from '../../../assets/post/down-arrow.png';
-// import collectIcon from '../../../assets/post/star.png';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { useMediaQuery } from 'react-responsive';
-// import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useAddComment } from '../../../hooks/useComment';
-import usePostQueryStore from '../../../postStore.ts';
-import userInfoQueryStore from '../../../userStore.ts';
 // import { Button } from 'react-bootstrap';
 
+// stores
+import usePostQueryStore from '../../../postStore.ts';
+import userInfoQueryStore from '../../../userStore.ts';
+
+// components
+import CommentCard from '../../comment-card/comment-card';
+// import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
+
+// hooks
+import { useAddComment } from '../../../hooks/useComment';
+
+// scss
+import './community-post-detail-pop-up.styles.scss';
+
 // images
-import UserImage from '../../../assets/post/user_image.svg';
 import HeartIcon from '../../../assets/post/heart_icon.svg';
 import StarIcon from '../../../assets/post/star_icon.svg';
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
+import DownArrow from '../../../assets/post/down-arrow.png';
+// import UserImage from '../../../assets/post/user_image.svg';
+// import heartIcon from '../../../assets/post/heart.png';
+// import commentIcon from '../../../assets/post/chat_bubble.png';
+// import collectIcon from '../../../assets/post/star.png';
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -33,9 +40,10 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
   id,
-  userName,
-  userAvatar,
+  // userName,
+  // userAvatar,
 }) => {
+  const postQuery = usePostQueryStore((state) => state.postQuery);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -103,8 +111,8 @@ const CommunityPostDetailPopUP = ({
     const container = containerRef.current;
     const image = imageRef.current;
     if (container && image) {
-      container.style.height = '400px'; 
-      image.style.maxHeight = '100%'; 
+      container.style.height = '400px';
+      image.style.maxHeight = '100%';
     }
   };
 
@@ -152,8 +160,8 @@ const CommunityPostDetailPopUP = ({
       {/* Moblie */}
       <div className='post-detail-mobile-profile-container'>
         <div className='post-detail-mobile-profile'>
-          <img src={userAvatar} className='post-detail-mobile-avatar'></img>
-          <span>{userName}</span>
+          <img src={postQuery.userAvatar} className='post-detail-mobile-avatar'></img>
+          <span>{postQuery.userName}</span>
         </div>
         <div>
           <button
@@ -184,8 +192,8 @@ const CommunityPostDetailPopUP = ({
 
             <div className='user-detail'>
               <div className='user-detail-inner'>
-                <img src={UserImage} alt='Image-User-Picture' />
-                <span>Anna</span>
+                <img src={postQuery.userAvatar} alt='Image-User-Picture' className='user-detail-profile-image' />
+                <span>{postQuery.userName}</span>
               </div>
               <div className='user-detail-button-container'>
                 <button className='button-archive'>Archive</button>

@@ -48,17 +48,21 @@ const UserProfileLike = () => {
   // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
+  const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
     console.log('Likes Page Data', data);
   }, [data]);
 
-  const handleOnClick = (id) => {
+  const handleOnClick = (post) => {
+    console.log('POST IS HERE', post);
     setIsModelOpen(true);
-    //userName = userName;
-    //avatar = avatar;
-    setUserID(id);
+    setUserID(post.id);
+    setUserName(post.username)
+    setUserAvatar(post.avatar)
   };
 
   const [gutterwidth, setGutterWidth] = useState('10px');
@@ -97,7 +101,7 @@ const UserProfileLike = () => {
   // });
 
   const postList = flatData.map((post, index) => (
-    <div key={index} onClick={()=>handleOnClick(post.id)}>
+    <div key={index} onClick={() => handleOnClick(post)}>
       <CommunityPost
         imageURL={post.coverImg || []}
         text={post.title || ''}
@@ -140,8 +144,8 @@ const UserProfileLike = () => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           // isMobile={isMobile}
-          postUserName="userName"
-          postAvatar={userPostAvatar}
+          // postUserName='userName'
+          // postAvatar={userPostAvatar}
         />
       )}
     </div>
