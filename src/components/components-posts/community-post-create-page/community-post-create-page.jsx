@@ -182,6 +182,7 @@ const CreatePostPage = () => {
 
         <div className="create-post-page-inner-container">
           <input
+            ref={fileInputRef}
             type="file"
             id="imageUpload"
             accept="image/*"
@@ -217,13 +218,6 @@ const CreatePostPage = () => {
                       height: "157px",
                     }}
                     alt="Image-Create-Post"
-                  />
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileSelection}
-                    multiple
-                    style={{ display: "none" }}
                   />
                 </div>
                 <div className="create-post-page-text">
