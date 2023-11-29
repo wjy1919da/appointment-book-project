@@ -28,6 +28,7 @@ interface postQueryStore {
   setTempSearchParam?: (tempSearchParam: string) => void;
   setPostSearchParam?: (postSearchParam: string) => void;
 }
+
 const usePostQueryStore = create<postQueryStore>((set) => ({
   postQuery: {
     pageSize: 12,
