@@ -55,7 +55,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const postCardList = flatData.map((post) => (
     <div
       className="btn"
-      onClick={() => setPostID(post.id, post.avatar, post.username)}
+      onClick={() => setPostID(post.id, post.avatar, post.nickname)}
       key={post.id}
     >
       <CommunityPost

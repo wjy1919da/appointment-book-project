@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import usePostQueryStore from '../../postStore.ts';
+import React, { useState, useEffect } from "react";
+import usePostQueryStore from "../../postStore.ts";
 
 // components
-import CommunityPost from '../components-posts/community-post/community-post.component';
-import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
+import CommunityPost from "../components-posts/community-post/community-post.component";
+import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
 
 // hook
-import { useGetUserLikededPost } from '../../hooks/useGetPosts';
+import { useGetUserLikededPost } from "../../hooks/useGetPosts";
 
 // scss
-import '../user-profile-post-area/user-profile-post-area.styles.scss';
-import '../create-post/create-post.style.scss';
+import "../user-profile-post-area/user-profile-post-area.styles.scss";
+import "../create-post/create-post.style.scss";
 
 // images
-import post1 from '../../assets/doctor/post3.png';
-import userPostAvatar from '../../assets/post/user-profile-avatar.png';
+import post1 from "../../assets/doctor/post3.png";
+import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
 // utils
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import creatPostIcon from '../../assets/post/create-post-icon.png';
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import creatPostIcon from "../../assets/post/create-post-icon.png";
+import { set } from "date-fns";
 
 //import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
@@ -46,22 +47,24 @@ const UserProfileLike = () => {
   const [IsModalOpen, setIsModelOpen] = useState(false);
   // const [showCreatePost, setShowCreatePost] = useState(false);
   // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
-
+  const [userName, setUserName] = useState("");
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
-    console.log('Likes Page Data', data);
+    console.log("Likes Page Data", data);
   }, [data]);
 
-  const handleOnClick = (id) => {
+  const handleOnClick = (post) => {
     setIsModelOpen(true);
     //userName = userName;
     //avatar = avatar;
-    setUserID(id);
+    // set user name and avatar
+    setUserName(post.username);
+    setUserID(post.id);
   };
 
-  const [gutterwidth, setGutterWidth] = useState('10px');
+  const [gutterwidth, setGutterWidth] = useState("10px");
   const breakPoint = {
     default: 4,
     2500: 4,
@@ -97,12 +100,12 @@ const UserProfileLike = () => {
   // });
 
   const postList = flatData.map((post, index) => (
-    <div key={index} onClick={()=>handleOnClick(post.id)}>
+    <div key={index} onClick={() => handleOnClick(post)}>
       <CommunityPost
         imageURL={post.coverImg || []}
-        text={post.title || ''}
-        profileImage={post.avatar || ''}
-        authorName={post.username || ''}
+        text={post.title || ""}
+        profileImage={post.avatar || ""}
+        authorName={post.username || ""}
         likes={post.like_count || 0}
 
         // key={index}
@@ -118,9 +121,9 @@ const UserProfileLike = () => {
   ));
 
   return (
-    <div className='user-profile-post-area-container'>
+    <div className="user-profile-post-area-container">
       {imagesLoaded && (
-        <div className='choose-picture-conatiner-post'>
+        <div className="choose-picture-conatiner-post">
           <ResponsiveMasonry
             columnsCountBreakPoints={breakPoint}
             gutter={gutterwidth}
@@ -140,7 +143,7 @@ const UserProfileLike = () => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           // isMobile={isMobile}
-          postUserName="userName"
+          postUserName={userName}
           postAvatar={userPostAvatar}
         />
       )}

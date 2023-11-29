@@ -12,12 +12,10 @@ import PostDropDownFilter from "../community-post-dropdown-filter/community-post
 
 // hook
 import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
-// import { useAddPost } from '../../../hooks/useAddingPost';
 
 // images
 import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
-import { uploadToS3 } from "../../../services/s3-client";
 import {
   Alert,
   AlertIcon,
@@ -27,14 +25,22 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
+import useUploadImg from "../../../hooks/useUploadImg";
 const CreatePostPage = () => {
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+  const {
+    selectedFiles,
+    handleFileSelection,
+    uploadProgress,
+    isLoading,
+    isError,
+    uploadedFiles,
+    resetFiles,
+  } = useUploadImg();
   const [clickedRadio, setClickedRadio] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
-  const [uploadingFiles, setUploadingFiles] = useState([]);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+
   const navigate = useNavigate();
   // react hook form
   const {
@@ -44,7 +50,7 @@ const CreatePostPage = () => {
   } = useForm({ mode: "onChange" });
 
   // api
-  const { mutate: apiMutate } = useApiRequestPost({
+  const { mutate: apiMutate, data } = useApiRequestPost({
     onError: (error) => {
       setAlert({
         show: true,
@@ -80,44 +86,36 @@ const CreatePostPage = () => {
         message: "Please login to create post.",
       });
     }
-    apiMutate(formData);
-    setUploadingFiles([]);
-  };
-  // back button
-  const handleClickCreatePostBack = () => {
-    navigate("/posts");
-  };
-
-  const handleFileSelection = async (event) => {
-    const newFiles = Array.from(event.target.files);
-    setSelectedFiles(newFiles);
-    console.log(`uploading ${newFiles.length} files...`);
-    const uploadPromises = newFiles.map((file) => uploadToS3(file));
-    try {
-      const uploadResults = await Promise.all(uploadPromises);
-      const successfulUploads = uploadResults
-        .filter((result) => result.success)
-        .map((result) => result.location);
-      setUploadedFiles((prevFiles) => [...prevFiles, ...successfulUploads]);
-      uploadResults.forEach((result) => {
-        if (!result.success) {
-          setAlert({ show: true, type: "error", message: result.message });
-        }
-      });
-      console.log("all the files uploaded successfully", uploadResults);
-      // setAlert({
-      //   show: true,
-      //   type: "success",
-      //   message: "All the files uploaded successfully.",
-      // });
-      setSelectedFiles([]);
-    } catch (err) {
+    if (isError) {
       setAlert({
         show: true,
         type: "error",
         message: "Failed to upload files.",
       });
     }
+    if (isLoading) {
+      setAlert({
+        show: true,
+        type: "error",
+        message: "Please wait for uploading files.",
+      });
+    }
+    apiMutate(formData);
+    resetFiles();
+  };
+  useEffect(() => {
+    console.log("data::", data);
+    if (data?.code === 100) {
+      setAlert({
+        show: true,
+        type: "success",
+        message: "Post created successfully.",
+      });
+    }
+  }, [data]);
+  // back button
+  const handleClickCreatePostBack = () => {
+    navigate("/posts");
   };
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
