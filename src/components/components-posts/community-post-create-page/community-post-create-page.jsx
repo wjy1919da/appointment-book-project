@@ -16,18 +16,12 @@ import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
 // images
 import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
-} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
 import useUploadImg from "../../../hooks/useUploadImg";
 const CreatePostPage = () => {
-  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+  const toast = useToast();
   const {
     selectedFiles,
     handleFileSelection,
@@ -52,10 +46,11 @@ const CreatePostPage = () => {
   // api
   const { mutate: apiMutate, data } = useApiRequestPost({
     onError: (error) => {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Failed to create post.",
+      toast({
+        title: "Failed to create post.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       });
     },
   });
@@ -79,40 +74,37 @@ const CreatePostPage = () => {
       ],
       title: data.title,
     };
-    if (!userInfo.username) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Please login to create post.",
+    if (!userInfo?.token) {
+      toast({
+        title: "Please login first.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       });
-    }
-    if (isError) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Failed to upload files.",
-      });
-    }
-    if (isLoading) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Please wait for uploading files.",
-      });
+      return;
     }
     apiMutate(formData);
     resetFiles();
   };
   useEffect(() => {
-    console.log("data::", data);
+    // console.log("data::", data);
     if (data?.code === 100) {
-      setAlert({
-        show: true,
-        type: "success",
-        message: "Post created successfully.",
+      toast({
+        title: "Post created successfully.",
+        status: "success",
+        duration: 1000,
+        isClosable: true,
       });
     }
-  }, [data]);
+    if (data?.code === 500) {
+      toast({
+        title: "Failed to create post.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [data, toast]);
   // back button
   const handleClickCreatePostBack = () => {
     navigate("/posts");
@@ -139,27 +131,6 @@ const CreatePostPage = () => {
 
   return (
     <div>
-      {alert.show && (
-        <Alert
-          status={alert.type}
-          variant="solid"
-          style={{
-            zIndex: "100",
-            position: "fixed",
-            top: "65px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%", // Adjust the width as needed
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <AlertIcon />
-            <AlertDescription>{alert.message}</AlertDescription>
-          </div>
-          <CloseButton onClick={() => setAlert({ ...alert, show: false })} />
-        </Alert>
-      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="create-post-page-container"

@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 const axiosInstance = axios.create({
-  baseURL: 'https://api-dev.charm-life.com/',
+  baseURL: "https://api-dev.charm-life.com/",
   // baseURL: "http://localhost:8080/",
 });
 
@@ -10,7 +10,7 @@ class APIClient {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   post(data) {

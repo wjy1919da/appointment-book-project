@@ -182,15 +182,21 @@ export function useDoctorLogin() {
     )
   );
 }
+
 export function useGetUserInfo() {
   const apiClient = new APIClient("/user/fetch_user_profile");
   const userInfo = userInfoQueryStore((s) => s.userInfo);
+
   const fetchGetUserInfo = async () => {
     const res = await apiClient.post();
     return res.data;
   };
-  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo);
+
+  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo, {
+    retry: 1,
+  });
 }
+
 export function useGetDoctorInfo() {
   const userInfo = userInfoQueryStore((s) => s.userInfo);
   const apiClient = new APIClient("/user_action/doctor_profile");

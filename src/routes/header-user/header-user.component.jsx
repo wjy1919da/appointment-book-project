@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
+import useTimer from "../../hooks/useTimer";
 import {
   Modal,
   ModalOverlay,
@@ -49,9 +50,6 @@ const HeaderUser = () => {
   );
   const setDescription = userInfoQueryStore((state) => state.setDescription);
   const removeToken = userInfoQueryStore((state) => state.removeToken);
-  const [dropdown, setDropdown] = useState(false);
-  const handleLoginClick = () => setLoginClick(!loginClick);
-  const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
 
   const handleLogOutClick = () => {
     localStorage.removeItem("token");
@@ -63,9 +61,16 @@ const HeaderUser = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const modalDisclosure = useDisclosure();
   const menuDisclosure = useDisclosure();
-
   const { data, isLoading, isError, error } = useGetUserInfo();
-  // console.log("userInfo in header", userInfo);
+  useTimer(
+    () => {
+      if (data === undefined) {
+        removeToken();
+        togglePopup(true, "accountType");
+      }
+    },
+    data ? null : 30000
+  );
   useEffect(() => {
     if (data?.data) {
       console.log("data setting is called", data);
