@@ -23,8 +23,8 @@ const DoctorEditHightLightSession = () => {
     resetFiles,
   } = useUploadImg();
   const fileInputRef = useRef(null);
-  const displayImage =
-    selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
+  // const displayImage =
+  //   selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
   if (isError) {
     setAlert({
       show: true,
@@ -63,45 +63,33 @@ const DoctorEditHightLightSession = () => {
             onChange={handleFileSelection}
             multiple
           />
-          {displayImage ? (
-            <img
-              src={displayImage}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                width: "330px",
-                height: "330px",
-                objectFit: "contain",
-              }}
-              alt="Selected"
-            />
-          ) : (
-            <div
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              onClick={handleBrowseFiles}
-            >
-              <img src={creatPostIcon} />
-            </div>
-          )}
+
+          <div
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onClick={handleBrowseFiles}
+          >
+            <img src={creatPostIcon} />
+          </div>
+
           <span className="hightlight-creat-post-text-container">
             Lorem ipsum dolor sit amet, consectetur adipiscing
           </span>
         </div>
         <div className="hightlight-post-container">
-          <div className="hightlight-post-img"></div>
+          <img className="hightlight-post-img" />
           <div className="highlight-post-text">
             Description 1 lorum ipsum Description 1 lorum ipsumDescription 1
             lorum ipsumDescription 1 lorum ipsum
           </div>
         </div>
-        <div className="hightlight-post-container">
+        {/* <div className="hightlight-post-container">
           <div className="hightlight-post-img"></div>
           <div className="highlight-post-text">
             Description 1 lorum ipsum Description 1 lorum ipsumDescription 1
             lorum ipsumDescription 1 lorum ipsum
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

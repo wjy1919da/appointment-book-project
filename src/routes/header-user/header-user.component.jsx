@@ -33,12 +33,6 @@ const HeaderUser = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   // console.log("userInfo in header", userInfo);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-  // let isUser = userInfo.accountType === "1";
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-  const menuContainerRef = useRef();
-  const [loginClick, setLoginClick] = useState(false);
-  const [verifyEmailClick, setVerifyEmailClick] = useState(false);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const setUsername = userInfoQueryStore((state) => state.setUsername);
   const setPostCount = userInfoQueryStore((state) => state.setPostCount);
@@ -65,6 +59,7 @@ const HeaderUser = () => {
   useTimer(
     () => {
       if (data === undefined) {
+        localStorage.removeItem("token");
         removeToken();
         togglePopup(true, "accountType");
       }
@@ -89,7 +84,6 @@ const HeaderUser = () => {
       menuDisclosure.onOpen();
     }
   };
-  // console.log("user Info in header", data);
 
   return (
     <div className="header-login">

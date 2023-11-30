@@ -17,11 +17,14 @@ const useUploadImg = () => {
   };
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
-    setSelectedFiles(newFiles);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+
     setUploadingFiles(newFiles);
     setIsError(false);
     setIsLoading(true);
+
     const uploadPromises = newFiles.map((file) => uploadImgToS3(file));
+
     toast.promise(
       Promise.all(uploadPromises),
       {
@@ -35,6 +38,7 @@ const useUploadImg = () => {
         isClosable: true,
       }
     );
+
     try {
       await Promise.all(
         newFiles.map(async (file) => {
@@ -63,9 +67,9 @@ const useUploadImg = () => {
       console.log("error uploading files", err);
     } finally {
       setIsLoading(false);
-      setSelectedFiles([]);
     }
   };
+
   return {
     selectedFiles,
     uploadedFiles,
