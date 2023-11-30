@@ -3,13 +3,6 @@ import arrowLeft from "../../../assets/user/doctor-arrow-left.png";
 import arrowRight from "../../../assets/user/doctor-arrow-right.png";
 import "./doctor-edit-profile-highLight.styles.scss";
 import creatPostIcon from "../../../assets/post/create-post-icon.png";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
-} from "@chakra-ui/react";
 import useUploadImg from "../../../hooks/useUploadImg";
 const DoctorEditHightLightSession = () => {
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
@@ -76,13 +69,18 @@ const DoctorEditHightLightSession = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing
           </span>
         </div>
-        <div className="hightlight-post-container">
-          <img className="hightlight-post-img" />
-          <div className="highlight-post-text">
-            Description 1 lorum ipsum Description 1 lorum ipsumDescription 1
-            lorum ipsumDescription 1 lorum ipsum
+        {selectedFiles.map((file, index) => (
+          <div key={index} className="hightlight-post-container">
+            <img
+              src={URL.createObjectURL(file)}
+              className="hightlight-post-img"
+              alt={`File ${index}`}
+            />
+            <div className="highlight-post-text">
+              Description {index + 1} lorem ipsum
+            </div>
           </div>
-        </div>
+        ))}
         {/* <div className="hightlight-post-container">
           <div className="hightlight-post-img"></div>
           <div className="highlight-post-text">
