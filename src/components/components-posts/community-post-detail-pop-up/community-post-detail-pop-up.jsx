@@ -1,5 +1,6 @@
-import React, { useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -50,6 +51,7 @@ const CommunityPostDetailPopUP = ({
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+  const navigate = useNavigate();
 
   const schema = z.object({
     comment: z
@@ -155,12 +157,19 @@ const CommunityPostDetailPopUP = ({
     );
   }
 
+  const handleGoToEdit = () => {
+    navigate('/edit-post');
+  };
+
   return (
     <div className='post-detail-popUp-container' ref={containerRef}>
       {/* Moblie */}
       <div className='post-detail-mobile-profile-container'>
         <div className='post-detail-mobile-profile'>
-          <img src={postQuery.userAvatar} className='post-detail-mobile-avatar'></img>
+          <img
+            src={postQuery.userAvatar}
+            className='post-detail-mobile-avatar'
+          ></img>
           <span>{postQuery.userName}</span>
         </div>
         <div>
@@ -192,12 +201,17 @@ const CommunityPostDetailPopUP = ({
 
             <div className='user-detail'>
               <div className='user-detail-inner'>
-                <img src={postQuery.userAvatar} alt='Image-User-Picture' className='user-detail-profile-image' />
+                <img
+                  src={postQuery.userAvatar}
+                  alt='Image-User-Picture'
+                  className='user-detail-profile-image'
+                />
                 <span>{postQuery.userName}</span>
               </div>
               <div className='user-detail-button-container'>
-                <button className='button-archive'>Archive</button>
-                <button className='button-edit'>Edit your Post</button>
+                <button className='button-edit' onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
               </div>
             </div>
           </>
@@ -214,6 +228,7 @@ const CommunityPostDetailPopUP = ({
         <div className='detail-top-content'>
           <div className='post-popUp-content'>
             {!isMobile && brief && <span>{brief}</span>}
+            <h2 className='postdetail-popUp-title'>Title</h2>
             <hr className='hr' />
             <p className='post-description'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
@@ -327,13 +342,13 @@ const CommunityPostDetailPopUP = ({
               />  */}
             </div>
             <div className='new-comment-input'>
-              <input
+              {/* <input
                 {...register('comment')}
                 type='text'
                 placeholder='Enter your comment'
                 className='input-blank'
                 onClick={handleInputClick}
-              />
+              /> */}
               <p>{errors.comment?.message}</p>
             </div>
           </form>

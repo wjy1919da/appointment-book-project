@@ -39,6 +39,15 @@
           max-width: 450px;
         }
 
+        .postdetail-popUp-title {
+          color: #352c29;
+          font-family: Open Sans;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+
         .post-popUp-break-lines {
           margin-top: 20px;
           position: relative;
@@ -55,22 +64,23 @@
       .fixed-input-box {
         position: absolute;
         width: 100%;
-        //height:90px;
+        height: 60px;
         bottom: 0px;
         flex: 1;
-        //height:50%;
         max-height: 90px;
         border: solid 1px rgba(226, 227, 231, 1);
         border-radius: 0 0 8px 0;
         background-color: #ffffff;
+
         .Icon-display {
           display: flex;
           flex-direction: row;
           gap: 40px;
           width: 500px;
           height: 60px;
-          //margin-top: 10px;
-          margin-left: 5%;
+          padding: 3%;
+          // margin-left: 5%;
+
           .Icon-size {
             width: 18px;
             border-radius: 0;
@@ -291,7 +301,7 @@
   align-items: center;
   background-color: var(--White, #fbfcff);
   opacity: 0.9;
-  width: 580px;
+  width: 100%;
   height: 60px;
   padding: 20px;
 
@@ -306,10 +316,6 @@
     height: 49px;
   }
 
-  .user-detail-button-container {
-    display: none;
-  }
-
   span {
     color: var(--text-1-footer, #352c29);
     font-size: 21px;
@@ -321,13 +327,8 @@
     text-decoration-line: underline;
   }
 
-  .button-archive,
   .button-edit {
     text-decoration: underline;
-  }
-
-  .button-archive {
-    margin-right: 24px;
   }
 }
 
