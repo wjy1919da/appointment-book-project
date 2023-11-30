@@ -12,9 +12,6 @@ import {
 } from '@chakra-ui/react';
 // import { useDisclosure } from '@chakra-ui/react';
 
-// scss
-import './community-post-create-page.scss';
-
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
 import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
@@ -22,6 +19,9 @@ import PostDropDownFilter from '../community-post-dropdown-filter/community-post
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
 // import { useAddPost } from '../../../hooks/useAddingPost';
+
+// scss
+import './community-post-create-page.scss';
 
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
@@ -126,7 +126,7 @@ const CreatePostPage = () => {
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
 
   const displayThumbnails =
-    selectedFiles.length > 1
+    selectedFiles.length > 0
       ? selectedFiles.slice(1, 4).map((file, index) => (
           <img
             key={index}
