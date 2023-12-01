@@ -136,6 +136,7 @@ const CreatePostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
+  // thumbnail
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
@@ -218,13 +219,40 @@ const CreatePostPage = () => {
                 </div>
               </>
             )}
-          
-            {displayThumbnails && (
-              <div className='thumbnails-wrapper' style={{
-                width: '70px',
-                height: '70px',
-              }}>{displayThumbnails}</div>
-            )}
+
+            {/* thumbnail */}
+            <div className='create-post-page-thumbnail-container'>
+              {displayThumbnails && (
+                <div
+                  className='create-post-page-thumbnail'
+                  style={{
+                    width: '70px',
+                    height: '70px',
+                  }}
+                >
+                  {displayThumbnails}
+                </div>
+              )}
+
+              {/* thumbnail create */}
+              {displayThumbnails && (
+                <div
+                  className='create-post-page-add-thumbnail'
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  onClick={handleBrowseFiles}
+                >
+                  <img
+                    src={createPostIcon}
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                    }}
+                    alt='Image-Create-Post'
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
           <div className='create-post-page-right-container'>
@@ -242,7 +270,9 @@ const CreatePostPage = () => {
                 })}
               />
 
-              <p className='create-post-page-title-error-validation'>{errors.title?.message}</p>
+              <p className='create-post-page-title-error-validation'>
+                {errors.title?.message}
+              </p>
 
               <div className='create-post-page-description-container'>
                 <textarea

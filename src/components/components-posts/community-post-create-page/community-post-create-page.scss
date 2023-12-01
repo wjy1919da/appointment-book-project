@@ -109,6 +109,33 @@
     width: 200px;
   }
 
+  .create-post-page-thumbnail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .create-post-page-thumbnail {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      // border: 1px solid gray;
+    }
+
+    .create-post-page-add-thumbnail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // border: 1px solid gray;
+      border-radius: 8px;
+      background: #fbfcff;
+      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  // right container
   .create-post-page-title,
   .create-post-page-description {
     border-radius: 8px;
