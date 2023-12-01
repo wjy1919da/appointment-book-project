@@ -75,21 +75,19 @@
         .Icon-display {
           display: flex;
           flex-direction: row;
-          gap: 40px;
+          gap: 10px;
           width: 500px;
           height: 60px;
           padding: 3%;
-          // margin-left: 5%;
 
           .Icon-size {
             width: 18px;
-            border-radius: 0;
           }
 
           .Icon-count {
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            gap: 8px;
             color: var(--text-2-button, #675d59);
             font-family: 'Open Sans';
             font-style: normal;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -21,11 +21,14 @@ import { useAddComment } from '../../../hooks/useComment';
 import './community-post-detail-pop-up.styles.scss';
 
 // images
-import HeartIcon from '../../../assets/post/heart_icon.svg';
 import StarIcon from '../../../assets/post/star_icon.svg';
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
 import DownArrow from '../../../assets/post/down-arrow.png';
+import heartIcon from '../../../assets/post/heart.png';
+import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+
+// import HeartIcon from '../../../assets/post/heart_icon.svg';
 // import UserImage from '../../../assets/post/user_image.svg';
 // import heartIcon from '../../../assets/post/heart.png';
 // import commentIcon from '../../../assets/post/chat_bubble.png';
@@ -52,6 +55,7 @@ const CommunityPostDetailPopUP = ({
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
+  const [liked, setLiked] = useState(false);
 
   const schema = z.object({
     comment: z
@@ -60,7 +64,7 @@ const CommunityPostDetailPopUP = ({
       .min(5, 'Comment must be at least 5 characters long'),
   });
 
-  //console.log("userInfo in post detail ",userInfo);
+  // console.log("userInfo in post detail ",userInfo);
 
   const {
     register,
@@ -72,8 +76,7 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
-    //console.log("formData ",formData);
-    // set post id and comment text
+    // console.log("formData ",formData);
     if (!userInfo.token) {
       togglePopup(true, 'login');
       return;
@@ -92,7 +95,7 @@ const CommunityPostDetailPopUP = ({
 
   useEffect(() => {
     if (data?.code === 100) {
-      //alert("send comment ",data.msg);
+      // alert("send comment ",data.msg);
       reset({ comment: '' });
       refresh();
     } else if (data?.code === 500 || data?.code === 403) {
@@ -101,7 +104,9 @@ const CommunityPostDetailPopUP = ({
   }, [data]);
 
   const handleInputClick = (e) => {
-    //console.log("handleInputClick ",userInfo.token);
+    // console.log("handleInputClick ",userInfo.token);
+
+    setLiked((prev) => !prev);
     if (!userInfo.token) {
       e.preventDefault(); // 阻止默认行为
       togglePopup(true, 'login');
@@ -299,7 +304,7 @@ const CommunityPostDetailPopUP = ({
               <div className='Icon-display'>
                 <span className='Icon-count'>
                   <img
-                    src={HeartIcon}
+                    src={liked ? heartIconFilled : heartIcon}
                     alt='Icon'
                     className='Icon-size'
                     onClick={handleInputClick}
