@@ -218,7 +218,7 @@ const CreatePostPage = () => {
                 </div>
               </>
             )}
-
+          
             {displayThumbnails && (
               <div className='thumbnails-wrapper' style={{
                 width: '70px',
