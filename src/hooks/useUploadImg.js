@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { uploadImgToS3 } from "../services/s3-client.js";
 import { useToast } from "@chakra-ui/react";
 
@@ -9,12 +9,24 @@ const useUploadImg = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+  const uploadControllers = useRef(new Map());
 
   const resetFiles = () => {
     setSelectedFiles([]);
     setUploadedFiles([]);
     setUploadingFiles([]);
   };
+  const removeFile = (fileToRemove) => {
+    if (uploadControllers.current.has(fileToRemove)) {
+      const controller = uploadControllers.current.get(fileToRemove);
+      controller.abort(); // 中断上传
+      uploadControllers.current.delete(fileToRemove); // 从 Map 中移除 controller
+    }
+    setSelectedFiles((currentFiles) =>
+      currentFiles.filter((file) => file !== fileToRemove)
+    );
+  };
+
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
     setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
@@ -23,7 +35,11 @@ const useUploadImg = () => {
     setIsError(false);
     setIsLoading(true);
 
-    const uploadPromises = newFiles.map((file) => uploadImgToS3(file));
+    const uploadPromises = newFiles.map((file) => {
+      const controller = new AbortController();
+      uploadControllers.current.set(file, controller);
+      return uploadImgToS3(file, controller.signal);
+    });
 
     toast.promise(
       Promise.all(uploadPromises),
@@ -78,6 +94,7 @@ const useUploadImg = () => {
     isError,
     isLoading,
     resetFiles,
+    removeFile,
   };
 };
 

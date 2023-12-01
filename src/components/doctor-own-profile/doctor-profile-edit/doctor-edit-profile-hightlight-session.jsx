@@ -14,6 +14,7 @@ const DoctorEditHightLightSession = () => {
     isError,
     uploadedFiles,
     resetFiles,
+    removeFile,
   } = useUploadImg();
   const fileInputRef = useRef(null);
   // const displayImage =
@@ -76,18 +77,13 @@ const DoctorEditHightLightSession = () => {
               className="hightlight-post-img"
               alt={`File ${index}`}
             />
+            <button onClick={() => removeFile(file)}>Close</button>{" "}
+            {/* 添加关闭按钮 */}
             <div className="highlight-post-text">
               Description {index + 1} lorem ipsum
             </div>
           </div>
         ))}
-        {/* <div className="hightlight-post-container">
-          <div className="hightlight-post-img"></div>
-          <div className="highlight-post-text">
-            Description 1 lorum ipsum Description 1 lorum ipsumDescription 1
-            lorum ipsumDescription 1 lorum ipsum
-          </div>
-        </div> */}
       </div>
     </div>
   );

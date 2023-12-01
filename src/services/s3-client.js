@@ -1,6 +1,6 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
-const uploadToS3 = async (file) => {
+const uploadToS3 = async (file, signal) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxFileSize) {
     return {
@@ -11,6 +11,8 @@ const uploadToS3 = async (file) => {
   const fileName = `${Date.now()}-${file.name}`;
   const upload = new Upload({
     client: s3Client,
+    leavePartsOnError: true,
+    abortSignal: signal,
     params: {
       Bucket: "verificationbucketcharm",
       Key: fileName,
