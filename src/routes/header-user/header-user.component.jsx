@@ -100,7 +100,6 @@ const HeaderUser = () => {
           <div className="header-login-text">Login/Sign up</div>
         </div>
       )}
-      {/* On Mouse Leave is not work */}
       <Menu
         isOpen={menuDisclosure.isOpen}
         onClose={menuDisclosure.onClose}
@@ -115,7 +114,7 @@ const HeaderUser = () => {
           />
         )}
 
-        {data?.data?.nickname && (
+        {userInfo.token && (
           <MenuButton
             as={Button}
             style={{ backgroundColor: "transparent" }}
@@ -126,7 +125,7 @@ const HeaderUser = () => {
           </MenuButton>
         )}
         <MenuList>
-          <MenuGroup title={`Hello, ${data?.data?.nickname || ""}`}>
+          <MenuGroup title={`Hello, ${data?.data?.nickname || "User"}`}>
             <MenuItem>
               <Link
                 to="/AccountSetup"
