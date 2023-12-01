@@ -137,14 +137,32 @@ const CreatePostPage = () => {
   };
 
   // thumbnail
+  // const displayThumbnails =
+  //   selectedFiles.length > 0
+  //     ? selectedFiles.map((file, index) => (
+  //         <div key={index}>
+  //           <img
+  //             src={URL.createObjectURL(file)}
+  //             className='thumbnail'
+  //             alt={`Selected Thumbnail ${index + 1}`}
+  //           />
+  //         </div>
+  //       ))
+  //     : null;
+
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
-          <div key={index}>
+          <div key={index} className='create-post-page-thumbnail'>
             <img
               src={URL.createObjectURL(file)}
               className='thumbnail'
               alt={`Selected Thumbnail ${index + 1}`}
+              style={{
+                width: '70px',
+                height: '70px',
+                objectFit: 'cover',
+              }}
             />
           </div>
         ))
@@ -222,17 +240,7 @@ const CreatePostPage = () => {
 
             {/* thumbnail */}
             <div className='create-post-page-thumbnail-container'>
-              {displayThumbnails && (
-                <div
-                  className='create-post-page-thumbnail'
-                  style={{
-                    width: '70px',
-                    height: '70px',
-                  }}
-                >
-                  {displayThumbnails}
-                </div>
-              )}
+              {displayThumbnails}
 
               {/* thumbnail create */}
               {displayThumbnails && (
