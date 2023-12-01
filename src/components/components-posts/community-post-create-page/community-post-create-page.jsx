@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
 import userInfoQueryStore from '../../../userStore';
+// import { useDisclosure } from '@chakra-ui/react';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
@@ -117,7 +117,7 @@ const CreatePostPage = () => {
 
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
-    
+
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -135,6 +135,19 @@ const CreatePostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
+
+  const displayThumbnails =
+    selectedFiles.length > 0
+      ? selectedFiles.map((file, index) => (
+          <div key={index} className='thumbnail-container'>
+            <img
+              src={URL.createObjectURL(file)}
+              className='thumbnail'
+              alt={`Selected Thumbnail ${index + 1}`}
+            />
+          </div>
+        ))
+      : null;
 
   return (
     <div>
@@ -159,51 +172,60 @@ const CreatePostPage = () => {
         </button>
 
         <div className='create-post-page-inner-container'>
-          <input
-            ref={fileInputRef}
-            type='file'
-            id='imageUpload'
-            accept='image/*'
-            style={{ display: 'none' }}
-            onChange={handleFileSelection}
-            multiple
-          />
-          {displayImage ? (
-            <img
-              src={displayImage}
-              style={{
-                maxWidth: '100%',
-                maxHeight: '100%',
-                width: '330px',
-                height: '330px',
-                objectFit: 'contain',
-              }}
-              alt='Selected'
+          <div className='create-post-page-wrapper'>
+            <input
+              ref={fileInputRef}
+              type='file'
+              id='imageUpload'
+              accept='image/*'
+              style={{ display: 'none' }}
+              onChange={handleFileSelection}
+              multiple
             />
-          ) : (
-            <>
-              <div className='left-container'>
-                <div
-                  className='create-post-page-add'
-                  onDrop={handleDrop}
-                  onDragOver={handleDragOver}
-                  onClick={handleBrowseFiles}
-                >
-                  <img
-                    src={createPostIcon}
-                    style={{
-                      width: '157px',
-                      height: '157px',
-                    }}
-                    alt='Image-Create-Post'
-                  />
+            {displayImage ? (
+              <img
+                src={displayImage}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  width: '330px',
+                  height: '330px',
+                  objectFit: 'contain',
+                }}
+                alt='Selected'
+              />
+            ) : (
+              <>
+                <div className='left-container'>
+                  <div
+                    className='create-post-page-add'
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onClick={handleBrowseFiles}
+                  >
+                    <img
+                      src={createPostIcon}
+                      style={{
+                        width: '157px',
+                        height: '157px',
+                      }}
+                      alt='Image-Create-Post'
+                    />
+                  </div>
+                  <div className='create-post-page-text'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                  </div>
                 </div>
-                <div className='create-post-page-text'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
+
+            {displayThumbnails && (
+              <div className='thumbnails-wrapper' style={{
+                width: '70px',
+                height: '70px',
+              }}>{displayThumbnails}</div>
+            )}
+          </div>
 
           <div className='right-container'>
             <div>
@@ -219,6 +241,7 @@ const CreatePostPage = () => {
                   },
                 })}
               />
+
               <p className='title-error-validation'>{errors.title?.message}</p>
 
               <div className='description-container'>
