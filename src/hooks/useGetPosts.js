@@ -35,7 +35,6 @@ export function useGetPost() {
 
 // get posts
 export function useGetUserPostedPost() {
-
   const apiClient = new APIClient('/user_action/Myposts');
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
@@ -62,7 +61,6 @@ export function useGetUserPostedPost() {
 }
 
 export function useGetUserLikededPost() {
-
   const apiClient = new APIClient('/user_action/likedPosts');
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
@@ -106,7 +104,7 @@ export function usePostDetail() {
       return { data: {} };
     }
   };
-  
+
   return useQuery(
     ['postDetail', postQuery.userID, postQuery.trigger],
     fetchPostDetail,
@@ -115,3 +113,5 @@ export function usePostDetail() {
     }
   );
 }
+
+// likes
