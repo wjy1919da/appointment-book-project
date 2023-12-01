@@ -160,7 +160,7 @@ const EditPostPage = () => {
       )} */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='create-post-page-container'
+        className='edit-post-page-container'
       >
         <div className='pink-background-1'></div>
         <div className='pink-background-2'></div>
@@ -168,18 +168,18 @@ const EditPostPage = () => {
         <button
           type='button'
           onClick={handleClickCreatePostBack}
-          className='create-post-page-back-button-container'
+          className='edit-post-page-back-button-container'
         >
           <img
             src={Arrow}
             alt='Image-Arrow-Icon'
-            className='arrow-back-button'
+            className='edit-post-page-arrow-back-button'
           />
-          <span className='create-post-page-back-button'>Edit a post</span>
+          <span className='edit-post-page-back-button'>Edit a post</span>
         </button>
 
-        <div className='create-post-page-inner-container'>
-          <div className='create-post-page-left-container-wrapper'>
+        <div className='edit-post-page-inner-container'>
+          <div className='edit-post-page-left-container-wrapper'>
             <input
               type='file'
               id='imageUpload'
@@ -202,9 +202,9 @@ const EditPostPage = () => {
               />
             ) : (
               <>
-                <div className='left-container'>
+                <div className='edit-post-page-left-container'>
                   <div
-                    className='create-post-page-add'
+                    className='edit-post-page-add'
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onClick={handleBrowseFiles}
@@ -236,7 +236,7 @@ const EditPostPage = () => {
                       style={{ display: 'none' }}
                     />
                   </div>
-                  <div className='create-post-page-text'>
+                  <div className='edit-post-page-text'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing
                   </div>
                 </div>
@@ -261,12 +261,12 @@ const EditPostPage = () => {
             </div> */}
           </div>
 
-          <div className='right-container'>
+          <div className='edit-post-page-right-container'>
             <div>
               <input
                 type='text'
                 placeholder='Title'
-                className='create-post-page-title'
+                className='edit-post-page-title'
                 {...register('title', {
                   required: '* Title is required.',
                   maxLength: {
@@ -275,14 +275,14 @@ const EditPostPage = () => {
                   },
                 })}
               />
-              <p className='title-error-validation'>{errors.title?.message}</p>
+              <p className='edit-post-page-title-error-validation'>{errors.title?.message}</p>
 
               <div className='description-container'>
                 <textarea
                   name='brief'
                   id='description'
                   placeholder='Description'
-                  className='create-post-page-description'
+                  className='edit-post-page-description'
                   {...register('description', {
                     required: '* Description is required.',
                   })}
@@ -291,26 +291,26 @@ const EditPostPage = () => {
                 <PostDropDownFilter />
                 <PostDropDownFilter />
 
-                <p className='description-error-validation'>
+                <p className='edit-post-page-description-error-validation'>
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
-            <div className='wrapper'>
+            <div className='edit-post-page-button-wrapper'>
               {/* --- radio button --- */}
-              <div className='create-post-page-radio-button-container'>
+              <div className='edit-post-page-radio-button-container'>
                 <input
                   id='input-linked'
                   type='radio'
                   name='input-radio-button'
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className='create-post-input-radio-button'
+                  className='edit-post-input-radio-button'
                 />
                 <label
                   htmlFor='input-linked'
-                  className='create-post-input-radio-button-label'
+                  className='edit-post-input-radio-button-label'
                 >
                   Restrict my post to viewers over 18
                 </label>

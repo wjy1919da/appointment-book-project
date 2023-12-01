@@ -139,7 +139,7 @@ const CreatePostPage = () => {
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
-          <div key={index} className='thumbnail-container'>
+          <div key={index}>
             <img
               src={URL.createObjectURL(file)}
               className='thumbnail'
