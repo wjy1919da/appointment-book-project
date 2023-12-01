@@ -77,22 +77,22 @@
     .edit-post-page-left-container-wrapper {
       display: flex;
       flex-direction: column;
+    }
 
-      .edit-post-page-left-container {
-        position: relative;
+    .edit-post-page-left-container {
+      position: relative;
+    }
 
-        .edit-post-page-add {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 8px;
-          background: #fbfcff;
-          box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
-          margin-top: -65px;
-          width: 330px;
-          height: 330px;
-        }
-      }
+    .edit-post-page-add {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      background: #fbfcff;
+      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+      margin-top: -65px;
+      width: 330px;
+      height: 330px;
     }
   }
 
@@ -135,6 +135,27 @@
   resize: none;
   width: 540px;
   height: 260px;
+}
+
+// tag, location button
+.create-post-page-tag-name {
+  left: 16px;
+}
+
+.create-post-page-location-tag-name {
+  right: 16px;
+}
+
+.create-post-page-tag-name,
+.create-post-page-location-tag-name {
+  position: absolute;
+  bottom: 20px;
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .edit-post-page-button-wrapper {

@@ -166,7 +166,7 @@ const CreatePostPage = () => {
           <img
             src={Arrow}
             alt='Image-Arrow-Icon'
-            className='arrow-back-button'
+            className='create-post-page-arrow-back-button'
           />
           <span className='create-post-page-back-button'>Create a post</span>
         </button>
@@ -196,7 +196,7 @@ const CreatePostPage = () => {
               />
             ) : (
               <>
-                <div className='left-container'>
+                <div className='create-post-page-left-container'>
                   <div
                     className='create-post-page-add'
                     onDrop={handleDrop}
@@ -227,7 +227,7 @@ const CreatePostPage = () => {
             )}
           </div>
 
-          <div className='right-container'>
+          <div className='create-post-page-right-container'>
             <div>
               <input
                 type='text'
@@ -242,9 +242,9 @@ const CreatePostPage = () => {
                 })}
               />
 
-              <p className='title-error-validation'>{errors.title?.message}</p>
+              <p className='create-post-page-title-error-validation'>{errors.title?.message}</p>
 
-              <div className='description-container'>
+              <div className='create-post-page-description-container'>
                 <textarea
                   name='brief'
                   id='description'
@@ -258,13 +258,13 @@ const CreatePostPage = () => {
                 <PostDropDownFilter />
                 <PostDropDownFilter />
 
-                <p className='description-error-validation'>
+                <p className='create-post-page-description-error-validation'>
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
-            <div className='wrapper'>
+            <div className='create-post-page-button-wrapper'>
               {/* --- radio button --- */}
               <div className='create-post-page-radio-button-container'>
                 <input
