@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./doctor-own-profile-edit.styles.scss";
+import CloseButton from "../../../assets/doctor/doctor-verification-close-Icon.png";
 import DoctorEditVoucherSession from "./doctor-edit-voucher-session";
 import DoctorEditInterestCategory from "./doctor-profile-edit-interest-area";
 import DoctorEditVerificationSession from "./doctor-own-profile-verification-session";
@@ -66,14 +67,16 @@ const DoctorProfileEdit = () => {
   return (
     <div className="user-profile-edit-container">
       <div className="user-profile-edit-screen">
-        <button
-          class="button-to-userprofile"
-          onClick={navigateToBasicProfile}
-        ></button>
-        <span className="edit-profile-text">Edit Profile</span>
-        <button class="button-save-changes">
-          <span className="subtext-save-changes">Save Changes</span>
-        </button>
+        <div className="doctor-edit-header">
+          <button
+            class="button-to-userprofile"
+            onClick={navigateToBasicProfile}
+          ></button>
+          <span className="edit-profile-text">Edit Profile</span>
+          <button class="button-save-changes">
+            <span className="subtext-save-changes">Save Changes</span>
+          </button>
+        </div>
         <div className="personal-info-table">
           <span className="table-subheading">Personal Information</span>
           <div

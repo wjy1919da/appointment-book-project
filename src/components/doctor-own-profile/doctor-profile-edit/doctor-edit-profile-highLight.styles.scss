@@ -1,103 +1,89 @@
-.doctor-edit-hightLight-session-container
-{
-
-
-    width: 1300px;
-    height: 601px;
+.doctor-edit-hightLight-session-container {
+  width: 1300px;
+  height: 601px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px solid var(--text-2-button, #675d59);
+  background: var(--White, #fbfcff);
+  position: absolute;
+  top: 3250px; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for the container's dimensions */
+  padding: 0; /* Adjust padding as needed */
+  display: flex;
+  flex-direction: column;
+  .doctor-edit-hightlight-title-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+  }
+  .hightlight-title-text {
+    color: var(--text-1-footer, #352c29);
+    /* NEW TYPE/NEW sub title */
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .hightlight-title-arrow-session {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+  }
+  .doctor-edit-hightlight-post-container {
+    padding-left: 40px;
+    display: flex;
+    margin-top: 60px;
+    gap: 40px;
+  }
+  .hightlight-creat-post-session {
+    width: 368px;
+    height: 365px;
     flex-shrink: 0;
-    border-radius: 12px;
-    border: 2px solid var(--text-2-button, #675D59);
-    background: var(--White, #FBFCFF);
-    position: absolute;
-    top: 2700px; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for the container's dimensions */
-    padding: 0; /* Adjust padding as needed */
+    border-radius: 8px;
+    background: var(--avatar-color-image, #e2e3e7);
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
-    .doctor-edit-hightlight-title-container
-    {
-        display: flex;
-        justify-content: space-between;
-        padding-left: 50px;
-        margin-right: 50px;
-        margin-top: 30px;
-    }
-    .hightlight-title-text
-    {
-        color: var(--text-1-footer, #352C29);
-        /* NEW TYPE/NEW sub title */
-        font-family: Open Sans;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-    }
-    .hightlight-title-arrow-session
-    {
-        display: flex;
-        justify-content: space-around;
-        gap:30px;
+    text-align: center;
 
+    .hightlight-creat-post-text-container {
+      width: 257px;
+      color: var(--text-2-button, #675d59);
+      /* NEW TYPE/NEW caption */
+      font-family: Open Sans;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
-    .doctor-edit-hightlight-post-container
-    {
-        padding-left: 40px;
-        display: flex;
-        margin-top: 60px;
-        gap:40px;
-    }
-    .hightlight-creat-post-session
-    {
-        width: 368px;
-        height: 365px;
-        flex-shrink: 0;
-        border-radius: 8px;
-        background: var(--avatar-color-image, #E2E3E7);
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
+  }
+  .hightlight-post-container {
+    width: 368px;
+    height: 365px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hightlight-post-img {
+    width: 368px;
+    height: 266px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--avatar-color-image, #e2e3e7);
+  }
+  .highlight-post-text {
+    color: #000;
 
-        .hightlight-creat-post-text-container
-        {
-            width: 257px;
-            color: var(--text-2-button, #675D59);
-            /* NEW TYPE/NEW caption */
-            font-family: Open Sans;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-
-        }
-    }
-    .hightlight-post-container
-    {
-        width: 368px;
-        height: 365px;
-        display: flex;
-        flex-direction: column;
-        gap:20px;
-    }
-    .hightlight-post-img
-    {
-        width: 368px;
-        height: 266px;
-        flex-shrink: 0;
-        border-radius: 8px;
-        background: var(--avatar-color-image, #E2E3E7);
-    }
-    .highlight-post-text
-    {
-        color: #000;
-
-        /* NEW TYPE/NEW body2 */
-        font-family: Open Sans;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
+    /* NEW TYPE/NEW body2 */
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }

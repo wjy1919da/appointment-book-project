@@ -17,15 +17,6 @@ const DoctorEditHightLightSession = () => {
     removeFile,
   } = useUploadImg();
   const fileInputRef = useRef(null);
-  // const displayImage =
-  //   selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
-  if (isError) {
-    setAlert({
-      show: true,
-      type: "error",
-      message: "Failed to uploaded file.",
-    });
-  }
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -78,7 +69,6 @@ const DoctorEditHightLightSession = () => {
               alt={`File ${index}`}
             />
             <button onClick={() => removeFile(file)}>Close</button>{" "}
-            {/* 添加关闭按钮 */}
             <div className="highlight-post-text">
               Description {index + 1} lorem ipsum
             </div>
