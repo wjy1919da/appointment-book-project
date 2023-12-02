@@ -48,20 +48,21 @@ const HeaderUser = () => {
   const handleLogOutClick = () => {
     localStorage.removeItem("token");
     removeToken();
-    //onClose()
     modalDisclosure.onClose(); // Close the logout modal
-    // alert('Log out successfully!');
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
   const modalDisclosure = useDisclosure();
   const menuDisclosure = useDisclosure();
   const { data, isLoading, isError, error } = useGetUserInfo();
+  /* Rfresh token */
   useTimer(
     () => {
       if (data === undefined) {
         localStorage.removeItem("token");
         removeToken();
-        togglePopup(true, "accountType");
+        if (userInfo.popupState === false) {
+          togglePopup(true, "accountType");
+        }
       }
     },
     data ? null : 30000
