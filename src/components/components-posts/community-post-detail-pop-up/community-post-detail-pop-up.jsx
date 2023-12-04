@@ -214,6 +214,10 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className='user-detail-button-container'>
+              <button className='button-private'>
+                  Private
+                </button>
+
                 <button className='button-edit' onClick={handleGoToEdit}>
                   Edit your Post
                 </button>
