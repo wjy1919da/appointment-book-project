@@ -56,6 +56,7 @@ const CommunityPostDetailPopUP = ({
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
+  const [isHighlight, setIsHightlight] = useState(false);
 
   const schema = z.object({
     comment: z
@@ -166,6 +167,11 @@ const CommunityPostDetailPopUP = ({
     navigate('/edit-post');
   };
 
+  // highlight
+  const handleHighlight = () => {
+    setIsHightlight((prev) => !prev);
+  };
+
   return (
     <div className='post-detail-popUp-container' ref={containerRef}>
       {/* Moblie */}
@@ -214,9 +220,11 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className='user-detail-button-container'>
-              <button className='button-private'>
-                  Private
+                <button className='button-highlight' onClick={handleHighlight}>
+                  {isHighlight ? 'Remove from Highlight' : 'Highlight'}
                 </button>
+
+                <button className='button-private'>Private</button>
                 <button className='button-edit' onClick={handleGoToEdit}>
                   Edit your Post
                 </button>
