@@ -1,126 +1,123 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-
-// scss
-import "./community-post-create-page.scss";
+import React, { useState, useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
+import userInfoQueryStore from '../../../userStore';
+// import { useDisclosure } from '@chakra-ui/react';
 
 // components
-import FormButton from "../../components-posts/community-post-button/community-post-button";
-
-import PostDropDownFilter from "../community-post-dropdown-filter/community-post-dropdown-filter";
+import FormButton from '../../components-posts/community-post-button/community-post-button';
+import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
-// import { useAddPost } from '../../../hooks/useAddingPost';
+import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
+import useUploadImg from '../../../hooks/useUploadImg';
+
+// scss
+import './community-post-create-page.scss';
 
 // images
-import createPostIcon from "../../../assets/post/create-post-icon.png";
-import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
-import { uploadToS3 } from "../../../services/s3-client";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
-} from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import userInfoQueryStore from "../../../userStore";
+import createPostIcon from '../../../assets/post/create-post-icon.png';
+import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
+
 const CreatePostPage = () => {
-  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+  const toast = useToast();
+
+  const {
+    selectedFiles,
+    handleFileSelection,
+    uploadProgress,
+    isLoading,
+    isError,
+    uploadedFiles,
+    resetFiles,
+  } = useUploadImg();
+
   const [clickedRadio, setClickedRadio] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
-  const [uploadingFiles, setUploadingFiles] = useState([]);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+
   const navigate = useNavigate();
+
   // react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: 'onChange' });
 
   // api
-  const { mutate: apiMutate } = useApiRequestPost({
+  const { mutate: apiMutate, data } = useApiRequestPost({
     onError: (error) => {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Failed to create post.",
+      toast({
+        title: 'Failed to create post.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
       });
     },
   });
 
   const onSubmit = (data) => {
     const formData = {
-      address: "",
+      address: '',
       brief: data.description,
-      coverImg: "",
+      coverImg: '',
       id: 0,
       isDisplay: 0,
-      lat: "",
-      location: "",
-      lon: "",
+      lat: '',
+      location: '',
+      lon: '',
       pictures: uploadedFiles,
       tags: [
         {
           tagId: 0,
-          tagName: "",
+          tagName: '',
         },
       ],
       title: data.title,
     };
-    if (!userInfo.username) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Please login to create post.",
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
       });
+      return;
     }
     apiMutate(formData);
-    setUploadingFiles([]);
-  };
-  // back button
-  const handleClickCreatePostBack = () => {
-    navigate("/posts");
+    resetFiles();
   };
 
-  const handleFileSelection = async (event) => {
-    const newFiles = Array.from(event.target.files);
-    setSelectedFiles(newFiles);
-    console.log(`uploading ${newFiles.length} files...`);
-    const uploadPromises = newFiles.map((file) => uploadToS3(file));
-    try {
-      const uploadResults = await Promise.all(uploadPromises);
-      const successfulUploads = uploadResults
-        .filter((result) => result.success)
-        .map((result) => result.location);
-      setUploadedFiles((prevFiles) => [...prevFiles, ...successfulUploads]);
-      uploadResults.forEach((result) => {
-        if (!result.success) {
-          setAlert({ show: true, type: "error", message: result.message });
-        }
-      });
-      console.log("all the files uploaded successfully", uploadResults);
-      // setAlert({
-      //   show: true,
-      //   type: "success",
-      //   message: "All the files uploaded successfully.",
-      // });
-      setSelectedFiles([]);
-    } catch (err) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Failed to upload files.",
+  useEffect(() => {
+    // console.log("data::", data);
+    if (data?.code === 100) {
+      toast({
+        title: 'Post created successfully.',
+        status: 'success',
+        duration: 1000,
+        isClosable: true,
       });
     }
+    if (data?.code === 500) {
+      toast({
+        title: 'Failed to create post.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [data, toast]);
+
+  // back button
+  const handleClickCreatePostBack = () => {
+    navigate('/posts');
   };
+
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
+
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -139,75 +136,116 @@ const CreatePostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
+  // thumbnail
+  // const displayThumbnails =
+  //   selectedFiles.length > 0
+  //     ? selectedFiles.map((file, index) => (
+  //         <div key={index}>
+  //           <img
+  //             src={URL.createObjectURL(file)}
+  //             className='thumbnail'
+  //             alt={`Selected Thumbnail ${index + 1}`}
+  //           />
+  //         </div>
+  //       ))
+  //     : null;
+
+  const displayThumbnails =
+    selectedFiles.length > 0
+      ? selectedFiles.map((file, index) => (
+          <div key={index} className='create-post-page-thumbnail'>
+            <img
+              src={URL.createObjectURL(file)}
+              className='thumbnail'
+              alt={`Selected Thumbnail ${index + 1}`}
+              style={{
+                width: '70px',
+                height: '70px',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        ))
+      : null;
+
   return (
     <div>
-      {alert.show && (
-        <Alert
-          status={alert.type}
-          variant="solid"
-          style={{
-            zIndex: "100",
-            position: "fixed",
-            top: "65px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%", // Adjust the width as needed
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <AlertIcon />
-            <AlertDescription>{alert.message}</AlertDescription>
-          </div>
-          <CloseButton onClick={() => setAlert({ ...alert, show: false })} />
-        </Alert>
-      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="create-post-page-container"
+        className='create-post-page-container'
       >
-        <div className="pink-background-1"></div>
-        <div className="pink-background-2"></div>
+        <div className='pink-background-1'></div>
+        <div className='pink-background-2'></div>
 
         <button
-          type="button"
+          type='button'
           onClick={handleClickCreatePostBack}
-          className="create-post-page-back-button-container"
+          className='create-post-page-back-button-container'
         >
           <img
             src={Arrow}
-            alt="Image-Arrow-Icon"
-            className="arrow-back-button"
+            alt='Image-Arrow-Icon'
+            className='create-post-page-arrow-back-button'
           />
-          <span className="create-post-page-back-button">Create a post</span>
+          <span className='create-post-page-back-button'>Create a post</span>
         </button>
 
-        <div className="create-post-page-inner-container">
-          <input
-            type="file"
-            id="imageUpload"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleFileSelection}
-            multiple
-          />
-          {displayImage ? (
-            <img
-              src={displayImage}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                width: "330px",
-                height: "330px",
-                objectFit: "contain",
-              }}
-              alt="Selected"
+        <div className='create-post-page-inner-container'>
+          <div className='create-post-page-wrapper'>
+            <input
+              ref={fileInputRef}
+              type='file'
+              id='imageUpload'
+              accept='image/*'
+              style={{ display: 'none' }}
+              onChange={handleFileSelection}
+              multiple
             />
-          ) : (
-            <>
-              <div className="left-container">
+            {displayImage ? (
+              <img
+                src={displayImage}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  width: '330px',
+                  height: '330px',
+                  objectFit: 'contain',
+                }}
+                alt='Selected'
+              />
+            ) : (
+              <>
+                <div className='create-post-page-left-container'>
+                  <div
+                    className='create-post-page-add'
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onClick={handleBrowseFiles}
+                  >
+                    <img
+                      src={createPostIcon}
+                      style={{
+                        width: '157px',
+                        height: '157px',
+                      }}
+                      alt='Image-Create-Post'
+                    />
+                  </div>
+                  <div className='create-post-page-text'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* thumbnail */}
+            <div className='create-post-page-thumbnail-container'>
+              {displayThumbnails}
+
+              {/* thumbnail create */}
+              {displayThumbnails && (
                 <div
-                  className="create-post-page-add"
+                  className='create-post-page-add-thumbnail'
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -215,86 +253,79 @@ const CreatePostPage = () => {
                   <img
                     src={createPostIcon}
                     style={{
-                      width: "157px",
-                      height: "157px",
+                      width: '60px',
+                      height: '60px',
                     }}
-                    alt="Image-Create-Post"
-                  />
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileSelection}
-                    multiple
-                    style={{ display: "none" }}
+                    alt='Image-Create-Post'
                   />
                 </div>
-                <div className="create-post-page-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                </div>
-              </div>
-            </>
-          )}
+              )}
+            </div>
+          </div>
 
-          <div className="right-container">
+          <div className='create-post-page-right-container'>
             <div>
               <input
-                type="text"
-                placeholder="Title"
-                className="create-post-page-title"
-                {...register("title", {
-                  required: "* Title is required.",
+                type='text'
+                placeholder='Title'
+                className='create-post-page-title'
+                {...register('title', {
+                  required: '* Title is required.',
                   maxLength: {
                     value: 20,
-                    message: "* Maximum limit for characters is 20.",
+                    message: '* Maximum limit for characters is 20.',
                   },
                 })}
               />
-              <p className="title-error-validation">{errors.title?.message}</p>
 
-              <div className="description-container">
+              <p className='create-post-page-title-error-validation'>
+                {errors.title?.message}
+              </p>
+
+              <div className='create-post-page-description-container'>
                 <textarea
-                  name="brief"
-                  id="description"
-                  placeholder="Description"
-                  className="create-post-page-description"
-                  {...register("description", {
-                    required: "* Description is required.",
+                  name='brief'
+                  id='description'
+                  placeholder='Description'
+                  className='create-post-page-description'
+                  {...register('description', {
+                    required: '* Description is required.',
                   })}
                 ></textarea>
 
                 <PostDropDownFilter />
                 <PostDropDownFilter />
 
-                <p className="description-error-validation">
+                <p className='create-post-page-description-error-validation'>
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
-            <div className="wrapper">
+            <div className='create-post-page-button-wrapper'>
               {/* --- radio button --- */}
-              <div className="create-post-page-radio-button-container">
+              <div className='create-post-page-radio-button-container'>
                 <input
-                  id="input-linked"
-                  type="radio"
-                  name="input-radio-button"
+                  id='input-linked'
+                  type='radio'
+                  name='input-radio-button'
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className="create-post-input-radio-button"
+                  className='create-post-input-radio-button'
                 />
                 <label
-                  htmlFor="input-linked"
-                  className="create-post-input-radio-button-label"
+                  htmlFor='input-linked'
+                  className='create-post-input-radio-button-label'
                 >
                   Restrict my post to viewers over 18
                 </label>
               </div>
 
               {/* --- button --- */}
-              <div className="post-information-sendButton">
+              <div className='post-information-sendButton'>
                 <FormButton
-                  buttonName="Post"
-                  className="create-post-custom-button"
+                  buttonName='Post'
+                  className='create-post-custom-button'
                 />
               </div>
             </div>

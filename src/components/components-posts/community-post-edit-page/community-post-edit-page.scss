@@ -1,0 +1,187 @@
+// screen bigger than 1025px
+.edit-post-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .pink-background-1 {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    z-index: 0;
+    border-radius: 0 236px 236px 0;
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    width: 400px;
+    height: 330px;
+  }
+
+  .pink-background-2 {
+    position: absolute;
+    top: 690px;
+    right: 0;
+    z-index: 0;
+    border-radius: 236px 0 0 236px;
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    width: 400px;
+    height: 330px;
+  }
+
+  .edit-post-page-back-button-container {
+    display: flex;
+
+    .edit-post-page-arrow-back-button {
+      position: absolute;
+      top: 115px;
+      left: 60px;
+      rotate: 180deg;
+    }
+
+    .edit-post-page-back-button {
+      position: absolute;
+      top: 110px;
+      left: 110px;
+      color: #fbfcff;
+      font-family: Open Sans;
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .edit-post-page-inner-container {
+    // position: absolute;
+    top: -30px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 18px;
+    border: 2px solid #675d59;
+    background: #fbfcff;
+    display: flex;
+    padding: 50px;
+    width: 1000px;
+    height: 580px;
+    margin: 220px 0;
+
+    // left container
+    .edit-post-page-left-container-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .edit-post-page-left-container {
+      position: relative;
+    }
+
+    .edit-post-page-add {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      background: #fbfcff;
+      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+      margin-top: -65px;
+      width: 330px;
+      height: 330px;
+    }
+  }
+
+  .edit-post-page-text {
+    position: absolute;
+    left: 70px;
+    bottom: 20px;
+    color: #675d59;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 200px;
+  }
+}
+
+// right container
+.edit-post-page-title,
+.edit-post-page-description {
+  border-radius: 8px;
+  background: #fbfcff;
+  box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+  outline: none;
+  padding: 14px;
+}
+
+.edit-post-page-title {
+  width: 540px;
+  height: 48px;
+}
+
+.edit-post-page-title-error-validation,
+.edit-post-page-description-error-validation {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+.edit-post-page-description {
+  resize: none;
+  width: 540px;
+  height: 260px;
+}
+
+// tag, location button
+.create-post-page-tag-name {
+  left: 16px;
+}
+
+.create-post-page-location-tag-name {
+  right: 16px;
+}
+
+.create-post-page-tag-name,
+.create-post-page-location-tag-name {
+  position: absolute;
+  bottom: 20px;
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.edit-post-page-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+
+  .edit-post-input-radio-button {
+    margin-right: 6px;
+  }
+
+  .edit-post-input-radio-button-label {
+    margin-right: 12px;
+  }
+}
+
+.post-information-sendButton {
+  display: flex;
+  align-items: center;
+}
+
+// screen 769px to 1024px
+@media (max-width: 1024px) {
+}
+
+// small screens
+@media (max-width: 768px) {
+}

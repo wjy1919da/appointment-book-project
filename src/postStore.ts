@@ -4,6 +4,8 @@ interface PostQuery {
   filterType: number;
   pageSize: number;
   userID: number;
+  userName: string;
+  userAvatar: string;
   filterCondition?: Array<string>;
   trigger: number;
   postBy?: Array<string>;
@@ -19,16 +21,21 @@ interface postQueryStore {
   setTag: (tag: string) => void;
   setPageSize: (pageSize: number) => void;
   setUserID: (userID: number) => void;
+  setUserName: (userName: string) => void;
+  setUserAvatar: (userAvatar: string) => void;
   setFilterCondition?: (filterCondition: Array<string>) => void;
   refresh: () => void;
   setTempSearchParam?: (tempSearchParam: string) => void;
   setPostSearchParam?: (postSearchParam: string) => void;
 }
+
 const usePostQueryStore = create<postQueryStore>((set) => ({
   postQuery: {
     pageSize: 12,
     filterType: 2,
     userID: 0,
+    userName: '',
+    userAvatar: '',
     filterCondition: [],
     postBy: ['doctor', 'user'],
     tag: '',
@@ -42,6 +49,10 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, pageSize } })),
   setUserID: (userID) =>
     set((state) => ({ postQuery: { ...state.postQuery, userID } })),
+  setUserName: (userName) =>
+    set((state) => ({ postQuery: { ...state.postQuery, userName } })),
+    setUserAvatar: (userAvatar) =>
+    set((state) => ({ postQuery: { ...state.postQuery, userAvatar } })),
   setFilterCondition: (filterCondition) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterCondition } })),
   setTempSearchParam: (tempSearchParam) =>

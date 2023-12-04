@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import usePostQueryStore from '../../postStore.ts';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 // components
 import CommunityPost from '../components-posts/community-post/community-post.component';
@@ -15,9 +16,6 @@ import '../create-post/create-post.style.scss';
 // images
 import post1 from '../../assets/doctor/post3.png';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png';
-
-// utils
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import creatPostIcon from '../../assets/post/create-post-icon.png';
 
 //import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
@@ -48,18 +46,14 @@ const UserProfileLike = () => {
   // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
+  const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
     console.log('Likes Page Data', data);
   }, [data]);
-
-  const handleOnClick = (id) => {
-    setIsModelOpen(true);
-    //userName = userName;
-    //avatar = avatar;
-    setUserID(id);
-  };
 
   const [gutterwidth, setGutterWidth] = useState('10px');
   const breakPoint = {
@@ -88,16 +82,16 @@ const UserProfileLike = () => {
     });
   }, []);
 
-  // const samplePosts = Array(10).fill({
-  //   pictures: post1,
-  //   title: 'Sample Title',
-  //   avatar: userPostAvatar,
-  //   username: 'Sample Author',
-  //   likeCount: 42,
-  // });
+  const handleOnClick = (post) => {
+    console.log('POST IS HERE', post);
+    setIsModelOpen(true);
+    setUserID(post.id);
+    setUserName(post.username);
+    setUserAvatar(post.avatar);
+  };
 
   const postList = flatData.map((post, index) => (
-    <div key={index} onClick={()=>handleOnClick(post.id)}>
+    <div key={index} onClick={() => handleOnClick(post)}>
       <CommunityPost
         imageURL={post.coverImg || []}
         text={post.title || ''}
@@ -116,6 +110,14 @@ const UserProfileLike = () => {
       />
     </div>
   ));
+
+  // const samplePosts = Array(10).fill({
+  //   pictures: post1,
+  //   title: 'Sample Title',
+  //   avatar: userPostAvatar,
+  //   username: 'Sample Author',
+  //   likeCount: 42,
+  // });
 
   return (
     <div className='user-profile-post-area-container'>
@@ -140,8 +142,8 @@ const UserProfileLike = () => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           // isMobile={isMobile}
-          postUserName="userName"
-          postAvatar={userPostAvatar}
+          // postUserName='userName'
+          // postAvatar={userPostAvatar}
         />
       )}
     </div>
