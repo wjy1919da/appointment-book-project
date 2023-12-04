@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
+import useTimer from "../../hooks/useTimer";
 import {
   Modal,
   ModalOverlay,
@@ -32,12 +33,6 @@ const HeaderUser = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   // console.log("userInfo in header", userInfo);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-  // let isUser = userInfo.accountType === "1";
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-  const menuContainerRef = useRef();
-  const [loginClick, setLoginClick] = useState(false);
-  const [verifyEmailClick, setVerifyEmailClick] = useState(false);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const setUsername = userInfoQueryStore((state) => state.setUsername);
   const setPostCount = userInfoQueryStore((state) => state.setPostCount);
@@ -49,23 +44,29 @@ const HeaderUser = () => {
   );
   const setDescription = userInfoQueryStore((state) => state.setDescription);
   const removeToken = userInfoQueryStore((state) => state.removeToken);
-  const [dropdown, setDropdown] = useState(false);
-  const handleLoginClick = () => setLoginClick(!loginClick);
-  const handleVerifyEmailClick = () => setVerifyEmailClick(!verifyEmailClick);
 
   const handleLogOutClick = () => {
     localStorage.removeItem("token");
     removeToken();
-    //onClose()
     modalDisclosure.onClose(); // Close the logout modal
-    // alert('Log out successfully!');
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
   const modalDisclosure = useDisclosure();
   const menuDisclosure = useDisclosure();
-
   const { data, isLoading, isError, error } = useGetUserInfo();
-  // console.log("userInfo in header", userInfo);
+  /* Rfresh token */
+  useTimer(
+    () => {
+      if (data === undefined) {
+        localStorage.removeItem("token");
+        removeToken();
+        if (userInfo.popupState === false) {
+          togglePopup(true, "accountType");
+        }
+      }
+    },
+    data ? null : 30000
+  );
   useEffect(() => {
     if (data?.data) {
       console.log("data setting is called", data);
@@ -84,7 +85,6 @@ const HeaderUser = () => {
       menuDisclosure.onOpen();
     }
   };
-  // console.log("user Info in header", data);
 
   return (
     <div className="header-login">
@@ -101,7 +101,6 @@ const HeaderUser = () => {
           <div className="header-login-text">Login/Sign up</div>
         </div>
       )}
-      {/* On Mouse Leave is not work */}
       <Menu
         isOpen={menuDisclosure.isOpen}
         onClose={menuDisclosure.onClose}
@@ -110,13 +109,13 @@ const HeaderUser = () => {
         {userInfo.token && (
           <img
             onMouseEnter={menuDisclosure.onOpen}
-            src={defaultAvatar}
+            src={data?.data?.avatar || defaultAvatar}
             alt="User avatar"
             className="header-avatar"
           />
         )}
 
-        {data?.data?.nickname && (
+        {userInfo.token && (
           <MenuButton
             as={Button}
             style={{ backgroundColor: "transparent" }}
@@ -127,7 +126,7 @@ const HeaderUser = () => {
           </MenuButton>
         )}
         <MenuList>
-          <MenuGroup title={`Hello, ${data?.data?.nickname || ""}`}>
+          <MenuGroup title={`Hello, ${data?.data?.nickname || "User"}`}>
             <MenuItem>
               <Link
                 to="/AccountSetup"
