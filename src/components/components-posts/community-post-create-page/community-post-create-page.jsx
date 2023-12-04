@@ -2,24 +2,26 @@ import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-// scss
-import "./community-post-create-page.scss";
+// hook
+import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
+
+import { useToast } from "@chakra-ui/react";
+import userInfoQueryStore from "../../../userStore";
+// import { useDisclosure } from '@chakra-ui/react';
 
 // components
 import FormButton from "../../components-posts/community-post-button/community-post-button";
-
 import PostDropDownFilter from "../community-post-dropdown-filter/community-post-dropdown-filter";
 
-// hook
-import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
+// scss
+import "./community-post-create-page.scss";
 
 // images
 import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
-import { useToast } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import userInfoQueryStore from "../../../userStore";
+
 import useUploadImg from "../../../hooks/useUploadImg";
+
 const CreatePostPage = () => {
   const toast = useToast();
   const {
@@ -129,6 +131,24 @@ const CreatePostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
+  const displayThumbnails =
+    selectedFiles.length > 0
+      ? selectedFiles.map((file, index) => (
+          <div key={index} className="create-post-page-thumbnail">
+            <img
+              src={URL.createObjectURL(file)}
+              className="thumbnail"
+              alt={`Selected Thumbnail ${index + 1}`}
+              style={{
+                width: "70px",
+                height: "70px",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+        ))
+      : null;
+
   return (
     <div>
       <form
@@ -146,36 +166,36 @@ const CreatePostPage = () => {
           <img
             src={Arrow}
             alt="Image-Arrow-Icon"
-            className="arrow-back-button"
+            className="create-post-page-arrow-back-button"
           />
           <span className="create-post-page-back-button">Create a post</span>
         </button>
 
         <div className="create-post-page-inner-container">
-          <input
-            ref={fileInputRef}
-            type="file"
-            id="imageUpload"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleFileSelection}
-            multiple
-          />
-          {displayImage ? (
-            <img
-              src={displayImage}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                width: "330px",
-                height: "330px",
-                objectFit: "contain",
-              }}
-              alt="Selected"
+          <div className="create-post-page-wrapper">
+            <input
+              ref={fileInputRef}
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleFileSelection}
+              multiple
             />
-          ) : (
-            <>
-              <div className="left-container">
+            {displayImage ? (
+              <img
+                src={displayImage}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  width: "330px",
+                  height: "330px",
+                  objectFit: "contain",
+                }}
+                alt="Selected"
+              />
+            ) : (
+              <div className="create-post-page-left-container">
                 <div
                   className="create-post-page-add"
                   onDrop={handleDrop}
@@ -195,10 +215,32 @@ const CreatePostPage = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing
                 </div>
               </div>
-            </>
-          )}
+            )}
 
-          <div className="right-container">
+            <div className="create-post-page-thumbnail-container">
+              {displayThumbnails}
+
+              {displayThumbnails && (
+                <div
+                  className="create-post-page-add-thumbnail"
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  onClick={handleBrowseFiles}
+                >
+                  <img
+                    src={createPostIcon}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                    }}
+                    alt="Image-Create-Post"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="create-post-page-right-container">
             <div>
               <input
                 type="text"
@@ -214,7 +256,7 @@ const CreatePostPage = () => {
               />
               <p className="title-error-validation">{errors.title?.message}</p>
 
-              <div className="description-container">
+              <div className="create-post-page-description-container">
                 <textarea
                   name="brief"
                   id="description"
@@ -228,14 +270,13 @@ const CreatePostPage = () => {
                 <PostDropDownFilter />
                 <PostDropDownFilter />
 
-                <p className="description-error-validation">
+                <p className="create-post-page-description-error-validation">
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
             <div className="wrapper">
-              {/* --- radio button --- */}
               <div className="create-post-page-radio-button-container">
                 <input
                   id="input-linked"
@@ -253,7 +294,6 @@ const CreatePostPage = () => {
                 </label>
               </div>
 
-              {/* --- button --- */}
               <div className="post-information-sendButton">
                 <FormButton
                   buttonName="Post"

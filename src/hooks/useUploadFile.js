@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { uploadToS3 } from "../services/s3-client";
 import { useToast } from "@chakra-ui/react";
 const useUploadFile = () => {
+  console.log("useUploadFile");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState([]);
