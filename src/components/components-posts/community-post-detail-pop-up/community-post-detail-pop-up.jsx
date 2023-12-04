@@ -21,13 +21,13 @@ import { useAddComment } from '../../../hooks/useComment';
 import './community-post-detail-pop-up.styles.scss';
 
 // images
-import StarIcon from '../../../assets/post/star_icon.svg';
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
 import DownArrow from '../../../assets/post/down-arrow.png';
 import heartIcon from '../../../assets/post/heart.png';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
-
+// import StarIcon from '../../../assets/post/star_icon.svg';
+// import StarIcon from '../../../assets/post/star_icon.svg';
 // import HeartIcon from '../../../assets/post/heart_icon.svg';
 // import UserImage from '../../../assets/post/user_image.svg';
 // import heartIcon from '../../../assets/post/heart.png';
@@ -279,7 +279,7 @@ const CommunityPostDetailPopUP = ({
                       />
                     );
                   }
-                  return null; // Or handle this case differently
+                  return null;
                 })}
             </div>
             {!userInfo.token && <div>Login to view more....</div>}

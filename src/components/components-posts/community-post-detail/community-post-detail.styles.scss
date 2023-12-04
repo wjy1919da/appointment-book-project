@@ -4,56 +4,55 @@
 //     max-height: 800px; /* Set your desired height */
 //     height: 100%; /* Set your desired height */
 //   }
-.close-button-modal
-{
-    .modal-content
-    {
-        background-color: transparent;
-        border:none;
-    }
-}
-  .first-modal-content {
-    background-color: transparent; /* Set background color to transparent */
-  }
-  
-  /* Close button styles */
-  .close-button {
-    position: absolute;
-    top: 0;
-    right: -10%;
+.close-button-modal {
+  .modal-content {
     background-color: transparent;
     border: none;
-    cursor: pointer;
-    color: white;
   }
-  
-  .close-button i {
-    font-size: 40px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    border: 2px solid white;
-    border:none;
-    filter: brightness(1.5);
-    padding: 2px;
-    margin: 0;
-  }
+}
+.first-modal-content {
+  background-color: transparent; /* Set background color to transparent */
+}
+
+/* Close button styles */
+.close-button img {
+  position: relative;
+  right: -80px;
+  top: -10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+// .close-button i {
+//   font-size: 40px;
+//   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+//   border: 2px solid white;
+//   border:none;
+//   filter: brightness(1.5);
+//   padding: 2px;
+//   margin: 0;
+// }
+
 .modal-dialog {
-    max-width: 100%; /* Allows the child element to define the width */
-    width: auto;
-    margin: 0.5rem auto; /* Vertical margin kept, horizontal set to auto for centering */
+  max-width: 100%; /* Allows the child element to define the width */
+  width: auto;
+  margin: 0.5rem auto; /* Vertical margin kept, horizontal set to auto for centering */
 }
 @media (min-width: 576px) {
-    .modal-content {
-        width: 80%;  
-        margin-left: auto;
-        margin-right: auto;
-        /* maintaining the same width */
-    }
+  .modal-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    /* maintaining the same width */
+  }
 }
 @media (max-width: 576px) {
-    .modal-content {
-        width: 80%;  
-        margin-left: auto;
-        margin-right:auto;
-        /* maintaining the same width */
-    }
+  .modal-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    /* maintaining the same width */
+  }
 }
