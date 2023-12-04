@@ -22,7 +22,7 @@
 
   .pink-background-2 {
     position: absolute;
-    top: 690px;
+    top: 714px;
     right: 0;
     z-index: 0;
     border-radius: 236px 0 0 236px;
@@ -35,26 +35,25 @@
   }
 
   .create-post-page-back-button-container {
+    position: absolute;
+    top: 130px;
+    left: 50px;
     display: flex;
+    align-items: center;
+    gap: 20px;
 
-    .create-post-arrow-back-button {
-      position: absolute;
-      top: 115px;
-      left: 60px;
+    .create-post-page-arrow-back-button {
       rotate: 180deg;
     }
-  }
 
-  .create-post-page-back-button {
-    position: absolute;
-    top: 110px;
-    left: 110px;
-    color: #fbfcff;
-    font-family: Open Sans;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    .create-post-page-label-back-button {
+      color: #fbfcff;
+      font-family: Open Sans;
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
   }
 
   .create-post-page-inner-container {

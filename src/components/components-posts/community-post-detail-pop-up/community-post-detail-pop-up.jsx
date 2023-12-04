@@ -217,7 +217,6 @@ const CommunityPostDetailPopUP = ({
               <button className='button-private'>
                   Private
                 </button>
-
                 <button className='button-edit' onClick={handleGoToEdit}>
                   Edit your Post
                 </button>
@@ -315,7 +314,7 @@ const CommunityPostDetailPopUP = ({
                   />
                   {likeCount}
                 </span>
-                <span className='Icon-count'>
+                {/* <span className='Icon-count'>
                   <img
                     src={StarIcon}
                     alt='Icon'
@@ -323,7 +322,7 @@ const CommunityPostDetailPopUP = ({
                     onClick={handleInputClick}
                   />
                   {collectCount}
-                </span>
+                </span> */}
                 <span className='Icon-count'>
                   <img
                     src={BubblesIcon}

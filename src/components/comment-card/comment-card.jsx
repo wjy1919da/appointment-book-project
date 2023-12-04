@@ -37,6 +37,8 @@ const CommentCard = ({avatar,name,date,commentText,onClick}) => {
                     <div className="userName-date">
                         <span className="detail-gray-font">{name ? convertUnicode(name) : ""}</span>
                         <span className="detail-comment-text">{commentText ? convertUnicode(commentText) : ""}</span>
+                        <span>12/4/2023</span>
+                        <button>Reply</button>
                     </div>
                 </div>
             </div>

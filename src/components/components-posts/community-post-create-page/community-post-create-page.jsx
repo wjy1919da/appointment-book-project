@@ -137,19 +137,6 @@ const CreatePostPage = () => {
   };
 
   // thumbnail
-  // const displayThumbnails =
-  //   selectedFiles.length > 0
-  //     ? selectedFiles.map((file, index) => (
-  //         <div key={index}>
-  //           <img
-  //             src={URL.createObjectURL(file)}
-  //             className='thumbnail'
-  //             alt={`Selected Thumbnail ${index + 1}`}
-  //           />
-  //         </div>
-  //       ))
-  //     : null;
-
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
@@ -187,7 +174,7 @@ const CreatePostPage = () => {
             alt='Image-Arrow-Icon'
             className='create-post-page-arrow-back-button'
           />
-          <span className='create-post-page-back-button'>Create a post</span>
+          <span className='create-post-page-label-back-button'>Create a post</span>
         </button>
 
         <div className='create-post-page-inner-container'>
