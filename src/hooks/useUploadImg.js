@@ -88,6 +88,7 @@ const useUploadImg = () => {
 
   return {
     selectedFiles,
+    setSelectedFiles,
     uploadedFiles,
     handleFileSelection,
     uploadingFiles,
