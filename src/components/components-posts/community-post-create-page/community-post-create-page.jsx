@@ -308,7 +308,7 @@ const CreatePostPage = () => {
                 <textarea
                   name='brief'
                   id='description'
-                  placeholder='Description'
+                  // placeholder='Description'
                   className='create-post-page-description'
                   {...register('description', {
                     required: '* Description is required.',
@@ -316,7 +316,7 @@ const CreatePostPage = () => {
                 ></textarea>
 
                 <PostDropDownFilter />
-                <PostDropDownFilter />
+                {/* <PostDropDownFilter /> */}
 
                 <p className='create-post-page-description-error-validation'>
                   {errors.description?.message}
