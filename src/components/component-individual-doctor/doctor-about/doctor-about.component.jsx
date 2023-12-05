@@ -6,23 +6,27 @@ import DoctorReviewGrid from '../../../components/component-individual-doctor/do
 import { useGetDoctorAbout } from '../../../hooks/useGetIndividualDoctor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+
+
 import highlightYear from '../../../assets/doctor/highlight-year.png';
 import highlightVerified from '../../../assets/doctor/highlight-verified.png';
 import highlightAppointment from '../../../assets/doctor/highlight-appointment.png';
+import backArrow from '../../../assets/doctor/left_back.png';
 
 const DoctorAbout = () => {
     // const [voucherExpanded, setVoucherExpanded] = useState(false);
     const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
     const { programs, interesteds, methods, actual, isAuth, method } = data.pages[0].data;
     console.log('Programs is: ', programs);
-    const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
-    // setVouchers(programs);
+    // UNCOMMENT FOR 2.0 RELEASE
+    // const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
     const navigate = useNavigate();
     console.log('doctor about data is: ', data);
 
-    useEffect(() => {
-        setVouchers(programs);
-    }, [])
+    //UNCOMMENT FOR 2.0 RELEASE
+    // useEffect(() => {
+    //     setVouchers(programs);
+    // }, [])
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -35,9 +39,6 @@ const DoctorAbout = () => {
     if (!data || !data.pages[0]?.data) {
         return <div>No data available</div>;
     }
-    // const toggleVoucherExpanded = () => {
-    //     setVoucherExpanded(!voucherExpanded);
-    // }
 
     const abouts = [
         {'title': 'Coupons', 'items': programs},
@@ -65,31 +66,18 @@ const DoctorAbout = () => {
         )
     }
     let specializations = interesteds;
-    // setVouchers(programs);
 
-    const voucherClick = (item) => {
-        console.log('item is: ', item);
-        const holder = vouchers.filter((voucher) => voucher === item);
-        setVouchers(holder);
-    }
-
-    // if (voucherExpanded) {
-    //     return (
-    //         <div className='indv-doctor-about-container' >
-    //             <div className='indv-vouchers-big-container' >
-    //                 <div className='vouchers-container' >
-    //                 {vouchers.length > 0 ? vouchers.map((item, index) => {
-    //                     return <DocotorOwnVoucherCard key={index} />
-    //                 }) : <h3 className='indv-no-vouchers-title' >No vouchers currently available, check back later for more great deals!</h3>}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
+    // UNCOMMENT FOR 2.0 RELEASE!
+    // const voucherClick = (item) => {
+    //     console.log('item is: ', item);
+    //     const holder = vouchers.filter((voucher) => voucher === item);
+    //     setVouchers(holder);
     // }
 
     return (
         <div className='indv-doctor-about-container' >
-            <div className='indv-vouchers-big-container' >
+            {/* UNCOMMENT FOR 2.0 RELEASE */}
+            {/* <div className='indv-vouchers-big-container' >
                 <div className='vouchers-title-container' >
                     <h3 className='indv-vouchers-title' >Vouchers</h3>
                 </div>
@@ -97,10 +85,8 @@ const DoctorAbout = () => {
                     {vouchers?.length > 0 ? vouchers?.map((item, index) => {
                         return <DocotorOwnVoucherCard key={index} onClick={() => voucherClick(item)}/>
                     }) : <h3 className='indv-no-vouchers-title' >No vouchers currently available, check back later for more great deals!</h3>}
-                    {/* <DocotorOwnVoucherCard onClick={printTest}/>
-                    <DocotorOwnVoucherCard /> */}
                 </div>
-            </div>
+            </div> */}
             <div className='indv-specialization-big-container' >
                 <div className='specialization-title-container' >
                     <h3 className='indv-specialization-title' >Specialization</h3>
@@ -112,8 +98,18 @@ const DoctorAbout = () => {
                 </div>
             </div>
             <div className='indv-highlight-cases-container' >
-                <div className='highlight-cases-title-container' >
-                    <h3 className='highlight-cases-title' >Highlight Cases</h3>
+                <div className='highlight-cases-top-row' >
+                    <div className='highlight-cases-title-container' >
+                        <h3 className='highlight-cases-title' >Highlight Cases</h3>
+                    </div>
+                    <div className='highlight-cases-arrows-container'>
+                        <div className='highlight-cases-arrow-container'>
+                            <img src={backArrow} className='highlight-cases-back-arrow highlight-cases-arrow' alt='back arrow' />
+                        </div>
+                        <div className='highlight-cases-arrow-container'>
+                            <img src={backArrow} className='highlight-cases-forward-arrow highlight-cases-arrow' alt='forward arrow' />
+                        </div>
+                    </div>
                 </div>
                 <div className='highlight-cases-cases-container' >
                     <div className='indv-highlight-case-container' >
@@ -142,21 +138,16 @@ const DoctorAbout = () => {
                     </div>
                 </div>
             </div>
-            <div className='indv-customer-review-container' >
+            {/* UNCOMMENT FOR 2.0 RELEASE */}
+            {/* <div className='indv-customer-review-container' >
                 <div className='customer-review-section-title-container' >
                     <h3 className='customer-review-section-title' >Customer Review</h3>
                 </div>
                 <div className='customer-review-review-container' >
                     <DoctorReviewGrid />
                 </div>
-            </div>
+            </div> */}
         </div>
-        // <div className='doctor-about-container'>
-        //     {abouts[0]?.items && <DoctorAboutSection title={abouts[0].title} items={abouts[0].items}></DoctorAboutSection>}
-        //     {abouts[1]?.items && <DoctorAboutSection title={abouts[1].title} items={abouts[1].items}></DoctorAboutSection>}
-        //     {abouts[2]?.items && <DoctorAboutSection title={abouts[2].title} items={abouts[2].items}></DoctorAboutSection>}
-        //     {abouts[3]?.items && <DoctorAboutSection title={abouts[3].title} items={abouts[3].items}></DoctorAboutSection>}
-        // </div>
     )
 }
 
