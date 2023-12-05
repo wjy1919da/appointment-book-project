@@ -20,6 +20,7 @@ import { useState } from 'react';
 import ProcedureCard from '../../components/procedure-card/procedure-card.component';
 import RecommendationGrid from '../../components/recommendation-grid/recommendation-grid.component';
 import { useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 function safeJsonParse(str) {
     try {
         return JSON.parse(str);
@@ -188,16 +189,18 @@ const SubProcedure = () => {
     // if (error) {
     //     return <ErrorMsg/>;
     // }
+    const navigate = useNavigate();
     if (isLoading && !loadingTimeout) {
         // If it's still loading and hasn't timed out, show the spinner
         return <HomeSpinner />;
     } else if (error && loadingTimeout) {
         // If there's an error and it has timed out, show the error message
-        return (
-            <div>
-                <ErrorMsg/>
-            </div>
-        );
+        navigate('../../*');
+        // return (
+        //     <div>
+        //         <ErrorMsg/>
+        //     </div>
+        // );
     }
     else if (data.data && data.data.subcategories) {
     return (

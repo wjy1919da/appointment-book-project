@@ -6,6 +6,7 @@ import DoctorSearchCard from '../../components/doctor-search-card/doctor-search-
 import BlankSearchCard from '../../components/doctor-search-card/blank-search-card.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { retrieveMultiInputResults } from '../../hooks/useGetMultiInputResults';
 import DoctorMobilWebpage from '../../components/components-doctor-search/doctor-mobile-webpage/doctor-mobile-web';
@@ -17,6 +18,7 @@ const Doctor = () => {
     const [noResults, setNoResults] = useState(false);
     const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
     const searchLocations = [];
+    const navigate = useNavigate();
     // useEffect(() => {
     //     // const retrieveLocations = async () => {
     //     //     try {
@@ -82,10 +84,8 @@ const Doctor = () => {
                         }; 
     const doctorArray = [testDoctor1, testDoctor2, testDoctor3, testDoctor4, testDoctor1, testDoctor2];                 
     
-    if (error) {  // do we have a generic error page?
-        return (
-            <ErrorMsg />
-        )
+    if (error) { 
+        navigate('../*');
     }
     return (
         <div className='doctor-container animate__animated animate__fadeIn'>

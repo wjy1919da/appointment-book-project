@@ -20,11 +20,17 @@ import DoctorAbout from '../../components/component-individual-doctor/doctor-abo
 import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import UserProfileDoctorPostGrid from '../../components/user-profile-doctor-post-grid/user-profile-doctor-post-grid';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
+import LogInAccessPopUp from '../../components/log-in-access-popup/log-in-access-popup.jsx';
+import { Spinner } from '@chakra-ui/react'
 
 // hook
 import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor.js';
 import { useGetDoctorAbout } from '../../hooks/useGetIndividualDoctor';
 import { useGetDoctorReviews } from '../../hooks/useGetIndividualDoctor';
+import { useFollowUser } from '../../hooks/useFollow.js';
+import APIClient from '../../services/api-client.js';
+import { useNavigate } from 'react-router-dom';
+import { retrieveUserFollowList } from '../../hooks/useAuth.js';
 
 // scss
 import './individual-doctor.styles.scss';
@@ -35,6 +41,7 @@ const IndividualDoctor = () => {
   }, []);
 
   const { encodedMemberId } = useParams();
+  const navigate = useNavigate();
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
@@ -59,16 +66,18 @@ const IndividualDoctor = () => {
     }
   }, [encodedMemberId, data]);
 
-  if (isLoading || isLoading2) {
-    return <HomeSpinner />;
+  if (isLoading || isLoading2 || isLoading3) {
+    return (
+    <div className='chakra-spinner-container'>
+      <Spinner thickness='4px'
+               speed='0.65s'
+               emptyColor='gray.200'
+               color='blue.500' size='xl' />
+    </div> );
   }
 
-  if (error || error2) {
-    return (
-      <div>
-        <ErrorMsg />
-      </div>
-    );
+  if (error || error2 || error3) {
+    navigate('../*');
   }
 
   // console.log('Doctor Data is: ', data);
@@ -81,8 +90,8 @@ const IndividualDoctor = () => {
 
   return (
     <div className='indv-doctor-page-container' >
-      <DoctorProfileInfo data={data} data3={data3} />
-      
+      <DoctorProfileInfo data={data} data3={data3} encodedMemberId={encodedMemberId} />
+
       <div className="indv-doctor-navbar">
           <div onClick={() => selectTab(0)} className={`indv-doctor-navbar-item ${activeTab === 0 ? "indv-active" : ""}`}>About</div>
           <div onClick={() => selectTab(1)} className={`indv-doctor-navbar-item ${activeTab === 1 ? "indv-active" : ""}`}>Posts</div>
@@ -138,19 +147,101 @@ const IndividualDoctor = () => {
 //   );
 };
 
-const DoctorProfileInfo = ({data, data3}) => {
+const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
   // data3 = data?.data3;
   // data = data?.data;
   // console.log('data3 is: ', data3);
+  
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isUserFollowing, setIsUserFollowing] = useState(false);
+  const [followers, setFollowers] = useState(data3?.pages[0]?.data?.data?.followers)
   const { doctorStars } = data3?.pages[0]?.data?.data || {};
   const {postNumber} = data3?.pages[0]?.data?.data || 0;
-  const {followers} = data3?.pages[0]?.data?.data || 0;
+  // const {followers} = data3?.pages[0]?.data?.data || 0;
   const {followings} = data3?.pages[0]?.data?.data || 0;
+
+  useEffect(() => {
+    // console.log('data1 is: ', data);
+    // console.log('data3 is: ', data3);
+    // setFollowers(data3?.pages[0]?.data?.data.followers);
+    let followArray = localStorage.getItem("charmFollowedUsers");
+    if (followArray !== null) {
+      followArray = JSON.parse(followArray);
+      if (followArray.includes(Number(encodedMemberId))) {
+        setIsUserFollowing(true);
+        console.log(`Doctor of id ${encodedMemberId} found in user followings array...`);
+      } else {
+        console.log(`Doctor of id ${encodedMemberId} NOT found in user followings array...`);
+      }
+    }
+  }, [encodedMemberId])
+
+  
+  // const result = useFollowUser(data?.memberId);
+  // console.log('Result of follow is: ', result);
+
+  const followUser = (userId) => {
+    console.log('attempting to follow this doctor');
+    const apiClient = new APIClient('/user_action/actions/follow');
+    const fetchFollowUser = async () => {
+      try {
+        const res = await apiClient.post({
+          "userId": userId,
+        });
+        setIsUserFollowing(true);
+        setFollowers(followers + 1);
+        let followArray = localStorage.getItem("charmFollowedUsers");
+        followArray = JSON.parse(followArray);
+        followArray.push(userId);
+        localStorage.setItem("charmFollowedUsers", JSON.stringify(followArray));
+        return res.data;
+      } catch (err) {
+          if (err?.response?.status === 403) {  // if the user tries to follow without logging in
+            setIsLoginPopupOpen(true);
+          }
+          console.log('Error trying to follow target: ', err.response.status);
+      }
+    }
+    fetchFollowUser();
+  }
+
+  const unfollowUser = (userId) => {
+    console.log('attempting to unfollow this doctor');
+    const apiClient = new APIClient('/user_action/actions/unfollow');
+    const fetchUnfollowUser = async () => {
+      try {
+        const res = await apiClient.post({
+          "userId": userId,
+        });
+        console.log('Res returned as: ', res);
+        setIsUserFollowing(false);
+        setFollowers(followers - 1);
+        let followArray = localStorage.getItem("charmFollowedUsers");
+        followArray = JSON.parse(followArray);
+        const index = followArray.indexOf(userId);
+        followArray.splice(index, 1);
+        localStorage.setItem("charmFollowedUsers", JSON.stringify(followArray));
+        return res.data;
+      } catch (err) {
+        if (err?.response?.status === 403) {  // if the user tries to follow without logging in
+          setIsLoginPopupOpen(true);
+        }
+        console.log('Error trying to follow target: ', err.response.status);
+      }
+    }
+    fetchUnfollowUser();
+  }
+
+  // console.log('isUserFollowing is: ', isUserFollowing);
+
+  // const result = retrieveUserFollowList();
   
   // console.log('data is: ', data);
   // console.log('data3 is: ', data3);
 
   return (
+    <>
+      {isLoginPopupOpen && <LogInAccessPopUp closingCallback={() => setIsLoginPopupOpen(false)}/>}
       <div className='indv-doctor-info-container' >
         <div className='indv-doctor-profile-picture-container' >
           <img className='indv-doctor-profile-picture' src={data?.img} alt='Doctor' />
@@ -219,11 +310,12 @@ const DoctorProfileInfo = ({data, data3}) => {
             </div>
           </div>
           <div className='indv-doctor-info-row indv-fifth-row'>
-            <button type='button' className='indv-button indv-follow-button'>Follow</button>
+            {isUserFollowing ? <button type='button' onClick={() => unfollowUser(data?.memberId)} className='indv-unfollow-button'>Unfollow</button> : <button type='button' onClick={() => followUser(data?.memberId)} className='indv-button indv-follow-button'>Follow</button>}
             <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button>
           </div>
         </div>
       </div>
+    </>
   )
 }
 
