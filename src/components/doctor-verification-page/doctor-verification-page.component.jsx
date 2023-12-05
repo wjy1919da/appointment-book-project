@@ -6,6 +6,7 @@ import UploadIcon from "../../assets/doctor/Upload.svg";
 import DoctorOwnProfileEditButton from "../doctor-own-profile/doctor-own-profile-edit-button";
 import useUploadFile from "../../hooks/useUploadFile";
 import { useRef } from "react";
+import DoctorSearchLoadingBar from "../doctor-search-loading-bar/doctor-search-loading-bar.component";
 function DoctorVerificationPage() {
   const navigate = useNavigate();
   const handleOnClick = () => {
@@ -14,15 +15,14 @@ function DoctorVerificationPage() {
   const fileInputRef = useRef(null);
   const {
     selectedFiles,
-    handleFileSelection,
+    uploadedFiles,
     uploadProgress,
     isLoading,
-    isError,
-    uploadedFiles,
-    resetFiles,
-    removeFile,
+    handleFileSelection,
     handleUpload,
-    uploadingFiles,
+    removeFile,
+    resetFiles,
+    removeUploadedFile,
   } = useUploadFile();
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -35,6 +35,7 @@ function DoctorVerificationPage() {
     e.preventDefault();
     handleFileSelection({ target: { files: e.dataTransfer.files } });
   };
+
   return (
     <div className="doctor-verification-outer-container">
       <div className="doctor-verfication-header-container">
@@ -78,7 +79,7 @@ function DoctorVerificationPage() {
             <div className="doctor-verification-content-sub-title">
               Attach Document
             </div>
-
+            {isLoading && <DoctorSearchLoadingBar />}
             <div
               className="doctor-verification-file-upload"
               onDrop={handleDrop}

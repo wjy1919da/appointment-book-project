@@ -1,6 +1,6 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
-const uploadToS3 = async (file, signal) => {
+const uploadToS3 = async (file, signal, onProgress) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxFileSize) {
     return {
@@ -23,11 +23,9 @@ const uploadToS3 = async (file, signal) => {
   });
 
   upload.on("httpUploadProgress", (progress) => {
-    console.log(
-      `upload progress '${Math.round(
-        (progress.loaded / progress.total) * 100
-      )}%`
-    );
+    const percent = Math.round((progress.loaded / progress.total) * 100);
+    console.log(`upload progress '${percent}%`);
+    onProgress(percent);
   });
 
   try {

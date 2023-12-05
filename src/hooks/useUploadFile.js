@@ -1,14 +1,13 @@
 import { useState, useRef } from "react";
 import { uploadToS3 } from "../services/s3-client";
-import { useToast } from "@chakra-ui/react";
+// import { useToast } from "@chakra-ui/react";
 const useUploadFile = () => {
-  console.log("useUploadFile");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(new Map());
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
   const uploadControllers = useRef(new Map());
 
   const resetFiles = () => {
@@ -38,19 +37,29 @@ const useUploadFile = () => {
 
   const handleFileSelection = (event) => {
     const newFiles = Array.from(event.target.files);
+    newFiles.forEach((file) => {
+      setUploadProgress((prevProgress) =>
+        new Map(prevProgress).set(file.name, 0)
+      );
+    });
     setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    setUploadingFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    handleUpload(newFiles);
   };
 
-  const handleUpload = async () => {
-    setIsError(false);
+  const handleUpload = async (files) => {
     setIsLoading(true);
 
-    const uploadPromises = uploadingFiles.map((file) => {
+    const uploadPromises = files.map((file) => {
       const controller = new AbortController();
       uploadControllers.current.set(file, controller);
 
-      return uploadToS3(file, controller.signal).then((uploadResponse) => {
+      return uploadToS3(file, controller.signal, (progress) => {
+        setUploadProgress((prevProgress) => {
+          const newProgress = new Map(prevProgress);
+          newProgress.set(file.name, progress);
+          return newProgress;
+        });
+      }).then((uploadResponse) => {
         const uploadedFile = {
           ...uploadResponse,
           name: file.name,
@@ -61,25 +70,10 @@ const useUploadFile = () => {
       });
     });
 
-    toast.promise(
-      Promise.all(uploadPromises),
-      {
-        success: { title: "File uploaded" },
-        error: { title: "File upload failed", description: "Something wrong" },
-        loading: { title: "File is uploading", description: "Please wait" },
-      },
-      {
-        position: "top",
-        duration: 1000,
-        isClosable: true,
-      }
-    );
-
     try {
       await Promise.all(uploadPromises);
-      setUploadingFiles([]);
     } catch (error) {
-      setIsError(true);
+      console.error("Upload error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -87,8 +81,7 @@ const useUploadFile = () => {
   return {
     selectedFiles,
     uploadedFiles,
-    uploadingFiles,
-    isError,
+    uploadProgress,
     isLoading,
     handleFileSelection,
     handleUpload,
