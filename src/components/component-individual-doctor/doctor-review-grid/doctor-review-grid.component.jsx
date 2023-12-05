@@ -24,7 +24,6 @@ const DoctorReviewGrid = () => {
     if (error) {
         return <div>Error loading data</div>;
     }
-    console.log('fetchedReviewsCount is: ', fetchedReviewsCount);
     if (fetchedReviewsCount === 0) {
         return (
             <div className='no-reviews-container'>

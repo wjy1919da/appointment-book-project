@@ -55,6 +55,7 @@ const HeaderUser = () => {
 
   const handleLogOutClick = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("charmFollowedUsers");
     removeToken();
     //onClose()
     modalDisclosure.onClose(); // Close the logout modal
