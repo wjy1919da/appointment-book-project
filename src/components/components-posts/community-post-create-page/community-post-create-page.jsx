@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
-// hook
-import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
-
 import { useToast } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
 // import { useDisclosure } from '@chakra-ui/react';
@@ -13,6 +9,10 @@ import userInfoQueryStore from "../../../userStore";
 import FormButton from "../../components-posts/community-post-button/community-post-button";
 import PostDropDownFilter from "../community-post-dropdown-filter/community-post-dropdown-filter";
 
+// hook
+import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
+import useUploadImg from "../../../hooks/useUploadImg";
+
 // scss
 import "./community-post-create-page.scss";
 
@@ -20,10 +20,9 @@ import "./community-post-create-page.scss";
 import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
 
-import useUploadImg from "../../../hooks/useUploadImg";
-
 const CreatePostPage = () => {
   const toast = useToast();
+
   const {
     selectedFiles,
     handleFileSelection,
@@ -33,6 +32,7 @@ const CreatePostPage = () => {
     uploadedFiles,
     resetFiles,
   } = useUploadImg();
+
   const [clickedRadio, setClickedRadio] = useState(false);
   const fileInputRef = useRef(null);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -89,6 +89,7 @@ const CreatePostPage = () => {
     apiMutate(formData);
     resetFiles();
   };
+
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
@@ -108,10 +109,12 @@ const CreatePostPage = () => {
       });
     }
   }, [data, toast]);
+
   // back button
   const handleClickCreatePostBack = () => {
     navigate("/posts");
   };
+
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
 
@@ -132,6 +135,20 @@ const CreatePostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
+
+  // thumbnail
+  // const displayThumbnails =
+  //   selectedFiles.length > 0
+  //     ? selectedFiles.map((file, index) => (
+  //         <div key={index}>
+  //           <img
+  //             src={URL.createObjectURL(file)}
+  //             className='thumbnail'
+  //             alt={`Selected Thumbnail ${index + 1}`}
+  //           />
+  //         </div>
+  //       ))
+  //     : null;
 
   const displayThumbnails =
     selectedFiles.length > 0
@@ -197,31 +214,35 @@ const CreatePostPage = () => {
                 alt="Selected"
               />
             ) : (
-              <div className="create-post-page-left-container">
-                <div
-                  className="create-post-page-add-thumbnail"
-                  onDrop={handleDrop}
-                  onDragOver={handleDragOver}
-                  onClick={handleBrowseFiles}
-                >
-                  <img
-                    src={createPostIcon}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                    }}
-                    alt="Image-Create-Post"
-                  />
+              <>
+                <div className="create-post-page-left-container">
+                  <div
+                    className="create-post-page-add"
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onClick={handleBrowseFiles}
+                  >
+                    <img
+                      src={createPostIcon}
+                      style={{
+                        width: "157px",
+                        height: "157px",
+                      }}
+                      alt="Image-Create-Post"
+                    />
+                  </div>
+                  <div className="create-post-page-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                  </div>
                 </div>
-                <div className="create-post-page-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                </div>
-              </div>
+              </>
             )}
 
+            {/* thumbnail */}
             <div className="create-post-page-thumbnail-container">
               {displayThumbnails}
 
+              {/* thumbnail create */}
               {displayThumbnails && (
                 <div
                   className="create-post-page-add-thumbnail"
@@ -257,6 +278,10 @@ const CreatePostPage = () => {
                 })}
               />
 
+              <p className="create-post-page-title-error-validation">
+                {errors.title?.message}
+              </p>
+
               <div className="create-post-page-description-container">
                 <textarea
                   name="brief"
@@ -277,7 +302,8 @@ const CreatePostPage = () => {
               </div>
             </div>
 
-            <div className="wrapper">
+            <div className="create-post-page-button-wrapper">
+              {/* --- radio button --- */}
               <div className="create-post-page-radio-button-container">
                 <input
                   id="input-linked"
@@ -295,6 +321,7 @@ const CreatePostPage = () => {
                 </label>
               </div>
 
+              {/* --- button --- */}
               <div className="post-information-sendButton">
                 <FormButton
                   buttonName="Post"
