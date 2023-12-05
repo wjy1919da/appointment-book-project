@@ -4,6 +4,8 @@
     flex-direction: row;
     top: 304px;
     border-radius: 20px;
+    height: 400px;
+    
     .postdetail-popUp-left-container {
       position: relative;
       flex-basis: 50%;
@@ -351,4 +353,11 @@
   font-weight: 400;
   line-height: normal;
   margin-top: 10px;
+}
+
+.comment-card-input {
+  border: 1px solid #675d59;
+  border-radius: 8px;
+  width: 450px;
+  height: 80px;
 }

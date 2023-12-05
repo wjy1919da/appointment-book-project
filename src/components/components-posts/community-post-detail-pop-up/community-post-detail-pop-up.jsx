@@ -57,6 +57,7 @@ const CommunityPostDetailPopUP = ({
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHightlight] = useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false);
 
   const schema = z.object({
     comment: z
@@ -114,27 +115,26 @@ const CommunityPostDetailPopUP = ({
     }
   };
 
-  // pop up height adjustment
-  const adjustContainerHeight = () => {
-    const container = containerRef.current;
-    const image = imageRef.current;
-    if (container && image) {
-      container.style.height = '400px';
-      image.style.maxHeight = '100%';
-    }
+  const handleClickComment = () => {
+    console.log('Comment Clicked');
+    setShowCommentBox((prev) => !prev);
   };
 
+  console.log('showCommentBox', showCommentBox);
+
+  // pop up height adjustment
   // const adjustContainerHeight = () => {
   //   const container = containerRef.current;
   //   const image = imageRef.current;
   //   if (container && image) {
-  //     container.style.height = image.offsetHeight + 70 + 'px';
+  //     container.style.height = '400px';
+  //     image.style.maxHeight = '100%';
   //   }
   // };
 
-  const handleImageLoad = () => {
-    adjustContainerHeight();
-  };
+  // const handleImageLoad = () => {
+  //   adjustContainerHeight();
+  // };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -205,7 +205,7 @@ const CommunityPostDetailPopUP = ({
             <img
               src={picture}
               ref={imageRef}
-              onLoad={handleImageLoad}
+              // onLoad={handleImageLoad}
               className='post-detail-image'
               alt='detail-pic'
             ></img>
@@ -276,12 +276,28 @@ const CommunityPostDetailPopUP = ({
                         commentText={convertUnicode(comment.content)}
                         date={formatDate(comment.commentDate)}
                         onClick={handleInputClick}
+                        handleClickComment={handleClickComment}
+                        showCommentBox={showCommentBox}
                       />
                     );
                   }
                   return null;
                 })}
             </div>
+
+            <div className='comment-card-input-container'>
+              {showCommentBox && (
+                <>
+                  <hr />
+                  <input
+                    type='text'
+                    onClick={handleClickComment}
+                    className='comment-card-input'
+                  />
+                </>
+              )}
+            </div>
+
             {!userInfo.token && <div>Login to view more....</div>}
           </div>
         </div>
@@ -336,7 +352,7 @@ const CommunityPostDetailPopUP = ({
                     src={BubblesIcon}
                     alt='Icon'
                     className='Icon-size'
-                    onClick={handleInputClick}
+                    onClick={handleClickComment}
                   />
                   {commentCount}
                 </span>
