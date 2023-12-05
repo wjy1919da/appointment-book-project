@@ -48,8 +48,6 @@ const CommunityPostDetailPopUP = ({
   // userAvatar,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  const containerRef = useRef(null);
-  const imageRef = useRef(null);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
@@ -59,6 +57,10 @@ const CommunityPostDetailPopUP = ({
   const [isHighlight, setIsHightlight] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
 
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
+  const textareaRef = useRef(null);
+
   const schema = z.object({
     comment: z
       .string()
@@ -66,7 +68,7 @@ const CommunityPostDetailPopUP = ({
       .min(5, 'Comment must be at least 5 characters long'),
   });
 
-  // console.log("userInfo in post detail ",userInfo);
+  // console.log("userInfo in post detail" ,userInfo);
 
   const {
     register,
@@ -78,7 +80,7 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
-    // console.log("formData ",formData);
+    // console.log("formData" ,formData);
     if (!userInfo.token) {
       togglePopup(true, 'login');
       return;
@@ -97,7 +99,7 @@ const CommunityPostDetailPopUP = ({
 
   useEffect(() => {
     if (data?.code === 100) {
-      // alert("send comment ",data.msg);
+      // alert("send comment" ,data.msg);
       reset({ comment: '' });
       refresh();
     } else if (data?.code === 500 || data?.code === 403) {
@@ -106,28 +108,41 @@ const CommunityPostDetailPopUP = ({
   }, [data]);
 
   const handleInputClick = (e) => {
-    // console.log("handleInputClick ",userInfo.token);
+    // console.log("handleInputClick" ,userInfo.token);
 
     setLiked((prev) => !prev);
+
     if (!userInfo.token) {
-      e.preventDefault(); // 阻止默认行为
+      e.preventDefault();
       togglePopup(true, 'login');
     }
   };
 
   const handleClickComment = () => {
-    console.log('Comment Clicked');
     setShowCommentBox((prev) => !prev);
+
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
 
-  console.log('showCommentBox', showCommentBox);
-
-  // pop up height adjustment
+  // when click the comment button it will scroll down to textarea: Emmy M
+  useEffect(() => {
+    if (showCommentBox && textareaRef.current && containerRef.current) {
+      textareaRef.current.focus();
+      containerRef.current.scrollTo({
+        top: textareaRef.current.offsetTop,
+        behavior: 'smooth',
+      });
+    }
+  }, [showCommentBox]);
+  
+  // pop up height adjustment: Emmy M
   const adjustContainerHeight = () => {
     const container = containerRef.current;
     const image = imageRef.current;
     if (container && image) {
-      container.style.height = '400px';
+      container.style.height = '420px';
       image.style.maxHeight = '100%';
     }
   };
@@ -198,6 +213,7 @@ const CommunityPostDetailPopUP = ({
           </button>
         </div>
       </div>
+
       {/* Web */}
       <div className='postdetail-popUp-left-container'>
         {!isMobile && picture && (
@@ -284,12 +300,13 @@ const CommunityPostDetailPopUP = ({
                   return null;
                 })}
             </div>
-            
+
             <div className='comment-card-input-container'>
               {showCommentBox && (
                 <>
                   <hr />
                   <textarea
+                    ref={textareaRef}
                     type='text'
                     placeholder='Type Something...'
                     className='comment-card-input'
@@ -362,7 +379,6 @@ const CommunityPostDetailPopUP = ({
                   <img src={ShareIcon} alt='Image-Share-Icon' />
                 </div>
               </div>
-
               {/* <div className='comment-send-msg-container'> 
                 <CommunitySendMsg isValid={isValid} />
                </div> */}
@@ -375,6 +391,7 @@ const CommunityPostDetailPopUP = ({
                 style={{ backgroundColor: 'orange', border: 'orange' }}
               />  */}
             </div>
+
             <div className='new-comment-input'>
               {/* <input
                 {...register('comment')}
