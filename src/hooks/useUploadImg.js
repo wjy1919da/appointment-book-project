@@ -19,8 +19,8 @@ const useUploadImg = () => {
   const removeFile = (fileToRemove) => {
     if (uploadControllers.current.has(fileToRemove)) {
       const controller = uploadControllers.current.get(fileToRemove);
-      controller.abort(); // 中断上传
-      uploadControllers.current.delete(fileToRemove); // 从 Map 中移除 controller
+      controller.abort();
+      uploadControllers.current.delete(fileToRemove);
     }
     setSelectedFiles((currentFiles) =>
       currentFiles.filter((file) => file !== fileToRemove)

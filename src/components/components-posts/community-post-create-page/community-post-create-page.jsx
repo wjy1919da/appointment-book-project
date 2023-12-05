@@ -38,6 +38,7 @@ const CreatePostPage = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
 
   const navigate = useNavigate();
+
   // react hook form
   const {
     register,
@@ -113,6 +114,7 @@ const CreatePostPage = () => {
   };
   const displayImage =
     selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
+
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -197,7 +199,7 @@ const CreatePostPage = () => {
             ) : (
               <div className="create-post-page-left-container">
                 <div
-                  className="create-post-page-add"
+                  className="create-post-page-add-thumbnail"
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -205,8 +207,8 @@ const CreatePostPage = () => {
                   <img
                     src={createPostIcon}
                     style={{
-                      width: "157px",
-                      height: "157px",
+                      width: "60px",
+                      height: "60px",
                     }}
                     alt="Image-Create-Post"
                   />
@@ -254,7 +256,6 @@ const CreatePostPage = () => {
                   },
                 })}
               />
-              <p className="title-error-validation">{errors.title?.message}</p>
 
               <div className="create-post-page-description-container">
                 <textarea

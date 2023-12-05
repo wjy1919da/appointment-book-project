@@ -44,9 +44,9 @@ const CommentCard = ({avatar,name,date,commentText,onClick}) => {
                 <span>
                     <img className='post-detail-icon' src ={HeartIcon} alt='like' onClick={onClick}></img>
                 </span>
-                <span>
+                {/* <span>
                     <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
-                </span>
+                </span> */}
             </div>
         </div>
     )

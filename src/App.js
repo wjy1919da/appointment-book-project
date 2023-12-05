@@ -42,6 +42,7 @@ import ProcedureMainPage from "./routes/procedure/procedure-main-page.component.
 // import { useGetUserInfo } from "./hooks/useAuth.js";
 import userInfoQueryStore from "./userStore.ts";
 import DoctorProfileEdit from "./components/doctor-own-profile/doctor-profile-edit/doctor-own-profile-edit";
+import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 
 // import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
@@ -118,6 +119,7 @@ const App = () => {
               <Route path="download" element={<Download />} />
               <Route path="create-post" element={<CreatePostOfUser />} />
               <Route path="/posts/create" element={<CreatePostPage />} />
+              <Route path="/edit-post" element={<EditPostPage />} />
               <Route path="health-check" element={<HealthCheck />} />
               {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
 
