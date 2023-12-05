@@ -180,12 +180,12 @@ const CommunityPostDetailPopUP = ({
         <div>
           <button
             className="doctor-search-button"
-            style={{
-              width: "90px",
-              height: "30px",
-              radius: "8px",
-              fontSize: "10px",
-            }}
+            // style={{
+            //   width: "90px",
+            //   height: "30px",
+            //   radius: "8px",
+            //   fontSize: "10px",
+            // }}
             onClick={() => (window.location.href = "/download")}
           >
             Try Charm Life
@@ -285,13 +285,13 @@ const CommunityPostDetailPopUP = ({
           </span>
           <button
             className="doctor-search-button"
-            style={{
-              width: "150px",
-              height: "40px",
-              radius: "20px",
-              fontSize: "15px",
-              marginTop: "10px",
-            }}
+            // style={{
+            //   width: "150px",
+            //   height: "40px",
+            //   radius: "20px",
+            //   fontSize: "15px",
+            //   marginTop: "10px",
+            // }}
             onClick={() => (window.location.href = "/download")}
           >
             Try Charm Life
