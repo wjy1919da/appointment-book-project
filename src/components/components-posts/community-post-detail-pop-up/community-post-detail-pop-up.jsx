@@ -289,9 +289,9 @@ const CommunityPostDetailPopUP = ({
               {showCommentBox && (
                 <>
                   <hr />
-                  <input
+                  <textarea
                     type='text'
-                    onClick={handleClickComment}
+                    placeholder='Type Something...'
                     className='comment-card-input'
                   />
                 </>
