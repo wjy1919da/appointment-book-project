@@ -9,23 +9,21 @@ import gradIcon from "../../assets/user/Graduation Cap.png";
 import certified from "../../assets/user/Certificate.png";
 import "./doctor-own-profile-Basic.styles.scss";
 import { useGetUserInfo } from "../../hooks/useAuth";
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import DoctorOwnProfileEditButton from "./doctor-own-profile-edit-button";
 
 import userInfoQueryStore from "../../userStore";
 import HomeSpinner from "../home-spinner/home-spinner.component";
 const DocotorOwnBasic = () => {
-  //   const { data, isLoading, isError, error } = useGetUserInfo();
-  //   if (data) {
-  //     console.log("data in doctor profile", data);
-  //   }
-  //   if (isLoading) {
-  //     return <HomeSpinner />;
-  //   }
+  const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [showManageButton, setShowManageButton] = useState(false);
   const handleFirstButtonClick = () => {
     setShowManageButton(true); // This will show the second button
+  };
+  const onClick = () => {
+    navigate("/doctorProfileEdit");
   };
   return (
     <div className="doctor-own-basic-conatiner ">
@@ -48,10 +46,17 @@ const DocotorOwnBasic = () => {
             ></img>
           </div>
           <div className="doctor-own-basic-edits-buttons">
-            <Link to="/doctorProfileEdit" className="top-edit-button-1">
+            {/* <Link to="/doctorProfileEdit" className="top-edit-button-1">
               edit profile
-            </Link>
-            <button onClick={handleFirstButtonClick} className="top-edit-button-2">
+            </Link> */}
+            <DoctorOwnProfileEditButton
+              onClick={onClick}
+              title="edit profile"
+            />
+            <button
+              onClick={handleFirstButtonClick}
+              className="top-edit-button-2"
+            >
               <img src={calendar} className="doctor-calendar-img"></img>
             </button>
           </div>
@@ -65,9 +70,11 @@ const DocotorOwnBasic = () => {
             )}
           </div>
           <div className="doctor-own-basic-app-button">
-          {showManageButton &&(<button className="text-management-button">
-              Manage Appointments
-            </button>)}
+            {showManageButton && (
+              <button className="text-management-button">
+                Manage Appointments
+              </button>
+            )}
           </div>
         </div>
         <div className="doctor-own-basic-medium">

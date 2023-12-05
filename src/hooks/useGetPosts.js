@@ -1,10 +1,10 @@
-import { useQuery, useInfiniteQuery } from 'react-query';
-import usePostQueryStore from '../postStore.ts';
-import APIClient from '../services/api-client.js';
+import { useQuery, useInfiniteQuery } from "react-query";
+import usePostQueryStore from "../postStore.ts";
+import APIClient from "../services/api-client.js";
 // import axios from 'axios';
 
 export function useGetPost() {
-  const apiClient = new APIClient('/post/all_posts');
+  const apiClient = new APIClient("/post/all_posts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -19,7 +19,7 @@ export function useGetPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetAllPosts', postQuery], fetchPost, {
+  return useInfiniteQuery(["GetAllPosts", postQuery.filterType], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -35,7 +35,7 @@ export function useGetPost() {
 
 // get posts
 export function useGetUserPostedPost() {
-  const apiClient = new APIClient('/user_action/Myposts');
+  const apiClient = new APIClient("/user_action/Myposts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -46,7 +46,7 @@ export function useGetUserPostedPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetPostsPost', postQuery], fetchPost, {
+  return useInfiniteQuery(["GetPostsPost"], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -61,7 +61,7 @@ export function useGetUserPostedPost() {
 }
 
 export function useGetUserLikededPost() {
-  const apiClient = new APIClient('/user_action/likedPosts');
+  const apiClient = new APIClient("/user_action/likedPosts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -75,7 +75,7 @@ export function useGetUserLikededPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetLikesPost', postQuery], fetchPost, {
+  return useInfiniteQuery(["GetLikesPost"], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -106,7 +106,7 @@ export function usePostDetail() {
   };
 
   return useQuery(
-    ['postDetail', postQuery.userID, postQuery.trigger],
+    ["postDetail", postQuery.userID, postQuery.trigger],
     fetchPostDetail,
     {
       placeholderData: { data: {} }, // Default object to use before fetching completes

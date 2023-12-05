@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import usePostQueryStore from '../../postStore.ts';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import React, { useState, useEffect } from "react";
+import usePostQueryStore from "../../postStore.ts";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 // components
-import CommunityPost from '../components-posts/community-post/community-post.component';
-import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
+import CommunityPost from "../components-posts/community-post/community-post.component";
+import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
 
 // hook
-import { useGetUserLikededPost } from '../../hooks/useGetPosts';
+import { useGetUserLikededPost } from "../../hooks/useGetPosts";
 
 // scss
-import '../user-profile-post-area/user-profile-post-area.styles.scss';
-import '../create-post/create-post.style.scss';
+import "../user-profile-post-area/user-profile-post-area.styles.scss";
+import "../create-post/create-post.style.scss";
 
 // images
-import post1 from '../../assets/doctor/post3.png';
-import userPostAvatar from '../../assets/post/user-profile-avatar.png';
-import creatPostIcon from '../../assets/post/create-post-icon.png';
+import post1 from "../../assets/doctor/post3.png";
+import userPostAvatar from "../../assets/post/user-profile-avatar.png";
+import creatPostIcon from "../../assets/post/create-post-icon.png";
 
 //import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
@@ -42,8 +42,6 @@ const UserProfileLike = () => {
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
-  // const [showCreatePost, setShowCreatePost] = useState(false);
-  // const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
@@ -52,10 +50,10 @@ const UserProfileLike = () => {
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
   useEffect(() => {
-    console.log('Likes Page Data', data);
+    console.log("Likes Page Data", data);
   }, [data]);
 
-  const [gutterwidth, setGutterWidth] = useState('10px');
+  const [gutterwidth, setGutterWidth] = useState("10px");
   const breakPoint = {
     default: 4,
     2500: 4,
@@ -83,7 +81,7 @@ const UserProfileLike = () => {
   }, []);
 
   const handleOnClick = (post) => {
-    console.log('POST IS HERE', post);
+    console.log("POST IS HERE", post);
     setIsModelOpen(true);
     setUserID(post.id);
     setUserName(post.username);
@@ -94,9 +92,9 @@ const UserProfileLike = () => {
     <div key={index} onClick={() => handleOnClick(post)}>
       <CommunityPost
         imageURL={post.coverImg || []}
-        text={post.title || ''}
-        profileImage={post.avatar || ''}
-        authorName={post.username || ''}
+        text={post.title || ""}
+        profileImage={post.avatar || ""}
+        authorName={post.username || ""}
         likes={post.like_count || 0}
 
         // key={index}
@@ -120,9 +118,9 @@ const UserProfileLike = () => {
   // });
 
   return (
-    <div className='user-profile-post-area-container'>
+    <div className="user-profile-post-area-container">
       {imagesLoaded && (
-        <div className='choose-picture-conatiner-post'>
+        <div className="choose-picture-conatiner-post">
           <ResponsiveMasonry
             columnsCountBreakPoints={breakPoint}
             gutter={gutterwidth}

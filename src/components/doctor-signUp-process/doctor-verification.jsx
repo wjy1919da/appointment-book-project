@@ -4,61 +4,22 @@ import CloseButton from "../../assets/doctor/doctor-verification-close-Icon.png"
 import UploadIcon from "../../assets/doctor/Upload.png";
 import { Button, Dropdown, Form } from "react-bootstrap";
 import React, { useState, useRef } from "react";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
-import { uploadToS3 } from "../../services/s3-client";
-
+import useUploadFile from "../../hooks/useUploadFile";
 const DoctorVerification = () => {
-  // console.log("process", process.env);
-  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
-  const [uploadingFiles, setUploadingFiles] = useState([]);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const {
+    selectedFiles,
+    handleFileSelection,
+    uploadProgress,
+    isLoading,
+    isError,
+    uploadedFiles,
+    resetFiles,
+    removeFile,
+    handleUpload,
+    uploadingFiles,
+  } = useUploadFile();
 
-  const handleFileSelection = (event) => {
-    const newFiles = Array.from(event.target.files);
-    setSelectedFiles((prevFiles) => {
-      const existingFileNames = new Set(prevFiles.map((file) => file.name));
-      const newUniqueFiles = newFiles.filter(
-        (file) => !existingFileNames.has(file.name)
-      );
-      return [...prevFiles, ...newUniqueFiles];
-    });
-  };
-
-  const handleUploadClick = async () => {
-    console.log(`uploading ${selectedFiles.length} files...`);
-    const uploadPromises = selectedFiles.map((file) => uploadToS3(file));
-    try {
-      const uploadResults = await Promise.all(uploadPromises);
-      uploadResults.forEach((result) => {
-        if (result.success) {
-          setAlert({ show: true, type: "success", message: result.message });
-        } else {
-          setAlert({ show: true, type: "error", message: result.message });
-        }
-      });
-      console.log("all the files uploaded successfully", uploadResults);
-      setUploadingFiles(selectedFiles);
-      setSelectedFiles([]);
-    } catch (err) {
-      setAlert({
-        show: true,
-        type: "error",
-        message: "Failed to upload files.",
-      });
-    }
-  };
-  const handleRemoveFile = (fileName) => {
-    setSelectedFiles((prevFiles) =>
-      prevFiles.filter((file) => file.name !== fileName)
-    );
-  };
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
   };
@@ -72,15 +33,6 @@ const DoctorVerification = () => {
   };
   return (
     <div className="doctor-verification-main-container">
-      {alert.show && (
-        <Alert status={alert.type}>
-          <AlertIcon />
-          <AlertTitle mr={2}>
-            {alert.type === "success" ? "Success!" : "Error!"}
-          </AlertTitle>
-          <AlertDescription>{alert.message}</AlertDescription>
-        </Alert>
-      )}
       <div className="doctor-verification-title">
         <span className="doctor-verification-text">Verification</span>
       </div>
@@ -140,9 +92,9 @@ const DoctorVerification = () => {
       />
       <div className="doctor-verification-choose-file-section">
         <span className="doctor-verification-text">
-          Uploading {selectedFiles.length}/3 files
+          Uploading {uploadingFiles.length}/{selectedFiles.length}files
         </span>
-        {selectedFiles.map((file) => (
+        {uploadingFiles.map((file) => (
           <div key={file.name} className="selected-file">
             <div className="uploadFile-box">
               <span
@@ -153,7 +105,7 @@ const DoctorVerification = () => {
               </span>
               <img
                 src={CloseButton}
-                onClick={() => handleRemoveFile(file.name)}
+                onClick={() => removeFile(file)}
                 style={{
                   width: "15px",
                   height: "15px",
@@ -184,7 +136,7 @@ const DoctorVerification = () => {
       <div className="doctor-verification-upload-button">
         <button
           className="doctor-verification-upload-button"
-          onClick={handleUploadClick}
+          onClick={handleUpload}
         >
           UPLOAD FILES
         </button>

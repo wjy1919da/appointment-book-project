@@ -44,6 +44,9 @@ import userInfoQueryStore from "./userStore.ts";
 import DoctorProfileEdit from "./components/doctor-own-profile/doctor-profile-edit/doctor-own-profile-edit";
 import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 
+// import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
+import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
+
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   // const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -125,6 +128,10 @@ const App = () => {
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
+              <Route
+                path="doctorVerification"
+                element={<DoctorVerificationPage />}
+              />
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="*" element={<PageNotFound />} />
             </Route>

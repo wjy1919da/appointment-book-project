@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
-import { uploadImgToS3 } from '../services/s3-client';
-import { useToast } from '@chakra-ui/react';
+import { useState, useRef } from "react";
+import { uploadImgToS3 } from "../services/s3-client.js";
+import { useToast } from "@chakra-ui/react";
 
 const useUploadImg = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -19,8 +19,8 @@ const useUploadImg = () => {
   const removeFile = (fileToRemove) => {
     if (uploadControllers.current.has(fileToRemove)) {
       const controller = uploadControllers.current.get(fileToRemove);
-      controller.abort(); // 中断上传
-      uploadControllers.current.delete(fileToRemove); // 从 Map 中移除 controller
+      controller.abort();
+      uploadControllers.current.delete(fileToRemove);
     }
     setSelectedFiles((currentFiles) =>
       currentFiles.filter((file) => file !== fileToRemove)
@@ -44,12 +44,12 @@ const useUploadImg = () => {
     toast.promise(
       Promise.all(uploadPromises),
       {
-        success: { title: 'image uploaded' },
-        error: { title: 'image upload failed', description: 'Something wrong' },
-        loading: { title: 'image is uploading', description: 'Please wait' },
+        success: { title: "image uploaded" },
+        error: { title: "image upload failed", description: "Something wrong" },
+        loading: { title: "image is uploading", description: "Please wait" },
       },
       {
-        position: 'top',
+        position: "top",
         duration: 1000,
         isClosable: true,
       }
@@ -64,11 +64,11 @@ const useUploadImg = () => {
               setUploadedFiles((prevFiles) => [...prevFiles, result.location]);
             } else {
               setIsError(true);
-              console.log('error uploading file', result.message);
+              console.log("error uploading file", result.message);
             }
           } catch (err) {
             setIsError(true);
-            console.log('error uploading file', err);
+            console.log("error uploading file", err);
           } finally {
             setUploadingFiles((prevUploadingFiles) =>
               prevUploadingFiles.filter(
@@ -80,7 +80,7 @@ const useUploadImg = () => {
       );
     } catch (err) {
       setIsError(true);
-      console.log('error uploading files', err);
+      console.log("error uploading files", err);
     } finally {
       setIsLoading(false);
     }

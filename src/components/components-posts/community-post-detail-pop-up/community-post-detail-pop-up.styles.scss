@@ -89,7 +89,7 @@
             flex-direction: row;
             gap: 8px;
             color: var(--text-2-button, #675d59);
-            font-family: 'Open Sans';
+            font-family: "Open Sans";
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -132,7 +132,7 @@
     line-height: normal;
   }
   .detail-red-font {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -198,34 +198,35 @@
       object-fit: cover;
     }
   }
-  // TODO: delete this when the search button component is done
+  // // TODO: delete this when the search button component is done
   .doctor-search-button {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 140%;
     color: #ffffff;
     width: 150px;
-    height: 40px;
     margin-left: 5px;
     justify-content: center;
     align-items: center;
     background: #352c29;
-    border-radius: 8px;
+    border-radius: 20px;
     display: flex;
-
-    .doctor-search-icon {
-      left: 12.5%;
-      right: 12.5%;
-      top: 12.5%;
-      bottom: 12.5%;
-      border-radius: 0;
-      width: 15px;
-      height: 15px;
-      margin-right: 8px;
-    }
+    height: 40px;
+    font-size: 15px;
+    // margin-top: 10px;
   }
+
+  .doctor-search-icon {
+    left: 12.5%;
+    right: 12.5%;
+    top: 12.5%;
+    bottom: 12.5%;
+    border-radius: 0;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
   .postdetail-popUp-left-container {
     display: flex;
     justify-content: center;
@@ -266,7 +267,7 @@
       font-size: 14px;
       font-weight: 500px;
       line-height: 25.6px;
-      font-family: 'Open Sans';
+      font-family: "Open Sans";
     }
   }
   .fixed-input-box {
