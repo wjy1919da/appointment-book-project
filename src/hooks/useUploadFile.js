@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { uploadToS3 } from "../services/s3-client";
-// import { useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 const useUploadFile = () => {
+  const toast = useToast();
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState([]);
@@ -60,6 +61,24 @@ const useUploadFile = () => {
           return newProgress;
         });
       }).then((uploadResponse) => {
+        if (uploadResponse.success) {
+          toast({
+            title: "Upload successful",
+            description: `File "${file.name}" uploaded successfully.`,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Upload failed",
+            description: `File "${file.name}" failed to upload. ${uploadResponse.message}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+
         const uploadedFile = {
           ...uploadResponse,
           name: file.name,
@@ -73,7 +92,15 @@ const useUploadFile = () => {
     try {
       await Promise.all(uploadPromises);
     } catch (error) {
+      toast({
+        title: "Upload error",
+        description: `An error occurred during the upload process. ${error.message}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.error("Upload error:", error);
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
