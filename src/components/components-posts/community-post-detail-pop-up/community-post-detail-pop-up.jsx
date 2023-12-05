@@ -135,8 +135,8 @@ const CommunityPostDetailPopUP = ({
         behavior: 'smooth',
       });
     }
-  }, [showCommentBox]);
-  
+  }, [showCommentBox, commentCount]);
+
   // pop up height adjustment: Emmy M
   const adjustContainerHeight = () => {
     const container = containerRef.current;
@@ -196,9 +196,9 @@ const CommunityPostDetailPopUP = ({
             src={postQuery.userAvatar}
             className='post-detail-mobile-avatar'
           ></img>
-          <span>{postQuery.userName}</span>
+          <span className='post-detail-user-name-mobile'>{postQuery.userName}</span>
         </div>
-        <div>
+        {/* <div>
           <button
             className='doctor-search-button'
             style={{
@@ -211,7 +211,7 @@ const CommunityPostDetailPopUP = ({
           >
             Try Charm Life
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Web */}
@@ -252,7 +252,6 @@ const CommunityPostDetailPopUP = ({
           <img
             src={picture}
             ref={imageRef}
-            style={{ borderRadius: '10px' }}
           ></img>
         )}
       </div>
@@ -302,7 +301,7 @@ const CommunityPostDetailPopUP = ({
             </div>
 
             <div className='comment-card-input-container'>
-              {showCommentBox && (
+              {commentCount >= 0 && showCommentBox && (
                 <>
                   <hr />
                   <textarea
@@ -320,7 +319,7 @@ const CommunityPostDetailPopUP = ({
         </div>
 
         {/* Mobile */}
-        <div className='post-detail-mobile-download-button'>
+        {/* <div className='post-detail-mobile-download-button'>
           <img
             src={DownArrow}
             style={{ marginTop: '50px', width: '15px', height: '13px' }}
@@ -341,7 +340,7 @@ const CommunityPostDetailPopUP = ({
           >
             Try Charm Life
           </button>
-        </div>
+        </div> */}
 
         {/* Web */}
         <div className='fixed-input-box'>

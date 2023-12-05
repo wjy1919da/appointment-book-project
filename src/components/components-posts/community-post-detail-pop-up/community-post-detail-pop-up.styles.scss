@@ -1,8 +1,7 @@
 @media (min-width: 1025px) {
   .post-detail-popUp-container {
+    top: 300px;
     display: flex;
-    flex-direction: row;
-    top: 304px;
     border-radius: 20px;
     // adjusting the height when there is no image so this can be removed when published: Emmy M
     height: 420px;
@@ -11,6 +10,7 @@
       position: relative;
       flex-basis: 50%;
       border-radius: 20px 0px 0px 20px;
+
       .post-detail-image {
         border-radius: 5px 0 0 5px;
         object-fit: contain;
@@ -189,21 +189,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
   }
 
   .post-detail-mobile-profile-container {
-    margin-top: 10px;
-    align-items: center;
-    justify-content: center;
     display: flex;
-    justify-content: space-between;
-    padding: 0px 10px;
+    align-items: center;
+    padding: 10px;
+    height: 60px;
 
     .post-detail-mobile-profile {
-      align-items: center;
-      justify-content: center;
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 10px;
     }
 
@@ -247,7 +246,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
   .post-detail-image {
     display: flex;
   }
@@ -262,6 +261,8 @@
 
   .postdetail-popUp-right-container {
     display: block;
+    background-color: #ffffff;
+    padding: 20px 30px;
   }
 
   .detail-top-content {
@@ -391,4 +392,12 @@
   padding: 10px;
   width: 450px;
   height: 80px;
+}
+
+.post-detail-user-name-mobile {
+  color: #352c29;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
