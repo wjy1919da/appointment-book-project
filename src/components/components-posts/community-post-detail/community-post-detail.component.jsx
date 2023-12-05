@@ -26,8 +26,8 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
       <div className='modal-parent-container'>
         <Modal
           dialogClassName='close-button-modal'
-          show={show} // Set this according to your logic
-          onHide={onHide} // Set this according to your logic
+          show={show} 
+          onHide={onHide}
           size='xl'
           aria-labelledby='example-custom-modal-styling-title'
           style={{ marginTop: '50px' }}
@@ -37,7 +37,6 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
               <button className='close-button' onClick={onHide}>
                 <img src={CloseButton} alt='Icon-Close-Button' />
               </button>
-              {/* ...more content for the first modal... */}
             </div>
           </div>
         </Modal>

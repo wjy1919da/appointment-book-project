@@ -123,18 +123,18 @@ const CommunityPostDetailPopUP = ({
   console.log('showCommentBox', showCommentBox);
 
   // pop up height adjustment
-  // const adjustContainerHeight = () => {
-  //   const container = containerRef.current;
-  //   const image = imageRef.current;
-  //   if (container && image) {
-  //     container.style.height = '400px';
-  //     image.style.maxHeight = '100%';
-  //   }
-  // };
+  const adjustContainerHeight = () => {
+    const container = containerRef.current;
+    const image = imageRef.current;
+    if (container && image) {
+      container.style.height = '400px';
+      image.style.maxHeight = '100%';
+    }
+  };
 
-  // const handleImageLoad = () => {
-  //   adjustContainerHeight();
-  // };
+  const handleImageLoad = () => {
+    adjustContainerHeight();
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -157,7 +157,7 @@ const CommunityPostDetailPopUP = ({
   }
 
   function convertUnicode(input) {
-    if (!input) return ''; // Return an empty string if input is null, undefined, or empty string
+    if (!input) return '';
     return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a, b) =>
       String.fromCharCode(parseInt(b, 16))
     );
@@ -205,7 +205,7 @@ const CommunityPostDetailPopUP = ({
             <img
               src={picture}
               ref={imageRef}
-              // onLoad={handleImageLoad}
+              onLoad={handleImageLoad}
               className='post-detail-image'
               alt='detail-pic'
             ></img>
@@ -284,7 +284,7 @@ const CommunityPostDetailPopUP = ({
                   return null;
                 })}
             </div>
-
+            
             <div className='comment-card-input-container'>
               {showCommentBox && (
                 <>
@@ -301,6 +301,7 @@ const CommunityPostDetailPopUP = ({
             {!userInfo.token && <div>Login to view more....</div>}
           </div>
         </div>
+
         {/* Mobile */}
         <div className='post-detail-mobile-download-button'>
           <img
@@ -324,6 +325,7 @@ const CommunityPostDetailPopUP = ({
             Try Charm Life
           </button>
         </div>
+
         {/* Web */}
         <div className='fixed-input-box'>
           <form onSubmit={handleSubmit(onSubmit)}>
