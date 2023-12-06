@@ -21,6 +21,7 @@ import "./doctor-post-grid.styles.scss";
 // images
 import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
+import { set } from "date-fns";
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -32,8 +33,10 @@ const DoctorPostGrid = ({ isAbout }) => {
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
-  const [userAvatar, setUserAvatar] = useState("");
-  const [userName, setUserName] = useState();
+  const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  const [title, setTitle] = useState();
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
@@ -46,17 +49,19 @@ const DoctorPostGrid = ({ isAbout }) => {
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
 
-  const setPostID = (ID, avatar, username) => {
+  const setPostID = (ID, avatar, username, title) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(avatar);
     setUserName(username);
+    setTitle(title);
   };
+  // console.log("postQuery", postQuery);
 
   const postCardList = flatData.map((post) => (
     <div
       className="btn"
-      onClick={() => setPostID(post.id, post.avatar, post.username)}
+      onClick={() => setPostID(post.id, post.avatar, post.nickname, post.title)}
       key={post.id}
     >
       <CommunityPost
@@ -100,8 +105,7 @@ const DoctorPostGrid = ({ isAbout }) => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           isMobile={isMobile}
-          postUserName={userName}
-          postAvatar={userAvatar}
+          postTitle={title}
         />
       )}
       <div className="down-load-more-container">

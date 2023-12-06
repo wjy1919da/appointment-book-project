@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Button } from 'react-bootstrap';
 
 // stores
@@ -38,6 +41,7 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
   id,
+  postTitle,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -48,6 +52,7 @@ const CommunityPostDetailPopUP = ({
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHightlight] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -75,6 +80,17 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+  const goToPreviousImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : picture.length - 1
+    );
+  };
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex < picture.length - 1 ? prevIndex + 1 : 0
+    );
+  };
 
   const toggleGetLikes = () => {
     setLiked((prev) => !prev);
@@ -161,31 +177,6 @@ const CommunityPostDetailPopUP = ({
     }
   }, [showCommentBox, commentCount]);
 
-  // pop up height adjustment
-  // const adjustContainerHeight = () => {
-  //   const container = containerRef.current;
-  //   const image = imageRef.current;
-  //   if (container && image) {
-  //     container.style.height = "420px";
-  //     image.style.maxHeight = "100%";
-  //   }
-  // };
-
-  // const handleImageLoad = () => {
-  //   adjustContainerHeight();
-  // };
-  const handleImageLoad = () => {
-    // Ensure the image fills the height of the container
-    const container = containerRef.current;
-    const image = imageRef.current;
-    if (container && image) {
-      // Set the image height to match the container height
-      const containerHeight = container.getBoundingClientRect().height;
-      image.style.height = `${containerHeight}px`;
-      image.style.width = "auto"; // Set width to auto to maintain the aspect ratio
-    }
-  };
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleDateString("en-US");
@@ -256,12 +247,23 @@ const CommunityPostDetailPopUP = ({
         {!isMobile && picture && (
           <>
             <div className="post-detail-image-wrapper">
+              <FontAwesomeIcon
+                className="arrow-icon arrow-left"
+                icon={faArrowLeft}
+                size="lg"
+                onClick={goToPreviousImage} // Go to previous image when this icon is clicked
+              />
               <img
-                src={picture}
+                src={picture[currentImageIndex]}
                 ref={imageRef}
-                // onLoad={handleImageLoad}
                 className="post-detail-image"
                 alt="detail-pic"
+              />
+              <FontAwesomeIcon
+                className="arrow-icon arrow-right"
+                icon={faArrowRight}
+                size="lg"
+                onClick={goToNextImage} // Go to next image when this icon is clicked
               />
             </div>
             <div className="user-detail">
@@ -290,15 +292,9 @@ const CommunityPostDetailPopUP = ({
       <div className="postdetail-popUp-right-container">
         <div className="detail-top-content">
           <div className="post-popUp-content">
-            {!isMobile && brief && <span>{brief}</span>}
-            <h2 className="postdetail-popUp-title">Title</h2>
+            <h2 className="postdetail-popUp-title">{postTitle}</h2>
             <hr className="hr" />
-            <p className="post-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-              voluptatum quae doloremque non voluptates eius sapiente, explicabo
-              quasi suscipit quo. Delectus, tempora. Quo esse sapiente ut cumque
-              amet error ipsum.
-            </p>
+            <p className="post-description">{brief || "No description"}</p>
             <span className="post-tag-names">
               #Doctor reviews #Breast Augmentation
             </span>

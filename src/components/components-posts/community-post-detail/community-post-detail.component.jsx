@@ -7,19 +7,8 @@ import "./community-post-detail.styles.scss";
 // images
 import CloseButton from "../../../assets/post/pop-up-close-button.png";
 
-const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
+const PostDetail = ({ show, onHide, isMobile, postTitle }) => {
   const { data, error, isLoading } = usePostDetail();
-
-  if (data) {
-    console.log("fetchdata", data);
-  }
-
-  //   if (error) {
-  //     return <div>Error: {error.message}</div>;
-  //   }
-  //   if (isLoading) {
-  //     return <div>Loading...</div>;
-  //   }
 
   return (
     <div>
@@ -64,8 +53,7 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
                     collectCount={data.data.collectCount}
                     comments={data.data.comments}
                     id={data.data.id}
-                    userName={postUserName}
-                    userAvatar={postAvatar}
+                    postTitle={postTitle}
                   />
                 )}
               </div>
@@ -92,8 +80,7 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
               collectCount={data.data.collectCount}
               comments={data.data.comments}
               id={data.data.id}
-              userName={postUserName}
-              userAvatar={postAvatar}
+              postTitle={postTitle}
             />
           )}
         </Modal>
