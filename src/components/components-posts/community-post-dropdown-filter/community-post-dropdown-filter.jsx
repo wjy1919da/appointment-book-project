@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // components
-import PostSearchBox from '../community-post-search-box/community-post-search-box';
 import PostDropDownTagButton from '../community-post-dropdown-tag-button/community-post-dropdown-tag-button';
+// import PostSearchBox from '../community-post-search-box/community-post-search-box';
 
 // scss
 import './community-post-dropdown-filter.scss';
@@ -32,12 +32,12 @@ const PostDropDownFilter = () => {
   };
 
   // location button
-  const handleClickLocation = () => {
-    setIsTagContainerVisible(false);
-    // get location
-    getUserLocation();
-    setIsLocationTagContainerVisible(!isLocationTagContainerVisible);
-  };
+  // const handleClickLocation = () => {
+  //   setIsTagContainerVisible(false);
+  //   // get location
+  //   getUserLocation();
+  //   setIsLocationTagContainerVisible(!isLocationTagContainerVisible);
+  // };
 
   const closeContainer = (e) => {
     if (containerRef.current && !containerRef.current.contains(e.target)) {
@@ -76,26 +76,26 @@ const PostDropDownFilter = () => {
       <div className='post-dropdown-filter-container' ref={containerRef}>
         <div className='post-dropdown-filter-inner-container'>
           <PostDropDownTagButton
-            buttonTagName='#Tag'
+            buttonTagName='#'
             className='create-post-page-tag-name'
             onClick={handleClickTag}
           />
 
-
           {isTagContainerVisible && (
             <div className='post-dropdown-filter-search-container'>
-              <div className='post-dropdown-filter-search-inner-container'>
+              {/* <div className='post-dropdown-filter-search-inner-container'>
                 <PostSearchBox className='search-reverse' />
-              </div>
+              </div> */}
               <div className='search-result'>
-                <p className='search-result-title'>#Trendy</p>
+                {/* <p className='search-result-title'>#Trendy</p> */}
                   {data?.data?.map((item) => (
                     <div key={item.tagId} className='search-result-list'>{item.tagName}</div>
                   ))}
               </div>
             </div>
           )}
-          <PostDropDownTagButton
+
+          {/* <PostDropDownTagButton
             buttonTagName='Add Location'
             className='create-post-page-location-tag-name'
             onClick={handleClickLocation}
@@ -117,7 +117,7 @@ const PostDropDownFilter = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </>

@@ -13,7 +13,7 @@ import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook
 import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-//  import { useGetPost } from '../../../hooks/useGetPosts';
+import { useGetLikesPost } from "../../../hooks/useGetPosts";
 
 // scss
 import "./doctor-post-grid.styles.scss";
@@ -39,6 +39,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
   // console.log("doctor post grid", flatData)
+
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
@@ -55,10 +56,11 @@ const DoctorPostGrid = ({ isAbout }) => {
   const postCardList = flatData.map((post) => (
     <div
       className="btn"
-      onClick={() => setPostID(post.id, post.avatar, post.nickname)}
+      onClick={() => setPostID(post.id, post.avatar, post.username)}
       key={post.id}
     >
       <CommunityPost
+        id={post.id}
         imageURL={post.coverImg || []}
         text={post.title || ""}
         profileImage={post.avatar || ""}

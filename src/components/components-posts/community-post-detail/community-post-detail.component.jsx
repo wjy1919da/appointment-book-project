@@ -3,7 +3,9 @@ import { usePostDetail } from '../../../hooks/useGetPosts';
 import Modal from 'react-bootstrap/Modal';
 import PostDetailPopUP from '../community-post-detail-pop-up/community-post-detail-pop-up';
 import './community-post-detail.styles.scss';
-// import CloseButton from 'react-bootstrap/CloseButton';
+
+// images
+import CloseButton from '../../../assets/post/pop-up-close-button.png';
 
 const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
   const { data, error, isLoading } = usePostDetail();
@@ -24,8 +26,8 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
       <div className='modal-parent-container'>
         <Modal
           dialogClassName='close-button-modal'
-          show={show} // Set this according to your logic
-          onHide={onHide} // Set this according to your logic
+          show={show} 
+          onHide={onHide}
           size='xl'
           aria-labelledby='example-custom-modal-styling-title'
           style={{ marginTop: '50px' }}
@@ -33,9 +35,8 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
           <div className='modal-content-centering-wrapper'>
             <div className='modal-content first-modal-content'>
               <button className='close-button' onClick={onHide}>
-                <i className='fas fa-times'></i>
+                <img src={CloseButton} alt='Icon-Close-Button' />
               </button>
-              {/* ...more content for the first modal... */}
             </div>
           </div>
         </Modal>

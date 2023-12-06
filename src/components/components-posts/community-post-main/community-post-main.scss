@@ -58,7 +58,7 @@
 
   .occaecat {
     position: absolute;
-    top: 160px;
+    top: 140px;
     left: 130px;
     color: var(--text-2-button, #675d59);
     font-family: Open Sans;
@@ -78,7 +78,7 @@
 
   .adipiscing {
     position: absolute;
-    top: 175px;
+    top: 160px;
     right: 80px;
     color: var(--text-2-button, #675d59);
     font-family: Open Sans;
@@ -160,7 +160,7 @@
   .post-main-photograph-caption {
     position: absolute;
     left: 160px;
-    bottom: -360px;
+    bottom: -340px;
     z-index: 100;
     font-family: Open Sans;
     font-size: 16px;
@@ -173,7 +173,7 @@
     img {
       position: absolute;
       left: 160px;
-      bottom: -380px;
+      bottom: -360px;
       z-index: 100;
     }
   }
@@ -181,7 +181,7 @@
   .post-main-photograph-like {
     position: absolute;
     left: 186px;
-    bottom: -395px;
+    bottom: -375px;
     z-index: 100;
     color: var(--text-2-button, #675d59);
     font-family: Open Sans;
@@ -193,7 +193,7 @@
 
   .photo-girl {
     position: absolute;
-    top: 240px;
+    top: 220px;
     left: 160px;
     z-index: 50;
   }
@@ -262,7 +262,7 @@
     left: 0;
     width: 100%;
     text-align: center;
-    background-color: #f0f0f0; /* You can change the background color */
-    padding: 20px; /* Add padding for spacing */
+    background-color: #f0f0f0;
+    padding: 20px;
   }
 }

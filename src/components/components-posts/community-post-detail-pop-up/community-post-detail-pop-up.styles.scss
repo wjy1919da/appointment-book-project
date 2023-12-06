@@ -1,26 +1,29 @@
 @media (min-width: 1025px) {
   .post-detail-popUp-container {
+    top: 300px;
     display: flex;
-    flex-direction: row;
-    top: 304px;
     border-radius: 20px;
+    // adjusting the height when there is no image so this can be removed when published: Emmy M
+    height: 420px;
+
     .postdetail-popUp-left-container {
       position: relative;
       flex-basis: 50%;
       border-radius: 20px 0px 0px 20px;
+
       .post-detail-image {
         border-radius: 5px 0 0 5px;
         object-fit: contain;
       }
     }
+
     .postdetail-popUp-right-container {
       position: relative;
       display: flex;
       flex-direction: column;
       flex-basis: 50%;
-      //margin-top:5%;
       height: 100%;
-      //justify-content: space-between;
+
       .detail-top-content {
         margin-top: 5%;
         position: relative;
@@ -35,7 +38,6 @@
           position: relative;
           display: flex;
           flex-direction: column;
-          // gap: 20px;
           max-width: 450px;
         }
 
@@ -54,6 +56,7 @@
           border: solid 1px rgba(226, 227, 231, 1);
           width: 80%;
         }
+
         .post-popUp-comments {
           margin-top: 10px;
           .comment-detail {
@@ -61,10 +64,11 @@
           }
         }
       }
+
       .fixed-input-box {
         position: absolute;
         width: 100%;
-        height: 60px;
+        height: 70px;
         bottom: 0px;
         flex: 1;
         max-height: 90px;
@@ -74,11 +78,10 @@
 
         .Icon-display {
           display: flex;
-          flex-direction: row;
           gap: 10px;
           width: 500px;
-          height: 60px;
-          padding: 3%;
+          height: 70px;
+          padding: 0px 18px;
 
           .Icon-size {
             width: 18px;
@@ -111,11 +114,13 @@
             border: none;
             outline: none;
           }
+
           .input-blank.focus {
             outline: none;
           }
         }
       }
+
       .post-detail-send-box-outer-container {
         display: flex;
         flex-direction: row;
@@ -123,14 +128,16 @@
       }
     }
   }
+
   .detail-gray-font {
-    color: var(--text-2-button, #675d59);
+    color: #675d59;
     font-family: Open Sans;
     font-size: 21px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
+
   .detail-red-font {
     font-family: "Open Sans";
     font-style: normal;
@@ -139,16 +146,19 @@
     line-height: 20.8px;
     color: rgba(130, 78, 61, 1);
   }
+
   .post-detail-mobile-profile-container {
     display: none;
   }
+
   .post-detail-mobile-profile {
     display: none;
   }
+
   .post-detail-mobile-avatar {
     display: none;
   }
-  // TODO: delete this when the search button component is done
+
   .doctor-search-button {
     display: none;
 
@@ -156,12 +166,15 @@
       display: none;
     }
   }
+
   .post-detail-mobile-download-button {
     display: none;
+
     .join-community-text {
       display: none;
     }
   }
+
   .comment-send-msg-container {
     margin-right: 10px;
   }
@@ -176,21 +189,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
   }
+
   .post-detail-mobile-profile-container {
-    margin-top: 10px;
-    align-items: center;
-    justify-content: center;
     display: flex;
-    justify-content: space-between;
-    padding: 0px 10px;
+    align-items: center;
+    padding: 10px;
+    height: 60px;
+
     .post-detail-mobile-profile {
-      align-items: center;
-      justify-content: center;
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 10px;
     }
+
     .post-detail-mobile-avatar {
       width: 35.84px;
       height: 35.84px;
@@ -198,7 +213,6 @@
       object-fit: cover;
     }
   }
-  // // TODO: delete this when the search button component is done
   .doctor-search-button {
     font-family: "Open Sans";
     font-style: normal;
@@ -216,24 +230,15 @@
     // margin-top: 10px;
   }
 
-  .doctor-search-icon {
-    left: 12.5%;
-    right: 12.5%;
-    top: 12.5%;
-    bottom: 12.5%;
-    border-radius: 0;
-    width: 15px;
-    height: 15px;
-    margin-right: 8px;
-  }
-
   .postdetail-popUp-left-container {
     display: flex;
     justify-content: center;
   }
+
   .post-detail-image {
     display: flex;
   }
+
   .post-popUp-content {
     display: flex;
     flex-direction: column;
@@ -241,9 +246,13 @@
     gap: 20px;
     margin-bottom: 20px;
   }
+
   .postdetail-popUp-right-container {
     display: block;
+    background-color: #ffffff;
+    padding: 20px 30px;
   }
+
   .detail-top-content {
     display: block;
   }
@@ -251,9 +260,11 @@
   .post-popUp-break-lines {
     display: none;
   }
+
   .post-popUp-comments {
     border-top: 1px solid rgba(226, 227, 231, 1);
   }
+
   .post-detail-mobile-download-button {
     display: flex;
     flex-direction: column;
@@ -263,6 +274,7 @@
     gap: 10px;
     margin-bottom: 50px;
     border-top: 1px solid rgba(226, 227, 231, 1);
+
     .join-community-text {
       font-size: 14px;
       font-weight: 500px;
@@ -270,21 +282,27 @@
       font-family: "Open Sans";
     }
   }
+
   .fixed-input-box {
     display: none;
+
     .Icon-display {
       display: none;
+
       .Icon-size {
         display: none;
       }
+
       .Icon-count {
         display: none;
       }
     }
+
     .new-comment-input {
       .input-blank {
         display: none;
       }
+
       .input-blank.focus {
         display: none;
       }
@@ -301,7 +319,7 @@
   background-color: var(--White, #fbfcff);
   opacity: 0.9;
   width: 100%;
-  height: 60px;
+  height: 70px;
   padding: 20px;
 
   .user-detail-inner {
@@ -326,8 +344,12 @@
     text-decoration-line: underline;
   }
 
+  .button-highlight,
+  .button-private,
   .button-edit {
+    font-size: 14px;
     text-decoration: underline;
+    margin-right: 10px;
   }
 }
 
@@ -348,4 +370,22 @@
   font-weight: 400;
   line-height: normal;
   margin-top: 10px;
+}
+
+.comment-card-input {
+  border: 1px solid #675d59;
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+  padding: 10px;
+  width: 450px;
+  height: 80px;
+}
+
+.post-detail-user-name-mobile {
+  color: #352c29;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

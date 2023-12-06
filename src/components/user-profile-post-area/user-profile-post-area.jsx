@@ -23,14 +23,21 @@ import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   // calling hook
-  const {
-    data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   // fetchNextPage,
+  //   // isFetchingNextPage,
+  //   // hasNextPage,
+  // } = useGetUserPostedPost();
+
+  // dummy data
+  const data = {
+    pages: [
+      // dummy data
+    ]
+  }
 
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState('');

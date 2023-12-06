@@ -13,6 +13,7 @@ export function useApiRequestPostFilter() {
   const fetchPost = async ({ pageParam = 1 }) => {
     var content = [];
     content.push(postQuery.postSearchParam ? postQuery.postSearchParam : "");
+
     const requestData = {
       categories: postQuery.filterCondition,
       contents: content,
