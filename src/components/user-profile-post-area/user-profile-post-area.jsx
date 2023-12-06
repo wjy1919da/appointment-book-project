@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import usePostQueryStore from '../../postStore.ts';
 import { useMediaQuery } from 'react-responsive';
-// import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
 
 // components
 import CreatePostOfUser from '../create-post/create-post';
 import CommunityPost from '../components-posts/community-post/community-post.component';
 import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
+// import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
 
 // hook
-import { useGetUserPostedPost } from '../../hooks/useGetPosts.js';
+// import { useGetUserPostedPost } from '../../hooks/useGetPosts.js';
 
 // scss
 import './user-profile-post-area.styles.scss';
@@ -35,9 +35,87 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   // dummy data
   const data = {
     pages: [
-      // dummy data
-    ]
-  }
+      {
+        code: 100,
+        msg: 'Success',
+        data: [
+          {
+            id: 135,
+            memberId: 125,
+            title: '1223@¥¥',
+            brief: null,
+            coverImg:
+              'http://app.charm-life.com/uploads/20230717/61c09ccb7324ba82e4642e9853536f4b.png',
+            like_count: 1,
+            avatar: 'default_avatar.jpg',
+            username: 'Unknown User',
+          },
+          {
+            id: 75,
+            memberId: 94,
+            title: '我们的生活方式是什么意思123',
+            brief: '山水大酒店对面一个人的时候我就不知道了',
+            coverImg:
+              'http://dxm72.zihai.shop/uploads/20220819/7399be71bbdacc8037682ef726e5d45a.png',
+            like_count: 2,
+            avatar:
+              'http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png',
+            username: 'zbzm',
+          },
+          {
+            id: 77,
+            memberId: 35,
+            title: '今天',
+            brief: '不过这个',
+            coverImg:
+              'http://dxm72.zihai.shop/uploads/20220723/3785cf8e2c338bc9954d3c8cb2fad62e.png',
+            like_count: 3,
+            avatar:
+              'http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png',
+            username: 'John',
+          },
+        ],
+      },
+    ],
+  };
+
+  // const data = [
+  //   {
+  //     id: 135,
+  //     memberId: 125,
+  //     title: '1223@¥¥',
+  //     brief: null,
+  //     coverImg:
+  //       'http://app.charm-life.com/uploads/20230717/61c09ccb7324ba82e4642e9853536f4b.png',
+  //     like_count: 1,
+  //     avatar: 'default_avatar.jpg',
+  //     username: 'Unknown User',
+  //   },
+  //   {
+  //     id: 75,
+  //     memberId: 94,
+  //     title: '我们的生活方式是什么意思123',
+  //     brief: '山水大酒店对面一个人的时候我就不知道了',
+  //     coverImg:
+  //       'http://dxm72.zihai.shop/uploads/20220819/7399be71bbdacc8037682ef726e5d45a.png',
+  //     like_count: 2,
+  //     avatar:
+  //       'http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png',
+  //     username: 'zbzm',
+  //   },
+  //   {
+  //     id: 77,
+  //     memberId: 35,
+  //     title: '今天',
+  //     brief: '不过这个',
+  //     coverImg:
+  //       'http://dxm72.zihai.shop/uploads/20220723/3785cf8e2c338bc9954d3c8cb2fad62e.png',
+  //     like_count: 3,
+  //     avatar:
+  //       'http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png',
+  //     username: 'John',
+  //   },
+  // ];
 
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState('');
@@ -87,20 +165,16 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       key={index}
       onClick={() => setPostID(post.id, post.avatar, post.username)}
     >
-      <CommunityPost
-        imageURL={post.coverImg || []}
-        text={post.title || ''}
-        profileImage={post.avatar || ''}
-        authorName={post.username || ''}
-        likes={post.like_count || 0}
-
-        // imageURL={post.coverImg}
-        // text={post.title}
-        // profileImage={userPostAvatar}
-        // authorName='Anna'
-        // likes={10}
-        // isProfile={true}
-      />
+        <CommunityPost
+          dummyId={post.id}
+          imageURL={post.coverImg || []}
+          text={post.title || ''}
+          profileImage={post.avatar || ''}
+          authorName={post.username || ''}
+          likes={post.like_count || 0}
+          // imageURL={post.coverImg}
+          // text={post.title}
+        />
     </div>
   ));
 

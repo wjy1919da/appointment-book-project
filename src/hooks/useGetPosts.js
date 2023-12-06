@@ -115,24 +115,6 @@ export function usePostDetail() {
 }
 
 // likes
-// export function useGetLikesPost() {
-//   // const token = localStorage.getItem('token');
-//   const apiClient = new APIClient('/post/like');
-//   const fetchUserData = async ({
-//     postId,
-//   }) => {
-//     console.log(brief, title);
-//     const res = await apiClient.post(
-//       {
-//         postId,
-//       },
-//     );
-//     return res.data;
-//   };
-//   return useMutation(fetchUserData);
-// }
-
-// likes
 export function useGetLikesPost() {
   const apiClient = new APIClient('/post/like');
   const fetchName = async (postId) => {

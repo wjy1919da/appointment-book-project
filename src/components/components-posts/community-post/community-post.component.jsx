@@ -4,10 +4,12 @@ import heartIcon from '../../../assets/post/heart.png';
 import { useMediaQuery } from 'react-responsive';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 
+
 // images
 import defaultImage from '../../../assets/post/default_image.png';
 
 const CommunityPost = ({
+  dummyId,
   imageURL,
   text,
   profileImage,
@@ -16,10 +18,12 @@ const CommunityPost = ({
   isLike,
   isProfile,
 }) => {
+
+  console.log('Here is the ID', dummyId);
+
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
-
   const [displayImage, setDisplayImage] = useState(imageURL);
 
   useEffect(() => {
@@ -32,7 +36,6 @@ const CommunityPost = ({
 
   const toggleLike = () => {
     setLiked((prevLiked) => !prevLiked);
-    // If you want to navigate to another page when the heart is clicked, uncomment the next line.
     // window.location.href = "/download";
   };
 
@@ -42,7 +45,7 @@ const CommunityPost = ({
 
   return (
     <div
-      className='community-post-container'
+      className={`community-post-container ${dummyId === 135 ? 'pink-background' : 'gray-background'}`}
       style={{ width: isProfile ? '240px' : '100%' }}
     >
       <div className='post-Image'>
