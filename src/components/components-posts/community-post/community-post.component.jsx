@@ -10,6 +10,8 @@ import defaultImage from '../../../assets/post/default_image.png';
 
 const CommunityPost = ({
   dummyId,
+  dummyHighlight,
+  dummyPrivate,
   imageURL,
   text,
   profileImage,
@@ -19,7 +21,7 @@ const CommunityPost = ({
   isProfile,
 }) => {
 
-  console.log('Here is the ID', dummyId);
+  // console.log('Here is the ID', dummyId);
 
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState('');
@@ -45,8 +47,10 @@ const CommunityPost = ({
 
   return (
     <div
-      className={`community-post-container ${dummyId === 135 ? 'pink-background' : 'gray-background'}`}
-      style={{ width: isProfile ? '240px' : '100%' }}
+      className='community-post-container'
+      style={{ width: isProfile ? '240px' : '100%',
+      backgroundColor: dummyHighlight === 1 ? '#F2F2F2' : 'pink'
+     }}
     >
       <div className='post-Image'>
         <img
