@@ -1,187 +1,195 @@
-@media (min-width: 1025px) {
-  .post-detail-popUp-container {
-    top: 300px;
+// @media (min-width: 1025px) {
+.post-detail-popUp-container {
+  display: flex;
+  height: var(--bs-modal-height);
+  .postdetail-popUp-right-container {
+    position: relative;
     display: flex;
-    border-radius: 20px;
-    // adjusting the height when there is no image so this can be removed when published: Emmy M
-    height: 420px;
+    flex-direction: column;
+    flex-basis: 50%;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    overflow: hidden;
+    padding: 0 15px 0 0;
 
-    .postdetail-popUp-left-container {
-      position: relative;
-      flex-basis: 50%;
-      border-radius: 20px 0px 0px 20px;
-
-      .post-detail-image {
-        border-radius: 5px 0 0 5px;
-        object-fit: contain;
-      }
-    }
-
-    .postdetail-popUp-right-container {
+    .detail-top-content {
+      margin-top: 5%;
       position: relative;
       display: flex;
       flex-direction: column;
-      flex-basis: 50%;
-      height: 100%;
+      overflow-y: auto;
+      margin-left: 5%;
+      flex: 1;
+      padding-bottom: 100px;
 
-      .detail-top-content {
-        margin-top: 5%;
+      .post-popUp-content {
         position: relative;
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
-        margin-left: 5%;
-        flex: 1;
-        padding-bottom: 100px;
+        max-width: 450px;
+      }
 
-        .post-popUp-content {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          max-width: 450px;
+      .postdetail-popUp-title {
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .post-popUp-break-lines {
+        margin-top: 20px;
+        position: relative;
+        border: solid 1px rgba(226, 227, 231, 1);
+        width: 80%;
+      }
+
+      .post-popUp-comments {
+        margin-top: 10px;
+        .comment-detail {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .fixed-input-box {
+      position: absolute;
+      width: 100%;
+      height: 70px;
+      bottom: 0px;
+      flex: 1;
+      max-height: 90px;
+      border: solid 1px rgba(226, 227, 231, 1);
+      border-radius: 0 0 8px 0;
+      background-color: #ffffff;
+
+      .Icon-display {
+        display: flex;
+        gap: 10px;
+
+        .Icon-size {
+          width: 18px;
         }
 
-        .postdetail-popUp-title {
-          color: #352c29;
-          font-family: Open Sans;
-          font-size: 24px;
+        .Icon-count {
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          color: var(--text-2-button, #675d59);
+          font-family: "Open Sans";
           font-style: normal;
           font-weight: 600;
-          line-height: normal;
+          font-size: 16px;
+          line-height: 16px;
+          align-items: center;
         }
 
-        .post-popUp-break-lines {
-          margin-top: 20px;
-          position: relative;
-          border: solid 1px rgba(226, 227, 231, 1);
-          width: 80%;
-        }
-
-        .post-popUp-comments {
-          margin-top: 10px;
-          .comment-detail {
-            margin-top: 20px;
-          }
-        }
-      }
-
-      .fixed-input-box {
-        position: absolute;
-        width: 100%;
-        height: 70px;
-        bottom: 0px;
-        flex: 1;
-        max-height: 90px;
-        border: solid 1px rgba(226, 227, 231, 1);
-        border-radius: 0 0 8px 0;
-        background-color: #ffffff;
-
-        .Icon-display {
+        // share-icon
+        .share-icon {
           display: flex;
-          gap: 10px;
-          width: 500px;
-          height: 70px;
-          padding: 0px 18px;
-
-          .Icon-size {
-            width: 18px;
-          }
-
-          .Icon-count {
-            display: flex;
-            flex-direction: row;
-            gap: 8px;
-            color: var(--text-2-button, #675d59);
-            font-family: "Open Sans";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 16px;
-            align-items: center;
-          }
-
-          // share-icon
-          .share-icon {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-          }
-        }
-
-        .new-comment-input {
-          .input-blank {
-            margin-left: 5%;
-            border: none;
-            outline: none;
-          }
-
-          .input-blank.focus {
-            outline: none;
-          }
+          align-items: center;
+          margin-left: auto;
         }
       }
 
-      .post-detail-send-box-outer-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      .new-comment-input {
+        .input-blank {
+          margin-left: 5%;
+          border: none;
+          outline: none;
+        }
+
+        .input-blank.focus {
+          outline: none;
+        }
       }
     }
-  }
 
-  .detail-gray-font {
-    color: #675d59;
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  .detail-red-font {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20.8px;
-    color: rgba(130, 78, 61, 1);
-  }
-
-  .post-detail-mobile-profile-container {
-    display: none;
-  }
-
-  .post-detail-mobile-profile {
-    display: none;
-  }
-
-  .post-detail-mobile-avatar {
-    display: none;
-  }
-
-  .doctor-search-button {
-    display: none;
-
-    .doctor-search-icon {
-      display: none;
+    .post-detail-send-box-outer-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      // width: 500px;
+      height: 70px;
+      padding: 0px 18px;
+      align-items: center;
     }
-  }
-
-  .post-detail-mobile-download-button {
-    display: none;
-
-    .join-community-text {
-      display: none;
-    }
-  }
-
-  .comment-send-msg-container {
-    margin-right: 10px;
   }
 }
 
-.user-detail-profile-image {
-  border-radius: 50%;
+.detail-gray-font {
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.detail-red-font {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.8px;
+  color: rgba(130, 78, 61, 1);
+}
+
+.post-detail-mobile-profile-container {
+  display: none;
+}
+
+.post-detail-mobile-profile {
+  display: none;
+}
+
+.post-detail-mobile-avatar {
+  display: none;
+}
+
+.doctor-search-button {
+  display: none;
+
+  .doctor-search-icon {
+    display: none;
+  }
+}
+
+.post-detail-mobile-download-button {
+  display: none;
+
+  .join-community-text {
+    display: none;
+  }
+}
+
+.comment-send-msg-container {
+  margin-right: 10px;
+}
+// }
+
+.post-detail-image-wrapper {
+  height: 100%; /* 确保填满父容器的高度 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  display: flex; /* 使用flex布局确保子元素可以填满容器 */
+  justify-content: center; /* 水平居中 */
+  // height: var(--bs-modal-height);
+  // align-items: center; /* 垂直居中 */
+}
+
+.post-detail-image {
+  width: 100%; /* 图片宽度填满容器 */
+  height: auto; /* 图片高度自适应 */
+  // height: var(--bs-modal-height);
+  object-fit: cover; /* 覆盖整个容器 */
+}
+
+.postdetail-popUp-left-container {
+  position: relative;
+  flex-basis: 50%; /* 根据需要调整宽度百分比 */
+  border-radius: 20px 0 0 20px; /* 圆角 */
+  overflow: hidden; /* 隐藏溢出部分 */
 }
 
 @media (max-width: 1024px) {
@@ -233,10 +241,6 @@
   .postdetail-popUp-left-container {
     display: flex;
     justify-content: center;
-  }
-
-  .post-detail-image {
-    display: flex;
   }
 
   .post-popUp-content {
@@ -378,7 +382,7 @@
   outline: none;
   resize: none;
   padding: 10px;
-  width: 450px;
+  width: 100%;
   height: 80px;
 }
 

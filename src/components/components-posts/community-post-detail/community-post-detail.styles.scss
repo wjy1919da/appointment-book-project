@@ -31,15 +31,35 @@
   max-width: 100%;
   width: auto;
 }
+// add css
+.custom-modal-size {
+  --bs-modal-width: 80vw; /* 视口宽度的70% */
+  --bs-modal-height: 90vh; /* 视口高度的90% */
+}
+
+.custom-modal-size .modal-dialog {
+  max-width: var(--bs-modal-width);
+  margin: 5vh auto; /* 垂直居中 */
+}
+
+.custom-modal-size .modal-content {
+  height: var(--bs-modal-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-modal-size .modal-body {
+  overflow-y: auto; /* 如果内容超过高度，会有滚动条 */
+  flex-grow: 1; /* 允许modal-body填充剩余空间 */
+}
+.modal-content {
+  width: 70%;
+  height: 90%;
+  margin: 0 auto;
+  border-radius: 25px;
+}
 
 @media (min-width: 576px) {
-  .modal-content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    height: 80%;
-  }
-
 }
 
 @media (max-width: 576px) {
@@ -49,6 +69,4 @@
     width: 80%;
     height: 80%;
   }
-
-  
 }

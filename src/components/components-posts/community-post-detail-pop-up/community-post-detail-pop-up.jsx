@@ -27,14 +27,6 @@ import BubblesIcon from "../../../assets/post/bubbles_icon.svg";
 import ShareIcon from "../../../assets/post/share_icon.svg";
 import heartIcon from "../../../assets/post/heart.png";
 import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
-// import StarIcon from '../../../assets/post/star_icon.svg';
-// import StarIcon from '../../../assets/post/star_icon.svg';
-// import HeartIcon from '../../../assets/post/heart_icon.svg';
-// import UserImage from '../../../assets/post/user_image.svg';
-// import heartIcon from '../../../assets/post/heart.png';
-// import commentIcon from '../../../assets/post/chat_bubble.png';
-// import collectIcon from '../../../assets/post/star.png';
-// import DownArrow from '../../../assets/post/down-arrow.png';
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -46,8 +38,6 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
   id,
-  // userName,
-  // userAvatar,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -117,7 +107,6 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
-    // console.log("formData" ,formData);
     if (!userInfo.token) {
       togglePopup(true, "login");
       return;
@@ -173,17 +162,28 @@ const CommunityPostDetailPopUP = ({
   }, [showCommentBox, commentCount]);
 
   // pop up height adjustment
-  const adjustContainerHeight = () => {
+  // const adjustContainerHeight = () => {
+  //   const container = containerRef.current;
+  //   const image = imageRef.current;
+  //   if (container && image) {
+  //     container.style.height = "420px";
+  //     image.style.maxHeight = "100%";
+  //   }
+  // };
+
+  // const handleImageLoad = () => {
+  //   adjustContainerHeight();
+  // };
+  const handleImageLoad = () => {
+    // Ensure the image fills the height of the container
     const container = containerRef.current;
     const image = imageRef.current;
     if (container && image) {
-      container.style.height = "420px";
-      image.style.maxHeight = "100%";
+      // Set the image height to match the container height
+      const containerHeight = container.getBoundingClientRect().height;
+      image.style.height = `${containerHeight}px`;
+      image.style.width = "auto"; // Set width to auto to maintain the aspect ratio
     }
-  };
-
-  const handleImageLoad = () => {
-    adjustContainerHeight();
   };
 
   const formatDate = (dateString) => {
@@ -255,14 +255,15 @@ const CommunityPostDetailPopUP = ({
       <div className="postdetail-popUp-left-container">
         {!isMobile && picture && (
           <>
-            <img
-              src={picture}
-              ref={imageRef}
-              onLoad={handleImageLoad}
-              className="post-detail-image"
-              alt="detail-pic"
-            ></img>
-
+            <div className="post-detail-image-wrapper">
+              <img
+                src={picture}
+                ref={imageRef}
+                // onLoad={handleImageLoad}
+                className="post-detail-image"
+                alt="detail-pic"
+              />
+            </div>
             <div className="user-detail">
               <div className="user-detail-inner">
                 <img
@@ -276,7 +277,6 @@ const CommunityPostDetailPopUP = ({
                 <button className="button-highlight" onClick={handleHighlight}>
                   {isHighlight ? "Remove from Highlight" : "Highlight"}
                 </button>
-
                 <button className="button-private">Private</button>
                 <button className="button-edit" onClick={handleGoToEdit}>
                   Edit your Post
@@ -406,9 +406,9 @@ const CommunityPostDetailPopUP = ({
                   />
                   {commentCount}
                 </span>
-                <div className="share-icon">
-                  <img src={ShareIcon} alt="Image-Share-Icon" />
-                </div>
+              </div>
+              <div className="share-icon">
+                <img src={ShareIcon} alt="Image-Share-Icon" />
               </div>
               {/* <div className='comment-send-msg-container'> 
                 <CommunitySendMsg isValid={isValid} />

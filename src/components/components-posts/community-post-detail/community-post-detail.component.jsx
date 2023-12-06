@@ -1,17 +1,17 @@
-import React from 'react';
-import { usePostDetail } from '../../../hooks/useGetPosts';
-import Modal from 'react-bootstrap/Modal';
-import PostDetailPopUP from '../community-post-detail-pop-up/community-post-detail-pop-up';
-import './community-post-detail.styles.scss';
+import React from "react";
+import { usePostDetail } from "../../../hooks/useGetPosts";
+import Modal from "react-bootstrap/Modal";
+import PostDetailPopUP from "../community-post-detail-pop-up/community-post-detail-pop-up";
+import "./community-post-detail.styles.scss";
 
 // images
-import CloseButton from '../../../assets/post/pop-up-close-button.png';
+import CloseButton from "../../../assets/post/pop-up-close-button.png";
 
 const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
   const { data, error, isLoading } = usePostDetail();
 
   if (data) {
-    console.log('fetchdata', data);
+    console.log("fetchdata", data);
   }
 
   //   if (error) {
@@ -23,19 +23,19 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
 
   return (
     <div>
-      <div className='modal-parent-container'>
+      <div className="modal-parent-container">
         <Modal
-          dialogClassName='close-button-modal'
-          show={show} 
+          dialogClassName="close-button-modal"
+          show={show}
           onHide={onHide}
-          size='xl'
-          aria-labelledby='example-custom-modal-styling-title'
-          style={{ marginTop: '50px' }}
+          size="xl"
+          aria-labelledby="example-custom-modal-styling-title"
+          style={{ marginTop: "50px" }}
         >
-          <div className='modal-content-centering-wrapper'>
-            <div className='modal-content first-modal-content'>
-              <button className='close-button' onClick={onHide}>
-                <img src={CloseButton} alt='Icon-Close-Button' />
+          <div className="modal-content-centering-wrapper">
+            <div className="modal-content first-modal-content">
+              <button className="close-button" onClick={onHide}>
+                <img src={CloseButton} alt="Icon-Close-Button" />
               </button>
             </div>
           </div>
@@ -43,16 +43,16 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
       </div>
       {isMobile ? (
         <div>
-          <div class='modal-parent-container'>
+          <div class="modal-parent-container">
             <Modal
-              dialogClassName='post-detail-mobile-modals'
+              dialogClassName="post-detail-mobile-modals"
               show={show}
               onHide={onHide}
-              size='xl'
-              aria-labelledby='example-custom-modal-styling-title'
-              style={{ marginTop: '100px' }}
+              size="xl"
+              aria-labelledby="example-custom-modal-styling-title"
+              style={{ marginTop: "100px" }}
             >
-              <div style={{ border: '10px solid white', borderRadius: '50px' }}>
+              <div style={{ border: "10px solid white", borderRadius: "50px" }}>
                 {data?.data && (
                   <PostDetailPopUP
                     picture={data.data.pictures}
@@ -74,12 +74,12 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
         </div>
       ) : (
         <Modal
-          dialogClassName='post-detail-modals'
+          dialogClassName="custom-modal-size"
           show={show}
           onHide={onHide}
-          size='xl'
-          aria-labelledby='example-custom-modal-styling-title'
-          style={{ marginTop: '100px' }}
+          aria-labelledby="example-custom-modal-styling-title"
+          style={{ marginTop: "20px", borderRadius: "55px" }}
+          centered
         >
           {data?.data && (
             <PostDetailPopUP
