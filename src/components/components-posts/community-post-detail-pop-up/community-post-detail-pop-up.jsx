@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 // import { Button } from 'react-bootstrap';
@@ -16,6 +17,7 @@ import CommentCard from '../../comment-card/comment-card';
 
 // hooks
 import { useAddComment } from '../../../hooks/useComment';
+import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
 
 // scss
 import './community-post-detail-pop-up.styles.scss';
@@ -23,7 +25,6 @@ import './community-post-detail-pop-up.styles.scss';
 // images
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
-import DownArrow from '../../../assets/post/down-arrow.png';
 import heartIcon from '../../../assets/post/heart.png';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 // import StarIcon from '../../../assets/post/star_icon.svg';
@@ -33,6 +34,7 @@ import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 // import heartIcon from '../../../assets/post/heart.png';
 // import commentIcon from '../../../assets/post/chat_bubble.png';
 // import collectIcon from '../../../assets/post/star.png';
+// import DownArrow from '../../../assets/post/down-arrow.png';
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -61,6 +63,8 @@ const CommunityPostDetailPopUP = ({
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
 
+  const toast = useToast();
+
   const schema = z.object({
     comment: z
       .string()
@@ -69,6 +73,39 @@ const CommunityPostDetailPopUP = ({
   });
 
   // console.log("userInfo in post detail" ,userInfo);
+
+  // api
+  const { mutate: apiMutate } = useGetLikesPost({
+    onError: (error) => {
+      toast({
+        title: 'Failed.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  const toggleGetLikes = () => {
+    setLiked((prev) => !prev);
+
+    const likesData = {
+      postId: id,
+    };
+
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    console.log('Likes API is called. Yay!', likesData);
+    apiMutate(likesData);
+  };
 
   const {
     register,
@@ -110,8 +147,6 @@ const CommunityPostDetailPopUP = ({
   const handleInputClick = (e) => {
     // console.log("handleInputClick" ,userInfo.token);
 
-    setLiked((prev) => !prev);
-
     if (!userInfo.token) {
       e.preventDefault();
       togglePopup(true, 'login');
@@ -126,7 +161,7 @@ const CommunityPostDetailPopUP = ({
     }
   };
 
-  // when click the comment button it will scroll down to textarea: Emmy M
+  // when click the comment button it will scroll down to textarea
   useEffect(() => {
     if (showCommentBox && textareaRef.current && containerRef.current) {
       textareaRef.current.focus();
@@ -137,7 +172,7 @@ const CommunityPostDetailPopUP = ({
     }
   }, [showCommentBox, commentCount]);
 
-  // pop up height adjustment: Emmy M
+  // pop up height adjustment
   const adjustContainerHeight = () => {
     const container = containerRef.current;
     const image = imageRef.current;
@@ -196,7 +231,9 @@ const CommunityPostDetailPopUP = ({
             src={postQuery.userAvatar}
             className='post-detail-mobile-avatar'
           ></img>
-          <span className='post-detail-user-name-mobile'>{postQuery.userName}</span>
+          <span className='post-detail-user-name-mobile'>
+            {postQuery.userName}
+          </span>
         </div>
         {/* <div>
           <button
@@ -248,12 +285,7 @@ const CommunityPostDetailPopUP = ({
             </div>
           </>
         )}
-        {isMobile && (
-          <img
-            src={picture}
-            ref={imageRef}
-          ></img>
-        )}
+        {isMobile && <img src={picture} ref={imageRef}></img>}
       </div>
       <div className='postdetail-popUp-right-container'>
         <div className='detail-top-content'>
@@ -291,8 +323,6 @@ const CommunityPostDetailPopUP = ({
                         commentText={convertUnicode(comment.content)}
                         date={formatDate(comment.commentDate)}
                         onClick={handleInputClick}
-                        handleClickComment={handleClickComment}
-                        showCommentBox={showCommentBox}
                       />
                     );
                   }
@@ -349,10 +379,12 @@ const CommunityPostDetailPopUP = ({
               <div className='Icon-display'>
                 <span className='Icon-count'>
                   <img
+                    // src={heartIcon}
                     src={liked ? heartIconFilled : heartIcon}
                     alt='Icon'
                     className='Icon-size'
-                    onClick={handleInputClick}
+                    // onClick={handleInputClick}
+                    onClick={toggleGetLikes}
                   />
                   {likeCount}
                 </span>

@@ -7,7 +7,7 @@ import userInfoQueryStore from '../../../userStore';
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
+// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
