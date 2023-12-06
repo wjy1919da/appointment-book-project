@@ -53,6 +53,9 @@ const CommunityPostDetailPopUP = ({
   const [isHighlight, setIsHightlight] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const setTitle = usePostQueryStore((state) => state.setTitle);
+  const setDescription = usePostQueryStore((state) => state.setDescription);
+  const setPictures = usePostQueryStore((state) => state.setPictures);
 
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -205,6 +208,9 @@ const CommunityPostDetailPopUP = ({
   }
 
   const handleGoToEdit = () => {
+    setTitle(postTitle);
+    setDescription(brief);
+    setPictures(picture);
     navigate("/edit-post");
   };
 

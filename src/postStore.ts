@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface PostQuery {
   filterType: number;
@@ -12,6 +12,9 @@ interface PostQuery {
   tag: string;
   tempSearchParam?: string;
   postSearchParam?: string;
+  title?: string;
+  description?: string;
+  pictures?: Array<string>;
 }
 
 interface postQueryStore {
@@ -27,6 +30,9 @@ interface postQueryStore {
   refresh: () => void;
   setTempSearchParam?: (tempSearchParam: string) => void;
   setPostSearchParam?: (postSearchParam: string) => void;
+  setTitle?: (title: string) => void;
+  setDescription?: (description: string) => void;
+  setPictures?: (pictures: Array<string>) => void;
 }
 
 const usePostQueryStore = create<postQueryStore>((set) => ({
@@ -34,14 +40,17 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     pageSize: 12,
     filterType: 2,
     userID: 0,
-    userName: '',
-    userAvatar: '',
+    userName: "",
+    userAvatar: "",
     filterCondition: [],
-    postBy: ['doctor', 'user'],
-    tag: '',
+    postBy: ["doctor", "user"],
+    tag: "",
     trigger: 0,
-    tempSearchParam: '',
-    postSearchParam: '',
+    tempSearchParam: "",
+    postSearchParam: "",
+    title: "",
+    description: "",
+    pictures: [],
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -51,7 +60,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, userID } })),
   setUserName: (userName) =>
     set((state) => ({ postQuery: { ...state.postQuery, userName } })),
-    setUserAvatar: (userAvatar) =>
+  setUserAvatar: (userAvatar) =>
     set((state) => ({ postQuery: { ...state.postQuery, userAvatar } })),
   setFilterCondition: (filterCondition) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterCondition } })),
@@ -62,6 +71,12 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
   setPostBy: (postBy) =>
     set((state) => ({ postQuery: { ...state.postQuery, postBy } })),
   setTag: (tag) => set((state) => ({ postQuery: { ...state.postQuery, tag } })),
+  setTitle: (title) =>
+    set((state) => ({ postQuery: { ...state.postQuery, title } })),
+  setDescription: (description) =>
+    set((state) => ({ postQuery: { ...state.postQuery, description } })),
+  setPictures: (pictures) =>
+    set((state) => ({ postQuery: { ...state.postQuery, pictures } })),
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },
