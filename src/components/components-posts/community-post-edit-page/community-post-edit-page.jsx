@@ -1,26 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from '../../../userStore';
 import { uploadToS3 } from '../../../services/s3-client';
-import {
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-} from '@chakra-ui/react';
 
 // components
+import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
+import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
 import './community-post-edit-page.scss';
@@ -29,33 +19,63 @@ import './community-post-edit-page.scss';
 import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 import Trash from '../../../assets/post/trash_icon.svg';
+import DeleteButton from '../../../assets/post/thumbnail_delete.png';
+
+import usePostQueryStore from '../../../postStore';
+import { Toast, useToast } from '@chakra-ui/react';
+import { set } from 'date-fns';
 
 const EditPostPage = () => {
+  const {
+    selectedFiles,
+    setSelectedFiles,
+    handleFileSelection,
+    uploadProgress,
+    isLoading,
+    isError,
+    uploadedFiles,
+    resetFiles,
+  } = useUploadImg();
+  const toast = useToast();
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  // console.log("EditPostPage", postQuery);
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
   const [clickedRadio, setClickedRadio] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  // const [selectedFiles, setSelectedFiles] = useState([]);
+
   const fileInputRef = useRef(null);
-  const [uploadingFiles, setUploadingFiles] = useState([]);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // useEffect(() => {
+  // setSelectedFiles(postQuery.pictures || []);
+  // setSelectedFiles([
+  //   "https://charm-post-img.s3.us-west-1.amazonaws.com/1701395754743-Screenshot+2023-11-07+at+8.31.42+PM.png",
+  // ]);
+  // }, [postQuery.pictures]);
 
   // react hook form
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({ mode: 'onChange' });
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      title: postQuery.title,
+      description: postQuery.description,
+    },
+  });
 
   // api
   const { mutate: apiMutate } = useApiRequestPost({
     onError: (error) => {
-      setAlert({
-        show: true,
-        type: 'error',
-        message: 'Failed to create post.',
+      toast({
+        title: 'Failed to create post.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
       });
     },
   });
@@ -79,15 +99,17 @@ const EditPostPage = () => {
       ],
       title: data.title,
     };
-    if (!userInfo.username) {
-      setAlert({
-        show: true,
-        type: 'error',
-        message: 'Please login to create post.',
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
       });
+      return;
     }
     apiMutate(formData);
-    setUploadingFiles([]);
+    resetFiles();
   };
 
   // back button
@@ -95,42 +117,11 @@ const EditPostPage = () => {
     navigate('/edit-post');
   };
 
-  const handleFileSelection = async (event) => {
-    const newFiles = Array.from(event.target.files);
-    setSelectedFiles(newFiles);
-    console.log(`uploading ${newFiles.length} files...`);
-    const uploadPromises = newFiles.map((file) => uploadToS3(file));
-    try {
-      const uploadResults = await Promise.all(uploadPromises);
-      const successfulUploads = uploadResults
-        .filter((result) => result.success)
-        .map((result) => result.location);
-      setUploadedFiles((prevFiles) => [...prevFiles, ...successfulUploads]);
-      uploadResults.forEach((result) => {
-        if (!result.success) {
-          setAlert({ show: true, type: 'error', message: result.message });
-        }
-      });
-      console.log('all the files uploaded successfully', uploadResults);
-      // setAlert({
-      //   show: true,
-      //   type: "success",
-      //   message: "All the files uploaded successfully.",
-      // });
-      setSelectedFiles([]);
-    } catch (err) {
-      setAlert({
-        show: true,
-        type: 'error',
-        message: 'Failed to upload files.',
-      });
-    }
-  };
-
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
   };
+
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -148,34 +139,62 @@ const EditPostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  const testClick = () => {
-    console.log('clicked');
-    onOpen();
+  // delete thumbnail
+  const handleDeleteThumbnail = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
   };
+
+  // thumbnail
+  const displayThumbnails =
+    selectedFiles.length > 0
+      ? selectedFiles.map((file, index) => (
+          <div key={index} className='create-edit-post-page-thumbnail'>
+            <div
+              className={`thumbnail ${
+                index < 2 ? 'mask-effect' : ''
+              }`}
+            >
+              <img
+                src={URL.createObjectURL(file)}
+                alt={`Selected Thumbnail ${index + 1}`}
+                style={{
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+            <button
+              type='button'
+              className='delete-thumbnail-button'
+              onClick={() => handleDeleteThumbnail(index)}
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#A5A6A7',
+                borderRadius: '50%',
+                position: 'absolute',
+                top: '-5px',
+                right: '-5px',
+              }}
+            >
+              <img
+                src={DeleteButton}
+                alt='Icon-Delete-Button'
+                className='create-edit-post-page-delete-button'
+                style={{
+                }}
+              />
+            </button>
+          </div>
+        ))
+      : null;
 
   return (
     <div>
-      {/* {alert.show && (
-        <Alert
-          status={alert.type}
-          variant='solid'
-          style={{
-            zIndex: '100',
-            position: 'fixed',
-            top: '65px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <AlertIcon />
-            <AlertDescription>{alert.message}</AlertDescription>
-          </div>
-          <CloseButton onClick={() => setAlert({ ...alert, show: false })} />
-        </Alert>
-      )} */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='edit-post-page-container'
@@ -199,6 +218,7 @@ const EditPostPage = () => {
         <div className='edit-post-page-inner-container'>
           <div className='edit-post-page-left-container-wrapper'>
             <input
+              ref={fileInputRef}
               type='file'
               id='imageUpload'
               accept='image/*'
@@ -227,17 +247,6 @@ const EditPostPage = () => {
                     onDragOver={handleDragOver}
                     onClick={handleBrowseFiles}
                   >
-                    {selectedFiles.length > 0 && (
-                      <img
-                        src={URL.createObjectURL(selectedFiles[0])}
-                        style={{
-                          width: '70px',
-                          height: '70px',
-                        }}
-                        className='test'
-                        alt='Selected Thumbnail'
-                      />
-                    )}
                     <img
                       src={createPostIcon}
                       style={{
@@ -245,13 +254,6 @@ const EditPostPage = () => {
                         height: '157px',
                       }}
                       alt='Image-Create-Post'
-                    />
-                    <input
-                      type='file'
-                      ref={fileInputRef}
-                      onChange={handleFileSelection}
-                      multiple
-                      style={{ display: 'none' }}
                     />
                   </div>
                   <div className='edit-post-page-text'>
@@ -261,22 +263,29 @@ const EditPostPage = () => {
               </>
             )}
 
-            {/* <div className='create-post-page-thumbnails'>
-              {selectedFiles.length > 0 && (
-                <>
+            {/* thumbnail */}
+            <div className='create-edit-post-page-thumbnail-container'>
+              {displayThumbnails}
+
+              {/* thumbnail create */}
+              {displayThumbnails && (
+                <div
+                  className='create-edit-post-page-add-thumbnail'
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  onClick={handleBrowseFiles}
+                >
                   <img
-                    src={URL.createObjectURL(selectedFiles[0])}
+                    src={createPostIcon}
                     style={{
-                      width: '70px',
-                      height: '70px',
-                      marginRight: '5px',
+                      width: '60px',
+                      height: '60px',
                     }}
-                    alt='Selected Thumbnail'
+                    alt='Image-Create-Post'
                   />
-                  {displayThumbnails}
-                </>
+                </div>
               )}
-            </div> */}
+            </div>
           </div>
 
           <div className='edit-post-page-right-container'>
@@ -292,6 +301,7 @@ const EditPostPage = () => {
                     message: '* Maximum limit for characters is 20.',
                   },
                 })}
+                defaultValue={postQuery.title}
               />
               <p className='edit-post-page-title-error-validation'>
                 {errors.title?.message}
@@ -306,10 +316,11 @@ const EditPostPage = () => {
                   {...register('description', {
                     required: '* Description is required.',
                   })}
+                  defaultValue={postQuery.description}
                 ></textarea>
 
-                {/* <PostDropDownFilter />
-                <PostDropDownFilter /> */}
+                <PostDropDownFilter />
+                <PostDropDownFilter />
 
                 <p className='edit-post-page-description-error-validation'>
                   {errors.description?.message}
@@ -344,47 +355,17 @@ const EditPostPage = () => {
                 />
                 <img
                   src={Trash}
-                  alt='Image-Trash-Icon'
-                  onClick={testClick}
                   style={{
                     width: '48px',
                     height: '48px',
                   }}
+                  alt='Image-Trash-Icon'
                 />
               </div>
             </div>
           </div>
         </div>
       </form>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent backgroundColor='transparent' boxShadow='none'>
-          <ModalHeader color='#ffffff' fontSize='25px'>
-            Are you sure to delete this post?
-          </ModalHeader>
-          <ModalFooter display='flex' justifyContent='space-between'>
-            <Button
-              color='#ffffff'
-              backgroundColor='#675f5a'
-              outline='none'
-              _hover='none'
-              mr={3}
-              onClick={onClose}
-            >
-              Back
-            </Button>
-            <Button
-              color='#ffffff'
-              backgroundColor='#f1a285'
-              outline='none'
-              _hover='none'
-            >
-              Delete
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </div>
   );
 };
