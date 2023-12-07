@@ -6,25 +6,9 @@ import defaultPhoto from '../../assets/post/user-profile-avatar.png';
 import backArrow from '../../assets/doctor/left_back.png';
 import axios from 'axios';
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    Text,
     useDisclosure,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
   } from "@chakra-ui/react";
+import ChakraModal from '../chakra-modal/chakra-modal';
 
 const UniversalProfileEdit = () => {
     const [name, setName] = useState("");
@@ -40,6 +24,7 @@ const UniversalProfileEdit = () => {
     const [accountType, setAccountType] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
     const modalDisclosure = useDisclosure();
 
@@ -120,7 +105,7 @@ const UniversalProfileEdit = () => {
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-        modalDisclosure.onOpen();
+        setIsModalOpen(true);
     }
 
     const handleFormSubmission = () => {
@@ -134,7 +119,7 @@ const UniversalProfileEdit = () => {
             'interests': interests
         }
         console.log('submission obj is: ', obj);
-        modalDisclosure.onClose();
+        setIsModalOpen(false);
     }
     
 
@@ -155,26 +140,7 @@ const UniversalProfileEdit = () => {
 
     return (
         <div className='univ-edit-main-container'>
-            <Modal isOpen={modalDisclosure.isOpen} onClose={modalDisclosure.onClose} >
-                <ModalOverlay />
-                <ModalContent bg="rgba(0,0,0,0)" boxShadow="none" >
-                <ModalHeader></ModalHeader>
-                <ModalBody display="flex" justifyContent="center" >
-                    <Text fontSize="3xl" color="white" fontWeight="600" >
-                    Save Changes?
-                    </Text>
-                </ModalBody>
-
-                <ModalFooter display="flex" justifyContent="center" columnGap="2.5rem">
-                    <Button bgColor="#675D59" px="28px" py="20px" color="white" _hover={{ bg: "#4c4542" }} onClick={modalDisclosure.onClose}>
-                    Don't Save
-                    </Button>
-                    <Button bgGradient="linear(to-r, #F48C8A, #F0A484)" color="white" _hover={{ bgGradient: "linear(to-r, #f27673, #ee9570)" }} px="28px" py="20px" onClick={handleFormSubmission}>
-                    Save
-                    </Button>
-                </ModalFooter>
-                </ModalContent>
-            </Modal>
+            <ChakraModal title={'Save Changes?'} cancelButtonText={'Don\'t Save'} approveButtonText={'Save'} approveCallback={handleFormSubmission} isModalOpen={isModalOpen} closeModalFunc={() => setIsModalOpen(false)} />
             <div className='univ-edit-top-row-container' >
                 <div className='univ-edit-top-row'>
                     <div className='univ-edit-top-row-left-col univ-edit-top-row-col'>
