@@ -30,7 +30,7 @@ const PostDetail = ({ show, onHide, isMobile, postUserName, postAvatar }) => {
           onHide={onHide}
           size='xl'
           aria-labelledby='example-custom-modal-styling-title'
-          // style={{ marginTop: '50px' }}
+          style={{ marginTop: '50px' }}
         >
           <div className='modal-content-centering-wrapper'>
             <div className='modal-content first-modal-content'>
