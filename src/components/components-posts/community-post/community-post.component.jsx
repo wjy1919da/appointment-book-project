@@ -6,6 +6,7 @@ import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 
 // images
 import defaultImage from '../../../assets/post/default_image.png';
+import LockIcon from '../../../assets/post/lock_icon.svg';
 
 const CommunityPost = ({
   dummyHighlight,
@@ -18,8 +19,6 @@ const CommunityPost = ({
   isLike,
   isProfile,
 }) => {
-  // console.log('Here is the ID', dummyId);
-
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
@@ -48,9 +47,16 @@ const CommunityPost = ({
       style={{
         width: isProfile ? '240px' : '100%',
         backgroundColor: dummyHighlight === 1 ? '#352C28' : '',
-        
       }}
     >
+        {dummyHighlight === 0 ? (
+          <img
+            src={LockIcon}
+            alt='Icon-Lock'
+            className='community-post-icon-lock'
+          />
+        ) : null}
+
       <div className='post-Image'>
         <img
           src={displayImage}
