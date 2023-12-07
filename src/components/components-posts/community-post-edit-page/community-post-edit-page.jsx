@@ -3,10 +3,21 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from '../../../userStore';
 import { uploadToS3 } from '../../../services/s3-client';
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from '@chakra-ui/react';
 
 // components
-import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 import FormButton from '../../components-posts/community-post-button/community-post-button';
+// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
@@ -28,6 +39,8 @@ const EditPostPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // react hook form
   const {
@@ -133,6 +146,11 @@ const EditPostPage = () => {
   // radio button
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
+  };
+
+  const testClick = () => {
+    console.log('clicked');
+    onOpen();
   };
 
   return (
@@ -275,7 +293,9 @@ const EditPostPage = () => {
                   },
                 })}
               />
-              <p className='edit-post-page-title-error-validation'>{errors.title?.message}</p>
+              <p className='edit-post-page-title-error-validation'>
+                {errors.title?.message}
+              </p>
 
               <div className='description-container'>
                 <textarea
@@ -288,8 +308,8 @@ const EditPostPage = () => {
                   })}
                 ></textarea>
 
-                <PostDropDownFilter />
-                <PostDropDownFilter />
+                {/* <PostDropDownFilter />
+                <PostDropDownFilter /> */}
 
                 <p className='edit-post-page-description-error-validation'>
                   {errors.description?.message}
@@ -324,17 +344,47 @@ const EditPostPage = () => {
                 />
                 <img
                   src={Trash}
+                  alt='Image-Trash-Icon'
+                  onClick={testClick}
                   style={{
                     width: '48px',
                     height: '48px',
                   }}
-                  alt='Image-Trash-Icon'
                 />
               </div>
             </div>
           </div>
         </div>
       </form>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent backgroundColor='transparent' boxShadow='none'>
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Are you sure to delete this post?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={onClose}
+            >
+              Back
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
