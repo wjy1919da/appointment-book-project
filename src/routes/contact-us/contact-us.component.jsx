@@ -2,7 +2,7 @@ import './contact-us.scss';
 import { useState, useLayoutEffect } from 'react';
 import { ContactSubmission } from '../../hooks/useContactForm';
 import companyLogo from '../../assets/home/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Instagram from '../../assets/home/instagram.svg';
 import TikTok from '../../assets/home/tiktok.svg';
 import Facebook from '../../assets/home/facebook.svg';
@@ -18,6 +18,7 @@ const ContactUs = () => {
     const [nameError, setNameError] = useState(false);  // if they do not input anything into name field
     const [emailError, setEmailError] = useState(false);  // if they do not input anything into email field
     const [messageError, setMessageError] = useState(false);  // if they do not enter anything into message field
+    const navigate = useNavigate();
     // useLayoutEffect(() => {
     //     window.scrollTo(0, 0);
     // }, [submitted]);
@@ -54,6 +55,10 @@ const ContactUs = () => {
             setSubmitted(true);
             setIsLoading(false);
         }
+    }
+
+    if (error) {
+        navigate('*')
     }
 
     return (

@@ -8,11 +8,11 @@ import { z } from 'zod';
 // import { Button } from 'react-bootstrap';
 
 // stores
-import usePostQueryStore from '../../../postStore.ts';
-import userInfoQueryStore from '../../../userStore.ts';
+import usePostQueryStore from "../../../postStore.ts";
+import userInfoQueryStore from "../../../userStore.ts";
 
 // components
-import CommentCard from '../../comment-card/comment-card';
+import CommentCard from "../../comment-card/comment-card";
 // import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 
 // hooks
@@ -20,7 +20,7 @@ import { useAddComment } from '../../../hooks/useComment';
 import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
 
 // scss
-import './community-post-detail-pop-up.styles.scss';
+import "./community-post-detail-pop-up.styles.scss";
 
 // images
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
@@ -53,7 +53,7 @@ const CommunityPostDetailPopUP = ({
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHightlight] = useState(false);
@@ -68,8 +68,8 @@ const CommunityPostDetailPopUP = ({
   const schema = z.object({
     comment: z
       .string()
-      .nonempty('Comment is required')
-      .min(5, 'Comment must be at least 5 characters long'),
+      .nonempty("Comment is required")
+      .min(5, "Comment must be at least 5 characters long"),
   });
 
   // console.log("userInfo in post detail" ,userInfo);
@@ -119,7 +119,7 @@ const CommunityPostDetailPopUP = ({
   const onSubmit = (formData) => {
     // console.log("formData" ,formData);
     if (!userInfo.token) {
-      togglePopup(true, 'login');
+      togglePopup(true, "login");
       return;
     }
     if (errors.comment) {
@@ -188,7 +188,7 @@ const CommunityPostDetailPopUP = ({
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString('en-US');
+    const formattedDate = date.toLocaleDateString("en-US");
     return formattedDate;
   };
 
@@ -214,7 +214,7 @@ const CommunityPostDetailPopUP = ({
   }
 
   const handleGoToEdit = () => {
-    navigate('/edit-post');
+    navigate("/edit-post");
   };
 
   // highlight
@@ -223,13 +223,13 @@ const CommunityPostDetailPopUP = ({
   };
 
   return (
-    <div className='post-detail-popUp-container' ref={containerRef}>
+    <div className="post-detail-popUp-container" ref={containerRef}>
       {/* Moblie */}
-      <div className='post-detail-mobile-profile-container'>
-        <div className='post-detail-mobile-profile'>
+      <div className="post-detail-mobile-profile-container">
+        <div className="post-detail-mobile-profile">
           <img
             src={postQuery.userAvatar}
-            className='post-detail-mobile-avatar'
+            className="post-detail-mobile-avatar"
           ></img>
           <span className='post-detail-user-name-mobile'>
             {postQuery.userName}
@@ -237,14 +237,14 @@ const CommunityPostDetailPopUP = ({
         </div>
         {/* <div>
           <button
-            className='doctor-search-button'
+            className="doctor-search-button"
             style={{
-              width: '90px',
-              height: '30px',
-              radius: '8px',
-              fontSize: '10px',
+              width: "90px",
+              height: "30px",
+              radius: "8px",
+              fontSize: "10px",
             }}
-            onClick={() => (window.location.href = '/download')}
+            onClick={() => (window.location.href = "/download")}
           >
             Try Charm Life
           </button>
@@ -252,23 +252,23 @@ const CommunityPostDetailPopUP = ({
       </div>
 
       {/* Web */}
-      <div className='postdetail-popUp-left-container'>
+      <div className="postdetail-popUp-left-container">
         {!isMobile && picture && (
           <>
             <img
               src={picture}
               ref={imageRef}
               onLoad={handleImageLoad}
-              className='post-detail-image'
-              alt='detail-pic'
+              className="post-detail-image"
+              alt="detail-pic"
             ></img>
 
-            <div className='user-detail'>
-              <div className='user-detail-inner'>
+            <div className="user-detail">
+              <div className="user-detail-inner">
                 <img
                   src={postQuery.userAvatar}
-                  alt='Image-User-Picture'
-                  className='user-detail-profile-image'
+                  alt="Image-User-Picture"
+                  className="user-detail-profile-image"
                 />
                 <span>{postQuery.userName}</span>
               </div>
@@ -287,39 +287,39 @@ const CommunityPostDetailPopUP = ({
         )}
         {isMobile && <img src={picture} ref={imageRef}></img>}
       </div>
-      <div className='postdetail-popUp-right-container'>
-        <div className='detail-top-content'>
-          <div className='post-popUp-content'>
+      <div className="postdetail-popUp-right-container">
+        <div className="detail-top-content">
+          <div className="post-popUp-content">
             {!isMobile && brief && <span>{brief}</span>}
-            <h2 className='postdetail-popUp-title'>Title</h2>
-            <hr className='hr' />
-            <p className='post-description'>
+            <h2 className="postdetail-popUp-title">Title</h2>
+            <hr className="hr" />
+            <p className="post-description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
               voluptatum quae doloremque non voluptates eius sapiente, explicabo
               quasi suscipit quo. Delectus, tempora. Quo esse sapiente ut cumque
               amet error ipsum.
             </p>
-            <span className='post-tag-names'>
+            <span className="post-tag-names">
               #Doctor reviews #Breast Augmentation
             </span>
-            <span className='post-date'>5/10/2023</span>
-            <hr className='hr' />
+            <span className="post-date">5/10/2023</span>
+            <hr className="hr" />
             {/* {tag && <span className='detail-red-font'>{tag}</span>}
             {postDate && <span className='detail-gray-font'>{ndate}</span>} */}
           </div>
           {/* <div className='post-popUp-break-lines'></div> */}
-          <div className='post-popUp-comments'>
-            <span className='detail-gray-font'>{commentCount} comments</span>
+          <div className="post-popUp-comments">
+            <span className="detail-gray-font">{commentCount} comments</span>
             {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}
-            <div className='comment-detail'>
+            <div className="comment-detail">
               {comments &&
                 comments.map((comment, index) => {
                   if (comment && comment.content) {
                     return (
                       <CommentCard
                         key={index}
-                        avatar={comment.avatar || ''}
-                        name={comment.userName || ''}
+                        avatar={comment.avatar || ""}
+                        name={comment.userName || ""}
                         commentText={convertUnicode(comment.content)}
                         date={formatDate(comment.commentDate)}
                         onClick={handleInputClick}
@@ -352,32 +352,32 @@ const CommunityPostDetailPopUP = ({
         {/* <div className='post-detail-mobile-download-button'>
           <img
             src={DownArrow}
-            style={{ marginTop: '50px', width: '15px', height: '13px' }}
+            style={{ marginTop: "50px", width: "15px", height: "13px" }}
           ></img>
-          <span className='join-community-text'>
+          <span className="join-community-text">
             Join the Charm Life Community to View More
           </span>
           <button
-            className='doctor-search-button'
+            className="doctor-search-button"
             style={{
-              width: '150px',
-              height: '40px',
-              radius: '20px',
-              fontSize: '15px',
-              marginTop: '10px',
+              width: "150px",
+              height: "40px",
+              radius: "20px",
+              fontSize: "15px",
+              marginTop: "10px",
             }}
-            onClick={() => (window.location.href = '/download')}
+            onClick={() => (window.location.href = "/download")}
           >
             Try Charm Life
           </button>
         </div> */}
 
         {/* Web */}
-        <div className='fixed-input-box'>
+        <div className="fixed-input-box">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='post-detail-send-box-outer-container'>
-              <div className='Icon-display'>
-                <span className='Icon-count'>
+            <div className="post-detail-send-box-outer-container">
+              <div className="Icon-display">
+                <span className="Icon-count">
                   <img
                     // src={heartIcon}
                     src={liked ? heartIconFilled : heartIcon}
@@ -391,8 +391,8 @@ const CommunityPostDetailPopUP = ({
                 {/* <span className='Icon-count'>
                   <img
                     src={StarIcon}
-                    alt='Icon'
-                    className='Icon-size'
+                    alt="Icon"
+                    className="Icon-size"
                     onClick={handleInputClick}
                   />
                   {collectCount}
@@ -406,8 +406,8 @@ const CommunityPostDetailPopUP = ({
                   />
                   {commentCount}
                 </span>
-                <div className='share-icon'>
-                  <img src={ShareIcon} alt='Image-Share-Icon' />
+                <div className="share-icon">
+                  <img src={ShareIcon} alt="Image-Share-Icon" />
                 </div>
               </div>
               {/* <div className='comment-send-msg-container'> 
@@ -419,8 +419,8 @@ const CommunityPostDetailPopUP = ({
                 type='submit'
                 value='send'
                 disabled={!isValid}
-                style={{ backgroundColor: 'orange', border: 'orange' }}
-              />  */}
+                style={{ backgroundColor: "orange", border: "orange" }}
+              /> */}
             </div>
 
             <div className='new-comment-input'>

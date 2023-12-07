@@ -112,7 +112,7 @@ const Community = () => {
       );
     }
     // setTempSearchParam("");
-    console.log("postQuery", postQuery);
+    // console.log("postQuery", postQuery);
   };
 
   // const handleFilters = (value, isChecked) => {
@@ -165,7 +165,7 @@ const Community = () => {
               ref={postContainerRef}
             >
               <PostSearchBox
-                value={toDisplayFormat(postQuery.tempSearchParam)}
+                value={postQuery.tempSearchParam}
                 onChange={handleInputChange}
                 onClick={handleShowContainer}
                 handleSearch={handleSearch}

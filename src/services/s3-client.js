@@ -1,11 +1,11 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
-const uploadToS3 = async (file, signal) => {
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
+const uploadToS3 = async (file, signal, onProgress) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxFileSize) {
     return {
       success: false,
-      message: 'File size is too large. Max file size is 8MB.',
+      message: "File size is too large. Max file size is 8MB.",
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
@@ -14,7 +14,7 @@ const uploadToS3 = async (file, signal) => {
     leavePartsOnError: true,
     abortSignal: signal,
     params: {
-      Bucket: 'verificationbucketcharm',
+      Bucket: "verificationbucketcharm",
       Key: fileName,
       Body: file,
     },
@@ -22,33 +22,31 @@ const uploadToS3 = async (file, signal) => {
     queueSize: 4,
   });
 
-  upload.on('httpUploadProgress', (progress) => {
-    console.log(
-      `upload progress '${Math.round(
-        (progress.loaded / progress.total) * 100
-      )}%`
-    );
+  upload.on("httpUploadProgress", (progress) => {
+    const percent = Math.round((progress.loaded / progress.total) * 100);
+    console.log(`upload progress '${percent}%`);
+    onProgress(percent);
   });
 
   try {
     var data = await upload.done();
-    console.log('upload done', data);
+    console.log("upload done", data);
     if (data.$metadata.httpStatusCode === 200) {
       return {
         success: true,
-        message: 'Upload successful!',
+        message: "Upload successful!",
         location: data.Location,
       };
     }
     return {
       success: false,
-      message: 'Upload failed. Please try again.',
+      message: "Upload failed. Please try again.",
       location: data.Location,
     };
   } catch (err) {
     return {
       success: false,
-      message: 'Upload failed. Please try again.',
+      message: "Upload failed. Please try again.",
       location: data.Location,
     };
   }
@@ -58,14 +56,14 @@ const uploadImgToS3 = async (file) => {
   if (file.size > maxFileSize) {
     return {
       success: false,
-      message: 'Image size is too large. Max file size is 8MB.',
+      message: "Image size is too large. Max file size is 8MB.",
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
   const upload = new Upload({
     client: s3Client,
     params: {
-      Bucket: 'charm-post-img',
+      Bucket: "charm-post-img",
       Key: fileName,
       Body: file,
     },
@@ -73,7 +71,7 @@ const uploadImgToS3 = async (file) => {
     queueSize: 4,
   });
 
-  upload.on('httpUploadProgress', (progress) => {
+  upload.on("httpUploadProgress", (progress) => {
     console.log(
       `upload progress '${Math.round(
         (progress.loaded / progress.total) * 100
@@ -83,23 +81,23 @@ const uploadImgToS3 = async (file) => {
 
   try {
     var data = await upload.done();
-    console.log('upload done', data);
+    console.log("upload done", data);
     if (data.$metadata.httpStatusCode === 200) {
       return {
         success: true,
-        message: 'Upload successful!',
+        message: "Upload successful!",
         location: data.Location,
       };
     }
     return {
       success: false,
-      message: 'Upload failed. Please try again.',
+      message: "Upload failed. Please try again.",
       location: data.Location,
     };
   } catch (err) {
     return {
       success: false,
-      message: 'Upload failed. Please try again.',
+      message: "Upload failed. Please try again.",
       location: data.Location,
     };
   }

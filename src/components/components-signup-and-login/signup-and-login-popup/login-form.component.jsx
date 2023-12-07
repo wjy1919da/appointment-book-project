@@ -9,8 +9,8 @@ import { Form, InputGroup } from 'react-bootstrap'
 import CustomInput from '../custom-input/custom-input.component';
 import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
-import { useDoctorLogin } from '../../../hooks/useAuth';
-import { useToast } from '@chakra-ui/react'
+import { useDoctorLogin, retrieveUserFollowList } from '../../../hooks/useAuth';
+import { useToast } from '@chakra-ui/react';
 
 const LoginForm = (props) => {
     // console.log("loginForm");
@@ -61,6 +61,11 @@ const LoginForm = (props) => {
                     localStorage.setItem('token', token);
                     setToken(token);
                     togglePopup(false);
+                    const fetchUserFollowerList = async () => {
+                        const followedIdArray = await retrieveUserFollowList();
+                        localStorage.setItem('charmFollowedUsers', JSON.stringify(followedIdArray));
+                    }
+                    fetchUserFollowerList();
                     toast({title: 'Login Success',status: 'success'});
                 }else {
                     toast({title: 'Login Failed, please try again',status: 'error',})
