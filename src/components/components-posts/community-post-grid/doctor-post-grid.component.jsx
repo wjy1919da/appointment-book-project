@@ -50,6 +50,9 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserAvatar(avatar);
     setUserName(username);
   };
+  useEffect(() => {
+    postid && setPostID(postid)
+  }, [postid])
 
   useEffect(() => {
     postid && setPostID(postid);

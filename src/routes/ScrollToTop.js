@@ -5,9 +5,10 @@ let before = '';
 const isPostPage = (pathname) => {
   return pathname.indexOf('posts') >= 0;
 };
+
 export default function ScrollToTop() {
   const { pathname } = useLocation();
-
+  
   useEffect(() => {
     const current = isPostPage(pathname);
     if (current && before) return;
