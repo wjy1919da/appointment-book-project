@@ -1,7 +1,6 @@
-import { useQuery, useInfiniteQuery } from "react-query";
-import usePostQueryStore from "../postStore.ts";
-import APIClient from "../services/api-client.js";
-// import axios from 'axios';
+import { useQuery, useInfiniteQuery, useMutation } from 'react-query';
+import usePostQueryStore from '../postStore.ts';
+import APIClient from '../services/api-client.js';
 
 export function useGetPost() {
   const apiClient = new APIClient("/post/all_posts");
@@ -115,3 +114,13 @@ export function usePostDetail() {
 }
 
 // likes
+export function useGetLikesPost() {
+  const apiClient = new APIClient('/post/like');
+  const fetchName = async (postId) => {
+    const res = await apiClient.post({
+      postId,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) => fetchName(credentials.postId));
+}

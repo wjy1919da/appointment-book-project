@@ -1,49 +1,48 @@
-import React, { useState, useEffect } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
-import usePostQueryStore from "../../../postStore.ts";
+import React, { useState, useEffect } from 'react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import usePostQueryStore from '../../../postStore.ts';
 
 // components
-import CommunityPost from "../community-post/community-post.component";
-import PostDetail from "../community-post-detail/community-post-detail.component";
-import HomeSpinner from "../../home-spinner/home-spinner.component";
-import InfiniteScroll from "react-infinite-scroll-component";
-import ErrorMsg from "../../error-msg/error-msg.component";
+import CommunityPost from '../community-post/community-post.component';
+import PostDetail from '../community-post-detail/community-post-detail.component';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import ErrorMsg from '../../error-msg/error-msg.component';
 
 // hook
-import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-//  import { useGetPost } from '../../../hooks/useGetPosts';
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
+import { useGetLikesPost } from '../../../hooks/useGetPosts';
 
 // scss
-import "./doctor-post-grid.styles.scss";
+import './doctor-post-grid.styles.scss';
 
 // images
-import Arrow from "../../../assets/post/arrow_grid.png";
-import Arrow1 from "../../../assets/post/arrow1_grid.png";
+import Arrow from '../../../assets/post/arrow_grid.png';
+import Arrow1 from '../../../assets/post/arrow1_grid.png';
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
 
 const DoctorPostGrid = ({ isAbout }) => {
+  const navigate = useNavigate();
+
   // hook
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useApiRequestPostFilter();
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setUserID = usePostQueryStore((state) => state.setUserID);
-  const [userAvatar, setUserAvatar] = useState("");
+  const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState();
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
-  const [gutterwidth, setGutterWidth] = useState("");
+  const [gutterwidth, setGutterWidth] = useState('');
   const isMobileOrAbout = isMobile || isAbout;
   // console.log("doctor post grid", flatData)
-  useEffect(() => {
-    setGutterWidth(isMobileOrAbout ? "0px" : "10px");
-  }, [isMobile]);
-  if (isLoading) return <HomeSpinner />;
-  if (error) return <ErrorMsg />;
+
+  const { postid } = useParams();
 
   const setPostID = (ID, avatar, username) => {
     setIsModelOpen(true);
@@ -51,25 +50,42 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserAvatar(avatar);
     setUserName(username);
   };
+  useEffect(() => {
+    postid && setPostID(postid)
+  }, [postid])
+
+  useEffect(() => {
+    postid && setPostID(postid);
+  }, [postid]);
+
+  useEffect(() => {
+    setGutterWidth(isMobileOrAbout ? '0px' : '10px');
+  }, [isMobile]);
+  if (isLoading) return <HomeSpinner />;
+  if (error) return <ErrorMsg />;
 
   const postCardList = flatData.map((post) => (
     <div
-      className="btn"
-      onClick={() => setPostID(post.id, post.avatar, post.nickname)}
+      className='btn'
+      onClick={() => {
+        setPostID(post.id, post.avatar, post.username);
+        navigate('/posts/' + post.id);
+      }}
       key={post.id}
     >
       <CommunityPost
+        id={post.id}
         imageURL={post.coverImg || []}
-        text={post.title || ""}
-        profileImage={post.avatar || ""}
-        authorName={post.nickname || ""}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.nickname || ''}
         likes={post.likedCount || 0}
       />
     </div>
   ));
 
   return (
-    <div className="doctor-post-grid-inner-container">
+    <div className='doctor-post-grid-inner-container'>
       {flatData && (
         <InfiniteScroll
           dataLength={flatData.length}
@@ -102,17 +118,17 @@ const DoctorPostGrid = ({ isAbout }) => {
           postAvatar={userAvatar}
         />
       )}
-      <div className="down-load-more-container">
+      <div className='down-load-more-container'>
         {!isMobile && (
-          <img src={Arrow} alt="arrow" className="arrow-containter" />
+          <img src={Arrow} alt='arrow' className='arrow-containter' />
         )}
         {isMobile && (
-          <img src={Arrow1} alt="arrow1" className="arrow1-containter" />
+          <img src={Arrow1} alt='arrow1' className='arrow1-containter' />
         )}
-        <div className="download-text">Join Charm community to view more</div>
-        <Link to="/download">
-          <button className="download-button">
-            <div className="download-button-text">DownLoad APP</div>
+        <div className='download-text'>Join Charm community to view more</div>
+        <Link to='/download'>
+          <button className='download-button'>
+            <div className='download-button-text'>DownLoad APP</div>
           </button>
         </Link>
       </div>

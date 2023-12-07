@@ -6,8 +6,8 @@ import userInfoQueryStore from "../../../userStore";
 // import { useDisclosure } from '@chakra-ui/react';
 
 // components
-import FormButton from "../../components-posts/community-post-button/community-post-button";
-import PostDropDownFilter from "../community-post-dropdown-filter/community-post-dropdown-filter";
+import FormButton from '../../components-posts/community-post-button/community-post-button';
+// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
@@ -17,14 +17,16 @@ import useUploadImg from "../../../hooks/useUploadImg";
 import "./community-post-create-page.scss";
 
 // images
-import createPostIcon from "../../../assets/post/create-post-icon.png";
-import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
+import createPostIcon from '../../../assets/post/create-post-icon.png';
+import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
+import DeleteButton from '../../../assets/post/pop-up-close-button.png';
 
 const CreatePostPage = () => {
   const toast = useToast();
 
   const {
     selectedFiles,
+    setSelectedFiles,
     handleFileSelection,
     uploadProgress,
     isLoading,
@@ -136,20 +138,14 @@ const CreatePostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  // thumbnail
-  // const displayThumbnails =
-  //   selectedFiles.length > 0
-  //     ? selectedFiles.map((file, index) => (
-  //         <div key={index}>
-  //           <img
-  //             src={URL.createObjectURL(file)}
-  //             className='thumbnail'
-  //             alt={`Selected Thumbnail ${index + 1}`}
-  //           />
-  //         </div>
-  //       ))
-  //     : null;
+  // delete thumbnail
+  const handleDeleteThumbnail = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+  };
 
+  // thumbnail
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
@@ -159,11 +155,32 @@ const CreatePostPage = () => {
               className="thumbnail"
               alt={`Selected Thumbnail ${index + 1}`}
               style={{
-                width: "70px",
-                height: "70px",
-                objectFit: "cover",
+                width: '70px',
+                height: '70px',
+                borderRadius: '8px',
+                objectFit: 'cover',
               }}
             />
+            <button
+              type='button'
+              className='delete-thumbnail-button'
+              onClick={() => handleDeleteThumbnail(index)}
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#A5A6A7',
+                borderRadius: '50%',
+                position: 'absolute',
+                top: '-5px',
+                right: '-5px',
+              }}
+            >
+              <img
+                src={DeleteButton}
+                alt='Icon-Delete-Button'
+                className='create-post-page-delete-button'
+              />
+            </button>
           </div>
         ))
       : null;
@@ -187,7 +204,9 @@ const CreatePostPage = () => {
             alt="Image-Arrow-Icon"
             className="create-post-page-arrow-back-button"
           />
-          <span className="create-post-page-back-button">Create a post</span>
+          <span className='create-post-page-label-back-button'>
+            Create a post
+          </span>
         </button>
 
         <div className="create-post-page-inner-container">
@@ -205,11 +224,14 @@ const CreatePostPage = () => {
               <img
                 src={displayImage}
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  width: "330px",
-                  height: "330px",
-                  objectFit: "contain",
+                  marginBottom: '20px',
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  width: '330px',
+                  height: '330px',
+                  borderRadius: '8px',
+                  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                  objectFit: 'contain',
                 }}
                 alt="Selected"
               />
@@ -293,8 +315,8 @@ const CreatePostPage = () => {
                   })}
                 ></textarea>
 
-                <PostDropDownFilter />
-                <PostDropDownFilter />
+                {/* <PostDropDownFilter /> */}
+                {/* <PostDropDownFilter /> */}
 
                 <p className="create-post-page-description-error-validation">
                   {errors.description?.message}
