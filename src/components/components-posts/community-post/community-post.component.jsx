@@ -4,12 +4,10 @@ import heartIcon from '../../../assets/post/heart.png';
 import { useMediaQuery } from 'react-responsive';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 
-
 // images
 import defaultImage from '../../../assets/post/default_image.png';
 
 const CommunityPost = ({
-  dummyId,
   dummyHighlight,
   dummyPrivate,
   imageURL,
@@ -20,7 +18,6 @@ const CommunityPost = ({
   isLike,
   isProfile,
 }) => {
-
   // console.log('Here is the ID', dummyId);
 
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -48,9 +45,11 @@ const CommunityPost = ({
   return (
     <div
       className='community-post-container'
-      style={{ width: isProfile ? '240px' : '100%',
-      backgroundColor: dummyHighlight === 1 ? '#F2F2F2' : 'pink'
-     }}
+      style={{
+        width: isProfile ? '240px' : '100%',
+        backgroundColor: dummyHighlight === 1 ? '#352C28' : '',
+        
+      }}
     >
       <div className='post-Image'>
         <img
