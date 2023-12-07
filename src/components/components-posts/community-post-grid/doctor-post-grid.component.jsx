@@ -36,12 +36,13 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   const postQuery = usePostQueryStore((state) => state.postQuery);
+
   const [title, setTitle] = useState();
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
-  // console.log("doctor post grid", flatData)
+  // console.log("doctor post grid", data);
 
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");

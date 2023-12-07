@@ -171,8 +171,8 @@
 
 .post-detail-image-wrapper {
   position: relative;
-  height: 100%; /* 确保填满父容器的高度 */
-  overflow: hidden; /* 隐藏溢出内容 */
+  height: 100%;
+  overflow: hidden;
   display: flex; /* 使用flex布局确保子元素可以填满容器 */
   justify-content: center; /* 水平居中 */
   // height: var(--bs-modal-height);
@@ -207,6 +207,21 @@
 
 .arrow-right {
   right: 10px; /* 右侧箭头的位置 */
+}
+.textarea-with-icon {
+  position: relative;
+}
+
+.comment-card-input {
+  padding-right: 30px; /* Adjust the padding to make room for the icon */
+}
+
+.textarea-icon {
+  position: absolute;
+  right: 15px; /* Adjust as necessary */
+  top: 70%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensures the icon doesn't interfere with text input */
 }
 
 @media (max-width: 1024px) {

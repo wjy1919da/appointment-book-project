@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Button } from 'react-bootstrap';
 
@@ -115,7 +116,7 @@ const CommunityPostDetailPopUP = ({
     console.log("Likes API is called. Yay!", likesData);
     apiMutate(likesData);
   };
-
+  const { mutate, data, isLoading, isError, error } = useAddComment();
   const {
     register,
     handleSubmit,
@@ -126,6 +127,7 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
+    console.log("submit comment is called");
     if (!userInfo.token) {
       togglePopup(true, "login");
       return;
@@ -139,8 +141,6 @@ const CommunityPostDetailPopUP = ({
       text: formData.comment,
     });
   };
-
-  const { mutate, data, isLoading, isError, error } = useAddComment();
 
   useEffect(() => {
     if (data?.code === 100) {
@@ -331,22 +331,29 @@ const CommunityPostDetailPopUP = ({
                   return null;
                 })}
             </div>
-
-            <div className="comment-card-input-container">
-              {commentCount >= 0 && showCommentBox && (
-                <>
-                  <hr />
-                  <textarea
-                    ref={textareaRef}
-                    type="text"
-                    placeholder="Type Something..."
-                    className="comment-card-input"
-                  />
-                </>
-              )}
-            </div>
-
-            {!userInfo.token && <div>Login to view more....</div>}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="comment-card-input-container">
+                {commentCount >= 0 && showCommentBox && (
+                  <>
+                    <hr />
+                    <div className="textarea-with-icon">
+                      <textarea
+                        {...register("comment")}
+                        // ref={textareaRef}
+                        type="text"
+                        placeholder="Type Something..."
+                        className="comment-card-input"
+                        onClick={handleInputClick}
+                      />
+                      <button type="submit">
+                        {/* <FontAwesomeIcon icon={faPaperPlane} className="textarea-icon"/> */}
+                        submit
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </form>
           </div>
         </div>
 
@@ -376,21 +383,20 @@ const CommunityPostDetailPopUP = ({
 
         {/* Web */}
         <div className="fixed-input-box">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="post-detail-send-box-outer-container">
-              <div className="Icon-display">
-                <span className="Icon-count">
-                  <img
-                    // src={heartIcon}
-                    src={liked ? heartIconFilled : heartIcon}
-                    alt="Icon"
-                    className="Icon-size"
-                    // onClick={handleInputClick}
-                    onClick={toggleGetLikes}
-                  />
-                  {likeCount}
-                </span>
-                {/* <span className='Icon-count'>
+          <div className="post-detail-send-box-outer-container">
+            <div className="Icon-display">
+              <span className="Icon-count">
+                <img
+                  // src={heartIcon}
+                  src={liked ? heartIconFilled : heartIcon}
+                  alt="Icon"
+                  className="Icon-size"
+                  // onClick={handleInputClick}
+                  onClick={toggleGetLikes}
+                />
+                {likeCount}
+              </span>
+              {/* <span className='Icon-count'>
                   <img
                     src={StarIcon}
                     alt="Icon"
@@ -399,43 +405,20 @@ const CommunityPostDetailPopUP = ({
                   />
                   {collectCount}
                 </span> */}
-                <span className="Icon-count">
-                  <img
-                    src={BubblesIcon}
-                    alt="Icon"
-                    className="Icon-size"
-                    onClick={handleClickComment}
-                  />
-                  {commentCount}
-                </span>
-              </div>
-              <div className="share-icon">
-                <img src={ShareIcon} alt="Image-Share-Icon" />
-              </div>
-              {/* <div className='comment-send-msg-container'> 
-                <CommunitySendMsg isValid={isValid} />
-               </div> */}
-              {/* 
-               <Button
-                as='input'
-                type='submit'
-                value='send'
-                disabled={!isValid}
-                style={{ backgroundColor: "orange", border: "orange" }}
-              /> */}
+              <span className="Icon-count">
+                <img
+                  src={BubblesIcon}
+                  alt="Icon"
+                  className="Icon-size"
+                  onClick={handleClickComment}
+                />
+                {commentCount}
+              </span>
             </div>
-
-            <div className="new-comment-input">
-              {/* <input
-                {...register('comment')}
-                type='text'
-                placeholder='Enter your comment'
-                className='input-blank'
-                onClick={handleInputClick}
-              /> */}
-              <p>{errors.comment?.message}</p>
+            <div className="share-icon">
+              <img src={ShareIcon} alt="Image-Share-Icon" />
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
