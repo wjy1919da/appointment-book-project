@@ -95,7 +95,10 @@ const App = () => {
               <Route path="instrument/:name" element={<SubInstrument />} />
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
-              <Route path="doctorProfileEdit" element={<DoctorProfileEdit />} />
+              <Route path="doctorProfileEdit" element={
+                <PrivateRoute >
+                  <UniversalProfileEdit />
+                </PrivateRoute>} />
               <Route
                 path="doctor/:encodedMemberId"
                 element={<IndividualDoctor />}
@@ -125,7 +128,11 @@ const App = () => {
               <Route path='userProfile' element={<UserProfilePage />} />
 
               <Route path="AccountSetup" element={<AccountSetup />} />
-              <Route path="userProfileEdit" element={<UniversalProfileEdit />} />
+              <Route path="userProfileEdit" element={
+                <PrivateRoute >
+                  <UniversalProfileEdit />
+                </PrivateRoute>
+              } />
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />

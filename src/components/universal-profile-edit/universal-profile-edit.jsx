@@ -2,31 +2,45 @@ import './universal-profile-edit.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
+import { useUserEmailLogin, useDoctorLogin } from '../../hooks/useAuth';
 import defaultPhoto from '../../assets/post/user-profile-avatar.png';
 import backArrow from '../../assets/doctor/left_back.png';
 import axios from 'axios';
-import {
-    useDisclosure,
-  } from "@chakra-ui/react";
+import { isValidDate, isValidEmail, isValidPhoneNumber, isValidPassword } from './universal-edit-verification-functions';
+// import {
+//     useDisclosure,
+//   } from "@chakra-ui/react";
 import ChakraModal from '../chakra-modal/chakra-modal';
+import userInfoQueryStore from '../../userStore';
 
 const UniversalProfileEdit = () => {
     const [name, setName] = useState("");
     const [gender, setGender] = useState(0);
     const [birthday, setBirthday] = useState("");
+    const [birthdayError, setBirthdayError] = useState(false);
     const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState(false);
     const [bio, setBio] = useState("");
-    const [interests, setInterests] = useState([]);
-    const [interestSelections, setInterestSelections] = useState([]);
+    const [interests, setInterests] = useState([]);  // the array of interests returned from the backend
+    const [interestSelections, setInterestSelections] = useState([]);  // the array that we put what the user selects their interests as in
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const [accountType, setAccountType] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
+    const [oldPasswordError, setOldPasswordError] = useState(false);
     const [newPassword, setNewPassword] = useState("");
+    const [newPasswordError, setNewPasswordError] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [changesSaved, setChangesSaved] = useState(false);
     const navigate = useNavigate();
-    const modalDisclosure = useDisclosure();
+    const userEmailLogin = useUserEmailLogin();
+    const doctorLogin = useDoctorLogin();
+    const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
+    // const modalDisclosure = useDisclosure();
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
+    
 
     const retrieveAccountType = () => {
         const accountNumber = localStorage.getItem("accountType");
@@ -43,7 +57,7 @@ const UniversalProfileEdit = () => {
                 // then put all info into states if that info exists;
             } 
             grabUserInfo();
-            
+            console.log('user info is: ', userInfo);
             const getProcedures = async () => {
                 const body = {
                     pageReq: 0
@@ -97,18 +111,32 @@ const UniversalProfileEdit = () => {
     }
 
     const handleInterestsClick = (item) => {
-        // console.log('attempting to handle click of: ', item);
-        // console.log('currently, interests looks like: ', interests);
         if (!interests.includes(item)) addToInterests(item);
         else removeFromInterests(item);
     }
 
+    const checkForErrors = () => {
+        // console.log(`${birthdayError} + ${emailError} + ${newPasswordError} + ${oldPasswordError}`);
+        return birthdayError || emailError || phoneNumberError|| newPasswordError || oldPasswordError;
+    }
+
     const handleButtonClick = (event) => {
         event.preventDefault();
+        setChangesSaved(false);
+        if (checkForErrors()) return;
         setIsModalOpen(true);
     }
 
+    const onBlurCheck = (stateVariable, setStateVariableError, checkerFunc) => {
+        if (stateVariable === null || stateVariable === "") {
+            setStateVariableError(false);
+            return;
+        }
+        setStateVariableError(!checkerFunc(stateVariable));
+    }
+
     const handleFormSubmission = () => {
+        console.log('submitting form!');
         const obj = {
             'name': name,
             'bday': birthday,
@@ -119,6 +147,7 @@ const UniversalProfileEdit = () => {
             'interests': interests
         }
         console.log('submission obj is: ', obj);
+        setChangesSaved(true);
         setIsModalOpen(false);
     }
     
@@ -153,6 +182,7 @@ const UniversalProfileEdit = () => {
                     </div>
                     <div className='univ-edit-top-row-right-col univ-edit-top-row-col'>
                         <div className='univ-edit-form-button-container'>
+                            {changesSaved && <p className='univ-edit-form-changes-saved-text'>Changes saved!</p>}
                             <button className='univ-edit-form-button' type='submit' form='univ-edit-info-form' onClick={(e) => handleButtonClick(e)}>Save Changes</button>
                         </div>
                     </div>
@@ -194,13 +224,13 @@ const UniversalProfileEdit = () => {
                             </div>
                             <div className='univ-edit-info-form-sub-container'>
                                 <div className='univ-edit-info-form-age-container'>
-                                    <UniversalInfoFormInput stateVariable={birthday} onChange={(e) => setBirthday(e.target.value)} placeholder={'mm/dd/yyyy'} label={'Age'} />
+                                    <UniversalInfoFormInput stateVariable={birthday} onChange={(e) => setBirthday(e.target.value)} onBlur={() => onBlurCheck(birthday, setBirthdayError, isValidDate)} placeholder={'mm/dd/yyyy'} label={'Age'} possibleError={birthdayError} errorMessage={'Invalid date, please enter a valid date.'} />
                                 </div>
                                 <div className='univ-edit-info-form-email-container'>
-                                    <UniversalInfoFormInput stateVariable={email} onChange={(e) => setEmail(e.target.value)} placeholder={'charm@gmail.com'} label={'Email'} />
+                                    <UniversalInfoFormInput stateVariable={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => onBlurCheck(email, setEmailError, isValidEmail)} placeholder={'charm@gmail.com'} label={'Email'} possibleError={emailError} errorMessage={'Invalid email, please enter a valid address.'} />
                                 </div>
                                 <div className='univ-edit-info-form-phone-container'>
-                                    <UniversalInfoFormInput stateVariable={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder={'(xxx) xxx-xxxx'} label={'Phone Number'} />
+                                    <UniversalInfoFormInput stateVariable={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} onBlur={() => onBlurCheck(phoneNumber, setPhoneNumberError, isValidPhoneNumber)} placeholder={'(xxx) xxx-xxxx'} label={'Phone Number'} possibleError={phoneNumberError} errorMessage={'Please use the correct phone number format. (xxx) xxx-xxxx'} />
                                 </div>
                                 <div className='univ-edit-form-bio-container'>
                                     <div className='univ-edit-info-form-input-container'>
@@ -224,14 +254,8 @@ const UniversalProfileEdit = () => {
                                 <h2 className='univ-edit-sub-container-title univ-edit-text'>Change Password</h2>
                             </div>
                             <form className='univ-edit-password-form'>
-                                <label>
-                                    <h4 className='univ-edit-password-form-subtitle'>Current Password</h4>
-                                    <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder='******' className='univ-edit-info-form-input univ-edit-info-form-password' type='password' />
-                                </label>
-                                <label>
-                                    <h4 className='univ-edit-password-form-subtitle'>New Password</h4>
-                                    <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className='univ-edit-info-form-input univ-edit-info-form-password' type='password' />
-                                </label>
+                                <UniversalInfoFormInput stateVariable={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder={'******'} label={'Current Password'} possibleError={oldPasswordError} errorMessage={'Invalid password.'} password={true} />
+                                <UniversalInfoFormInput stateVariable={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder={''} label={'New Password'} possibleError={newPasswordError} onBlur={() => onBlurCheck(newPassword, setNewPasswordError, isValidPassword)} errorMessage={'Password must be between 6 and 18 characters, and must contain numbers and (letters or special characters).'} password={true} />
                             </form>
                         </div>
                     </div>
@@ -242,12 +266,13 @@ const UniversalProfileEdit = () => {
 
 }
 
-const UniversalInfoFormInput = ({onChange, stateVariable, placeholder, label}) => {
+const UniversalInfoFormInput = ({onChange, stateVariable, placeholder, label, possibleError, errorMessage, onBlur, password}) => {
     return (
         <div className='univ-edit-info-form-input-container'>
             <label className='univ-edit-info-form-label'>
                 <h4 className='univ-edit-info-form-label-text univ-edit-text'>{label}</h4>
-                <input value={stateVariable} onChange={onChange} placeholder={placeholder} className='univ-edit-info-form-input' />
+                <input value={stateVariable} onChange={onChange} onBlur={onBlur} placeholder={placeholder} className={`univ-edit-info-form-input ${possibleError ? 'univ-edit-info-form-input-error' : ''}`} type={password ? 'password' : ''} />
+                {possibleError ? <div className='univ-edit-info-form-input-error-message'>{errorMessage}</div> : ''}
             </label>
         </div>
     )
