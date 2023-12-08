@@ -3,10 +3,21 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from '../../../userStore';
 import { uploadToS3 } from '../../../services/s3-client';
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from '@chakra-ui/react';
 
 // components
-import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 import FormButton from '../../components-posts/community-post-button/community-post-button';
+// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
@@ -36,6 +47,7 @@ const EditPostPage = () => {
     uploadedFiles,
     resetFiles,
   } = useUploadImg();
+
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // console.log("EditPostPage", postQuery);
@@ -47,6 +59,9 @@ const EditPostPage = () => {
 
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   // useEffect(() => {
   // setSelectedFiles(postQuery.pictures || []);
   // setSelectedFiles([
@@ -67,6 +82,11 @@ const EditPostPage = () => {
       description: postQuery.description,
     },
   });
+
+  const testClick = () => {
+    console.log('clicked');
+    onOpen();
+  };
 
   // api
   const { mutate: apiMutate } = useApiRequestPost({
@@ -320,8 +340,8 @@ const EditPostPage = () => {
                   defaultValue={postQuery.description}
                 ></textarea>
 
-                <PostDropDownFilter />
-                <PostDropDownFilter />
+                {/* <PostDropDownFilter />
+                <PostDropDownFilter /> */}
 
                 <p className='edit-post-page-description-error-validation'>
                   {errors.description?.message}
@@ -356,17 +376,48 @@ const EditPostPage = () => {
                 />
                 <img
                   src={Trash}
+                  alt='Image-Trash-Icon'
                   style={{
                     width: '48px',
                     height: '48px',
                   }}
-                  alt='Image-Trash-Icon'
+                  onClick={testClick}
                 />
               </div>
             </div>
           </div>
         </div>
       </form>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent backgroundColor='transparent' boxShadow='none'>
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Are you sure to delete this post?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={onClose}
+            >
+              Back
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
     </div>
   );
 };
