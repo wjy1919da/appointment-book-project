@@ -19,7 +19,7 @@ import "./community-post-create-page.scss";
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import DeleteButton from '../../../assets/post/pop-up-close-button.png';
+import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 const CreatePostPage = () => {
   const toast = useToast();

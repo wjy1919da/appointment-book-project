@@ -230,6 +230,7 @@ const EditPostPage = () => {
               <img
                 src={displayImage}
                 style={{
+                  marginBottom: '20px',
                   maxWidth: '100%',
                   maxHeight: '100%',
                   width: '330px',
