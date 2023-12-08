@@ -9,10 +9,10 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
   ModalFooter,
   Button,
+  ModalCloseButton,
+  ModalBody,
 } from '@chakra-ui/react';
 
 // components
@@ -34,7 +34,7 @@ import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 import usePostQueryStore from '../../../postStore';
 import { Toast, useToast } from '@chakra-ui/react';
-import { set } from 'date-fns';
+// import { set } from 'date-fns';
 
 const EditPostPage = () => {
   const {
@@ -48,18 +48,22 @@ const EditPostPage = () => {
     resetFiles,
   } = useUploadImg();
 
-  const toast = useToast();
-  const postQuery = usePostQueryStore((state) => state.postQuery);
-  // console.log("EditPostPage", postQuery);
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
-  const [clickedRadio, setClickedRadio] = useState(false);
-  // const [selectedFiles, setSelectedFiles] = useState([]);
+  const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
+  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
+  const [selectedImage, setSelectedImage] = useState(null); // display in big image
 
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  // console.log("EditPostPage", postQuery);
+
+  // refs
   const fileInputRef = useRef(null);
 
-  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
+  const toast = useToast();
 
+  // chakura ui modal
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // useEffect(() => {
@@ -83,7 +87,7 @@ const EditPostPage = () => {
     },
   });
 
-  const testClick = () => {
+  const hanldeClickModal = () => {
     console.log('clicked');
     onOpen();
   };
@@ -159,22 +163,23 @@ const EditPostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  // delete thumbnail
-  const handleDeleteThumbnail = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
+  // thumbnail click masking
+  const handleClickMask = (index) => {
+    console.log(`Thumbnail index ${index} is clicked!!!!!!!!!!!`);
+    setClickedThumbnailIndex(index === clickedThumbnailIndex ? null : index);
+    setSelectedImage(selectedFiles[index]);
   };
 
   // thumbnail
   const displayThumbnails =
     selectedFiles.length > 0
       ? selectedFiles.map((file, index) => (
-          <div key={index} className='create-edit-post-page-thumbnail'>
+          <div key={index} className='edit-post-page-thumbnail'>
             <div
               className={`thumbnail ${
-                index < 2 ? 'mask-effect' : ''
+                index === clickedThumbnailIndex ? 'clicked' : ''
               }`}
+              onClick={() => handleClickMask(index)}
             >
               <img
                 src={URL.createObjectURL(file)}
@@ -205,13 +210,19 @@ const EditPostPage = () => {
                 src={DeleteButton}
                 alt='Icon-Delete-Button'
                 className='create-edit-post-page-delete-button'
-                style={{
-                }}
+                style={{}}
               />
             </button>
           </div>
         ))
       : null;
+
+  // delete thumbnail
+  const handleDeleteThumbnail = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+  };
 
   return (
     <div>
@@ -230,9 +241,9 @@ const EditPostPage = () => {
           <img
             src={Arrow}
             alt='Image-Arrow-Icon'
-            className='edit-post-page-arrow-back-button'
+            className='edit-post-page-arrow-icon-back-button'
           />
-          <span className='edit-post-page-back-button'>Edit a post</span>
+          <span className='edit-post-page-label-back-button'>Edit a post</span>
         </button>
 
         <div className='edit-post-page-inner-container'>
@@ -246,9 +257,9 @@ const EditPostPage = () => {
               onChange={handleFileSelection}
               multiple
             />
-            {displayImage ? (
+            {displayImage && selectedImage ? (
               <img
-                src={displayImage}
+                src={URL.createObjectURL(selectedImage)}
                 style={{
                   marginBottom: '20px',
                   maxWidth: '100%',
@@ -285,13 +296,13 @@ const EditPostPage = () => {
             )}
 
             {/* thumbnail */}
-            <div className='create-edit-post-page-thumbnail-container'>
+            <div className='edit-post-page-thumbnail-container'>
               {displayThumbnails}
 
               {/* thumbnail create */}
               {displayThumbnails && (
                 <div
-                  className='create-edit-post-page-add-thumbnail'
+                  className='edit-post-page-add-thumbnail'
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -381,7 +392,7 @@ const EditPostPage = () => {
                     width: '48px',
                     height: '48px',
                   }}
-                  onClick={testClick}
+                  onClick={hanldeClickModal}
                 />
               </div>
             </div>
@@ -417,7 +428,6 @@ const EditPostPage = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
     </div>
   );
 };
