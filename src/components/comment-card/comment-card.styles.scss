@@ -1,9 +1,10 @@
 .comment-card-container {
+  position: relative;
   display: flex;
-  width: 80%;
-  height: 70px;
+  align-items: flex-start;
   gap: 10px;
-  align-items: center;
+  width: 80%;
+  height: auto;
 
   .reviewer-profile-information {
     display: flex;
@@ -72,16 +73,37 @@
 
   .likeCount-commentCount {
     position: absolute;
+    right: 0;
     display: flex;
-    align-content: center;
+    align-items: center;
     gap: 5px;
-    left: 80%;
 
     .post-detail-icon {
       width: 18px;
-      // border-radius: 0;
     }
   }
+
+  .comment-card-reply-input-container {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .comment-card-reply-input {
+    border: 1px solid #675d59;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    width: 100%;
+    min-height: 80px;
+  }
+}
+
+.comment-card-profile-information-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .comment-card-inner-container {
@@ -91,4 +113,14 @@
 
 .comment-card-detail-container {
   display: flex;
+  width: 400px;
+  height: 80px;
+}
+
+.comment-card-reply-input {
+  border: 1px solid #675d59;
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+  padding: 10px;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import usePostQueryStore from "../../../postStore.ts";
 
@@ -27,6 +27,8 @@ import { set } from "date-fns";
 // import Cookie from 'js-cookie';
 
 const DoctorPostGrid = ({ isAbout }) => {
+  const navigate = useNavigate();
+
   // hook
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useApiRequestPostFilter();
@@ -44,11 +46,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const isMobileOrAbout = isMobile || isAbout;
   // console.log("doctor post grid", data);
 
-  useEffect(() => {
-    setGutterWidth(isMobileOrAbout ? "0px" : "10px");
-  }, [isMobile]);
-  if (isLoading) return <HomeSpinner />;
-  if (error) return <ErrorMsg />;
+  const { postid } = useParams();
 
   const setPostID = (ID, avatar, username, title) => {
     setIsModelOpen(true);
@@ -57,12 +55,27 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserName(username);
     setTitle(title);
   };
-  // console.log("postQuery", postQuery);
+  useEffect(() => {
+    postid && setPostID(postid);
+  }, [postid]);
+
+  useEffect(() => {
+    postid && setPostID(postid);
+  }, [postid]);
+
+  useEffect(() => {
+    setGutterWidth(isMobileOrAbout ? "0px" : "10px");
+  }, [isMobile]);
+  if (isLoading) return <HomeSpinner />;
+  if (error) return <ErrorMsg />;
 
   const postCardList = flatData.map((post) => (
     <div
       className="btn"
-      onClick={() => setPostID(post.id, post.avatar, post.nickname, post.title)}
+      onClick={() => {
+        setPostID(post.id, post.avatar, post.username);
+        navigate("/posts/" + post.id);
+      }}
       key={post.id}
     >
       <CommunityPost

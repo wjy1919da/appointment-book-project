@@ -285,6 +285,7 @@ const CommunityPostDetailPopUP = ({
                 <button className="button-highlight" onClick={handleHighlight}>
                   {isHighlight ? "Remove from Highlight" : "Highlight"}
                 </button>
+
                 <button className="button-private">Private</button>
                 <button className="button-edit" onClick={handleGoToEdit}>
                   Edit your Post

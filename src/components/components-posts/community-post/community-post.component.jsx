@@ -6,8 +6,11 @@ import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
 
 // images
 import defaultImage from "../../../assets/post/default_image.png";
+import LockIcon from "../../../assets/post/lock_icon.svg";
 
 const CommunityPost = ({
+  dummyHighlight,
+  dummyPrivate,
   imageURL,
   text,
   profileImage,
@@ -19,7 +22,6 @@ const CommunityPost = ({
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState("");
   const [liked, setLiked] = useState(isLike);
-
   const [displayImage, setDisplayImage] = useState(imageURL);
 
   useEffect(() => {
@@ -32,7 +34,6 @@ const CommunityPost = ({
 
   const toggleLike = () => {
     setLiked((prevLiked) => !prevLiked);
-    // If you want to navigate to another page when the heart is clicked, uncomment the next line.
     // window.location.href = "/download";
   };
 
@@ -45,8 +46,17 @@ const CommunityPost = ({
       className="community-post-container"
       style={{
         width: isProfile ? "240px" : "100%",
+        backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
       }}
     >
+      {dummyHighlight === 0 ? (
+        <img
+          src={LockIcon}
+          alt="Icon-Lock"
+          className="community-post-icon-lock"
+        />
+      ) : null}
+
       <div className="post-Image">
         <img
           src={displayImage}

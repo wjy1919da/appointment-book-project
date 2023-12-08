@@ -91,7 +91,8 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     const proceduresNameAndImg = [{"location": "Face", "procedures" : [{"procedureName": "Botox", "photoURL": "botox_injections.svg"}, {"procedureName": "Chemical Peel", "photoURL": "chemical_peels.svg"}, {"procedureName": "Chin Implants", "photoURL": "Chin-Implants.svg"}, {"procedureName": "Face Life", "photoURL": "Facelift.svg"}, {"procedureName": "Fox Eyes", "photoURL": "fox_eyes.svg"}, {"procedureName": "Lip Augmentation", "photoURL": "lip_augmentation.svg"}, {"procedureName": "Otoplasty", "photoURL": "Otoplasty.svg"}, {"procedureName": "Teeth Whitening", "photoURL": "teeth_whitening.svg"}]}, 
                                {"location": "Body", "procedures" : [{"procedureName": "Breast Augmentation", "photoURL": "breast_augmentation.svg"}, {"procedureName": "Laser Hair Removal", "photoURL": "laser_hair_removal.svg"}, {"procedureName": "Neck Contouring", "photoURL": "Neck_Contouring.svg"}, {"procedureName": "Tummy Tuck", "photoURL": "Tummy_Tuck.svg"}]}
                               ]
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const obj = { 
                       'address': doctorQuery.location,
                       'name':   doctorQuery.field,
@@ -252,7 +253,7 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
                             onChange={(event) => setDoctorName(event.target.value)} 
                             className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
                         
-                        <button type='button' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
+                        <button type='submit' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/>Search</button>
                     </form>
                 </div>
         )}
