@@ -50,6 +50,15 @@ const EditPostPage = () => {
   // ]);
   // }, [postQuery.pictures]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // useEffect(() => {
+  // setSelectedFiles(postQuery.pictures || []);
+  // setSelectedFiles([
+  //   "https://charm-post-img.s3.us-west-1.amazonaws.com/1701395754743-Screenshot+2023-11-07+at+8.31.42+PM.png",
+  // ]);
+  // }, [postQuery.pictures]);
+
   // react hook form
   const {
     register,
@@ -117,6 +126,7 @@ const EditPostPage = () => {
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
   };
+
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -133,6 +143,55 @@ const EditPostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
+
+  // delete thumbnail
+  const handleDeleteThumbnail = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+  };
+
+  // thumbnail
+  const displayThumbnails =
+    selectedFiles.length > 0
+      ? selectedFiles.map((file, index) => (
+          <div key={index} className="create-edit-post-page-thumbnail">
+            <div className={`thumbnail ${index < 2 ? "mask-effect" : ""}`}>
+              <img
+                src={URL.createObjectURL(file)}
+                alt={`Selected Thumbnail ${index + 1}`}
+                style={{
+                  width: "70px",
+                  height: "70px",
+                  borderRadius: "8px",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+            <button
+              type="button"
+              className="delete-thumbnail-button"
+              onClick={() => handleDeleteThumbnail(index)}
+              style={{
+                width: "20px",
+                height: "20px",
+                backgroundColor: "#A5A6A7",
+                borderRadius: "50%",
+                position: "absolute",
+                top: "-5px",
+                right: "-5px",
+              }}
+            >
+              <img
+                src={DeleteButton}
+                alt="Icon-Delete-Button"
+                className="create-edit-post-page-delete-button"
+                style={{}}
+              />
+            </button>
+          </div>
+        ))
+      : null;
 
   return (
     <div>
@@ -253,8 +312,8 @@ const EditPostPage = () => {
                   defaultValue={postQuery.description} // Set the default value
                 ></textarea>
 
-                <PostDropDownFilter />
-                <PostDropDownFilter />
+                {/* <PostDropDownFilter />
+                <PostDropDownFilter /> */}
 
                 <p className="edit-post-page-description-error-validation">
                   {errors.description?.message}
@@ -289,6 +348,7 @@ const EditPostPage = () => {
                 />
                 <img
                   src={Trash}
+                  alt="Image-Trash-Icon"
                   style={{
                     width: "48px",
                     height: "48px",
@@ -300,6 +360,35 @@ const EditPostPage = () => {
           </div>
         </div>
       </form>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent backgroundColor="transparent" boxShadow="none">
+          <ModalHeader color="#ffffff" fontSize="25px">
+            Are you sure to delete this post?
+          </ModalHeader>
+          <ModalFooter display="flex" justifyContent="space-between">
+            <Button
+              color="#ffffff"
+              backgroundColor="#675f5a"
+              outline="none"
+              _hover="none"
+              mr={3}
+              onClick={onClose}
+            >
+              Back
+            </Button>
+            <Button
+              color="#ffffff"
+              backgroundColor="#f1a285"
+              outline="none"
+              _hover="none"
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
