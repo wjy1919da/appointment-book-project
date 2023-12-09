@@ -15,6 +15,8 @@ interface PostQuery {
   title?: string;
   description?: string;
   pictures?: Array<string>;
+  // memberId is autherId
+  memberID?: number;
 }
 
 interface postQueryStore {
@@ -34,6 +36,7 @@ interface postQueryStore {
   setTitle?: (title: string) => void;
   setDescription?: (description: string) => void;
   setPictures?: (pictures: Array<string>) => void;
+  setMemberID?: (memberID: number) => void;
 }
 
 const usePostQueryStore = create<postQueryStore>((set) => ({
@@ -52,6 +55,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     title: "",
     description: "",
     pictures: [],
+    memberID: 0,
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -78,6 +82,8 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, description } })),
   setPictures: (pictures) =>
     set((state) => ({ postQuery: { ...state.postQuery, pictures } })),
+  setMemberID: (memberID) =>
+    set((state) => ({ postQuery: { ...state.postQuery, memberID } })),
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },

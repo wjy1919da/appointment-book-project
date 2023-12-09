@@ -31,6 +31,7 @@ import BubblesIcon from "../../../assets/post/bubbles_icon.svg";
 import ShareIcon from "../../../assets/post/share_icon.svg";
 import heartIcon from "../../../assets/post/heart.png";
 import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import { is } from "date-fns/locale";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -62,15 +63,18 @@ const CommunityPostDetailPopUP = ({
   const textareaRef = useRef(null);
 
   const toast = useToast();
-
+  var isAuthor = userInfo.userId == postQuery.memberID;
+  var isDoctorAuthor =
+    userInfo.userId == postQuery.memberID &&
+    localStorage.getItem("accountType") === "2";
+  // console.log("postDetail", userInfo, postQuery);
+  // console.log("postDetail author", isAuthor, isDoctorAuthor);
   const schema = z.object({
     comment: z
       .string()
       .nonempty("Comment is required")
       .min(5, "Comment must be at least 5 characters long"),
   });
-
-  // console.log("userInfo in post detail" ,userInfo);
 
   // api
   const { mutate: apiMutate } = useGetLikesPost({
@@ -280,14 +284,22 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className="user-detail-button-container">
-                <button className="button-highlight" onClick={handleHighlight}>
-                  {isHighlight ? "Remove from Highlight" : "Highlight"}
-                </button>
-
-                <button className="button-private">Private</button>
-                <button className="button-edit" onClick={handleGoToEdit}>
-                  Edit your Post
-                </button>
+                {isDoctorAuthor && (
+                  <button
+                    className="button-highlight"
+                    onClick={handleHighlight}
+                  >
+                    {isHighlight ? "Remove from Highlight" : "Highlight"}
+                  </button>
+                )}
+                {isAuthor && (
+                  <button className="button-private">Private</button>
+                )}
+                {isAuthor && (
+                  <button className="button-edit" onClick={handleGoToEdit}>
+                    Edit your Post
+                  </button>
+                )}
               </div>
             </div>
           </>
@@ -414,9 +426,9 @@ const CommunityPostDetailPopUP = ({
                 {commentCount}
               </span>
             </div>
-            <div className="share-icon">
+            {/* <div className="share-icon">
               <img src={ShareIcon} alt="Image-Share-Icon" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

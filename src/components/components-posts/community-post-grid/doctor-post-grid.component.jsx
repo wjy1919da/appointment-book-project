@@ -37,8 +37,8 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-  const postQuery = usePostQueryStore((state) => state.postQuery);
-
+  // const postQuery = usePostQueryStore((state) => state.postQuery);
+  const setMemberID = usePostQueryStore((state) => state.setMemberID);
   const setTitle = usePostQueryStore((state) => state.setTitle);
   // const [title, setTitle] = useState("");
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
@@ -48,12 +48,13 @@ const DoctorPostGrid = ({ isAbout }) => {
 
   const { postid } = useParams();
 
-  const setPostID = (ID, avatar, username, title) => {
+  const setPostID = (ID, avatar, username, title, memberId) => {
     setIsModelOpen(true);
     setUserID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
+    setMemberID(memberId);
   };
 
   useEffect(() => {
@@ -66,7 +67,13 @@ const DoctorPostGrid = ({ isAbout }) => {
     <div
       className="btn"
       onClick={() => {
-        setPostID(post.id, post.avatar, post.username, post.title);
+        setPostID(
+          post.id,
+          post.avatar,
+          post.username,
+          post.title,
+          post.memberId
+        );
         navigate("/posts/" + post.id);
       }}
       key={post.id}
