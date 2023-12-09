@@ -224,6 +224,14 @@ const EditPostPage = () => {
     setSelectedFiles(updatedFiles);
   };
 
+  // initial display image set up
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      setSelectedImage(selectedFiles[0]);
+      setClickedThumbnailIndex(0);
+    }
+  }, [selectedFiles]);
+
   return (
     <div>
       <form
