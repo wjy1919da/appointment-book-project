@@ -9,10 +9,10 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
   ModalFooter,
   Button,
+  ModalCloseButton,
+  ModalBody,
 } from "@chakra-ui/react";
 
 // components
@@ -52,17 +52,19 @@ const EditPostPage = () => {
   } = useUploadImg();
   const { mutate: apiMutateEditPost, data } = useApiRequestEditPost({});
 
-  const toast = useToast();
-  const postQuery = usePostQueryStore((state) => state.postQuery);
-
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [selectedFiles, setSelectedFiles] = useState([]);
 
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  // console.log("EditPostPage", postQuery);
+
+  // refs
   const fileInputRef = useRef(null);
 
-  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
 
+  // chakura ui modal
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -208,6 +210,13 @@ const EditPostPage = () => {
       : null;
   const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
+  // delete thumbnail
+  const handleDeleteThumbnail = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+  };
+
   return (
     <div>
       <form
@@ -241,9 +250,9 @@ const EditPostPage = () => {
               onChange={handleFileSelection}
               multiple
             />
-            {displayImage ? (
+            {displayImage && selectedImage ? (
               <img
-                src={displayImage}
+                src={URL.createObjectURL(selectedImage)}
                 style={{
                   marginBottom: "20px",
                   maxWidth: "100%",
@@ -286,7 +295,7 @@ const EditPostPage = () => {
               {/* thumbnail create */}
               {displayThumbnails && (
                 <div
-                  className="create-edit-post-page-add-thumbnail"
+                  className="edit-post-page-add-thumbnail"
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -376,6 +385,7 @@ const EditPostPage = () => {
                     width: "48px",
                     height: "48px",
                   }}
+                  onClick={hanldeClickModal}
                 />
               </div>
             </div>

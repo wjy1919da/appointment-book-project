@@ -37,14 +37,14 @@
   .edit-post-page-back-button-container {
     display: flex;
 
-    .edit-post-page-arrow-back-button {
+    .edit-post-page-arrow-icon-back-button {
       position: absolute;
       top: 115px;
       left: 60px;
       rotate: 180deg;
     }
 
-    .edit-post-page-back-button {
+    .edit-post-page-label-back-button {
       position: absolute;
       top: 110px;
       left: 110px;
@@ -81,19 +81,20 @@
 
     .edit-post-page-left-container {
       position: relative;
+      margin-bottom: 20px;
     }
+  }
 
-    .edit-post-page-add {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 8px;
-      background: #fbfcff;
-      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
-      margin-top: -65px;
-      width: 330px;
-      height: 330px;
-    }
+  .edit-post-page-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: #fbfcff;
+    box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+    margin-top: -65px;
+    width: 330px;
+    height: 330px;
   }
 
   .edit-post-page-text {
@@ -110,13 +111,13 @@
   }
 }
 
-.create-edit-post-page-thumbnail-container {
+.edit-post-page-thumbnail-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 
-  .create-edit-post-page-thumbnail {
+  .edit-post-page-thumbnail {
     position: relative;
     display: flex;
     justify-items: center;
@@ -124,7 +125,7 @@
     // border: 1px solid gray;
   }
 
-  .create-edit-post-page-add-thumbnail {
+  .edit-post-page-add-thumbnail {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -206,28 +207,19 @@
 }
 
 // image mask effect
-.create-edit-post-page-thumbnail {
+.thumbnail.clicked {
   position: relative;
-  display: flex;
-  justify-items: center;
-  align-items: center;
 
-  &:nth-child(-n + 2) {
-    .thumbnail {
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: gray;
-        border-radius: 8px;
-        opacity: 0.6;
-        width: 100%;
-        height: 100%;
-      }
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: gray;
+    border-radius: 8px;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
   }
 }
 
