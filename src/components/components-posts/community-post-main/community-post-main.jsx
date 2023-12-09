@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from '../../../userStore.ts';
-import { useGetUserInfo } from "../../../hooks/useAuth";
-
 
 // components
 import PostPageTitle from '../../community-post-main-title/community-post-main-title';
@@ -20,28 +18,13 @@ const PostPageMain = () => {
 
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-  const setUsername = userInfoQueryStore((state) => state.setUsername);
-  const setPostCount = userInfoQueryStore((state) => state.setPostCount);
-  const setFollowerCount = userInfoQueryStore(
-    (state) => state.setFollowerCount
-  );
-  const setFollowingCount = userInfoQueryStore(
-    (state) => state.setFollowingCount
-  );
-  const setDescription = userInfoQueryStore((state) => state.setDescription);
-  const removeToken = userInfoQueryStore((state) => state.removeToken);
-
-
+ 
   const handleCreatePostClick = () => {
-    // navigate('/posts/create');
-    togglePopup(true, 'accountType');
-    // const isLoggedIn = localStorage.getItem('isLoggedIn');
-    // if (isLoggedIn) {
-    //   navigate('/posts/create');
-    // } else {
-    //   alert('Please login.');
-    // }
+    if (!userInfo.token) {
+      togglePopup(true, 'accountType');
+    } else {
+      navigate('/posts/create');
+    }
   };
 
   return (
@@ -84,7 +67,7 @@ const PostPageMain = () => {
                 className='post-main-link-button'
                 onClick={handleCreatePostClick}
               >
-                Creating a post{' '}
+                Creating a post
                 <img
                   src={ArrowRight}
                   alt='ArrowRight'
@@ -92,16 +75,6 @@ const PostPageMain = () => {
                 />
               </button>
             </div>
-            {!userInfo.token && (
-              <div onClick={handleCreatePostClick} className='header-login-default'>
-                {/* <img
-                  src={loginIcon}
-                  alt='login'
-                  className='header-login-default-icon'
-                ></img> */}
-                <div className='header-login-text'>Login/Sign up</div>
-              </div>
-            )}
           </div>
         </div>
       </div>
