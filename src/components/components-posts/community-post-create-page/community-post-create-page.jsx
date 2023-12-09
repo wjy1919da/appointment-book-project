@@ -45,6 +45,7 @@ const CreatePostPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
@@ -89,12 +90,16 @@ const CreatePostPage = () => {
       return;
     }
     apiMutate(formData);
-    resetFiles();
   };
 
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
+      resetFiles();
+      reset({
+        title: "",
+        description: "",
+      });
       toast({
         title: "Post created successfully.",
         status: "success",

@@ -54,8 +54,7 @@ const EditPostPage = () => {
 
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  // console.log("EditPostPage", postQuery);
-  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -84,17 +83,13 @@ const EditPostPage = () => {
     },
   });
 
-  const testClick = () => {
-    console.log("clicked");
-    onOpen();
-  };
-
   const onSubmit = (data) => {
+    console.log("submit in edit post", data);
     const formData = {
       address: "",
       brief: data.description,
       coverImg: "",
-      id: 0,
+      id: postQuery.userID,
       isDisplay: 0,
       lat: "",
       location: "",
@@ -109,6 +104,7 @@ const EditPostPage = () => {
       title: data.title,
       userId: postQuery.userID,
     };
+
     if (!userInfo?.token) {
       toast({
         title: "Please login first.",
@@ -119,8 +115,31 @@ const EditPostPage = () => {
       return;
     }
     apiMutateEditPost(formData);
-    resetFiles();
   };
+  useEffect(() => {
+    // console.log("data::", data);
+    if (data?.code === 100) {
+      resetFiles();
+      reset({
+        title: "",
+        description: "",
+      });
+      toast({
+        title: "Repost successfully.",
+        status: "success",
+        duration: 1000,
+        isClosable: true,
+      });
+    }
+    if (data?.code === 500) {
+      toast({
+        title: "Failed to create post.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [data, toast]);
 
   // back button
   const handleClickCreatePostBack = () => {
@@ -146,13 +165,6 @@ const EditPostPage = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  // delete thumbnail
-  // const handleDeleteThumbnail = (index) => {
-  //   const updatedFiles = [...tempSelectedFiles];
-  //   updatedFiles.splice(index, 1);
-  //   setSelectedFiles(updatedFiles);
-  // };
-  // console.log("uploadedFiles", uploadedFiles, postQuery);
   // thumbnail
   const displayThumbnails =
     uploadedFiles.length > 0
@@ -356,7 +368,6 @@ const EditPostPage = () => {
                 <FormButton
                   buttonName="Repost"
                   className="create-post-custom-button"
-                  type="submit"
                 />
                 <img
                   src={Trash}

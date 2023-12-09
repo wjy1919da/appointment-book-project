@@ -54,7 +54,7 @@ export function useApiRequestEditPost() {
     title,
     postId,
   }) => {
-    const res = await apiClient.put({
+    const res = await apiClient.post({
       address,
       brief,
       coverImg,
