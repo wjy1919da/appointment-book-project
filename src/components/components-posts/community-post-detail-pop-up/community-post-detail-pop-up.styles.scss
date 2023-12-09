@@ -385,6 +385,7 @@
 }
 
 .comment-card-input-container {
+  position: relative;
 
   .comment-card-input {
     border: 1px solid #675d59;
@@ -394,6 +395,12 @@
     padding: 10px;
     width: 450px;
     height: 70px;
+  }
+
+  .comment-card-send-icon {
+    position: absolute;
+    right: 48px;
+    bottom: 18px;
   }
 }
 
