@@ -3,13 +3,26 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import userInfoQueryStore from "../../../userStore";
 import { uploadToS3 } from "../../../services/s3-client";
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "@chakra-ui/react";
 
 // components
-import PostDropDownFilter from "../community-post-dropdown-filter/community-post-dropdown-filter";
 import FormButton from "../../components-posts/community-post-button/community-post-button";
+// import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
 import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
+import useUploadImg from "../../../hooks/useUploadImg";
+import { useApiRequestEditPost } from "../../../hooks/useApiRequestPost";
 
 // scss
 import "./community-post-edit-page.scss";
@@ -18,10 +31,12 @@ import "./community-post-edit-page.scss";
 import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
 import Trash from "../../../assets/post/trash_icon.svg";
+import DeleteButton from "../../../assets/post/thumbnail_delete.png";
+
 import usePostQueryStore from "../../../postStore";
-import useUploadImg from "../../../hooks/useUploadFile";
 import { Toast, useToast } from "@chakra-ui/react";
 import { set } from "date-fns";
+
 const EditPostPage = () => {
   const {
     selectedFiles,
@@ -31,33 +46,29 @@ const EditPostPage = () => {
     isLoading,
     isError,
     uploadedFiles,
+    setUploadedFiles,
     resetFiles,
+    removeUploadedFile,
   } = useUploadImg();
+  const { mutate: apiMutateEditPost, data } = useApiRequestEditPost({});
+
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // console.log("EditPostPage", postQuery);
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
   const [clickedRadio, setClickedRadio] = useState(false);
   // const [selectedFiles, setSelectedFiles] = useState([]);
+
   const fileInputRef = useRef(null);
 
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
-  // useEffect(() => {
-  // setSelectedFiles(postQuery.pictures || []);
-  // setSelectedFiles([
-  //   "https://charm-post-img.s3.us-west-1.amazonaws.com/1701395754743-Screenshot+2023-11-07+at+8.31.42+PM.png",
-  // ]);
-  // }, [postQuery.pictures]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // useEffect(() => {
-  // setSelectedFiles(postQuery.pictures || []);
-  // setSelectedFiles([
-  //   "https://charm-post-img.s3.us-west-1.amazonaws.com/1701395754743-Screenshot+2023-11-07+at+8.31.42+PM.png",
-  // ]);
-  // }, [postQuery.pictures]);
+  useEffect(() => {
+    setUploadedFiles(postQuery.pictures);
+  }, [postQuery.pictures]);
 
   // react hook form
   const {
@@ -73,17 +84,10 @@ const EditPostPage = () => {
     },
   });
 
-  // api
-  const { mutate: apiMutate } = useApiRequestPost({
-    onError: (error) => {
-      toast({
-        title: "Failed to create post.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const testClick = () => {
+    console.log("clicked");
+    onOpen();
+  };
 
   const onSubmit = (data) => {
     const formData = {
@@ -103,6 +107,7 @@ const EditPostPage = () => {
         },
       ],
       title: data.title,
+      userId: postQuery.userID,
     };
     if (!userInfo?.token) {
       toast({
@@ -113,7 +118,7 @@ const EditPostPage = () => {
       });
       return;
     }
-    apiMutate(formData);
+    apiMutateEditPost(formData);
     resetFiles();
   };
 
@@ -136,29 +141,26 @@ const EditPostPage = () => {
     handleFileSelection({ target: { files: e.dataTransfer.files } });
   };
 
-  const displayImage =
-    selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
-
   // radio button
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
   // delete thumbnail
-  const handleDeleteThumbnail = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
-
+  // const handleDeleteThumbnail = (index) => {
+  //   const updatedFiles = [...tempSelectedFiles];
+  //   updatedFiles.splice(index, 1);
+  //   setSelectedFiles(updatedFiles);
+  // };
+  // console.log("uploadedFiles", uploadedFiles, postQuery);
   // thumbnail
   const displayThumbnails =
-    selectedFiles.length > 0
-      ? selectedFiles.map((file, index) => (
+    uploadedFiles.length > 0
+      ? uploadedFiles.map((file, index) => (
           <div key={index} className="create-edit-post-page-thumbnail">
             <div className={`thumbnail ${index < 2 ? "mask-effect" : ""}`}>
               <img
-                src={URL.createObjectURL(file)}
+                src={file}
                 alt={`Selected Thumbnail ${index + 1}`}
                 style={{
                   width: "70px",
@@ -171,7 +173,7 @@ const EditPostPage = () => {
             <button
               type="button"
               className="delete-thumbnail-button"
-              onClick={() => handleDeleteThumbnail(index)}
+              onClick={() => removeUploadedFile(index)}
               style={{
                 width: "20px",
                 height: "20px",
@@ -192,6 +194,7 @@ const EditPostPage = () => {
           </div>
         ))
       : null;
+  const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   return (
     <div>
@@ -218,6 +221,7 @@ const EditPostPage = () => {
         <div className="edit-post-page-inner-container">
           <div className="edit-post-page-left-container-wrapper">
             <input
+              ref={fileInputRef}
               type="file"
               id="imageUpload"
               accept="image/*"
@@ -229,6 +233,7 @@ const EditPostPage = () => {
               <img
                 src={displayImage}
                 style={{
+                  marginBottom: "20px",
                   maxWidth: "100%",
                   maxHeight: "100%",
                   width: "330px",
@@ -246,17 +251,6 @@ const EditPostPage = () => {
                     onDragOver={handleDragOver}
                     onClick={handleBrowseFiles}
                   >
-                    {selectedFiles.length > 0 && (
-                      <img
-                        src={URL.createObjectURL(selectedFiles[0])}
-                        style={{
-                          width: "70px",
-                          height: "70px",
-                        }}
-                        className="test"
-                        alt="Selected Thumbnail"
-                      />
-                    )}
                     <img
                       src={createPostIcon}
                       style={{
@@ -265,13 +259,6 @@ const EditPostPage = () => {
                       }}
                       alt="Image-Create-Post"
                     />
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleFileSelection}
-                      multiple
-                      style={{ display: "none" }}
-                    />
                   </div>
                   <div className="edit-post-page-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -279,6 +266,30 @@ const EditPostPage = () => {
                 </div>
               </>
             )}
+
+            {/* thumbnail */}
+            <div className="create-edit-post-page-thumbnail-container">
+              {displayThumbnails}
+
+              {/* thumbnail create */}
+              {displayThumbnails && (
+                <div
+                  className="create-edit-post-page-add-thumbnail"
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  onClick={handleBrowseFiles}
+                >
+                  <img
+                    src={createPostIcon}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                    }}
+                    alt="Image-Create-Post"
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="edit-post-page-right-container">
@@ -294,7 +305,7 @@ const EditPostPage = () => {
                     message: "* Maximum limit for characters is 20.",
                   },
                 })}
-                defaultValue={postQuery.title} // Set the default value
+                defaultValue={postQuery.title}
               />
               <p className="edit-post-page-title-error-validation">
                 {errors.title?.message}
@@ -309,7 +320,7 @@ const EditPostPage = () => {
                   {...register("description", {
                     required: "* Description is required.",
                   })}
-                  defaultValue={postQuery.description} // Set the default value
+                  defaultValue={postQuery.description}
                 ></textarea>
 
                 {/* <PostDropDownFilter />
@@ -345,6 +356,7 @@ const EditPostPage = () => {
                 <FormButton
                   buttonName="Repost"
                   className="create-post-custom-button"
+                  type="submit"
                 />
                 <img
                   src={Trash}
@@ -353,7 +365,6 @@ const EditPostPage = () => {
                     width: "48px",
                     height: "48px",
                   }}
-                  alt="Image-Trash-Icon"
                 />
               </div>
             </div>

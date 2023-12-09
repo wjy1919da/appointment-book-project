@@ -23,6 +23,7 @@ interface postQueryStore {
   setPostBy: (postBy: Array<string>) => void;
   setTag: (tag: string) => void;
   setPageSize: (pageSize: number) => void;
+  /* User ID is postId!!!!! */
   setUserID: (userID: number) => void;
   setUserName: (userName: string) => void;
   setUserAvatar: (userAvatar: string) => void;

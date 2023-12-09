@@ -42,7 +42,6 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
   id,
-  postTitle,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -208,7 +207,6 @@ const CommunityPostDetailPopUP = ({
   }
 
   const handleGoToEdit = () => {
-    setTitle(postTitle);
     setDescription(brief);
     setPictures(picture);
     navigate("/edit-post");
@@ -299,7 +297,7 @@ const CommunityPostDetailPopUP = ({
       <div className="postdetail-popUp-right-container">
         <div className="detail-top-content">
           <div className="post-popUp-content">
-            <h2 className="postdetail-popUp-title">{postTitle}</h2>
+            <h2 className="postdetail-popUp-title">{postQuery.title}</h2>
             <hr className="hr" />
             <p className="post-description">{brief || "No description"}</p>
             <span className="post-tag-names">

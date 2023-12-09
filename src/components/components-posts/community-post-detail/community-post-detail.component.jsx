@@ -9,7 +9,7 @@ import CloseButton from "../../../assets/post/pop-up-close-button.png";
 
 const PostDetail = ({ show, onHide, isMobile, postTitle }) => {
   const { data, error, isLoading } = usePostDetail();
-
+  console.log("post detail", postTitle);
   return (
     <div>
       <div className="modal-parent-container">

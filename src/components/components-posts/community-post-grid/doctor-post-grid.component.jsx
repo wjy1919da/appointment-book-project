@@ -39,12 +39,12 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   const postQuery = usePostQueryStore((state) => state.postQuery);
 
-  const [title, setTitle] = useState();
+  const setTitle = usePostQueryStore((state) => state.setTitle);
+  // const [title, setTitle] = useState("");
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
-  // console.log("doctor post grid", data);
 
   const { postid } = useParams();
 
@@ -55,13 +55,6 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserName(username);
     setTitle(title);
   };
-  useEffect(() => {
-    postid && setPostID(postid);
-  }, [postid]);
-
-  useEffect(() => {
-    postid && setPostID(postid);
-  }, [postid]);
 
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
@@ -73,7 +66,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     <div
       className="btn"
       onClick={() => {
-        setPostID(post.id, post.avatar, post.username);
+        setPostID(post.id, post.avatar, post.username, post.title);
         navigate("/posts/" + post.id);
       }}
       key={post.id}
@@ -119,7 +112,6 @@ const DoctorPostGrid = ({ isAbout }) => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           isMobile={isMobile}
-          postTitle={title}
         />
       )}
       <div className="down-load-more-container">

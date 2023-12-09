@@ -272,14 +272,16 @@ const CreatePostPage = () => {
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
                 >
-                  <img
-                    src={createPostIcon}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                    }}
-                    alt="Image-Create-Post"
-                  />
+                  <div className="create-post-image-wrapper">
+                    <img
+                      src={createPostIcon}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      alt="Image-Create-Post"
+                    />
+                  </div>
                 </div>
               )}
             </div>
