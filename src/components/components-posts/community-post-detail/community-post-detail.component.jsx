@@ -7,9 +7,9 @@ import "./community-post-detail.styles.scss";
 // images
 import CloseButton from "../../../assets/post/pop-up-close-button.png";
 
-const PostDetail = ({ show, onHide, isMobile, postTitle }) => {
+const PostDetail = ({ show, onHide, isMobile }) => {
   const { data, error, isLoading } = usePostDetail();
-  console.log("post detail", postTitle);
+  // console.log("post detail", postTitle);
   return (
     <div>
       <div className="modal-parent-container">
@@ -46,14 +46,17 @@ const PostDetail = ({ show, onHide, isMobile, postTitle }) => {
                   <PostDetailPopUP
                     picture={data.data.pictures}
                     brief={data.data.brief}
-                    tag={data.data.tags ? data.data.tags[0].tagName : null}
+                    tag={
+                      data?.data?.tags && data.data.tags.length > 0
+                        ? data.data.tags[0].tagName
+                        : null
+                    }
                     postDate={data.data.createTimestamp}
                     commentCount={data.data.commentCount}
                     likeCount={data.data.likeCount}
                     collectCount={data.data.collectCount}
                     comments={data.data.comments}
                     id={data.data.id}
-                    postTitle={postTitle}
                   />
                 )}
               </div>
@@ -73,14 +76,17 @@ const PostDetail = ({ show, onHide, isMobile, postTitle }) => {
             <PostDetailPopUP
               picture={data.data.pictures}
               brief={data.data.brief}
-              tag={data.data.tags ? data.data.tags[0].tagName : null}
+              tag={
+                data?.data?.tags && data.data.tags.length > 0
+                  ? data.data.tags[0].tagName
+                  : null
+              }
               postDate={data.data.createTimestamp}
               commentCount={data.data.commentCount}
               likeCount={data.data.likeCount}
               collectCount={data.data.collectCount}
               comments={data.data.comments}
               id={data.data.id}
-              postTitle={postTitle}
             />
           )}
         </Modal>

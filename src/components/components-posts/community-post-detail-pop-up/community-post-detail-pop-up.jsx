@@ -130,7 +130,7 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
-    console.log("submit comment is called");
+    // console.log("submit comment is called");
     if (!userInfo.token) {
       togglePopup(true, "login");
       return;
@@ -189,19 +189,19 @@ const CommunityPostDetailPopUP = ({
     return formattedDate;
   };
 
-  const ndate = formatDate(postDate);
-  if (
-    !picture &&
-    !tag &&
-    !postDate &&
-    !likeCount &&
-    !collectCount &&
-    !comments &&
-    !commentCount &&
-    !brief
-  ) {
-    return null;
-  }
+  // const ndate = formatDate(postDate);
+  // if (
+  //   !picture &&
+  //   !tag &&
+  //   !postDate &&
+  //   !likeCount &&
+  //   !collectCount &&
+  //   !comments &&
+  //   !commentCount &&
+  //   !brief
+  // ) {
+  //   return null;
+  // }
 
   function convertUnicode(input) {
     if (!input) return "";

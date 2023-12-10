@@ -193,7 +193,7 @@ const EditPostPage = () => {
           <div key={index} className="edit-post-page-thumbnail">
             <div
               className={`thumbnail ${
-                index === clickedThumbnailIndex ? "" : "clicked"
+                index === clickedThumbnailIndex ? "clicked" : ""
               }`}
               onClick={() => handleClickMask(index)}
             >
