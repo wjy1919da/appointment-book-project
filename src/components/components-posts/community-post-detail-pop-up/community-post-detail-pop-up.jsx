@@ -27,6 +27,7 @@ import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
 import heartIcon from '../../../assets/post/heart.png';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+import SendIcon from '../../../assets/post/send_icon.svg';
 // import StarIcon from '../../../assets/post/star_icon.svg';
 // import StarIcon from '../../../assets/post/star_icon.svg';
 // import HeartIcon from '../../../assets/post/heart_icon.svg';
@@ -340,6 +341,7 @@ const CommunityPostDetailPopUP = ({
                     placeholder='Type Something...'
                     className='comment-card-input'
                   />
+                  <img src={SendIcon} alt="Icon-Send" className='comment-card-send-icon' />
                 </>
               )}
             </div>

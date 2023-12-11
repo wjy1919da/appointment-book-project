@@ -92,7 +92,7 @@
             flex-direction: row;
             gap: 8px;
             color: var(--text-2-button, #675d59);
-            font-family: "Open Sans";
+            font-family: 'Open Sans';
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -139,7 +139,7 @@
   }
 
   .detail-red-font {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -213,9 +213,9 @@
       object-fit: cover;
     }
   }
-  
+
   .doctor-search-button {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 600;
     color: #ffffff;
@@ -291,7 +291,7 @@
       font-size: 14px;
       font-weight: 500px;
       line-height: 25.6px;
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
     }
   }
 
@@ -384,14 +384,24 @@
   margin-top: 10px;
 }
 
-.comment-card-input {
-  border: 1px solid #675d59;
-  border-radius: 8px;
-  outline: none;
-  resize: none;
-  padding: 10px;
-  width: 450px;
-  height: 80px;
+.comment-card-input-container {
+  position: relative;
+
+  .comment-card-input {
+    border: 1px solid #675d59;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+    padding: 10px;
+    width: 450px;
+    height: 70px;
+  }
+
+  .comment-card-send-icon {
+    position: absolute;
+    right: 48px;
+    bottom: 18px;
+  }
 }
 
 .post-detail-user-name-mobile {
