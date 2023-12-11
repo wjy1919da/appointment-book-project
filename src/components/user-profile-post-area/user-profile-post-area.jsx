@@ -144,22 +144,14 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   //   ],
   //   pageParams: [null],
   // };
-
-  const [userAvatar, setUserAvatar] = useState("");
-  const [userName, setUserName] = useState("");
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
-  // const [activeTab, setActiveTab] = useState('like');
-  //const [showCreatePost, setShowCreatePost] = useState(false);
-
-  const setUserID = usePostQueryStore((state) => state.setUserID);
+  const setPostID = usePostQueryStore((state) => state.setPostID);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
-
-  useEffect(() => {
-    console.log("Posts Page Data", data);
-  }, [data]);
-
-  // create a post + icon button
+  const setMemberID = usePostQueryStore((state) => state.setMemberID);
+  const setTitle = usePostQueryStore((state) => state.setTitle);
+  const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   const handleIconClick = () => {
     setShowCreatePost(true);
   };
@@ -179,21 +171,27 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     430: 2,
   };
 
-  const setPostID = (ID) => {
-    console.log(ID);
-
+  const handleClickPost = (ID, avatar, username, title, memberId) => {
     setIsModelOpen(true);
-    setUserID(ID);
-    setUserAvatar(userPostAvatar);
-    setUserName("wyj");
+    setPostID(ID);
+    setUserAvatar(avatar);
+    setUserName(username);
+    setTitle(title);
+    setMemberID(memberId);
   };
-
-  console.log("FLAT", flatData);
 
   const postList = flatData.map((post, index) => (
     <div
       key={index}
-      onClick={() => setPostID(post.id, post.avatar, post.username)}
+      onClick={() =>
+        handleClickPost(
+          post.id,
+          post.avatar,
+          post.username,
+          post.title,
+          post.memberId
+        )
+      }
     >
       <CommunityPost
         dummyHighlight={post.highlight}
@@ -203,8 +201,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
         profileImage={post.avatar || ""}
         authorName={post.username || ""}
         likes={post.like_count || 0}
-        // imageURL={post.coverImg}
-        // text={post.title}
       />
     </div>
   ));
@@ -231,19 +227,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       };
     });
   }, []);
-
-  // if (flatData.length === 0) {
-  //   return null; // 或者你可以选择返回null来完全不渲染组件
-  // }
-
-  // const samplePosts = Array(10).fill({
-  //   pictures: post1,
-  //   title: 'Sample Title',
-  //   avatar: userPostAvatar,
-  //   username: 'Sample Author',
-  //   likeCount: 42,
-  // });
-
   return (
     <div className="user-profile-post-area-container">
       {!showCreatePost && imagesLoaded && (
@@ -283,8 +266,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
           show={IsModalOpen}
           onHide={() => setIsModelOpen(false)}
           isMobile={isMobile}
-          postUserName={userName}
-          postAvatar={userAvatar}
         />
       )}
     </div>

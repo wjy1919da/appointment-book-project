@@ -54,7 +54,6 @@ const CommunityPostDetailPopUP = ({
   const [isHighlight, setIsHightlight] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const setTitle = usePostQueryStore((state) => state.setTitle);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
 
@@ -68,7 +67,13 @@ const CommunityPostDetailPopUP = ({
     userInfo.userId == postQuery.memberID &&
     localStorage.getItem("accountType") === "2";
   // console.log("postDetail", userInfo, postQuery);
-  // console.log("postDetail author", isAuthor, isDoctorAuthor);
+  console.log(
+    "postDetail author",
+    isAuthor,
+    isDoctorAuthor,
+    postQuery.memberID,
+    userInfo.userId
+  );
   const schema = z.object({
     comment: z
       .string()
@@ -188,20 +193,6 @@ const CommunityPostDetailPopUP = ({
     const formattedDate = date.toLocaleDateString("en-US");
     return formattedDate;
   };
-
-  // const ndate = formatDate(postDate);
-  // if (
-  //   !picture &&
-  //   !tag &&
-  //   !postDate &&
-  //   !likeCount &&
-  //   !collectCount &&
-  //   !comments &&
-  //   !commentCount &&
-  //   !brief
-  // ) {
-  //   return null;
-  // }
 
   function convertUnicode(input) {
     if (!input) return "";

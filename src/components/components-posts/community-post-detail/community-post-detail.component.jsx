@@ -56,7 +56,6 @@ const PostDetail = ({ show, onHide, isMobile }) => {
                     likeCount={data.data.likeCount}
                     collectCount={data.data.collectCount}
                     comments={data.data.comments}
-                    id={data.data.id}
                   />
                 )}
               </div>
@@ -86,7 +85,6 @@ const PostDetail = ({ show, onHide, isMobile }) => {
               likeCount={data.data.likeCount}
               collectCount={data.data.collectCount}
               comments={data.data.comments}
-              id={data.data.id}
             />
           )}
         </Modal>

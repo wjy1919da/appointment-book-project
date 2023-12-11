@@ -3,7 +3,7 @@ import { create } from "zustand";
 interface PostQuery {
   filterType: number;
   pageSize: number;
-  userID: number;
+  postID: number;
   userName: string;
   userAvatar: string;
   filterCondition?: Array<string>;
@@ -26,7 +26,7 @@ interface postQueryStore {
   setTag: (tag: string) => void;
   setPageSize: (pageSize: number) => void;
   /* User ID is postId!!!!! */
-  setUserID: (userID: number) => void;
+  setPostID: (userID: number) => void;
   setUserName: (userName: string) => void;
   setUserAvatar: (userAvatar: string) => void;
   setFilterCondition?: (filterCondition: Array<string>) => void;
@@ -43,7 +43,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
   postQuery: {
     pageSize: 12,
     filterType: 2,
-    userID: 0,
+    postID: 0,
     userName: "",
     userAvatar: "",
     filterCondition: [],
@@ -61,7 +61,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
   setPageSize: (pageSize) =>
     set((state) => ({ postQuery: { ...state.postQuery, pageSize } })),
-  setUserID: (userID) =>
+  setPostID: (userID) =>
     set((state) => ({ postQuery: { ...state.postQuery, userID } })),
   setUserName: (userName) =>
     set((state) => ({ postQuery: { ...state.postQuery, userName } })),

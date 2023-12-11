@@ -34,7 +34,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     useApiRequestPostFilter();
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
-  const setUserID = usePostQueryStore((state) => state.setUserID);
+  const setPostID = usePostQueryStore((state) => state.setPostID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   // const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -48,9 +48,9 @@ const DoctorPostGrid = ({ isAbout }) => {
 
   const { postid } = useParams();
 
-  const setPostID = (ID, avatar, username, title, memberId) => {
+  const handleClickPost = (ID, avatar, username, title, memberId) => {
     setIsModelOpen(true);
-    setUserID(ID);
+    setPostID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
@@ -67,7 +67,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     <div
       className="btn"
       onClick={() => {
-        setPostID(
+        handleClickPost(
           post.id,
           post.avatar,
           post.username,

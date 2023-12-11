@@ -103,8 +103,9 @@ const EditPostPage = () => {
       address: "",
       brief: data.description,
       coverImg: "",
-      id: postQuery.userID,
-      isDisplay: 0,
+      // memberID
+      id: userInfo.userId,
+      isDisplay: 1,
       lat: "",
       location: "",
       lon: "",
@@ -116,6 +117,7 @@ const EditPostPage = () => {
         },
       ],
       title: data.title,
+      // postID
       userId: postQuery.userID,
     };
 
