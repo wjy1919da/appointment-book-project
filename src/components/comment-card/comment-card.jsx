@@ -7,6 +7,7 @@ import "../components-posts/community-post-detail-pop-up/community-post-detail-p
 
 // images
 import HeartIcon from "../../assets/post/heart.png";
+import SendIcon from "../../assets/post/send_icon.svg";
 // import commentIcon from '../../assets/post/chat_bubble.png';
 
 const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
@@ -110,6 +111,11 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
                 type="text"
                 placeholder="Type Something..."
                 className="comment-card-reply-input"
+              />
+              <img
+                src={SendIcon}
+                alt="Icon-Send"
+                className="comment-card-reply-send-icon"
               />
             </>
           )}

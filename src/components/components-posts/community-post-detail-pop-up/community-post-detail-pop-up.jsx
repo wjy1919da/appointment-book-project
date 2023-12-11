@@ -31,7 +31,7 @@ import BubblesIcon from "../../../assets/post/bubbles_icon.svg";
 import ShareIcon from "../../../assets/post/share_icon.svg";
 import heartIcon from "../../../assets/post/heart.png";
 import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
-import { is } from "date-fns/locale";
+import SendIcon from "../../../assets/post/send_icon.svg";
 
 const CommunityPostDetailPopUP = ({
   picture,

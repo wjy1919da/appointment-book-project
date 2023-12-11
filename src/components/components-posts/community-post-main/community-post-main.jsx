@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import userInfoQueryStore from '../../../userStore.ts';
 
 // components
 import PostPageTitle from '../../community-post-main-title/community-post-main-title';
@@ -15,8 +16,15 @@ import Heart from '../../../assets/post/heart_like.svg';
 const PostPageMain = () => {
   const navigate = useNavigate();
 
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+ 
   const handleCreatePostClick = () => {
-    navigate('/posts/create');
+    if (!userInfo.token) {
+      togglePopup(true, 'accountType');
+    } else {
+      navigate('/posts/create');
+    }
   };
 
   return (
@@ -59,7 +67,7 @@ const PostPageMain = () => {
                 className='post-main-link-button'
                 onClick={handleCreatePostClick}
               >
-                Creating a post{' '}
+                Creating a post
                 <img
                   src={ArrowRight}
                   alt='ArrowRight'
