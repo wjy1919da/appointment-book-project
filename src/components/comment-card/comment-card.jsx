@@ -8,7 +8,9 @@ import "../components-posts/community-post-detail-pop-up/community-post-detail-p
 // images
 import HeartIcon from "../../assets/post/heart.png";
 import SendIcon from "../../assets/post/send_icon.svg";
+
 // import commentIcon from '../../assets/post/chat_bubble.png';
+import CommentReplyInput from "./comment-reply-input";
 
 const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
   const [showCommentBox, setShowCommentBox] = useState(false);
@@ -106,6 +108,7 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
           {showCommentBox && (
             <>
               {/* <hr /> */}
+
               <textarea
                 ref={textareaRef}
                 type="text"
@@ -117,6 +120,7 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
                 alt="Icon-Send"
                 className="comment-card-reply-send-icon"
               />
+              {/* <CommentReplyInput textareaRef={textareaRef} /> */}
             </>
           )}
         </div>

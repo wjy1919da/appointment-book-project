@@ -34,6 +34,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -62,7 +63,7 @@ const CommunityPostDetailPopUP = ({
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
-  console.log("postQuery", postQuery);
+  // console.log("postQuery", postQuery);
 
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
@@ -141,7 +142,6 @@ const CommunityPostDetailPopUP = ({
       });
       return;
     }
-
     console.log("Likes API is called. Yay!", likesData);
     apiMutate(likesData);
   };
@@ -361,23 +361,24 @@ const CommunityPostDetailPopUP = ({
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="comment-card-input-container">
                 {commentCount >= 0 && showCommentBox && (
-                  <>
-                    <hr />
-                    <div className="textarea-with-icon">
-                      <textarea
-                        {...register("comment")}
-                        // ref={textareaRef}
-                        type="text"
-                        placeholder="Type Something..."
-                        className="comment-card-input"
-                        onClick={handleInputClick}
-                      />
-                      <button type="submit">
-                        {/* <FontAwesomeIcon icon={faPaperPlane} className="textarea-icon"/> */}
-                        submit
-                      </button>
-                    </div>
-                  </>
+                  <div className="textarea-with-icon">
+                    <textarea
+                      {...register("comment")}
+                      ref={textareaRef}
+                      type="text"
+                      placeholder="Type Something..."
+                      className="post-comment-card-input"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSubmit(onSubmit)();
+                        }
+                      }}
+                    />
+                    <button type="submit" className="textarea-icon">
+                      <img src={SendIcon} alt="sendIcon" />
+                    </button>
+                  </div>
                 )}
               </div>
             </form>
