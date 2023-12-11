@@ -18,9 +18,8 @@ import FormButton from "../../components-posts/community-post-button/community-p
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-// import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
-import useUploadImg from "../../../hooks/useUploadImg";
 import { useApiRequestEditPost } from "../../../hooks/useApiRequestPost";
+import useUploadImg from "../../../hooks/useUploadImg";
 
 // scss
 import "./community-post-edit-page.scss";
@@ -33,8 +32,6 @@ import DeleteButton from "../../../assets/post/thumbnail_delete.png";
 
 import usePostQueryStore from "../../../postStore";
 import { Toast, useToast } from "@chakra-ui/react";
-import { set } from "date-fns";
-// import { set } from 'date-fns';
 
 const EditPostPage = () => {
   const {

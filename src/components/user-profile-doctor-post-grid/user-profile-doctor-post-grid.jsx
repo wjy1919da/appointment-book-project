@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import usePostQueryStore from "../../postStore";
-import useDoctorQueryStore from "../../store";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";

@@ -5,10 +5,7 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 // import { Button } from 'react-bootstrap';
 
 // stores
@@ -22,6 +19,7 @@ import CommentCard from "../../comment-card/comment-card";
 // hooks
 import { useAddComment } from "../../../hooks/useComment";
 import { useGetLikesPost } from "../../../hooks/useGetPosts.js";
+import { useApiRequestSetPostDisplay } from "../../../hooks/useApiRequestPost";
 
 // scss
 import "./community-post-detail-pop-up.styles.scss";
@@ -32,6 +30,10 @@ import ShareIcon from "../../../assets/post/share_icon.svg";
 import heartIcon from "../../../assets/post/heart.png";
 import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
 import SendIcon from "../../../assets/post/send_icon.svg";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -42,7 +44,6 @@ const CommunityPostDetailPopUP = ({
   likeCount,
   collectCount,
   commentCount,
-  id,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -52,6 +53,7 @@ const CommunityPostDetailPopUP = ({
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHightlight] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
@@ -60,38 +62,13 @@ const CommunityPostDetailPopUP = ({
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
+  console.log("postQuery", postQuery);
 
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
   var isDoctorAuthor =
     userInfo.userId == postQuery.memberID &&
     localStorage.getItem("accountType") === "2";
-  // console.log("postDetail", userInfo, postQuery);
-  console.log(
-    "postDetail author",
-    isAuthor,
-    isDoctorAuthor,
-    postQuery.memberID,
-    userInfo.userId
-  );
-  const schema = z.object({
-    comment: z
-      .string()
-      .nonempty("Comment is required")
-      .min(5, "Comment must be at least 5 characters long"),
-  });
-
-  // api
-  const { mutate: apiMutate } = useGetLikesPost({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
   const goToPreviousImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : picture.length - 1
@@ -104,13 +81,57 @@ const CommunityPostDetailPopUP = ({
     );
   };
 
+  const schema = z.object({
+    comment: z
+      .string()
+      .nonempty("Comment is required")
+      .min(5, "Comment must be at least 5 characters long"),
+  });
+  // Set post display(private/public)
+  const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+  const toggleSetPostDisplay = () => {
+    setIsPrivate((prev) => (prev === 0 ? 1 : 0));
+    if (!userInfo?.token) {
+      toast({
+        title: "Please login first.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    apiMutateSetPostDisplay({
+      id: postQuery.postID,
+      isDisplay: isPrivate,
+    });
+  };
+
+  // api
+  const { mutate: apiMutate } = useGetLikesPost({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
   const toggleGetLikes = () => {
     setLiked((prev) => !prev);
-
     const likesData = {
-      postId: id,
+      postId: postQuery.postID,
     };
-
     if (!userInfo?.token) {
       toast({
         title: "Please login first.",
@@ -135,9 +156,8 @@ const CommunityPostDetailPopUP = ({
   });
 
   const onSubmit = (formData) => {
-    // console.log("submit comment is called");
     if (!userInfo.token) {
-      togglePopup(true, "login");
+      togglePopup(true, "accountType");
       return;
     }
     if (errors.comment) {
@@ -145,7 +165,7 @@ const CommunityPostDetailPopUP = ({
       return;
     }
     mutate({
-      dynamicId: id,
+      dynamicId: postQuery.postID,
       text: formData.comment,
     });
   };
@@ -284,7 +304,12 @@ const CommunityPostDetailPopUP = ({
                   </button>
                 )}
                 {isAuthor && (
-                  <button className="button-private">Private</button>
+                  <button
+                    className="button-private"
+                    onClick={toggleSetPostDisplay}
+                  >
+                    {isPrivate ? "Remove from private" : "Private"}
+                  </button>
                 )}
                 {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>

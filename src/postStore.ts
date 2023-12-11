@@ -25,7 +25,6 @@ interface postQueryStore {
   setPostBy: (postBy: Array<string>) => void;
   setTag: (tag: string) => void;
   setPageSize: (pageSize: number) => void;
-  /* User ID is postId!!!!! */
   setPostID: (userID: number) => void;
   setUserName: (userName: string) => void;
   setUserAvatar: (userAvatar: string) => void;
@@ -61,8 +60,8 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
   setPageSize: (pageSize) =>
     set((state) => ({ postQuery: { ...state.postQuery, pageSize } })),
-  setPostID: (userID) =>
-    set((state) => ({ postQuery: { ...state.postQuery, userID } })),
+  setPostID: (postID) =>
+    set((state) => ({ postQuery: { ...state.postQuery, postID } })),
   setUserName: (userName) =>
     set((state) => ({ postQuery: { ...state.postQuery, userName } })),
   setUserAvatar: (userAvatar) =>

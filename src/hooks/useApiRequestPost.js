@@ -38,7 +38,6 @@ export function useApiRequestPost() {
 }
 // Edit post
 export function useApiRequestEditPost() {
-  //const token = localStorage.getItem('token');
   const apiClient = new APIClient("/post/edit_posts");
   const fetchUserData = async ({
     address,
@@ -71,4 +70,18 @@ export function useApiRequestEditPost() {
     return res.data;
   };
   return useMutation(fetchUserData);
+}
+// set post display(private/public)
+export function useApiRequestSetPostDisplay() {
+  const apiClient = new APIClient("/post/edit_posts");
+  const setPostDisplay = async (id, isDisplay) => {
+    const res = await apiClient.post({
+      id,
+      isDisplay,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) =>
+    setPostDisplay(credentials.id, credentials.isDisplay)
+  );
 }

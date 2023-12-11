@@ -172,6 +172,14 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   };
 
   const handleClickPost = (ID, avatar, username, title, memberId) => {
+    console.log(
+      "handleClickPost in user profile post",
+      ID,
+      avatar,
+      username,
+      title,
+      memberId
+    );
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
