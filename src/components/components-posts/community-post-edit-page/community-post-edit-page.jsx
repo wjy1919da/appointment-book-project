@@ -179,7 +179,7 @@ const EditPostPage = () => {
   };
 
   const handleClickMask = (index) => {
-    console.log(`Thumbnail index ${index} is clicked`);
+    // console.log(`Thumbnail index ${index} is clicked`);
     setSelectedImage(uploadedFiles[index]);
     setClickedThumbnailIndex(index);
   };
@@ -265,19 +265,22 @@ const EditPostPage = () => {
               onChange={handleFileSelection}
               multiple
             />
+
             {displayImage && selectedImage ? (
-              <img
-                src={selectedImage}
-                style={{
-                  marginBottom: "20px",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  width: "330px",
-                  height: "330px",
-                  objectFit: "contain",
-                }}
-                alt="Selected"
-              />
+              <div className="edit-post-pic-wrapper">
+                <img
+                  src={selectedImage}
+                  style={{
+                    marginBottom: "20px",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    width: "330px",
+                    height: "330px",
+                    objectFit: "cover",
+                  }}
+                  alt="Selected"
+                />
+              </div>
             ) : (
               <>
                 <div className="edit-post-page-left-container">

@@ -33,6 +33,7 @@ const CreatePostPage = () => {
     isError,
     uploadedFiles,
     resetFiles,
+    removeUploadedFile,
   } = useUploadImg();
 
   const [clickedRadio, setClickedRadio] = useState(false);
@@ -122,8 +123,7 @@ const CreatePostPage = () => {
     navigate("/posts");
   };
 
-  const displayImage =
-    selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
+  const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   // file upload
   const handleBrowseFiles = () => {
@@ -142,18 +142,10 @@ const CreatePostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
-
-  // delete thumbnail
-  const handleDeleteThumbnail = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
-
   // thumbnail
   const displayThumbnails =
-    selectedFiles.length > 0
-      ? selectedFiles.map((file, index) => (
+    uploadedFiles.length > 0
+      ? uploadedFiles.map((file, index) => (
           <div key={index} className="create-post-page-thumbnail">
             <img
               src={URL.createObjectURL(file)}
@@ -169,7 +161,7 @@ const CreatePostPage = () => {
             <button
               type="button"
               className="delete-thumbnail-button"
-              onClick={() => handleDeleteThumbnail(index)}
+              onClick={() => removeUploadedFile(index)}
               style={{
                 width: "20px",
                 height: "20px",

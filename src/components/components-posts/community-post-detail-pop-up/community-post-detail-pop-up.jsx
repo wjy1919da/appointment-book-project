@@ -224,7 +224,7 @@ const CommunityPostDetailPopUP = ({
   const handleGoToEdit = () => {
     setDescription(brief);
     setPictures(picture);
-    navigate("/edit-post");
+    navigate(`/edit-post/${postQuery.postID}`);
   };
 
   // highlight
