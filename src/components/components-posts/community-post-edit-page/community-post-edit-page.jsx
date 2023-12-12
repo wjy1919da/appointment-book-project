@@ -35,7 +35,7 @@ import usePostQueryStore from '../../../postStore';
 import { Toast, useToast } from '@chakra-ui/react';
 // import { set } from 'date-fns';
 
-const EditPostPage = () => {
+const EditPostPage = ({postId}) => {
   const {
     selectedFiles,
     setSelectedFiles,
