@@ -6,7 +6,7 @@ import userInfoQueryStore from "../../../userStore";
 // import { useDisclosure } from '@chakra-ui/react';
 
 // components
-import FormButton from '../../components-posts/community-post-button/community-post-button';
+import FormButton from "../../components-posts/community-post-button/community-post-button";
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
@@ -17,9 +17,9 @@ import useUploadImg from "../../../hooks/useUploadImg";
 import "./community-post-create-page.scss";
 
 // images
-import createPostIcon from '../../../assets/post/create-post-icon.png';
-import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import DeleteButton from '../../../assets/post/thumbnail_delete.png';
+import createPostIcon from "../../../assets/post/create-post-icon.png";
+import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
+import DeleteButton from "../../../assets/post/pop-up-close-button.png";
 
 const CreatePostPage = () => {
   const toast = useToast();
@@ -33,6 +33,7 @@ const CreatePostPage = () => {
     isError,
     uploadedFiles,
     resetFiles,
+    removeUploadedFile,
   } = useUploadImg();
 
   const [clickedRadio, setClickedRadio] = useState(false);
@@ -45,6 +46,7 @@ const CreatePostPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
@@ -89,12 +91,16 @@ const CreatePostPage = () => {
       return;
     }
     apiMutate(formData);
-    resetFiles();
   };
 
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
+      resetFiles();
+      reset({
+        title: "",
+        description: "",
+      });
       toast({
         title: "Post created successfully.",
         status: "success",
@@ -117,8 +123,7 @@ const CreatePostPage = () => {
     navigate("/posts");
   };
 
-  const displayImage =
-    selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
+  const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   // file upload
   const handleBrowseFiles = () => {
@@ -137,48 +142,40 @@ const CreatePostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
-
-  // delete thumbnail
-  const handleDeleteThumbnail = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
-
   // thumbnail
   const displayThumbnails =
-    selectedFiles.length > 0
-      ? selectedFiles.map((file, index) => (
+    uploadedFiles.length > 0
+      ? uploadedFiles.map((file, index) => (
           <div key={index} className="create-post-page-thumbnail">
             <img
               src={URL.createObjectURL(file)}
               className="thumbnail"
               alt={`Selected Thumbnail ${index + 1}`}
               style={{
-                width: '70px',
-                height: '70px',
-                borderRadius: '8px',
-                objectFit: 'cover',
+                width: "70px",
+                height: "70px",
+                borderRadius: "8px",
+                objectFit: "cover",
               }}
             />
             <button
-              type='button'
-              className='delete-thumbnail-button'
-              onClick={() => handleDeleteThumbnail(index)}
+              type="button"
+              className="delete-thumbnail-button"
+              onClick={() => removeUploadedFile(index)}
               style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#A5A6A7',
-                borderRadius: '50%',
-                position: 'absolute',
-                top: '-5px',
-                right: '-5px',
+                width: "20px",
+                height: "20px",
+                backgroundColor: "#A5A6A7",
+                borderRadius: "50%",
+                position: "absolute",
+                top: "-5px",
+                right: "-5px",
               }}
             >
               <img
                 src={DeleteButton}
-                alt='Icon-Delete-Button'
-                className='create-post-page-delete-button'
+                alt="Icon-Delete-Button"
+                className="create-post-page-delete-button"
               />
             </button>
           </div>
@@ -204,7 +201,7 @@ const CreatePostPage = () => {
             alt="Image-Arrow-Icon"
             className="create-post-page-arrow-back-button"
           />
-          <span className='create-post-page-label-back-button'>
+          <span className="create-post-page-label-back-button">
             Create a post
           </span>
         </button>
@@ -224,14 +221,14 @@ const CreatePostPage = () => {
               <img
                 src={displayImage}
                 style={{
-                  marginBottom: '20px',
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  width: '330px',
-                  height: '330px',
-                  borderRadius: '8px',
-                  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                  objectFit: 'contain',
+                  marginBottom: "20px",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  width: "330px",
+                  height: "330px",
+                  borderRadius: "8px",
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                  objectFit: "contain",
                 }}
                 alt="Selected"
               />
@@ -272,14 +269,16 @@ const CreatePostPage = () => {
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
                 >
-                  <img
-                    src={createPostIcon}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                    }}
-                    alt="Image-Create-Post"
-                  />
+                  <div className="create-post-image-wrapper">
+                    <img
+                      src={createPostIcon}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      alt="Image-Create-Post"
+                    />
+                  </div>
                 </div>
               )}
             </div>

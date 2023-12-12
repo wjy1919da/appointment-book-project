@@ -26,6 +26,11 @@ const useUploadImg = () => {
       currentFiles.filter((file) => file !== fileToRemove)
     );
   };
+  const removeUploadedFile = (indexToRemove) => {
+    setUploadedFiles((currentFiles) =>
+      currentFiles.filter((_, index) => index !== indexToRemove)
+    );
+  };
 
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
@@ -89,6 +94,7 @@ const useUploadImg = () => {
   return {
     selectedFiles,
     setSelectedFiles,
+    setUploadedFiles,
     uploadedFiles,
     handleFileSelection,
     uploadingFiles,
@@ -96,6 +102,7 @@ const useUploadImg = () => {
     isLoading,
     resetFiles,
     removeFile,
+    removeUploadedFile,
   };
 };
 

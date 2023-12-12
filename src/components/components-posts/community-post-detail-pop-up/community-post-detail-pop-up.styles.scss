@@ -1,82 +1,92 @@
-@media (min-width: 1025px) {
-  .post-detail-popUp-container {
-    top: 300px;
+// @media (min-width: 1025px) {
+.post-detail-popUp-container {
+  display: flex;
+  height: var(--bs-modal-height);
+  .postdetail-popUp-right-container {
+    position: relative;
     display: flex;
-    border-radius: 20px;
-    // adjusting the height when there is no image so this can be removed when published: Emmy M
-    height: 420px;
+    flex-direction: column;
+    flex-basis: 50%;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    overflow: hidden;
+    padding: 0 15px 0 0;
 
-    .postdetail-popUp-left-container {
-      position: relative;
-      flex-basis: 50%;
-      border-radius: 20px 0px 0px 20px;
-
-      .post-detail-image {
-        border-radius: 5px 0 0 5px;
-        object-fit: contain;
-      }
-    }
-
-    .postdetail-popUp-right-container {
+    .detail-top-content {
+      margin-top: 5%;
       position: relative;
       display: flex;
       flex-direction: column;
-      flex-basis: 50%;
-      height: 100%;
+      overflow-y: auto;
+      margin-left: 5%;
+      flex: 1;
+      padding-bottom: 100px;
 
-      .detail-top-content {
-        margin-top: 5%;
+      .post-popUp-content {
         position: relative;
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
-        margin-left: 5%;
-        flex: 1;
-        padding-bottom: 100px;
-
-        .post-popUp-content {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          max-width: 450px;
-        }
-
-        .postdetail-popUp-title {
-          color: #352c29;
-          font-family: Open Sans;
-          font-size: 24px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: normal;
-        }
-
-        .post-popUp-break-lines {
-          margin-top: 20px;
-          position: relative;
-          border: solid 1px rgba(226, 227, 231, 1);
-          width: 80%;
-        }
-
-        .post-popUp-comments {
-          margin-top: 10px;
-          .comment-detail {
-            margin-top: 20px;
-          }
-        }
+        max-width: 450px;
       }
 
-      .fixed-input-box {
-        position: absolute;
-        width: 100%;
-        height: 70px;
-        bottom: 0px;
-        flex: 1;
-        max-height: 90px;
-        border: solid 1px rgba(226, 227, 231, 1);
-        border-radius: 0 0 8px 0;
-        background-color: #ffffff;
+      .postdetail-popUp-title {
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
 
-        .Icon-display {
+      .post-popUp-break-lines {
+        margin-top: 20px;
+        position: relative;
+        border: solid 1px rgba(226, 227, 231, 1);
+        width: 80%;
+      }
+
+      .post-popUp-comments {
+        margin-top: 10px;
+        .comment-detail {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .fixed-input-box {
+      position: absolute;
+      width: 100%;
+      height: 70px;
+      bottom: 0px;
+      flex: 1;
+      max-height: 90px;
+      border: solid 1px rgba(226, 227, 231, 1);
+      border-radius: 0 0 8px 0;
+      background-color: #ffffff;
+
+      .Icon-display {
+        display: flex;
+        gap: 10px;
+
+        .Icon-size {
+          width: 18px;
+        }
+
+        .Icon-count {
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          color: var(--text-2-button, #675d59);
+          font-family: "Open Sans";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 16px;
+          align-items: center;
+        }
+
+        // share-icon
+        .share-icon {
           display: flex;
           gap: 10px;
           width: 500px;
@@ -92,7 +102,7 @@
             flex-direction: row;
             gap: 8px;
             color: var(--text-2-button, #675d59);
-            font-family: 'Open Sans';
+            font-family: "Open Sans";
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -121,67 +131,147 @@
         }
       }
 
-      .post-detail-send-box-outer-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      .new-comment-input {
+        .input-blank {
+          margin-left: 5%;
+          border: none;
+          outline: none;
+        }
+
+        .input-blank.focus {
+          outline: none;
+        }
       }
     }
-  }
 
-  .detail-gray-font {
-    color: #675d59;
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  .detail-red-font {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20.8px;
-    color: rgba(130, 78, 61, 1);
-  }
-
-  .post-detail-mobile-profile-container {
-    display: none;
-  }
-
-  .post-detail-mobile-profile {
-    display: none;
-  }
-
-  .post-detail-mobile-avatar {
-    display: none;
-  }
-
-  .doctor-search-button {
-    display: none;
-
-    .doctor-search-icon {
-      display: none;
+    .post-detail-send-box-outer-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      // width: 500px;
+      height: 70px;
+      padding: 0px 18px;
+      align-items: center;
     }
-  }
-
-  .post-detail-mobile-download-button {
-    display: none;
-
-    .join-community-text {
-      display: none;
-    }
-  }
-
-  .comment-send-msg-container {
-    margin-right: 10px;
   }
 }
 
-.user-detail-profile-image {
-  border-radius: 50%;
+.detail-gray-font {
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.detail-red-font {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.8px;
+  color: rgba(130, 78, 61, 1);
+}
+
+.post-detail-mobile-profile-container {
+  display: none;
+}
+
+.post-detail-mobile-profile {
+  display: none;
+}
+
+.post-detail-mobile-avatar {
+  display: none;
+}
+
+.doctor-search-button {
+  display: none;
+
+  .doctor-search-icon {
+    display: none;
+  }
+}
+
+.post-detail-mobile-download-button {
+  display: none;
+
+  .join-community-text {
+    display: none;
+  }
+}
+
+.comment-send-msg-container {
+  margin-right: 10px;
+}
+// }
+
+.post-detail-image-wrapper {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+}
+
+.post-detail-image {
+  width: 100%; /* 图片宽度填满容器 */
+  height: auto; /* 图片高度自适应 */
+  // height: var(--bs-modal-height);
+  object-fit: cover; /* 覆盖整个容器 */
+}
+
+.postdetail-popUp-left-container {
+  position: relative;
+  flex-basis: 50%;
+  border-radius: 20px 0 0 20px;
+  overflow: hidden;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.arrow-left {
+  left: 10px;
+  border-radius: 50%; /* Creates a circular shape */
+  padding: 6px; /* Adjusts the size of the circular background */
+  cursor: pointer;
+  background-color: rgba(64, 64, 64, 0.25);
+}
+
+.arrow-right {
+  right: 10px;
+  border-radius: 50%; /* Creates a circular shape */
+  padding: 6px; /* Adjusts the size of the circular background */
+  cursor: pointer;
+  background-color: rgba(64, 64, 64, 0.25);
+}
+.textarea-with-icon {
+  position: relative;
+  height: 70px;
+  border: 1px solid #675d59;
+  border-radius: 8px;
+
+  padding: 10px;
+  overflow: hidden;
+}
+
+.post-comment-card-input {
+  outline: none;
+  margin-right: 10px;
+}
+
+.textarea-icon {
+  // position: absolute;
+  right: 10%; /* Adjust as necessary */
+  top: 55%;
+  position: absolute;
 }
 
 @media (max-width: 1024px) {
@@ -213,9 +303,8 @@
       object-fit: cover;
     }
   }
-
   .doctor-search-button {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     color: #ffffff;
@@ -231,24 +320,9 @@
     // margin-top: 10px;
   }
 
-  .doctor-search-icon {
-    left: 12.5%;
-    right: 12.5%;
-    top: 12.5%;
-    bottom: 12.5%;
-    border-radius: 0;
-    width: 15px;
-    height: 15px;
-    margin-right: 8px;
-  }
-
   .postdetail-popUp-left-container {
     display: flex;
     justify-content: center;
-  }
-
-  .post-detail-image {
-    display: flex;
   }
 
   .post-popUp-content {
@@ -291,7 +365,7 @@
       font-size: 14px;
       font-weight: 500px;
       line-height: 25.6px;
-      font-family: 'Open Sans';
+      font-family: "Open Sans";
     }
   }
 
@@ -385,8 +459,6 @@
 }
 
 .comment-card-input-container {
-  position: relative;
-
   .comment-card-input {
     border: 1px solid #675d59;
     border-radius: 8px;
