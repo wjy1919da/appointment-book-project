@@ -18,8 +18,8 @@ import FormButton from '../../components-posts/community-post-button/community-p
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
-import useDeletePost from '../../../hooks/useDeletePost';
+import { useApiRequestEditPost } from '../../../hooks/useApiRequestPost';
+// import useDeletePost from '../../../hooks/useDeletePost';
 import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
@@ -33,7 +33,6 @@ import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 import usePostQueryStore from '../../../postStore';
 import { Toast, useToast } from '@chakra-ui/react';
-// import { set } from 'date-fns';
 
 const EditPostPage = ({ postId }) => {
   const {
@@ -44,15 +43,18 @@ const EditPostPage = ({ postId }) => {
     isLoading,
     isError,
     uploadedFiles,
+    setUploadedFiles,
     resetFiles,
+    removeUploadedFile,
   } = useUploadImg();
 
-  const mutation = useDeletePost();
+  const { mutate: apiEditMutate, data } = useApiRequestEditPost();
 
-  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+  // const deletePostMutation = useDeletePost();
+
+  const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
   const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
-  const [selectedImage, setSelectedImage] = useState(null); // display in big image
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -66,13 +68,13 @@ const EditPostPage = ({ postId }) => {
 
   // chakura ui modal
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // useEffect(() => {
-  // setSelectedFiles(postQuery.pictures || []);
-  // setSelectedFiles([
-  //   "https://charm-post-img.s3.us-west-1.amazonaws.com/1701395754743-Screenshot+2023-11-07+at+8.31.42+PM.png",
-  // ]);
-  // }, [postQuery.pictures]);
+  useEffect(() => {
+    setUploadedFiles(postQuery.pictures);
+    // Set the selected image to the last image in the uploadedFiles array
+    if (postQuery.pictures && postQuery.pictures.length > 0) {
+      setSelectedImage(postQuery.pictures[postQuery.pictures.length - 1]);
+    }
+  }, [postQuery.pictures]);
 
   // react hook form
   const {
@@ -93,28 +95,19 @@ const EditPostPage = ({ postId }) => {
   };
 
   const handleClickDelete = () => {
-    mutation.mutate();
+    // deletePostMutation.mutate(postId);
   };
 
   // api
-  const { mutate: apiMutate } = useApiRequestPost({
-    onError: (error) => {
-      toast({
-        title: 'Failed to create post.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
 
   const onSubmit = (data) => {
     const formData = {
       address: '',
       brief: data.description,
       coverImg: '',
-      id: 0,
-      isDisplay: 0,
+      // memberID
+      id: userInfo.userId,
+      isDisplay: 1,
       lat: '',
       location: '',
       lon: '',
@@ -126,7 +119,10 @@ const EditPostPage = ({ postId }) => {
         },
       ],
       title: data.title,
+      // postID
+      userId: postQuery.userID,
     };
+
     if (!userInfo?.token) {
       toast({
         title: 'Please login first.',
@@ -136,9 +132,34 @@ const EditPostPage = ({ postId }) => {
       });
       return;
     }
-    apiMutate(formData);
+    apiEditMutate(formData);
     resetFiles();
   };
+  useEffect(() => {
+    // console.log("data::", data);
+    if (data?.code === 100) {
+      resetFiles();
+      reset({
+        title: '',
+        description: '',
+      });
+      setSelectedImage(null);
+      toast({
+        title: 'Post edit successfully.',
+        status: 'success',
+        duration: 1000,
+        isClosable: true,
+      });
+    }
+    if (data?.code === 500) {
+      toast({
+        title: 'Failed to create post.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [data, toast]);
 
   // back button
   const handleClickCreatePostBack = () => {
@@ -159,25 +180,20 @@ const EditPostPage = ({ postId }) => {
     handleFileSelection({ target: { files: e.dataTransfer.files } });
   };
 
-  const displayImage =
-    selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[0]) : null;
-
   // radio button
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
 
-  // thumbnail click masking
   const handleClickMask = (index) => {
-    console.log(`Thumbnail index ${index} is clicked!!!!!!!!!!!`);
-    setClickedThumbnailIndex(index === clickedThumbnailIndex ? null : index);
-    setSelectedImage(selectedFiles[index]);
+    // console.log(`Thumbnail index ${index} is clicked`);
+    setSelectedImage(uploadedFiles[index]);
+    setClickedThumbnailIndex(index);
   };
-
   // thumbnail
   const displayThumbnails =
-    selectedFiles.length > 0
-      ? selectedFiles.map((file, index) => (
+    uploadedFiles.length > 0
+      ? uploadedFiles.map((file, index) => (
           <div key={index} className='edit-post-page-thumbnail'>
             <div
               className={`thumbnail ${
@@ -186,7 +202,7 @@ const EditPostPage = ({ postId }) => {
               onClick={() => handleClickMask(index)}
             >
               <img
-                src={URL.createObjectURL(file)}
+                src={file}
                 alt={`Selected Thumbnail ${index + 1}`}
                 style={{
                   width: '70px',
@@ -199,7 +215,7 @@ const EditPostPage = ({ postId }) => {
             <button
               type='button'
               className='delete-thumbnail-button'
-              onClick={() => handleDeleteThumbnail(index)}
+              onClick={() => removeUploadedFile(index)}
               style={{
                 width: '20px',
                 height: '20px',
@@ -221,21 +237,8 @@ const EditPostPage = ({ postId }) => {
         ))
       : null;
 
-  // delete thumbnail
-  const handleDeleteThumbnail = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
-
-  // initial display image set up
-  useEffect(() => {
-    if (selectedFiles.length > 0) {
-      setSelectedImage(selectedFiles[0]);
-      setClickedThumbnailIndex(0);
-    }
-  }, [selectedFiles]);
-
+  const displayImage =
+    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
   return (
     <div>
       <form
@@ -269,19 +272,22 @@ const EditPostPage = ({ postId }) => {
               onChange={handleFileSelection}
               multiple
             />
+
             {displayImage && selectedImage ? (
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                style={{
-                  marginBottom: '20px',
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  width: '330px',
-                  height: '330px',
-                  objectFit: 'contain',
-                }}
-                alt='Selected'
-              />
+              <div className='edit-post-pic-wrapper'>
+                <img
+                  src={selectedImage}
+                  style={{
+                    marginBottom: '20px',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: '330px',
+                    height: '330px',
+                    objectFit: 'cover',
+                  }}
+                  alt='Selected'
+                />
+              </div>
             ) : (
               <>
                 <div className='edit-post-page-left-container'>
