@@ -222,9 +222,10 @@ const CommunityPostDetailPopUP = ({
   }
 
   const handleGoToEdit = () => {
-    setDescription(brief);
-    setPictures(picture);
-    navigate(`/edit-post/${postQuery.postID}`);
+    // setDescription(brief);
+    // setPictures(picture);
+    // navigate(`/edit-post/${postQuery.postID}`);
+    navigate('/edit-post')
   };
 
   // highlight
@@ -311,11 +312,11 @@ const CommunityPostDetailPopUP = ({
                     {isPrivate ? "Remove from private" : "Private"}
                   </button>
                 )}
-                {isAuthor && (
+                {/* {isAuthor && ( */}
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
                   </button>
-                )}
+                {/* )} */}
               </div>
             </div>
           </>
