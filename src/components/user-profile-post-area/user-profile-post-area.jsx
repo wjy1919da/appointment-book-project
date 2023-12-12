@@ -150,14 +150,14 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
   // const [activeTab, setActiveTab] = useState('like');
-  //const [showCreatePost, setShowCreatePost] = useState(false);
+  // const [showCreatePost, setShowCreatePost] = useState(false);
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
 
-  useEffect(() => {
-    console.log('Posts Page Data', data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log('Posts Page Data', data);
+  // }, [data]);
 
   // create a post + icon button
   const handleIconClick = () => {

@@ -19,7 +19,7 @@ import FormButton from '../../components-posts/community-post-button/community-p
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
-import {useDeletePost} from '../../../hooks/useDeletePost'
+import useDeletePost from '../../../hooks/useDeletePost';
 import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
@@ -35,7 +35,7 @@ import usePostQueryStore from '../../../postStore';
 import { Toast, useToast } from '@chakra-ui/react';
 // import { set } from 'date-fns';
 
-const EditPostPage = ({postId}) => {
+const EditPostPage = ({ postId }) => {
   const {
     selectedFiles,
     setSelectedFiles,
@@ -47,7 +47,7 @@ const EditPostPage = ({postId}) => {
     resetFiles,
   } = useUploadImg();
 
-  const deletePost = useDeletePost();
+  const mutation = useDeletePost();
 
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -90,7 +90,10 @@ const EditPostPage = ({postId}) => {
 
   const handleClickModal = () => {
     onOpen();
-    deletePost.mutate(postId);
+  };
+
+  const handleClickDelete = () => {
+    mutation.mutate();
   };
 
   // api
@@ -431,6 +434,7 @@ const EditPostPage = ({postId}) => {
               backgroundColor='#f1a285'
               outline='none'
               _hover='none'
+              onClick={handleClickDelete}
             >
               Delete
             </Button>
