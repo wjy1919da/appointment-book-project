@@ -7,14 +7,14 @@ export function useDeletePost() {
   const useDeletePost = useMutation(
     async (postId) => {
       const response = await apiClient.delete(postId);
-      return response.data; 
+      return response.data;
     },
     {
       onSuccess: (data) => {
-        console.log('DELETE request succeeded:', data);
+        console.log('OK', data);
       },
       onError: (error) => {
-        console.error('DELETE request failed:', error);
+        console.error('ERROR', error);
       },
     }
   );
