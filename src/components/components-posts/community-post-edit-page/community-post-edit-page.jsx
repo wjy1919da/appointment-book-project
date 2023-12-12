@@ -19,6 +19,7 @@ import FormButton from '../../components-posts/community-post-button/community-p
 
 // hook
 import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
+import {useDeletePost} from '../../../hooks/useDeletePost'
 import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
@@ -45,6 +46,8 @@ const EditPostPage = () => {
     uploadedFiles,
     resetFiles,
   } = useUploadImg();
+
+  const deletePost = useDeletePost();
 
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -85,9 +88,9 @@ const EditPostPage = () => {
     },
   });
 
-  const hanldeClickModal = () => {
-    console.log('clicked');
+  const handleClickModal = () => {
     onOpen();
+    deletePost.mutate(postId);
   };
 
   // api
@@ -398,7 +401,7 @@ const EditPostPage = () => {
                     width: '48px',
                     height: '48px',
                   }}
-                  onClick={hanldeClickModal}
+                  onClick={handleClickModal}
                 />
               </div>
             </div>

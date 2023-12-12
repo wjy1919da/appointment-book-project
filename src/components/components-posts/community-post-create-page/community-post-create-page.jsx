@@ -187,7 +187,6 @@ const CreatePostPage = () => {
 
   return (
     <div>
-      <p>Test</p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="create-post-page-container"
