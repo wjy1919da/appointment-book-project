@@ -34,6 +34,7 @@ import Trash from '../../../assets/post/trash_icon.svg';
 import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 const EditPostPage = () => {
+  // call api hooks
   const {
     selectedFiles,
     setSelectedFiles,
@@ -46,9 +47,7 @@ const EditPostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-
   const { mutate: apiEditMutate, data } = useApiRequestEditPost();
-
   const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -69,7 +68,7 @@ const EditPostPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     setUploadedFiles(postQuery.pictures);
-    // Set the selected image to the last image in the uploadedFiles array
+    // set the selected image to the last image in the uploadedFiles array
     if (postQuery.pictures && postQuery.pictures.length > 0) {
       setSelectedImage(postQuery.pictures[postQuery.pictures.length - 1]);
     }
@@ -96,7 +95,7 @@ const EditPostPage = () => {
 
   // when click on delete button
   const handleClickDelete = () => {
-    console.log(postQuery);
+    console.log('POSTQUERY:', postQuery);
     const postId = postQuery.postID;
     apiDeleteMutate(postId);
     onClose();
@@ -138,6 +137,7 @@ const EditPostPage = () => {
     apiEditMutate(formData);
     resetFiles();
   };
+
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
@@ -193,6 +193,7 @@ const EditPostPage = () => {
     setSelectedImage(uploadedFiles[index]);
     setClickedThumbnailIndex(index);
   };
+
   // thumbnail
   const displayThumbnails =
     uploadedFiles.length > 0
@@ -242,6 +243,7 @@ const EditPostPage = () => {
 
   const displayImage =
     selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
   return (
     <div>
       <form

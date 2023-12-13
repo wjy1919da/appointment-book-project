@@ -222,10 +222,10 @@ const CommunityPostDetailPopUP = ({
   }
 
   const handleGoToEdit = () => {
-    // setDescription(brief);
-    // setPictures(picture);
-    // navigate(`/edit-post/${postQuery.postID}`);
-    navigate('/edit-post');
+    setDescription(brief);
+    setPictures(picture);
+    navigate(`/edit-post/${postQuery.postID}`);
+    // navigate('/edit-post');
   };
 
   // highlight

@@ -5,7 +5,7 @@ export function useDeletePost() {
   const apiClient = new APIClient('/post');
   const useDeletePost = useMutation(
     async (postId) => {
-      console.log('postId', postId);
+      console.log('POSTID', postId);
       const response = await apiClient.delete(postId);
       return response.data;
     },
