@@ -89,14 +89,16 @@ const EditPostPage = () => {
     },
   });
 
+  // when click on trash icon
   const handleClickModal = () => {
     onOpen();
   };
 
+  // when click on delete button
   const handleClickDelete = () => {
     console.log(postQuery);
-    const postId = postQuery.postID; // 获取 postID
-    apiDeleteMutate(postId); // 传递 postID
+    const postId = postQuery.postID;
+    apiDeleteMutate(postId);
     onClose();
   };
 
