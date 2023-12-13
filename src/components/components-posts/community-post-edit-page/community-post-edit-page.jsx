@@ -19,7 +19,7 @@ import FormButton from '../../components-posts/community-post-button/community-p
 
 // hook
 import { useApiRequestEditPost } from '../../../hooks/useApiRequestPost';
-// import useDeletePost from '../../../hooks/useDeletePost';
+import useDeletePost from '../../../hooks/useDeletePost';
 import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
@@ -34,7 +34,7 @@ import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 import usePostQueryStore from '../../../postStore';
 import { Toast, useToast } from '@chakra-ui/react';
 
-const EditPostPage = ({ postId }) => {
+const EditPostPage = ({ id }) => {
   const {
     selectedFiles,
     setSelectedFiles,
@@ -50,7 +50,7 @@ const EditPostPage = ({ postId }) => {
 
   const { mutate: apiEditMutate, data } = useApiRequestEditPost();
 
-  // const deletePostMutation = useDeletePost();
+  const deletePostMutation = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -95,7 +95,7 @@ const EditPostPage = ({ postId }) => {
   };
 
   const handleClickDelete = () => {
-    // deletePostMutation.mutate(postId);
+    deletePostMutation.mutate(id);
   };
 
   // api
