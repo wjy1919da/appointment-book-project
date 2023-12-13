@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from '../../../userStore';
+import usePostQueryStore from '../../../postStore';
+import { Toast, useToast } from '@chakra-ui/react';
 import { uploadToS3 } from '../../../services/s3-client';
 import {
   useDisclosure,
@@ -19,7 +21,7 @@ import FormButton from '../../components-posts/community-post-button/community-p
 
 // hook
 import { useApiRequestEditPost } from '../../../hooks/useApiRequestPost';
-import useDeletePost from '../../../hooks/useDeletePost';
+import { useDeletePost } from '../../../hooks/useDeletePost';
 import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
@@ -31,10 +33,7 @@ import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 import Trash from '../../../assets/post/trash_icon.svg';
 import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
-import usePostQueryStore from '../../../postStore';
-import { Toast, useToast } from '@chakra-ui/react';
-
-const EditPostPage = ({ id }) => {
+const EditPostPage = () => {
   const {
     selectedFiles,
     setSelectedFiles,
@@ -50,7 +49,7 @@ const EditPostPage = ({ id }) => {
 
   const { mutate: apiEditMutate, data } = useApiRequestEditPost();
 
-  const deletePostMutation = useDeletePost();
+  const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -95,11 +94,13 @@ const EditPostPage = ({ id }) => {
   };
 
   const handleClickDelete = () => {
-    deletePostMutation.mutate(id);
+    console.log(postQuery);
+    const postId = postQuery.postID; // 获取 postID
+    apiDeleteMutate(postId); // 传递 postID
+    onClose();
   };
 
   // api
-
   const onSubmit = (data) => {
     const formData = {
       address: '',

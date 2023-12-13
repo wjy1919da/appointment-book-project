@@ -37,6 +37,18 @@ class APIClient {
       .get(this.endpoint, config)
       .then((response) => response);
   }
+
+  delete(postId) {
+    const token = this.getToken();
+    const config = {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    };
+    return axiosInstance
+      .delete(`${this.endpoint}/${postId}`, config)
+      .then((response) => response);
+  }
 }
 
 export default APIClient;
