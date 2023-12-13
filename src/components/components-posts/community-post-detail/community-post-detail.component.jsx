@@ -46,11 +46,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
                   <PostDetailPopUP
                     picture={data.data.pictures}
                     brief={data.data.brief}
-                    tag={
-                      data?.data?.tags && data.data.tags.length > 0
-                        ? data.data.tags[0].tagName
-                        : null
-                    }
+                    tag={data.data.tags}
                     postDate={data.data.createTimestamp}
                     commentCount={data.data.commentCount}
                     likeCount={data.data.likeCount}
@@ -75,11 +71,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
             <PostDetailPopUP
               picture={data.data.pictures}
               brief={data.data.brief}
-              tag={
-                data?.data?.tags && data.data.tags.length > 0
-                  ? data.data.tags[0].tagName
-                  : null
-              }
+              tag={data.data.tags}
               postDate={data.data.createTimestamp}
               commentCount={data.data.commentCount}
               likeCount={data.data.likeCount}

@@ -98,8 +98,8 @@ const EditPostPage = () => {
       address: "",
       brief: data.description,
       coverImg: "",
-      // memberID
-      id: userInfo.userId,
+      // postID
+      id: postQuery.postID,
       isDisplay: 1,
       lat: "",
       location: "",
@@ -112,8 +112,6 @@ const EditPostPage = () => {
         },
       ],
       title: data.title,
-      // postID
-      userId: postQuery.userID,
     };
 
     if (!userInfo?.token) {
@@ -156,7 +154,7 @@ const EditPostPage = () => {
 
   // back button
   const handleClickCreatePostBack = () => {
-    navigate("/edit-post");
+    navigate("/posts");
   };
 
   // file upload

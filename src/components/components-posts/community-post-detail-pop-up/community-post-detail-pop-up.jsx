@@ -20,6 +20,7 @@ import CommentCard from "../../comment-card/comment-card";
 import { useAddComment } from "../../../hooks/useComment";
 import { useGetLikesPost } from "../../../hooks/useGetPosts.js";
 import { useApiRequestSetPostDisplay } from "../../../hooks/useApiRequestPost";
+import { useApiRequestSetPostPublic } from "../../../hooks/useApiRequestPost";
 
 // scss
 import "./community-post-detail-pop-up.styles.scss";
@@ -46,6 +47,7 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
 }) => {
+  // console.log("tag", postDate);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -56,9 +58,11 @@ const CommunityPostDetailPopUP = ({
   const [isHighlight, setIsHightlight] = useState(false);
   const [isPrivate, setIsPrivate] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const [comment, setComment] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
+  const [showArrows, setShowArrows] = useState(false);
 
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -99,21 +103,24 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
-  const toggleSetPostDisplay = () => {
-    setIsPrivate((prev) => (prev === 0 ? 1 : 0));
-    if (!userInfo?.token) {
+  const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
+    onError: (error) => {
       toast({
-        title: "Please login first.",
+        title: "Failed.",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
-      return;
+    },
+  });
+  const toggleSetPostDisplay = () => {
+    setIsPrivate((prev) => !prev);
+    const apiMutation = isPrivate
+      ? apiMutateSetPostPublic
+      : apiMutateSetPostDisplay;
+    if (validateTokenAndPopup()) {
+      apiMutation({ id: postQuery.postID });
     }
-    apiMutateSetPostDisplay({
-      id: postQuery.postID,
-      isDisplay: isPrivate,
-    });
   };
 
   // api
@@ -130,20 +137,9 @@ const CommunityPostDetailPopUP = ({
 
   const toggleGetLikes = () => {
     setLiked((prev) => !prev);
-    const likesData = {
-      postId: postQuery.postID,
-    };
-    if (!userInfo?.token) {
-      toast({
-        title: "Please login first.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
+    if (validateTokenAndPopup()) {
+      apiMutate({ postId: postQuery.postID });
     }
-    console.log("Likes API is called. Yay!", likesData);
-    apiMutate(likesData);
   };
   const { mutate, data, isLoading, isError, error } = useAddComment();
   const {
@@ -155,43 +151,35 @@ const CommunityPostDetailPopUP = ({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (formData) => {
-    if (!userInfo.token) {
-      togglePopup(true, "accountType");
-      return;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (validateTokenAndPopup()) {
+      // console.log("mutate is called");
+      mutate({
+        dynamicId: postQuery.postID,
+        text: comment,
+      });
+      refresh();
     }
-    if (errors.comment) {
-      alert(errors.comment.message);
-      return;
-    }
-    mutate({
-      dynamicId: postQuery.postID,
-      text: formData.comment,
-    });
   };
 
-  useEffect(() => {
-    if (data?.code === 100) {
-      // alert("send comment" ,data.msg);
-      reset({ comment: "" });
-      refresh();
-    } else if (data?.code === 500 || data?.code === 403) {
-      alert(data.msg);
+  const validateTokenAndPopup = () => {
+    if (!userInfo.token) {
+      togglePopup(true, "accountType");
+      return false;
     }
-  }, [data]);
+    return true;
+  };
 
   const handleInputClick = (e) => {
-    // console.log("handleInputClick" ,userInfo.token);
-
     if (!userInfo.token) {
       e.preventDefault();
-      togglePopup(true, "login");
+      togglePopup(true, "accountType");
     }
   };
 
   const handleClickComment = () => {
     setShowCommentBox((prev) => !prev);
-
     if (textareaRef.current) {
       textareaRef.current.focus();
     }
@@ -245,45 +233,46 @@ const CommunityPostDetailPopUP = ({
             {postQuery.userName}
           </span>
         </div>
-        {/* <div>
-          <button
-            className="doctor-search-button"
-            // style={{
-            //   width: "90px",
-            //   height: "30px",
-            //   radius: "8px",
-            //   fontSize: "10px",
-            // }}
-            onClick={() => (window.location.href = "/download")}
-          >
-            Try Charm Life
-          </button>
-        </div> */}
       </div>
 
       {/* Web */}
       <div className="postdetail-popUp-left-container">
         {!isMobile && picture && (
           <>
-            <div className="post-detail-image-wrapper">
-              <FontAwesomeIcon
-                className="arrow-icon arrow-left"
-                icon={faArrowLeft}
-                size="lg"
-                onClick={goToPreviousImage} // Go to previous image when this icon is clicked
-              />
+            <div
+              className="post-detail-image-wrapper"
+              onMouseEnter={() => setShowArrows(true)}
+              onMouseLeave={() => setShowArrows(false)}
+            >
+              {currentImageIndex > 0 && showArrows && (
+                <FontAwesomeIcon
+                  className="arrow-icon arrow-left"
+                  icon={faArrowLeft}
+                  size="lg"
+                  onClick={goToPreviousImage}
+                  style={{ color: "#fafcff" }}
+                />
+              )}
               <img
                 src={picture[currentImageIndex]}
                 ref={imageRef}
                 className="post-detail-image"
                 alt="detail-pic"
               />
-              <FontAwesomeIcon
-                className="arrow-icon arrow-right"
-                icon={faArrowRight}
-                size="lg"
-                onClick={goToNextImage} // Go to next image when this icon is clicked
-              />
+              {currentImageIndex < picture.length - 1 && showArrows && (
+                <FontAwesomeIcon
+                  className="arrow-icon arrow-right"
+                  icon={faArrowRight}
+                  size="lg"
+                  onClick={goToNextImage}
+                  style={{ color: "#fafcff" }}
+                />
+              )}
+              {showArrows && (
+                <div className="image-index-tag">
+                  {currentImageIndex + 1} / {picture.length}
+                </div>
+              )}
             </div>
             <div className="user-detail">
               <div className="user-detail-inner">
@@ -303,14 +292,14 @@ const CommunityPostDetailPopUP = ({
                     {isHighlight ? "Remove from Highlight" : "Highlight"}
                   </button>
                 )}
-                {isAuthor && (
-                  <button
-                    className="button-private"
-                    onClick={toggleSetPostDisplay}
-                  >
-                    {isPrivate ? "Remove from private" : "Private"}
-                  </button>
-                )}
+                {/* {isAuthor && ( */}
+                <button
+                  className="button-private"
+                  onClick={toggleSetPostDisplay}
+                >
+                  {isPrivate ? "Remove from private" : "Private"}
+                </button>
+                {/* )} */}
                 {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
@@ -328,54 +317,52 @@ const CommunityPostDetailPopUP = ({
             <h2 className="postdetail-popUp-title">{postQuery.title}</h2>
             <hr className="hr" />
             <p className="post-description">{brief || "No description"}</p>
-            <span className="post-tag-names">
-              #Doctor reviews #Breast Augmentation
-            </span>
-            <span className="post-date">5/10/2023</span>
+            {tag && (
+              <span className="post-tag-names">
+                {tag.map((t) => `#${t.tagName}`).join("")}
+              </span>
+            )}
+            {postDate && <span className="post-date">{postDate}</span>}
             <hr className="hr" />
-            {/* {tag && <span className='detail-red-font'>{tag}</span>}
-            {postDate && <span className='detail-gray-font'>{ndate}</span>} */}
           </div>
           {/* <div className='post-popUp-break-lines'></div> */}
           <div className="post-popUp-comments">
             <span className="detail-gray-font">{commentCount} comments</span>
             {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}
             <div className="comment-detail">
-              {comments &&
-                comments.map((comment, index) => {
-                  if (comment && comment.content) {
-                    return (
-                      <CommentCard
-                        key={index}
-                        avatar={comment.avatar || ""}
-                        name={comment.userName || ""}
-                        commentText={convertUnicode(comment.content)}
-                        date={formatDate(comment.commentDate)}
-                        onClick={handleInputClick}
-                      />
-                    );
-                  }
-                  return null;
-                })}
+              {comments?.map((comment, index) => {
+                if (comment?.content) {
+                  return (
+                    <CommentCard
+                      key={index}
+                      avatar={comment.avatar || ""}
+                      name={comment.userName || ""}
+                      commentText={convertUnicode(comment.content)}
+                      date={formatDate(comment.commentDate)}
+                      onClick={handleInputClick}
+                    />
+                  );
+                }
+                return null;
+              })}
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
               <div className="comment-card-input-container">
                 {commentCount >= 0 && showCommentBox && (
                   <div className="textarea-with-icon">
                     <textarea
-                      {...register("comment")}
+                      // {...register("comment")}
+                      onChange={(e) => setComment(e.target.value)}
                       ref={textareaRef}
                       type="text"
                       placeholder="Type Something..."
                       className="post-comment-card-input"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSubmit(onSubmit)();
-                        }
-                      }}
                     />
-                    <button type="submit" className="textarea-icon">
+                    <button
+                      onClick={handleFormSubmit}
+                      type="submit"
+                      className="textarea-icon"
+                    >
                       <img src={SendIcon} alt="sendIcon" />
                     </button>
                   </div>
@@ -384,30 +371,6 @@ const CommunityPostDetailPopUP = ({
             </form>
           </div>
         </div>
-
-        {/* Mobile */}
-        {/* <div className='post-detail-mobile-download-button'>
-          <img
-            src={DownArrow}
-            style={{ marginTop: "50px", width: "15px", height: "13px" }}
-          ></img>
-          <span className="join-community-text">
-            Join the Charm Life Community to View More
-          </span>
-          <button
-            className="doctor-search-button"
-            // style={{
-            //   width: "150px",
-            //   height: "40px",
-            //   radius: "20px",
-            //   fontSize: "15px",
-            //   marginTop: "10px",
-            // }}
-            onClick={() => (window.location.href = "/download")}
-          >
-            Try Charm Life
-          </button>
-        </div> */}
 
         {/* Web */}
         <div className="fixed-input-box">
