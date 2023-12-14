@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import userInfoQueryStore from '../../../userStore';
 // import { useDisclosure } from '@chakra-ui/react';
@@ -52,6 +52,7 @@ const CreatePostPage = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // react hook form
   const {
@@ -119,7 +120,15 @@ const CreatePostPage = () => {
 
   // back button
   const handleClickCreatePostBack = () => {
-    navigate('/posts');
+    const source = location.state?.source;
+  
+    if (source === 'userProfile') {
+      navigate('/userProfile');
+    } else if (source === 'doctorProfile') {
+      navigate('/doctorProfile');
+    } else {
+      navigate('/posts');
+    }
   };
 
   const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;

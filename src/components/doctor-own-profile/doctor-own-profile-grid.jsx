@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import usePostQueryStore from '../../../postStore.ts';
+import usePostQueryStore from '../../postStore.ts';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 
 // components
 // import CreatePostOfUser from '../../create-post/create-post';
-import CommunityPost from '../../components-posts/community-post/community-post.component';
-import PostDetail from '../../components-posts/community-post-detail/community-post-detail.component';
+import CommunityPost from '../../components/components-posts/community-post/community-post.component.jsx';
+import PostDetail from '../../components/components-posts/community-post-detail/community-post-detail.component.jsx';
 
 // hook
-import { useGetUserPostedPost } from '../../../hooks/useGetPosts.js';
+import { useGetUserPostedPost } from '../../hooks/useGetPosts.js';
 
 // scss
 import './doctor-own-profile-grid.scss';
 
 // images
-import post1 from '../../../assets/doctor/post3.png';
-import creatPostIcon from '../../../assets/post/create-post-icon.png';
-import userPostAvatar from '../../../assets/post/user-profile-avatar.png';
+import post1 from '../../assets/doctor/post3.png';
+import creatPostIcon from '../../assets/post/create-post-icon.png';
+import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   // dummy data
@@ -73,7 +73,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   // create a post + icon button
   const handleIconClick = () => {
     // setShowCreatePost(true);
-    navigate('/posts/create');
+    navigate('/posts/create', { state: { source: 'doctorProfile' } });
   };
 
   // width

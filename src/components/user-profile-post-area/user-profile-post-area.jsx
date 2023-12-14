@@ -61,7 +61,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-
   const navigate = useNavigate();
 
   // hook
@@ -87,6 +86,12 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     1024: 4,
     767: 3,
     430: 2,
+  };
+
+  // create a post + icon button
+  const handleIconClick = () => {
+    // setShowCreatePost(true);
+    navigate('/posts/create', { state: { source: 'userProfile' } });
   };
 
   const handleClickPost = (ID, avatar, username, title, memberId) => {
@@ -130,12 +135,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       />
     </div>
   ));
-
-  // create a post + icon button
-  const handleIconClick = () => {
-    // setShowCreatePost(true);
-    navigate('/posts/create');
-  };
 
   // var userName;
   // var avatar;
