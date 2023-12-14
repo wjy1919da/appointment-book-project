@@ -22,16 +22,6 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  // calling hook
-  const {
-    // data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
-
   // dummy data
   let data = {
     pages: [
@@ -58,6 +48,10 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     pageParams: [null],
   };
 
+  useEffect(() => {
+    console.log('POSTS PAGE DATA', data);
+  }, [data]);
+
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
@@ -69,6 +63,16 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const handleIconClick = () => {
     setShowCreatePost(true);
   };
+
+  // hook
+  const {
+    // data,
+    error,
+    isLoading,
+    // fetchNextPage,
+    // isFetchingNextPage,
+    // hasNextPage,
+  } = useGetUserPostedPost();
 
   // width
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
