@@ -34,6 +34,17 @@ const useUploadImg = () => {
 
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
+    if (uploadingFiles.length + newFiles.length > 3) {
+      toast({
+        title: "Upload limit exceeded",
+        description: "You can upload up to 3 files at a time.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
     setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
     setUploadingFiles(newFiles);

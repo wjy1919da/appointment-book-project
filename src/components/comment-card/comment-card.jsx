@@ -13,6 +13,7 @@ import SendIcon from "../../assets/post/send_icon.svg";
 import CommentReplyInput from "./comment-reply-input";
 
 const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
+  console.log("comment avatar", avatar);
   const [showCommentBox, setShowCommentBox] = useState(false);
 
   const containerRef = useRef(null);
@@ -27,10 +28,6 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
       });
     }
   }, [showCommentBox]);
-
-  if (!avatar && !name && !date && !commentText) {
-    return null;
-  }
 
   const formatDate = (dateString) => {
     const dateParts = dateString.split("/");
@@ -77,7 +74,7 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
                     {commentText ? convertUnicode(commentText) : ""}
                   </span>
                   <div className="comment-card-second-line">
-                    <span className="comment-card-date">12/4/2023</span>
+                    <span className="comment-card-date">{date}</span>
                     <button
                       onClick={handleClickReply}
                       className="comment-card-button"

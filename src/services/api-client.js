@@ -13,15 +13,21 @@ class APIClient {
     return localStorage.getItem("token");
   }
 
-  post(data) {
+  post(data, pathParams = {}) {
     const token = this.getToken();
     const config = {
       headers: {
         Authorization: token ? `Bearer ${token}` : undefined,
       },
     };
+
+    let endpoint = this.endpoint;
+    for (const key in pathParams) {
+      endpoint = endpoint.replace(`{${key}}`, pathParams[key]);
+    }
+
     return axiosInstance
-      .post(this.endpoint, data, config)
+      .post(endpoint, data, config)
       .then((response) => response);
   }
 
@@ -37,7 +43,6 @@ class APIClient {
       .get(this.endpoint, config)
       .then((response) => response);
   }
-
   delete(postId) {
     const token = this.getToken();
     const config = {
