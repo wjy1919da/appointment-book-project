@@ -50,7 +50,7 @@ const HomeDoctorPage = () => {
                         </span>
                         <div className='home-doctor-page-link'>
                             {/* <HomeLink title= "View More Doctors" href = "/doctor"/> */}
-                            <HomeButtonPink title='Consult a doctor'/>
+                            <HomeButtonPink title='Consult a doctor' href='/doctor'/>
                             {/* <img src={vector} alt="arrow" style={{width:"18px",height:"17px",marginTop:"3px",marginLeft:"10px", border: "None"}}></img> */}
                         </div>
                     </div>
