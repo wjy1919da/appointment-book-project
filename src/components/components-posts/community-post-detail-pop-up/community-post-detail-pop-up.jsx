@@ -20,6 +20,8 @@ import CommentCard from '../../comment-card/comment-card';
 import { useAddComment } from '../../../hooks/useComment';
 import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
 import { useApiRequestSetPostDisplay } from '../../../hooks/useApiRequestPost';
+import { useHighlightPost } from '../../../hooks/useGetPosts.js';
+import { useRemoveHighlightPost } from '../../../hooks/useGetPosts.js';
 
 // scss
 import './community-post-detail-pop-up.styles.scss';
@@ -53,7 +55,7 @@ const CommunityPostDetailPopUP = ({
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const [isHighlight, setIsHightlight] = useState(false);
+  const [isHighlight, setIsHighlight] = useState(0);
   const [isPrivate, setIsPrivate] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -99,6 +101,29 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+  // highlight
+  const { mutate: apiMutateHightlight } = useHighlightPost({
+    onError: (error) => {
+      toast({
+        title: 'Failed.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+  // remove highlight
+  const { mutate: apiMutateRemoveHighlight } = useRemoveHighlightPost({
+    onError: (error) => {
+      toast({
+        title: 'Failed to remove highlight.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  }); 
+  // private
   const toggleSetPostDisplay = () => {
     setIsPrivate((prev) => (prev === 0 ? 1 : 0));
     if (!userInfo?.token) {
@@ -115,6 +140,48 @@ const CommunityPostDetailPopUP = ({
       isDisplay: isPrivate,
     });
   };
+   // highlight
+   const handleHighlight = () => {
+    console.log('POSTQUERY', postQuery);
+    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (isHighlight) {
+      apiMutateRemoveHighlight({
+        id: postQuery.postID,
+      });
+    } else {
+      apiMutateHightlight({
+        id: postQuery.postID,
+        isDisplay: isHighlight,
+      });
+    }
+  };
+  
+  //  const handleHighlight = () => {
+  //   console.log('POSTQUERY', postQuery);
+  //   setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+  //   if (!userInfo?.token) {
+  //     toast({
+  //       title: 'Please login first.',
+  //       status: 'error',
+  //       duration: 9000,
+  //       isClosable: true,
+  //     });
+  //     return;
+  //   }
+  //   apiMutateHightlight({
+  //     id: postQuery.postID,
+  //     isDisplay: isHighlight,
+  //   });
+  // };
 
   // api
   const { mutate: apiMutate } = useGetLikesPost({
@@ -228,11 +295,6 @@ const CommunityPostDetailPopUP = ({
     // navigate('/edit-post');
   };
 
-  // highlight
-  const handleHighlight = () => {
-    setIsHightlight((prev) => !prev);
-  };
-
   return (
     <div className='post-detail-popUp-container' ref={containerRef}>
       {/* Moblie */}
@@ -296,14 +358,14 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className='user-detail-button-container'>
-                {isDoctorAuthor && (
+                {/* {isDoctorAuthor && ( */}
                   <button
                     className='button-highlight'
                     onClick={handleHighlight}
                   >
                     {isHighlight ? 'Remove from Highlight' : 'Highlight'}
                   </button>
-                )}
+                {/* )} */}
                 {isAuthor && (
                   <button
                     className='button-private'

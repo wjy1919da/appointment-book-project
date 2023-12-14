@@ -96,7 +96,8 @@ const EditPostPage = () => {
   // when click on delete button
   const handleClickDelete = () => {
     console.log('POSTQUERY:', postQuery);
-    const postId = postQuery.postID;
+    // const postId = postQuery.postID;
+    const postId = 260;
     apiDeleteMutate(postId);
     onClose();
   };
