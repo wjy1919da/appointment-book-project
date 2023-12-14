@@ -10,6 +10,7 @@ import CloseButton from "../../../assets/post/pop-up-close-button.png";
 const PostDetail = ({ show, onHide, isMobile }) => {
   const { data, error, isLoading } = usePostDetail();
   // console.log("post detail", postTitle);
+
   return (
     <div>
       <div className="modal-parent-container">
@@ -19,7 +20,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
           onHide={onHide}
           size="xl"
           aria-labelledby="example-custom-modal-styling-title"
-          style={{ marginTop: "50px" }}
+          // style={{ marginTop: "50px" }}
         >
           <div className="modal-content-centering-wrapper">
             <div className="modal-content first-modal-content">
@@ -30,6 +31,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
           </div>
         </Modal>
       </div>
+
       {isMobile ? (
         <div>
           <div class="modal-parent-container">
@@ -39,7 +41,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
               onHide={onHide}
               size="xl"
               aria-labelledby="example-custom-modal-styling-title"
-              style={{ marginTop: "100px" }}
+              style={{ marginTop: "20px" }}
             >
               <div style={{ border: "10px solid white", borderRadius: "50px" }}>
                 {data?.data && (

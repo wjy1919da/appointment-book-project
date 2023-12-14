@@ -35,7 +35,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
+// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -213,6 +213,7 @@ const CommunityPostDetailPopUP = ({
     setDescription(brief);
     setPictures(picture);
     navigate(`/edit-post/${postQuery.postID}`);
+    // navigate('/edit-post');
   };
 
   // highlight
@@ -292,14 +293,19 @@ const CommunityPostDetailPopUP = ({
                     {isHighlight ? "Remove from Highlight" : "Highlight"}
                   </button>
                 )}
-                {/* {isAuthor && ( */}
-                <button
-                  className="button-private"
-                  onClick={toggleSetPostDisplay}
-                >
-                  {isPrivate ? "Remove from private" : "Private"}
-                </button>
-                {/* )} */}
+                {isAuthor && (
+                  <button
+                    className="button-private"
+                    onClick={toggleSetPostDisplay}
+                  >
+                    {isPrivate ? "Remove from private" : "Private"}
+                  </button>
+                )}
+                {isAuthor && (
+                  <button className="button-edit" onClick={handleGoToEdit}>
+                    Edit your Post
+                  </button>
+                )}
                 {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post

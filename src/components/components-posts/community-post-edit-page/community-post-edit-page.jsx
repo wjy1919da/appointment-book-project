@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import userInfoQueryStore from "../../../userStore";
+import usePostQueryStore from "../../../postStore";
+import { Toast, useToast } from "@chakra-ui/react";
 import { uploadToS3 } from "../../../services/s3-client";
 import {
   useDisclosure,
@@ -19,6 +21,7 @@ import FormButton from "../../components-posts/community-post-button/community-p
 
 // hook
 import { useApiRequestEditPost } from "../../../hooks/useApiRequestPost";
+import { useDeletePost } from "../../../hooks/useDeletePost";
 import useUploadImg from "../../../hooks/useUploadImg";
 
 // scss
@@ -30,10 +33,8 @@ import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
 import Trash from "../../../assets/post/trash_icon.svg";
 import DeleteButton from "../../../assets/post/thumbnail_delete.png";
 
-import usePostQueryStore from "../../../postStore";
-import { Toast, useToast } from "@chakra-ui/react";
-
 const EditPostPage = () => {
+  // call api hooks
   const {
     selectedFiles,
     setSelectedFiles,
@@ -47,6 +48,7 @@ const EditPostPage = () => {
     removeUploadedFile,
   } = useUploadImg();
   const { mutate: apiEditMutate, data } = useApiRequestEditPost();
+  const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -66,7 +68,7 @@ const EditPostPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     setUploadedFiles(postQuery.pictures);
-    // Set the selected image to the last image in the uploadedFiles array
+    // set the selected image to the last image in the uploadedFiles array
     if (postQuery.pictures && postQuery.pictures.length > 0) {
       setSelectedImage(postQuery.pictures[postQuery.pictures.length - 1]);
     }
@@ -86,13 +88,20 @@ const EditPostPage = () => {
     },
   });
 
-  const hanldeClickModal = () => {
-    console.log("clicked");
+  // when click on trash icon
+  const handleClickModal = () => {
     onOpen();
   };
 
-  // api
+  // when click on delete button
+  const handleClickDelete = () => {
+    console.log("POSTQUERY:", postQuery);
+    const postId = postQuery.postID;
+    apiDeleteMutate(postId);
+    onClose();
+  };
 
+  // api
   const onSubmit = (data) => {
     const formData = {
       address: "",
@@ -126,6 +135,7 @@ const EditPostPage = () => {
     apiEditMutate(formData);
     resetFiles();
   };
+
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
@@ -181,6 +191,7 @@ const EditPostPage = () => {
     setSelectedImage(uploadedFiles[index]);
     setClickedThumbnailIndex(index);
   };
+
   // thumbnail
   const displayThumbnails =
     uploadedFiles.length > 0
@@ -230,6 +241,7 @@ const EditPostPage = () => {
 
   const displayImage =
     selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
   return (
     <div>
       <form
@@ -401,7 +413,7 @@ const EditPostPage = () => {
                     width: "48px",
                     height: "48px",
                   }}
-                  onClick={hanldeClickModal}
+                  onClick={handleClickModal}
                 />
               </div>
             </div>
@@ -431,6 +443,7 @@ const EditPostPage = () => {
               backgroundColor="#f1a285"
               outline="none"
               _hover="none"
+              onClick={handleClickDelete}
             >
               Delete
             </Button>
