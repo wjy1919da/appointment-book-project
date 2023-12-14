@@ -92,8 +92,8 @@ const HomePost = () => {
                 Discover exceptional savings and exclusive offers.
               </span>
             </div>
-            <div className='home-post-link'>
-            <Button buttonName='View More Posts' />
+            <div className='home-post-link' >
+            <HomeLink title='View More Posts' href='/posts'/>
               {/* <span className="underline-link">View More Posts</span> */}
               {/* <HomeLink title='View More Posts' href='/posts' /> */}
               {/* <img
