@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import usePostQueryStore from '../../../postStore.ts';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 
 // components
-import CreatePostOfUser from '../../create-post/create-post';
+// import CreatePostOfUser from '../../create-post/create-post';
 import CommunityPost from '../../components-posts/community-post/community-post.component';
 import PostDetail from '../../components-posts/community-post-detail/community-post-detail.component';
 
@@ -57,6 +58,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+  const navigate = useNavigate();
 
   // hook
   const {
@@ -70,7 +72,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
 
   // create a post + icon button
   const handleIconClick = () => {
-    setShowCreatePost(true);
+    // setShowCreatePost(true);
+    navigate('/posts/create');
   };
 
   // width
@@ -151,7 +154,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         </div>
       )}
 
-      {showCreatePost && <CreatePostOfUser />}
+      {/* {showCreatePost && <CreatePostOfUser />} */}
 
       {IsModalOpen && (
         <PostDetail

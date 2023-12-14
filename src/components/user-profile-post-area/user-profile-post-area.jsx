@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import usePostQueryStore from '../../postStore.ts';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 
 // components
 import CreatePostOfUser from '../create-post/create-post';
@@ -60,9 +61,8 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-  const handleIconClick = () => {
-    setShowCreatePost(true);
-  };
+
+  const navigate = useNavigate();
 
   // hook
   const {
@@ -131,6 +131,12 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     </div>
   ));
 
+  // create a post + icon button
+  const handleIconClick = () => {
+    // setShowCreatePost(true);
+    navigate('/posts/create');
+  };
+
   // var userName;
   // var avatar;
 
@@ -153,6 +159,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       };
     });
   }, []);
+
   return (
     <div className='user-profile-post-area-container'>
       {!showCreatePost && imagesLoaded && (
