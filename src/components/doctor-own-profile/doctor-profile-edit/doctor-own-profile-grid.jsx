@@ -8,6 +8,9 @@ import CreatePostOfUser from '../../create-post/create-post';
 import CommunityPost from '../../components-posts/community-post/community-post.component';
 import PostDetail from '../../components-posts/community-post-detail/community-post-detail.component';
 
+// hook
+import { useGetUserPostedPost } from '../../../hooks/useGetPosts.js';
+
 // scss
 import './doctor-own-profile-grid.scss';
 
@@ -17,6 +20,7 @@ import creatPostIcon from '../../../assets/post/create-post-icon.png';
 import userPostAvatar from '../../../assets/post/user-profile-avatar.png';
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
+  // dummy data
   let data = {
     pages: [
       {
@@ -25,36 +29,9 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
             id: 13,
             title: '哈哈哈',
             coverImg:
-              'http://dxm72.longcai.pw/uploads/20220403/5235ed292a68dc6e07fe8b11e49af30a.png',
+              'https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png',
             memberId: 262,
             nickname: 'DrJohnDoe',
-            likedCount: 2,
-          },
-          {
-            id: 72,
-            title: '11',
-            coverImg:
-              'http://dxm72.zihai.shop/uploads/20220725/a26366a3b047841bf7c8fe24f50c200e.jpg',
-            memberId: 84,
-            nickname: 'rgwyq1',
-            likedCount: 4,
-          },
-          {
-            id: 74,
-            title: 'hajs',
-            coverImg:
-              'http://dxm72.zihai.shop/uploads/20220819/3b33d04748999acf876fc17a761c3c6d.png',
-            memberId: 94,
-            nickname: 'zbzm',
-            likedCount: 2,
-          },
-          {
-            id: 75,
-            title: '我们的生活方式是什么意思123',
-            coverImg:
-              'http://dxm72.zihai.shop/uploads/20220819/7399be71bbdacc8037682ef726e5d45a.png',
-            memberId: 94,
-            nickname: 'zbzm',
             likedCount: 2,
           },
         ],
@@ -69,6 +46,10 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     pageParams: [null],
   };
 
+  useEffect(() => {
+    console.log('POSTS PAGE DATA', data);
+  }, [data]);
+
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState('');
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -76,6 +57,16 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
 
   const setUserID = usePostQueryStore((state) => state.setUserID);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+
+  // hook
+  const {
+    // data,
+    error,
+    isLoading,
+    // fetchNextPage,
+    // isFetchingNextPage,
+    // hasNextPage,
+  } = useGetUserPostedPost();
 
   // create a post + icon button
   const handleIconClick = () => {

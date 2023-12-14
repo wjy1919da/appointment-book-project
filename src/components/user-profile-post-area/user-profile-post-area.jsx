@@ -32,6 +32,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     // hasNextPage,
   } = useGetUserPostedPost();
 
+  // dummy data
   let data = {
     pages: [
       {
