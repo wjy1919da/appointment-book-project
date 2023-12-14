@@ -47,6 +47,7 @@
         margin-top: 10px;
         .comment-detail {
           margin-top: 20px;
+          margin-bottom: 70px;
         }
       }
     }
@@ -252,12 +253,11 @@
   background-color: rgba(64, 64, 64, 0.25);
   // color: white;
 }
-.textarea-with-icon {
+.textarea-with-icon-post {
   position: relative;
   height: 70px;
   border: 1px solid #675d59;
   border-radius: 8px;
-
   padding: 10px;
   overflow: hidden;
 }
