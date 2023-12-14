@@ -2,12 +2,12 @@ import { useMutation } from 'react-query';
 import APIClient from '../services/api-client';
 
 export function useDeletePost() {
-  const apiClient = new APIClient('/post/{id}');
-
+  const apiClient = new APIClient('/post');
   const useDeletePost = useMutation(
     async (postId) => {
+      console.log('POSTID', postId);
       const response = await apiClient.delete(postId);
-      return response.data; 
+      return response.data;
     },
     {
       onSuccess: (data) => {
@@ -18,6 +18,5 @@ export function useDeletePost() {
       },
     }
   );
-
   return useDeletePost;
 }

@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import userInfoQueryStore from "../../../userStore";
-import { uploadToS3 } from "../../../services/s3-client";
+import React, { useState, useRef, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import userInfoQueryStore from '../../../userStore';
+import usePostQueryStore from '../../../postStore';
+import { Toast, useToast } from '@chakra-ui/react';
+import { uploadToS3 } from '../../../services/s3-client';
 import {
   useDisclosure,
   Modal,
@@ -11,29 +13,28 @@ import {
   ModalHeader,
   ModalFooter,
   Button,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 // components
-import FormButton from "../../components-posts/community-post-button/community-post-button";
+import FormButton from '../../components-posts/community-post-button/community-post-button';
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequestEditPost } from "../../../hooks/useApiRequestPost";
-import useUploadImg from "../../../hooks/useUploadImg";
+import { useApiRequestEditPost } from '../../../hooks/useApiRequestPost';
+import { useDeletePost } from '../../../hooks/useDeletePost';
+import useUploadImg from '../../../hooks/useUploadImg';
 
 // scss
-import "./community-post-edit-page.scss";
+import './community-post-edit-page.scss';
 
 // images
-import createPostIcon from "../../../assets/post/create-post-icon.png";
-import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
-import Trash from "../../../assets/post/trash_icon.svg";
-import DeleteButton from "../../../assets/post/thumbnail_delete.png";
-
-import usePostQueryStore from "../../../postStore";
-import { Toast, useToast } from "@chakra-ui/react";
+import createPostIcon from '../../../assets/post/create-post-icon.png';
+import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
+import Trash from '../../../assets/post/trash_icon.svg';
+import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 const EditPostPage = () => {
+  // call api hooks
   const {
     selectedFiles,
     setSelectedFiles,
@@ -47,6 +48,7 @@ const EditPostPage = () => {
     removeUploadedFile,
   } = useUploadImg();
   const { mutate: apiEditMutate, data } = useApiRequestEditPost();
+  const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -66,7 +68,7 @@ const EditPostPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     setUploadedFiles(postQuery.pictures);
-    // Set the selected image to the last image in the uploadedFiles array
+    // set the selected image to the last image in the uploadedFiles array
     if (postQuery.pictures && postQuery.pictures.length > 0) {
       setSelectedImage(postQuery.pictures[postQuery.pictures.length - 1]);
     }
@@ -79,36 +81,43 @@ const EditPostPage = () => {
     reset,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: {
       title: postQuery.title,
       description: postQuery.description,
     },
   });
 
-  const hanldeClickModal = () => {
-    console.log("clicked");
+  // when click on trash icon
+  const handleClickModal = () => {
     onOpen();
   };
 
-  // api
+  // when click on delete button
+  const handleClickDelete = () => {
+    console.log('POSTQUERY:', postQuery);
+    const postId = postQuery.postID;
+    apiDeleteMutate(postId);
+    onClose();
+  };
 
+  // api
   const onSubmit = (data) => {
     const formData = {
-      address: "",
+      address: '',
       brief: data.description,
-      coverImg: "",
+      coverImg: '',
       // memberID
       id: userInfo.userId,
       isDisplay: 1,
-      lat: "",
-      location: "",
-      lon: "",
+      lat: '',
+      location: '',
+      lon: '',
       pictures: uploadedFiles,
       tags: [
         {
           tagId: 0,
-          tagName: "",
+          tagName: '',
         },
       ],
       title: data.title,
@@ -118,8 +127,8 @@ const EditPostPage = () => {
 
     if (!userInfo?.token) {
       toast({
-        title: "Please login first.",
-        status: "error",
+        title: 'Please login first.',
+        status: 'error',
         duration: 9000,
         isClosable: true,
       });
@@ -128,26 +137,27 @@ const EditPostPage = () => {
     apiEditMutate(formData);
     resetFiles();
   };
+
   useEffect(() => {
     // console.log("data::", data);
     if (data?.code === 100) {
       resetFiles();
       reset({
-        title: "",
-        description: "",
+        title: '',
+        description: '',
       });
       setSelectedImage(null);
       toast({
-        title: "Post edit successfully.",
-        status: "success",
+        title: 'Post edit successfully.',
+        status: 'success',
         duration: 1000,
         isClosable: true,
       });
     }
     if (data?.code === 500) {
       toast({
-        title: "Failed to create post.",
-        status: "error",
+        title: 'Failed to create post.',
+        status: 'error',
         duration: 9000,
         isClosable: true,
       });
@@ -156,7 +166,7 @@ const EditPostPage = () => {
 
   // back button
   const handleClickCreatePostBack = () => {
-    navigate("/edit-post");
+    navigate('/edit-post');
   };
 
   // file upload
@@ -183,14 +193,15 @@ const EditPostPage = () => {
     setSelectedImage(uploadedFiles[index]);
     setClickedThumbnailIndex(index);
   };
+
   // thumbnail
   const displayThumbnails =
     uploadedFiles.length > 0
       ? uploadedFiles.map((file, index) => (
-          <div key={index} className="edit-post-page-thumbnail">
+          <div key={index} className='edit-post-page-thumbnail'>
             <div
               className={`thumbnail ${
-                index === clickedThumbnailIndex ? "clicked" : ""
+                index === clickedThumbnailIndex ? 'clicked' : ''
               }`}
               onClick={() => handleClickMask(index)}
             >
@@ -198,31 +209,31 @@ const EditPostPage = () => {
                 src={file}
                 alt={`Selected Thumbnail ${index + 1}`}
                 style={{
-                  width: "70px",
-                  height: "70px",
-                  borderRadius: "8px",
-                  objectFit: "cover",
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '8px',
+                  objectFit: 'cover',
                 }}
               />
             </div>
             <button
-              type="button"
-              className="delete-thumbnail-button"
+              type='button'
+              className='delete-thumbnail-button'
               onClick={() => removeUploadedFile(index)}
               style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: "#A5A6A7",
-                borderRadius: "50%",
-                position: "absolute",
-                top: "-5px",
-                right: "-5px",
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#A5A6A7',
+                borderRadius: '50%',
+                position: 'absolute',
+                top: '-5px',
+                right: '-5px',
               }}
             >
               <img
                 src={DeleteButton}
-                alt="Icon-Delete-Button"
-                className="create-edit-post-page-delete-button"
+                alt='Icon-Delete-Button'
+                className='create-edit-post-page-delete-button'
                 style={{}}
               />
             </button>
@@ -232,60 +243,61 @@ const EditPostPage = () => {
 
   const displayImage =
     selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
   return (
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="edit-post-page-container"
+        className='edit-post-page-container'
       >
-        <div className="pink-background-1"></div>
-        <div className="pink-background-2"></div>
+        <div className='pink-background-1'></div>
+        <div className='pink-background-2'></div>
 
         <button
-          type="button"
+          type='button'
           onClick={handleClickCreatePostBack}
-          className="edit-post-page-back-button-container"
+          className='edit-post-page-back-button-container'
         >
           <img
             src={Arrow}
-            alt="Image-Arrow-Icon"
-            className="edit-post-page-arrow-icon-back-button"
+            alt='Image-Arrow-Icon'
+            className='edit-post-page-arrow-icon-back-button'
           />
-          <span className="edit-post-page-label-back-button">Edit a post</span>
+          <span className='edit-post-page-label-back-button'>Edit a post</span>
         </button>
 
-        <div className="edit-post-page-inner-container">
-          <div className="edit-post-page-left-container-wrapper">
+        <div className='edit-post-page-inner-container'>
+          <div className='edit-post-page-left-container-wrapper'>
             <input
               ref={fileInputRef}
-              type="file"
-              id="imageUpload"
-              accept="image/*"
-              style={{ display: "none" }}
+              type='file'
+              id='imageUpload'
+              accept='image/*'
+              style={{ display: 'none' }}
               onChange={handleFileSelection}
               multiple
             />
 
             {displayImage && selectedImage ? (
-              <div className="edit-post-pic-wrapper">
+              <div className='edit-post-pic-wrapper'>
                 <img
                   src={selectedImage}
                   style={{
-                    marginBottom: "20px",
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    width: "330px",
-                    height: "330px",
-                    objectFit: "cover",
+                    marginBottom: '20px',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: '330px',
+                    height: '330px',
+                    objectFit: 'cover',
                   }}
-                  alt="Selected"
+                  alt='Selected'
                 />
               </div>
             ) : (
               <>
-                <div className="edit-post-page-left-container">
+                <div className='edit-post-page-left-container'>
                   <div
-                    className="edit-post-page-add"
+                    className='edit-post-page-add'
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onClick={handleBrowseFiles}
@@ -293,13 +305,13 @@ const EditPostPage = () => {
                     <img
                       src={createPostIcon}
                       style={{
-                        width: "157px",
-                        height: "157px",
+                        width: '157px',
+                        height: '157px',
                       }}
-                      alt="Image-Create-Post"
+                      alt='Image-Create-Post'
                     />
                   </div>
-                  <div className="edit-post-page-text">
+                  <div className='edit-post-page-text'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing
                   </div>
                 </div>
@@ -307,13 +319,13 @@ const EditPostPage = () => {
             )}
 
             {/* thumbnail */}
-            <div className="edit-post-page-thumbnail-container">
+            <div className='edit-post-page-thumbnail-container'>
               {displayThumbnails}
 
               {/* thumbnail create */}
               {displayThumbnails && (
                 <div
-                  className="edit-post-page-add-thumbnail"
+                  className='edit-post-page-add-thumbnail'
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -321,43 +333,43 @@ const EditPostPage = () => {
                   <img
                     src={createPostIcon}
                     style={{
-                      width: "60px",
-                      height: "60px",
+                      width: '60px',
+                      height: '60px',
                     }}
-                    alt="Image-Create-Post"
+                    alt='Image-Create-Post'
                   />
                 </div>
               )}
             </div>
           </div>
 
-          <div className="edit-post-page-right-container">
+          <div className='edit-post-page-right-container'>
             <div>
               <input
-                type="text"
-                placeholder="Title"
-                className="edit-post-page-title"
-                {...register("title", {
-                  required: "* Title is required.",
+                type='text'
+                placeholder='Title'
+                className='edit-post-page-title'
+                {...register('title', {
+                  required: '* Title is required.',
                   maxLength: {
                     value: 20,
-                    message: "* Maximum limit for characters is 20.",
+                    message: '* Maximum limit for characters is 20.',
                   },
                 })}
                 defaultValue={postQuery.title}
               />
-              <p className="edit-post-page-title-error-validation">
+              <p className='edit-post-page-title-error-validation'>
                 {errors.title?.message}
               </p>
 
-              <div className="description-container">
+              <div className='description-container'>
                 <textarea
-                  name="brief"
-                  id="description"
-                  placeholder="Description"
-                  className="edit-post-page-description"
-                  {...register("description", {
-                    required: "* Description is required.",
+                  name='brief'
+                  id='description'
+                  placeholder='Description'
+                  className='edit-post-page-description'
+                  {...register('description', {
+                    required: '* Description is required.',
                   })}
                   defaultValue={postQuery.description}
                 ></textarea>
@@ -365,45 +377,45 @@ const EditPostPage = () => {
                 {/* <PostDropDownFilter />
                 <PostDropDownFilter /> */}
 
-                <p className="edit-post-page-description-error-validation">
+                <p className='edit-post-page-description-error-validation'>
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
-            <div className="edit-post-page-button-wrapper">
+            <div className='edit-post-page-button-wrapper'>
               {/* --- radio button --- */}
-              <div className="edit-post-page-radio-button-container">
+              <div className='edit-post-page-radio-button-container'>
                 <input
-                  id="input-linked"
-                  type="radio"
-                  name="input-radio-button"
+                  id='input-linked'
+                  type='radio'
+                  name='input-radio-button'
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className="edit-post-input-radio-button"
+                  className='edit-post-input-radio-button'
                 />
                 <label
-                  htmlFor="input-linked"
-                  className="edit-post-input-radio-button-label"
+                  htmlFor='input-linked'
+                  className='edit-post-input-radio-button-label'
                 >
                   Restrict my post to viewers over 18
                 </label>
               </div>
 
               {/* --- button --- */}
-              <div className="post-information-sendButton">
+              <div className='post-information-sendButton'>
                 <FormButton
-                  buttonName="Repost"
-                  className="create-post-custom-button"
+                  buttonName='Repost'
+                  className='create-post-custom-button'
                 />
                 <img
                   src={Trash}
-                  alt="Image-Trash-Icon"
+                  alt='Image-Trash-Icon'
                   style={{
-                    width: "48px",
-                    height: "48px",
+                    width: '48px',
+                    height: '48px',
                   }}
-                  onClick={hanldeClickModal}
+                  onClick={handleClickModal}
                 />
               </div>
             </div>
@@ -413,26 +425,27 @@ const EditPostPage = () => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent backgroundColor="transparent" boxShadow="none">
-          <ModalHeader color="#ffffff" fontSize="25px">
+        <ModalContent backgroundColor='transparent' boxShadow='none'>
+          <ModalHeader color='#ffffff' fontSize='25px'>
             Are you sure to delete this post?
           </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
+          <ModalFooter display='flex' justifyContent='space-between'>
             <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
               mr={3}
               onClick={onClose}
             >
               Back
             </Button>
             <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handleClickDelete}
             >
               Delete
             </Button>

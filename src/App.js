@@ -121,6 +121,7 @@ const App = () => {
               <Route path="create-post" element={<CreatePostOfUser />} />
               <Route path="/posts/create" element={<CreatePostPage />} />
               <Route path="/edit-post/:postid" element={<EditPostPage />} />
+              {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
               <Route path="health-check" element={<HealthCheck />} />
               {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
 

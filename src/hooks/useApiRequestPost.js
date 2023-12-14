@@ -38,7 +38,7 @@ export function useApiRequestPost() {
 }
 // Edit post
 export function useApiRequestEditPost() {
-  const apiClient = new APIClient("/post/edit_posts");
+  const apiClient = new APIClient('/post/edit_posts');
   const fetchUserData = async ({
     address,
     brief,
@@ -73,7 +73,7 @@ export function useApiRequestEditPost() {
 }
 // set post display(private/public)
 export function useApiRequestSetPostDisplay() {
-  const apiClient = new APIClient("/post/edit_posts");
+  const apiClient = new APIClient('/post/edit_posts');
   const setPostDisplay = async (id, isDisplay) => {
     const res = await apiClient.post({
       id,
