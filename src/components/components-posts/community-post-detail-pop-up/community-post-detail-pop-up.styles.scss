@@ -232,7 +232,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 1000;
   cursor: pointer;
 }
 
@@ -242,6 +242,7 @@
   padding: 6px; /* Adjusts the size of the circular background */
   cursor: pointer;
   background-color: rgba(64, 64, 64, 0.25);
+  z-index: 1000;
   // color: white;
 }
 
@@ -251,6 +252,7 @@
   padding: 6px; /* Adjusts the size of the circular background */
   cursor: pointer;
   background-color: rgba(64, 64, 64, 0.25);
+  z-index: 1000;
   // color: white;
 }
 .textarea-with-icon-post {
