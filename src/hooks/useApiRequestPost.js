@@ -18,7 +18,7 @@ export function useApiRequestPost() {
     tags,
     title,
   }) => {
-    console.log(brief, title);
+    // console.log(brief, title);
     const res = await apiClient.post({
       address,
       brief,
@@ -38,7 +38,7 @@ export function useApiRequestPost() {
 }
 // Edit post
 export function useApiRequestEditPost() {
-  const apiClient = new APIClient('/post/edit_posts');
+  const apiClient = new APIClient("/post/edit_posts");
   const fetchUserData = async ({
     address,
     brief,
@@ -51,7 +51,6 @@ export function useApiRequestEditPost() {
     pictures,
     tags,
     title,
-    postId,
   }) => {
     const res = await apiClient.post({
       address,
@@ -65,23 +64,28 @@ export function useApiRequestEditPost() {
       pictures,
       tags,
       title,
-      postId,
     });
     return res.data;
   };
   return useMutation(fetchUserData);
 }
-// set post display(private/public)
+// set post private
 export function useApiRequestSetPostDisplay() {
-  const apiClient = new APIClient('/post/edit_posts');
-  const setPostDisplay = async (id, isDisplay) => {
-    const res = await apiClient.post({
-      id,
-      isDisplay,
-    });
+  const setPostDisplay = async (id) => {
+    const apiClient = new APIClient(`/post/posts/${id}/private`);
+
+    const res = await apiClient.post();
     return res.data;
   };
-  return useMutation((credentials) =>
-    setPostDisplay(credentials.id, credentials.isDisplay)
-  );
+
+  return useMutation((credentials) => setPostDisplay(credentials.id));
+}
+// set post public
+export function useApiRequestSetPostPublic() {
+  const setPostPublic = async (id) => {
+    const apiClient = new APIClient(`/post/posts/${id}/remove_private`);
+    const res = await apiClient.post();
+    return res.data;
+  };
+  return useMutation((credentials) => setPostPublic(credentials.id));
 }

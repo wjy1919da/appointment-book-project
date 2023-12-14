@@ -88,7 +88,7 @@ export function useGetUserLikededPost() {
     },
   });
 }
-
+// Get post details
 export function usePostDetail() {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const apiClient = new APIClient(`/post/web/posts/${postQuery.postID}`);

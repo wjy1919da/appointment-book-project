@@ -1,33 +1,14 @@
 @media(min-width: 1024px){
-    .home-link {
-        /* Link Button */
-        width: fit-content;
-        height: 22px;
-        font-family: 'Open Sans';
-        font-weight: 600;
-        //font-size: 2.2vw;
-        font-size: 22px;
-        line-height: 100%;
-    
-        display: flex;
-        //align-items: center;
-        //text-align: center;
-    
-        /* 深巧 */
-        color: #352C29;
-    
-        /* Inside auto layout */
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin-top: -8px;
-        text-decoration: none;
-    }
-    
-    .home-link:hover {
-        /* Add underline */
-        text-decoration: underline;
-        color: #352C29;
-    }
+    .home-link
+{
+    color:white;
+    display: inline-flex;
+    padding: 12px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background:  linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+}
 }
 

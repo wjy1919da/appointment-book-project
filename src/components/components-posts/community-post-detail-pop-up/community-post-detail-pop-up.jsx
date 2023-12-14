@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import React, { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 // import { Button } from 'react-bootstrap';
 
 // stores
-import usePostQueryStore from '../../../postStore.ts';
-import userInfoQueryStore from '../../../userStore.ts';
+import usePostQueryStore from "../../../postStore.ts";
+import userInfoQueryStore from "../../../userStore.ts";
 
 // components
-import CommentCard from '../../comment-card/comment-card';
+import CommentCard from "../../comment-card/comment-card";
 // import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 
 // hooks
@@ -22,20 +22,21 @@ import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
 import { useApiRequestSetPostDisplay } from '../../../hooks/useApiRequestPost';
 import { useHighlightPost } from '../../../hooks/useGetPosts.js';
 import { useRemoveHighlightPost } from '../../../hooks/useGetPosts.js';
+import { useApiRequestSetPostPublic } from "../../../hooks/useApiRequestPost";
 
 // scss
-import './community-post-detail-pop-up.styles.scss';
+import "./community-post-detail-pop-up.styles.scss";
 
 // images
-import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
-import ShareIcon from '../../../assets/post/share_icon.svg';
-import heartIcon from '../../../assets/post/heart.png';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
-import SendIcon from '../../../assets/post/send_icon.svg';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BubblesIcon from "../../../assets/post/bubbles_icon.svg";
+import ShareIcon from "../../../assets/post/share_icon.svg";
+import heartIcon from "../../../assets/post/heart.png";
+import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import SendIcon from "../../../assets/post/send_icon.svg";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 const CommunityPostDetailPopUP = ({
@@ -48,19 +49,22 @@ const CommunityPostDetailPopUP = ({
   collectCount,
   commentCount,
 }) => {
+  // console.log("tag", postDate);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHighlight] = useState(0);
   const [isPrivate, setIsPrivate] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const [comment, setComment] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
+  const [showArrows, setShowArrows] = useState(false);
 
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -71,7 +75,7 @@ const CommunityPostDetailPopUP = ({
   var isAuthor = userInfo.userId == postQuery.memberID;
   var isDoctorAuthor =
     userInfo.userId == postQuery.memberID &&
-    localStorage.getItem('accountType') === '2';
+    localStorage.getItem("accountType") === "2";
   const goToPreviousImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : picture.length - 1
@@ -87,15 +91,25 @@ const CommunityPostDetailPopUP = ({
   const schema = z.object({
     comment: z
       .string()
-      .nonempty('Comment is required')
-      .min(5, 'Comment must be at least 5 characters long'),
+      .nonempty("Comment is required")
+      .min(5, "Comment must be at least 5 characters long"),
   });
   // Set post display(private/public)
   const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
     onError: (error) => {
       toast({
-        title: 'Failed.',
-        status: 'error',
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+  const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -125,20 +139,13 @@ const CommunityPostDetailPopUP = ({
   }); 
   // private
   const toggleSetPostDisplay = () => {
-    setIsPrivate((prev) => (prev === 0 ? 1 : 0));
-    if (!userInfo?.token) {
-      toast({
-        title: 'Please login first.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
+    setIsPrivate((prev) => !prev);
+    const apiMutation = isPrivate
+      ? apiMutateSetPostPublic
+      : apiMutateSetPostDisplay;
+    if (validateTokenAndPopup()) {
+      apiMutation({ id: postQuery.postID });
     }
-    apiMutateSetPostDisplay({
-      id: postQuery.postID,
-      isDisplay: isPrivate,
-    });
   };
    // highlight
    const handleHighlight = () => {
@@ -164,31 +171,13 @@ const CommunityPostDetailPopUP = ({
       });
     }
   };
-  
-  //  const handleHighlight = () => {
-  //   console.log('POSTQUERY', postQuery);
-  //   setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-  //   if (!userInfo?.token) {
-  //     toast({
-  //       title: 'Please login first.',
-  //       status: 'error',
-  //       duration: 9000,
-  //       isClosable: true,
-  //     });
-  //     return;
-  //   }
-  //   apiMutateHightlight({
-  //     id: postQuery.postID,
-  //     isDisplay: isHighlight,
-  //   });
-  // };
 
   // api
   const { mutate: apiMutate } = useGetLikesPost({
     onError: (error) => {
       toast({
-        title: 'Failed.',
-        status: 'error',
+        title: "Failed.",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -197,20 +186,9 @@ const CommunityPostDetailPopUP = ({
 
   const toggleGetLikes = () => {
     setLiked((prev) => !prev);
-    const likesData = {
-      postId: postQuery.postID,
-    };
-    if (!userInfo?.token) {
-      toast({
-        title: 'Please login first.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
+    if (validateTokenAndPopup()) {
+      apiMutate({ postId: postQuery.postID });
     }
-    console.log('Likes API is called. Yay!', likesData);
-    apiMutate(likesData);
   };
   const { mutate, data, isLoading, isError, error } = useAddComment();
   const {
@@ -222,43 +200,35 @@ const CommunityPostDetailPopUP = ({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (formData) => {
-    if (!userInfo.token) {
-      togglePopup(true, 'accountType');
-      return;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (validateTokenAndPopup()) {
+      // console.log("mutate is called");
+      mutate({
+        dynamicId: postQuery.postID,
+        text: comment,
+      });
+      refresh();
     }
-    if (errors.comment) {
-      alert(errors.comment.message);
-      return;
-    }
-    mutate({
-      dynamicId: postQuery.postID,
-      text: formData.comment,
-    });
   };
 
-  useEffect(() => {
-    if (data?.code === 100) {
-      // alert("send comment", data.msg);
-      reset({ comment: '' });
-      refresh();
-    } else if (data?.code === 500 || data?.code === 403) {
-      alert(data.msg);
+  const validateTokenAndPopup = () => {
+    if (!userInfo.token) {
+      togglePopup(true, "accountType");
+      return false;
     }
-  }, [data]);
+    return true;
+  };
 
   const handleInputClick = (e) => {
-    // console.log("handleInputClick", userInfo.token);
-
     if (!userInfo.token) {
       e.preventDefault();
-      togglePopup(true, 'login');
+      togglePopup(true, "accountType");
     }
   };
 
   const handleClickComment = () => {
     setShowCommentBox((prev) => !prev);
-
     if (textareaRef.current) {
       textareaRef.current.focus();
     }
@@ -270,19 +240,19 @@ const CommunityPostDetailPopUP = ({
       textareaRef.current.focus();
       containerRef.current.scrollTo({
         top: textareaRef.current.offsetTop,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   }, [showCommentBox, commentCount]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString('en-US');
+    const formattedDate = date.toLocaleDateString("en-US");
     return formattedDate;
   };
 
   function convertUnicode(input) {
-    if (!input) return '';
+    if (!input) return "";
     return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a, b) =>
       String.fromCharCode(parseInt(b, 16))
     );
@@ -296,192 +266,172 @@ const CommunityPostDetailPopUP = ({
   };
 
   return (
-    <div className='post-detail-popUp-container' ref={containerRef}>
+    <div className="post-detail-popUp-container" ref={containerRef}>
       {/* Moblie */}
-      <div className='post-detail-mobile-profile-container'>
-        <div className='post-detail-mobile-profile'>
+      <div className="post-detail-mobile-profile-container">
+        <div className="post-detail-mobile-profile">
           <img
             src={postQuery.userAvatar}
-            className='post-detail-mobile-avatar'
+            className="post-detail-mobile-avatar"
           ></img>
-          <span className='post-detail-user-name-mobile'>
+          <span className="post-detail-user-name-mobile">
             {postQuery.userName}
           </span>
         </div>
-        {/* <div>
-          <button
-            className="doctor-search-button"
-            // style={{
-            //   width: "90px",
-            //   height: "30px",
-            //   radius: "8px",
-            //   fontSize: "10px",
-            // }}
-            onClick={() => (window.location.href = "/download")}
-          >
-            Try Charm Life
-          </button>
-        </div> */}
       </div>
 
       {/* Web */}
-      <div className='postdetail-popUp-left-container'>
+      <div className="postdetail-popUp-left-container">
         {!isMobile && picture && (
           <>
-            <div className='post-detail-image-wrapper'>
-              <FontAwesomeIcon
-                className='arrow-icon arrow-left'
-                icon={faArrowLeft}
-                size='lg'
-                onClick={goToPreviousImage} // Go to previous image when this icon is clicked
-              />
+            <div
+              className="post-detail-image-wrapper"
+              onMouseEnter={() => setShowArrows(true)}
+              onMouseLeave={() => setShowArrows(false)}
+            >
+              {currentImageIndex > 0 && showArrows && (
+                <FontAwesomeIcon
+                  className="arrow-icon arrow-left"
+                  icon={faArrowLeft}
+                  size="lg"
+                  onClick={goToPreviousImage}
+                  style={{ color: "#fafcff" }}
+                />
+              )}
               <img
                 src={picture[currentImageIndex]}
                 ref={imageRef}
-                className='post-detail-image'
-                alt='detail-pic'
+                className="post-detail-image"
+                alt="detail-pic"
               />
-              <FontAwesomeIcon
-                className='arrow-icon arrow-right'
-                icon={faArrowRight}
-                size='lg'
-                onClick={goToNextImage} // Go to next image when this icon is clicked
-              />
+              {currentImageIndex < picture.length - 1 && showArrows && (
+                <FontAwesomeIcon
+                  className="arrow-icon arrow-right"
+                  icon={faArrowRight}
+                  size="lg"
+                  onClick={goToNextImage}
+                  style={{ color: "#fafcff" }}
+                />
+              )}
+              {showArrows && (
+                <div className="image-index-tag">
+                  {currentImageIndex + 1} / {picture.length}
+                </div>
+              )}
             </div>
-            <div className='user-detail'>
-              <div className='user-detail-inner'>
+            <div className="user-detail">
+              <div className="user-detail-inner">
                 <img
                   src={postQuery.userAvatar}
-                  alt='Image-User-Picture'
-                  className='user-detail-profile-image'
+                  alt="Image-User-Picture"
+                  className="user-detail-profile-image"
                 />
                 <span>{postQuery.userName}</span>
               </div>
-              <div className='user-detail-button-container'>
-                {/* {isDoctorAuthor && ( */}
+              <div className="user-detail-button-container">
+                {isDoctorAuthor && (
                   <button
-                    className='button-highlight'
+                    className="button-highlight"
                     onClick={handleHighlight}
                   >
-                    {isHighlight ? 'Remove from Highlight' : 'Highlight'}
-                  </button>
-                {/* )} */}
-                {isAuthor && (
-                  <button
-                    className='button-private'
-                    onClick={toggleSetPostDisplay}
-                  >
-                    {isPrivate ? 'Remove from private' : 'Private'}
+                    {isHighlight ? "Remove from Highlight" : "Highlight"}
                   </button>
                 )}
-                {/* {isAuthor && ( */}
-                <button className='button-edit' onClick={handleGoToEdit}>
-                  Edit your Post
-                </button>
-                {/* )} */}
+                {isAuthor && (
+                  <button
+                    className="button-private"
+                    onClick={toggleSetPostDisplay}
+                  >
+                    {isPrivate ? "Remove from private" : "Private"}
+                  </button>
+                )}
+                {isAuthor && (
+                  <button className="button-edit" onClick={handleGoToEdit}>
+                    Edit your Post
+                  </button>
+                )}
+                {isAuthor && (
+                  <button className="button-edit" onClick={handleGoToEdit}>
+                    Edit your Post
+                  </button>
+                )}
               </div>
             </div>
           </>
         )}
         {isMobile && <img src={picture} ref={imageRef}></img>}
       </div>
-      <div className='postdetail-popUp-right-container'>
-        <div className='detail-top-content'>
-          <div className='post-popUp-content'>
-            <h2 className='postdetail-popUp-title'>{postQuery.title}</h2>
-            <hr className='hr' />
-            <p className='post-description'>{brief || 'No description'}</p>
-            <span className='post-tag-names'>
-              #Doctor reviews #Breast Augmentation
-            </span>
-            <span className='post-date'>5/10/2023</span>
-            <hr className='hr' />
-            {/* {tag && <span className='detail-red-font'>{tag}</span>}
-            {postDate && <span className='detail-gray-font'>{ndate}</span>} */}
+      <div className="postdetail-popUp-right-container">
+        <div className="detail-top-content">
+          <div className="post-popUp-content">
+            <h2 className="postdetail-popUp-title">{postQuery.title}</h2>
+            <hr className="hr" />
+            <p className="post-description">{brief || "No description"}</p>
+            {tag && (
+              <span className="post-tag-names">
+                {tag.map((t) => `#${t.tagName}`).join("")}
+              </span>
+            )}
+            {postDate && <span className="post-date">{postDate}</span>}
+            <hr className="hr" />
           </div>
           {/* <div className='post-popUp-break-lines'></div> */}
-          <div className='post-popUp-comments'>
-            <span className='detail-gray-font'>{commentCount} comments</span>
+          <div className="post-popUp-comments">
+            <span className="detail-gray-font">{commentCount} comments</span>
             {/* {comments&&<CommentCard avatar={comments.avatar} name={comments./>} */}
-            <div className='comment-detail'>
-              {comments &&
-                comments.map((comment, index) => {
-                  if (comment && comment.content) {
-                    return (
-                      <CommentCard
-                        key={index}
-                        avatar={comment.avatar || ''}
-                        name={comment.userName || ''}
-                        commentText={convertUnicode(comment.content)}
-                        date={formatDate(comment.commentDate)}
-                        onClick={handleInputClick}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className='comment-card-input-container'>
-                {commentCount >= 0 && showCommentBox && (
-                  <div className='textarea-with-icon'>
-                    <textarea
-                      {...register('comment')}
-                      ref={textareaRef}
-                      type='text'
-                      placeholder='Type Something...'
-                      className='post-comment-card-input'
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSubmit(onSubmit)();
-                        }
-                      }}
+            <div className="comment-detail">
+              {comments?.map((comment, index) => {
+                if (comment?.content) {
+                  return (
+                    <CommentCard
+                      key={index}
+                      avatar={comment.avatar || ""}
+                      name={comment.userName || ""}
+                      commentText={convertUnicode(comment.content)}
+                      date={formatDate(comment.commentDate)}
+                      onClick={handleInputClick}
                     />
-                    <button type='submit' className='textarea-icon'>
-                      <img src={SendIcon} alt='sendIcon' />
-                    </button>
-                  </div>
-                )}
-              </div>
-            </form>
+                  );
+                }
+                return null;
+              })}
+            </div>
+            {/* <form> */}
+            <div className="comment-card-input-container">
+              {commentCount >= 0 && showCommentBox && (
+                <div className="textarea-with-icon-post">
+                  <textarea
+                    // {...register("comment")}
+                    onChange={(e) => setComment(e.target.value)}
+                    ref={textareaRef}
+                    type="text"
+                    placeholder="Type Something..."
+                    className="post-comment-card-input"
+                  />
+                  <button
+                    onClick={handleFormSubmit}
+                    type="submit"
+                    className="textarea-icon"
+                  >
+                    <img src={SendIcon} alt="sendIcon" />
+                  </button>
+                </div>
+              )}
+            </div>
+            {/* </form> */}
           </div>
         </div>
 
-        {/* Mobile */}
-        {/* <div className='post-detail-mobile-download-button'>
-          <img
-            src={DownArrow}
-            style={{ marginTop: "50px", width: "15px", height: "13px" }}
-          ></img>
-          <span className="join-community-text">
-            Join the Charm Life Community to View More
-          </span>
-          <button
-            className="doctor-search-button"
-            // style={{
-            //   width: "150px",
-            //   height: "40px",
-            //   radius: "20px",
-            //   fontSize: "15px",
-            //   marginTop: "10px",
-            // }}
-            onClick={() => (window.location.href = "/download")}
-          >
-            Try Charm Life
-          </button>
-        </div> */}
-
         {/* Web */}
-        <div className='fixed-input-box'>
-          <div className='post-detail-send-box-outer-container'>
-            <div className='Icon-display'>
-              <span className='Icon-count'>
+        <div className="fixed-input-box">
+          <div className="post-detail-send-box-outer-container">
+            <div className="Icon-display">
+              <span className="Icon-count">
                 <img
                   // src={heartIcon}
                   src={liked ? heartIconFilled : heartIcon}
-                  alt='Icon'
-                  className='Icon-size'
+                  alt="Icon"
+                  className="Icon-size"
                   // onClick={handleInputClick}
                   onClick={toggleGetLikes}
                 />
@@ -496,11 +446,11 @@ const CommunityPostDetailPopUP = ({
                   />
                   {collectCount}
                 </span> */}
-              <span className='Icon-count'>
+              <span className="Icon-count">
                 <img
                   src={BubblesIcon}
-                  alt='Icon'
-                  className='Icon-size'
+                  alt="Icon"
+                  className="Icon-size"
                   onClick={handleClickComment}
                 />
                 {commentCount}
