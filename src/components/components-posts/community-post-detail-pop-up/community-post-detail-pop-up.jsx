@@ -4,6 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  Button,
+} from '@chakra-ui/react';
 
 import { z } from 'zod';
 
@@ -74,6 +83,19 @@ const CommunityPostDetailPopUP = ({
 
   // console.log("postQuery", postQuery);
 
+  // chakura ui modal
+  const {
+    isOpen: isHighlightModalOpen,
+    onOpen: openHighlightModal,
+    onClose: closeHighlightModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isRemoveHighlightModalOpen,
+    onOpen: openRemoveHighlightModal,
+    onClose: closeRemoveHighlightModal,
+  } = useDisclosure();
+
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
   var isDoctorAuthor =
@@ -142,6 +164,18 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+
+  // highlight click
+  const toggleHighlight = () => {
+    setIsHighlight((prev) => !prev);
+    openHighlightModal();
+  };
+
+  // remove highlight click
+  const toggleRemoveHighlight = () => {
+    setIsHighlight((prev) => !prev);
+    openRemoveHighlightModal();
+  };
 
   // highlight click
   const handleHighlight = () => {
@@ -353,7 +387,7 @@ const CommunityPostDetailPopUP = ({
                 <button
                   className='button-highlight'
                   onClick={
-                    isHighlight ? handleRemoveHighlight : handleHighlight
+                    isHighlight ? toggleRemoveHighlight : toggleHighlight
                   }
                 >
                   {isHighlight ? 'Remove from Highlight' : 'Highlight'}
@@ -483,6 +517,88 @@ const CommunityPostDetailPopUP = ({
           </div>
         </div>
       </div>
+
+      {/* highlight modal */}
+      <Modal isOpen={isHighlightModalOpen} onClose={closeHighlightModal}>
+        <ModalOverlay
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+        <ModalContent
+          backgroundColor='transparent'
+          boxShadow='none'
+          textAlign='center'
+        >
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Highlight this post?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={closeHighlightModal}
+            >
+              Cancel
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handleHighlight}
+            >
+              Highlight
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* remove highlight modal */}
+      <Modal isOpen={isRemoveHighlightModalOpen} onClose={closeHighlightModal}>
+        <ModalOverlay
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+        <ModalContent
+          backgroundColor='transparent'
+          boxShadow='none'
+          textAlign='center'
+        >
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Remove This Pose from Highlight Cases?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={closeRemoveHighlightModal}
+            >
+              Cancel
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handleRemoveHighlight}
+            >
+              Remove
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

@@ -66,6 +66,7 @@ const EditPostPage = () => {
 
   // chakura ui modal
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   useEffect(() => {
     setUploadedFiles(postQuery.pictures);
     // set the selected image to the last image in the uploadedFiles array
@@ -418,43 +419,44 @@ const EditPostPage = () => {
               </div>
             </div>
           </div>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            />
-            <ModalContent backgroundColor='transparent' boxShadow='none'>
-              <ModalHeader color='#ffffff' fontSize='25px'>
-                Are you sure to delete this post?
-              </ModalHeader>
-              <ModalFooter display='flex' justifyContent='space-between'>
-                <Button
-                  color='#ffffff'
-                  backgroundColor='#675f5a'
-                  outline='none'
-                  _hover='none'
-                  mr={3}
-                  onClick={onClose}
-                >
-                  Back
-                </Button>
-                <Button
-                  color='#ffffff'
-                  backgroundColor='#f1a285'
-                  outline='none'
-                  _hover='none'
-                  onClick={handleClickDelete}
-                >
-                  Delete
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
         </div>
       </form>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+        <ModalContent backgroundColor='transparent' boxShadow='none'>
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Are you sure to delete this post?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={onClose}
+            >
+              Back
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handleClickDelete}
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

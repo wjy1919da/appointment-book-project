@@ -7,7 +7,6 @@ const DocotorOwnMain = () => {
     <div className='doctor-own-profile-main-conatiner container'>
       <DocotorOwnBasic />
       <DoctorProfileSubArea />
-      {/* <DoctorProfileGrid /> */}
     </div>
   );
 };
