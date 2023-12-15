@@ -57,16 +57,18 @@ const CommunityPostDetailPopUP = ({
   const [liked, setLiked] = useState(false);
   const [isHighlight, setIsHightlight] = useState(false);
   const [isPrivate, setIsPrivate] = useState(0);
-  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false); // comment box
   const [comment, setComment] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
   const [showArrows, setShowArrows] = useState(false);
 
+  // refs
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
+
   // console.log("postQuery", postQuery);
 
   const toast = useToast();
@@ -178,6 +180,7 @@ const CommunityPostDetailPopUP = ({
   //   }
   // };
 
+  // comment box
   const handleClickComment = () => {
     setShowCommentBox((prev) => !prev);
     if (textareaRef.current) {
@@ -345,40 +348,41 @@ const CommunityPostDetailPopUP = ({
                       name={comment.userName || ''}
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
-                      // onClick={handleInputClick}
                       showCommentBox={showCommentBox}
                       handleClickComment={handleClickComment}
                       handleFormSubmit={handleFormSubmit}
+                      // onClick={handleInputClick}
                     />
                   );
                 }
                 return null;
               })}
             </div>
-            <div className='comment-card-textarea-container'>
-              {commentCount >= 0 && showCommentBox && (
-                <>
-                  <div className='textarea-with-icon-post'>
-                    <textarea
-                      // {...register("comment")}
-                      onChange={(e) => setComment(e.target.value)}
-                      ref={textareaRef}
-                      type='text'
-                      placeholder='Share Your Thoughts Here...'
-                      className='post-comment-card-textarea'
-                    />
-                  </div>
-                  {/* <button
+          </div>
+        </div>
+
+        <div className='comment-card-textarea-container'>
+          {commentCount >= 0 && showCommentBox && (
+            <>
+              <div className='textarea-with-icon-post'>
+                <textarea
+                  // {...register("comment")}
+                  onChange={(e) => setComment(e.target.value)}
+                  ref={textareaRef}
+                  type='text'
+                  placeholder='Share Your Thoughts Here...'
+                  className='post-comment-card-textarea'
+                />
+              </div>
+              {/* <button
                     onClick={handleFormSubmit}
                     type='submit'
                     className='textarea-icon'
                   >
                     <img src={SendIcon} alt='sendIcon' />
                   </button> */}
-                </>
-              )}
-            </div>
-          </div>
+            </>
+          )}
         </div>
 
         {/* Web */}

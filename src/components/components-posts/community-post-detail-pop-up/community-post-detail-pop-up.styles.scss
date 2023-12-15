@@ -1,4 +1,3 @@
-// @media (min-width: 1025px) {
 .post-detail-popUp-container {
   display: flex;
   height: var(--bs-modal-height);
@@ -22,7 +21,7 @@
       overflow-y: auto; // this is for scroll
       // margin-top: 5%;
       margin-top: 20px;
-      padding: 0 36px;
+      padding: 0 40px;
       // height: 90%;
 
       .post-popUp-content {
@@ -242,8 +241,8 @@
 
 .arrow-left {
   left: 10px;
-  border-radius: 50%; /* Creates a circular shape */
-  padding: 6px; /* Adjusts the size of the circular background */
+  border-radius: 50%;
+  padding: 6px;
   cursor: pointer;
   background-color: rgba(64, 64, 64, 0.25);
   z-index: 1000;
@@ -252,8 +251,8 @@
 
 .arrow-right {
   right: 10px;
-  border-radius: 50%; /* Creates a circular shape */
-  padding: 6px; /* Adjusts the size of the circular background */
+  border-radius: 50%;
+  padding: 6px;
   cursor: pointer;
   background-color: rgba(64, 64, 64, 0.25);
   z-index: 1000;
@@ -261,20 +260,21 @@
 }
 
 // textarea
-// .textarea-with-icon-post {
-//   position: relative;
-// }
+.textarea-with-icon-post {
+  display: flex;
+  justify-content: center;
+}
 
 .post-comment-card-textarea {
   position: fixed;
-  bottom: 130px;
+  bottom: 118px;
   box-sizing: border-box;
   border: 1px solid #675d59;
   border-radius: 8px;
   outline: none;
   resize: none;
   padding: 10px;
-  width: 460px;
+  width: 30%;
   height: 70px;
 }
 
@@ -284,6 +284,7 @@
 //   bottom: 85px;
 // }
 
+// 1024px up
 @media (max-width: 1024px) {
   .post-detail-popUp-container {
     display: flex;

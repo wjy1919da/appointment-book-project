@@ -12,18 +12,13 @@ import SendIcon from '../../assets/post/send_icon.svg';
 // import commentIcon from '../../assets/post/chat_bubble.png';
 import CommentReplyInput from './comment-reply-input';
 
-const CommentCard = ({
-  avatar,
-  name,
-  date,
-  commentText,
-}) => {
+const CommentCard = ({ avatar, name, date, commentText }) => {
   console.log('comment avatar', avatar);
+
   const [showReplyCommentBox, setShowReplyCommentBox] = useState(false);
 
   const containerRef = useRef(null);
   const textareaRef = useRef(null);
-
 
   useEffect(() => {
     if (showReplyCommentBox && textareaRef.current && containerRef.current) {
@@ -34,7 +29,6 @@ const CommentCard = ({
       });
     }
   }, [showReplyCommentBox]);
-
 
   const formatDate = (dateString) => {
     const dateParts = dateString.split('/');
@@ -51,12 +45,9 @@ const CommentCard = ({
     );
   }
 
+  // reply comment
   const handleClickReply = () => {
-    setShowReplyCommentBox((prev) => !prev);
-
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
+    setShowReplyCommentBox(!showReplyCommentBox);
   };
 
   return (
