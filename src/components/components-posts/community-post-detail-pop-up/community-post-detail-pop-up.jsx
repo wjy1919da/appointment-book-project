@@ -64,7 +64,7 @@ const CommunityPostDetailPopUP = ({
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(false); // like
   const [isHighlight, setIsHighlight] = useState(false); // highlight
   const [isPrivate, setIsPrivate] = useState(0); // private
   const [showCommentBox, setShowCommentBox] = useState(false); // comment box

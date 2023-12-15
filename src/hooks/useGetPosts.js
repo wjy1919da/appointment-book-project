@@ -121,6 +121,26 @@ export function useGetLikesPost() {
   return useMutation((credentials) => fetchName(credentials.postId));
 }
 
+// like comment
+export function useGetCommentLikesPost() {
+  const apiClient = new APIClient('/user_action/like_comment');
+  const fetchLikeComment = async (commentId) => {
+    // console.log('COMMENT ID', commentId);
+    const res = await apiClient.post({
+      commentId,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) => fetchLikeComment(credentials.commentId), {
+    onSuccess: (data) => {
+      console.log('OK', data);
+    },
+    onError: (error) => {
+      console.error('ERROR', error);
+    },
+  });
+}
+
 // highlight
 export function useHighlightPost() {
   const setHighlightPost = async (id) => {

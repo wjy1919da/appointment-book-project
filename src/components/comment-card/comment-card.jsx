@@ -1,22 +1,30 @@
 import { useState, useEffect, useRef } from 'react';
+import usePostQueryStore from '../../postStore.ts';
 // import userInfoQueryStore from '../../userStore.ts';
+
+// hooks
+import { useGetCommentLikesPost } from '../../hooks/useGetPosts.js';
 
 // scss
 import './comment-card.styles.scss';
 import '../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss';
 
 // images
-import HeartIcon from '../../assets/post/heart.png';
+import heartIcon from '../../assets/post/heart.png';
+import heartIconFilled from '../../assets/post/heart-fill-Icon.png';
 import SendIcon from '../../assets/post/send_icon.svg';
 
 // import commentIcon from '../../assets/post/chat_bubble.png';
-import CommentReplyInput from './comment-reply-input';
+// import CommentReplyInput from './comment-reply-input';
 
 const CommentCard = ({ avatar, name, date, commentText }) => {
   console.log('comment avatar', avatar);
 
-  const [showReplyCommentBox, setShowReplyCommentBox] = useState(false);
+  const [showReplyCommentBox, setShowReplyCommentBox] = useState(false); // reply comment box
+  const [likedComment, setLikedComment] = useState(false); // like commment
+  const postQuery = usePostQueryStore((state) => state.postQuery);
 
+  // refs
   const containerRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -37,6 +45,7 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
     const formattedDate = `${month}/${day}`;
     return formattedDate;
   };
+
   const newDate = formatDate(date);
 
   function convertUnicode(input) {
@@ -44,6 +53,24 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
       String.fromCharCode(parseInt(b, 16))
     );
   }
+
+  // like comment
+  const { mutate: apiCommentLikeMutate, data: likeData } =
+    useGetCommentLikesPost();
+
+  const handleClickCommentLike = () => {
+    console.log('POST QUERY LIKE COMMENT', postQuery);
+
+    if (!postQuery || !postQuery.postID) {
+      console.error('Invalid postQuery or postID is missing.');
+      return;
+    }
+    
+    setLikedComment((prev) => !prev);
+    const commentId = postQuery.postID;
+    console.log('COMMENT ID TO LIKE', commentId);
+    apiCommentLikeMutate(commentId);
+  };
 
   // reply comment
   const handleClickReply = () => {
@@ -88,8 +115,9 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
               <span>
                 <img
                   className='post-detail-icon'
-                  src={HeartIcon}
+                  src={likedComment ? heartIconFilled : heartIcon}
                   alt='like'
+                  onClick={handleClickCommentLike}
                   // onClick={onClick}
                 ></img>
               </span>
@@ -119,7 +147,6 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
             </>
           )}
         </div>
-        
       </div>
     </div>
   );
