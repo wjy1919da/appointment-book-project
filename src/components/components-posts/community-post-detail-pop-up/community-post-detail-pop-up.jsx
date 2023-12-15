@@ -169,7 +169,7 @@ const CommunityPostDetailPopUP = ({
   // highlight click call api
   const handleHighlight = () => {
     // console.log('POSTQUERY', postQuery);
-    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
     apiMutateHightlight({
       id: postQuery.postID,
       isDisplay: isHighlight,
@@ -178,7 +178,7 @@ const CommunityPostDetailPopUP = ({
 
   // remove highlight click call api
   const handleRemoveHighlight = () => {
-    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
     apiMutateRemoveHighlight({
       id: postQuery.postID,
       isDisplay: isHighlight,
@@ -224,7 +224,7 @@ const CommunityPostDetailPopUP = ({
   // private click call api
   const handlePrivate = () => {
     // console.log('POSTQUERY', postQuery);
-    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
     apiMutateSetPostDisplay({
       id: postQuery.postID,
       isDisplay: isHighlight,
@@ -233,7 +233,7 @@ const CommunityPostDetailPopUP = ({
 
   // remove private click call api
   const handleRemovePrivate = () => {
-    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
     apiMutateSetPostPublic({
       id: postQuery.postID,
       isDisplay: isHighlight,
