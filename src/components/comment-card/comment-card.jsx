@@ -42,14 +42,14 @@ const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    if (showCommentBox && textareaRef.current && containerRef.current) {
+    if (showReplyCommentBox && textareaRef.current && containerRef.current) {
       textareaRef.current.focus();
       containerRef.current.scrollTo({
         top: textareaRef.current.offsetTop,
         behavior: "smooth",
       });
     }
-  }, [showCommentBox]);
+  }, [showReplyCommentBox]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -64,12 +64,9 @@ const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
     );
   }
 
+  // reply comment
   const handleClickReply = () => {
-    setShowCommentBox((prev) => !prev);
-
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
+    setShowReplyCommentBox(!showReplyCommentBox);
   };
 
   return (
@@ -160,15 +157,15 @@ const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
             </div>
           </div>
         </div>
+
         <div className="comment-card-reply-input-container">
-          {showCommentBox && (
+          {showReplyCommentBox && (
             <>
               {/* <hr /> */}
-
               <textarea
                 ref={textareaRef}
                 type="text"
-                placeholder="Type Something..."
+                placeholder="Reply Comments..."
                 className="comment-card-reply-input"
               />
               <img

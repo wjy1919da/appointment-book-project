@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import usePostQueryStore from '../../postStore.ts';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 
 // components
 import CreatePostOfUser from '../create-post/create-post';
@@ -22,16 +23,7 @@ import creatPostIcon from '../../assets/post/create-post-icon.png';
 import userPostAvatar from '../../assets/post/user-profile-avatar.png';
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  // calling hook
-  const {
-    // data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
-
+  // dummy data
   let data = {
     pages: [
       {
@@ -57,6 +49,10 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     pageParams: [null],
   };
 
+  useEffect(() => {
+    console.log('POSTS PAGE DATA', data);
+  }, [data]);
+
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
@@ -65,9 +61,17 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-  const handleIconClick = () => {
-    setShowCreatePost(true);
-  };
+  const navigate = useNavigate();
+
+  // hook
+  const {
+    // data,
+    error,
+    isLoading,
+    // fetchNextPage,
+    // isFetchingNextPage,
+    // hasNextPage,
+  } = useGetUserPostedPost();
 
   // width
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
@@ -82,6 +86,12 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     1024: 4,
     767: 3,
     430: 2,
+  };
+
+  // create a post + icon button
+  const handleIconClick = () => {
+    // setShowCreatePost(true);
+    navigate('/posts/create', { state: { source: 'userProfile' } });
   };
 
   const handleClickPost = (ID, avatar, username, title, memberId) => {
@@ -148,6 +158,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       };
     });
   }, []);
+
   return (
     <div className='user-profile-post-area-container'>
       {!showCreatePost && imagesLoaded && (
