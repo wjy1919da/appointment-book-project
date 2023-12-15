@@ -266,15 +266,15 @@
 }
 
 .post-comment-card-textarea {
-  position: fixed;
-  bottom: 118px;
+  position: absolute;
+  bottom: 70px;
   box-sizing: border-box;
   border: 1px solid #675d59;
   border-radius: 8px;
   outline: none;
   resize: none;
   padding: 10px;
-  width: 30%;
+  width: 90%;
   height: 70px;
 }
 
