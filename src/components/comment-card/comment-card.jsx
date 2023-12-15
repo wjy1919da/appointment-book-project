@@ -1,36 +1,43 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 // import userInfoQueryStore from '../../userStore.ts';
 
 // scss
-import "./comment-card.styles.scss";
-import "../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss";
+import './comment-card.styles.scss';
+import '../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss';
 
 // images
-import HeartIcon from "../../assets/post/heart.png";
-import SendIcon from "../../assets/post/send_icon.svg";
+import HeartIcon from '../../assets/post/heart.png';
+import SendIcon from '../../assets/post/send_icon.svg';
 
 // import commentIcon from '../../assets/post/chat_bubble.png';
-import CommentReplyInput from "./comment-reply-input";
+import CommentReplyInput from './comment-reply-input';
 
-const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
-  console.log("comment avatar", avatar);
-  const [showCommentBox, setShowCommentBox] = useState(false);
+const CommentCard = ({
+  avatar,
+  name,
+  date,
+  commentText,
+}) => {
+  console.log('comment avatar', avatar);
+  const [showReplyCommentBox, setShowReplyCommentBox] = useState(false);
 
   const containerRef = useRef(null);
   const textareaRef = useRef(null);
 
+
   useEffect(() => {
-    if (showCommentBox && textareaRef.current && containerRef.current) {
+    if (showReplyCommentBox && textareaRef.current && containerRef.current) {
       textareaRef.current.focus();
       containerRef.current.scrollTo({
         top: textareaRef.current.offsetTop,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
-  }, [showCommentBox]);
+  }, [showReplyCommentBox]);
+
 
   const formatDate = (dateString) => {
-    const dateParts = dateString.split("/");
+    const dateParts = dateString.split('/');
     const month = dateParts[0];
     const day = dateParts[1];
     const formattedDate = `${month}/${day}`;
@@ -45,7 +52,7 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
   }
 
   const handleClickReply = () => {
-    setShowCommentBox((prev) => !prev);
+    setShowReplyCommentBox((prev) => !prev);
 
     if (textareaRef.current) {
       textareaRef.current.focus();
@@ -53,31 +60,31 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
   };
 
   return (
-    <div className="comment-card-container">
-      <div className="comment-card-inner-container">
-        <div className="comment-card-detail-container">
-          <div className="comment-card-profile-information-wrapper">
-            <div className="reviewer-profile-information">
-              <div className="reviewer-progile-avatar">
+    <div className='comment-card-container'>
+      <div className='comment-card-inner-container'>
+        <div className='comment-card-detail-container'>
+          <div className='comment-card-profile-information-wrapper'>
+            <div className='reviewer-profile-information'>
+              <div className='reviewer-progile-avatar'>
                 <img
                   src={avatar}
-                  className="reviewer-avatar"
-                  alt="avatar"
+                  className='reviewer-avatar'
+                  alt='avatar'
                 ></img>
               </div>
-              <div className="reviewer-information">
-                <div className="userName-date">
-                  <span className="detail-gray-font">
-                    {name ? convertUnicode(name) : ""}
+              <div className='reviewer-information'>
+                <div className='userName-date'>
+                  <span className='detail-gray-font'>
+                    {name ? convertUnicode(name) : ''}
                   </span>
-                  <span className="detail-comment-text">
-                    {commentText ? convertUnicode(commentText) : ""}
+                  <span className='detail-comment-text'>
+                    {commentText ? convertUnicode(commentText) : ''}
                   </span>
-                  <div className="comment-card-second-line">
-                    <span className="comment-card-date">{date}</span>
+                  <div className='comment-card-second-line'>
+                    <span className='comment-card-date'>{date}</span>
                     <button
                       onClick={handleClickReply}
-                      className="comment-card-button"
+                      className='comment-card-button'
                     >
                       Reply
                     </button>
@@ -86,12 +93,12 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
               </div>
             </div>
 
-            <div className="likeCount-commentCount">
+            <div className='likeCount-commentCount'>
               <span>
                 <img
-                  className="post-detail-icon"
+                  className='post-detail-icon'
                   src={HeartIcon}
-                  alt="like"
+                  alt='like'
                   // onClick={onClick}
                 ></img>
               </span>
@@ -101,21 +108,21 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
             </div>
           </div>
         </div>
-        <div className="comment-card-reply-input-container">
-          {showCommentBox && (
+
+        <div className='comment-card-reply-input-container'>
+          {showReplyCommentBox && (
             <>
               {/* <hr /> */}
-
               <textarea
                 ref={textareaRef}
-                type="text"
-                placeholder="Type Something..."
-                className="comment-card-reply-input"
+                type='text'
+                placeholder='Reply Comments...'
+                className='comment-card-reply-input'
               />
               <img
                 src={SendIcon}
-                alt="Icon-Send"
-                className="comment-card-reply-send-icon"
+                alt='Icon-Send'
+                className='comment-card-reply-send-icon'
               />
               {/* <CommentReplyInput textareaRef={textareaRef} /> */}
             </>
