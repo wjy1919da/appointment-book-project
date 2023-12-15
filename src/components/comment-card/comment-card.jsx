@@ -21,52 +21,22 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
+const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
   // console.log("comment avatar", avatar);
-  const comments = [
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-09",
-      content: "rrrrrrrrrrr",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "8888889testing comment",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "testing again",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "tessssst",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "sent comment test",
-      comments: [],
-    },
-  ];
 
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const [visibleReplies, setVisibleReplies] = useState(3); // 初始显示3条回复
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const togglePanel = () => {
+    setIsPanelOpen(!isPanelOpen); // Toggle the isPanelOpen state
+    if (!isPanelOpen && visibleReplies > 3) {
+      setVisibleReplies(3); // If panel is being closed, reset to show only 3 replies
+    }
+  };
+
+  const handleShowMoreReplies = () => {
+    setVisibleReplies(replies.length); // 展开所有回复
+  };
 
   const containerRef = useRef(null);
   const textareaRef = useRef(null);
@@ -82,10 +52,8 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
   }, [showCommentBox]);
 
   const formatDate = (dateString) => {
-    const dateParts = dateString.split("/");
-    const month = dateParts[0];
-    const day = dateParts[1];
-    const formattedDate = `${month}/${day}`;
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString("en-US");
     return formattedDate;
   };
   const newDate = formatDate(date);
@@ -135,23 +103,43 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
                     </button>
                   </div>
                   <div className="comment-card-third-line">
-                    <Accordion allowToggle>
-                      <AccordionItem>
-                        <h2>
-                          <AccordionButton>
-                            <Box flex="1" textAlign="left">
-                              Section 1 title
-                            </Box>
+                    {replies && replies.length > 0 && (
+                      <Accordion allowToggle>
+                        <AccordionItem>
+                          <AccordionPanel pb={4}>
+                            {replies.slice(0, visibleReplies).map((reply) => (
+                              <CommentCard
+                                key={reply.id}
+                                avatar={reply.avatar}
+                                name={reply.userName}
+                                commentText={reply.content}
+                                date={formatDate(reply.commentDate)}
+                                replies={reply.comments}
+                              />
+                            ))}
+                            {/* Show more or less buttons */}
+                            {replies.length > 3 && visibleReplies === 3 && (
+                              <button onClick={handleShowMoreReplies}>
+                                Show More
+                              </button>
+                            )}
+                            {/* {visibleReplies > 3 && (
+                              <AccordionButton onClick={togglePanel}>
+                                Collapse All
+                              </AccordionButton>
+                            )} */}
+                          </AccordionPanel>
+                          <AccordionButton onClick={togglePanel}>
+                            {/* <button> */}
+                            {/* <Box flex="1" textAlign="left"> */}
+                            {isPanelOpen ? "Collapse" : "Replies"}
+                            {/* </Box> */}
                             <AccordionIcon />
+                            {/* </button> */}
                           </AccordionButton>
-                        </h2>
-                        <AccordionPanel pb={4}>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua.
-                        </AccordionPanel>
-                      </AccordionItem>
-                    </Accordion>
+                        </AccordionItem>
+                      </Accordion>
+                    )}
                   </div>
                 </div>
               </div>
