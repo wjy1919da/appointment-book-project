@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import { z } from 'zod';
 
 // import { Button } from 'react-bootstrap';
@@ -21,6 +22,8 @@ import { useAddComment } from '../../../hooks/useComment';
 import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
 import { useApiRequestSetPostDisplay } from '../../../hooks/useApiRequestPost';
 import { useApiRequestSetPostPublic } from '../../../hooks/useApiRequestPost';
+import { useHighlightPost } from '../../../hooks/useGetPosts.js';
+import { useRemoveHighlightPost } from '../../../hooks/useGetPosts.js';
 
 // scss
 import './community-post-detail-pop-up.styles.scss';
@@ -55,7 +58,7 @@ const CommunityPostDetailPopUP = ({
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const [isHighlight, setIsHightlight] = useState(false);
+  const [isHighlight, setIsHighlight] = useState(false);
   const [isPrivate, setIsPrivate] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false); // comment box
   const [comment, setComment] = useState('');
@@ -115,6 +118,69 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+
+  // highlight
+  const { mutate: apiMutateHightlight } = useHighlightPost({
+    onError: (error) => {
+      toast({
+        title: 'Failed.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  // remove highlight
+  const { mutate: apiMutateRemoveHighlight } = useRemoveHighlightPost({
+    onError: (error) => {
+      toast({
+        title: 'Failed to remove highlight.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  // highlight click
+  const handleHighlight = () => {
+    console.log('POSTQUERY', postQuery);
+    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    apiMutateHightlight({
+      id: postQuery.postID,
+      isDisplay: isHighlight,
+    });
+  };
+
+  // remove highlight click
+  const handleRemoveHighlight = () => {
+    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    if (!userInfo?.token) {
+      toast({
+        title: 'Please login first.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    apiMutateRemoveHighlight({
+      id: postQuery.postID,
+      isDisplay: isHighlight,
+    });
+  };
+
+  // private click
   const toggleSetPostDisplay = () => {
     setIsPrivate((prev) => !prev);
     const apiMutation = isPrivate
@@ -219,11 +285,6 @@ const CommunityPostDetailPopUP = ({
     // navigate('/edit-post');
   };
 
-  // highlight
-  const handleHighlight = () => {
-    setIsHightlight((prev) => !prev);
-  };
-
   return (
     <div className='post-detail-popUp-container' ref={containerRef}>
       {/* Moblie */}
@@ -289,12 +350,14 @@ const CommunityPostDetailPopUP = ({
               </div>
               <div className='user-detail-button-container'>
                 {/* {isDoctorAuthor && ( */}
-                  <button
-                    className='button-highlight'
-                    onClick={handleHighlight}
-                  >
-                    {isHighlight ? 'Remove from Highlight' : 'Highlight'}
-                  </button>
+                <button
+                  className='button-highlight'
+                  onClick={
+                    isHighlight ? handleRemoveHighlight : handleHighlight
+                  }
+                >
+                  {isHighlight ? 'Remove from Highlight' : 'Highlight'}
+                </button>
                 {/* )} */}
                 {isAuthor && (
                   <button
@@ -305,9 +368,9 @@ const CommunityPostDetailPopUP = ({
                   </button>
                 )}
                 {/* {isAuthor && ( */}
-                  <button className='button-edit' onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
+                <button className='button-edit' onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
                 {/* )} */}
               </div>
             </div>
