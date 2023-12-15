@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 // import userInfoQueryStore from '../../userStore.ts';
+import { useGetCommentLikesPost } from "../../hooks/useComment";
+import { useToast } from "@chakra-ui/react";
 
 // scss
 import "./comment-card.styles.scss";
@@ -21,10 +23,30 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
+const CommentCard = ({
+  avatar,
+  name,
+  date,
+  commentText,
+  commentId,
+  onClick,
+  replies,
+}) => {
   // console.log("comment avatar", avatar);
   // console.log("comment replies", replies);
+  const toast = useToast();
+  const { mutate: apiCommentLikeMutate } = useGetCommentLikesPost({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
   const [showCommentBox, setShowCommentBox] = useState(false);
+
   const [visibleReplies, setVisibleReplies] = useState(3); // 初始显示3条回复
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const togglePanel = () => {
@@ -68,6 +90,10 @@ const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
   // const handleClickReply = () => {
   //   setShowReplyCommentBox(!showReplyCommentBox);
   // };
+  const handleClickCommentLike = (commentId) => {
+    console.log("commentId here", commentId);
+    apiCommentLikeMutate({ commentId: commentId });
+  };
 
   return (
     <div className="comment-card-container">
@@ -148,7 +174,7 @@ const CommentCard = ({ avatar, name, date, commentText, onClick, replies }) => {
                   className="post-detail-icon"
                   src={HeartIcon}
                   alt="like"
-                  // onClick={onClick}
+                  onClick={() => handleClickCommentLike(commentId)}
                 ></img>
               </span>
               {/* <span>
