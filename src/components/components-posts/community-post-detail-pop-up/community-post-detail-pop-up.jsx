@@ -330,14 +330,11 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className="user-detail-button-container">
-                {isDoctorAuthor && (
-                  <button
-                    className="button-highlight"
-                    onClick={handleHighlight}
-                  >
-                    {isHighlight ? "Remove from Highlight" : "Highlight"}
-                  </button>
-                )}
+                {/* {isDoctorAuthor && ( */}
+                <button className="button-highlight" onClick={handleHighlight}>
+                  {isHighlight ? "Remove from Highlight" : "Highlight"}
+                </button>
+                {/* )} */}
                 {isAuthor && (
                   <button
                     className="button-private"
@@ -346,16 +343,11 @@ const CommunityPostDetailPopUP = ({
                     {isPrivate ? "Remove from private" : "Private"}
                   </button>
                 )}
-                {isAuthor && (
-                  <button className="button-edit" onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
-                )}
-                {isAuthor && (
-                  <button className="button-edit" onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
-                )}
+                {/* {isAuthor && ( */}
+                <button className="button-edit" onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
+                {/* )} */}
               </div>
             </div>
           </>
@@ -390,9 +382,10 @@ const CommunityPostDetailPopUP = ({
                       name={comment.userName || ""}
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
-                      showCommentBox={showCommentBox}
-                      handleClickComment={handleClickComment}
-                      handleFormSubmit={handleFormSubmit}
+                      // showCommentBox={showCommentBox}
+                      // handleClickComment={handleClickComment}
+                      // handleFormSubmit={handleFormSubmit}
+                      replies={replies}
                       // onClick={handleInputClick}
                     />
                   );
@@ -416,13 +409,13 @@ const CommunityPostDetailPopUP = ({
                   className="post-comment-card-textarea"
                 />
               </div>
-              {/* <button
-                    onClick={handleFormSubmit}
-                    type='submit'
-                    className='textarea-icon'
-                  >
-                    <img src={SendIcon} alt='sendIcon' />
-                  </button> */}
+              <button
+                onClick={handleFormSubmit}
+                type="submit"
+                className="textarea-icon"
+              >
+                <img src={SendIcon} alt="sendIcon" />
+              </button>
             </>
           )}
         </div>
