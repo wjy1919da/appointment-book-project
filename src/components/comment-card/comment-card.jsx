@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import React from "react";
 // import userInfoQueryStore from '../../userStore.ts';
 
 // scss
@@ -11,9 +12,60 @@ import SendIcon from "../../assets/post/send_icon.svg";
 
 // import commentIcon from '../../assets/post/chat_bubble.png';
 import CommentReplyInput from "./comment-reply-input";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
 
 const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
-  console.log("comment avatar", avatar);
+  // console.log("comment avatar", avatar);
+  const comments = [
+    {
+      avatar:
+        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+      userName: "wjyyy",
+      commentDate: "2023-12-09",
+      content: "rrrrrrrrrrr",
+      comments: [],
+    },
+    {
+      avatar:
+        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+      userName: "wjyyy",
+      commentDate: "2023-12-13",
+      content: "8888889testing comment",
+      comments: [],
+    },
+    {
+      avatar:
+        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+      userName: "wjyyy",
+      commentDate: "2023-12-13",
+      content: "testing again",
+      comments: [],
+    },
+    {
+      avatar:
+        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+      userName: "wjyyy",
+      commentDate: "2023-12-13",
+      content: "tessssst",
+      comments: [],
+    },
+    {
+      avatar:
+        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+      userName: "wjyyy",
+      commentDate: "2023-12-13",
+      content: "sent comment test",
+      comments: [],
+    },
+  ];
+
   const [showCommentBox, setShowCommentBox] = useState(false);
 
   const containerRef = useRef(null);
@@ -81,6 +133,25 @@ const CommentCard = ({ avatar, name, date, commentText, onClick }) => {
                     >
                       Reply
                     </button>
+                  </div>
+                  <div className="comment-card-third-line">
+                    <Accordion allowToggle>
+                      <AccordionItem>
+                        <h2>
+                          <AccordionButton>
+                            <Box flex="1" textAlign="left">
+                              Section 1 title
+                            </Box>
+                            <AccordionIcon />
+                          </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua.
+                        </AccordionPanel>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
                 </div>
               </div>
