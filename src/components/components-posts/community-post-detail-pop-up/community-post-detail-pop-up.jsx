@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
 import {
   useDisclosure,
   Modal,
@@ -14,10 +16,6 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-import { z } from 'zod';
-
-// import { Button } from 'react-bootstrap';
-
 // stores
 import usePostQueryStore from '../../../postStore.ts';
 import userInfoQueryStore from '../../../userStore.ts';
@@ -25,14 +23,15 @@ import userInfoQueryStore from '../../../userStore.ts';
 // components
 import CommentCard from '../../comment-card/comment-card';
 // import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
+// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 // hooks
 import { useAddComment } from '../../../hooks/useComment';
 import { useGetLikesPost } from '../../../hooks/useGetPosts.js';
-import { useApiRequestSetPostDisplay } from '../../../hooks/useApiRequestPost';
-import { useApiRequestSetPostPublic } from '../../../hooks/useApiRequestPost';
 import { useHighlightPost } from '../../../hooks/useGetPosts.js';
 import { useRemoveHighlightPost } from '../../../hooks/useGetPosts.js';
+import { useApiRequestSetPostDisplay } from '../../../hooks/useApiRequestPost'; // private
+import { useApiRequestSetPostPublic } from '../../../hooks/useApiRequestPost'; // remove private
 
 // scss
 import './community-post-detail-pop-up.styles.scss';
@@ -47,7 +46,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -67,8 +65,8 @@ const CommunityPostDetailPopUP = ({
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const [isHighlight, setIsHighlight] = useState(false);
-  const [isPrivate, setIsPrivate] = useState(0);
+  const [isHighlight, setIsHighlight] = useState(false); // highlight
+  const [isPrivate, setIsPrivate] = useState(0); // private
   const [showCommentBox, setShowCommentBox] = useState(false); // comment box
   const [comment, setComment] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -96,6 +94,18 @@ const CommunityPostDetailPopUP = ({
     onClose: closeRemoveHighlightModal,
   } = useDisclosure();
 
+  const {
+    isOpen: isPrivateModalOpen,
+    onOpen: openPrivateModal,
+    onClose: closePrivateModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isRemovePrivateModalOpen,
+    onOpen: openRemovePrivateModal,
+    onClose: closeRemovePrivateModal,
+  } = useDisclosure();
+
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
   var isDoctorAuthor =
@@ -119,29 +129,8 @@ const CommunityPostDetailPopUP = ({
       .nonempty('Comment is required')
       .min(5, 'Comment must be at least 5 characters long'),
   });
-  // Set post display(private/public)
-  const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
-    onError: (error) => {
-      toast({
-        title: 'Failed.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
-  const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
-    onError: (error) => {
-      toast({
-        title: 'Failed.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
 
-  // highlight
+  // highlight api import
   const { mutate: apiMutateHightlight } = useHighlightPost({
     onError: (error) => {
       toast({
@@ -153,7 +142,7 @@ const CommunityPostDetailPopUP = ({
     },
   });
 
-  // remove highlight
+  // remove highlight api import
   const { mutate: apiMutateRemoveHighlight } = useRemoveHighlightPost({
     onError: (error) => {
       toast({
@@ -165,65 +154,102 @@ const CommunityPostDetailPopUP = ({
     },
   });
 
-  // highlight click
+  // highlight button label and modal toggle
   const toggleHighlight = () => {
     setIsHighlight((prev) => !prev);
     openHighlightModal();
   };
 
-  // remove highlight click
+  // remove highlight button label and modal toggle
   const toggleRemoveHighlight = () => {
     setIsHighlight((prev) => !prev);
     openRemoveHighlightModal();
   };
 
-  // highlight click
+  // highlight click call api
   const handleHighlight = () => {
-    console.log('POSTQUERY', postQuery);
+    // console.log('POSTQUERY', postQuery);
     setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    if (!userInfo?.token) {
-      toast({
-        title: 'Please login first.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
-    }
     apiMutateHightlight({
       id: postQuery.postID,
       isDisplay: isHighlight,
     });
   };
 
-  // remove highlight click
+  // remove highlight click call api
   const handleRemoveHighlight = () => {
     setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    if (!userInfo?.token) {
-      toast({
-        title: 'Please login first.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
-    }
     apiMutateRemoveHighlight({
       id: postQuery.postID,
       isDisplay: isHighlight,
     });
   };
 
-  // private click
-  const toggleSetPostDisplay = () => {
+  // private api import
+  const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
+    onError: (error) => {
+      toast({
+        title: 'Failed.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  //  remove private api import
+  const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
+    onError: (error) => {
+      toast({
+        title: 'Failed.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  // private button label and modal toggle
+  const togglePrivate = () => {
     setIsPrivate((prev) => !prev);
-    const apiMutation = isPrivate
-      ? apiMutateSetPostPublic
-      : apiMutateSetPostDisplay;
-    if (validateTokenAndPopup()) {
-      apiMutation({ id: postQuery.postID });
-    }
+    openPrivateModal();
   };
+
+  // remove private button label and modal toggle
+  const toggleRemovePrivate = () => {
+    setIsPrivate((prev) => !prev);
+    openRemovePrivateModal();
+  };
+
+  // private click call api
+  const handlePrivate = () => {
+    // console.log('POSTQUERY', postQuery);
+    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    apiMutateSetPostDisplay({
+      id: postQuery.postID,
+      isDisplay: isHighlight,
+    });
+  };
+
+  // remove private click call api
+  const handleRemovePrivate = () => {
+    setIsHighlight((prev) => (prev === 0 ? 1 : 0));
+    apiMutateSetPostPublic({
+      id: postQuery.postID,
+      isDisplay: isHighlight,
+    });
+  };
+
+  // private click call api
+  // const toggleSetPostDisplay = () => {
+  //   setIsPrivate((prev) => !prev);
+  //   const apiMutation = isPrivate
+  //     ? apiMutateSetPostPublic
+  //     : apiMutateSetPostDisplay;
+  //   if (validateTokenAndPopup()) {
+  //     apiMutation({ id: postQuery.postID });
+  //   }
+  // };
 
   // api
   const { mutate: apiMutate } = useGetLikesPost({
@@ -393,14 +419,17 @@ const CommunityPostDetailPopUP = ({
                   {isHighlight ? 'Remove from Highlight' : 'Highlight'}
                 </button>
                 {/* )} */}
-                {isAuthor && (
-                  <button
-                    className='button-private'
-                    onClick={toggleSetPostDisplay}
-                  >
-                    {isPrivate ? 'Remove from private' : 'Private'}
-                  </button>
-                )}
+
+                {/* {isAuthor && ( */}
+                <button
+                  className='button-private'
+                  onClick={isPrivate ? toggleRemovePrivate : togglePrivate}
+                  // onClick={toggleSetPostDisplay}
+                >
+                  {isPrivate ? 'Remove from Private' : 'Private'}
+                </button>
+                {/* )} */}
+
                 {/* {isAuthor && ( */}
                 <button className='button-edit' onClick={handleGoToEdit}>
                   Edit your Post
@@ -593,6 +622,88 @@ const CommunityPostDetailPopUP = ({
               outline='none'
               _hover='none'
               onClick={handleRemoveHighlight}
+            >
+              Remove
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* private modal */}
+      <Modal isOpen={isPrivateModalOpen} onClose={closePrivateModal}>
+        <ModalOverlay
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+        <ModalContent
+          backgroundColor='transparent'
+          boxShadow='none'
+          textAlign='center'
+        >
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Private this post?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={closePrivateModal}
+            >
+              Cancel
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handlePrivate}
+            >
+              Private
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* remove private modal */}
+      <Modal isOpen={isRemovePrivateModalOpen} onClose={closeRemovePrivateModal}>
+        <ModalOverlay
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+        <ModalContent
+          backgroundColor='transparent'
+          boxShadow='none'
+          textAlign='center'
+        >
+          <ModalHeader color='#ffffff' fontSize='25px'>
+            Remove This Pose from Private Cases?
+          </ModalHeader>
+          <ModalFooter display='flex' justifyContent='space-between'>
+            <Button
+              color='#ffffff'
+              backgroundColor='#675f5a'
+              outline='none'
+              _hover='none'
+              mr={3}
+              onClick={closeRemovePrivateModal}
+            >
+              Cancel
+            </Button>
+            <Button
+              color='#ffffff'
+              backgroundColor='#f1a285'
+              outline='none'
+              _hover='none'
+              onClick={handleRemovePrivate}
             >
               Remove
             </Button>
