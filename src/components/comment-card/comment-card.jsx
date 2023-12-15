@@ -119,6 +119,7 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
             </>
           )}
         </div>
+        
       </div>
     </div>
   );
