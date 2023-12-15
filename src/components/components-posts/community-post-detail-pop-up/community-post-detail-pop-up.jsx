@@ -346,7 +346,7 @@ const CommunityPostDetailPopUP = ({
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
                       // onClick={handleInputClick}
-                      showCommentBox={showCommentBox}  
+                      showCommentBox={showCommentBox}
                       handleClickComment={handleClickComment}
                       handleFormSubmit={handleFormSubmit}
                     />
@@ -357,23 +357,25 @@ const CommunityPostDetailPopUP = ({
             </div>
             <div className='comment-card-textarea-container'>
               {commentCount >= 0 && showCommentBox && (
-                <div className='textarea-with-icon-post'>
-                  <textarea
-                    // {...register("comment")}
-                    onChange={(e) => setComment(e.target.value)}
-                    ref={textareaRef}
-                    type='text'
-                    placeholder='Share Your Thoughts Here...'
-                    className='post-comment-card-textarea'
-                  />
-                  <button
+                <>
+                  <div className='textarea-with-icon-post'>
+                    <textarea
+                      // {...register("comment")}
+                      onChange={(e) => setComment(e.target.value)}
+                      ref={textareaRef}
+                      type='text'
+                      placeholder='Share Your Thoughts Here...'
+                      className='post-comment-card-textarea'
+                    />
+                  </div>
+                  {/* <button
                     onClick={handleFormSubmit}
                     type='submit'
                     className='textarea-icon'
                   >
                     <img src={SendIcon} alt='sendIcon' />
-                  </button>
-                </div>
+                  </button> */}
+                </>
               )}
             </div>
           </div>

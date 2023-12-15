@@ -15,14 +15,15 @@
 
     .detail-top-content {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      flex: 1;
-      -top: 20px;
+      // -top: 20px;
+      // display: flex;
+      // flex-direction: column;
+      // flex: 1;
+      overflow-y: auto; // this is for scroll
       // margin-top: 5%;
       margin-top: 20px;
       padding: 0 36px;
+      // height: 90%;
 
       .post-popUp-content {
         position: relative;
@@ -258,27 +259,30 @@
   z-index: 1000;
   // color: white;
 }
-.textarea-with-icon-post {
-  position: relative;
-}
+
+// textarea
+// .textarea-with-icon-post {
+//   position: relative;
+// }
 
 .post-comment-card-textarea {
+  position: fixed;
+  bottom: 130px;
+  box-sizing: border-box;
   border: 1px solid #675d59;
   border-radius: 8px;
-  overflow: hidden;
   outline: none;
   resize: none;
-  margin-right: 10px;
   padding: 10px;
-  width: 100%;
+  width: 460px;
   height: 70px;
 }
 
-.textarea-icon {
-  position: absolute;
-  right: 20px;
-  top: 30px;
-}
+// .textarea-icon {
+//   position: absolute;
+//   right: 50px;
+//   bottom: 85px;
+// }
 
 @media (max-width: 1024px) {
   .post-detail-popUp-container {
