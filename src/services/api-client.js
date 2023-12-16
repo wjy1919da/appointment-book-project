@@ -43,6 +43,27 @@ class APIClient {
       .get(this.endpoint, config)
       .then((response) => response);
   }
+  postForm(data, pathParams = {}) {
+    const token = this.getToken();
+    const config = {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    let endpoint = this.endpoint;
+    for (const key in pathParams) {
+      endpoint = endpoint.replace(`{${key}}`, pathParams[key]);
+    }
+
+    const formData = new URLSearchParams();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+
+    return axiosInstance
+      .post(endpoint, formData, config)
+      .then((response) => response);
+  }
   delete(postId) {
     const token = this.getToken();
     const config = {

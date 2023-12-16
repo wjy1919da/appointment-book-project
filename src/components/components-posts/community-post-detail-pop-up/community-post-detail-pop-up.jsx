@@ -469,9 +469,10 @@ const CommunityPostDetailPopUP = ({
                       name={comment.userName || ''}
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
-                      showCommentBox={showCommentBox}
-                      handleClickComment={handleClickComment}
-                      handleFormSubmit={handleFormSubmit}
+                      commentId={comment.id}
+                      // showCommentBox={showCommentBox}
+                      // handleClickComment={handleClickComment}
+                      // handleFormSubmit={handleFormSubmit}
                       // onClick={handleInputClick}
                     />
                   );

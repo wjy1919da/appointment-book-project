@@ -17,8 +17,9 @@ import SendIcon from '../../assets/post/send_icon.svg';
 // import commentIcon from '../../assets/post/chat_bubble.png';
 // import CommentReplyInput from './comment-reply-input';
 
-const CommentCard = ({ avatar, name, date, commentText }) => {
-  console.log('comment avatar', avatar);
+const CommentCard = ({ avatar, name, date, commentText, commentId }) => {
+  // console.log('comment avatar', avatar);
+  console.log('COMMENT NAME', commentId);
 
   const [showReplyCommentBox, setShowReplyCommentBox] = useState(false); // reply comment box
   const [likedComment, setLikedComment] = useState(false); // like commment
@@ -58,18 +59,11 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
   const { mutate: apiCommentLikeMutate, data: likeData } =
     useGetCommentLikesPost();
 
-  const handleClickCommentLike = () => {
-    console.log('POST QUERY LIKE COMMENT', postQuery);
 
-    if (!postQuery || !postQuery.postID) {
-      console.error('Invalid postQuery or postID is missing.');
-      return;
-    }
-    
+  const handleClickCommentLike = (commentId) => {
+    console.log('COMMENT ID', commentId);
     setLikedComment((prev) => !prev);
-    const commentId = postQuery.postID;
-    console.log('COMMENT ID TO LIKE', commentId);
-    apiCommentLikeMutate(commentId);
+    apiCommentLikeMutate({ commentId: commentId });
   };
 
   // reply comment
@@ -117,7 +111,7 @@ const CommentCard = ({ avatar, name, date, commentText }) => {
                   className='post-detail-icon'
                   src={likedComment ? heartIconFilled : heartIcon}
                   alt='like'
-                  onClick={handleClickCommentLike}
+                  onClick={() => handleClickCommentLike(commentId)}
                   // onClick={onClick}
                 ></img>
               </span>
