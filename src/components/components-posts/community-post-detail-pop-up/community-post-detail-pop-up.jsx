@@ -27,6 +27,7 @@ import CommentCard from "../../comment-card/comment-card";
 
 // hooks
 import { useAddComment } from "../../../hooks/useComment";
+import { useRplyComment } from "../../../hooks/useComment";
 import { useGetLikesPost } from "../../../hooks/useGetPosts.js";
 import { useHighlightPost } from "../../../hooks/useGetPosts.js";
 import { useRemoveHighlightPost } from "../../../hooks/useGetPosts.js";
@@ -46,6 +47,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { is } from "date-fns/locale";
 // import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 const CommunityPostDetailPopUP = ({
@@ -116,6 +118,10 @@ const CommunityPostDetailPopUP = ({
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
   const [showArrows, setShowArrows] = useState(false);
+  // Reply comment
+  const [replyCommnetId, setReplyCommentId] = useState(0);
+  const [isReply, setIsReply] = useState(false);
+  const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
 
   // refs
   const containerRef = useRef(null);
@@ -312,7 +318,16 @@ const CommunityPostDetailPopUP = ({
       apiMutate({ postId: postQuery.postID });
     }
   };
-  const { mutate, data, isLoading, isError, error } = useAddComment();
+  const { mutate } = useAddComment({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -321,15 +336,35 @@ const CommunityPostDetailPopUP = ({
   } = useForm({
     resolver: zodResolver(schema),
   });
+  const { mutate: apiReplyComment } = useRplyComment({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (validateTokenAndPopup()) {
       // console.log("mutate is called");
-      mutate({
-        dynamicId: postQuery.postID,
-        text: comment,
-      });
+      console.log("postQuery.tempCommentStatus", postQuery.tempCommentStatus);
+      if (postQuery.tempCommentStatus === "comment") {
+        mutate({
+          dynamicId: postQuery.postID,
+          text: comment,
+        });
+      }
+      if (postQuery.tempCommentStatus === "reply") {
+        console.log("reply is called", replyCommnetId);
+        apiReplyComment({
+          commentId: replyCommnetId,
+          text: comment,
+        });
+      }
       refresh();
     }
   };
@@ -351,9 +386,10 @@ const CommunityPostDetailPopUP = ({
 
   // comment box
   const handleClickComment = () => {
-    setShowCommentBox((prev) => !prev);
-    if (textareaRef.current) {
-      textareaRef.current.focus();
+    if (postQuery.tempCommentStatus === "comment") {
+      setTempCommentStatus(false);
+    } else {
+      setTempCommentStatus(true, "comment");
     }
   };
 
@@ -513,11 +549,8 @@ const CommunityPostDetailPopUP = ({
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
                       commentId={comment.id}
-                      // showCommentBox={showCommentBox}
-                      // handleClickComment={handleClickComment}
-                      // handleFormSubmit={handleFormSubmit}
+                      setReplyCommentId={setReplyCommentId}
                       replies={replies}
-                      // onClick={handleInputClick}
                     />
                   );
                 }
@@ -528,26 +561,23 @@ const CommunityPostDetailPopUP = ({
         </div>
 
         <div className="comment-card-textarea-container">
-          {commentCount >= 0 && showCommentBox && (
-            <>
-              <div className="textarea-with-icon-post">
-                <textarea
-                  // {...register("comment")}
-                  onChange={(e) => setComment(e.target.value)}
-                  ref={textareaRef}
-                  type="text"
-                  placeholder="Share Your Thoughts Here..."
-                  className="post-comment-card-textarea"
-                />
-              </div>
-              <button
-                onClick={handleFormSubmit}
-                type="submit"
-                className="textarea-icon"
-              >
+          {postQuery.tempCommentStatus && (
+            <div className="textarea-with-icon-post">
+              <textarea
+                onChange={(e) => setComment(e.target.value)}
+                ref={textareaRef}
+                type="text"
+                placeholder={
+                  postQuery.tempCommentStatus === "reply"
+                    ? "Reply"
+                    : "Share Your Thoughts Here..."
+                }
+                className="post-comment-card-textarea"
+              />
+              <button onClick={handleFormSubmit} className="textarea-icon">
                 <img src={SendIcon} alt="sendIcon" />
               </button>
-            </>
+            </div>
           )}
         </div>
 

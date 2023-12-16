@@ -33,3 +33,16 @@ export function useGetCommentLikesPost() {
     },
   });
 }
+export function useRplyComment() {
+  const apiClient = new APIClient("/user_action/actions/reply");
+  const fetchRplyComment = async (commentId, text) => {
+    const res = await apiClient.post({
+      commentId,
+      text,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) =>
+    fetchRplyComment(credentials.commentId, credentials.text)
+  );
+}

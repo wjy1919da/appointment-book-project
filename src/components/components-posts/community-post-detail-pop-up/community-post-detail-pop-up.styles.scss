@@ -79,7 +79,7 @@
           flex-direction: row;
           gap: 8px;
           color: var(--text-2-button, #675d59);
-          font-family: 'Open Sans';
+          font-family: "Open Sans";
           font-style: normal;
           font-weight: 600;
           font-size: 16px;
@@ -104,7 +104,7 @@
             flex-direction: row;
             gap: 8px;
             color: var(--text-2-button, #675d59);
-            font-family: 'Open Sans';
+            font-family: "Open Sans";
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -168,7 +168,7 @@
 }
 
 .detail-red-font {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -282,11 +282,11 @@
   height: 70px;
 }
 
-// .textarea-icon {
-//   position: absolute;
-//   right: 50px;
-//   bottom: 85px;
-// }
+.textarea-icon {
+  z-index: 1000;
+  margin-top: -40px;
+  margin-left: 80%;
+}
 
 // 1024px up
 @media (max-width: 1024px) {
@@ -319,7 +319,7 @@
     }
   }
   .doctor-search-button {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     color: #ffffff;
@@ -380,7 +380,7 @@
       font-size: 14px;
       font-weight: 500px;
       line-height: 25.6px;
-      font-family: 'Open Sans';
+      font-family: "Open Sans";
     }
   }
 

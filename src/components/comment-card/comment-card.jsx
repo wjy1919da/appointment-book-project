@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
-// import userInfoQueryStore from '../../userStore.ts';
-import { useGetCommentLikesPost } from "../../hooks/useComment";
 import { useToast } from "@chakra-ui/react";
-
+import usePostQueryStore from "../../postStore.ts";
 // hooks
 import { useGetCommentLikesPost } from "../../hooks/useGetPosts.js";
 
@@ -33,11 +31,22 @@ const CommentCard = ({
   commentText,
   commentId,
   onClick,
+  setReplyCommentId,
   replies,
 }) => {
   // console.log("comment avatar", avatar);
   // console.log("comment replies", replies);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCustomButtonClick = () => {
+    setIsOpen(!isOpen);
+  };
   const toast = useToast();
+  var commentId = commentId;
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  const setTempCommentStatus = usePostQueryStore(
+    (state) => state.setTempCommentStatus
+  );
   const { mutate: apiCommentLikeMutate } = useGetCommentLikesPost({
     onError: (error) => {
       toast({
@@ -50,7 +59,7 @@ const CommentCard = ({
   });
   const [showCommentBox, setShowCommentBox] = useState(false);
 
-  const [visibleReplies, setVisibleReplies] = useState(3); // 初始显示3条回复
+  const [visibleReplies, setVisibleReplies] = useState(3);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen); // Toggle the isPanelOpen state
@@ -60,7 +69,7 @@ const CommentCard = ({
   };
 
   const handleShowMoreReplies = () => {
-    setVisibleReplies(replies.length); // 展开所有回复
+    setVisibleReplies(replies.length);
   };
 
   // refs
@@ -92,11 +101,17 @@ const CommentCard = ({
   }
 
   // reply comment
-  // const handleClickReply = () => {
-  //   setShowReplyCommentBox(!showReplyCommentBox);
-  // };
+  const handleClickReply = () => {
+    setReplyCommentId(commentId);
+    if (postQuery.tempCommentStatus === "reply") {
+      setTempCommentStatus(false);
+    } else {
+      setTempCommentStatus(true, "reply");
+    }
+  };
+
   const handleClickCommentLike = (commentId) => {
-    console.log("commentId here", commentId);
+    // console.log("commentId here", commentId);
     apiCommentLikeMutate({ commentId: commentId });
   };
 
@@ -124,7 +139,7 @@ const CommentCard = ({
                   <div className="comment-card-second-line">
                     <span className="comment-card-date">{date}</span>
                     <button
-                      // onClick={handleClickReply}
+                      onClick={() => handleClickReply(commentId)}
                       className="comment-card-button"
                     >
                       Reply
@@ -151,11 +166,6 @@ const CommentCard = ({
                                 Show More
                               </button>
                             )}
-                            {/* {visibleReplies > 3 && (
-                              <AccordionButton onClick={togglePanel}>
-                                Collapse All
-                              </AccordionButton>
-                            )} */}
                           </AccordionPanel>
                           <AccordionButton onClick={togglePanel}>
                             {/* <button> */}
@@ -179,33 +189,12 @@ const CommentCard = ({
                   className="post-detail-icon"
                   src={HeartIcon}
                   alt="like"
-                  onClick={() => handleClickCommentLike(commentId)}
+                  onClick={() => handleClickCommentLike()}
                 ></img>
               </span>
-              {/* <span>
-                    <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
-                </span> */}
             </div>
           </div>
         </div>
-        {/* 
-        <div className="comment-card-reply-input-container">
-          {showReplyCommentBox && (
-            <>
-              <textarea
-                ref={textareaRef}
-                type="text"
-                placeholder="Reply Comments..."
-                className="comment-card-reply-input"
-              />
-              <img
-                src={SendIcon}
-                alt="Icon-Send"
-                className="comment-card-reply-send-icon"
-              />
-            </>
-          )}
-        </div> */}
       </div>
     </div>
   );
