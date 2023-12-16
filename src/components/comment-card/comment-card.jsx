@@ -4,6 +4,9 @@ import React from "react";
 import { useGetCommentLikesPost } from "../../hooks/useComment";
 import { useToast } from "@chakra-ui/react";
 
+// hooks
+import { useGetCommentLikesPost } from "../../hooks/useGetPosts.js";
+
 // scss
 import "./comment-card.styles.scss";
 import "../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss";
@@ -60,6 +63,7 @@ const CommentCard = ({
     setVisibleReplies(replies.length); // 展开所有回复
   };
 
+  // refs
   const containerRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -78,6 +82,7 @@ const CommentCard = ({
     const formattedDate = date.toLocaleDateString("en-US");
     return formattedDate;
   };
+
   const newDate = formatDate(date);
 
   function convertUnicode(input) {

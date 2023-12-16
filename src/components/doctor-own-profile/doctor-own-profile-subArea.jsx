@@ -3,6 +3,7 @@ import "./doctor-own-profile-subArea.styles.scss";
 import DocotorOwnAbout from "./doctor-own-about-area";
 import DoctorProfileGrid from "./doctor-own-profile-grid";
 import UserProfileLike from "../user-profile-like/user-profile-like";
+
 const DoctorProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("About"); // By default, "like" is the active taba
   const [showCreatePost, setShowCreatePost] = useState(false);
