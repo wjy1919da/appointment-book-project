@@ -266,14 +266,24 @@
 
     .phone-pic {
         //width: 350px;
-        width: 174px;
-        height: auto;
+        width: 220px;
+        // height: auto;
         position: relative;
-        top: 64px;
-        left: 20px;
+        top: 85px;
+        left: 90px;
         border: none;
         border-radius: 0;
+        z-index: 100;
     }
+
+    .phone-screen {
+        position: absolute;
+        z-index: 2;
+        width: 174px;
+        top: 165px;
+        left: 112px;
+    }
+
     
 
     .QR-codes-div {
