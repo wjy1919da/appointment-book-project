@@ -17,6 +17,10 @@ interface PostQuery {
   pictures?: Array<string>;
   // memberId is autherId
   memberID?: number;
+  tempCommentStatus: string;
+  commentId?: number;
+  isPrivate?: boolean;
+  isHighlight?: boolean;
 }
 
 interface postQueryStore {
@@ -36,6 +40,10 @@ interface postQueryStore {
   setDescription?: (description: string) => void;
   setPictures?: (pictures: Array<string>) => void;
   setMemberID?: (memberID: number) => void;
+  setTempCommentStatus: (isOpen: boolean, status: string) => void;
+  setCommentId?: (commentId: number) => void;
+  setIsPrivate?: (isPrivate: boolean) => void;
+  setIsHighlight?: (isHighlight: boolean) => void;
 }
 
 const usePostQueryStore = create<postQueryStore>((set) => ({
@@ -55,6 +63,10 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     description: "",
     pictures: [],
     memberID: 0,
+    tempCommentStatus: "",
+    commentId: 0,
+    isPrivate: false,
+    isHighlight: false,
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -83,6 +95,19 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, pictures } })),
   setMemberID: (memberID) =>
     set((state) => ({ postQuery: { ...state.postQuery, memberID } })),
+  setTempCommentStatus: (isOpen, status) =>
+    set((state) => ({
+      postQuery: {
+        ...state.postQuery,
+        tempCommentStatus: isOpen ? status : "",
+      },
+    })),
+  setCommentId: (commentId) =>
+    set((state) => ({ postQuery: { ...state.postQuery, commentId } })),
+  setIsPrivate: (isPrivate) =>
+    set((state) => ({ postQuery: { ...state.postQuery, isPrivate } })),
+  setIsHighlight: (isHighlight) =>
+    set((state) => ({ postQuery: { ...state.postQuery, isHighlight } })),
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },

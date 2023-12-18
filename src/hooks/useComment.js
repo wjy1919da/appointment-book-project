@@ -15,3 +15,34 @@ export function useAddComment() {
     fetchAddComment(credentials.dynamicId, credentials.text)
   );
 }
+
+export function useGetCommentLikesPost() {
+  const apiClient = new APIClient("/user_action/like_comment");
+  const fetchLikeComment = async (commentId) => {
+    const res = await apiClient.postForm({
+      commentId,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) => fetchLikeComment(credentials.commentId), {
+    onSuccess: (data) => {
+      console.log("OK", data);
+    },
+    onError: (error) => {
+      console.error("ERROR", error);
+    },
+  });
+}
+export function useRplyComment() {
+  const apiClient = new APIClient("/user_action/actions/reply");
+  const fetchRplyComment = async (commentId, text) => {
+    const res = await apiClient.post({
+      commentId,
+      text,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) =>
+    fetchRplyComment(credentials.commentId, credentials.text)
+  );
+}

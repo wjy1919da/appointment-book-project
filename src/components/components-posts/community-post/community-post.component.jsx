@@ -49,13 +49,13 @@ const CommunityPost = ({
         backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
       }}
     >
-      {dummyHighlight === 0 ? (
+      {dummyPrivate === 1 && (
         <img
           src={LockIcon}
           alt="Icon-Lock"
           className="community-post-icon-lock"
         />
-      ) : null}
+      )}
 
       <div className="post-Image">
         <img

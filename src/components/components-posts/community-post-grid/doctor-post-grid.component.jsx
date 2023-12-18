@@ -36,6 +36,8 @@ const DoctorPostGrid = ({ isAbout }) => {
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   // const postQuery = usePostQueryStore((state) => state.postQuery);
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
@@ -45,16 +47,27 @@ const DoctorPostGrid = ({ isAbout }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
+  // console.log("flatData", flatData);
 
   const { postid } = useParams();
 
-  const handleClickPost = (ID, avatar, username, title, memberId) => {
+  const handleClickPost = (
+    ID,
+    avatar,
+    username,
+    title,
+    memberId,
+    isHighlight,
+    isPrivate
+  ) => {
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
+    // setIsHighlight(isHighlight);
+    setIsPrivate(isPrivate);
   };
 
   useEffect(() => {
@@ -79,6 +92,7 @@ const DoctorPostGrid = ({ isAbout }) => {
       key={post.id}
     >
       <CommunityPost
+        dummyPrivate={post.isDisplay}
         id={post.id}
         imageURL={post.coverImg || []}
         text={post.title || ""}

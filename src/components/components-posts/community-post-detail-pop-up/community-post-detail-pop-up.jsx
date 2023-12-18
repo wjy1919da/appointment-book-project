@@ -6,7 +6,15 @@ import { useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// import { Button } from 'react-bootstrap';
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  Button,
+} from "@chakra-ui/react";
 
 // stores
 import usePostQueryStore from "../../../postStore.ts";
@@ -14,13 +22,15 @@ import userInfoQueryStore from "../../../userStore.ts";
 
 // components
 import CommentCard from "../../comment-card/comment-card";
-// import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
 
 // hooks
 import { useAddComment } from "../../../hooks/useComment";
+import { useRplyComment } from "../../../hooks/useComment";
 import { useGetLikesPost } from "../../../hooks/useGetPosts.js";
-import { useApiRequestSetPostDisplay } from "../../../hooks/useApiRequestPost";
-import { useApiRequestSetPostPublic } from "../../../hooks/useApiRequestPost";
+import { useHighlightPost } from "../../../hooks/useGetPosts.js";
+import { useRemoveHighlightPost } from "../../../hooks/useGetPosts.js";
+import { useApiRequestSetPostDisplay } from "../../../hooks/useApiRequestPost"; // private
+import { useApiRequestSetPostPublic } from "../../../hooks/useApiRequestPost"; // remove private
 
 // scss
 import "./community-post-detail-pop-up.styles.scss";
@@ -35,7 +45,8 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
+import { is } from "date-fns/locale";
+import { set } from "date-fns";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -46,28 +57,39 @@ const CommunityPostDetailPopUP = ({
   likeCount,
   collectCount,
   commentCount,
+  isPrivate,
+  isHighlight,
 }) => {
-  // console.log("tag", postDate);
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  // console.log("my post detail", postQuery.userAvatar);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
-  const [liked, setLiked] = useState(false);
-  const [isHighlight, setIsHightlight] = useState(false);
-  const [isPrivate, setIsPrivate] = useState(0);
-  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [liked, setLiked] = useState(false); // like
+  // const [isHighlight, setIsHighlight] = useState(false); // highlight
+  // const [isPrivate, setIsPrivate] = useState(0); // private
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const [comment, setComment] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
   const [showArrows, setShowArrows] = useState(false);
+  const [modalStatus, setModalStatus] = useState("");
+  // Reply comment
+  const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
 
+  // refs
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
-  // console.log("postQuery", postQuery);
+
+  // chakura ui modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalContent, setModalContent] = useState("");
 
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
@@ -92,7 +114,32 @@ const CommunityPostDetailPopUP = ({
       .nonempty("Comment is required")
       .min(5, "Comment must be at least 5 characters long"),
   });
-  // Set post display(private/public)
+
+  // highlight api import
+  const { mutate: apiMutateHightlight } = useHighlightPost({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  // remove highlight api import
+  const { mutate: apiMutateRemoveHighlight } = useRemoveHighlightPost({
+    onError: (error) => {
+      toast({
+        title: "Failed to remove highlight.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  // private api import
   const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
     onError: (error) => {
       toast({
@@ -103,6 +150,8 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+
+  //  remove private api import
   const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
     onError: (error) => {
       toast({
@@ -113,13 +162,57 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
-  const toggleSetPostDisplay = () => {
-    setIsPrivate((prev) => !prev);
-    const apiMutation = isPrivate
-      ? apiMutateSetPostPublic
-      : apiMutateSetPostDisplay;
+  const handlePrivateClick = () => {
     if (validateTokenAndPopup()) {
-      apiMutation({ id: postQuery.postID });
+      setModalStatus("private");
+      if (!postQuery.isPrivate) {
+        setModalHeader("Private Post");
+        setModalContent("Private");
+      } else {
+        setModalHeader("Remove Private");
+        setModalContent("Remove Private");
+      }
+      onOpen();
+    }
+  };
+  // console.log("postQuery", postQuery);
+  // private click call api
+  const handlePrivate = () => {
+    if (validateTokenAndPopup()) {
+      setIsPrivate(!postQuery.isPrivate);
+      const apiMutation = postQuery.isPrivate
+        ? apiMutateSetPostPublic
+        : apiMutateSetPostDisplay;
+      if (validateTokenAndPopup()) {
+        apiMutation({ id: postQuery.postID });
+      }
+      onClose();
+    }
+  };
+  const handleHighlightClick = () => {
+    if (validateTokenAndPopup()) {
+      setModalStatus("highlight");
+      if (!postQuery.isHighlight) {
+        setModalHeader("Highlight Post");
+        setModalContent("Highlight");
+      } else {
+        setModalHeader("Remove Highlight");
+        setModalContent("Remove Highlight");
+      }
+      onOpen();
+    }
+  };
+  // highlight click call api
+  const handleHighlight = () => {
+    if (validateTokenAndPopup()) {
+      setIsHighlight(!postQuery.isHighlight);
+      const apiHighlightMutation = postQuery.isHighlight
+        ? apiMutateRemoveHighlight
+        : apiMutateHightlight;
+      if (validateTokenAndPopup()) {
+        apiHighlightMutation({ id: postQuery.postID });
+      }
+      onClose();
     }
   };
 
@@ -136,12 +229,23 @@ const CommunityPostDetailPopUP = ({
   });
 
   const toggleGetLikes = () => {
-    setLiked((prev) => !prev);
     if (validateTokenAndPopup()) {
-      apiMutate({ postId: postQuery.postID });
+      setLiked((prev) => !prev);
+      if (validateTokenAndPopup()) {
+        apiMutate({ postId: postQuery.postID });
+      }
     }
   };
-  const { mutate, data, isLoading, isError, error } = useAddComment();
+  const { mutate } = useAddComment({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -150,15 +254,32 @@ const CommunityPostDetailPopUP = ({
   } = useForm({
     resolver: zodResolver(schema),
   });
+  const { mutate: apiReplyComment } = useRplyComment({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (validateTokenAndPopup()) {
-      // console.log("mutate is called");
-      mutate({
-        dynamicId: postQuery.postID,
-        text: comment,
-      });
+      if (postQuery.tempCommentStatus === "comment") {
+        mutate({
+          dynamicId: postQuery.postID,
+          text: comment,
+        });
+      }
+      if (postQuery.tempCommentStatus === "reply") {
+        apiReplyComment({
+          commentId: postQuery.commentId,
+          text: comment,
+        });
+      }
       refresh();
     }
   };
@@ -171,30 +292,31 @@ const CommunityPostDetailPopUP = ({
     return true;
   };
 
-  const handleInputClick = (e) => {
-    if (!userInfo.token) {
-      e.preventDefault();
-      togglePopup(true, "accountType");
-    }
-  };
-
+  // comment box
   const handleClickComment = () => {
-    setShowCommentBox((prev) => !prev);
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
+    setTempCommentStatus(true, "comment");
   };
 
   // when click the comment button it will scroll down to textarea
   useEffect(() => {
-    if (showCommentBox && textareaRef.current && containerRef.current) {
-      textareaRef.current.focus();
-      containerRef.current.scrollTo({
-        top: textareaRef.current.offsetTop,
-        behavior: "smooth",
-      });
+    const rightContainer = document.querySelector(".detail-top-content");
+
+    let debounceTimer;
+    const handleScroll = () => {
+      setTempCommentStatus(false);
+    };
+
+    if (rightContainer) {
+      rightContainer.addEventListener("scroll", handleScroll);
     }
-  }, [showCommentBox, commentCount]);
+
+    return () => {
+      if (rightContainer) {
+        rightContainer.removeEventListener("scroll", handleScroll);
+      }
+      if (debounceTimer) clearTimeout(debounceTimer);
+    };
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -213,12 +335,6 @@ const CommunityPostDetailPopUP = ({
     setDescription(brief);
     setPictures(picture);
     navigate(`/edit-post/${postQuery.postID}`);
-    // navigate('/edit-post');
-  };
-
-  // highlight
-  const handleHighlight = () => {
-    setIsHightlight((prev) => !prev);
   };
 
   return (
@@ -288,24 +404,23 @@ const CommunityPostDetailPopUP = ({
                 {isDoctorAuthor && (
                   <button
                     className="button-highlight"
-                    onClick={handleHighlight}
+                    onClick={handleHighlightClick}
                   >
-                    {isHighlight ? "Remove from Highlight" : "Highlight"}
+                    {postQuery.isHighlight
+                      ? "Remove from Highlight"
+                      : "Highlight"}
                   </button>
                 )}
+
                 {isAuthor && (
                   <button
                     className="button-private"
-                    onClick={toggleSetPostDisplay}
+                    onClick={handlePrivateClick}
                   >
-                    {isPrivate ? "Remove from private" : "Private"}
+                    {postQuery.isPrivate ? "Remove from Private" : "Private"}
                   </button>
                 )}
-                {isAuthor && (
-                  <button className="button-edit" onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
-                )}
+
                 {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
@@ -345,38 +460,38 @@ const CommunityPostDetailPopUP = ({
                       name={comment.userName || ""}
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
-                      onClick={handleInputClick}
+                      commentId={comment.id}
+                      replies={comment.comments || []}
                     />
                   );
                 }
                 return null;
               })}
             </div>
-            {/* <form> */}
-            <div className="comment-card-input-container">
-              {commentCount >= 0 && showCommentBox && (
-                <div className="textarea-with-icon-post">
-                  <textarea
-                    // {...register("comment")}
-                    onChange={(e) => setComment(e.target.value)}
-                    ref={textareaRef}
-                    type="text"
-                    placeholder="Type Something..."
-                    className="post-comment-card-input"
-                  />
-                  <button
-                    onClick={handleFormSubmit}
-                    type="submit"
-                    className="textarea-icon"
-                  >
-                    <img src={SendIcon} alt="sendIcon" />
-                  </button>
-                </div>
-              )}
-            </div>
-            {/* </form> */}
           </div>
         </div>
+        {postQuery.tempCommentStatus && (
+          <div className="comment-card-textarea-container">
+            <div className="textarea-with-icon-post">
+              {/* <div> */}
+              <textarea
+                onChange={(e) => setComment(e.target.value)}
+                ref={textareaRef}
+                type="text"
+                placeholder={
+                  postQuery.tempCommentStatus === "reply"
+                    ? "Reply"
+                    : "Share Your Thoughts Here..."
+                }
+                className="post-comment-card-textarea"
+              />
+              <button onClick={handleFormSubmit} className="textarea-icon">
+                <img src={SendIcon} alt="sendIcon" />
+              </button>
+              {/* </div> */}
+            </div>
+          </div>
+        )}
 
         {/* Web */}
         <div className="fixed-input-box">
@@ -388,7 +503,6 @@ const CommunityPostDetailPopUP = ({
                   src={liked ? heartIconFilled : heartIcon}
                   alt="Icon"
                   className="Icon-size"
-                  // onClick={handleInputClick}
                   onClick={toggleGetLikes}
                 />
                 {likeCount}
@@ -418,6 +532,49 @@ const CommunityPostDetailPopUP = ({
           </div>
         </div>
       </div>
+
+      {/* highlight modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+        <ModalContent
+          backgroundColor="transparent"
+          boxShadow="none"
+          textAlign="center"
+        >
+          <ModalHeader color="#ffffff" fontSize="25px">
+            {modalHeader}
+          </ModalHeader>
+          <ModalFooter display="flex" justifyContent="space-between">
+            <Button
+              color="#ffffff"
+              backgroundColor="#675f5a"
+              outline="none"
+              _hover="none"
+              mr={3}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              color="#ffffff"
+              backgroundColor="#f1a285"
+              outline="none"
+              _hover="none"
+              onClick={
+                modalStatus === "private" ? handlePrivate : handleHighlight
+              }
+            >
+              {modalContent}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
