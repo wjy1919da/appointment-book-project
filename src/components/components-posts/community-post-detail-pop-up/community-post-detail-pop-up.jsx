@@ -470,7 +470,6 @@ const CommunityPostDetailPopUP = ({
             </div>
           </div>
         </div>
-
         {postQuery.tempCommentStatus && (
           <div className="comment-card-textarea-container">
             <div className="textarea-with-icon-post">
