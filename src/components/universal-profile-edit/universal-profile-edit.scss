@@ -91,6 +91,7 @@
 
 .univ-edit-info-form-label {
     font-size: 21px;
+    position: relative;
 }
 
 .univ-edit-left-column-container {
@@ -236,6 +237,20 @@
     box-shadow: 2px 2px 10px lightgray;
 }
 
+.univ-edit-info-form-disabled {
+    opacity: 40%;
+}
+
+.univ-edit-info-form-change-email-text {
+    color: #F48C8A;
+    text-decoration: underline;
+    position: absolute;
+    top: 0.4rem;
+    right: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 .univ-edit-info-form-input-error {
     border: 2px solid red;
 }
@@ -248,6 +263,8 @@
 .univ-edit-info-form-input-error-message {
     font-size: 12px;
     color: red;
+    position: absolute;
+    top: 5.75rem;
 }
 
 .univ-edit-info-form-textarea {
@@ -269,8 +286,8 @@
 }
 
 .univ-edit-interests-container-container {
-    height: 50%;
-    min-height: 33rem;
+    height: 100%;
+    min-height: 54.5rem;
 }
 
 .univ-edit-interests-selection-navbar-container {
@@ -328,6 +345,22 @@
     width: 30%;
 }
 
+.univ-edit-change-password-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.univ-edit-change-password-button {
+    background: #FBFCFF;
+    color: #F48C8A;
+    font-size: 22px;
+    border: 2px solid #F48C8A;
+    width: 100%;
+    padding: 12px 36px;
+    border-radius: 8px;
+}
+
 .univ-edit-password-container {
     height: 100%;
 }
@@ -383,6 +416,9 @@
     }
     .univ-edit-form-changes-saved-text {
         font-size: 16px;
+    }
+    .univ-edit-interests-container-container {
+        min-height: 40rem;
     }
 }
 
