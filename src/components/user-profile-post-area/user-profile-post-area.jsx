@@ -23,31 +23,6 @@ import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  // // dummy data
-  // let data = {
-  //   pages: [
-  //     {
-  //       data: [
-  //         {
-  //           id: 13,
-  //           title: '哈哈哈',
-  //           coverImg:
-  //             'https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png',
-  //           memberId: 262,
-  //           nickname: 'DrJohnDoe',
-  //           likedCount: 2,
-  //         },
-  //       ],
-  //       pageInfo: {
-  //         currentPage: 1,
-  //         totalPage: 6,
-  //         pageSize: 12,
-  //         totalRecords: 62,
-  //       },
-  //     },
-  //   ],
-  //   pageParams: [null],
-  // };
   const {
     data,
     error,
