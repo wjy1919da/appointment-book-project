@@ -95,8 +95,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
           post.username,
           post.title,
           post.memberId,
-          post.isDisplay
-          // post.isHighlight
+          post.isDisplay,
+          post.highlightStatus
         )
       }
     >
@@ -107,6 +107,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         authorName={post.username || ""}
         likes={post.like_count || 0}
         dummyPrivate={post.isDisplay}
+        dummyHighlight={post.highlightStatus}
       />
     </div>
   ));
