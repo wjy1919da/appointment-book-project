@@ -22,6 +22,7 @@ import UserProfileDoctorPostGrid from '../../components/user-profile-doctor-post
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 import LogInAccessPopUp from '../../components/log-in-access-popup/log-in-access-popup.jsx';
 import { Spinner } from '@chakra-ui/react'
+import userInfoQueryStore from '../../userStore.ts';
 
 // hook
 import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor.js';
@@ -152,13 +153,14 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
   // data = data?.data;
   // console.log('data3 is: ', data3);
   
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  // const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isUserFollowing, setIsUserFollowing] = useState(false);
   const [followers, setFollowers] = useState(data3?.pages[0]?.data?.data?.followers)
   const { doctorStars } = data3?.pages[0]?.data?.data || {};
   const {postNumber} = data3?.pages[0]?.data?.data || 0;
   // const {followers} = data3?.pages[0]?.data?.data || 0;
   const {followings} = data3?.pages[0]?.data?.data || 0;
+  const togglePopUp = userInfoQueryStore((state) => state.togglePopup);
 
   useEffect(() => {
     // console.log('data1 is: ', data);
@@ -169,9 +171,6 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
       followArray = JSON.parse(followArray);
       if (followArray.includes(Number(encodedMemberId))) {
         setIsUserFollowing(true);
-        console.log(`Doctor of id ${encodedMemberId} found in user followings array...`);
-      } else {
-        console.log(`Doctor of id ${encodedMemberId} NOT found in user followings array...`);
       }
     }
   }, [encodedMemberId])
@@ -197,7 +196,8 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
         return res.data;
       } catch (err) {
           if (err?.response?.status === 403) {  // if the user tries to follow without logging in
-            setIsLoginPopupOpen(true);
+            togglePopUp(true, "accountType");
+          // setIsLoginPopupOpen(true);
           }
           console.log('Error trying to follow target: ', err.response.status);
       }
@@ -224,7 +224,8 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
         return res.data;
       } catch (err) {
         if (err?.response?.status === 403) {  // if the user tries to follow without logging in
-          setIsLoginPopupOpen(true);
+          togglePopUp(true, "accountType");
+          // setIsLoginPopupOpen(true);
         }
         console.log('Error trying to follow target: ', err.response.status);
       }
@@ -241,7 +242,6 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
 
   return (
     <>
-      {isLoginPopupOpen && <LogInAccessPopUp closingCallback={() => setIsLoginPopupOpen(false)}/>}
       <div className='indv-doctor-info-container' >
         <div className='indv-doctor-profile-picture-container' >
           <img className='indv-doctor-profile-picture' src={data?.img} alt='Doctor' />
@@ -311,7 +311,8 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
           </div>
           <div className='indv-doctor-info-row indv-fifth-row'>
             {isUserFollowing ? <button type='button' onClick={() => unfollowUser(data?.memberId)} className='indv-unfollow-button'>Unfollow</button> : <button type='button' onClick={() => followUser(data?.memberId)} className='indv-button indv-follow-button'>Follow</button>}
-            <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button>
+            {/* UNCOMMENT FOR 2.0 RELEASE (WHEN API IS IMPLEMENTED) */}
+            {/* <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button> */}
           </div>
         </div>
       </div>

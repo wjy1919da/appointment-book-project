@@ -43,6 +43,7 @@ import ProcedureMainPage from "./routes/procedure/procedure-main-page.component.
 import userInfoQueryStore from "./userStore.ts";
 import DoctorProfileEdit from "./components/doctor-own-profile/doctor-profile-edit/doctor-own-profile-edit";
 import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
+import UniversalProfileEdit from "./components/universal-profile-edit/universal-profile-edit";
 
 // import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
@@ -94,8 +95,11 @@ const App = () => {
               <Route path="instrument/:name" element={<SubInstrument />} />
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
+              <Route path="doctorProfileEdit" element={
+                <PrivateRoute >
+                  <UniversalProfileEdit />
+                </PrivateRoute>} />
               <Route path="posts/:postid" element={<DoctorPost />} />
-              <Route path="doctorProfileEdit" element={<DoctorProfileEdit />} />
               <Route
                 path="doctor/:encodedMemberId"
                 element={<IndividualDoctor />}
@@ -123,10 +127,14 @@ const App = () => {
               <Route path="/edit-post/:postid" element={<EditPostPage />} />
               {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
               <Route path="health-check" element={<HealthCheck />} />
-              {/* <Route path='userProfile' element={<UserProfilePage />} /> */}
+              <Route path='userProfile' element={<UserProfilePage />} />
 
               <Route path="AccountSetup" element={<AccountSetup />} />
-              <Route path="userProfileEdit" element={<UserProfileEdit />} />
+              <Route path="userProfileEdit" element={
+                <PrivateRoute >
+                  <UniversalProfileEdit />
+                </PrivateRoute>
+              } />
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />

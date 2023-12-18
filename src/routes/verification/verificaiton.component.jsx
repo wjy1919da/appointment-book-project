@@ -37,7 +37,7 @@ const Verification = () => {
         // <div style={{diplay:'flex', justifyContent: 'center', alignItems: 'center' }}>
         //     Email verification in process...
         // </div>
-        <ErrorPageCommon title="The email url is expired." context="please try agein"></ErrorPageCommon>
+        <ErrorPageCommon title="The email url is expired." context="Please Try Again"></ErrorPageCommon>
     );
 };
 
