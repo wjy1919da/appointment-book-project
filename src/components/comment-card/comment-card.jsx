@@ -47,16 +47,7 @@ const CommentCard = ({
     (state) => state.setTempCommentStatus
   );
   const setCommentId = usePostQueryStore((state) => state.setCommentId);
-  const { mutate: apiCommentLikeMutate } = useGetCommentLikesPost({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  
   const [showCommentBox, setShowCommentBox] = useState(false);
 
   const [visibleReplies, setVisibleReplies] = useState(3);
@@ -100,6 +91,25 @@ const CommentCard = ({
     );
   }
 
+  // like comment
+  const { mutate: apiCommentLikeMutate } = useGetCommentLikesPost({
+    onError: (error) => {
+      toast({
+        title: "Failed.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+
+  const handleClickCommentLike = (commentId) => {
+    console.log('COMMENT ID', commentId);
+    setLikedComment((prev) => !prev);
+    apiCommentLikeMutate({ commentId: commentId });
+  };
+
   // reply comment
   const handleClickReply = () => {
     setCommentId(commentId);
@@ -110,10 +120,6 @@ const CommentCard = ({
     }
   };
 
-  const handleClickCommentLike = (commentId) => {
-    // console.log("commentId here", commentId);
-    apiCommentLikeMutate({ commentId: commentId });
-  };
 
   return (
     <div>
@@ -151,16 +157,19 @@ const CommentCard = ({
                 </div>
               </div>
 
-              <div className="likeCount-commentCount">
-                <span>
-                  <img
-                    className="post-detail-icon"
-                    src={HeartIcon}
-                    alt="like"
-                    onClick={() => handleClickCommentLike()}
-                  ></img>
-                </span>
-              </div>
+            <div className='likeCount-commentCount'>
+              <span>
+                <img
+                  className='post-detail-icon'
+                  src={likedComment ? heartIconFilled : heartIcon}
+                  alt='like'
+                  onClick={() => handleClickCommentLike(commentId)}
+                  // onClick={onClick}
+                ></img>
+              </span>
+              {/* <span>
+                    <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
+                </span> */}
             </div>
           </div>
         </div>
