@@ -29,7 +29,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     // isFetchingNextPage,
     // hasNextPage,
   } = useGetUserPostedPost();
-
+  const postQuery = usePostQueryStore((state) => state.postQuery);
   const [userAvatar, setUserAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -38,9 +38,11 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setDescription = usePostQueryStore((state) => state.setDescription);
+  const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
-  console.log("flatData in doctor profile", flatData);
+  // console.log("flatData in doctor profile", flatData);
   // hook
 
   // create a post + icon button
@@ -64,13 +66,23 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     430: 2,
   };
 
-  const handleClickPost = (ID, avatar, username, title, memberId) => {
+  const handleClickPost = (
+    ID,
+    avatar,
+    username,
+    title,
+    memberId,
+    isPrivate,
+    isHighlight
+  ) => {
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
+    // setIsHighlight(isHighlight);
+    setIsPrivate(isPrivate);
   };
 
   const postList = flatData.map((post, index) => (
@@ -82,7 +94,9 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
           post.avatar,
           post.username,
           post.title,
-          post.memberId
+          post.memberId,
+          post.isDisplay
+          // post.isHighlight
         )
       }
     >

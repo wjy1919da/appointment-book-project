@@ -10,7 +10,9 @@ import "./comment-card.styles.scss";
 import "../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss";
 
 // images
-import HeartIcon from "../../assets/post/heart.png";
+
+import heartIcon from "../../assets/post/heart.png";
+import heartIconFilled from "../../assets/post/heart-fill-Icon.png";
 import SendIcon from "../../assets/post/send_icon.svg";
 
 // import commentIcon from '../../assets/post/chat_bubble.png';
@@ -33,22 +35,14 @@ const CommentCard = ({
   onClick,
   replies,
 }) => {
-  // console.log("comment avatar", avatar);
-  console.log("comment replies", replies);
-  const [isOpen, setIsOpen] = useState(false);
+  const [likedComment, setLikedComment] = useState(false); // like commment
 
-  const handleCustomButtonClick = () => {
-    setIsOpen(!isOpen);
-  };
   const toast = useToast();
-  var commentId = commentId;
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const setTempCommentStatus = usePostQueryStore(
     (state) => state.setTempCommentStatus
   );
   const setCommentId = usePostQueryStore((state) => state.setCommentId);
-  
-  const [showCommentBox, setShowCommentBox] = useState(false);
 
   const [visibleReplies, setVisibleReplies] = useState(3);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -62,20 +56,6 @@ const CommentCard = ({
   const handleShowMoreReplies = () => {
     setVisibleReplies(replies.length);
   };
-
-  // refs
-  const containerRef = useRef(null);
-  const textareaRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (showReplyCommentBox && textareaRef.current && containerRef.current) {
-  //     textareaRef.current.focus();
-  //     containerRef.current.scrollTo({
-  //       top: textareaRef.current.offsetTop,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }, [showReplyCommentBox]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -103,9 +83,7 @@ const CommentCard = ({
     },
   });
 
-
   const handleClickCommentLike = (commentId) => {
-    console.log('COMMENT ID', commentId);
     setLikedComment((prev) => !prev);
     apiCommentLikeMutate({ commentId: commentId });
   };
@@ -113,13 +91,8 @@ const CommentCard = ({
   // reply comment
   const handleClickReply = () => {
     setCommentId(commentId);
-    if (postQuery.tempCommentStatus === "reply") {
-      setTempCommentStatus(false);
-    } else {
-      setTempCommentStatus(true, "reply");
-    }
+    setTempCommentStatus(true, "reply");
   };
-
 
   return (
     <div>
@@ -157,19 +130,20 @@ const CommentCard = ({
                 </div>
               </div>
 
-            <div className='likeCount-commentCount'>
-              <span>
-                <img
-                  className='post-detail-icon'
-                  src={likedComment ? heartIconFilled : heartIcon}
-                  alt='like'
-                  onClick={() => handleClickCommentLike(commentId)}
-                  // onClick={onClick}
-                ></img>
-              </span>
-              {/* <span>
+              <div className="likeCount-commentCount">
+                <span>
+                  <img
+                    className="post-detail-icon"
+                    src={likedComment ? heartIconFilled : heartIcon}
+                    alt="like"
+                    onClick={() => handleClickCommentLike(commentId)}
+                    // onClick={onClick}
+                  ></img>
+                </span>
+                {/* <span>
                     <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
                 </span> */}
+              </div>
             </div>
           </div>
         </div>

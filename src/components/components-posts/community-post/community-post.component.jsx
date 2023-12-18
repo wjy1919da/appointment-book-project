@@ -19,7 +19,6 @@ const CommunityPost = ({
   isLike,
   isProfile,
 }) => {
-  console.log("dummyPrivate", dummyPrivate);
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState("");
   const [liked, setLiked] = useState(isLike);

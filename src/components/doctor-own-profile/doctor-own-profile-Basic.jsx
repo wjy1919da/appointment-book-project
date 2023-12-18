@@ -37,9 +37,10 @@ const DocotorOwnBasic = () => {
       <div className="doctor-own-basic-info">
         <div className="doctor-own-basic-top-name">
           <div className="doctor-own-basic-name">
-            {userInfo.username && (
-              <span className="doctor-own-name-text">{userInfo.username}</span>
-            )}
+            <span className="doctor-own-name-text">
+              {userInfo.username || `User ${userInfo.userId}`}
+            </span>
+
             <img
               src={doctorVerify}
               style={{ width: "25px", height: "25px" }}

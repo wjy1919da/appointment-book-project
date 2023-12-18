@@ -22,8 +22,6 @@ import userInfoQueryStore from "../../../userStore.ts";
 
 // components
 import CommentCard from "../../comment-card/comment-card";
-// import CommunitySendMsg from '../community-send-msg/community-send-msg.component';
-// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
 
 // hooks
 import { useAddComment } from "../../../hooks/useComment";
@@ -48,7 +46,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { is } from "date-fns/locale";
-// import CommentReplyInput from "../../comment-card/comment-reply-input.jsx";
+import { set } from "date-fns";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -59,68 +57,28 @@ const CommunityPostDetailPopUP = ({
   likeCount,
   collectCount,
   commentCount,
+  isPrivate,
+  isHighlight,
 }) => {
-  // console.log("tag", postDate);
-  // const replies = [
-  //   {
-  //     avatar:
-  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-  //     userName: "wjyyy",
-  //     commentDate: "2023-12-09",
-  //     content: "rrrrrrrrrrr",
-  //     comments: [],
-  //   },
-  //   {
-  //     avatar:
-  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-  //     userName: "wjyyy",
-  //     commentDate: "2023-12-13",
-  //     content: "8888889testing comment",
-  //     comments: [],
-  //   },
-  //   {
-  //     avatar:
-  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-  //     userName: "wjyyy",
-  //     commentDate: "2023-12-13",
-  //     content: "testing again",
-  //     comments: [],
-  //   },
-  //   {
-  //     avatar:
-  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-  //     userName: "wjyyy",
-  //     commentDate: "2023-12-13",
-  //     content: "tessssst",
-  //     comments: [],
-  //   },
-  //   {
-  //     avatar:
-  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-  //     userName: "wjyyy",
-  //     commentDate: "2023-12-13",
-  //     content: "sent comment test",
-  //     comments: [],
-  //   },
-  // ];
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  // console.log("my post detail", postQuery.userAvatar);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false); // like
-  const [isHighlight, setIsHighlight] = useState(false); // highlight
-  const [isPrivate, setIsPrivate] = useState(0); // private
-  const [showCommentBox, setShowCommentBox] = useState(false); // comment box
+  // const [isHighlight, setIsHighlight] = useState(false); // highlight
+  // const [isPrivate, setIsPrivate] = useState(0); // private
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const [comment, setComment] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setPictures = usePostQueryStore((state) => state.setPictures);
   const [showArrows, setShowArrows] = useState(false);
+  const [modalStatus, setModalStatus] = useState("");
   // Reply comment
-  const [replyCommnetId, setReplyCommentId] = useState(0);
-  const [isReply, setIsReply] = useState(false);
   const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
 
   // refs
@@ -128,32 +86,10 @@ const CommunityPostDetailPopUP = ({
   const imageRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // console.log("postQuery", postQuery);
-
   // chakura ui modal
-  const {
-    isOpen: isHighlightModalOpen,
-    onOpen: openHighlightModal,
-    onClose: closeHighlightModal,
-  } = useDisclosure();
-
-  const {
-    isOpen: isRemoveHighlightModalOpen,
-    onOpen: openRemoveHighlightModal,
-    onClose: closeRemoveHighlightModal,
-  } = useDisclosure();
-
-  const {
-    isOpen: isPrivateModalOpen,
-    onOpen: openPrivateModal,
-    onClose: closePrivateModal,
-  } = useDisclosure();
-
-  const {
-    isOpen: isRemovePrivateModalOpen,
-    onOpen: openRemovePrivateModal,
-    onClose: closeRemovePrivateModal,
-  } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalContent, setModalContent] = useState("");
 
   const toast = useToast();
   var isAuthor = userInfo.userId == postQuery.memberID;
@@ -203,37 +139,6 @@ const CommunityPostDetailPopUP = ({
     },
   });
 
-  // highlight button label and modal toggle
-  const toggleHighlight = () => {
-    setIsHighlight((prev) => !prev);
-    openHighlightModal();
-  };
-
-  // remove highlight button label and modal toggle
-  const toggleRemoveHighlight = () => {
-    setIsHighlight((prev) => !prev);
-    openRemoveHighlightModal();
-  };
-
-  // highlight click call api
-  const handleHighlight = () => {
-    // console.log('POSTQUERY', postQuery);
-    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    apiMutateHightlight({
-      id: postQuery.postID,
-      isDisplay: isHighlight,
-    });
-  };
-
-  // remove highlight click call api
-  const handleRemoveHighlight = () => {
-    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    apiMutateRemoveHighlight({
-      id: postQuery.postID,
-      isDisplay: isHighlight,
-    });
-  };
-
   // private api import
   const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
     onError: (error) => {
@@ -257,48 +162,59 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
-
-  // private button label and modal toggle
-  const togglePrivate = () => {
-    setIsPrivate((prev) => !prev);
-    openPrivateModal();
+  const handlePrivateClick = () => {
+    if (validateTokenAndPopup()) {
+      setModalStatus("private");
+      if (!postQuery.isPrivate) {
+        setModalHeader("Private Post");
+        setModalContent("Private");
+      } else {
+        setModalHeader("Remove Private");
+        setModalContent("Remove Private");
+      }
+      onOpen();
+    }
   };
-
-  // remove private button label and modal toggle
-  const toggleRemovePrivate = () => {
-    setIsPrivate((prev) => !prev);
-    openRemovePrivateModal();
-  };
-
+  // console.log("postQuery", postQuery);
   // private click call api
   const handlePrivate = () => {
-    // console.log('POSTQUERY', postQuery);
-    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    apiMutateSetPostDisplay({
-      id: postQuery.postID,
-      isDisplay: isHighlight,
-    });
+    if (validateTokenAndPopup()) {
+      setIsPrivate(!postQuery.isPrivate);
+      const apiMutation = postQuery.isPrivate
+        ? apiMutateSetPostPublic
+        : apiMutateSetPostDisplay;
+      if (validateTokenAndPopup()) {
+        apiMutation({ id: postQuery.postID });
+      }
+      onClose();
+    }
   };
-
-  // remove private click call api
-  const handleRemovePrivate = () => {
-    // setIsHighlight((prev) => (prev === 0 ? 1 : 0));
-    apiMutateSetPostPublic({
-      id: postQuery.postID,
-      isDisplay: isHighlight,
-    });
+  const handleHighlightClick = () => {
+    if (validateTokenAndPopup()) {
+      setModalStatus("highlight");
+      if (!postQuery.isHighlight) {
+        setModalHeader("Highlight Post");
+        setModalContent("Highlight");
+      } else {
+        setModalHeader("Remove Highlight");
+        setModalContent("Remove Highlight");
+      }
+      onOpen();
+    }
   };
-
-  // private click call api
-  // const toggleSetPostDisplay = () => {
-  //   setIsPrivate((prev) => !prev);
-  //   const apiMutation = isPrivate
-  //     ? apiMutateSetPostPublic
-  //     : apiMutateSetPostDisplay;
-  //   if (validateTokenAndPopup()) {
-  //     apiMutation({ id: postQuery.postID });
-  //   }
-  // };
+  // highlight click call api
+  const handleHighlight = () => {
+    if (validateTokenAndPopup()) {
+      setIsHighlight(!postQuery.isHighlight);
+      const apiHighlightMutation = postQuery.isHighlight
+        ? apiMutateRemoveHighlight
+        : apiMutateHightlight;
+      if (validateTokenAndPopup()) {
+        apiHighlightMutation({ id: postQuery.postID });
+      }
+      onClose();
+    }
+  };
 
   // api
   const { mutate: apiMutate } = useGetLikesPost({
@@ -313,9 +229,11 @@ const CommunityPostDetailPopUP = ({
   });
 
   const toggleGetLikes = () => {
-    setLiked((prev) => !prev);
     if (validateTokenAndPopup()) {
-      apiMutate({ postId: postQuery.postID });
+      setLiked((prev) => !prev);
+      if (validateTokenAndPopup()) {
+        apiMutate({ postId: postQuery.postID });
+      }
     }
   };
   const { mutate } = useAddComment({
@@ -350,8 +268,6 @@ const CommunityPostDetailPopUP = ({
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (validateTokenAndPopup()) {
-      // console.log("mutate is called");
-      console.log("postQuery.tempCommentStatus", postQuery.tempCommentStatus);
       if (postQuery.tempCommentStatus === "comment") {
         mutate({
           dynamicId: postQuery.postID,
@@ -359,7 +275,6 @@ const CommunityPostDetailPopUP = ({
         });
       }
       if (postQuery.tempCommentStatus === "reply") {
-        console.log("reply is called", replyCommnetId);
         apiReplyComment({
           commentId: postQuery.commentId,
           text: comment,
@@ -377,32 +292,31 @@ const CommunityPostDetailPopUP = ({
     return true;
   };
 
-  // const handleInputClick = (e) => {
-  //   if (!userInfo.token) {
-  //     e.preventDefault();
-  //     togglePopup(true, 'accountType');
-  //   }
-  // };
-
   // comment box
   const handleClickComment = () => {
-    if (postQuery.tempCommentStatus === "comment") {
-      setTempCommentStatus(false);
-    } else {
-      setTempCommentStatus(true, "comment");
-    }
+    setTempCommentStatus(true, "comment");
   };
 
   // when click the comment button it will scroll down to textarea
   useEffect(() => {
-    if (showCommentBox && textareaRef.current && containerRef.current) {
-      textareaRef.current.focus();
-      containerRef.current.scrollTo({
-        top: textareaRef.current.offsetTop,
-        behavior: "smooth",
-      });
+    const rightContainer = document.querySelector(".detail-top-content");
+
+    let debounceTimer;
+    const handleScroll = () => {
+      setTempCommentStatus(false);
+    };
+
+    if (rightContainer) {
+      rightContainer.addEventListener("scroll", handleScroll);
     }
-  }, [showCommentBox, commentCount]);
+
+    return () => {
+      if (rightContainer) {
+        rightContainer.removeEventListener("scroll", handleScroll);
+      }
+      if (debounceTimer) clearTimeout(debounceTimer);
+    };
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -421,7 +335,6 @@ const CommunityPostDetailPopUP = ({
     setDescription(brief);
     setPictures(picture);
     navigate(`/edit-post/${postQuery.postID}`);
-    // navigate('/edit-post');
   };
 
   return (
@@ -488,32 +401,31 @@ const CommunityPostDetailPopUP = ({
                 <span>{postQuery.userName}</span>
               </div>
               <div className="user-detail-button-container">
-                {/* {isDoctorAuthor && ( */}
-                <button
-                  className="button-highlight"
-                  onClick={
-                    isHighlight ? toggleRemoveHighlight : toggleHighlight
-                  }
-                >
-                  {isHighlight ? "Remove from Highlight" : "Highlight"}
-                </button>
-                {/* )} */}
+                {isDoctorAuthor && (
+                  <button
+                    className="button-highlight"
+                    onClick={handleHighlightClick}
+                  >
+                    {postQuery.isHighlight
+                      ? "Remove from Highlight"
+                      : "Highlight"}
+                  </button>
+                )}
 
-                {/* {isAuthor && ( */}
-                <button
-                  className="button-private"
-                  onClick={isPrivate ? toggleRemovePrivate : togglePrivate}
-                  // onClick={toggleSetPostDisplay}
-                >
-                  {isPrivate ? "Remove from Private" : "Private"}
-                </button>
-                {/* )} */}
+                {isAuthor && (
+                  <button
+                    className="button-private"
+                    onClick={handlePrivateClick}
+                  >
+                    {postQuery.isPrivate ? "Remove from Private" : "Private"}
+                  </button>
+                )}
 
-                {/* {isAuthor && ( */}
-                <button className="button-edit" onClick={handleGoToEdit}>
-                  Edit your Post
-                </button>
-                {/* )} */}
+                {isAuthor && (
+                  <button className="button-edit" onClick={handleGoToEdit}>
+                    Edit your Post
+                  </button>
+                )}
               </div>
             </div>
           </>
@@ -559,9 +471,10 @@ const CommunityPostDetailPopUP = ({
           </div>
         </div>
 
-        <div className="comment-card-textarea-container">
-          {postQuery.tempCommentStatus && (
+        {postQuery.tempCommentStatus && (
+          <div className="comment-card-textarea-container">
             <div className="textarea-with-icon-post">
+              {/* <div> */}
               <textarea
                 onChange={(e) => setComment(e.target.value)}
                 ref={textareaRef}
@@ -576,9 +489,10 @@ const CommunityPostDetailPopUP = ({
               <button onClick={handleFormSubmit} className="textarea-icon">
                 <img src={SendIcon} alt="sendIcon" />
               </button>
+              {/* </div> */}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Web */}
         <div className="fixed-input-box">
@@ -590,7 +504,6 @@ const CommunityPostDetailPopUP = ({
                   src={liked ? heartIconFilled : heartIcon}
                   alt="Icon"
                   className="Icon-size"
-                  // onClick={handleInputClick}
                   onClick={toggleGetLikes}
                 />
                 {likeCount}
@@ -622,7 +535,7 @@ const CommunityPostDetailPopUP = ({
       </div>
 
       {/* highlight modal */}
-      <Modal isOpen={isHighlightModalOpen} onClose={closeHighlightModal}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay
           style={{
             display: "flex",
@@ -636,7 +549,7 @@ const CommunityPostDetailPopUP = ({
           textAlign="center"
         >
           <ModalHeader color="#ffffff" fontSize="25px">
-            Highlight this post?
+            {modalHeader}
           </ModalHeader>
           <ModalFooter display="flex" justifyContent="space-between">
             <Button
@@ -645,7 +558,7 @@ const CommunityPostDetailPopUP = ({
               outline="none"
               _hover="none"
               mr={3}
-              onClick={closeHighlightModal}
+              onClick={onClose}
             >
               Cancel
             </Button>
@@ -654,135 +567,11 @@ const CommunityPostDetailPopUP = ({
               backgroundColor="#f1a285"
               outline="none"
               _hover="none"
-              onClick={handleHighlight}
+              onClick={
+                modalStatus === "private" ? handlePrivate : handleHighlight
+              }
             >
-              Highlight
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
-      {/* remove highlight modal */}
-      <Modal isOpen={isRemoveHighlightModalOpen} onClose={closeHighlightModal}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent
-          backgroundColor="transparent"
-          boxShadow="none"
-          textAlign="center"
-        >
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Remove This Pose from Highlight Cases?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={closeRemoveHighlightModal}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handleRemoveHighlight}
-            >
-              Remove
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
-      {/* private modal */}
-      <Modal isOpen={isPrivateModalOpen} onClose={closePrivateModal}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent
-          backgroundColor="transparent"
-          boxShadow="none"
-          textAlign="center"
-        >
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Private this post?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={closePrivateModal}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handlePrivate}
-            >
-              Private
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
-      {/* remove private modal */}
-      <Modal
-        isOpen={isRemovePrivateModalOpen}
-        onClose={closeRemovePrivateModal}
-      >
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent
-          backgroundColor="transparent"
-          boxShadow="none"
-          textAlign="center"
-        >
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Remove This Pose from Private Cases?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={closeRemovePrivateModal}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handleRemovePrivate}
-            >
-              Remove
+              {modalContent}
             </Button>
           </ModalFooter>
         </ModalContent>

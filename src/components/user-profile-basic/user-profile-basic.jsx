@@ -35,11 +35,10 @@ const UserProfileBasic = () => {
         <div className="user-profile-basic-name-and-editButton">
           <div className="user-profile-basic-name">
             <div className="user-profile-basic-name-title">
-              {userInfo.username && (
-                <span className="user-profile-basic-user-name">
-                  {userInfo.username}
-                </span>
-              )}
+              <span className="user-profile-basic-user-name">
+                {userInfo.username || `User ${userInfo.id}`}
+              </span>
+
               {/* <img
                 src={userVerified}
                 style={{ width: '34px', height: '34px' }}
@@ -47,7 +46,7 @@ const UserProfileBasic = () => {
             </div>
             <div className="user-profile-basic-name-text">
               <span className="user-profile-basic-create-name">
-                @{userInfo.username}
+                @{userInfo.username || `User ${userInfo.id}`}
               </span>
             </div>
           </div>
