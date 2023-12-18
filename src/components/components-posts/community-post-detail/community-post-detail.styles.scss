@@ -1,59 +1,75 @@
-// .custom-size .modal-dialog {
-//     max-width: 1500px; /* Set your desired width */
-//     width: 100%; /* Set your desired width */
-//     max-height: 800px; /* Set your desired height */
-//     height: 100%; /* Set your desired height */
-//   }
-.close-button-modal
-{
-    .modal-content
-    {
-        background-color: transparent;
-        border:none;
-    }
-}
-  .first-modal-content {
-    background-color: transparent; /* Set background color to transparent */
-  }
-  
-  /* Close button styles */
-  .close-button {
-    position: absolute;
-    top: 0;
-    right: -10%;
+.close-button-modal {
+  .modal-content {
     background-color: transparent;
     border: none;
-    cursor: pointer;
-    color: white;
   }
-  
-  .close-button i {
-    font-size: 40px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    border: 2px solid white;
-    border:none;
-    filter: brightness(1.5);
-    padding: 2px;
-    margin: 0;
-  }
+}
+
+.first-modal-content {
+  background-color: transparent;
+}
+
+.close-button img {
+  position: relative;
+  top: -30px;
+  right: -140px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .modal-dialog {
-    max-width: 100%; /* Allows the child element to define the width */
-    width: auto;
-    margin: 0.5rem auto; /* Vertical margin kept, horizontal set to auto for centering */
+  margin: 0.5rem auto;
+  max-width: 100%;
+  width: auto;
 }
-@media (min-width: 576px) {
-    .modal-content {
-        width: 80%;  
-        margin-left: auto;
-        margin-right: auto;
-        /* maintaining the same width */
-    }
+// add css
+.custom-modal-size {
+  --bs-modal-width: 80vw; /* 视口宽度的70% */
+  --bs-modal-height: 90vh; /* 视口高度的90% */
 }
+
+.custom-modal-size .modal-dialog {
+  max-width: var(--bs-modal-width);
+  margin: 5vh auto; /* 垂直居中 */
+}
+
+.custom-modal-size .modal-content {
+  height: var(--bs-modal-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-modal-size .modal-body {
+  overflow-y: auto; /* 如果内容超过高度，会有滚动条 */
+  flex-grow: 1; /* 允许modal-body填充剩余空间 */
+}
+.modal-content {
+  width: 70%;
+  height: 90%;
+  margin: 0 auto;
+  border-radius: 25px;
+}
+
+// @media (min-width: 576px) {
+// }
+
+@media (max-width: 1024px) {
+  .close-button img {
+    right: -120px;
+  }
+}
+
 @media (max-width: 576px) {
-    .modal-content {
-        width: 80%;  
-        margin-left: auto;
-        margin-right:auto;
-        /* maintaining the same width */
-    }
+  .modal-content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 80%;
+  }
+
+  .close-button img {
+    right: -80px;
+  }
 }

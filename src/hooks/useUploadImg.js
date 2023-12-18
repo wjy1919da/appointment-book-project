@@ -26,9 +26,25 @@ const useUploadImg = () => {
       currentFiles.filter((file) => file !== fileToRemove)
     );
   };
+  const removeUploadedFile = (indexToRemove) => {
+    setUploadedFiles((currentFiles) =>
+      currentFiles.filter((_, index) => index !== indexToRemove)
+    );
+  };
 
   const handleFileSelection = async (event) => {
     const newFiles = Array.from(event.target.files);
+    if (uploadingFiles.length + newFiles.length > 3) {
+      toast({
+        title: "Upload limit exceeded",
+        description: "You can upload up to 3 files at a time.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
     setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
     setUploadingFiles(newFiles);
@@ -88,6 +104,8 @@ const useUploadImg = () => {
 
   return {
     selectedFiles,
+    setSelectedFiles,
+    setUploadedFiles,
     uploadedFiles,
     handleFileSelection,
     uploadingFiles,
@@ -95,6 +113,7 @@ const useUploadImg = () => {
     isLoading,
     resetFiles,
     removeFile,
+    removeUploadedFile,
   };
 };
 

@@ -1,4 +1,4 @@
-import { useQuery, useInfiniteQuery } from "react-query";
+import { useQuery, useInfiniteQuery, useMutation } from "react-query";
 import usePostQueryStore from "../postStore.ts";
 import APIClient from "../services/api-client.js";
 // import axios from 'axios';
@@ -88,15 +88,11 @@ export function useGetUserLikededPost() {
     },
   });
 }
-
+// Get post details
 export function usePostDetail() {
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  const apiClient = new APIClient(`/post/web/posts/${postQuery.userID}`);
-
-  //console.log("postQuery.trigger", postQuery.trigger);
-
+  const apiClient = new APIClient(`/post/web/posts/${postQuery.postID}`);
   const fetchPostDetail = async () => {
-    //let url = `${base.postDetailUrl}${postQuery.userID}`;
     try {
       const res = await apiClient.get();
       return res.data;
@@ -104,9 +100,8 @@ export function usePostDetail() {
       return { data: {} };
     }
   };
-
   return useQuery(
-    ["postDetail", postQuery.userID, postQuery.trigger],
+    ["postDetail", postQuery.postID, postQuery.trigger],
     fetchPostDetail,
     {
       placeholderData: { data: {} }, // Default object to use before fetching completes
@@ -115,3 +110,13 @@ export function usePostDetail() {
 }
 
 // likes
+export function useGetLikesPost() {
+  const apiClient = new APIClient("/post/like");
+  const fetchName = async (postId) => {
+    const res = await apiClient.post({
+      postId,
+    });
+    return res.data;
+  };
+  return useMutation((credentials) => fetchName(credentials.postId));
+}

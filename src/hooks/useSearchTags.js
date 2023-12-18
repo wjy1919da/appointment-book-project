@@ -11,7 +11,7 @@ export function useSearchTags() {
   const fetchTags = async ({ pageParam = 1 }) => {
     const res = await apiClient.post({
       currentPage: pageParam,
-      pageSize: 4,
+      pageSize: 6,
       tag: postQuery.tag,
     });
     console.log('APIレスポンス:', res);
