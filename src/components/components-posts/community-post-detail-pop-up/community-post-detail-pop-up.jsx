@@ -61,48 +61,48 @@ const CommunityPostDetailPopUP = ({
   commentCount,
 }) => {
   // console.log("tag", postDate);
-  const replies = [
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-09",
-      content: "rrrrrrrrrrr",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "8888889testing comment",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "testing again",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "tessssst",
-      comments: [],
-    },
-    {
-      avatar:
-        "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-      userName: "wjyyy",
-      commentDate: "2023-12-13",
-      content: "sent comment test",
-      comments: [],
-    },
-  ];
+  // const replies = [
+  //   {
+  //     avatar:
+  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+  //     userName: "wjyyy",
+  //     commentDate: "2023-12-09",
+  //     content: "rrrrrrrrrrr",
+  //     comments: [],
+  //   },
+  //   {
+  //     avatar:
+  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+  //     userName: "wjyyy",
+  //     commentDate: "2023-12-13",
+  //     content: "8888889testing comment",
+  //     comments: [],
+  //   },
+  //   {
+  //     avatar:
+  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+  //     userName: "wjyyy",
+  //     commentDate: "2023-12-13",
+  //     content: "testing again",
+  //     comments: [],
+  //   },
+  //   {
+  //     avatar:
+  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+  //     userName: "wjyyy",
+  //     commentDate: "2023-12-13",
+  //     content: "tessssst",
+  //     comments: [],
+  //   },
+  //   {
+  //     avatar:
+  //       "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+  //     userName: "wjyyy",
+  //     commentDate: "2023-12-13",
+  //     content: "sent comment test",
+  //     comments: [],
+  //   },
+  // ];
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -361,7 +361,7 @@ const CommunityPostDetailPopUP = ({
       if (postQuery.tempCommentStatus === "reply") {
         console.log("reply is called", replyCommnetId);
         apiReplyComment({
-          commentId: replyCommnetId,
+          commentId: postQuery.commentId,
           text: comment,
         });
       }
@@ -549,8 +549,7 @@ const CommunityPostDetailPopUP = ({
                       commentText={convertUnicode(comment.content)}
                       date={formatDate(comment.commentDate)}
                       commentId={comment.id}
-                      setReplyCommentId={setReplyCommentId}
-                      replies={replies}
+                      replies={comment.comments || []}
                     />
                   );
                 }

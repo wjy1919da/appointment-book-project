@@ -119,6 +119,25 @@
 
 .comment-card-detail-container {
   display: flex;
-  width: 400px;
+  width: 100%;
+  // width: 450px;
   // height: 80px;
+}
+.custom-accordion-item {
+  border: none;
+}
+.custom-accordion-button {
+  width: 150px !important;
+  background-color: transparent !important;
+}
+
+.custom-accordion-button[aria-expanded="true"] {
+  background-color: transparent !important;
+}
+
+.custom-accordion-button:hover {
+  background-color: transparent !important;
+}
+.comment-card-show-more-button {
+  margin-top: 20px;
 }

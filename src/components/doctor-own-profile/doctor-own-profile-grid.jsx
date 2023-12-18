@@ -21,35 +21,14 @@ import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
-  // dummy data
-  let data = {
-    pages: [
-      {
-        data: [
-          {
-            id: 13,
-            title: "哈哈哈",
-            coverImg:
-              "https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png",
-            memberId: 262,
-            nickname: "DrJohnDoe",
-            likedCount: 2,
-          },
-        ],
-        pageInfo: {
-          currentPage: 1,
-          totalPage: 6,
-          pageSize: 12,
-          totalRecords: 62,
-        },
-      },
-    ],
-    pageParams: [null],
-  };
-
-  useEffect(() => {
-    console.log("POSTS PAGE DATA", data);
-  }, [data]);
+  const {
+    data,
+    error,
+    isLoading,
+    // fetchNextPage,
+    // isFetchingNextPage,
+    // hasNextPage,
+  } = useGetUserPostedPost();
 
   const [userAvatar, setUserAvatar] = useState("");
   const [userName, setUserName] = useState("");
@@ -61,16 +40,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
-
+  console.log("flatData in doctor profile", flatData);
   // hook
-  const {
-    // data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
 
   // create a post + icon button
   const handleIconClick = () => {
@@ -121,6 +92,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         profileImage={post.avatar || ""}
         authorName={post.username || ""}
         likes={post.like_count || 0}
+        dummyPrivate={post.isDisplay}
       />
     </div>
   ));

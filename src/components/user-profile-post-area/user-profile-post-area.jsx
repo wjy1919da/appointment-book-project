@@ -1,58 +1,61 @@
-import { useState, useEffect } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import usePostQueryStore from '../../postStore.ts';
-import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import usePostQueryStore from "../../postStore.ts";
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 // components
-import CreatePostOfUser from '../create-post/create-post';
-import CommunityPost from '../components-posts/community-post/community-post.component';
-import PostDetail from '../components-posts/community-post-detail/community-post-detail.component';
+import CreatePostOfUser from "../create-post/create-post";
+import CommunityPost from "../components-posts/community-post/community-post.component";
+import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
 // import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
 
 // hook
-import { useGetUserPostedPost } from '../../hooks/useGetPosts.js';
+import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
 
 // scss
-import './user-profile-post-area.styles.scss';
-import '../create-post/create-post.style.scss';
+import "./user-profile-post-area.styles.scss";
+import "../create-post/create-post.style.scss";
 
 // images
-import post1 from '../../assets/doctor/post3.png';
-import creatPostIcon from '../../assets/post/create-post-icon.png';
-import userPostAvatar from '../../assets/post/user-profile-avatar.png';
+import post1 from "../../assets/doctor/post3.png";
+import creatPostIcon from "../../assets/post/create-post-icon.png";
+import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  // dummy data
-  let data = {
-    pages: [
-      {
-        data: [
-          {
-            id: 13,
-            title: '哈哈哈',
-            coverImg:
-              'https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png',
-            memberId: 262,
-            nickname: 'DrJohnDoe',
-            likedCount: 2,
-          },
-        ],
-        pageInfo: {
-          currentPage: 1,
-          totalPage: 6,
-          pageSize: 12,
-          totalRecords: 62,
-        },
-      },
-    ],
-    pageParams: [null],
-  };
-
-  useEffect(() => {
-    console.log('POSTS PAGE DATA', data);
-  }, [data]);
-
+  // // dummy data
+  // let data = {
+  //   pages: [
+  //     {
+  //       data: [
+  //         {
+  //           id: 13,
+  //           title: '哈哈哈',
+  //           coverImg:
+  //             'https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png',
+  //           memberId: 262,
+  //           nickname: 'DrJohnDoe',
+  //           likedCount: 2,
+  //         },
+  //       ],
+  //       pageInfo: {
+  //         currentPage: 1,
+  //         totalPage: 6,
+  //         pageSize: 12,
+  //         totalRecords: 62,
+  //       },
+  //     },
+  //   ],
+  //   pageParams: [null],
+  // };
+  const {
+    data,
+    error,
+    isLoading,
+    // fetchNextPage,
+    // isFetchingNextPage,
+    // hasNextPage,
+  } = useGetUserPostedPost();
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
@@ -64,19 +67,11 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const navigate = useNavigate();
 
   // hook
-  const {
-    // data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
 
   // width
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
 
-  const [gutterwidth, setGutterWidth] = useState('20px');
+  const [gutterwidth, setGutterWidth] = useState("20px");
 
   const breakPoint = {
     default: 4,
@@ -91,18 +86,10 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   // create a post + icon button
   const handleIconClick = () => {
     // setShowCreatePost(true);
-    navigate('/posts/create', { state: { source: 'userProfile' } });
+    navigate("/posts/create", { state: { source: "userProfile" } });
   };
 
   const handleClickPost = (ID, avatar, username, title, memberId) => {
-    console.log(
-      'handleClickPost in user profile post',
-      ID,
-      avatar,
-      username,
-      title,
-      memberId
-    );
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
@@ -125,12 +112,12 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
       }
     >
       <CommunityPost
-        dummyHighlight={post.highlight}
-        dummyPrivate={post.private}
+        // dummyHighlight={post.highlight}
+        dummyPrivate={post.isDisplay}
         imageURL={post.coverImg || []}
-        text={post.title || ''}
-        profileImage={post.avatar || ''}
-        authorName={post.username || ''}
+        text={post.title || ""}
+        profileImage={post.avatar || ""}
+        authorName={post.username || ""}
         likes={post.like_count || 0}
       />
     </div>
@@ -160,9 +147,9 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   }, []);
 
   return (
-    <div className='user-profile-post-area-container'>
+    <div className="user-profile-post-area-container">
       {!showCreatePost && imagesLoaded && (
-        <div className='choose-picture-conatiner-post'>
+        <div className="choose-picture-conatiner-post">
           <ResponsiveMasonry
             columnsCountBreakPoints={breakPoint}
             gutter={gutterwidth}
@@ -170,18 +157,18 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
             <Masonry gutter={gutterwidth}>
               {/* CreatePostIcon as the first post */}
 
-              <div className='choose-picture-section-image-post'>
+              <div className="choose-picture-section-image-post">
                 <img
                   src={creatPostIcon}
                   onClick={handleIconClick}
-                  className='choose-picture-section-image'
-                  alt='Create Post'
+                  className="choose-picture-section-image"
+                  alt="Create Post"
                 />
               </div>
 
               {/* archive posts button */}
-              <div className='archive-posts-button-container'>
-                <span className='archive-title'>Archived Posts</span>
+              <div className="archive-posts-button-container">
+                <span className="archive-title">Archived Posts</span>
               </div>
 
               {/* Rest of the posts */}

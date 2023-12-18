@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./doctor-own-profile-edit.styles.scss";
-import CloseButton from "../../../assets/doctor/doctor-verification-close-Icon.png";
+
 import DoctorEditVoucherSession from "./doctor-edit-voucher-session";
 import DoctorEditInterestCategory from "./doctor-profile-edit-interest-area";
 import DoctorEditVerificationSession from "./doctor-own-profile-verification-session";

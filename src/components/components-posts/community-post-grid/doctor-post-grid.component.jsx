@@ -45,6 +45,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
+  console.log("flatData", flatData);
 
   const { postid } = useParams();
 
@@ -79,6 +80,7 @@ const DoctorPostGrid = ({ isAbout }) => {
       key={post.id}
     >
       <CommunityPost
+        dummyPrivate={post.isDisplay}
         id={post.id}
         imageURL={post.coverImg || []}
         text={post.title || ""}

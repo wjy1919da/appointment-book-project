@@ -70,7 +70,7 @@ const HeaderUser = () => {
   );
   useEffect(() => {
     if (data?.data) {
-      console.log("data setting is called", data);
+      // console.log("data setting is called", data);
       setUsername(data.data.nickname);
       setAccountType(data.data.accountType);
       setPostCount(data.data.postsNumber);
