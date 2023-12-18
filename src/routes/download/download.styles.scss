@@ -27,7 +27,7 @@
         width: 26vw;
         position: relative;
         z-index: 3;
-        top: 64px;
+        top: 75px;
         left: 80px;
         border: none;
         border-radius: 0;
@@ -38,7 +38,8 @@
         z-index: 2;
         width: 22vw;
         top: 165px;
-        left: 112px;
+        left: 105px;
+        border-radius: 10px;
       }
     }
 
@@ -173,7 +174,7 @@
         width: 145px;
         top: 135px;
         left: 115px;
-        border-radius: 3px
+        border-radius: 3px;
       }
     }
 
@@ -393,9 +394,19 @@
         height: auto;
         position: relative;
         top: 64px;
-        left: 20px;
+        left: 60px;
         border: none;
         border-radius: 0;
+        z-index: 100;
+      }
+
+      .phone-screen {
+        position: absolute;
+        z-index: 2;
+        width: 140px;
+        top: 136px;
+        left: 75px;
+        border-radius: 10px;
       }
     }
 
