@@ -39,6 +39,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const navigate = useNavigate();
 
   // hook
@@ -64,13 +65,21 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     navigate("/posts/create", { state: { source: "userProfile" } });
   };
 
-  const handleClickPost = (ID, avatar, username, title, memberId) => {
+  const handleClickPost = (
+    ID,
+    avatar,
+    username,
+    title,
+    memberId,
+    isPrivate
+  ) => {
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
+    setIsPrivate(isPrivate);
   };
 
   const postList = flatData.map((post, index) => (
@@ -82,7 +91,8 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
           post.avatar,
           post.username,
           post.title,
-          post.memberId
+          post.memberId,
+          post.isDisplay
         )
       }
     >
