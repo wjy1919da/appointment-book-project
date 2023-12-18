@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+// hooks
+import { useGetLikesPost } from '../../../hooks/useGetPosts';
+
+// stores
+import usePostQueryStore from '../../../postStore.ts';
+
 // scss
 import './community-post.styles.scss';
 
@@ -26,6 +32,8 @@ const CommunityPost = ({
   const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
 
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+
   useEffect(() => {
     if (isMobile) {
       setWidth('240px');
@@ -33,6 +41,9 @@ const CommunityPost = ({
       setWidth('186px');
     }
   }, [isMobile]);
+
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
 
   // set default image when image is not loaded function is here
   const handleImageError = () => {
@@ -42,8 +53,9 @@ const CommunityPost = ({
   // like button function is here
   // prevent to open pop up when like buttonis clicked
   const handleHeartIconClick = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setLiked((prevLiked) => !prevLiked);
+    apiLikeMutate({ postId: postQuery.postID });
   };
 
   return (
