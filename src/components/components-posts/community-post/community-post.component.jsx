@@ -31,8 +31,10 @@ const CommunityPost = ({
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
+  const [countLikes, setCountLikes] = useState(0);
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  // const setCounter = usePostQueryStore((state) => state.setCounter);
 
   useEffect(() => {
     if (isMobile) {
@@ -54,8 +56,13 @@ const CommunityPost = ({
   // prevent to open pop up when like buttonis clicked
   const handleHeartIconClick = (e) => {
     e.stopPropagation();
-    setLiked((prevLiked) => !prevLiked);
     apiLikeMutate({ postId: postQuery.postID });
+    setLiked((prevLiked) => {
+      const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
+      setCountLikes(newCountLikes);
+      console.log('newCountLikes', newCountLikes);
+      return !prevLiked;
+    });
   };
 
   return (
@@ -92,12 +99,12 @@ const CommunityPost = ({
             <img
               src={liked ? heartIconFilled : heartIcon}
               className='heartIcon'
-              onClick={handleHeartIconClick}
-              // onClick={toggleLike}
+              onClick={(e) => handleHeartIconClick(e)}
               alt='Like Icon'
             />
 
-            <span className='gray-text'>{likes}</span>
+            {/* <span className='gray-text'>{likes}</span> */}
+            <span className='gray-text'>{countLikes}</span>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ import PostDetail from "../../components/components-posts/community-post-detail/
 import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
 
 // scss
-import "./doctor-own-profile-grid.scss";
+// import "./doctor-own-profile-grid.scss";
 
 // images
 import post1 from "../../assets/doctor/post3.png";
