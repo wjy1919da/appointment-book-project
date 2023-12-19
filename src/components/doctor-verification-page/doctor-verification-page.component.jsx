@@ -24,6 +24,8 @@ function DoctorVerificationPage() {
     resetFiles,
     removeUploadedFile,
   } = useUploadFile();
+  /* uploadedFiles.join(", ") is licences */
+  console.log("uploadedFiles", uploadedFiles.join(", "));
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
   };
