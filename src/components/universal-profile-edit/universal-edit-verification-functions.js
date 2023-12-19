@@ -96,9 +96,9 @@ export async function sendVerification(email) {
 
 export async function getUserData() {
     try {
-        const apiClient = new APIClient("/user/fetch_user_profile");
-        const res = await apiClient.post();
-        console.log('getUserProfile res is: ', res);
+        const apiClient = new APIClient("/user/get_edit_user_profile");
+        const res = await apiClient.get();
+        // console.log('getUserProfile res is: ', res);
         return res;
     } catch (err) {
         throw new Error('Unable to retrieve user info', err);
@@ -108,6 +108,7 @@ export async function getUserData() {
 
 export async function setUserData(userData) {
     const incorrectPasswordMsg = 'Incorrect password, please try again.';
+    console.log('attempting to send data as: ', userData);
     try {
         const apiClient = new APIClient("/user/set_user_profile");
         const res = await apiClient.post(userData);

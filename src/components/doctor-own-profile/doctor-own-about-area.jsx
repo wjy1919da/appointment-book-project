@@ -6,10 +6,10 @@ import DocotorOwnReview from './doctor-own-profile-reviews';
 const DocotorOwnAbout = () => {
     return (
         <div>
-            <DocotorOwnVoucher/>
+            {/* <DocotorOwnVoucher/> */}
             <DocotorOwnSpecialization/>
             <DocotorOwnHightLight/>
-            <DocotorOwnReview/>
+            {/* <DocotorOwnReview/> */}
         </div>
     );
 };
