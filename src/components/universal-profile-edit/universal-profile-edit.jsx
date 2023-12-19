@@ -447,7 +447,7 @@ const UniversalProfileEdit = () => {
                                         
                                     >
                                     </div> */}
-                                    <img src={imageLink ? imageLink : originalInformation.image ? originalInformation : defaultPhoto} alt='profile Picture' className='univ-edit-info-form-profile-pic' />
+                                    <img src={imageLink ? imageLink : originalInformation.image ? originalInformation.image : defaultPhoto} alt='profile Picture' className='univ-edit-info-form-profile-pic' />
                                 </div>
                                 <div className='univ-edit-info-form-name-and-gender-container'>
                                     <div className='univ-edit-info-form-name-container'>
