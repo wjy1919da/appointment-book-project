@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
-import usePostQueryStore from "../../../postStore.ts";
+import React, { useState, useEffect } from 'react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import usePostQueryStore from '../../../postStore.ts';
 
 // components
-import CommunityPost from "../community-post/community-post.component";
-import PostDetail from "../community-post-detail/community-post-detail.component";
-import HomeSpinner from "../../home-spinner/home-spinner.component";
-import InfiniteScroll from "react-infinite-scroll-component";
-import ErrorMsg from "../../error-msg/error-msg.component";
+import CommunityPost from '../community-post/community-post.component';
+import PostDetail from '../community-post-detail/community-post-detail.component';
+import HomeSpinner from '../../home-spinner/home-spinner.component';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import ErrorMsg from '../../error-msg/error-msg.component';
 
 // hook
-import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-import { useGetLikesPost } from "../../../hooks/useGetPosts";
+import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
+import { useGetLikesPost } from '../../../hooks/useGetPosts';
 
 // scss
-import "./doctor-post-grid.styles.scss";
+import './doctor-post-grid.styles.scss';
 
 // images
-import Arrow from "../../../assets/post/arrow_grid.png";
-import Arrow1 from "../../../assets/post/arrow1_grid.png";
-import { set } from "date-fns";
+import Arrow from '../../../assets/post/arrow_grid.png';
+import Arrow1 from '../../../assets/post/arrow1_grid.png';
+import { set } from 'date-fns';
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -45,7 +45,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   // const [title, setTitle] = useState("");
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
-  const [gutterwidth, setGutterWidth] = useState("");
+  const [gutterwidth, setGutterWidth] = useState('');
   const isMobileOrAbout = isMobile || isAbout;
   // console.log("flatData", flatData);
 
@@ -58,7 +58,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     title,
     memberId,
     isHighlight,
-    isPrivate
+    isPrivate,
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -71,23 +71,23 @@ const DoctorPostGrid = ({ isAbout }) => {
   };
 
   useEffect(() => {
-    setGutterWidth(isMobileOrAbout ? "0px" : "10px");
+    setGutterWidth(isMobileOrAbout ? '0px' : '10px');
   }, [isMobile]);
   if (isLoading) return <HomeSpinner />;
   if (error) return <ErrorMsg />;
 
   const postCardList = flatData.map((post) => (
     <div
-      className="btn"
+      className='btn'
       onClick={() => {
         handleClickPost(
           post.id,
           post.avatar,
           post.nickname,
           post.title,
-          post.memberId
+          post.memberId,
         );
-        navigate("/posts/" + post.id);
+        navigate('/posts/' + post.id);
       }}
       key={post.id}
     >
@@ -95,16 +95,16 @@ const DoctorPostGrid = ({ isAbout }) => {
         dummyPrivate={post.isDisplay}
         id={post.id}
         imageURL={post.coverImg || []}
-        text={post.title || ""}
-        profileImage={post.avatar || ""}
-        authorName={post.nickname || ""}
+        text={post.title || ''}
+        profileImage={post.avatar || ''}
+        authorName={post.nickname || ''}
         likes={post.likedCount || 0}
       />
     </div>
   ));
 
   return (
-    <div className="doctor-post-grid-inner-container">
+    <div className='doctor-post-grid-inner-container'>
       {flatData && (
         <InfiniteScroll
           dataLength={flatData.length}
@@ -135,17 +135,17 @@ const DoctorPostGrid = ({ isAbout }) => {
           isMobile={isMobile}
         />
       )}
-      <div className="down-load-more-container">
+      <div className='down-load-more-container'>
         {!isMobile && (
-          <img src={Arrow} alt="arrow" className="arrow-containter" />
+          <img src={Arrow} alt='arrow' className='arrow-containter' />
         )}
         {isMobile && (
-          <img src={Arrow1} alt="arrow1" className="arrow1-containter" />
+          <img src={Arrow1} alt='arrow1' className='arrow1-containter' />
         )}
-        <div className="download-text">Join Charm community to view more</div>
-        <Link to="/download">
-          <button className="download-button">
-            <div className="download-button-text">DownLoad APP</div>
+        <div className='download-text'>Join Charm community to view more</div>
+        <Link to='/download'>
+          <button className='download-button'>
+            <div className='download-button-text'>DownLoad APP</div>
           </button>
         </Link>
       </div>
