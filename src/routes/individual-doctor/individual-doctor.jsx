@@ -98,7 +98,7 @@ const IndividualDoctor = () => {
           <div onClick={() => selectTab(1)} className={`indv-doctor-navbar-item ${activeTab === 1 ? "indv-active" : ""}`}>Posts</div>
           <div onClick={() => selectTab(2)} className={`indv-doctor-navbar-item ${activeTab === 2 ? "indv-active" : ""}`}>Like</div>
       </div>
-      {activeTab === 0 && <DoctorAbout />}
+      {activeTab === 0 && <DoctorAbout encodedMemberId={encodedMemberId} />}
       {activeTab === 1 && (
             <div className='individual-doctor-posts'>
               <UserProfileDoctorPostGrid />
@@ -294,7 +294,7 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
             </div>
             <div className='indv-doctor-specialization-container indv-doctor-info-subrow' >
               <img src={glassIcon} className='specialization-img' alt='specialization' />
-              {data?.name?.length > 0 && <span className='indv-doctor-specialization indv-doctor-info'>Specialization in {data?.name[0]}</span>}
+              {data?.name?.length > 0 && <span className='indv-doctor-specialization indv-doctor-info'>Specialization in {convertTitle(data?.name[0])}</span>}
             </div>
             <div className='indv-doctor-verification-container indv-doctor-info-subrow' >
               <img src={badgeIcon} className='verification-img' alt='verification' />
@@ -318,6 +318,13 @@ const DoctorProfileInfo = ({data, data3, encodedMemberId}) => {
       </div>
     </>
   )
+}
+
+const convertTitle = (string) => {
+  const splitItem = string.split('_');
+  const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+  const procedureTitle = upperCased.join(' ');
+  return procedureTitle;
 }
 
 export default IndividualDoctor;
