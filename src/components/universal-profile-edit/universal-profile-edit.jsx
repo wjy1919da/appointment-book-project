@@ -35,7 +35,8 @@ const UniversalProfileEdit = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState(false);
     const [bio, setBio] = useState("");
-    const [interests, setInterests] = useState([]);  // the array of interests returned from the backend
+    const [image, setImage] = useState("");
+    const [interests, setInterests] = useState([]);  // the array of interests returned from the backend that we display as options
     const [interestSelections, setInterestSelections] = useState([]);  // the array that we put what the user selects their interests as in
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -46,7 +47,7 @@ const UniversalProfileEdit = () => {
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const [changesSaved, setChangesSaved] = useState(false);
     // const originalObj = {'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': ''};
-    const [originalInformation, setOriginalInformation] = useState({'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': ''});
+    const [originalInformation, setOriginalInformation] = useState({'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': [], 'image': ''});
     const navigate = useNavigate();
     const userEmailLogin = useUserEmailLogin();
     const doctorLogin = useDoctorLogin();
@@ -61,62 +62,95 @@ const UniversalProfileEdit = () => {
         if (accountNumber === null) throw new Error('No account type found...');
         return Number(accountNumber);
     }
+    const establishOriginalInfo = async (userObjResponse) => {
+        let { nickname, bio, email, avatar, birthday, gender, phoneNumber, interestedProcedure } = userObjResponse?.data?.data;
+        let holder = JSON.parse(JSON.stringify(originalInformation));
+        // establishOriginalInfo(interestedProcedure, setInterestSelections, holder, 'interests');
+        if (nickname) {
+            setName(nickname);
+            holder = {...holder, 'name': nickname};
+        }
+        if (bio) {
+            setBio(bio);
+            holder = {...holder, 'bio': bio};
+        }
+        if (email) {
+            setEmail(email);
+            holder = {...holder, 'email': email};
+        }
+        if (avatar) {
+            setImage(avatar);
+            holder = {...holder, 'image': avatar};
+        }
+        if (birthday) {
+            setBirthday(birthday);
+            holder = {...holder, 'birthday': birthday};
+        }
+        if (gender) {
+            let genderNumber = 0;
+            if (gender === 'Male') {
+                genderNumber = 1;
+            } else if (gender === 'Female') {
+                genderNumber = 2;
+            } else if (gender === 'Other') {
+                genderNumber = 3;
+            }
+            setGender(genderNumber);
+            holder = {...holder, 'gender': genderNumber};
+        }
+        if (phoneNumber) {
+            setPhoneNumber(phoneNumber);
+            holder = {...holder, 'phoneNumber': phoneNumber};
+        }
+        if (interestedProcedure) {
+            setInterestSelections(interestedProcedure);
+            holder = {...holder, 'interests': interestedProcedure};
+        }
+        console.log('OriginalInfo is: ', holder);
+        setOriginalInformation(holder);
+    }
+
     useEffect(() => {
         setIsLoading(true);
         try {
-            const grabUserInfo = async () => {
+            setAccountType(retrieveAccountType());
+            const grabUserInfoAndProcedures = async () => {
                 console.log('attempting to grab user info!');
-                // call get API for user info when implemented
-                // then put all info into states if that info exists;
-                // const userObj = { 'name' : '', 'gender': '', 'birthday': '', 'email': '', 'phone': '', 'bio': '', 'interests': ''};
-                // setOriginalInformation(...)
                 try {
                     const response = await editFuncs.getUserData();
                     console.log('getUSER response returned as: ', response);
-                    let { nickname, description, image } = response?.data?.data;
-                    let holder = JSON.parse(JSON.stringify(originalInformation));
-                    if (nickname) {
-                        setName(nickname);
-                        holder = {...holder, 'name': nickname};
-                        //setOriginalInformation({...originalInformation, 'name': nickname});
-                    }
-                    if (description) {
-                        setBio(description);
-                        holder = {...holder, 'bio': description};
-                        //setOriginalInformation({...originalInformation, 'bio': description});
-                    }
-                    setOriginalInformation(holder);
+                    await establishOriginalInfo(response);
+                    const procedures = await editFuncs.getProcedures();
+                    await alterInterests(procedures);
+                    setIsLoading(false);
                 } catch (err) {
                     throw new Error(err);
-                }
-                
+                } 
             } 
-            grabUserInfo();
+            grabUserInfoAndProcedures();
+            // retrieveProcedures(); 
         } catch (err) {
             console.log('Error retrieving user info for edit page: ', err);
             setError(err);
+        } finally {
+            setTimeout(() => {
+                // add a small delay, otherwise the page loads before the data has been rendered;
+                setIsLoading(false);
+            }, 3500);
         }
     }, [])
 
-    useEffect(() => {
-        try {
-            setAccountType(retrieveAccountType());
-            const retrieveProcedures = async () => {
-                try {
-                    const procedures = await editFuncs.getProcedures();
-                    setInterestSelections(procedures);
-                } catch (err) {
-                    throw new Error(err);
-                }
-            }
-            retrieveProcedures(); 
-        } catch (err) {
-            console.log('Error retrieving procedures info for edit page: ', err);
-            setError(err);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [])
+    // useEffect(() => {
+    //     try {
+            
+            
+    //     } catch (err) {
+    //         console.log('Error retrieving procedures info for edit page: ', err);
+    //         setError(err);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // }, [])
 
     // useEffect(() => {
     //     if (oldPasswordError) {
@@ -127,11 +161,31 @@ const UniversalProfileEdit = () => {
     //     }
     // }, [oldPasswordError])
 
-    const alterInterestsForSending = () => {
-        const holder = [];
-        interestSelections.forEach((item) => {
-
-        })
+    const alterInterests = async (procedures) => {  // needed for if in the future, we hold the procedure imgs somewhere else (not in assets folder)
+        const alteredProcedures = [];
+        for (let i = 0; i < procedures.length; i++) {
+            const location = procedures[i]?.location;
+            const locationProcedureArray = procedures[i]?.procedures;
+            const holder = [];
+            locationProcedureArray.forEach((item) => {
+                let imgUrl = '';
+                let procedureTitle = '';
+                if (item?.imageUrl) {
+                    imgUrl = item?.imageUrl;
+                }
+                if (item?.procedureTitle) {
+                    procedureTitle = item?.procedureTitle;
+                } else {
+                    procedureTitle = item;
+                }
+                const obj = {imageUrl: imgUrl, procedureTitle: procedureTitle};
+                holder.push(obj);
+            });
+            const newObj = {location: location, procedures: holder};
+            alteredProcedures.push(newObj);
+        }
+        setInterests(alteredProcedures);
+        return;
     }
 
     const goBack = () => {
@@ -139,17 +193,19 @@ const UniversalProfileEdit = () => {
     }
 
     const addToInterests = (item) => {
-        setInterests((array) => [...array, item]);
+        console.log('adding to interests array: ', item);
+        setInterestSelections((array) => [...array, item]);
     }
 
     const removeFromInterests = (item) => {
-        const filteredArray = interests.filter((procedure) => procedure !== item);
-        setInterests(filteredArray);
+        console.log('removing from interests array: ', item);
+        const filteredArray = interestSelections.filter((procedure) => procedure !== item);
+        setInterestSelections(filteredArray);
     }
 
     const handleInterestsClick = (item) => {
         // console.log('originalInfo is: ', originalInformation);
-        if (!interests.includes(item)) addToInterests(item);
+        if (!interestSelections.includes(item)) addToInterests(item);
         else removeFromInterests(item);
     }
 
@@ -182,17 +238,17 @@ const UniversalProfileEdit = () => {
         1. (conditional) If the user is trying to change their password, check that the provided 'current password' is correct. If not, we do not save any data
         2. (conditional) If the user is trying to change their email, call verifyEmail. If the email is not valid, we will not save anything. If it is valid, somehow wait until the user has clicked 'verify' before proceeding. 
         */
-        if (email) {
-            console.log('testing verification!');
-            const verifyEmail = async () => {
-                let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
-                const isEmailValid = await editFuncs.verifyEmailForChange(email, userRole);  // checks to see if this new email is already in use or not
-                if (!isEmailValid) {  // USE DIFFERENT ERROR HANDLING HERE!
-                    console.log('Unable to use this email, please use a different email.');
-                }
-            }
-            await verifyEmail();
-        }
+        // if (email) {
+        //     console.log('testing verification!');
+        //     const verifyEmail = async () => {
+        //         let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
+        //         const isEmailValid = await editFuncs.verifyEmailForChange(email, userRole);  // checks to see if this new email is already in use or not
+        //         if (!isEmailValid) {  // USE DIFFERENT ERROR HANDLING HERE!
+        //             console.log('Unable to use this email, please use a different email.');
+        //         }
+        //     }
+        //     await verifyEmail();
+        // }
 
         // if (oldPassword && newPassword) {
         //     console.log('attempting to change password...');
@@ -216,26 +272,45 @@ const UniversalProfileEdit = () => {
         //         return;
         //     }
         // }
+        const data = {};
 
-        if (name || bio) {
-            console.log('attempting to change name or bio');
-            const data = {};
-            const changeName = async () => {
-                try {
-                    // if (name && name !== originalInformation.name) data['name'] = name;
-                    if (name) data['name'] = name;
-                    // console.log('data name is: ', data);
-                    // if (bio && bio !== originalInformation.bio) data['bio'] = bio;
-                    if (bio) data['bio'] = bio;
-                    console.log('sending data as: ', data);
-                    const res = await editFuncs.setUserData(data);
-                    console.log('name res returned as: ', res);
-                } catch (err) {
-                    console.log('Could not change name or bio: ', err);
-                }
-            }
-            await changeName();
+        if (name && name !== originalInformation.name) {
+            data.nickname = name;
         }
+        if (bio && bio !== originalInformation.bio) {
+            data.bio = bio;
+        }
+        if (gender && gender !== originalInformation.gender) {
+            data.gender = gender;
+        }
+        if (birthday && birthday !== originalInformation.birthday) {
+            data.birthday = birthday;
+        }
+        if (phoneNumber && phoneNumber !== originalInformation.phoneNumber) {
+            data.mobile = phoneNumber;
+        }
+        if (interestSelections && interestSelections !== originalInformation.interests) {
+            data.interested = interestSelections;
+        }
+        console.log('data is: ', data);
+        let errorSubmitting = false;
+        const submitForm = async () => {
+            try {
+                const res = await editFuncs.setUserData(data);
+                if (res?.data?.code === 500) {
+                    throw new Error('Couldn\'t save some or all of the submitted data...');
+                } else {
+                    setChangesSaved(true);
+                }
+                console.log('edit profile res returned as: ', res);
+            } catch (err) {
+                console.log('Could not change edit profile page...');
+                errorSubmitting = true;
+            } finally {
+                setIsLoadingModalOpen(false);
+            }
+        }
+        submitForm();
         
         // const sendVerificationEmail = async () => {
         //     if (await verifyEmail()) {
@@ -246,18 +321,9 @@ const UniversalProfileEdit = () => {
         //         })
         //     }
         // }
-        
-        // const obj = {
-        //     'name': name,
-        //     'birthday': birthday,
-        //     'gender': gender,
-        //     'email': email,
-        //     'mobile': phoneNumber,
-        //     'bio': bio,
-        //     'interests': interests
+        // if (!errorSubmitting) {
+        //     setChangesSaved(true);
         // }
-        // console.log('submission obj is: ', obj);
-        setChangesSaved(true);
         setIsLoadingModalOpen(false);
     }
     
@@ -320,7 +386,7 @@ const UniversalProfileEdit = () => {
                                         <h4 className='univ-edit-info-form-label univ-edit-text'>Gender</h4>
                                         <div className='univ-edit-info-form-gender-radio-container'>
                                             <div className='univ-edit-info-form-gender-radio'>
-                                                <input type='radio' id='female' name='gender' className='univ-edit-info-form-gender-radio-button' value={0} onClick={() => setGender(0)} defaultChecked={gender === 0 ? "checked" : ""} />
+                                                <input type='radio' id='female' name='gender' className='univ-edit-info-form-gender-radio-button' value={2} onClick={() => setGender(2)} defaultChecked={gender === 2 ? "checked" : ""} />
                                                 <label className='univ-edit-info-form-gender-radio-label'>Female</label>
                                             </div>
                                             <div className='univ-edit-info-form-gender-radio'>
@@ -328,7 +394,7 @@ const UniversalProfileEdit = () => {
                                                 <label className='univ-edit-info-form-gender-radio-label'>Male</label>
                                             </div>
                                             <div className='univ-edit-info-form-gender-radio'>
-                                                <input type='radio' id='other' name='gender' className='univ-edit-info-form-gender-radio-button' value={2} onClick={() => setGender(2)} defaultChecked={gender === 2 ? "checked" : ""}/>
+                                                <input type='radio' id='other' name='gender' className='univ-edit-info-form-gender-radio-button' value={3} onClick={() => setGender(3)} defaultChecked={gender === 3 ? "checked" : ""}/>
                                                 <label className='univ-edit-info-form-gender-radio-label'>Other</label>
                                             </div>
                                         </div>
@@ -359,7 +425,7 @@ const UniversalProfileEdit = () => {
                 </div>
                 <div className='univ-edit-right-column-container'>
                     <div className='univ-edit-sub-container univ-edit-interests-container-container'>
-                        <UniversalInfoInterestsSelection interestsArray={interestSelections} interestOnClick={handleInterestsClick} userInterests={interests} accountType={accountType} />
+                        <UniversalInfoInterestsSelection interestsArray={interests} interestOnClick={handleInterestsClick} userInterests={interestSelections} accountType={accountType} />
                     </div>
                     <div className='univ-edit-change-password-button-container' >
                         <button type='button' className='univ-edit-change-password-button' onClick={() => setIsPasswordModalOpen(true)} >Change Password</button>
@@ -430,12 +496,14 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
             
             <div className='univ-edit-interests-selection-interests-container'>
                 {procedures?.map((item, index) => {
-                    const splitItem = item.split('_');
+                    const imgUrl = item?.imgUrl;
+                    const itemTitle = item?.procedureTitle || item;
+                    const splitItem = itemTitle.split('_');
                     const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
                     const procedureTitle = upperCased.join(' ');
-                    return (<div className='procedure-wrapper univ-edit-procedure-wrapper' onClick={() => interestOnClick(item)} key={index+100}>
+                    return (<div className='univ-edit-procedure-wrapper' onClick={() => interestOnClick(item)} key={index+100}>
                                 <div className={`procedure-photo-container univ-edit-procedure-photo-container ${userInterests.includes(item) ? 'univ-edit-procedure-selected' : ''}`}>
-                                    {item ? <img src={require(`../../assets/procedure/${item}.svg`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
+                                    {imgUrl ? <img src={imgUrl} alt='procedure' className='procedure-photo' /> : <img src={require(`../../assets/procedure/${itemTitle}.svg`)} alt='procedure' className='procedure-photo' />}
                                 </div>
                                 <p className='procedure-subtitle'>{procedureTitle}</p>
                             </div>
@@ -487,13 +555,20 @@ const ChakraPasswordModal = ({title, approveButtonText, isModalOpen, closeModalF
 
     const handlePasswordFormSubmission = async () => {
         console.log('attempting to submit the password form!');
+        // setIsLoadingModalOpen(true);
         const obj = {
-            'oldPW': oldPassword,
-            'newPW': newPassword,
-            'newPWRep': newPasswordRepeated
+            'currentPassword': oldPassword,
+            'newPassword': newPassword,
+            'confirmNewPassword': newPasswordRepeated
         }
-        console.log('submitting: ', obj);
-        
+        try {
+            const res = await editFuncs.setUserData(obj)
+            console.log('new password res is: ', res);
+        } catch (err) {
+            if (err.message === 'Incorrect password, please try again.') {
+                setOldPasswordError('Incorrect password, please try again.');
+            }
+        }
     }
 
     return (
