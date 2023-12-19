@@ -63,6 +63,13 @@
     font-size: 21px;
 }
 
+.univ-edit-form-changes-unsaved-text {
+    position: absolute;
+    top: -2rem;
+    color: #F48C8A;
+    font-size: 12px;
+}
+
 .univ-edit-form-button-container {
     display: flex;
     flex-direction: column;
@@ -138,29 +145,82 @@
 .univ-edit-info-form-top-row {
     display: flex;
     align-items: center;
-    column-gap: 2rem;
+    // column-gap: 2rem;
     padding-bottom: 2rem;
 }
 
 .univ-edit-info-form-profile-pic-container {
     width: 12rem;
+    height: 12rem;
     border-radius: 50%;
+    position: relative;
+    margin-right: 1rem;
 }
 
 .univ-edit-info-form-profile-pic {
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
-.univ-edit-info-form-profile-pic:hover {
-    filter: brightness(70%);
+.univ-edit-profile-pic-cover-container {
+    opacity: 0%;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background: rgba($color: #141414, $alpha: 0.5);
 }
+
+.univ-edit-profile-pic-cover-container:hover {
+    opacity: 100%;
+}
+
+.univ-edit-profile-pic-cover {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+.univ-edit-profile-pic-change-text {
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.univ-edit-profile-pic-change-text:hover {
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.univ-edit-profile-pic-trash-container {
+    width: 3rem;
+}
+
+.univ-edit-profile-pic-trash-container:hover {
+    width: 3.25rem;
+}
+
+.univ-edit-profile-pic-trash {
+    width: 100%;
+    cursor: pointer;
+}
+
+// .univ-edit-info-form-profile-pic:hover {
+//     filter: brightness(70%);
+// }
 
 .univ-edit-info-form-name-and-gender-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     row-gap: 2rem;
-    width: 65%;
+    width: 55%;
 }
 
 .univ-edit-info-form-sub-container {
@@ -384,6 +444,14 @@
 .univ-edit-password-form-subtitle {
     font-size: 18px;
     padding-bottom: 0.8rem;
+}
+
+.univ-edit-profile-upload-div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 
 @media (max-width: 1024px) {
