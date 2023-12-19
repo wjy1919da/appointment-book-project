@@ -35,7 +35,6 @@ const CommunityPost = ({
   const [displayImage, setDisplayImage] = useState(imageURL);
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  const { mutate: apiLikeMutate } = useGetLikesPost();
 
   useEffect(() => {
     if (isMobile) {
@@ -45,11 +44,10 @@ const CommunityPost = ({
     }
   }, [isMobile]);
 
-  const toggleLike = () => {
-    setLiked((prevLiked) => !prevLiked);
-    // window.location.href = "/download";
-  };
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
 
+  // set default image when image is not loaded function is here
   const handleImageError = () => {
     setDisplayImage(defaultImage);
   };

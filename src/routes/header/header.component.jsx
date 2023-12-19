@@ -130,13 +130,13 @@ const Header = () => {
               <span className='header-nav dropdown-center'>
                 <Link
                   className={`header-nav-link ${
-                    location.pathname.startsWith('/procedure/')
+                    location.pathname.startsWith('/procedure')
                       ? 'active-link'
                       : ''
                   }`}
                   // to = '/procedure/botox_injections'
-                  data-bs-toggle='dropdown disabled'
-                  aria-expanded='false'
+                  // data-bs-toggle='dropdown disabled'
+                  // aria-expanded='false'
                   //onMouseOver={() => setIsModelOpen(true)}
                   // onClick={() => setIsModalOpen(true)}
                   to = '/procedure'

@@ -52,9 +52,9 @@ const useUploadImg = () => {
     setIsLoading(true);
 
     const uploadPromises = newFiles.map((file) => {
-      const controller = new AbortController();
-      uploadControllers.current.set(file, controller);
-      return uploadImgToS3(file, controller.signal);
+      // const controller = new AbortController();
+      // uploadControllers.current.set(file, controller);
+      return uploadImgToS3(file);
     });
 
     toast.promise(

@@ -85,6 +85,36 @@
     border-radius: 8px;
     padding: 2.5rem;
     width: 100%;
+    margin-bottom: 4rem;
+}
+
+.highlight-cases-top-row {
+    display: flex;
+    width: 100%;
+}
+
+.highlight-cases-arrows-container {
+    display: flex;
+    column-gap: 2rem;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.highlight-cases-arrow-container {
+    width: 1.5rem;
+}
+
+.highlight-cases-arrow {
+    width: 100%;
+    cursor: pointer;
+}
+
+.highlight-cases-forward-arrow {
+    transform: scaleX(-1);
+}
+
+.highlight-cases-title-container {
+    width: 50%;
 }
 
 .highlight-cases-title {

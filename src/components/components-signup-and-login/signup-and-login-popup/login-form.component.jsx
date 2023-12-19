@@ -19,6 +19,8 @@ const LoginForm = (props) => {
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
     //var userRole = localStorage.getItem('accountType');
     const [accountType, setAccountType] = useState(null);
+    const [userEmail, setUserEmail] = useState('');
+    const setEmail = userInfoQueryStore(state=>state.setEmail);
     const toast = useToast()
 
     useEffect(() => {
@@ -45,6 +47,7 @@ const LoginForm = (props) => {
     const { mutate, isLoading, data: resp, error } = authHook;
     const userRole = localStorage.getItem('accountType') === 1 ? 'USER' : 'DOCTOR';
     const onSubmit = (formData) => {
+        setUserEmail(formData.email);
         mutate({
             email: formData.email,
             password: formData.password,
@@ -66,6 +69,7 @@ const LoginForm = (props) => {
                         localStorage.setItem('charmFollowedUsers', JSON.stringify(followedIdArray));
                     }
                     fetchUserFollowerList();
+                    setEmail(userEmail);
                     toast({title: 'Login Success',status: 'success'});
                 }else {
                     toast({title: 'Login Failed, please try again',status: 'error',})

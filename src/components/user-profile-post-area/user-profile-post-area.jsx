@@ -23,31 +23,6 @@ import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
 const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  // // dummy data
-  // let data = {
-  //   pages: [
-  //     {
-  //       data: [
-  //         {
-  //           id: 13,
-  //           title: '哈哈哈',
-  //           coverImg:
-  //             'https://charm-post-img.s3.us-west-1.amazonaws.com/1701450158790-Screen+Shot+2023-12-01+at+11.48.03+AM.png',
-  //           memberId: 262,
-  //           nickname: 'DrJohnDoe',
-  //           likedCount: 2,
-  //         },
-  //       ],
-  //       pageInfo: {
-  //         currentPage: 1,
-  //         totalPage: 6,
-  //         pageSize: 12,
-  //         totalRecords: 62,
-  //       },
-  //     },
-  //   ],
-  //   pageParams: [null],
-  // };
   const {
     data,
     error,
@@ -64,6 +39,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const navigate = useNavigate();
 
   // hook
@@ -89,13 +65,21 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     navigate("/posts/create", { state: { source: "userProfile" } });
   };
 
-  const handleClickPost = (ID, avatar, username, title, memberId) => {
+  const handleClickPost = (
+    ID,
+    avatar,
+    username,
+    title,
+    memberId,
+    isPrivate
+  ) => {
     setIsModelOpen(true);
     setPostID(ID);
     setUserAvatar(avatar);
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
+    setIsPrivate(isPrivate);
   };
 
   const postList = flatData.map((post, index) => (
@@ -107,7 +91,8 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
           post.avatar,
           post.username,
           post.title,
-          post.memberId
+          post.memberId,
+          post.isDisplay
         )
       }
     >

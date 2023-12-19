@@ -17,7 +17,7 @@ const Footer = (props,)=> {
                 <div className='footer-mobile-container'>
                     <div className='footer-mobile-text'>
                         
-                            <Link>procedure</Link>|
+                            <Link>Procedure</Link>|
                             <Link>Doctors</Link>|
                             <Link>Posts</Link>
                         
@@ -50,7 +50,7 @@ const Footer = (props,)=> {
                         <p className='footer-nav-title'>
                             About Us
                         </p>
-                        <Link className='footer-nav-link' to='/procedure/facial'>
+                        <Link className='footer-nav-link' to='/procedure'>
                             Procedures
                         </Link>
                         <Link className='footer-nav-link' to='/doctor'>
@@ -70,7 +70,7 @@ const Footer = (props,)=> {
                             Address:
                         </p>
                         <p className='footer-nav-contact-content'>
-                            9100 Wilshire Blvd,  Beverly hills, CA 90212
+                            9100 Wilshire Blvd,  Beverly Hills, CA 90212
                         </p>
                         <p className='footer-nav-contact-title'>
                             Email:

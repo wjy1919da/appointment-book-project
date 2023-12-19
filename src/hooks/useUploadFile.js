@@ -69,6 +69,10 @@ const useUploadFile = () => {
             duration: 5000,
             isClosable: true,
           });
+          setUploadedFiles((prevFiles) => [
+            ...prevFiles,
+            uploadResponse.location,
+          ]); // Add URL to the array using spread operator
         } else {
           toast({
             title: "Upload failed",
@@ -78,14 +82,7 @@ const useUploadFile = () => {
             isClosable: true,
           });
         }
-
-        const uploadedFile = {
-          ...uploadResponse,
-          name: file.name,
-        };
-
-        setUploadedFiles((prevFiles) => [...prevFiles, uploadedFile]);
-        return uploadedFile;
+        return uploadResponse;
       });
     });
 
@@ -105,6 +102,7 @@ const useUploadFile = () => {
       setIsLoading(false);
     }
   };
+
   return {
     selectedFiles,
     uploadedFiles,
