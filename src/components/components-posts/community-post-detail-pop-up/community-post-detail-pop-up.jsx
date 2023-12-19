@@ -176,6 +176,7 @@ const CommunityPostDetailPopUP = ({
     }
   };
   // console.log("postQuery", postQuery);
+  
   // private click call api
   const handlePrivate = () => {
     if (validateTokenAndPopup()) {
