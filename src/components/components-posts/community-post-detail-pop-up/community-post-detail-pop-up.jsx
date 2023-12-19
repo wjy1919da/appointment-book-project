@@ -61,7 +61,7 @@ const CommunityPostDetailPopUP = ({
   isHighlight,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  // console.log("my post detail", postQuery.userAvatar);
+  console.log("my post detail", postQuery);
   const refresh = usePostQueryStore((state) => state.refresh);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
@@ -236,7 +236,11 @@ const CommunityPostDetailPopUP = ({
       }
     }
   };
-  const { mutate } = useAddComment({
+  const {
+    mutate,
+    isSuccess: addCommentSucces,
+    data: commentData,
+  } = useAddComment({
     onError: (error) => {
       toast({
         title: "Failed.",
@@ -245,7 +249,17 @@ const CommunityPostDetailPopUP = ({
         isClosable: true,
       });
     },
+    onSuccess: (commentData) => {
+      toast({
+        title: "Send Success.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      refresh();
+    },
   });
+
   const {
     register,
     handleSubmit,
@@ -254,16 +268,11 @@ const CommunityPostDetailPopUP = ({
   } = useForm({
     resolver: zodResolver(schema),
   });
-  const { mutate: apiReplyComment } = useRplyComment({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const {
+    mutate: apiReplyComment,
+    isSuccess: addRplySuccess,
+    data: replyData,
+  } = useRplyComment();
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -280,9 +289,14 @@ const CommunityPostDetailPopUP = ({
           text: comment,
         });
       }
-      refresh();
     }
   };
+  useEffect(() => {
+    if (addCommentSucces || addRplySuccess) {
+      refresh();
+      reset();
+    }
+  }, [addCommentSucces, addRplySuccess]);
 
   const validateTokenAndPopup = () => {
     if (!userInfo.token) {

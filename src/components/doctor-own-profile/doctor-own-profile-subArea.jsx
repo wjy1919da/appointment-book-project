@@ -6,6 +6,7 @@ import UserProfileLike from "../user-profile-like/user-profile-like";
 
 const DoctorProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("About"); // By default, "like" is the active taba
+  console.log(activeTab);
   const [showCreatePost, setShowCreatePost] = useState(false);
   return (
     <div className="doctor-profile-subArea-container">
@@ -36,7 +37,7 @@ const DoctorProfileSubArea = () => {
       <div className="bottom-rendering">
         {activeTab === "About" && <DocotorOwnAbout />}
         {activeTab === "Posts" && <DoctorProfileGrid />}
-        {activeTab === "Likes" && <UserProfileLike />}
+        {activeTab === "Like" && <UserProfileLike />}
       </div>
     </div>
   );

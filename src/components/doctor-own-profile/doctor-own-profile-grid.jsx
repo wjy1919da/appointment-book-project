@@ -81,7 +81,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
-    // setIsHighlight(isHighlight);
+    setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
   };
 
