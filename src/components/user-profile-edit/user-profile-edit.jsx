@@ -1,11 +1,14 @@
 import "./user-profile-edit.styles.scss"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useSetUserProfile} from '../../hooks/useAuth'
+import DoctorEditInterestCategory from "../doctor-own-profile/doctor-profile-edit/doctor-profile-edit-interest-area";
 const UserProfileEdit = () => {
     const [changePic, setChangePic] = useState(false);
     const [isTextClicked, setIsTextClicked] = useState([false, false, false, false, false, false]);
     const interests = ["Body", "Face", "Lorum", "Lorum", "Lorum", "Lorum"];
     const [underlinePosition, setUnderlinePosition] = useState({ left: 50, top: 106 });
+    const [saveSuccess, setSaveSuccess] = useState(false);
     const navigate = useNavigate();
     const navigateToBasicProfile = () =>
     {
@@ -23,8 +26,49 @@ const UserProfileEdit = () => {
             setUnderlinePosition({ left: 50 + 63*2 + 74*(index-2)});
         }
     };
+    const [selectedGender, setSelectedGender] = useState(null);
+
+    const handleSelectGender = (gender) => {
+      setSelectedGender(gender);
+    };
+  
+    const isGenderSelected = (gender) => {
+      return selectedGender === gender;
+    };
+    const [name, setName] = useState('');
+    const [dob, setDob] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [description, setDescription] = useState('');
+    const { mutate: setUserProfile, status } = useSetUserProfile();
+    useEffect(() => {
+        if (status === 'success') {
+            console.log("suc send",status)
+            setSaveSuccess(true);
+            setTimeout(() => setSaveSuccess(false), 3000);
+        } else if (status === 'error') {
+            setSaveSuccess(false);
+        }
+    }, [status]);
+    const saveProfile = () => {
+        setUserProfile({
+            bio: description,
+            birthday:dob,
+            email: email,
+            gender: selectedGender,
+            img: '',
+            interests: [],
+            mobile: phone,
+            nickname: '', // If you need to pass password, manage its state as well
+        });
+    };
     return (
         <div className='user-profile-edit-container'>
+            {saveSuccess && (
+                <div className="save-success-message" style={{position:'absolute',top:'100px',left:'650px',color:'red'}}>
+                    Change saved!
+                </div>
+            )}
             <div className='user-profile-edit-screen'>
                 <button class="button-to-userprofile"
                         onClick={navigateToBasicProfile}                
@@ -51,33 +95,22 @@ const UserProfileEdit = () => {
                         <div className="delete-pic"></div>
                     </div>
                     )}
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '315px' }}>Female</span>
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '423px' }}>Male</span>
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '513px' }}>Other</span>
                     
-                    <textarea style={{width: '278px', height: '40px', top: '165px', left:'281px', padding: "9px 20px 9px 12px"}} placeholder="Name" />
-                    <textarea style={{width: '504px', height: '48px', top: '364px', left:'55px', padding: "13px 374px 13px 12px"}} placeholder="mm/dd/yyyy" />
-                    <textarea style={{width: '504px', height: '48px', top: '471px', left:'55px', padding: "13px 320px 13px 12px"}} placeholder="charm@gmail.com" />
-                    <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} placeholder="(xxx)-xxxx-xxxx" />
-                    <textarea style={{width: '504px', height: '178px', top: '685px', left:'55px', padding: "8px 12px 148px 12px"}} placeholder="Description" />
+                    <textarea style={{width: '278px', height: '40px', top: '165px', left:'281px', padding: "9px 20px 9px 12px"}} value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+                    <textarea style={{width: '504px', height: '48px', top: '364px', left:'55px', padding: "13px 374px 13px 12px"}} value={dob} onChange={(e) => setDob(e.target.value)} placeholder="mm/dd/yyyy" />
+                    <textarea style={{width: '504px', height: '48px', top: '471px', left:'55px', padding: "13px 320px 13px 12px"}} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="charm@gmail.com" />
+                    <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(xxx)-xxxx-xxxx" />
+                    <textarea style={{width: '504px', height: '178px', top: '685px', left:'55px', padding: "8px 12px 148px 12px"}} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
                     <span className='table-body' style={{top: '124px', left: '281px' }}>Name</span>
-                    <div className="other-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '479px', top: '264px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div className="male-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '389px', top: '240px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div className="female-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '281px', top: '216px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#F48C8A" stroke-width="2"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ position: 'relative', left: '287px', top: '198px'}}>
-                            <circle cx="6" cy="6" r="6" fill="#F48C8A" stroke="#FBFCFF"/>
-                        </svg>
+                    <div className="gender-selection-container" style={{position:'absolute',top:'264px',left:'280px'}}>
+                    {['female', 'male', 'other'].map((gender) => (
+                        <div key={gender} className="gender-option" onClick={() => handleSelectGender(gender)}>
+                        <div className={`gender-checkbox ${selectedGender === gender ? 'selected' : ''}`}>
+                            {selectedGender === gender && <div className="gender-inner-circle"></div>}
+                        </div>
+                        <span className="gender-label">{gender}</span>
+                        </div>
+                    ))}
                     </div>
                     <span className='table-body' style={{top: '223px', left: '281px' }}>Gender</span>
                     <span className='table-body' style={{top: '323px', left: '55px' }}>Age</span>
@@ -113,57 +146,9 @@ const UserProfileEdit = () => {
                             </defs>
                         </svg>
                     </div>
-                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
-                        Breast Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
-                        Body Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '245px', left: '48px' }}>
-                        Skin Procedures
-                        <br/>
-                    </span>
-                    <span className='procedure-text' style={{top: '401px', left: '49px', marginRight: '52px' }}>
-                        Face Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '401px', left: '49px', marginRight: '40px'}}>
-                        Face Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '401px', left: '49px' }}>
-                        Face Procedures
-                        <br/>
-                    </span>
-                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
-                        Breast Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
-                        Body Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '557px', left: '49px' }}>
-                        Skin Procedures
-                        <br/>
-                    </span>
-                    <span className='procedure-text' style={{top: '713px', left: '49px', marginRight: '52px' }}>
-                        Face Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '713px', left: '49px', marginRight: '40px'}}>
-                        Face Procedures
-                    </span>
-                    <span className='procedure-text' style={{top: '713px', left: '49px' }}>
-                        Face Procedures
-                    </span>
-                    <div className="breast-procedures" style={{top: '40px', left: '76px' }}></div>
-                    <div className="face-procedures" style={{top: '40px', left: '20px' }}></div>
-                    <div className="face-procedures" style={{top: '-10px', left: '98px' }}></div>
-                    <div className="face-procedures" style={{top: '-60px', left: '168px' }}></div>
-                    <div className="face-procedures" style={{top: '35px', left: '168px' }}></div>
-                    <div className="face-procedures" style={{top: '-15px', left: '98px' }}></div>
-                    <div className="face-procedures" style={{top: '-65px', left: '20px' }}></div>
-                    <div className="breast-procedures" style={{top: '-450px', left: '76px' }}></div>
-                    <div className="skin-procedures" style={{top: '-925px', left: '425px' }}></div>
-                    <div className="skin-procedures" style={{top: '-685px', left: '425px' }}></div>
-                    <div className="body-procedures" style={{top: '-800px', left: '250px' }}></div>
-                    <div className="body-procedures" style={{top: '-1280px', left: '250px' }}></div>
+                    <div className='doctor-edit-profile-interest-category-mapping'>
+                            <DoctorEditInterestCategory/>
+                    </div>
                 </div>
             </div>
         </div>

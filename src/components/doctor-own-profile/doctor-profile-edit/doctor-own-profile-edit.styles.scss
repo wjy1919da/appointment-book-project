@@ -278,3 +278,49 @@
         margin-top: 130px;
     }
 }
+.gender-selection-container {
+    display: flex;
+    align-items: center;
+    color: var(--text-1-footer, #352C29);
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .gender-option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 15px; /* Adjust the margin between options as needed */
+  }
+  
+  .gender-checkbox {
+    width: 24px; /* Outer circle size */
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #675D59; /* Gray border for the outer circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px; /* Space between checkbox and label */
+  }
+  
+  .gender-checkbox.selected {
+    border-color: #F48C8A; /* Pink border for the selected state */
+  }
+  
+  .gender-checkbox.selected::after {
+    content: '';
+    width: 12px; /* Inner circle size */
+    height: 12px;
+    background-color: #F48C8A; /* Pink fill for the inner circle */
+    border-radius: 50%;
+    display: block;
+  }
+  
+  .gender-label {
+    user-select: none;
+    /* Add additional styles for the label text as needed */
+  }

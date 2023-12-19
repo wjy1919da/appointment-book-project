@@ -1,16 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './doctor-own-profile-edit.styles.scss';
 import DoctorEditVoucherSession from "./doctor-edit-voucher-session";
 import DoctorEditInterestCategory from './doctor-profile-edit-interest-area';
 import DoctorEditVerificationSession from './doctor-own-profile-verification-session';
 import DoctorEditHightLightSession from './doctor-edit-profile-hightlight-session';
+import { useSetDoctorProfile } from '../../../hooks/useUpdateProfile'
+import userInfoQueryStore from '../../../userStore';
+import { Link } from 'react-router-dom';
 const DoctorProfileEdit = () => {
+    const { userInfo } = userInfoQueryStore();
     const [changePic, setChangePic] = useState(false);
     const [isTextClicked, setIsTextClicked] = useState([false, false, false, false, false, false]);
     const interests = ["Body", "Face", "Lorum", "Lorum", "Lorum", "Lorum"];
     const [underlinePosition, setUnderlinePosition] = useState({ left: 50, top: 106 });
+    const [saveSuccess, setSaveSuccess] = useState(false);
     const navigate = useNavigate();
     const navigateToBasicProfile = () =>
     {
@@ -28,14 +33,61 @@ const DoctorProfileEdit = () => {
             setUnderlinePosition({ left: 50 + 63*2 + 74*(index-2)});
         }
     };
+    const [selectedGender, setSelectedGender] = useState(null);
+
+    const handleSelectGender = (gender) => {
+      setSelectedGender(gender);
+    };
+  
+    const isGenderSelected = (gender) => {
+      return selectedGender === gender;
+    };
+    const [name, setName] = useState('');
+    const [dob, setDob] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [businessPhone, setBusinessPhone] = useState('');
+    const [clinic, setClinic] = useState('');
+    const [location, setLocation] = useState('');
+    const [website, setWebsite] = useState('');
+    const [description, setDescription] = useState('');
+
+    const { mutate: setUserProfile, status } = useSetDoctorProfile();
+    useEffect(() => {
+        if (status === 'success') {
+            console.log("suc send",status)
+            setSaveSuccess(true);
+            setTimeout(() => setSaveSuccess(false), 3000);
+        } else if (status === 'error') {
+            setSaveSuccess(false);
+        }
+    }, [status]);
+    const saveProfile = () => {
+        const { password } = userInfo;
+        setUserProfile({
+            address: location,
+            licenses:'',
+            mechName: clinic,
+            mechTel: businessPhone,
+            miaoshu: description,
+            mobile: phone,
+            nickname: name,
+            password, // If you need to pass password, manage its state as well
+        });
+    };
     return (
         <div className='user-profile-edit-container'>
+            {saveSuccess && (
+                <div className="save-success-message" style={{position:'absolute',top:'100px',left:'650px',color:'red'}}>
+                    Change saved!
+                </div>
+            )}
             <div className='user-profile-edit-screen'>
                 <button class="button-to-userprofile"
                         onClick={navigateToBasicProfile}                
                 ></button>
                 <span className='edit-profile-text'>Edit Profile</span>
-                <button class="button-save-changes">
+                <button class="button-save-changes" onClick={saveProfile}>
                     <span className='subtext-save-changes'>Save Changes</span>
                 </button>
                 <div className='personal-info-table'>
@@ -56,37 +108,26 @@ const DoctorProfileEdit = () => {
                         <div className="delete-pic"></div>
                     </div>
                     )}
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '315px' }}>Female</span>
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '423px' }}>Male</span>
-                    <span className='gender-text' style={{ position: 'absolute', top: '265px', left: '513px' }}>Other</span>
                     
-                    <textarea style={{width: '278px', height: '40px', top: '165px', left:'281px', padding: "9px 20px 9px 12px"}} placeholder="Name" />
-                    <textarea style={{width: '504px', height: '48px', top: '364px', left:'55px', padding: "13px 374px 13px 12px"}} placeholder="mm/dd/yyyy" />
-                    <textarea style={{width: '504px', height: '48px', top: '471px', left:'55px', padding: "13px 320px 13px 12px"}} placeholder="charm@gmail.com" />
-                    <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} placeholder="(xxx)-xxxx-xxxx" />
-                    <textarea style={{width: '504px', height: '48px', top: '678px', left:'55px', padding: "13px 365px 13px 12px"}} placeholder="(xxx)-xxxx-xxxx" />
-                    <textarea style={{width: '504px', height: '48px', top: '778px', left:'55px', padding: "13px 300px 13px 12px"}} placeholder="Clinic/Organization" />
-                    <textarea style={{width: '504px', height: '48px', top: '878px', left:'55px', padding: "13px 300px 13px 12px"}} placeholder="City,state" />
-                    <textarea style={{width: '504px', height: '48px', top: '978px', left:'55px', padding: "13px 300px 13px 12px"}} placeholder="www.charm.com" />
-                    <textarea style={{width: '504px', height: '178px', top: '1085px', left:'55px', padding: "8px 12px 148px 12px"}} placeholder="Description" />
+                    <textarea style={{width: '278px', height: '40px', top: '165px', left:'281px', padding: "9px 20px 9px 12px"}} value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+                    <textarea style={{width: '504px', height: '48px', top: '364px', left:'55px', padding: "13px 374px 13px 12px"}} value={dob} onChange={(e) => setDob(e.target.value)}  placeholder="mm/dd/yyyy" />
+                    <textarea style={{width: '504px', height: '48px', top: '471px', left:'55px', padding: "13px 320px 13px 12px"}} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="charm@gmail.com" />
+                    <textarea style={{width: '504px', height: '48px', top: '578px', left:'55px', padding: "13px 365px 13px 12px"}} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(xxx)-xxxx-xxxx" />
+                    <textarea style={{width: '504px', height: '48px', top: '678px', left:'55px', padding: "13px 365px 13px 12px"}} value={businessPhone} onChange={(e) => setBusinessPhone(e.target.value)} placeholder="(xxx)-xxxx-xxxx" />
+                    <textarea style={{width: '504px', height: '48px', top: '778px', left:'55px', padding: "13px 300px 13px 12px"}} value={clinic} onChange={(e) => setClinic(e.target.value)} placeholder="Clinic/Organization" />
+                    <textarea style={{width: '504px', height: '48px', top: '878px', left:'55px', padding: "13px 300px 13px 12px"}} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="City,state" />
+                    <textarea style={{width: '504px', height: '48px', top: '978px', left:'55px', padding: "13px 300px 13px 12px"}} value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="www.charm.com" />
+                    <textarea style={{width: '504px', height: '178px', top: '1085px', left:'55px', padding: "8px 12px 148px 12px"}} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
                     <span className='table-body' style={{top: '124px', left: '281px' }}>Name</span>
-                    <div className="other-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '479px', top: '264px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div className="male-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '389px', top: '240px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#675D59" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div className="female-gender-marker" style={{cursor: "pointer"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', left: '281px', top: '216px'}}>
-                            <circle cx="12" cy="12" r="11" fill="#FBFCFF" stroke="#F48C8A" stroke-width="2"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ position: 'relative', left: '287px', top: '198px'}}>
-                            <circle cx="6" cy="6" r="6" fill="#F48C8A" stroke="#FBFCFF"/>
-                        </svg>
+                    <div className="gender-selection-container" style={{position:'absolute',top:'264px',left:'280px'}}>
+                    {['female', 'male', 'other'].map((gender) => (
+                        <div key={gender} className="gender-option" onClick={() => handleSelectGender(gender)}>
+                        <div className={`gender-checkbox ${selectedGender === gender ? 'selected' : ''}`}>
+                            {selectedGender === gender && <div className="gender-inner-circle"></div>}
+                        </div>
+                        <span className="gender-label">{gender}</span>
+                        </div>
+                    ))}
                     </div>
                     <span className='table-body' style={{top: '223px', left: '281px' }}>Gender</span>
                     <span className='table-body' style={{top: '323px', left: '55px' }}>Age</span>
@@ -99,7 +140,7 @@ const DoctorProfileEdit = () => {
                     <span className='table-body' style={{top: '1044px', left: '55px' }}>Bio</span>
                 </div>
                 <div className='interests-table'>
-                    <span className='table-subheading'>Interests</span>
+                    <span className='table-subheading'>Specialization</span>
                         {isTextClicked.map((isClicked, index) => (
                             <span
                             className="interest-options"
@@ -129,7 +170,6 @@ const DoctorProfileEdit = () => {
                         <div className='doctor-edit-profile-interest-category-mapping'>
                             <DoctorEditInterestCategory/>
                         </div>
-
                 </div>
                 <div className='doctoe-edit-verification-session'>
                             <DoctorEditVerificationSession/>
