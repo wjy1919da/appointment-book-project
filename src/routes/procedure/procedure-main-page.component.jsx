@@ -9,6 +9,7 @@ import HomeSpinner from '../../components/home-spinner/home-spinner.component';
 import ErrorMsg from '../../components/error-msg/error-msg.component';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProcedureSearchDropDown from '../../components/procedure-search-dropdown/procedure-search-dropdown.component';
 
 function groupByGroupName(data) {
@@ -68,15 +69,18 @@ const ProcedureMainPage = () => {
     };
   }, [containerRef]);
 
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <HomeSpinner />;
   }
   if (error) {
-    return (
-      <div>
-        <ErrorMsg />
-      </div>
-    );
+    navigate('../*');
+    // return (
+    //   <div>
+    //     <ErrorMsg />
+    //   </div>
+    // );
   }
 
   const filteredProcedures = procedures
@@ -125,11 +129,13 @@ const ProcedureMainPage = () => {
             {isSearchContainerVisible && <ProcedureSearchDropDown />}
           </div>
         </div>
-        {data?.data && (
+        {data?.data && procedureGrids.length !== 0 ? (
           <div className='procedure-main-collapse-container'>
             {procedureGrids}
           </div>
-        )}
+        ) : (<div className='procedure-grid-empty-container' >
+          <h2 className='procedure-grid-empty'>No results match this filter, please try again.</h2>
+        </div >)}
       </div>
     </div>
   );

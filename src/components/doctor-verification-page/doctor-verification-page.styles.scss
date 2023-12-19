@@ -1,0 +1,140 @@
+.doctor-verification-outer-container {
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  margin-top: 64px;
+  gap: 48px;
+}
+.doctor-verfication-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  //   gap: 24px;
+}
+.doctor-verification-header-navi {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: flex-start;
+}
+.doctor-verification-header-arrow {
+  margin-left: -8px;
+}
+.doctor-verification-header-title {
+  color: #352c29;
+  font-family: Open Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.doctor-verification-content-container {
+  display: flex;
+  flex-direction: column;
+  //   gap: 24px;
+  border-radius: 12px;
+  border: 2px solid #675d59;
+  background: #fbfcff;
+  align-items: center;
+}
+.doctor-verification-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 108px;
+  align-items: flex-start;
+}
+.doctor-verification-content-title {
+  color: #352c29;
+
+  /* NEW TYPE/NEW sub title */
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.doctor-verification-content-sub-title {
+  color: #352c29;
+
+  /* NEW TYPE/NEW body1 */
+  font-family: Open Sans;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.doctor-verification-content-sub-text {
+  color: #675d59;
+
+  /* NEW TYPE/NEW caption */
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.doctor-verification-content-sub-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.doctor-verification-file-upload {
+  display: inline-flex;
+  padding: 52px 143px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-radius: 6px;
+  border: 1px solid #675d59;
+  background: rgba(20, 20, 20, 0.5);
+}
+.doctor-verification-file-upload-text {
+  color: #fbfcff;
+  text-align: center;
+
+  /* NEW TYPE/NEW title */
+  font-family: Open Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.doctor-verification-file-upload-sub-text {
+  color: #fbfcff;
+
+  /* NEW TYPE/NEW sub title */
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.doctor-verification-choose-file-section {
+  margin-top: 30px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.uploadFile-box {
+  border: 1px solid #838383;
+  background: #fff;
+  width: 600px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.doctor-verification-text {
+  color: #352c29;
+  /* Interactive 3 */
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 16px */
+  //text-align: center;
+}

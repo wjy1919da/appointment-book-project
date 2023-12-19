@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './community-post.styles.scss';
-import heartIcon from '../../../assets/post/heart.png';
-import { useMediaQuery } from 'react-responsive';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+import React, { useState, useEffect } from "react";
+import "./community-post.styles.scss";
+import heartIcon from "../../../assets/post/heart.png";
+import { useMediaQuery } from "react-responsive";
+import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
 
 // images
-import defaultImage from '../../../assets/post/default_image.png';
+import defaultImage from "../../../assets/post/default_image.png";
+import LockIcon from "../../../assets/post/lock_icon.svg";
 
 const CommunityPost = ({
+  dummyHighlight,
+  dummyPrivate,
   imageURL,
   text,
   profileImage,
@@ -17,22 +20,20 @@ const CommunityPost = ({
   isProfile,
 }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-  const [width, setWidth] = useState('');
+  const [width, setWidth] = useState("");
   const [liked, setLiked] = useState(isLike);
-
   const [displayImage, setDisplayImage] = useState(imageURL);
 
   useEffect(() => {
     if (isMobile) {
-      setWidth('240px');
+      setWidth("240px");
     } else {
-      setWidth('186px');
+      setWidth("186px");
     }
   }, [isMobile]);
 
   const toggleLike = () => {
     setLiked((prevLiked) => !prevLiked);
-    // If you want to navigate to another page when the heart is clicked, uncomment the next line.
     // window.location.href = "/download";
   };
 
@@ -42,32 +43,43 @@ const CommunityPost = ({
 
   return (
     <div
-      className='community-post-container'
-      style={{ width: isProfile ? '240px' : '100%' }}
+      className="community-post-container"
+      style={{
+        width: isProfile ? "240px" : "100%",
+        backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
+      }}
     >
-      <div className='post-Image'>
+      {dummyPrivate === 1 && (
+        <img
+          src={LockIcon}
+          alt="Icon-Lock"
+          className="community-post-icon-lock"
+        />
+      )}
+
+      <div className="post-Image">
         <img
           src={displayImage}
-          className='postImage'
+          className="postImage"
           onError={handleImageError}
         />
       </div>
-      <div className='post-information'>
-        <span className='post-text'>{text}</span>
-        <div className='profile'>
-          <div className='profileImage'>
-            <img className='profile-pic' src={profileImage}></img>
-            <span className='gray-text'>{authorName}</span>
+      <div className="post-information">
+        <span className="post-text">{text}</span>
+        <div className="profile">
+          <div className="profileImage">
+            <img className="profile-pic" src={profileImage}></img>
+            <span className="gray-text">{authorName}</span>
           </div>
-          <div className='likeNumber'>
+          <div className="likeNumber">
             <img
               src={liked ? heartIconFilled : heartIcon}
-              className='heartIcon'
+              className="heartIcon"
               onClick={toggleLike}
-              alt='Like Icon'
+              alt="Like Icon"
             />
 
-            <span className='gray-text'>{likes}</span>
+            <span className="gray-text">{likes}</span>
           </div>
         </div>
       </div>

@@ -1,117 +1,86 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
-const uploadToS3 = async (file, signal) => {
-  const maxFileSize = 8 * 1024 * 1024; // 8MB
-  if (file.size > maxFileSize) {
-    return {
-      success: false,
-      message: 'File size is too large. Max file size is 8MB.',
-    };
-  }
-  const fileName = `${Date.now()}-${file.name}`;
-  const upload = new Upload({
-    client: s3Client,
-    leavePartsOnError: true,
-    abortSignal: signal,
-    params: {
-      Bucket: 'verificationbucketcharm',
-      Key: fileName,
-      Body: file,
-    },
-    partSize: 8 * 1024 * 1024,
-    queueSize: 4,
-  });
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
+import APIClient from "../services/api-client";
+const s3Client = new S3Client({
+  region: "us-west-1",
+  credentials: {
+    accessKeyId: "AKIAWQE6ZUZGIH2WI7PP",
+    secretAccessKey: "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",
+    apiVersion: "2006-03-01",
+    signatureVersion: "v4",
+  },
+  logger: console,
+});
 
-  upload.on('httpUploadProgress', (progress) => {
-    console.log(
-      `upload progress '${Math.round(
-        (progress.loaded / progress.total) * 100
-      )}%`
-    );
-  });
-
-  try {
-    var data = await upload.done();
-    console.log('upload done', data);
-    if (data.$metadata.httpStatusCode === 200) {
-      return {
-        success: true,
-        message: 'Upload successful!',
-        location: data.Location,
-      };
-    }
-    return {
-      success: false,
-      message: 'Upload failed. Please try again.',
-      location: data.Location,
-    };
-  } catch (err) {
-    return {
-      success: false,
-      message: 'Upload failed. Please try again.',
-      location: data.Location,
-    };
-  }
-};
 const uploadImgToS3 = async (file) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxFileSize) {
     return {
       success: false,
-      message: 'Image size is too large. Max file size is 8MB.',
+      message: "Image size is too large. Max file size is 8MB.",
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
-  const upload = new Upload({
-    client: s3Client,
-    params: {
-      Bucket: 'charm-post-img',
-      Key: fileName,
-      Body: file,
-    },
-    partSize: 8 * 1024 * 1024,
-    queueSize: 4,
-  });
+  const params = {
+    Bucket: "charm-post-img",
+    Key: fileName,
+    Body: file,
+  };
 
-  upload.on('httpUploadProgress', (progress) => {
-    console.log(
-      `upload progress '${Math.round(
-        (progress.loaded / progress.total) * 100
-      )}%`
-    );
-  });
-
+  const command = new PutObjectCommand(params);
   try {
-    var data = await upload.done();
-    console.log('upload done', data);
-    if (data.$metadata.httpStatusCode === 200) {
-      return {
-        success: true,
-        message: 'Upload successful!',
-        location: data.Location,
-      };
-    }
+    const data = await s3Client.send(command);
+    // console.log("upload result", data);
     return {
-      success: false,
-      message: 'Upload failed. Please try again.',
-      location: data.Location,
+      success: true,
+      message: "Upload successful!",
+      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
+        params.Key
+      )}`,
     };
-  } catch (err) {
+  } catch (error) {
+    console.error("upload error", error);
     return {
       success: false,
-      message: 'Upload failed. Please try again.',
-      location: data.Location,
+      message: "Upload failed. Please try again.",
     };
   }
 };
-const s3Client = new S3Client({
-  region: process.env.REACT_APP_REGION,
-  credentials: {
-    accessKeyId: process.env.REACT_APP_ACCESS_ID,
-    secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-  },
-  logger: console,
-});
 
-// export default s3Client;
-export { s3Client, uploadToS3, uploadImgToS3 };
+const uploadToS3 = async (file) => {
+  const maxFileSize = 8 * 1024 * 1024; // 8MB
+  if (file.size > maxFileSize) {
+    return {
+      success: false,
+      message: "File size is too large. Max file size is 8MB.",
+    };
+  }
+  const fileName = `${Date.now()}-${file.name}`;
+  const params = {
+    Bucket: "verificationbucketcharm",
+    Key: fileName,
+    Body: file,
+  };
+
+  const command = new PutObjectCommand(params);
+
+  try {
+    const data = await s3Client.send(command);
+    console.log("upload result", data);
+    return {
+      success: true,
+      message: "Upload successful!",
+      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
+        params.Key
+      )}`,
+    };
+  } catch (error) {
+    console.error("upload error", error);
+    return {
+      success: false,
+      message: "Upload failed. Please try again.",
+    };
+  }
+};
+
+export { uploadToS3, uploadImgToS3 };

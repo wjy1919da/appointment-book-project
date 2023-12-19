@@ -9,7 +9,7 @@
 
   /* 白 */
 
-  background: #fbfcff;
+  background: #ffffff;
   /* Strong Shadow */
 
   box-shadow: 0px 0px 40px rgba(255, 164, 163, 0.1),
@@ -90,7 +90,7 @@
   object-fit: cover;
 }
 .gray-text {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -115,4 +115,13 @@
 .heartIcon {
   width: 12px;
   border-radius: 0;
+}
+
+.community-post-icon-lock {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  padding: 10px;
+  width: 45px;
+  height: 45px;
 }

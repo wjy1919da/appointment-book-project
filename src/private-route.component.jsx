@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import userInfoQueryStore from './userStore.ts';
+
 const PrivateRoute = ({ children }) => {
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     const navigate = useNavigate();

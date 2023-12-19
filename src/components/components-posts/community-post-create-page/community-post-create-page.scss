@@ -35,26 +35,25 @@
   }
 
   .create-post-page-back-button-container {
+    position: absolute;
+    top: 130px;
+    left: 50px;
     display: flex;
+    align-items: center;
+    gap: 20px;
 
-    .create-post-arrow-back-button {
-      position: absolute;
-      top: 115px;
-      left: 60px;
+    .create-post-page-arrow-back-button {
       rotate: 180deg;
     }
-  }
 
-  .create-post-page-back-button {
-    position: absolute;
-    top: 110px;
-    left: 110px;
-    color: #fbfcff;
-    font-family: Open Sans;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    .create-post-page-label-back-button {
+      color: #fbfcff;
+      font-family: Open Sans;
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
   }
 
   .create-post-page-inner-container {
@@ -116,6 +115,7 @@
     gap: 10px;
 
     .create-post-page-thumbnail {
+      position: relative;
       display: flex;
       justify-items: center;
       align-items: center;
@@ -164,6 +164,7 @@
 
   // tag, location button
   .create-post-page-tag-name {
+    top: -460px;
     left: 16px;
   }
 
@@ -196,6 +197,9 @@
     .create-post-input-radio-button-label {
       margin-right: 12px;
     }
+  }
+  .create-post-image-wrapper{
+    
   }
 
   // screen 769px to 1024px

@@ -1,0 +1,449 @@
+.univ-edit-main-container {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: auto;
+    align-items: center;
+    padding: 8rem 0rem;
+}
+
+.univ-edit-top-row-container {
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+.univ-edit-top-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.univ-edit-top-row-col {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.univ-edit-top-row-right-col {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.univ-edit-back-arrow-container {
+    width: 1.5rem;
+    position: absolute;
+    left: -2rem;
+}
+
+.univ-edit-back-arrow {
+    width: 100%;
+    cursor: pointer;
+}
+
+.univ-edit-text {
+    color: #352C29;
+    font-weight: 600;
+}
+
+.univ-edit-title-container {
+    padding-left: 1.5rem;
+}
+
+.univ-edit-title {
+    font-size: 34px;
+    margin-bottom: 0rem;
+}
+
+.univ-edit-form-changes-saved-text {
+    position: absolute;
+    top: -2.25rem;
+    color: #F48C8A;
+    font-size: 21px;
+}
+
+.univ-edit-form-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.univ-edit-form-button {
+    background: linear-gradient(to right, #F48C8A, #F0A484);
+    color: #FBFCFF;
+    font-weight: 600;
+    font-size: 22px;
+    text-shadow: 0px 2px 2px rgba($color: #303030, $alpha: 0.1);
+    border-radius: 8px;
+    padding: 12px 40px;
+}
+
+.univ-edit-form-button:hover {
+    background: linear-gradient(to right, #f27673, #ee9570);
+}
+
+.univ-edit-sub-container-title {
+    font-size: 24px;
+    padding-bottom: 2rem;
+}
+
+.univ-edit-info-form-label {
+    font-size: 21px;
+    position: relative;
+}
+
+.univ-edit-left-column-container {
+    width: 50%;
+}
+
+.univ-edit-right-column-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.univ-edit-sub-container {
+    border: 2px solid #675D59;
+    background: #FBFCFF;
+    border-radius: 12px;
+    padding: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.univ-edit-main-sub-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    column-gap: 4rem;
+    // flex-direction: column; CHANGE TO THIS FOR IPAD + MOBILE VERSION
+}
+
+.univ-edit-info-form-container-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.univ-edit-info-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.univ-edit-info-form-top-row {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.univ-edit-info-form-profile-pic-container {
+    width: 12rem;
+    border-radius: 50%;
+}
+
+.univ-edit-info-form-profile-pic {
+    width: 100%;
+}
+
+.univ-edit-info-form-profile-pic:hover {
+    filter: brightness(70%);
+}
+
+.univ-edit-info-form-name-and-gender-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 2rem;
+    width: 65%;
+}
+
+.univ-edit-info-form-sub-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.univ-edit-info-form-input-container {
+    width: 100%;
+}
+
+.univ-edit-info-form-label {
+    width: 100%;
+}
+
+// .univ-edit-info-form-label-text {
+//     padding-bottom: 0.5rem;
+// }
+
+.univ-edit-info-form-gender-radio-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+}
+
+.univ-edit-info-form-gender-radio {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.univ-edit-info-form-gender-radio-label {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.univ-edit-info-form-gender-radio-button {
+    width: 1rem;
+    height: 1rem;
+}
+
+.univ-edit-info-form-gender-radio-button:checked {
+    appearance: none;
+    -webkit-appearance: none;
+    /* For a circular appearance we need a border-radius. */
+    border-radius: 50%;
+    
+
+    /* The background will be the radio dot's color. */
+    background: #F48C8A;
+
+    /* The border will be the spacing between the dot and the outer circle */
+    border: 3.5px solid #FFF;
+
+    /* And by creating a box-shadow with no offset and no blur, we have an outer circle */
+    box-shadow: 0 0 0 2px #F0A484;
+}
+
+.univ-edit-info-form-gender-radio-button:checked ~ .univ-edit-info-form-checkmark {
+    background-color: #2196F3;
+}
+
+.univ-edit-info-form-input {
+    border: 1px solid #675D59;
+    background: #FBFCFF;
+    margin: 0.5rem 0rem;
+    border-radius: 8px;
+    height: 2.75rem;
+    width: 100%;
+    font-weight: 600;
+    text-indent: 1rem;
+    font-size: 16px;
+    box-shadow: 2px 2px 10px lightgray;
+}
+
+.univ-edit-info-form-disabled {
+    opacity: 40%;
+}
+
+.univ-edit-info-form-change-email-text {
+    color: #F48C8A;
+    text-decoration: underline;
+    position: absolute;
+    top: 0.4rem;
+    right: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.univ-edit-info-form-input-error {
+    border: 2px solid red;
+}
+
+.univ-edit-info-form-input-error:focus {
+    outline: none;
+    border: 3px solid red;
+}
+
+.univ-edit-info-form-input-error-message {
+    font-size: 12px;
+    color: red;
+    position: absolute;
+    top: 5.75rem;
+}
+
+.univ-edit-info-form-textarea {
+    border: 1px solid #675D59;
+    background: #FBFCFF;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 600;
+    padding: 1rem;
+    font-size: 16px;
+    height: 12rem;
+    box-shadow: 2px 2px 10px lightgray;
+}
+
+.univ-edit-info-form-input::placeholder,
+.univ-edit-info-form-textarea::placeholder {
+    color: rgba($color: #141414, $alpha: 0.5);
+    font-weight: 600;
+}
+
+.univ-edit-interests-container-container {
+    height: 100%;
+    min-height: 54.5rem;
+}
+
+.univ-edit-interests-selection-navbar-container {
+    display: flex;
+    column-gap: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1.25rem;
+}
+
+.univ-edit-interests-selection-navbar-item {
+    font-size: 16px;
+    font-weight: 600;
+    color: #675D59;
+    cursor: pointer;
+}
+
+.univ-edit-sub-container-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.univ-edit-selections-selected-tab {
+    padding-bottom: 0.25rem;
+    color: #352C29;
+    background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%) no-repeat;
+    background-size: 80% 3px; 
+    background-position: bottom;  /* Position the background at the bottom, like a border */
+}
+
+.univ-edit-interests-selection-interests-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    row-gap: 2rem;
+    width: 100%;
+    // justify-content: space-around;
+}
+
+.univ-edit-procedure-photo-container {
+    width: 7rem;
+    height: 7rem;
+    border: 0px;
+    box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.1);
+    padding: 0.15rem;
+}
+
+.univ-edit-procedure-selected {
+    border: 3px solid #F0A484;
+    // border-image: linear-gradient(to right, #F48C8A, #F0A484);
+}
+
+.univ-edit-procedure-wrapper {
+    width: 30%;
+}
+
+.univ-edit-change-password-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.univ-edit-change-password-button {
+    background: #FBFCFF;
+    color: #F48C8A;
+    font-size: 22px;
+    border: 2px solid #F48C8A;
+    width: 100%;
+    padding: 12px 36px;
+    border-radius: 8px;
+}
+
+.univ-edit-password-container {
+    height: 100%;
+}
+
+.univ-edit-password-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    width: 100%;
+}
+
+.univ-edit-info-form-password {
+    font-size: 20px;
+}
+
+.univ-edit-password-form-subtitle {
+    font-size: 18px;
+    padding-bottom: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+    .univ-edit-main-container {
+        width: 90%;
+    }
+    .univ-edit-back-arrow-container {
+        width: 1rem;
+        left: 0rem;
+        margin-bottom: 0.25rem;
+    }
+    .univ-edit-main-sub-container {
+        flex-direction: column;
+        row-gap: 2rem;
+    }
+    .univ-edit-left-column-container {
+        width: 100%;
+    }
+    .univ-edit-right-column-container {
+        width: 100%;
+    }
+    .univ-edit-info-form-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 2rem;
+    }
+    .univ-edit-info-form-profile-pic-container {
+        margin-left: 1rem;
+    }
+    .univ-edit-info-form-name-and-gender-container {
+        width: 100%;
+    }
+    .univ-edit-interests-selection-interests-container {
+        justify-content: space-between;
+    }
+    .univ-edit-form-changes-saved-text {
+        font-size: 16px;
+    }
+    .univ-edit-interests-container-container {
+        min-height: 40rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .univ-edit-title {
+        font-size: 24px;
+    }
+    .univ-edit-form-button {
+        font-size: 16px;
+        padding: 6px 20px;
+        margin-bottom: 0.75rem;
+    }
+    .univ-edit-sub-container-title {
+        font-size: 20px;
+    }
+    .univ-edit-interests-selection-navbar-container {
+        column-gap: 0.5rem;
+    }
+    .univ-edit-sub-container {
+        padding: 2rem;
+    }
+}
+
+@media (min-width: 1600px) {
+    .univ-edit-main-container {
+        max-width: 75%;
+    }
+}
