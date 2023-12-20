@@ -107,6 +107,9 @@ const CreatePostPage = () => {
         duration: 1000,
         isClosable: true,
       });
+      localStorage.getItem("accountType") === "2"
+        ? navigate("/doctor-profile")
+        : navigate("/userProfile");
     }
     if (data?.code === 500) {
       toast({

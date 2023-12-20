@@ -27,7 +27,6 @@ const CommunityPost = ({
   likes,
   isLike,
   isProfile,
-  id,
 }) => {
   // console.log("community post", id);
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -36,13 +35,13 @@ const CommunityPost = ({
   const [width, setWidth] = useState("");
   // const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
-  // const [countLikes, setCountLikes] = useState(likes);
+  const [countLikes, setCountLikes] = useState(likes);
   const [liked, setLiked] = useState(
     localStorage.getItem(`post_${id}_liked`) === "true" || isLike
   );
-  const [countLikes, setCountLikes] = useState(
-    parseInt(localStorage.getItem(`post_${id}_likes`), 10) || likes
-  );
+  // const [countLikes, setCountLikes] = useState(
+  //   parseInt(localStorage.getItem(`post_${id}_likes`), 10) || likes
+  // );
 
   useEffect(() => {
     if (isMobile) {
@@ -64,12 +63,11 @@ const CommunityPost = ({
   // prevent to open pop up when like button is clicked
   const handleHeartIconClick = (e) => {
     e.stopPropagation();
-    apiLikeMutate({ postId: postQuery.postID });
+    apiLikeMutate({ postId: id });
 
     setLiked((prevLiked) => {
       const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
       setCountLikes(newCountLikes);
-      // console.log('newCountLikes', newCountLikes);
 
       // save the likes to local storage
       localStorage.setItem(`post_${id}_liked`, !prevLiked);
