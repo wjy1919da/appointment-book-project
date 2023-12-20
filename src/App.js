@@ -4,7 +4,6 @@ import UpdateVerification from "./routes/update-verification/update-verification
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./private-route.component";
 import "./App.css";
-
 // components
 import Header from "./routes/header/header.component";
 import Home from "./routes/home/home.component";
@@ -48,6 +47,9 @@ import UniversalProfileEdit from "./components/universal-profile-edit/universal-
 
 // import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
+
+import DoctorVerificationMainPage from "./components/doctor-verification-page/doctor-verification-main-page";
+
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -142,7 +144,8 @@ const App = () => {
               <Route path="update/verifyEmail" element={<UpdateVerification />} />
               <Route
                 path="doctorVerification"
-                element={<DoctorVerificationPage />}
+                element={<DoctorVerificationMainPage />}
+
               />
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="*" element={<PageNotFound />} />
