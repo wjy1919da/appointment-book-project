@@ -167,7 +167,7 @@ const CommunityPostDetailPopUP = ({
     if (validateTokenAndPopup()) {
       console.log("postQuery.isPrivate", postQuery.isPrivate);
       setModalStatus("private");
-      if (!postQuery.isPrivate) {
+      if (postQuery.isPrivate !== 0) {
         setModalHeader("Private Post");
         setModalContent("Private");
       } else {
@@ -181,10 +181,11 @@ const CommunityPostDetailPopUP = ({
   // private click call api
   const handlePrivate = () => {
     if (validateTokenAndPopup()) {
-      setIsPrivate(!postQuery.isPrivate);
-      const apiMutation = postQuery.isPrivate
-        ? apiMutateSetPostPublic
-        : apiMutateSetPostDisplay;
+      setIsPrivate(postQuery.isPrivate);
+      const apiMutation =
+        postQuery.isPrivate === 0
+          ? apiMutateSetPostPublic
+          : apiMutateSetPostDisplay;
       if (validateTokenAndPopup()) {
         apiMutation({ id: postQuery.postID });
       }
@@ -433,7 +434,9 @@ const CommunityPostDetailPopUP = ({
                     className="button-private"
                     onClick={handlePrivateClick}
                   >
-                    {postQuery.isPrivate ? "Remove from Private" : "Private"}
+                    {postQuery.isPrivate === 0
+                      ? "Remove from Private"
+                      : "Private"}
                   </button>
                 )}
 

@@ -68,7 +68,7 @@ const CommunityPost = ({
         backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
       }}
     >
-      {dummyPrivate === 1 && (
+      {dummyPrivate === 0 && (
         <img
           src={LockIcon}
           alt="Icon-Lock"
