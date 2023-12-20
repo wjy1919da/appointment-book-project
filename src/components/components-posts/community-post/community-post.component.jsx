@@ -17,6 +17,7 @@ import heartIcon from '../../../assets/post/heart.png';
 import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 
 const CommunityPost = ({
+  id,
   dummyHighlight,
   dummyPrivate,
   imageURL,
@@ -28,11 +29,18 @@ const CommunityPost = ({
   isProfile,
 }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-  const [width, setWidth] = useState('');
-  const [liked, setLiked] = useState(isLike);
-  const [displayImage, setDisplayImage] = useState(imageURL);
-
   const postQuery = usePostQueryStore((state) => state.postQuery);
+
+  const [width, setWidth] = useState('');
+  // const [liked, setLiked] = useState(isLike);
+  const [displayImage, setDisplayImage] = useState(imageURL);
+  // const [countLikes, setCountLikes] = useState(likes);
+  const [liked, setLiked] = useState(
+    localStorage.getItem(`post_${id}_liked`) === 'true' || isLike
+  );
+  const [countLikes, setCountLikes] = useState(
+    parseInt(localStorage.getItem(`post_${id}_likes`), 10) || likes
+  );
 
   useEffect(() => {
     if (isMobile) {
@@ -51,11 +59,22 @@ const CommunityPost = ({
   };
 
   // like button function is here
-  // prevent to open pop up when like buttonis clicked
+  // prevent to open pop up when like button is clicked
   const handleHeartIconClick = (e) => {
     e.stopPropagation();
-    setLiked((prevLiked) => !prevLiked);
     apiLikeMutate({ postId: postQuery.postID });
+
+    setLiked((prevLiked) => {
+      const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
+      setCountLikes(newCountLikes);
+      // console.log('newCountLikes', newCountLikes);
+
+      // save the likes to local storage
+      localStorage.setItem(`post_${id}_liked`, !prevLiked);
+      localStorage.setItem(`post_${id}_likes`, newCountLikes.toString());
+
+      return !prevLiked;
+    });
   };
 
   return (
@@ -92,12 +111,12 @@ const CommunityPost = ({
             <img
               src={liked ? heartIconFilled : heartIcon}
               className='heartIcon'
-              onClick={handleHeartIconClick}
-              // onClick={toggleLike}
+              onClick={(e) => handleHeartIconClick(e)}
               alt='Like Icon'
             />
 
-            <span className='gray-text'>{likes}</span>
+            {/* <span className='gray-text'>{likes}</span> */}
+            <span className='gray-text'>{countLikes}</span>
           </div>
         </div>
       </div>
