@@ -1,70 +1,157 @@
-.comment-card-container
-{
+.comment-card-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  // width: 80%;
+  height: auto;
+
+  .reviewer-profile-information {
     display: flex;
     flex-direction: row;
-    width:80%;
-    height:70px;
-    gap:10px;
     align-items: center;
-    .reviewer-profile-information
-    {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap:10px;
-    .reviewer-progile-avatar{
-        position: relative;
-        left:0%;
-        justify-content: center;
-        
-        
-        .reviewer-avatar
-        {
-            width:35.84px;
-            height:35.84px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    gap: 10px;
+
+    .reviewer-progile-avatar {
+      position: relative;
+      left: 0%;
+      justify-content: center;
+
+      .reviewer-avatar {
+        width: 35.84px;
+        height: 35.84px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
-    .reviewer-information
-    {
-        position: relative;
-        justify-content: center;
+
+    .reviewer-information {
+      position: relative;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      left: 0%;
+      width: 400px;
+      gap: 5px;
+
+      .detail-gray-font {
+        color: #675d59;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .userName-date {
         display: flex;
         flex-direction: column;
-        left:0%;
-        width:400px;
-        gap:5px;
-        .userName-date
-        {
-            display: flex;
-            flex-direction: row;
-            gap:4%;
-            align-items: center;
-            
-        }
-        .detail-comment-text
-        {
-           
-            font-family:  'Open Sans';
-            font-weight: 400;
-            font-size:16px;
-            line-height: 20.8px;
-        }
-    }
-}
-    .likeCount-commentCount
-    {
-        justify-self: center;
-        position: absolute;
-        display: flex;
-        flex-direction: row;
-        gap:5px;
-        left:80%;
+        gap: 4%;
+      }
 
-        .post-detail-icon {
-            width: 18px;
-            border-radius: 0;
-        }
+      .detail-comment-text {
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .comment-card-date,
+      .comment-card-button {
+        color: #675d59;
+        font-family: Open Sans;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-right: 10px;
+      }
     }
+  }
+
+  .likeCount-commentCount {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .post-detail-icon {
+      width: 18px;
+    }
+  }
+
+  .comment-card-reply-input-container {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .comment-card-reply-input {
+    border: 1px solid #675d59;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .comment-card-reply-send-icon {
+    position: absolute;
+    right: 14px;
+    bottom: 18px;
+  }
+}
+
+.comment-card-profile-information-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-card-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-card-detail-container {
+  display: flex;
+  width: 100%;
+  // width: 450px;
+  // height: 80px;
+}
+.custom-accordion-item {
+  border: none;
+}
+.custom-accordion-button {
+  width: 150px !important;
+  background-color: transparent !important;
+  margin-left: 30px;
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.custom-accordion-button[aria-expanded="true"] {
+  background-color: transparent !important;
+}
+
+.custom-accordion-button:hover {
+  background-color: transparent !important;
+}
+.comment-card-show-more-button {
+  margin-top: 20px;
+  margin-left: 30px;
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

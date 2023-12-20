@@ -18,6 +18,7 @@ import InstrumentFAQ from '../../components/instrument-FQA/instrument-FQA.compon
 import SubProcedureMobileExtraBottom from '../../components/sub-procedure-mobile-extra-bottom/sub-procedure-mobile-extra-bottom.component';
 import useGetProcedures from '../../hooks/useGetProcedures';
 import { useGetInstruments } from '../../hooks/useGetInstruments';
+import { useNavigate } from 'react-router-dom';
 import { GetDetailedInstruments } from '../../hooks/useGetDetailedInstruments';
 import useProcedureQueryStore from '../../procedureStore.ts'
 function safeJsonParse(str) {
@@ -32,6 +33,7 @@ const SubInstrument = () => {
     const [data, setData] = useState({});
     const [subcategories, setSubcategories] = useState([]);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
     const images = {
         coolsculpting,
         inmode,
@@ -221,11 +223,7 @@ const SubInstrument = () => {
 
 
     if (error) {
-        return (
-            <div className='instrument-error-page'>
-                <h1 className='instrument-error-title'>Unable to find this instrument. Please try again later.</h1>
-            </div>
-        )
+        navigate('../*');
     }    
 
     return (

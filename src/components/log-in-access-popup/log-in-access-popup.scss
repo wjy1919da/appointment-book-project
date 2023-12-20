@@ -1,0 +1,40 @@
+.grayed-out-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 10rem;
+    left: 0;
+    z-index: 3;
+    // background-color: rgba($color: #adadad, $alpha: 0.6);
+    width: 100%;
+    height: 100%;
+}
+
+.log-in-access-popup-container {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 4;
+    background-color: white;
+    border: 2px solid orange;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 2px 2px 16px gray;
+}
+
+.log-in-access-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log-in-access-popup-logo-container {
+    width: 5rem;
+    padding-bottom: 1rem;
+}
+
+.log-in-access-popup-logo {
+    width: 100%;
+}

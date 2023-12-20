@@ -40,7 +40,25 @@ export function useUserRegister() {
     )
   );
 }
-
+export async function retrieveUserFollowList() {
+  const apiClient = new APIClient('/user/follows');
+    const fetchAllUsersWeFollow = async () => {
+      try {
+        const res = await apiClient.post({
+          "currentPage": 0,
+          "pageSize": 100
+      });
+      const idArray = [];
+      let myObjectArray = res?.data?.data;
+      myObjectArray.forEach((followedUser) => idArray.push(followedUser.id));
+      return idArray;
+      } catch (err) {
+        console.log('Error retrieving all followed users: ', err);
+      }
+    }
+    const followRes = await fetchAllUsersWeFollow();
+    return followRes;
+}
 export function useUserEmailLogin() {
   const apiClient = new APIClient("/login/user");
   const fetchEmailLogin = async (email, password, provider, userRole) => {
@@ -182,15 +200,21 @@ export function useDoctorLogin() {
     )
   );
 }
+
 export function useGetUserInfo() {
   const apiClient = new APIClient("/user/fetch_user_profile");
   const userInfo = userInfoQueryStore((s) => s.userInfo);
+
   const fetchGetUserInfo = async () => {
     const res = await apiClient.post();
     return res.data;
   };
-  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo);
+
+  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo, {
+    retry: 1,
+  });
 }
+
 export function useGetDoctorInfo() {
   const userInfo = userInfoQueryStore((s) => s.userInfo);
   const apiClient = new APIClient("/user_action/doctor_profile");

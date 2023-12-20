@@ -1,13 +1,52 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
+import APIClient from "../services/api-client";
 const s3Client = new S3Client({
-  region: process.env.REACT_APP_REGION,
+  region: "us-west-1",
   credentials: {
-    accessKeyId: process.env.REACT_APP_ACCESS_ID,
-    secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+    accessKeyId: "AKIAWQE6ZUZGIH2WI7PP",
+    secretAccessKey: "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",
+    apiVersion: "2006-03-01",
+    signatureVersion: "v4",
   },
   logger: console,
 });
+
+const uploadImgToS3 = async (file) => {
+  const maxFileSize = 8 * 1024 * 1024; // 8MB
+  if (file.size > maxFileSize) {
+    return {
+      success: false,
+      message: "Image size is too large. Max file size is 8MB.",
+    };
+  }
+  const fileName = `${Date.now()}-${file.name}`;
+  const params = {
+    Bucket: "charm-post-img",
+    Key: fileName,
+    Body: file,
+  };
+
+  const command = new PutObjectCommand(params);
+  try {
+    const data = await s3Client.send(command);
+    // console.log("upload result", data);
+    return {
+      success: true,
+      message: "Upload successful!",
+      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
+        params.Key
+      )}`,
+    };
+  } catch (error) {
+    console.error("upload error", error);
+    return {
+      success: false,
+      message: "Upload failed. Please try again.",
+    };
+  }
+};
+
 const uploadToS3 = async (file) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxFileSize) {
@@ -17,47 +56,31 @@ const uploadToS3 = async (file) => {
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
-  const upload = new Upload({
-    client: s3Client,
-    params: {
-      Bucket: process.env.REACT_APP_BUCKET_NAME,
-      Key: fileName,
-      Body: file,
-    },
-    partSize: 8 * 1024 * 1024,
-    queueSize: 4,
-  });
+  const params = {
+    Bucket: "verificationbucketcharm",
+    Key: fileName,
+    Body: file,
+  };
 
-  upload.on("httpUploadProgress", (progress) => {
-    console.log(
-      `upload progress '${Math.round(
-        (progress.loaded / progress.total) * 100
-      )}%`
-    );
-  });
+  const command = new PutObjectCommand(params);
 
   try {
-    var data = await upload.done();
-    console.log("upload done", data);
-    if (data.$metadata.httpStatusCode === 200) {
-      return {
-        success: true,
-        message: "Upload successful!",
-        location: data.Location,
-      };
-    }
+    const data = await s3Client.send(command);
+    console.log("upload result", data);
     return {
-      success: false,
-      message: "Upload failed. Please try again.",
-      location: data.Location,
+      success: true,
+      message: "Upload successful!",
+      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
+        params.Key
+      )}`,
     };
-  } catch (err) {
+  } catch (error) {
+    console.error("upload error", error);
     return {
       success: false,
       message: "Upload failed. Please try again.",
-      location: data.Location,
     };
   }
 };
-// export default s3Client;
-export { uploadToS3 };
+
+export { uploadToS3, uploadImgToS3 };

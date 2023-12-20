@@ -1,57 +1,50 @@
 .doctor-edit-verification-session-container {
-    width: 1300px;
-    height: 701px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    border: 2px solid var(--text-2-button, #675D59);
-    background: var(--White, #FBFCFF);
-    position: absolute;
-    top: 2000px; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for the container's dimensions */
-    padding: 0; /* Adjust padding as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    
-      
-      /* Style for the arrow */
+  width: 1300px;
+  height: 1280px;
+  //   padding: 30px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px solid var(--text-2-button, #675d59);
+  background: var(--White, #fbfcff);
+  position: absolute;
+  top: 2250px; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for the container's dimensions */
+  padding: 0; /* Adjust padding as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 
+  /* Style for the arrow */
 
-.doctor-verification-text
-{
-
-    color: #352C29;
-/* Interactive 3 */
+  .doctor-verification-text {
+    color: #352c29;
+    /* Interactive 3 */
     font-family: Open Sans;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: 100%; /* 16px */
     //text-align: center;
-}
-.doctor-verification-gray-text
-{
+  }
+  .doctor-verification-gray-text {
     color: #838383;
-/* Interactive 3 */
+    /* Interactive 3 */
     font-family: Open Sans;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
-}
-.doctor-verification-title
-{
+  }
+  .doctor-verification-title {
     margin-left: 20%;
     margin-top: 50px;
-}
-.doctor-verification-doctor-profile
-{
+  }
+  .doctor-verification-doctor-profile {
     margin-top: 50px;
     margin-left: 20%;
-}
-.doctor-verification-dropDown--button
-{
+  }
+  .doctor-verification-dropDown--button {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
@@ -60,46 +53,44 @@
     align-items: center;
     flex-shrink: 0;
     border-radius: 8px;
-    border: 1px solid #F8F8F8;
-    background: #FFF;
+    border: 1px solid #f8f8f8;
+    background: #fff;
     box-shadow: 0px 1px 4px 0px rgba(176, 176, 176, 0.25);
-    color: #675D59; /* For the button text color */
+    color: #675d59; /* For the button text color */
     font-family: Open Sans;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 100%; 
-}
-.doctor-veri-upload-main-section
-{
+    line-height: 100%;
+  }
+  .doctor-veri-upload-main-section {
     display: flex;
     flex-direction: column;
-    gap:30px;
+    gap: 30px;
     margin-left: 20%;
     margin-top: 60px;
-    color: #352C29;
+    color: #352c29;
     /* Interactive 3 */
-
-}
-.doctor-verification-certification
-{
+  }
+  .doctor-verification-certification {
     margin-top: 30px;
     margin-left: 20%;
-}
-.doctor-edit-veri-upload-button
-{
+  }
+  .doctor-edit-veri-upload-button {
     display: flex;
-    align-items: center;padding-left: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
     border-radius: 8px;
-    border: 2px solid #63BC61;
+    border: 2px solid #63bc61;
     font-size: 14px;
-    
-    background: var(--White, #FBFCFF);
+
+    background: var(--White, #fbfcff);
     width: 852px;
     height: 50px;
     flex-shrink: 0;
-    color: #352C29; // Fallback color used if CSS variable isn't set
-    font-family: 'Open Sans', sans-serif;
+    color: #352c29; // Fallback color used if CSS variable isn't set
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: 600;
     line-height: 16px; // 100% of 16px font size
@@ -107,5 +98,46 @@
     &:hover {
       background-color: #e0e0e0; // Example hover color
     }
+  }
 }
+.doctor-profile-verification-upload-body {
+  //   margin-top: 30px;
+  width: 600px;
+  height: 300px;
+  //   margin-left: 30px;
+  background-color: #ededed;
+  border: 1px dashed #000;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  gap: 20px;
+}
+.doctor-edit-verification-file-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doctor-edit-upload-button {
+  border: 1px solid #838383;
+  background-color: #c9c9c9;
+  width: 600px;
+  height: 40px;
+  flex-shrink: 0;
+  cursor: pointer; /* Makes it clear it's clickable */
+  outline: none; /* Removes the default focus outline */
+  transition: background-color 0.2s;
+  color: #000;
+  /* Interactive 2 */
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+}
+.doctor-edit-upload-button-section {
+  margin-left: 14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

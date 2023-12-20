@@ -1,38 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { QueryParamProvider } from 'use-query-params';
-import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { QueryParamProvider } from "use-query-params";
+import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from './theme';
-
+import theme from "./theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 3,
+      retry: 2,
       cacheTime: 1000 * 60 * 60 * 24 * 7, // 7 days
       //cacheTime: 1000 ,// 1 second
       staleTime: 1000 * 60 * 60 * 1,
-     // staleTime: 1000, // 1 second
+      // staleTime: 1000, // 1 second
       refetchOnWindowFocus: false,
-      refetchOnReconnect: false
-    }
-  }
+      refetchOnReconnect: false,
+    },
+  },
 });
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <QueryParamProvider reactRouterAdapter={ReactRouter6Adapter}>
-          <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'top' } }}>
+          <ChakraProvider
+            theme={theme}
+            toastOptions={{ defaultOptions: { position: "top" } }}
+          >
             <App />
           </ChakraProvider>
         </QueryParamProvider>

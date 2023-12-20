@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import './community-post.styles.scss';
-import heartIcon from '../../../assets/post/heart.png';
 import { useMediaQuery } from 'react-responsive';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+
+// hooks
+import { useGetLikesPost } from '../../../hooks/useGetPosts';
+
+// stores
+import usePostQueryStore from '../../../postStore.ts';
+
+// scss
+import './community-post.styles.scss';
 
 // images
 import defaultImage from '../../../assets/post/default_image.png';
+import LockIcon from '../../../assets/post/lock_icon.svg';
+import heartIcon from '../../../assets/post/heart.png';
+import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
 
 const CommunityPost = ({
+  dummyHighlight,
+  dummyPrivate,
   imageURL,
   text,
   profileImage,
@@ -19,8 +30,9 @@ const CommunityPost = ({
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
-
   const [displayImage, setDisplayImage] = useState(imageURL);
+
+  const postQuery = usePostQueryStore((state) => state.postQuery);
 
   useEffect(() => {
     if (isMobile) {
@@ -30,21 +42,38 @@ const CommunityPost = ({
     }
   }, [isMobile]);
 
-  const toggleLike = () => {
-    setLiked((prevLiked) => !prevLiked);
-    // If you want to navigate to another page when the heart is clicked, uncomment the next line.
-    // window.location.href = "/download";
-  };
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
 
+  // set default image when image is not loaded function is here
   const handleImageError = () => {
     setDisplayImage(defaultImage);
+  };
+
+  // like button function is here
+  // prevent to open pop up when like buttonis clicked
+  const handleHeartIconClick = (e) => {
+    e.stopPropagation();
+    setLiked((prevLiked) => !prevLiked);
+    apiLikeMutate({ postId: postQuery.postID });
   };
 
   return (
     <div
       className='community-post-container'
-      style={{ width: isProfile ? '240px' : '100%' }}
+      style={{
+        width: isProfile ? '240px' : '100%',
+        backgroundColor: dummyHighlight === 1 ? '#352C28' : '',
+      }}
     >
+      {dummyPrivate === 1 && (
+        <img
+          src={LockIcon}
+          alt='Icon-Lock'
+          className='community-post-icon-lock'
+        />
+      )}
+
       <div className='post-Image'>
         <img
           src={displayImage}
@@ -63,7 +92,8 @@ const CommunityPost = ({
             <img
               src={liked ? heartIconFilled : heartIcon}
               className='heartIcon'
-              onClick={toggleLike}
+              onClick={handleHeartIconClick}
+              // onClick={toggleLike}
               alt='Like Icon'
             />
 

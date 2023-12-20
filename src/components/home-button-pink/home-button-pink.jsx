@@ -4,13 +4,18 @@ import './home-button-pink.styles.scss';
 // props: link title, link href, onClick handler
 const HomeButtonPink = (props) => {
     const navigate = useNavigate();
-    const handleClick = () => {
+    const handleClick = async () => {
         if (props.href) {
-            console.log(props.href);
-            navigate(props.href);
-        }
+            await navigate(props.href);
+
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth',
+        });
+          }
         if (props.onClick) {
             props.onClick();
+            
         }
     }
     const hasIcon = props.isIcon;
