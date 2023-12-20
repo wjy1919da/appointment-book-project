@@ -1,13 +1,15 @@
 import './universal-profile-edit.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
 import { useUserEmailLogin, useDoctorLogin, useClickVerification } from '../../hooks/useAuth';
 import useUploadImg from '../../hooks/useUploadImg';
 import defaultPhoto from '../../assets/post/user-profile-avatar.png';
 import backArrow from '../../assets/doctor/left_back.png';
 import axios from 'axios';
 import * as editFuncs from './universal-edit-verification-functions';
+import trashcan from '../../assets/doctor/trashcan.svg';
 import APIClient from '../../services/api-client';
 import {
     Modal,
@@ -35,11 +37,12 @@ const UniversalProfileEdit = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState(false);
     const [bio, setBio] = useState("");
-    const [image, setImage] = useState("");
+    const [imageLink, setImageLink] = useState("");
     const [interests, setInterests] = useState([]);  // the array of interests returned from the backend that we display as options
     const [interestSelections, setInterestSelections] = useState([]);  // the array that we put what the user selects their interests as in
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [errorSubmitting, setErrorSubmitting] = useState(false);
     const [accountType, setAccountType] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
@@ -54,9 +57,37 @@ const UniversalProfileEdit = () => {
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     // const modalDisclosure = useDisclosure();
     const userInfo = userInfoQueryStore((state) => state.userInfo);
-    const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
-    
+    // const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
+    const {
+        selectedFiles,
+        setSelectedFiles,
+        handleFileSelection,
+        uploadProgress,
+        isLoading: isUploadLoading,
+        isError: isUploadError,
+        uploadedFiles,
+        resetFiles,
+        removeUploadedFile,
+      } = useUploadImg();
+    const fileInputRef = useRef(null);
+    const handleBrowseFiles = () => {
+        fileInputRef.current.click();
+      };
+    const handleDragOver = (e) => {
+    e.preventDefault();
+    };
 
+    const handleDrop = (e) => {
+    e.preventDefault();
+    handleFileSelection({ target: { files: e.dataTransfer.files } });
+    };
+
+    useEffect(() => {
+        if (uploadedFiles.length > 0) {
+            setImageLink(uploadedFiles[uploadedFiles.length - 1]);
+        }
+    }, [uploadedFiles])
+    
     const retrieveAccountType = () => {
         const accountNumber = localStorage.getItem("accountType");
         if (accountNumber === null) throw new Error('No account type found...');
@@ -79,7 +110,7 @@ const UniversalProfileEdit = () => {
             holder = {...holder, 'email': email};
         }
         if (avatar) {
-            setImage(avatar);
+            setImageLink(avatar);
             holder = {...holder, 'image': avatar};
         }
         if (birthday) {
@@ -193,12 +224,12 @@ const UniversalProfileEdit = () => {
     }
 
     const addToInterests = (item) => {
-        console.log('adding to interests array: ', item);
+        // console.log('adding to interests array: ', item);
         setInterestSelections((array) => [...array, item]);
     }
 
     const removeFromInterests = (item) => {
-        console.log('removing from interests array: ', item);
+        // console.log('removing from interests array: ', item);
         const filteredArray = interestSelections.filter((procedure) => procedure !== item);
         setInterestSelections(filteredArray);
     }
@@ -217,6 +248,7 @@ const UniversalProfileEdit = () => {
     const handleButtonClick = (event) => {
         event.preventDefault();
         setChangesSaved(false);
+        setErrorSubmitting(false);
         if (checkForErrors()) return;
         // if (checkForPasswordInputError()) return;
         setIsModalOpen(true);
@@ -292,20 +324,23 @@ const UniversalProfileEdit = () => {
         if (interestSelections && interestSelections !== originalInformation.interests) {
             data.interested = interestSelections;
         }
-        console.log('data is: ', data);
+        if (imageLink && imageLink !== originalInformation.image) {
+            data.img = imageLink;
+        }
+        console.log('sending data as: ', data);
         let errorSubmitting = false;
         const submitForm = async () => {
             try {
                 const res = await editFuncs.setUserData(data);
+                console.log('edit profile res returned as: ', res);
                 if (res?.data?.code === 500) {
                     throw new Error('Couldn\'t save some or all of the submitted data...');
                 } else {
                     setChangesSaved(true);
                 }
-                console.log('edit profile res returned as: ', res);
             } catch (err) {
                 console.log('Could not change edit profile page...');
-                errorSubmitting = true;
+                setErrorSubmitting(true);
             } finally {
                 setIsLoadingModalOpen(false);
             }
@@ -325,6 +360,18 @@ const UniversalProfileEdit = () => {
         //     setChangesSaved(true);
         // }
         setIsLoadingModalOpen(false);
+    }
+
+    // const handlePhotoChange = () => {
+    //     console.log('attempting to change photo');
+    // }
+
+    const handlePhotoReset = () => {
+        if (imageLink === originalInformation.image) return;
+        console.log('attempting to remove photo!');
+        resetFiles();
+        console.log('uploadedFiles is: ', uploadedFiles);
+        setImageLink("");
     }
     
 
@@ -362,6 +409,7 @@ const UniversalProfileEdit = () => {
                     <div className='univ-edit-top-row-right-col univ-edit-top-row-col'>
                         <div className='univ-edit-form-button-container'>
                             {changesSaved && <p className='univ-edit-form-changes-saved-text'>Changes saved!</p>}
+                            {errorSubmitting && <p className='univ-edit-form-changes-unsaved-text'>Unable to save changes at this time.</p>}
                             <button className='univ-edit-form-button' type='submit' form='univ-edit-info-form' onClick={(e) => handleButtonClick(e)}>Save Changes</button>
                         </div>
                     </div>
@@ -376,7 +424,30 @@ const UniversalProfileEdit = () => {
                         <form className='univ-edit-info-form-container' id='univ-edit-info-form'>
                             <div className='univ-edit-info-form-top-row'>
                                 <div className='univ-edit-info-form-profile-pic-container'>
-                                    <img src={defaultPhoto} alt='profilePicture' className='univ-edit-info-form-profile-pic' />
+                                    <div className='univ-edit-profile-pic-cover-container' onDrop={handleDrop}
+                                        onDragOver={handleDragOver}>
+                                        <div className='univ-edit-profile-pic-cover'>
+                                            <p className='univ-edit-profile-pic-change-text' onClick={handleBrowseFiles}>Click to Change</p>
+                                            <div className='univ-edit-profile-pic-trash-container' onClick={handlePhotoReset}>
+                                                <img src={trashcan} alt='remove profile picture' className='univ-edit-profile-pic-trash' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input
+                                        ref={fileInputRef}
+                                        type="file"
+                                        id="imageUpload"
+                                        accept="image/*"
+                                        style={{ display: "none" }}
+                                        onChange={handleFileSelection}
+                                    />
+                                    {/* <div
+                                        className="univ-edit-profile-upload-div"
+                                        
+                                        
+                                    >
+                                    </div> */}
+                                    <img src={imageLink ? imageLink : originalInformation.image ? originalInformation.image : defaultPhoto} alt='profile Picture' className='univ-edit-info-form-profile-pic' />
                                 </div>
                                 <div className='univ-edit-info-form-name-and-gender-container'>
                                     <div className='univ-edit-info-form-name-container'>
@@ -461,9 +532,9 @@ const UniversalInfoFormInput = ({onChange, stateVariable, placeholder, label, po
     )
 }
 
-const UploadProfilePic = () => {
-    const { selectedFiles, uploadedFiles, handleFileSelection, uploadingFiles, isError, isLoading, resetFiles, removeFiles} = useUploadImg();
-}
+// const UploadProfilePic = () => {
+//     const { selectedFiles, uploadedFiles, handleFileSelection, uploadingFiles, isError, isLoading, resetFiles, removeFiles} = useUploadImg();
+// }
 
 const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userInterests, accountType}) => {
     const [interestTab, setInterestTab] = useState(0);

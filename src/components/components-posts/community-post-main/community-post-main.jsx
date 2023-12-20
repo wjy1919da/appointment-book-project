@@ -76,7 +76,7 @@ const PostPageMain = () => {
           </div>
         </div>
       </div>
-      <PostPageTitle />
+      {/* <PostPageTitle /> */}
     </div>
   );
 };

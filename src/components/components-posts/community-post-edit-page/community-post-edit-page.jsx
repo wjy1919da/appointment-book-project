@@ -200,7 +200,7 @@ const EditPostPage = () => {
           <div key={index} className='edit-post-page-thumbnail'>
             <div
               className={`thumbnail ${
-                index === clickedThumbnailIndex ? 'clicked' : ''
+                index === uploadedFiles.length - 1 ? 'clicked' : ''
               }`}
               onClick={() => handleClickMask(index)}
             >
