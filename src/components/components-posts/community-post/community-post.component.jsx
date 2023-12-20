@@ -31,7 +31,7 @@ const CommunityPost = ({
   const [width, setWidth] = useState('');
   const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
-  const [countLikes, setCountLikes] = useState(0);
+  const [countLikes, setCountLikes] = useState(likes); // counter likes
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // const setCounter = usePostQueryStore((state) => state.setCounter);

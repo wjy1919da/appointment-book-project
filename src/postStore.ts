@@ -21,7 +21,6 @@ interface PostQuery {
   commentId?: number;
   isPrivate?: boolean;
   isHighlight?: boolean;
-  counter: number;
 }
 
 interface postQueryStore {
@@ -45,7 +44,6 @@ interface postQueryStore {
   setCommentId?: (commentId: number) => void;
   setIsPrivate?: (isPrivate: boolean) => void;
   setIsHighlight?: (isHighlight: boolean) => void;
-  setCounter: (increment?: boolean) => void;
 }
 
 const usePostQueryStore = create<postQueryStore>((set) => ({
@@ -69,7 +67,6 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     commentId: 0,
     isPrivate: false,
     isHighlight: false,
-    counter: 0,
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -111,17 +108,6 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, isPrivate } })),
   setIsHighlight: (isHighlight) =>
     set((state) => ({ postQuery: { ...state.postQuery, isHighlight } })),
-  setCounter: (increment: boolean = true) => {
-    set((state) => {
-      const newCounter = increment
-        ? Math.min(state.postQuery.counter + 1, 1)
-        : Math.max(state.postQuery.counter - 1, -1);
-      return {
-        postQuery: { ...state.postQuery, counter: newCounter },
-      };
-    });
-  },
-
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },
