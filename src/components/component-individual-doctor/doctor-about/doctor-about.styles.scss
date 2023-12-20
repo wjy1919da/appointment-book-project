@@ -125,10 +125,34 @@
 
 .highlight-cases-cases-container {
     width: 95%;
+    min-height: 24rem;
     margin: auto;
     padding-top: 1.5rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.highlight-cases-container-space-around {
+    justify-content: space-around;
+}
+
+.highlight-cases-highlights-container {
+    width: 30%;
+    // max-height: 18rem;
+}
+
+.highlight-cases-no-posts-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight-cases-no-posts-text {
+    color: #F48C8A;
+}
+
+.highlight-post-container {
+    width: 100%;
 }
 
 .indv-highlight-case-container {
