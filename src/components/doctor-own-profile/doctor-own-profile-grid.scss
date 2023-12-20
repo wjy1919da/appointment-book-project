@@ -1,29 +1,15 @@
-// .doctor-profile-post-grid-container {
-//     margin: 0 110px;
-//     margin-bottom: 80px;
-//   }
-  
-//   .doctor-profile-post-grid-container-post {
-//     position: absolute;
-//     top: 100px;
-//     left: 200px;
-//     width: 80%;
-//   }
-  
-//   .doctor-profile-post-grid-choose-picture-section-image-post {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     background-color: white; 
-//     border-radius: 8px; 
-//     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
-//     cursor: pointer;
-//     width: 240px;
-//     height: 240px; 
-//   }
-  
-//   .doctor-profile-post-grid-choose-picture-section-image img {
-//     width: 50%; 
-//     height: auto;
-//   }
-    
+/* note: grid layout style is applied in doctor-own-profile-subArea.styles.scss 
+   bec doctor-own-profile-grid component is wrapped in there */
+
+// create a post + icon button
+.doctor-profile-post-grid-choose-picture-section-image-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  width: 240px;
+  height: 240px;
+}

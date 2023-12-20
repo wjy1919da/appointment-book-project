@@ -66,8 +66,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   const navigate = useNavigate();
 
-  // hook
-
   // width
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
 
@@ -155,8 +153,6 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
             gutter={gutterwidth}
           >
             <Masonry gutter={gutterwidth}>
-              {/* CreatePostIcon as the first post */}
-
               <div className="choose-picture-section-image-post">
                 <img
                   src={creatPostIcon}
