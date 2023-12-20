@@ -8,7 +8,6 @@ import locationIcon from "../../assets/user/locationIcon.png";
 import gradIcon from "../../assets/user/Graduation Cap.png";
 import certified from "../../assets/user/Certificate.png";
 import "./doctor-own-profile-Basic.styles.scss";
-import verificationStatusIcon from '../../assets/doctor/VerificationStatus.png'
 import { useGetUserInfo } from "../../hooks/useAuth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -17,20 +16,15 @@ import DoctorOwnProfileEditButton from "./doctor-own-profile-edit-button";
 import userInfoQueryStore from "../../userStore";
 import HomeSpinner from "../home-spinner/home-spinner.component";
 const DocotorOwnBasic = () => {
-  
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [showManageButton, setShowManageButton] = useState(false);
-  const [VerificationStatus,setVerificationStatus] = useState(false);
   const handleFirstButtonClick = () => {
     setShowManageButton(true); // This will show the second button
   };
   const onClick = () => {
     navigate("/doctorProfileEdit");
   };
-  const handleVerificationClick = () => {
-    navigate('/doctorVerification'); // Replace '/doctorVerification' with the actual path
-};
   return (
     <div className="doctor-own-basic-conatiner ">
       <div className="doctor-own-basic-avatar">
@@ -46,17 +40,11 @@ const DocotorOwnBasic = () => {
             <span className="doctor-own-name-text">
               {userInfo.username || `User ${userInfo.userId}`}
             </span>
-            {!VerificationStatus &&
-            <button className='doctor-profile-verification-button'onClick={handleVerificationClick}>
-                Verification
-            </button>
-            }
-            {VerificationStatus &&
+
             <img
               src={doctorVerify}
               style={{ width: "25px", height: "25px" }}
             ></img>
-            }
           </div>
           <div className="doctor-own-basic-edits-buttons">
             {/* <Link to="/doctorProfileEdit" className="top-edit-button-1">
