@@ -58,7 +58,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     title,
     memberId,
     isHighlight,
-    isPrivate,
+    isPrivate
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -66,7 +66,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
-    // setIsHighlight(isHighlight);
+    setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
   };
 
@@ -85,13 +85,14 @@ const DoctorPostGrid = ({ isAbout }) => {
           post.avatar,
           post.username,
           post.title,
-          post.memberId,
+          post.memberId
         );
         navigate('/posts/' + post.id);
       }}
       key={post.id}
     >
       <CommunityPost
+        dummyHighlight={post.isHighlight}
         dummyPrivate={post.isDisplay}
         id={post.id}
         imageURL={post.coverImg || []}

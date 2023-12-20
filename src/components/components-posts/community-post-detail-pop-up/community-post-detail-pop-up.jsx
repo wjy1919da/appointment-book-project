@@ -412,7 +412,6 @@ const CommunityPostDetailPopUP = ({
                       : "Highlight"}
                   </button>
                 )}
-
                 {isAuthor && (
                   <button
                     className="button-private"
@@ -421,7 +420,6 @@ const CommunityPostDetailPopUP = ({
                     {postQuery.isPrivate ? "Remove from Private" : "Private"}
                   </button>
                 )}
-
                 {/* {isAuthor && ( */}
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
