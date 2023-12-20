@@ -162,8 +162,10 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
+  // private click
   const handlePrivateClick = () => {
     if (validateTokenAndPopup()) {
+      console.log("postQuery.isPrivate", postQuery.isPrivate);
       setModalStatus("private");
       if (!postQuery.isPrivate) {
         setModalHeader("Private Post");

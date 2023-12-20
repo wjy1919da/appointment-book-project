@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Verification from "./routes/verification/verificaiton.component";
+import UpdateVerification from "./routes/update-verification/update-verification";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./private-route.component";
 import "./App.css";
@@ -138,6 +139,7 @@ const App = () => {
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
+              <Route path="update/verifyEmail" element={<UpdateVerification />} />
               <Route
                 path="doctorVerification"
                 element={<DoctorVerificationPage />}

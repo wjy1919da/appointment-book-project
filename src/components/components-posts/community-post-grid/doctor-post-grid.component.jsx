@@ -83,7 +83,7 @@ const DoctorPostGrid = ({ isAbout }) => {
         handleClickPost(
           post.id,
           post.avatar,
-          post.username,
+          post.nickname,
           post.title,
           post.memberId
         );
