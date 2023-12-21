@@ -177,3 +177,9 @@
   font-weight: 400;
   line-height: normal;
   }
+
+.doctor-profile-verification-button:hover,
+.doctor-profile-verification-button:active {
+  justify-content: center;
+  background: rgba(255, 164, 163, 0.20);
+}

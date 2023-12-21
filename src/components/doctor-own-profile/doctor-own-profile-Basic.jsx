@@ -13,7 +13,7 @@ import { useGetUserInfo } from "../../hooks/useAuth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DoctorOwnProfileEditButton from "./doctor-own-profile-edit-button";
-
+import doctorInfoQueryStore from "../../doctorStore";
 import userInfoQueryStore from "../../userStore";
 import HomeSpinner from "../home-spinner/home-spinner.component";
 const DocotorOwnBasic = () => {
@@ -22,6 +22,7 @@ const DocotorOwnBasic = () => {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [showManageButton, setShowManageButton] = useState(false);
   const [VerificationStatus,setVerificationStatus] = useState(false);
+  const { isVerificationSubmitted } = doctorInfoQueryStore();
   const handleFirstButtonClick = () => {
     setShowManageButton(true); // This will show the second button
   };
@@ -48,7 +49,7 @@ const DocotorOwnBasic = () => {
             </span>
             {!VerificationStatus &&
             <button className='doctor-profile-verification-button'onClick={handleVerificationClick}>
-                Verification
+                {isVerificationSubmitted ? 'Verifying' : 'Verification'}
             </button>
             }
             {VerificationStatus &&
