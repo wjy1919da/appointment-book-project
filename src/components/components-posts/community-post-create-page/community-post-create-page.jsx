@@ -19,7 +19,7 @@ import './community-post-create-page.scss';
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import DeleteButton from '../../../assets/post/pop-up-close-button.png';
+import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 const CreatePostPage = () => {
   const toast = useToast();
@@ -269,8 +269,8 @@ const CreatePostPage = () => {
             <div className='create-post-page-thumbnail-container'>
               {displayThumbnails}
 
-              {/* thumbnail create */}
-              {displayThumbnails && (
+              {/* create thumbnail */}
+              {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
                   className='create-post-page-add-thumbnail'
                   onDrop={handleDrop}
