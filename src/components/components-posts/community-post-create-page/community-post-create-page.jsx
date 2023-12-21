@@ -123,7 +123,7 @@ const CreatePostPage = () => {
     const source = location.state?.source;
 
     if (source === 'userProfile') {
-      navigate('/userProfile');
+      navigate('/userProfile/#Posts');
     } else if (source === 'doctorProfile') {
       navigate('/doctorProfile/#Posts');
     } else {
