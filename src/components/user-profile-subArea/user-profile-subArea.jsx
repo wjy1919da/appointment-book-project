@@ -54,8 +54,8 @@ const UserProfileSubArea = () => {
           </a>
         </div>
         <div
-          onClick={() => setActiveTab('Reviews')}
-          className={`item ${activeTab === 'Reviews' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Doctors')}
+          className={`item ${activeTab === 'Doctors' ? 'active' : ''}`}
         >
           <a href='#Doctors' className='nav-tab-doctors'>
             Doctors
@@ -73,7 +73,7 @@ const UserProfileSubArea = () => {
       <div className='bottom-rendering'>
         {activeTab === 'Likes' && <UserProfileLike />}
         {activeTab === 'Posts' && <UserProfilePost />}
-        {activeTab === 'Reviews' && <UserProfileReview />}
+        {activeTab === 'Doctors' && <UserProfileReview />}
       </div>
       {/* <div className='bottom-rendering'>
         {activeTab === 'Posts' && (
