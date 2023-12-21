@@ -128,14 +128,14 @@ const HeaderUser = () => {
         )}
         <MenuList>
           <MenuGroup title={`Hello, ${data?.data?.nickname || "User"}`}>
-            <MenuItem>
+            {/* <MenuItem>
               <Link
                 to="/AccountSetup"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 Account Setting
               </Link>
-            </MenuItem>
+            </MenuItem> */}
             {localStorage.getItem("accountType") === "1" && (
               <MenuItem>
                 <Link
