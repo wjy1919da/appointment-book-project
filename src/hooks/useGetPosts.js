@@ -112,13 +112,22 @@ export function usePostDetail() {
 // likes
 export function useGetLikesPost() {
   const apiClient = new APIClient('/post/like');
-  const fetchName = async (postId) => {
+
+  const fetchLikeData = async (postId) => {
     const res = await apiClient.post({
       postId,
     });
     return res.data;
   };
-  return useMutation((credentials) => fetchName(credentials.postId));
+
+  return useMutation((credentials) => fetchLikeData(credentials.postId), {
+    onSuccess: (data) => {
+      console.log('OK', data);
+    },
+    onError: (error) => {
+      console.error('ERROR', error);
+    },
+  });
 }
 
 // like comment

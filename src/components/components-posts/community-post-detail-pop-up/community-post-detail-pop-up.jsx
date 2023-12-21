@@ -59,6 +59,7 @@ const CommunityPostDetailPopUP = ({
   commentCount,
   isPrivate,
   isHighlight,
+  likes,
 }) => {
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // console.log("my post detail", postQuery.userAvatar);
@@ -80,7 +81,10 @@ const CommunityPostDetailPopUP = ({
   const [modalStatus, setModalStatus] = useState("");
   // Reply comment
   const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
-
+    // like states ready
+    const [isPopupLiked, setIsPopupLiked] = useState(false);
+    const [countPopupLikes, setCountPopupLikes] = useState(likes);
+  
   // refs
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -219,8 +223,8 @@ const CommunityPostDetailPopUP = ({
     }
   };
 
-  // api
-  const { mutate: apiMutate } = useGetLikesPost({
+  // likes hook
+  const { mutate: apiLikePopupMutate } = useGetLikesPost({
     onError: (error) => {
       toast({
         title: "Failed.",
@@ -230,15 +234,16 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
-
+ // like buttton
   const toggleGetLikes = () => {
     if (validateTokenAndPopup()) {
-      setLiked((prev) => !prev);
+      setIsPopupLiked((prev) => !prev);
       if (validateTokenAndPopup()) {
-        apiMutate({ postId: postQuery.postID });
+        apiLikePopupMutate({ postId: postQuery.postID });
       }
     }
   };
+
   const { mutate } = useAddComment({
     onError: (error) => {
       toast({
@@ -501,12 +506,13 @@ const CommunityPostDetailPopUP = ({
               <span className="Icon-count">
                 <img
                   // src={heartIcon}
-                  src={liked ? heartIconFilled : heartIcon}
+                  src={isPopupLiked ? heartIconFilled : heartIcon}
                   alt="Icon"
                   className="Icon-size"
                   onClick={toggleGetLikes}
                 />
                 {likeCount}
+                {/* {countPopupLikes} */}
               </span>
               {/* <span className='Icon-count'>
                   <img
