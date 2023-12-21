@@ -243,8 +243,9 @@ const CreatePostPage = () => {
               onChange={handleFileSelection}
               multiple
             />
-            {displayImage && selectedImage ? (
+            {/* {displayImage && selectedImage ? ( */}
               <div className='create-post-pic-wrapper'>
+              {uploadedFiles.length > 0 ? (
                 <img
                   src={selectedImage}
                   style={{
@@ -259,7 +260,6 @@ const CreatePostPage = () => {
                   }}
                   alt='Selected'
                 />
-              </div>
             ) : (
               <>
                 <div className='create-post-page-left-container'>
@@ -284,6 +284,7 @@ const CreatePostPage = () => {
                 </div>
               </>
             )}
+            </div>
 
             {/* thumbnail */}
             <div className='create-post-page-thumbnail-container'>
