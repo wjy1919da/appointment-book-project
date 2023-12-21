@@ -247,7 +247,7 @@ const CreatePostPage = () => {
               <div className='create-post-pic-wrapper'>
               {uploadedFiles.length > 0 ? (
                 <img
-                  src={selectedImage}
+                  src={selectedImage || uploadedFiles[0]}
                   style={{
                     marginBottom: '20px',
                     maxWidth: '100%',
