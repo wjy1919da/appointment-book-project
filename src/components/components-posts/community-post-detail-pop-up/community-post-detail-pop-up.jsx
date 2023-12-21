@@ -178,6 +178,7 @@ const CommunityPostDetailPopUP = ({
     }
   };
   // console.log("postQuery", postQuery);
+  
   // private click call api
   const handlePrivate = () => {
     if (validateTokenAndPopup()) {
@@ -413,7 +414,6 @@ const CommunityPostDetailPopUP = ({
                       : "Highlight"}
                   </button>
                 )}
-
                 {isAuthor && (
                   <button
                     className="button-private"
@@ -422,12 +422,11 @@ const CommunityPostDetailPopUP = ({
                     {postQuery.isPrivate ? "Remove from Private" : "Private"}
                   </button>
                 )}
-
-                {isAuthor && (
+                {/* {isAuthor && ( */}
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
                   </button>
-                )}
+                {/* )} */}
               </div>
             </div>
           </>

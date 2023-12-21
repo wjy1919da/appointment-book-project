@@ -43,7 +43,6 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
   // console.log("flatData in doctor profile", flatData);
-  // hook
 
   // create a post + icon button
   const handleIconClick = () => {
@@ -81,7 +80,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
-    // setIsHighlight(isHighlight);
+    setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
   };
 
@@ -96,6 +95,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
           post.title,
           post.memberId,
           post.isDisplay,
+          post.isHighlight,
           post.highlightStatus
         )
       }

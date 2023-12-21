@@ -47,7 +47,9 @@ import UniversalProfileEdit from "./components/universal-profile-edit/universal-
 
 // import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
+
 import DoctorVerificationMainPage from "./components/doctor-verification-page/doctor-verification-main-page";
+
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -123,7 +125,7 @@ const App = () => {
               />
 
               <Route path="download" element={<Download />} />
-              <Route path="create-post" element={<CreatePostOfUser />} />
+              {/* <Route path="create-post" element={<CreatePostOfUser />} /> */}
               <Route path="/posts/create" element={<CreatePostPage />} />
               <Route path="/edit-post/:postid" element={<EditPostPage />} />
               {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
@@ -143,6 +145,7 @@ const App = () => {
               <Route
                 path="doctorVerification"
                 element={<DoctorVerificationMainPage />}
+
               />
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="*" element={<PageNotFound />} />
