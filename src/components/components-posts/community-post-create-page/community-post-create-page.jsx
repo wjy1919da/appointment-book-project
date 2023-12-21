@@ -67,7 +67,6 @@ const CreatePostPage = () => {
       address: "",
       brief: data.description,
       coverImg: "",
-      id: 0,
       isDisplay: 1,
       lat: "",
       location: "",
