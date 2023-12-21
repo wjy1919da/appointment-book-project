@@ -6,9 +6,9 @@ import cancelIcon from '../../assets/doctor/Cancel.png';
 import UploadIcon from "../../assets/doctor/Upload.svg";
 import DoctorOwnProfileEditButton from "../doctor-own-profile/doctor-own-profile-edit-button";
 import useUploadFile from "../../hooks/useUploadFile";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import DoctorSearchLoadingBar from "../doctor-search-loading-bar/doctor-search-loading-bar.component";
-function DoctorVerificationPage({ pageNumber }) {
+function DoctorVerificationPage({ pageNumber,onFileSelected }) {
   const navigate = useNavigate();
   const handleOnClick = () => {
     navigate("/doctorProfile");
@@ -30,9 +30,22 @@ function DoctorVerificationPage({ pageNumber }) {
     const fileName = decodedUrl.split('/').pop();
     return fileName.replace(/^\d+-/, ''); // Remove the leading digits and hyphen
   }
+  useEffect(() => {
+    console.log("Uploaded Files changed:", uploadedFiles);
+    if (uploadedFiles.length > 0) {
+        handleFileSelectedAndUploaded(uploadedFiles[0]);
+    }
+}, [uploadedFiles]);
+  const handleFileSelectedAndUploaded = (selectedFile) => {
+    // Call the function passed from the parent component
+    console.log('have call the function?');
+    onFileSelected(selectedFile);
+  };
+
   console.log("what is the uploadFiles",uploadedFiles);
   /* uploadedFiles.join(", ") is licences */
   console.log("uploadedFiles", uploadedFiles.join(", "));
+  console.log("selectedFile",selectedFiles);
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
   };

@@ -160,3 +160,26 @@
   font-weight: 400;
   line-height: normal;
 }
+.doctor-profile-verification-button
+{
+  display: flex;
+  height: 25px;
+  padding: 2px 5px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--new-gradient, #F48C8A); 
+  color:  #FFA4A3;
+  /* NEW TYPE/NEW caption */
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  }
+
+.doctor-profile-verification-button:hover,
+.doctor-profile-verification-button:active {
+  justify-content: center;
+  background: rgba(255, 164, 163, 0.20);
+}
