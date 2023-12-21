@@ -322,7 +322,7 @@ const EditPostPage = () => {
               {displayThumbnails}
 
               {/* thumbnail create */}
-              {displayThumbnails && (
+              {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
                   className='edit-post-page-add-thumbnail'
                   onDrop={handleDrop}
