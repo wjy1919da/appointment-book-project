@@ -110,7 +110,7 @@ const HeaderUser = () => {
         {userInfo.token && (
           <img
             onMouseEnter={menuDisclosure.onOpen}
-            src={data?.data?.avatar || defaultAvatar}
+            src={data?.data?.image || defaultAvatar}
             alt="User avatar"
             className="header-avatar"
           />

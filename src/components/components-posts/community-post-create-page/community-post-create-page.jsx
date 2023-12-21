@@ -68,7 +68,7 @@ const CreatePostPage = () => {
       brief: data.description,
       coverImg: "",
       id: 0,
-      isDisplay: 0,
+      isDisplay: 1,
       lat: "",
       location: "",
       lon: "",
@@ -108,7 +108,7 @@ const CreatePostPage = () => {
         isClosable: true,
       });
       localStorage.getItem("accountType") === "2"
-        ? navigate("/doctor-profile")
+        ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
     if (data?.code === 500) {
@@ -124,11 +124,10 @@ const CreatePostPage = () => {
   // back button
   const handleClickCreatePostBack = () => {
     const source = location.state?.source;
-
     if (source === "userProfile") {
       navigate("/userProfile");
     } else if (source === "doctorProfile") {
-      navigate("/doctorProfile");
+      navigate("/doctorProfile/#Posts");
     } else {
       navigate("/posts");
     }

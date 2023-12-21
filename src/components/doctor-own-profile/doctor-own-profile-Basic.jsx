@@ -54,12 +54,12 @@ const DocotorOwnBasic = () => {
               onClick={onClick}
               title="edit profile"
             />
-            <button
+            {/* <button
               onClick={handleFirstButtonClick}
               className="top-edit-button-2"
             >
               <img src={calendar} className="doctor-calendar-img"></img>
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="doctor-own-basic-top-text">
