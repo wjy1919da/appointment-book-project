@@ -5,11 +5,22 @@ export function useAddComment() {
   //   console.log("useAddComment");
   const apiClient = new APIClient("/user_action/actions/comment");
   const fetchAddComment = async (dynamicId, text) => {
-    const res = await apiClient.post({
-      dynamicId,
-      text,
-    });
-    return res.data;
+    try {
+      const response = await apiClient.post({
+        dynamicId,
+        text,
+      });
+      // console.log("response", response);
+      if (response.status === 200) {
+        return response;
+      } else {
+        throw new Error(
+          response.statusText || "Error occurred during the comment post"
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
   };
   return useMutation((credentials) =>
     fetchAddComment(credentials.dynamicId, credentials.text)
@@ -36,11 +47,18 @@ export function useGetCommentLikesPost() {
 export function useRplyComment() {
   const apiClient = new APIClient("/user_action/actions/reply");
   const fetchRplyComment = async (commentId, text) => {
-    const res = await apiClient.post({
+    const response = await apiClient.post({
       commentId,
       text,
     });
-    return res.data;
+    if (response.status === 200) {
+      return response;
+    } else {
+      throw new Error(
+        response.statusText || "Error occurred during the comment post"
+      );
+    }
+    // return res.data;
   };
   return useMutation((credentials) =>
     fetchRplyComment(credentials.commentId, credentials.text)

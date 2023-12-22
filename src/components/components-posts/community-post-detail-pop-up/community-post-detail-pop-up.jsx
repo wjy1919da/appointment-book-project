@@ -81,10 +81,10 @@ const CommunityPostDetailPopUP = ({
   const [modalStatus, setModalStatus] = useState("");
   // Reply comment
   const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
-    // like states ready
-    const [isPopupLiked, setIsPopupLiked] = useState(false);
-    const [countPopupLikes, setCountPopupLikes] = useState(likes);
-  
+  // like states ready
+  const [isPopupLiked, setIsPopupLiked] = useState(false);
+  const [countPopupLikes, setCountPopupLikes] = useState(likes);
+
   // refs
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -182,7 +182,7 @@ const CommunityPostDetailPopUP = ({
     }
   };
   // console.log("postQuery", postQuery);
-  
+
   // private click call api
   const handlePrivate = () => {
     if (validateTokenAndPopup()) {
@@ -234,7 +234,7 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
- // like buttton
+  // like buttton
   const toggleGetLikes = () => {
     if (validateTokenAndPopup()) {
       setIsPopupLiked((prev) => !prev);
@@ -428,9 +428,9 @@ const CommunityPostDetailPopUP = ({
                   </button>
                 )}
                 {/* {isAuthor && ( */}
-                  <button className="button-edit" onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
+                <button className="button-edit" onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
                 {/* )} */}
               </div>
             </div>
