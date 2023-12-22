@@ -19,7 +19,7 @@ import './community-post-create-page.scss';
 // images
 import createPostIcon from '../../../assets/post/create-post-icon.png';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import DeleteButton from '../../../assets/post/pop-up-close-button.png';
+import DeleteButton from '../../../assets/post/thumbnail_delete.png';
 
 const CreatePostPage = () => {
   const toast = useToast();
@@ -47,6 +47,8 @@ const CreatePostPage = () => {
     },
   });
 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
   const [clickedRadio, setClickedRadio] = useState(false);
   const fileInputRef = useRef(null);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -123,15 +125,13 @@ const CreatePostPage = () => {
     const source = location.state?.source;
 
     if (source === 'userProfile') {
-      navigate('/userProfile');
+      navigate('/userProfile/#Posts');
     } else if (source === 'doctorProfile') {
       navigate('/doctorProfile/#Posts');
     } else {
       navigate('/posts');
     }
   };
-
-  const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   // file upload
   const handleBrowseFiles = () => {
@@ -150,22 +150,35 @@ const CreatePostPage = () => {
   const handleRadioClick = () => {
     setClickedRadio((prevState) => !prevState);
   };
+
+  const handleClickMask = (index) => {
+    // console.log('clicked');
+    setSelectedImage(uploadedFiles[index]);
+    setClickedThumbnailIndex(index);
+  };
+
   // thumbnail
   const displayThumbnails =
     uploadedFiles.length > 0
       ? uploadedFiles.map((file, index) => (
           <div key={index} className='create-post-page-thumbnail'>
-            <img
-              src={file}
-              className='thumbnail'
-              alt={`Selected Thumbnail ${index + 1}`}
-              style={{
-                width: '70px',
-                height: '70px',
-                borderRadius: '8px',
-                objectFit: 'cover',
-              }}
-            />
+            <div
+              className={`thumbnail ${
+                index === uploadedFiles.length - 1 ? 'clicked' : ''
+              }`}
+              onClick={() => handleClickMask(index)}
+            >
+              <img
+                src={file}
+                alt={`Selected Thumbnail ${index + 1}`}
+                style={{
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
             <button
               type='button'
               className='delete-thumbnail-button'
@@ -189,6 +202,11 @@ const CreatePostPage = () => {
           </div>
         ))
       : null;
+
+  const displayImage =
+    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
+  // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   return (
     <div>
@@ -225,21 +243,23 @@ const CreatePostPage = () => {
               onChange={handleFileSelection}
               multiple
             />
-            {displayImage ? (
-              <img
-                src={displayImage}
-                style={{
-                  marginBottom: '20px',
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  width: '330px',
-                  height: '330px',
-                  borderRadius: '8px',
-                  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                  objectFit: 'contain',
-                }}
-                alt='Selected'
-              />
+            {/* {displayImage && selectedImage ? ( */}
+              <div className='create-post-pic-wrapper'>
+              {uploadedFiles.length > 0 ? (
+                <img
+                  src={selectedImage || uploadedFiles[0]}
+                  style={{
+                    marginBottom: '20px',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: '330px',
+                    height: '330px',
+                    borderRadius: '8px',
+                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                    objectFit: 'contain',
+                  }}
+                  alt='Selected'
+                />
             ) : (
               <>
                 <div className='create-post-page-left-container'>
@@ -264,29 +284,30 @@ const CreatePostPage = () => {
                 </div>
               </>
             )}
+            </div>
 
             {/* thumbnail */}
             <div className='create-post-page-thumbnail-container'>
               {displayThumbnails}
 
-              {/* thumbnail create */}
-              {displayThumbnails && (
+              {/* create thumbnail */}
+              {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
                   className='create-post-page-add-thumbnail'
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
                 >
-                  <div className='create-post-image-wrapper'>
-                    <img
-                      src={createPostIcon}
-                      style={{
-                        width: '60px',
-                        height: '60px',
-                      }}
-                      alt='Image-Create-Post'
-                    />
-                  </div>
+                  {/* <div className='create-post-image-wrapper'> */}
+                  <img
+                    src={createPostIcon}
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                    }}
+                    alt='Image-Create-Post'
+                  />
+                  {/* </div> */}
                 </div>
               )}
             </div>

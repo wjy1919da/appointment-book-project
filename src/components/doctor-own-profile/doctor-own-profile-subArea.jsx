@@ -6,7 +6,7 @@ import DoctorProfileGrid from './doctor-own-profile-grid';
 import UserProfileLike from '../user-profile-like/user-profile-like';
 
 const DoctorProfileSubArea = () => {
-  const [activeTab, setActiveTab] = useState('About'); // By default, "about" is the active tab
+  const [activeTab, setActiveTab] = useState('About'); // by default, "about" is the active tab
   const [showCreatePost, setShowCreatePost] = useState(false);
 
   const { hash } = useLocation();
@@ -29,7 +29,7 @@ const DoctorProfileSubArea = () => {
           onClick={() => setActiveTab('About')}
           className={`item ${activeTab === 'About' ? 'active' : ''}`}
         >
-          <a href='#About'>About</a>
+          <a href='#About' className='nav-tab-about'>About</a>
         </div>
         <div
           onClick={() => {
@@ -39,13 +39,13 @@ const DoctorProfileSubArea = () => {
           }}
           className={`item ${activeTab === 'Posts' ? 'active' : ''}`}
         >
-          <a href='#Posts'>Posts</a>
+          <a href='#Posts' className='nav-tab-posts'>Posts</a>
         </div>
         <div
           onClick={() => setActiveTab('Like')}
           className={`item ${activeTab === 'Like' ? 'active' : ''}`}
         >
-          <a href='#Like'>Like</a>
+          <a href='#Like' className='nav-tab-like'>Like</a>
         </div>
       </div>
       <div className='bottom-rendering'>
