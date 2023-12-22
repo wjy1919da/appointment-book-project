@@ -14,6 +14,7 @@ import ErrorMsg from "../../error-msg/error-msg.component";
 // hook
 import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
 import { useGetLikesPost } from "../../../hooks/useGetPosts";
+import { useToast } from "@chakra-ui/react";
 
 // scss
 import "./doctor-post-grid.styles.scss";
@@ -21,7 +22,6 @@ import "./doctor-post-grid.styles.scss";
 // images
 import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
-import { set } from "date-fns";
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -50,6 +50,18 @@ const DoctorPostGrid = ({ isAbout }) => {
   // console.log("flatData", flatData);
 
   const { postid } = useParams();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (hasNextPage === undefined) {
+      toast({
+        title: "No more posts",
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  }, [hasNextPage, toast]);
 
   const handleClickPost = (
     ID,
@@ -75,7 +87,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
-  if (isLoading) return <HomeSpinner />;
+  // if (isLoading) return <HomeSpinner />;
 
   const postCardList = flatData.map((post) => (
     <div
@@ -107,13 +119,13 @@ const DoctorPostGrid = ({ isAbout }) => {
 
   return (
     <div className="doctor-post-grid-inner-container">
-      {flatData && (
-        <InfiniteScroll
-          dataLength={flatData.length}
-          next={fetchNextPage}
-          hasMore={hasNextPage}
-          scrollThreshold={0.8}
-        >
+      <InfiniteScroll
+        dataLength={flatData.length}
+        next={fetchNextPage}
+        hasMore={hasNextPage}
+        scrollThreshold={0.8}
+      >
+        {flatData && (
           <ResponsiveMasonry
             columnsCountBreakPoints={{
               default: 5,
@@ -128,8 +140,9 @@ const DoctorPostGrid = ({ isAbout }) => {
           >
             <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
           </ResponsiveMasonry>
-        </InfiniteScroll>
-      )}
+        )}
+      </InfiniteScroll>
+
       {IsModalOpen && (
         <PostDetail
           show={IsModalOpen}
@@ -138,6 +151,7 @@ const DoctorPostGrid = ({ isAbout }) => {
         />
       )}
       <div className="down-load-more-container">
+        {/* <div> */}
         {!isMobile && (
           <img src={Arrow} alt="arrow" className="arrow-containter" />
         )}
@@ -150,6 +164,7 @@ const DoctorPostGrid = ({ isAbout }) => {
             <div className="download-button-text">DownLoad APP</div>
           </button>
         </Link>
+        {/* </div> */}
       </div>
     </div>
   );

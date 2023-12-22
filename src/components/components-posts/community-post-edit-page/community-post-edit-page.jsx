@@ -96,7 +96,7 @@ const EditPostPage = () => {
 
   // when click on delete button
   const handleClickDelete = () => {
-    console.log("POSTQUERY:", postQuery);
+    // console.log("POSTQUERY:", postQuery);
     const postId = postQuery.postID;
     apiDeleteMutate(postId);
     onClose();
@@ -107,7 +107,7 @@ const EditPostPage = () => {
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: "",
+      coverImg: displayImage,
       // postID
       id: postQuery.postID,
       isDisplay: 1,
@@ -153,7 +153,7 @@ const EditPostPage = () => {
         isClosable: true,
       });
       localStorage.getItem("accountType") === "2"
-        ? navigate("/doctor-profile")
+        ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
     if (data?.code === 500) {
