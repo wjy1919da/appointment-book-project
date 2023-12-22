@@ -20,6 +20,7 @@ const toDisplayFormat = (param) => {
  return param.replace(/_/g, " ");
 };
 const Community = () => {
+ const setPostBy = usePostQueryStore((state) => state.setPostBy);
  const postQuery = usePostQueryStore((state) => state.postQuery);
  const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
  const postContainerRef = useRef(null);
@@ -73,19 +74,33 @@ const Community = () => {
 
 
  const handleFilters = (value, isChecked) => {
-   const updatedFilter = [...postQuery.filterCondition];
-   if (isChecked) {
-     if (!updatedFilter.includes(value)) {
-       updatedFilter.push(value);
-     }
-   } else {
-     const index = updatedFilter.indexOf(value);
-     if (index !== -1) {
-       updatedFilter.splice(index, 1);
-     }
-   }
-   setFilterCondition(updatedFilter);
- };
+  const updatedFilter = [...postQuery.filterCondition];
+  let updatedPostBy = [...postQuery.postBy];
+
+  if (isChecked) {
+    if (!updatedFilter.includes(value)) {
+      updatedFilter.push(value);
+
+      if (value === 'user') {
+        updatedPostBy = ['user'];
+      } else if (value === 'doctor') {
+        updatedPostBy = ['doctor'];
+      }
+    }
+  } else {
+    const index = updatedFilter.indexOf(value);
+    if (index !== -1) {
+      updatedFilter.splice(index, 1);
+      if (updatedFilter.length === 0) {
+        updatedPostBy = ['user', 'doctor'];
+      }
+    }
+  }
+
+  setFilterCondition(updatedFilter);
+  setPostBy(updatedPostBy);
+};
+
  const handleInputChange = (e) => {
    setTempSearchParam(e.target.value);
    setIsPostDropDownOpen(true);
@@ -163,15 +178,15 @@ const Community = () => {
              />
              {isPostDropDownOpen && <PostSearchBoxDropDown />}
            </div>
-           <span style={{ marginLeft: '20px', fontSize:"27px" }}>Post By</span>
+           <span className="postby" style={{ marginLeft: '20px', fontSize:"27px" }}>Post By</span>
            <button
-               className={`filter-button ${postQuery.filterCondition.includes('member') ? 'active' : ''}`}
-               onClick={() => handleFilters('member', !postQuery.filterCondition.includes('member'))}
+               className={`filter-button-member ${postQuery.filterCondition.includes('user') ? 'active' : ''}`}
+               onClick={() => handleFilters('user', !postQuery.filterCondition.includes('user'))}
              >
                Member
              </button>
              <button
-               className={`filter-button ${postQuery.filterCondition.includes('doctor') ? 'active' : ''}`}
+               className={`filter-button-doctor ${postQuery.filterCondition.includes('doctor') ? 'active' : ''}`}
                onClick={() => handleFilters('doctor', !postQuery.filterCondition.includes('doctor'))}
              >
                Doctor

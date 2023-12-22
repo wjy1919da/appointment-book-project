@@ -77,17 +77,47 @@
 .custom-dropdown {
   width: 100px !important;
 }
-.filter-button {
-  border: 1px solid black; 
-  border-radius: 2px; 
+.filter-button-member {
+  border-radius: 4px;
+  border: 1px solid #A5A6A8;
+  background: var(--White, #FBFCFF);
+  color: var(--, #A5A6A8);
+  text-align: center;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
   padding: 4px 10px;
-  background-color: white; 
-  color: black; 
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+.filter-button-doctor {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--, #FFA4A3);
+  background: var(--new-gradient, linear-gradient(90deg, #F48C8A 0%, #F0A484 100%));
   cursor: pointer;
-  transition: background-color 0.3s; 
+  color: var(--White, #FBFCFF);
+  text-align: center;
+
+  /* NEW TYPE/NEW input, navi */
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.postby {
+  color: var(--text-1-footer, #352C29);
+  font-family: Open Sans;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
-.filter-button.active {
-  background-color: #ff4d4d;
-}
 
