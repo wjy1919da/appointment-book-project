@@ -16,7 +16,7 @@ const DoctorProfileSubArea = () => {
     if (
       cleanHash === "About" ||
       cleanHash === "Posts" ||
-      cleanHash === "Like"
+      cleanHash === "Likes"
     ) {
       setActiveTab(cleanHash);
     }

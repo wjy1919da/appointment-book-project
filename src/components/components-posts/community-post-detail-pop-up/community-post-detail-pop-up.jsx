@@ -59,8 +59,14 @@ const CommunityPostDetailPopUP = ({
   commentCount,
   isPrivate,
   isHighlight,
-  likes,
+  isLiked,
 }) => {
+  // console.log("isLiked", isLiked);
+  const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
+  // like count
+  const [isPopupLiked, setIsPopupLiked] = useState(isLiked); // like
+  // console.log("isPopupLiked", isPopupLiked, popupLikeCount, likeCount, isLiked);
+  // console.log("popupLikeCount", popupLikeCount);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -68,10 +74,6 @@ const CommunityPostDetailPopUP = ({
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
-  // const [liked, setLiked] = useState(false); // like
-  const [isPopupLiked, setIsPopupLiked] = useState(false); // like
-  // const [isHighlight, setIsHighlight] = useState(false); // highlight
-  // const [isPrivate, setIsPrivate] = useState(0); // private
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const [comment, setComment] = useState("");
@@ -245,6 +247,10 @@ const CommunityPostDetailPopUP = ({
   // like buttton
   const toggleGetLikes = () => {
     if (validateTokenAndPopup()) {
+      let newCountLikes = isPopupLiked
+        ? popupLikeCount - 1
+        : popupLikeCount + 1;
+      setPopupLikeCount(newCountLikes);
       setIsPopupLiked((prev) => !prev);
       if (validateTokenAndPopup()) {
         apiLikePopupMutate({ postId: postQuery.postID });
@@ -551,8 +557,7 @@ const CommunityPostDetailPopUP = ({
                   className="Icon-size"
                   onClick={toggleGetLikes}
                 />
-                {likeCount}
-                {/* {countPopupLikes} */}
+                {popupLikeCount}
               </span>
               {/* <span className='Icon-count'>
                   <img

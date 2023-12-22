@@ -5,7 +5,7 @@ import { useGetHighlightPost } from "../../hooks/useGetPosts";
 const DocotorOwnHightLight = () => {
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useGetHighlightPost();
-  console.log("data", data);
+
   return (
     <HighlightCases
       selected={data?.data || []}

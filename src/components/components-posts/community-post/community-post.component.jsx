@@ -27,7 +27,7 @@ const CommunityPost = ({
   likes,
   isProfile,
 }) => {
-  console.log("Likes:", likes);
+  // console.log("Likes:", likes);
 
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const postQuery = usePostQueryStore((state) => state.postQuery);

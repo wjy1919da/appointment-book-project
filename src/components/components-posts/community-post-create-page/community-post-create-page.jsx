@@ -69,7 +69,7 @@ const CreatePostPage = () => {
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: displayThumbnails,
+      coverImg: uploadedFiles[uploadedFiles.length - 1],
       isDisplay: 1,
       lat: "",
       location: "",

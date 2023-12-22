@@ -196,7 +196,7 @@ export function useRemoveHighlightPost() {
 
 export function useGetHighlightPost() {
   const userInfo = userInfoQueryStore((state) => state.userInfo);
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
   const apiClient = new APIClient(`/post/highlight/${userInfo.userId}`);
 
   const fetchHighlightPost = async () => {
