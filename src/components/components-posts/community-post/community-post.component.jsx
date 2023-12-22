@@ -25,23 +25,19 @@ const CommunityPost = ({
   profileImage,
   authorName,
   likes,
-  isLike,
   isProfile,
 }) => {
-  // console.log("community post", id);
+  console.log("Likes:", likes);
+
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
   const postQuery = usePostQueryStore((state) => state.postQuery);
 
   const [width, setWidth] = useState("");
-  // const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
+
+  // like states ready
+  const [isLiked, setIsLiked] = useState(false);
   const [countLikes, setCountLikes] = useState(likes);
-  const [liked, setLiked] = useState(
-    localStorage.getItem(`post_${id}_liked`) === "true" || isLike
-  );
-  // const [countLikes, setCountLikes] = useState(
-  //   parseInt(localStorage.getItem(`post_${id}_likes`), 10) || likes
-  // );
 
   useEffect(() => {
     if (isMobile) {
@@ -51,21 +47,21 @@ const CommunityPost = ({
     }
   }, [isMobile]);
 
-  // likes hook import
-  const { mutate: apiLikeMutate } = useGetLikesPost();
-
-  // set default image when image is not loaded function is here
+  // default image when image is not loaded
   const handleImageError = () => {
     setDisplayImage(defaultImage);
   };
 
-  // like button function is here
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
+
+  // like button
   // prevent to open pop up when like button is clicked
   const handleHeartIconClick = (e) => {
     e.stopPropagation();
     apiLikeMutate({ postId: id });
 
-    setLiked((prevLiked) => {
+    setIsLiked((prevLiked) => {
       const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
       setCountLikes(newCountLikes);
 
@@ -109,12 +105,11 @@ const CommunityPost = ({
           </div>
           <div className="likeNumber">
             <img
-              src={liked ? heartIconFilled : heartIcon}
+              src={isLiked ? heartIconFilled : heartIcon}
               className="heartIcon"
               onClick={(e) => handleHeartIconClick(e)}
               alt="Like Icon"
             />
-
             {/* <span className='gray-text'>{likes}</span> */}
             <span className="gray-text">{countLikes}</span>
           </div>

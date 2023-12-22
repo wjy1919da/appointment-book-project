@@ -18,6 +18,13 @@
     width: 250px;
   }
 
+  .nav-tab-about,
+  .nav-tab-posts,
+  .nav-tab-like {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .item {
     font-weight: 400;
 

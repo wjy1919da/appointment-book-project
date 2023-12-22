@@ -282,8 +282,9 @@ const EditPostPage = () => {
               multiple
             />
 
-            {displayImage && selectedImage ? (
-              <div className="edit-post-pic-wrapper">
+            {/* {displayImage && selectedImage ? ( */}
+            <div className="edit-post-pic-wrapper">
+              {uploadedFiles.length > 0 ? (
                 <img
                   src={selectedImage}
                   style={{
@@ -296,31 +297,31 @@ const EditPostPage = () => {
                   }}
                   alt="Selected"
                 />
-              </div>
-            ) : (
-              <>
-                <div className="edit-post-page-left-container">
-                  <div
-                    className="edit-post-page-add"
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}
-                    onClick={handleBrowseFiles}
-                  >
-                    <img
-                      src={createPostIcon}
-                      style={{
-                        width: "157px",
-                        height: "157px",
-                      }}
-                      alt="Image-Create-Post"
-                    />
+              ) : (
+                <>
+                  <div className="edit-post-page-left-container">
+                    <div
+                      className="edit-post-page-add"
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}
+                      onClick={handleBrowseFiles}
+                    >
+                      <img
+                        src={createPostIcon}
+                        style={{
+                          width: "157px",
+                          height: "157px",
+                        }}
+                        alt="Image-Create-Post"
+                      />
+                    </div>
+                    <div className="edit-post-page-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing
+                    </div>
                   </div>
-                  <div className="edit-post-page-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                  </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
+            </div>
 
             {/* thumbnail */}
             <div className="edit-post-page-thumbnail-container">

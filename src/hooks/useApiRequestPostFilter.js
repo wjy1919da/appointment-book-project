@@ -30,7 +30,12 @@ export function useApiRequestPostFilter() {
   };
 
   return useInfiniteQuery(
-    ["filterPost", postQuery.filterCondition, postQuery.postSearchParam],
+    [
+      "filterPost",
+      postQuery.filterCondition,
+      postQuery.postSearchParam,
+      postQuery.postBy,
+    ],
     fetchPost,
     {
       // staleTime: 1 * 6 * 1000 * 60 * 3,
