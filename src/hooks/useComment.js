@@ -2,8 +2,8 @@ import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import APIClient from "../services/api-client";
 export function useAddComment() {
-  //   console.log("useAddComment");
   const apiClient = new APIClient("/user_action/actions/comment");
+
   const fetchAddComment = async (dynamicId, text) => {
     try {
       const response = await apiClient.post({
@@ -22,6 +22,7 @@ export function useAddComment() {
       throw error;
     }
   };
+
   return useMutation((credentials) =>
     fetchAddComment(credentials.dynamicId, credentials.text)
   );

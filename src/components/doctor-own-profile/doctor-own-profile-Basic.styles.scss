@@ -27,6 +27,11 @@
   display: flex;
   gap: 10px;
 }
+.doctor-own-avatar-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+}
 .doctor-own-basic-edits-buttons {
   display: flex;
   align-items: center;
@@ -160,26 +165,25 @@
   font-weight: 400;
   line-height: normal;
 }
-.doctor-profile-verification-button
-{
+.doctor-profile-verification-button {
   display: flex;
   height: 25px;
   padding: 2px 5px;
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-  border: 1px solid var(--new-gradient, #F48C8A); 
-  color:  #FFA4A3;
+  border: 1px solid var(--new-gradient, #f48c8a);
+  color: #ffa4a3;
   /* NEW TYPE/NEW caption */
   font-family: Open Sans;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  }
+}
 
 .doctor-profile-verification-button:hover,
 .doctor-profile-verification-button:active {
   justify-content: center;
-  background: rgba(255, 164, 163, 0.20);
+  background: rgba(255, 164, 163, 0.2);
 }
