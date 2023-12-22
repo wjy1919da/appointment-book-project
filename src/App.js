@@ -98,10 +98,14 @@ const App = () => {
               <Route path="instrument/:name" element={<SubInstrument />} />
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
-              <Route path="doctorProfileEdit" element={
-                <PrivateRoute >
-                  <UniversalProfileEdit />
-                </PrivateRoute>} />
+              <Route
+                path="doctorProfileEdit"
+                element={
+                  <PrivateRoute>
+                    <UniversalProfileEdit />
+                  </PrivateRoute>
+                }
+              />
               <Route path="posts/:postid" element={<DoctorPost />} />
               <Route
                 path="doctor/:encodedMemberId"
@@ -130,18 +134,24 @@ const App = () => {
               <Route path="/edit-post/:postid" element={<EditPostPage />} />
               {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
               <Route path="health-check" element={<HealthCheck />} />
-              <Route path='userProfile' element={<UserProfilePage />} />
+              <Route path="userProfile" element={<UserProfilePage />} />
 
               <Route path="AccountSetup" element={<AccountSetup />} />
-              <Route path="userProfileEdit" element={
-                <PrivateRoute >
-                  <UniversalProfileEdit />
-                </PrivateRoute>
-              } />
+              <Route
+                path="userProfileEdit"
+                element={
+                  <PrivateRoute>
+                    <UniversalProfileEdit />
+                  </PrivateRoute>
+                }
+              />
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
-              <Route path="update/verifyEmail" element={<UpdateVerification />} />
+              <Route
+                path="update/verifyEmail"
+                element={<UpdateVerification />}
+              />
               <Route
                 path="doctorVerification"
                 element={<DoctorVerificationMainPage />}

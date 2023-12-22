@@ -176,7 +176,7 @@ const Community = () => {
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
                 />
-                {isPostDropDownOpen && <PostSearchBoxDropDown />}
+                {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
               </div>
               <span
                 className="postby"

@@ -36,6 +36,7 @@ const HeaderUser = () => {
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const setUsername = userInfoQueryStore((state) => state.setUsername);
   const setPostCount = userInfoQueryStore((state) => state.setPostCount);
+  const setAvatar = userInfoQueryStore((state) => state.setAvatar);
   const setFollowerCount = userInfoQueryStore(
     (state) => state.setFollowerCount
   );
@@ -77,6 +78,7 @@ const HeaderUser = () => {
       setFollowerCount(data.data.follower);
       setFollowingCount(data.data.followings);
       setDescription(data.data.description);
+      setAvatar(data?.data?.image || defaultAvatar);
     }
   }, [data]);
   const toggle = () => {
@@ -110,7 +112,7 @@ const HeaderUser = () => {
         {userInfo.token && (
           <img
             onMouseEnter={menuDisclosure.onOpen}
-            src={data?.data?.avatar || defaultAvatar}
+            src={data?.data?.image || defaultAvatar}
             alt="User avatar"
             className="header-avatar"
           />
