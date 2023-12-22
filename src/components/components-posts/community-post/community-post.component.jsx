@@ -57,7 +57,6 @@ const CommunityPost = ({
 
   // like button
   const handleHeartIconClick = (e) => {
-    console.log('heartIconClick is clicked');
     e.stopPropagation(); // prevent to open pop up when like button is clicked
     apiLikeMutate({ postId: id });
 
