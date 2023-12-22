@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useToast } from '@chakra-ui/react';
-import userInfoQueryStore from '../../../userStore';
+import React, { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+import userInfoQueryStore from "../../../userStore";
 // import { useDisclosure } from '@chakra-ui/react';
 
 // components
-import FormButton from '../../components-posts/community-post-button/community-post-button';
+import FormButton from "../../components-posts/community-post-button/community-post-button";
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequestPost } from '../../../hooks/useApiRequestPost';
-import useUploadImg from '../../../hooks/useUploadImg';
+import { useApiRequestPost } from "../../../hooks/useApiRequestPost";
+import useUploadImg from "../../../hooks/useUploadImg";
 
 // scss
-import './community-post-create-page.scss';
+import "./community-post-create-page.scss";
 
 // images
-import createPostIcon from '../../../assets/post/create-post-icon.png';
-import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
-import DeleteButton from '../../../assets/post/thumbnail_delete.png';
+import createPostIcon from "../../../assets/post/create-post-icon.png";
+import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
+import DeleteButton from "../../../assets/post/thumbnail_delete.png";
 
 const CreatePostPage = () => {
   const toast = useToast();
@@ -39,8 +39,8 @@ const CreatePostPage = () => {
   const { mutate: apiMutate, data } = useApiRequestPost({
     onError: (error) => {
       toast({
-        title: 'Failed to create post.',
-        status: 'error',
+        title: "Failed to create post.",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -48,7 +48,9 @@ const CreatePostPage = () => {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
+  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(
+    uploadedFiles.length - 1 || 0
+  ); // thumbnail click masking
   const [clickedRadio, setClickedRadio] = useState(false);
   const fileInputRef = useRef(null);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -62,7 +64,7 @@ const CreatePostPage = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ mode: 'onChange' });
+  } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
     const displayImage =
@@ -70,28 +72,28 @@ const CreatePostPage = () => {
 
     // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
-    console.log('data::', data, displayThumbnails, uploadedFiles);
+    console.log("data::", data, displayThumbnails, uploadedFiles);
     const formData = {
-      address: '',
+      address: "",
       brief: data.description,
       coverImg: displayImage,
       isDisplay: 1,
-      lat: '',
-      location: '',
-      lon: '',
+      lat: "",
+      location: "",
+      lon: "",
       pictures: uploadedFiles,
       tags: [
         {
           tagId: 0,
-          tagName: '',
+          tagName: "",
         },
       ],
       title: data.title,
     };
     if (!userInfo?.token) {
       toast({
-        title: 'Please login first.',
-        status: 'error',
+        title: "Please login first.",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -105,23 +107,23 @@ const CreatePostPage = () => {
     if (data?.code === 100) {
       resetFiles();
       reset({
-        title: '',
-        description: '',
+        title: "",
+        description: "",
       });
       toast({
-        title: 'Post created successfully.',
-        status: 'success',
+        title: "Post created successfully.",
+        status: "success",
         duration: 1000,
         isClosable: true,
       });
-      localStorage.getItem('accountType') === '2'
-        ? navigate('/doctorProfile/#Posts')
-        : navigate('/userProfile');
+      localStorage.getItem("accountType") === "2"
+        ? navigate("/doctorProfile/#Posts")
+        : navigate("/userProfile");
     }
     if (data?.code === 500) {
       toast({
-        title: 'Failed to create post.',
-        status: 'error',
+        title: "Failed to create post.",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
@@ -138,12 +140,12 @@ const CreatePostPage = () => {
   const handleClickCreatePostBack = () => {
     const source = location.state?.source;
 
-    if (source === 'userProfile') {
-      navigate('/userProfile/#Posts');
-    } else if (source === 'doctorProfile') {
-      navigate('/doctorProfile/#Posts');
+    if (source === "userProfile") {
+      navigate("/userProfile/#Posts");
+    } else if (source === "doctorProfile") {
+      navigate("/doctorProfile/#Posts");
     } else {
-      navigate('/posts');
+      navigate("/posts");
     }
   };
 
@@ -178,45 +180,40 @@ const CreatePostPage = () => {
   const displayThumbnails =
     uploadedFiles.length > 0
       ? uploadedFiles.map((file, index) => (
-          <div key={index} className='create-post-page-thumbnail'>
+          <div key={index} className="create-post-page-thumbnail">
             <div
-              className={`${
-                index < uploadedFiles.length - 1 &&
-                index !== clickedThumbnailIndex
-                  ? 'thumbnail'
-                  : ''
-              }`}
+              className={`thumbnail ${selectedImage === file ? "clicked" : ""}`}
               onClick={() => handleClickMask(index)}
             >
               <img
                 src={file}
                 alt={`Selected Thumbnail ${index + 1}`}
                 style={{
-                  width: '70px',
-                  height: '70px',
-                  borderRadius: '8px',
-                  objectFit: 'cover',
+                  width: "70px",
+                  height: "70px",
+                  borderRadius: "8px",
+                  objectFit: "cover",
                 }}
               />
             </div>
             <button
-              type='button'
-              className='delete-thumbnail-button'
+              type="button"
+              className="delete-thumbnail-button"
               onClick={() => removeUploadedFile(index)}
               style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#A5A6A7',
-                borderRadius: '50%',
-                position: 'absolute',
-                top: '-5px',
-                right: '-5px',
+                width: "20px",
+                height: "20px",
+                backgroundColor: "#A5A6A7",
+                borderRadius: "50%",
+                position: "absolute",
+                top: "-5px",
+                right: "-5px",
               }}
             >
               <img
                 src={DeleteButton}
-                alt='Icon-Delete-Button'
-                className='create-post-page-delete-button'
+                alt="Icon-Delete-Button"
+                className="create-post-page-delete-button"
               />
             </button>
           </div>
@@ -227,59 +224,59 @@ const CreatePostPage = () => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='create-post-page-container'
+        className="create-post-page-container"
       >
-        <div className='pink-background-1'></div>
-        <div className='pink-background-2'></div>
+        <div className="pink-background-1"></div>
+        <div className="pink-background-2"></div>
 
         <button
-          type='button'
+          type="button"
           onClick={handleClickCreatePostBack}
-          className='create-post-page-back-button-container'
+          className="create-post-page-back-button-container"
         >
           <img
             src={Arrow}
-            alt='Image-Arrow-Icon'
-            className='create-post-page-arrow-back-button'
+            alt="Image-Arrow-Icon"
+            className="create-post-page-arrow-back-button"
           />
-          <span className='create-post-page-label-back-button'>
+          <span className="create-post-page-label-back-button">
             Create a post
           </span>
         </button>
 
-        <div className='create-post-page-inner-container'>
-          <div className='create-post-page-wrapper'>
+        <div className="create-post-page-inner-container">
+          <div className="create-post-page-wrapper">
             <input
               ref={fileInputRef}
-              type='file'
-              id='imageUpload'
-              accept='image/*'
-              style={{ display: 'none' }}
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              style={{ display: "none" }}
               onChange={handleFileSelection}
               multiple
             />
             {/* {displayImage && selectedImage ? ( */}
-            <div className='create-post-pic-wrapper'>
+            <div className="create-post-pic-wrapper">
               {uploadedFiles.length > 0 ? (
                 <img
                   src={selectedImage}
                   style={{
-                    marginBottom: '20px',
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    width: '330px',
-                    height: '330px',
-                    borderRadius: '8px',
-                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                    objectFit: 'contain',
+                    marginBottom: "20px",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    width: "330px",
+                    height: "330px",
+                    borderRadius: "8px",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                    objectFit: "contain",
                   }}
-                  alt='Selected'
+                  alt="Selected"
                 />
               ) : (
                 <>
-                  <div className='create-post-page-left-container'>
+                  <div className="create-post-page-left-container">
                     <div
-                      className='create-post-page-add'
+                      className="create-post-page-add"
                       onDrop={handleDrop}
                       onDragOver={handleDragOver}
                       onClick={handleBrowseFiles}
@@ -287,13 +284,13 @@ const CreatePostPage = () => {
                       <img
                         src={createPostIcon}
                         style={{
-                          width: '157px',
-                          height: '157px',
+                          width: "157px",
+                          height: "157px",
                         }}
-                        alt='Image-Create-Post'
+                        alt="Image-Create-Post"
                       />
                     </div>
-                    <div className='create-post-page-text'>
+                    <div className="create-post-page-text">
                       Lorem ipsum dolor sit amet, consectetur adipiscing
                     </div>
                   </div>
@@ -302,13 +299,13 @@ const CreatePostPage = () => {
             </div>
 
             {/* thumbnail */}
-            <div className='create-post-page-thumbnail-container'>
+            <div className="create-post-page-thumbnail-container">
               {displayThumbnails}
 
               {/* create thumbnail */}
               {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
-                  className='create-post-page-add-thumbnail'
+                  className="create-post-page-add-thumbnail"
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onClick={handleBrowseFiles}
@@ -317,10 +314,10 @@ const CreatePostPage = () => {
                   <img
                     src={createPostIcon}
                     style={{
-                      width: '60px',
-                      height: '60px',
+                      width: "60px",
+                      height: "60px",
                     }}
-                    alt='Image-Create-Post'
+                    alt="Image-Create-Post"
                   />
                   {/* </div> */}
                 </div>
@@ -328,69 +325,69 @@ const CreatePostPage = () => {
             </div>
           </div>
 
-          <div className='create-post-page-right-container'>
+          <div className="create-post-page-right-container">
             <div>
               <input
-                type='text'
-                placeholder='Title'
-                className='create-post-page-title'
-                {...register('title', {
-                  required: '* Title is required.',
+                type="text"
+                placeholder="Title"
+                className="create-post-page-title"
+                {...register("title", {
+                  required: "* Title is required.",
                   maxLength: {
                     value: 20,
-                    message: '* Maximum limit for characters is 20.',
+                    message: "* Maximum limit for characters is 20.",
                   },
                 })}
               />
 
-              <p className='create-post-page-title-error-validation'>
+              <p className="create-post-page-title-error-validation">
                 {errors.title?.message}
               </p>
 
-              <div className='create-post-page-description-container'>
+              <div className="create-post-page-description-container">
                 <textarea
-                  name='brief'
-                  id='description'
-                  placeholder='Description'
-                  className='create-post-page-description'
-                  {...register('description', {
-                    required: '* Description is required.',
+                  name="brief"
+                  id="description"
+                  placeholder="Description"
+                  className="create-post-page-description"
+                  {...register("description", {
+                    required: "* Description is required.",
                   })}
                 ></textarea>
 
                 {/* <PostDropDownFilter /> */}
                 {/* <PostDropDownFilter /> */}
 
-                <p className='create-post-page-description-error-validation'>
+                <p className="create-post-page-description-error-validation">
                   {errors.description?.message}
                 </p>
               </div>
             </div>
 
-            <div className='create-post-page-button-wrapper'>
+            <div className="create-post-page-button-wrapper">
               {/* --- radio button --- */}
-              <div className='create-post-page-radio-button-container'>
+              <div className="create-post-page-radio-button-container">
                 <input
-                  id='input-linked'
-                  type='radio'
-                  name='input-radio-button'
+                  id="input-linked"
+                  type="radio"
+                  name="input-radio-button"
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className='create-post-input-radio-button'
+                  className="create-post-input-radio-button"
                 />
                 <label
-                  htmlFor='input-linked'
-                  className='create-post-input-radio-button-label'
+                  htmlFor="input-linked"
+                  className="create-post-input-radio-button-label"
                 >
                   Restrict my post to viewers over 18
                 </label>
               </div>
 
               {/* --- button --- */}
-              <div className='post-information-sendButton'>
+              <div className="post-information-sendButton">
                 <FormButton
-                  buttonName='Post'
-                  className='create-post-custom-button'
+                  buttonName="Post"
+                  className="create-post-custom-button"
                 />
               </div>
             </div>
