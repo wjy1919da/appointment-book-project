@@ -65,10 +65,11 @@ const CreatePostPage = () => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
+    console.log("data::", data, displayThumbnails, uploadedFiles);
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: "",
+      coverImg: displayThumbnails,
       isDisplay: 1,
       lat: "",
       location: "",

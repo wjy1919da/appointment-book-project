@@ -45,8 +45,8 @@ const DoctorProfileSubArea = () => {
           </a>
         </div>
         <div
-          onClick={() => setActiveTab("Like")}
-          className={`item ${activeTab === "Like" ? "active" : ""}`}
+          onClick={() => setActiveTab("Likes")}
+          className={`item ${activeTab === "Likes" ? "active" : ""}`}
         >
           <a href="#Like" className="nav-tab-like">
             Like

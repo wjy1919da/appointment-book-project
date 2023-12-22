@@ -1,6 +1,7 @@
 import { useQuery, useInfiniteQuery, useMutation } from "react-query";
 import usePostQueryStore from "../postStore.ts";
 import APIClient from "../services/api-client.js";
+import userInfoQueryStore from "../userStore.ts";
 // import axios from 'axios';
 
 export function useGetPost() {
@@ -190,5 +191,20 @@ export function useRemoveHighlightPost() {
     onError: (error) => {
       console.error("ERROR", error);
     },
+  });
+}
+
+export function useGetHighlightPost() {
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  console.log("userInfo", userInfo);
+  const apiClient = new APIClient(`/post/highlight/${userInfo.userId}`);
+
+  const fetchHighlightPost = async () => {
+    const res = await apiClient.get();
+    return res.data;
+  };
+
+  return useQuery("highlightPost", fetchHighlightPost, {
+    placeholderData: { data: [] }, // Default object to use before fetching completes
   });
 }

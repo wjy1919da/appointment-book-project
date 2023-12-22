@@ -68,7 +68,8 @@ const CommunityPostDetailPopUP = ({
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
-  const [liked, setLiked] = useState(false); // like
+  // const [liked, setLiked] = useState(false); // like
+  const [isPopupLiked, setIsPopupLiked] = useState(false); // like
   // const [isHighlight, setIsHighlight] = useState(false); // highlight
   // const [isPrivate, setIsPrivate] = useState(0); // private
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
@@ -82,6 +83,7 @@ const CommunityPostDetailPopUP = ({
   // Reply comment
   const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
   const refreshMyPost = usePostQueryStore((s) => s.refreshMyPost);
+  // console.log("postQuery", postQuery);
 
   // refs
   const containerRef = useRef(null);
