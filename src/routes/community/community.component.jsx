@@ -185,7 +185,7 @@ const Community = () => {
                 Post By
               </span>
               <button
-                className={`filter-button ${
+                className={`filter-button-member ${
                   postQuery.postBy.includes("user")
                     ? "filter-button-selected"
                     : ""
@@ -195,7 +195,7 @@ const Community = () => {
                 Member
               </button>
               <button
-                className={`filter-button ${
+                className={`filter-button-doctor ${
                   postQuery.postBy.includes("doctor")
                     ? "filter-button-selected"
                     : ""
