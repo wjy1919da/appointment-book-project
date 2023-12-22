@@ -107,7 +107,7 @@ const EditPostPage = () => {
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: "",
+      coverImg: displayImage,
       // postID
       id: postQuery.postID,
       isDisplay: 1,
