@@ -61,15 +61,17 @@ const CommunityPostDetailPopUP = ({
   isHighlight,
   isLiked,
 }) => {
+  // like count
   // console.log("isLiked", isLiked);
   const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
-  // like count
+  // like state
   const [isPopupLiked, setIsPopupLiked] = useState(isLiked); // like
   // console.log("isPopupLiked", isPopupLiked, popupLikeCount, likeCount, isLiked);
   // console.log("popupLikeCount", popupLikeCount);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
   const refresh = usePostQueryStore((state) => state.refresh);
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
@@ -84,8 +86,6 @@ const CommunityPostDetailPopUP = ({
   const [modalStatus, setModalStatus] = useState("");
   // Reply comment
   const setTempCommentStatus = usePostQueryStore((s) => s.setTempCommentStatus);
-  const refreshMyPost = usePostQueryStore((s) => s.refreshMyPost);
-  // console.log("postQuery", postQuery);
 
   // refs
   const containerRef = useRef(null);
