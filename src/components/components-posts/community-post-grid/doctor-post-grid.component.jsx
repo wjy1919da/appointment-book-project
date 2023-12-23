@@ -3,18 +3,18 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import usePostQueryStore from "../../../postStore.ts";
+import { useToast } from "@chakra-ui/react";
 
 // components
 import CommunityPost from "../community-post/community-post.component";
 import PostDetail from "../community-post-detail/community-post-detail.component";
 import HomeSpinner from "../../home-spinner/home-spinner.component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ErrorMsg from "../../error-msg/error-msg.component";
+// import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook
 import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-import { useGetLikesPost } from "../../../hooks/useGetPosts";
-import { useToast } from "@chakra-ui/react";
+// import { useGetLikesPost } from "../../../hooks/useGetPosts";
 
 // scss
 import "./doctor-post-grid.styles.scss";
@@ -121,7 +121,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     <div className="doctor-post-grid-inner-container">
       <InfiniteScroll
         dataLength={flatData.length}
-        next={fetchNextPage}
+        next={() => fetchNextPage}
         hasMore={hasNextPage}
         scrollThreshold={0.8}
       >
@@ -151,7 +151,6 @@ const DoctorPostGrid = ({ isAbout }) => {
         />
       )}
       <div className="down-load-more-container">
-        {/* <div> */}
         {!isMobile && (
           <img src={Arrow} alt="arrow" className="arrow-containter" />
         )}
