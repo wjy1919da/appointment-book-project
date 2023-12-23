@@ -47,8 +47,18 @@ const EditPostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-  const { mutate: apiEditMutate, data } = useApiRequestEditPost();
-  const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
+  const {
+    mutate: apiEditMutate,
+    data,
+    isSuccess: isEditSuccess,
+    isError: isEditError,
+  } = useApiRequestEditPost();
+  const {
+    mutate: apiDeleteMutate,
+    data: deleteData,
+    isSuccess: isDeleteSuccess,
+    isError: isDeleteError,
+  } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -56,6 +66,7 @@ const EditPostPage = () => {
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   // console.log("EditPostPage", postQuery);
 
   // refs
@@ -141,8 +152,7 @@ const EditPostPage = () => {
   };
 
   useEffect(() => {
-    // console.log("data::", data);
-    if (data?.code === 100) {
+    if (isDeleteSuccess || isEditSuccess) {
       resetFiles();
       reset({
         title: "",
@@ -150,24 +160,25 @@ const EditPostPage = () => {
       });
       setSelectedImage(null);
       toast({
-        title: "Post edit successfully.",
+        title: "Success!.",
         status: "success",
         duration: 1000,
         isClosable: true,
       });
+      refreshMyPost();
       localStorage.getItem("accountType") === "2"
         ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
-    if (data?.code === 500) {
+    if (isEditError || isDeleteError) {
       toast({
-        title: "Failed to create post.",
+        title: "Failed.",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
     }
-  }, [data, toast]);
+  }, [isDeleteSuccess, isEditSuccess, isDeleteError, isEditError, toast]);
 
   useEffect(() => {
     if (uploadedFiles.length > 0) {

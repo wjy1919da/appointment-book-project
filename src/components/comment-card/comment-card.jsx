@@ -43,8 +43,6 @@ const CommentCard = ({
     setCommentLikeCount(likeCount);
     setLikedComment(isLiked);
   }, [likeCount, isLiked]);
-  // const [likedComment, setLikedComment] = useState(isLiked || 0); // like commment
-  // const [commentLikeCount, setCommentLikeCount] = useState(likeCount); // like count
 
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);

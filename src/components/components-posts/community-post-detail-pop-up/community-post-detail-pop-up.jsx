@@ -45,8 +45,6 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { hi, is } from "date-fns/locale";
-import { set } from "date-fns";
 
 const CommunityPostDetailPopUP = ({
   picture,
@@ -64,11 +62,15 @@ const CommunityPostDetailPopUP = ({
   // like count
   // console.log("isLiked", isLiked);
   const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
-  // like state
   const [isPopupLiked, setIsPopupLiked] = useState(isLiked); // like
-  // console.log("isPopupLiked", isPopupLiked, popupLikeCount, likeCount, isLiked);
-  // console.log("popupLikeCount", popupLikeCount);
+
+  useEffect(() => {
+    setPopupLikeCount(likeCount);
+    setIsPopupLiked(isLiked);
+  }, [likeCount, isLiked]);
+
   const postQuery = usePostQueryStore((state) => state.postQuery);
+
   // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
   const refresh = usePostQueryStore((state) => state.refresh);
   const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
@@ -473,9 +475,9 @@ const CommunityPostDetailPopUP = ({
                   </button>
                 )}
                 {/* {isAuthor && ( */}
-                  <button className="button-edit" onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
+                <button className="button-edit" onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
                 {/* )} */}
               </div>
             </div>

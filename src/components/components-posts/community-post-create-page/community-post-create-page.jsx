@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
+import usePostQueryStore from "../../../postStore";
 // import { useDisclosure } from '@chakra-ui/react';
 
 // components
@@ -36,7 +37,12 @@ const CreatePostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-  const { mutate: apiMutate, data } = useApiRequestPost({
+  const {
+    mutate: apiMutate,
+    data,
+    isSuccess: createPostSuccess,
+    isError: createPostError,
+  } = useApiRequestPost({
     onError: (error) => {
       toast({
         title: "Failed to create post.",
@@ -48,6 +54,7 @@ const CreatePostPage = () => {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(
     uploadedFiles.length - 1 || 0
   ); // thumbnail click masking
@@ -72,7 +79,7 @@ const CreatePostPage = () => {
 
     // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
-    console.log("data::", data, displayThumbnails, uploadedFiles);
+    // console.log("data::", data, displayThumbnails, uploadedFiles);
     const formData = {
       address: "",
       brief: data.description,
@@ -103,8 +110,7 @@ const CreatePostPage = () => {
   };
 
   useEffect(() => {
-    // console.log("data::", data);
-    if (data?.code === 100) {
+    if (createPostSuccess) {
       resetFiles();
       reset({
         title: "",
@@ -116,11 +122,12 @@ const CreatePostPage = () => {
         duration: 1000,
         isClosable: true,
       });
+      refreshMyPost();
       localStorage.getItem("accountType") === "2"
         ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
-    if (data?.code === 500) {
+    if (createPostError) {
       toast({
         title: "Failed to create post.",
         status: "error",
@@ -128,7 +135,7 @@ const CreatePostPage = () => {
         isClosable: true,
       });
     }
-  }, [data, toast]);
+  }, [createPostSuccess, createPostError, toast]);
 
   useEffect(() => {
     if (uploadedFiles.length > 0) {
