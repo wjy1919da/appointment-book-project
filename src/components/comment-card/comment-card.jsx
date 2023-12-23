@@ -35,9 +35,16 @@ const CommentCard = ({
   onClick,
   replies,
   likeCount,
+  isLiked,
 }) => {
-  const [likedComment, setLikedComment] = useState(false); // like commment
+  const [likedComment, setLikedComment] = useState(isLiked || 0); // like commment
   const [commentLikeCount, setCommentLikeCount] = useState(likeCount); // like count
+  useEffect(() => {
+    setCommentLikeCount(likeCount);
+    setLikedComment(isLiked);
+  }, [likeCount, isLiked]);
+  // const [likedComment, setLikedComment] = useState(isLiked || 0); // like commment
+  // const [commentLikeCount, setCommentLikeCount] = useState(likeCount); // like count
 
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -165,6 +172,7 @@ const CommentCard = ({
                   date={formatDate(reply.commentDate)}
                   replies={reply.comments || []}
                   likeCount={reply.likeCount}
+                  isLiked={reply.isLike}
                 />
               ))}
               {/* Show more or less buttons */}

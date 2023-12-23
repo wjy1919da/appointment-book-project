@@ -514,6 +514,7 @@ const CommunityPostDetailPopUP = ({
                       commentId={comment.id}
                       replies={comment.comments || []}
                       likeCount={comment.likeCount}
+                      isLiked={comment.isLike}
                     />
                   );
                 }
