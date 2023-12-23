@@ -17,6 +17,7 @@ const toDisplayFormat = (param) => {
   return param.replace(/_/g, " ");
 };
 const Community = () => {
+  const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
   const postContainerRef = useRef(null);
@@ -63,20 +64,47 @@ const Community = () => {
   //  },[userInfo.token]);
   //console.log("userInfo in doctor-post-grid outside",userInfo);
 
-  const handleFilters = (value, isChecked) => {
-    const updatedFilter = [...postQuery.filterCondition];
-    if (isChecked) {
-      if (!updatedFilter.includes(value)) {
-        updatedFilter.push(value);
-      }
+  // const handleFilters = (value, isChecked) => {
+  //   const updatedFilter = [...postQuery.filterCondition];
+  //   let updatedPostBy = [...postQuery.postBy];
+
+  //   if (isChecked) {
+  //     if (!updatedFilter.includes(value)) {
+  //       updatedFilter.push(value);
+
+  //       if (value === "user") {
+  //         updatedPostBy = ["user"];
+  //       } else if (value === "doctor") {
+  //         updatedPostBy = ["doctor"];
+  //       }
+  //     }
+  //   } else {
+  //     const index = updatedFilter.indexOf(value);
+  //     if (index !== -1) {
+  //       updatedFilter.splice(index, 1);
+  //       if (updatedFilter.length === 0) {
+  //         updatedPostBy = ["user", "doctor"];
+  //       }
+  //     }
+  //   }
+
+  //   setFilterCondition(updatedFilter);
+  //   setPostBy(updatedPostBy);
+  //   if (postQuery.postBy.includes(role)) {
+  //     setPostBy(postQuery.postBy.filter((item) => item !== role));
+  //   } else {
+  //     setPostBy([...postQuery.postBy, role]);
+  //   }
+  // };
+
+  const handleOnClick = (role) => {
+    if (postQuery.postBy.includes(role)) {
+      setPostBy(postQuery.postBy.filter((item) => item !== role));
     } else {
-      const index = updatedFilter.indexOf(value);
-      if (index !== -1) {
-        updatedFilter.splice(index, 1);
-      }
+      setPostBy([...postQuery.postBy, role]);
     }
-    setFilterCondition(updatedFilter);
   };
+
   const handleInputChange = (e) => {
     setTempSearchParam(e.target.value);
     setIsPostDropDownOpen(true);
@@ -136,41 +164,60 @@ const Community = () => {
         <PostPageMain />
         <div className="doctor-post-outer-container">
           <div className="doctor-post-header-container">
+            <h1 className="doctor-post-outer-title">Community Posts</h1>
             <div className="doctor-post-header-button-container">
-              <PostDropDown
-                options={dropdownContentsByFilter}
-                handleFilters={handleFilters}
-                menuLabel="Filter"
-                wordAfterMenuLabel="All"
-                className="filter-button"
-              />
-              <PostDropDown
-                options={dropdownContentsByProcedure}
-                handleFilters={handleFilters}
-                menuLabel="Procedure"
-                wordAfterMenuLabel="All"
-                className="location-button"
-              />
-              <PostDropDown
-                options={dropdownContentsByLocation}
-                handleFilters={handleFilters}
-                menuLabel="Location"
-                wordAfterMenuLabel="All"
-                className="location-button"
-              />
-              <ResetAllButton />
-            </div>
-            <div
-              className="post-search-box-position-container"
-              ref={postContainerRef}
-            >
-              <PostSearchBox
-                value={postQuery.tempSearchParam}
-                onChange={handleInputChange}
-                onClick={handleShowContainer}
-                handleSearch={handleSearch}
-              />
-              {isPostDropDownOpen && <PostSearchBoxDropDown />}
+              <div
+                className="post-search-box-position-container"
+                ref={postContainerRef}
+              >
+                <PostSearchBox
+                  value={postQuery.tempSearchParam}
+                  onChange={handleInputChange}
+                  onClick={handleShowContainer}
+                  handleSearch={handleSearch}
+                />
+                {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
+              </div>
+              <span
+                className="postby"
+                style={{ marginLeft: "20px", fontSize: "27px" }}
+              >
+                Post By
+              </span>
+              <button
+                className={`filter-button ${
+                  postQuery.postBy.includes("user")
+                    ? "filter-button-selected"
+                    : ""
+                }`}
+                onClick={() => handleOnClick("user")}
+              >
+                Member
+              </button>
+              <button
+                className={`filter-button ${
+                  postQuery.postBy.includes("doctor")
+                    ? "filter-button-selected"
+                    : ""
+                }`}
+                onClick={() => handleOnClick("doctor")}
+              >
+                Doctor
+              </button>
+              {/* <PostDropDown
+               options={dropdownContentsByProcedure}
+               handleFilters={handleFilters}
+               menuLabel="Procedure"
+               wordAfterMenuLabel="All"
+               className="location-button"
+             />
+             <PostDropDown
+               options={dropdownContentsByLocation}
+               handleFilters={handleFilters}
+               menuLabel="Location"
+               wordAfterMenuLabel="All"
+               className="location-button"
+             /> */}
             </div>
           </div>
           <DoctorPostGrid />

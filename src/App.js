@@ -4,7 +4,6 @@ import UpdateVerification from "./routes/update-verification/update-verification
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./private-route.component";
 import "./App.css";
-
 // components
 import Header from "./routes/header/header.component";
 import Home from "./routes/home/home.component";
@@ -48,6 +47,9 @@ import UniversalProfileEdit from "./components/universal-profile-edit/universal-
 
 // import EditPostPage from "./components/components-posts/community-post-edit-page/community-post-edit-page";
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
+
+import DoctorVerificationMainPage from "./components/doctor-verification-page/doctor-verification-main-page";
+
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -96,10 +98,14 @@ const App = () => {
               <Route path="instrument/:name" element={<SubInstrument />} />
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
-              <Route path="doctorProfileEdit" element={
-                <PrivateRoute >
-                  <UniversalProfileEdit />
-                </PrivateRoute>} />
+              <Route
+                path="doctorProfileEdit"
+                element={
+                  <PrivateRoute>
+                    <UniversalProfileEdit />
+                  </PrivateRoute>
+                }
+              />
               <Route path="posts/:postid" element={<DoctorPost />} />
               <Route
                 path="doctor/:encodedMemberId"
@@ -128,21 +134,25 @@ const App = () => {
               <Route path="/edit-post/:postid" element={<EditPostPage />} />
               {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
               <Route path="health-check" element={<HealthCheck />} />
-              <Route path='userProfile' element={<UserProfilePage />} />
+              <Route path="userProfile" element={<UserProfilePage />} />
 
               <Route path="AccountSetup" element={<AccountSetup />} />
-              <Route path="userProfileEdit" element={
-                <PrivateRoute >
-                  <UniversalProfileEdit />
-                </PrivateRoute>
-              } />
+              <Route
+                path="userProfileEdit"
+                element={
+                  <PrivateRoute>
+                    <UniversalProfileEdit />
+                  </PrivateRoute>
+                }
+              />
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
               <Route path="updateEmail/verification" element={<UpdateVerification />} />
               <Route
                 path="doctorVerification"
-                element={<DoctorVerificationPage />}
+                element={<DoctorVerificationMainPage />}
+
               />
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="*" element={<PageNotFound />} />

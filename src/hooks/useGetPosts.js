@@ -1,10 +1,11 @@
-import { useQuery, useInfiniteQuery, useMutation } from 'react-query';
-import usePostQueryStore from '../postStore.ts';
-import APIClient from '../services/api-client.js';
+import { useQuery, useInfiniteQuery, useMutation } from "react-query";
+import usePostQueryStore from "../postStore.ts";
+import APIClient from "../services/api-client.js";
+import userInfoQueryStore from "../userStore.ts";
 // import axios from 'axios';
 
 export function useGetPost() {
-  const apiClient = new APIClient('/post/all_posts');
+  const apiClient = new APIClient("/post/all_posts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -19,7 +20,7 @@ export function useGetPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetAllPosts', postQuery.filterType], fetchPost, {
+  return useInfiniteQuery(["GetAllPosts", postQuery.filterType], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -35,7 +36,7 @@ export function useGetPost() {
 
 // get posts
 export function useGetUserPostedPost() {
-  const apiClient = new APIClient('/user_action/Myposts');
+  const apiClient = new APIClient("/user_action/Myposts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -46,22 +47,26 @@ export function useGetUserPostedPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetPostsPost'], fetchPost, {
-    staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
-    keepPreviousData: true,
-    // lastPage is an array of posts
-    // allPages is an array of pages
-    getNextPageParam: (lastPage, allPages) => {
-      // hasNextPage
-      //console.log("lastPage data",lastPage.pageInfo)
-      //return lastPage.pageInfo.totalPage > lastPage.pageInfo.currentPage ? allPages.length + 1 : undefined;
-      return undefined;
-    },
-  });
+  return useInfiniteQuery(
+    ["GetPostsPost", postQuery.myPostTrigger],
+    fetchPost,
+    {
+      staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
+      keepPreviousData: true,
+      // lastPage is an array of posts
+      // allPages is an array of pages
+      getNextPageParam: (lastPage, allPages) => {
+        // hasNextPage
+        //console.log("lastPage data",lastPage.pageInfo)
+        //return lastPage.pageInfo.totalPage > lastPage.pageInfo.currentPage ? allPages.length + 1 : undefined;
+        return undefined;
+      },
+    }
+  );
 }
 
 export function useGetUserLikededPost() {
-  const apiClient = new APIClient('/user_action/likedPosts');
+  const apiClient = new APIClient("/user_action/likedPosts");
   const postQuery = usePostQueryStore((s) => s.postQuery);
 
   const fetchPost = async ({ pageParam = 1 }) => {
@@ -75,7 +80,7 @@ export function useGetUserLikededPost() {
     return { data: res.data.data, pageInfo: res.data.pageInfo };
   };
 
-  return useInfiniteQuery(['GetLikesPost'], fetchPost, {
+  return useInfiniteQuery(["GetLikesPost"], fetchPost, {
     staleTime: 1 * 6 * 1000 * 60 * 3, // 3 hour
     keepPreviousData: true,
     // lastPage is an array of posts
@@ -101,7 +106,7 @@ export function usePostDetail() {
     }
   };
   return useQuery(
-    ['postDetail', postQuery.postID, postQuery.trigger],
+    ["postDetail", postQuery.postID, postQuery.trigger],
     fetchPostDetail,
     {
       placeholderData: { data: {} }, // Default object to use before fetching completes
@@ -111,19 +116,28 @@ export function usePostDetail() {
 
 // likes
 export function useGetLikesPost() {
-  const apiClient = new APIClient('/post/like');
-  const fetchName = async (postId) => {
+  const apiClient = new APIClient("/post/like");
+
+  const fetchLikeData = async (postId) => {
     const res = await apiClient.post({
       postId,
     });
     return res.data;
   };
-  return useMutation((credentials) => fetchName(credentials.postId));
+
+  return useMutation((credentials) => fetchLikeData(credentials.postId), {
+    onSuccess: (data) => {
+      console.log("OK", data);
+    },
+    onError: (error) => {
+      console.error("ERROR", error);
+    },
+  });
 }
 
 // like comment
 export function useGetCommentLikesPost() {
-  const apiClient = new APIClient('/user_action/like_comment');
+  const apiClient = new APIClient("/user_action/like_comment");
   const fetchLikeComment = async (commentId) => {
     const res = await apiClient.postForm({
       commentId,
@@ -132,36 +146,18 @@ export function useGetCommentLikesPost() {
   };
   return useMutation((credentials) => fetchLikeComment(credentials.commentId), {
     onSuccess: (data) => {
-      console.log('OK', data);
+      console.log("OK", data);
     },
     onError: (error) => {
-      console.error('ERROR', error);
+      console.error("ERROR", error);
     },
   });
 }
-// export function useGetCommentLikesPost() {
-//   const apiClient = new APIClient('/user_action/like_comment');
-//   const fetchLikeComment = async (commentId) => {
-//     console.log('COMMENT ID', commentId);
-//     const res = await apiClient.post({
-//       commentId,
-//     });
-//     return res.data;
-//   };
-//   return useMutation((credentials) => fetchLikeComment(credentials.commentId), {
-//     onSuccess: (data) => {
-//       console.log('OK', data);
-//     },
-//     onError: (error) => {
-//       console.error('ERROR', error);
-//     },
-//   });
-// }
 
 // highlight
 export function useHighlightPost() {
   const setHighlightPost = async (id) => {
-    console.log('ID', id);
+    console.log("ID", id);
     const apiClient = new APIClient(`/post/posts/${id}/highlight`);
 
     const res = await apiClient.post();
@@ -170,10 +166,10 @@ export function useHighlightPost() {
 
   return useMutation((credentials) => setHighlightPost(credentials.id), {
     onSuccess: (data) => {
-      console.log('OK', data);
+      console.log("OK", data);
     },
     onError: (error) => {
-      console.error('ERROR', error);
+      console.error("ERROR", error);
     },
   });
 }
@@ -181,7 +177,7 @@ export function useHighlightPost() {
 // remove highlight
 export function useRemoveHighlightPost() {
   const setRemoveHighlight = async (id) => {
-    console.log('ID', id);
+    console.log("ID", id);
     const apiClient = new APIClient(`/post/posts/${id}/remove_highlight`);
 
     const res = await apiClient.post();
@@ -190,10 +186,25 @@ export function useRemoveHighlightPost() {
 
   return useMutation((credentials) => setRemoveHighlight(credentials.id), {
     onSuccess: (data) => {
-      console.log('OK', data);
+      console.log("OK", data);
     },
     onError: (error) => {
-      console.error('ERROR', error);
+      console.error("ERROR", error);
     },
+  });
+}
+
+export function useGetHighlightPost() {
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  // console.log("userInfo", userInfo);
+  const apiClient = new APIClient(`/post/highlight/${userInfo.userId}`);
+
+  const fetchHighlightPost = async () => {
+    const res = await apiClient.get();
+    return res.data;
+  };
+
+  return useQuery("highlightPost", fetchHighlightPost, {
+    placeholderData: { data: [] }, // Default object to use before fetching completes
   });
 }

@@ -45,7 +45,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { is } from "date-fns/locale";
+import { hi, is } from "date-fns/locale";
 import { set } from "date-fns";
 
 const CommunityPostDetailPopUP = ({
@@ -59,17 +59,23 @@ const CommunityPostDetailPopUP = ({
   commentCount,
   isPrivate,
   isHighlight,
+  isLiked,
 }) => {
+  // like count
+  // console.log("isLiked", isLiked);
+  const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
+  // like state
+  const [isPopupLiked, setIsPopupLiked] = useState(isLiked); // like
+  // console.log("isPopupLiked", isPopupLiked, popupLikeCount, likeCount, isLiked);
+  // console.log("popupLikeCount", popupLikeCount);
   const postQuery = usePostQueryStore((state) => state.postQuery);
-  // console.log("my post detail", postQuery.userAvatar);
+  // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
   const refresh = usePostQueryStore((state) => state.refresh);
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const navigate = useNavigate();
-  const [liked, setLiked] = useState(false); // like
-  // const [isHighlight, setIsHighlight] = useState(false); // highlight
-  // const [isPrivate, setIsPrivate] = useState(0); // private
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const [comment, setComment] = useState("");
@@ -116,19 +122,23 @@ const CommunityPostDetailPopUP = ({
   });
 
   // highlight api import
-  const { mutate: apiMutateHightlight } = useHighlightPost({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const { mutate: apiMutateHightlight, isSuccess: highlightSuccess } =
+    useHighlightPost({
+      onError: (error) => {
+        toast({
+          title: "Failed.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      },
+    });
 
   // remove highlight api import
-  const { mutate: apiMutateRemoveHighlight } = useRemoveHighlightPost({
+  const {
+    mutate: apiMutateRemoveHighlight,
+    isSuccess: removeHighlightSuccess,
+  } = useRemoveHighlightPost({
     onError: (error) => {
       toast({
         title: "Failed to remove highlight.",
@@ -140,19 +150,23 @@ const CommunityPostDetailPopUP = ({
   });
 
   // private api import
-  const { mutate: apiMutateSetPostDisplay } = useApiRequestSetPostDisplay({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const { mutate: apiMutateSetPostDisplay, isSuccess: privatePostSuceess } =
+    useApiRequestSetPostDisplay({
+      onError: (error) => {
+        toast({
+          title: "Failed.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      },
+    });
 
   //  remove private api import
-  const { mutate: apiMutateSetPostPublic } = useApiRequestSetPostPublic({
+  const {
+    mutate: apiMutateSetPostPublic,
+    isSuccess: removePrivatePostSuccess,
+  } = useApiRequestSetPostPublic({
     onError: (error) => {
       toast({
         title: "Failed.",
@@ -165,9 +179,8 @@ const CommunityPostDetailPopUP = ({
   // private click
   const handlePrivateClick = () => {
     if (validateTokenAndPopup()) {
-      console.log("postQuery.isPrivate", postQuery.isPrivate);
       setModalStatus("private");
-      if (!postQuery.isPrivate) {
+      if (postQuery.isPrivate !== 0) {
         setModalHeader("Private Post");
         setModalContent("Private");
       } else {
@@ -178,13 +191,15 @@ const CommunityPostDetailPopUP = ({
     }
   };
   // console.log("postQuery", postQuery);
+
   // private click call api
   const handlePrivate = () => {
     if (validateTokenAndPopup()) {
       setIsPrivate(!postQuery.isPrivate);
-      const apiMutation = postQuery.isPrivate
-        ? apiMutateSetPostPublic
-        : apiMutateSetPostDisplay;
+      const apiMutation =
+        postQuery.isPrivate == 0
+          ? apiMutateSetPostPublic
+          : apiMutateSetPostDisplay;
       if (validateTokenAndPopup()) {
         apiMutation({ id: postQuery.postID });
       }
@@ -218,8 +233,8 @@ const CommunityPostDetailPopUP = ({
     }
   };
 
-  // api
-  const { mutate: apiMutate } = useGetLikesPost({
+  // likes hook
+  const { mutate: apiLikePopupMutate } = useGetLikesPost({
     onError: (error) => {
       toast({
         title: "Failed.",
@@ -229,16 +244,24 @@ const CommunityPostDetailPopUP = ({
       });
     },
   });
-
+  // like buttton
   const toggleGetLikes = () => {
     if (validateTokenAndPopup()) {
-      setLiked((prev) => !prev);
+      let newCountLikes = isPopupLiked
+        ? popupLikeCount - 1
+        : popupLikeCount + 1;
+      setPopupLikeCount(newCountLikes);
+      setIsPopupLiked((prev) => !prev);
       if (validateTokenAndPopup()) {
-        apiMutate({ postId: postQuery.postID });
+        apiLikePopupMutate({ postId: postQuery.postID });
       }
     }
   };
-  const { mutate } = useAddComment({
+  const {
+    mutate,
+    isSuccess: addCommentSucces,
+    data: commentData,
+  } = useAddComment({
     onError: (error) => {
       toast({
         title: "Failed.",
@@ -247,7 +270,17 @@ const CommunityPostDetailPopUP = ({
         isClosable: true,
       });
     },
+    onSuccess: (commentData) => {
+      toast({
+        title: "Send Success.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      refresh();
+    },
   });
+
   const {
     register,
     handleSubmit,
@@ -256,16 +289,11 @@ const CommunityPostDetailPopUP = ({
   } = useForm({
     resolver: zodResolver(schema),
   });
-  const { mutate: apiReplyComment } = useRplyComment({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const {
+    mutate: apiReplyComment,
+    isSuccess: addRplySuccess,
+    data: replyData,
+  } = useRplyComment();
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -282,9 +310,30 @@ const CommunityPostDetailPopUP = ({
           text: comment,
         });
       }
-      refresh();
     }
   };
+
+  useEffect(() => {
+    if (addCommentSucces || addRplySuccess) {
+      refresh();
+      reset();
+    }
+  }, [addCommentSucces, addRplySuccess]);
+  useEffect(() => {
+    if (
+      highlightSuccess ||
+      removeHighlightSuccess ||
+      privatePostSuceess ||
+      removePrivatePostSuccess
+    ) {
+      refreshMyPost();
+    }
+  }, [
+    highlightSuccess,
+    removeHighlightSuccess,
+    privatePostSuceess,
+    removePrivatePostSuccess,
+  ]);
 
   const validateTokenAndPopup = () => {
     if (!userInfo.token) {
@@ -413,16 +462,16 @@ const CommunityPostDetailPopUP = ({
                       : "Highlight"}
                   </button>
                 )}
-
                 {isAuthor && (
                   <button
                     className="button-private"
                     onClick={handlePrivateClick}
                   >
-                    {postQuery.isPrivate ? "Remove from Private" : "Private"}
+                    {postQuery.isPrivate == 0
+                      ? "Remove from Private"
+                      : "Private"}
                   </button>
                 )}
-
                 {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
@@ -464,6 +513,7 @@ const CommunityPostDetailPopUP = ({
                       date={formatDate(comment.commentDate)}
                       commentId={comment.id}
                       replies={comment.comments || []}
+                      likeCount={comment.likeCount}
                     />
                   );
                 }
@@ -502,12 +552,12 @@ const CommunityPostDetailPopUP = ({
               <span className="Icon-count">
                 <img
                   // src={heartIcon}
-                  src={liked ? heartIconFilled : heartIcon}
+                  src={isPopupLiked ? heartIconFilled : heartIcon}
                   alt="Icon"
                   className="Icon-size"
                   onClick={toggleGetLikes}
                 />
-                {likeCount}
+                {popupLikeCount}
               </span>
               {/* <span className='Icon-count'>
                   <img

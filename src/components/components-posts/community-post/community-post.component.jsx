@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import React, { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 // hooks
-import { useGetLikesPost } from '../../../hooks/useGetPosts';
+import { useGetLikesPost } from "../../../hooks/useGetPosts";
 
 // stores
-import usePostQueryStore from '../../../postStore.ts';
+import usePostQueryStore from "../../../postStore.ts";
 
 // scss
-import './community-post.styles.scss';
+import "./community-post.styles.scss";
 
 // images
-import defaultImage from '../../../assets/post/default_image.png';
-import LockIcon from '../../../assets/post/lock_icon.svg';
-import heartIcon from '../../../assets/post/heart.png';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+import defaultImage from "../../../assets/post/default_image.png";
+import LockIcon from "../../../assets/post/lock_icon.svg";
+import heartIcon from "../../../assets/post/heart.png";
+import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
 
 const CommunityPost = ({
+  id,
   dummyHighlight,
   dummyPrivate,
   imageURL,
@@ -24,80 +25,93 @@ const CommunityPost = ({
   profileImage,
   authorName,
   likes,
-  isLike,
   isProfile,
 }) => {
+  // console.log("Likes:", likes);
+
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-  const [width, setWidth] = useState('');
-  const [liked, setLiked] = useState(isLike);
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+
+  const [width, setWidth] = useState("");
   const [displayImage, setDisplayImage] = useState(imageURL);
 
-  const postQuery = usePostQueryStore((state) => state.postQuery);
+  // like states ready
+  const [isLiked, setIsLiked] = useState(false);
+  const [countLikes, setCountLikes] = useState(likes);
 
   useEffect(() => {
     if (isMobile) {
-      setWidth('240px');
+      setWidth("240px");
     } else {
-      setWidth('186px');
+      setWidth("186px");
     }
   }, [isMobile]);
 
-  // likes hook import
-  const { mutate: apiLikeMutate } = useGetLikesPost();
-
-  // set default image when image is not loaded function is here
+  // default image when image is not loaded
   const handleImageError = () => {
     setDisplayImage(defaultImage);
   };
 
-  // like button function is here
-  // prevent to open pop up when like buttonis clicked
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
+
+  // like button
+  // prevent to open pop up when like button is clicked
   const handleHeartIconClick = (e) => {
     e.stopPropagation();
-    setLiked((prevLiked) => !prevLiked);
-    apiLikeMutate({ postId: postQuery.postID });
+    apiLikeMutate({ postId: id });
+
+    setIsLiked((prevLiked) => {
+      const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
+      setCountLikes(newCountLikes);
+
+      // save the likes to local storage
+      localStorage.setItem(`post_${id}_liked`, !prevLiked);
+      localStorage.setItem(`post_${id}_likes`, newCountLikes.toString());
+
+      return !prevLiked;
+    });
   };
 
   return (
     <div
-      className='community-post-container'
+      className="community-post-container"
       style={{
-        width: isProfile ? '240px' : '100%',
-        backgroundColor: dummyHighlight === 1 ? '#352C28' : '',
+        width: isProfile ? "240px" : "100%",
+        backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
       }}
     >
-      {dummyPrivate === 1 && (
+      {dummyPrivate === 0 && (
         <img
           src={LockIcon}
-          alt='Icon-Lock'
-          className='community-post-icon-lock'
+          alt="Icon-Lock"
+          className="community-post-icon-lock"
         />
       )}
 
-      <div className='post-Image'>
+      <div className="post-Image">
         <img
           src={displayImage}
-          className='postImage'
+          className="postImage"
           onError={handleImageError}
         />
       </div>
-      <div className='post-information'>
-        <span className='post-text'>{text}</span>
-        <div className='profile'>
-          <div className='profileImage'>
-            <img className='profile-pic' src={profileImage}></img>
-            <span className='gray-text'>{authorName}</span>
+      <div className="post-information">
+        <span className="post-text">{text}</span>
+        <div className="profile">
+          <div className="profileImage">
+            <img className="profile-pic" src={profileImage}></img>
+            <span className="gray-text">{authorName}</span>
           </div>
-          <div className='likeNumber'>
+          <div className="likeNumber">
             <img
-              src={liked ? heartIconFilled : heartIcon}
-              className='heartIcon'
-              onClick={handleHeartIconClick}
-              // onClick={toggleLike}
-              alt='Like Icon'
+              src={isLiked ? heartIconFilled : heartIcon}
+              className="heartIcon"
+              onClick={(e) => handleHeartIconClick(e)}
+              alt="Like Icon"
             />
-
-            <span className='gray-text'>{likes}</span>
+            {/* <span className='gray-text'>{likes}</span> */}
+            <span className="gray-text">{countLikes}</span>
           </div>
         </div>
       </div>

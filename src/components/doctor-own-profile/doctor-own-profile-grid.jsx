@@ -19,6 +19,7 @@ import "./doctor-own-profile-grid.scss";
 import post1 from "../../assets/doctor/post3.png";
 import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
+import { is } from "date-fns/locale";
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const {
@@ -42,10 +43,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
-  // console.log("flatData in doctor profile", flatData);
-  // hook
 
-  // create a post + icon button
   const handleIconClick = () => {
     // setShowCreatePost(true);
     navigate("/posts/create", { state: { source: "doctorProfile" } });
@@ -81,7 +79,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
-    // setIsHighlight(isHighlight);
+    setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
   };
 

@@ -31,6 +31,7 @@ interface doctorInfo {
     selectedInterests: Set<string>;
      // Used to control the register popup page and open/close
     popupState: 'closed'| 'personal Information' | 'verification'|'finish';
+
 }
 
 interface doctorInfoQuery {
@@ -48,6 +49,9 @@ interface doctorInfoQuery {
     removeToken: () => void;
     togglePopup: (open: boolean, initialState?:'personal Information' | 'verification'|'finish') => void;
     switchPopupTab: (tab: 'personal Information' | 'verification'|'finish') => void;
+    isVerificationSubmitted: boolean;
+    setVerificationSubmitted: (isSubmitted: boolean) => void;
+
 }
 
 const doctorInfoQueryStore = create<doctorInfoQuery>((set) => ({
@@ -146,6 +150,12 @@ const doctorInfoQueryStore = create<doctorInfoQuery>((set) => ({
         } catch (error) {
             console.error("Failed to remove the token", error);
         }
+    },
+    isVerificationSubmitted: false,
+    setVerificationSubmitted: (isSubmitted: boolean) => {
+        set(() => ({
+            isVerificationSubmitted: isSubmitted
+        }));
     }
 }));
 export default doctorInfoQueryStore;

@@ -21,6 +21,7 @@ interface PostQuery {
   commentId?: number;
   isPrivate?: boolean;
   isHighlight?: boolean;
+  myPostTrigger: number;
 }
 
 interface postQueryStore {
@@ -44,11 +45,12 @@ interface postQueryStore {
   setCommentId?: (commentId: number) => void;
   setIsPrivate?: (isPrivate: boolean) => void;
   setIsHighlight?: (isHighlight: boolean) => void;
+  refreshMyPost?: () => void;
 }
 
 const usePostQueryStore = create<postQueryStore>((set) => ({
   postQuery: {
-    pageSize: 12,
+    pageSize: 15,
     filterType: 2,
     postID: 0,
     userName: "",
@@ -67,6 +69,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     commentId: 0,
     isPrivate: false,
     isHighlight: false,
+    myPostTrigger: 0,
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -108,6 +111,13 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, isPrivate } })),
   setIsHighlight: (isHighlight) =>
     set((state) => ({ postQuery: { ...state.postQuery, isHighlight } })),
+  refreshMyPost: () =>
+    set((state) => ({
+      postQuery: {
+        ...state.postQuery,
+        myPostTrigger: state.postQuery.myPostTrigger + 1,
+      },
+    })),
   refresh: () =>
     set((state) => ({
       postQuery: { ...state.postQuery, trigger: state.postQuery.trigger + 1 },

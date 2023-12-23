@@ -1,35 +1,42 @@
-import './doctor-about.styles.scss';
-import { useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import DoctorAboutSection from '../../doctor-about-section/doctor-about-section.component';
-import DocotorOwnVoucherCard from '../../doctor-own-profile/doctor-profile-voucher-card';
-import DoctorReviewGrid from '../../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component';
-import CommunityPost from '../../components-posts/community-post/community-post.component';
-import PostDetail from '../../components-posts/community-post-detail/community-post-detail.component';
-import { useGetDoctorAbout } from '../../../hooks/useGetIndividualDoctor';
-import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import usePostQueryStore from '../../../postStore.ts';
-import APIClient from '../../../services/api-client';
+import "./doctor-about.styles.scss";
+import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import DoctorAboutSection from "../../doctor-about-section/doctor-about-section.component";
+import DocotorOwnVoucherCard from "../../doctor-own-profile/doctor-profile-voucher-card";
+import DoctorReviewGrid from "../../../components/component-individual-doctor/doctor-review-grid/doctor-review-grid.component";
+import CommunityPost from "../../components-posts/community-post/community-post.component";
+import PostDetail from "../../components-posts/community-post-detail/community-post-detail.component";
+import { useGetDoctorAbout } from "../../../hooks/useGetIndividualDoctor";
+import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import usePostQueryStore from "../../../postStore.ts";
+import APIClient from "../../../services/api-client";
 
-import highlightYear from '../../../assets/doctor/highlight-year.png';
-import highlightVerified from '../../../assets/doctor/highlight-verified.png';
-import highlightAppointment from '../../../assets/doctor/highlight-appointment.png';
-import backArrow from '../../../assets/doctor/left_back.png';
+import highlightYear from "../../../assets/doctor/highlight-year.png";
+import highlightVerified from "../../../assets/doctor/highlight-verified.png";
+import highlightAppointment from "../../../assets/doctor/highlight-appointment.png";
+import backArrow from "../../../assets/doctor/left_back.png";
 
-const DoctorAbout = ({encodedMemberId}) => {
-    // const [voucherExpanded, setVoucherExpanded] = useState(false);
-    const [specializations, setSpecializations] = useState([]);
-    const [highlights, setHighlights] = useState([]);
-    const [loadingPosts, setLoadingPosts] = useState(true);
-    const [postCounter, setPostCounter] = useState(0);
-    // const [selectedPosts, setSelectedPosts] = useState([]);
-    const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
-    // UNCOMMENT FOR 2.0 RELEASE
-    // const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
-    const navigate = useNavigate();
-    // console.log('doctor about data is: ', data);
+const DoctorAbout = ({ encodedMemberId }) => {
+  // const [voucherExpanded, setVoucherExpanded] = useState(false);
+  const [specializations, setSpecializations] = useState([]);
+  const [highlights, setHighlights] = useState([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [postCounter, setPostCounter] = useState(0);
+  // const [selectedPosts, setSelectedPosts] = useState([]);
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetDoctorAbout();
+  // UNCOMMENT FOR 2.0 RELEASE
+  // const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
+  const navigate = useNavigate();
+  // console.log('doctor about data is: ', data);
 
     const objArray = [{
         "id": 13,
@@ -87,59 +94,70 @@ const DoctorAbout = ({encodedMemberId}) => {
             } finally {
                 setLoadingPosts(false);
             }
-        }
-        retrieveHighlightedPosts()
+      };
+      retrieveHighlightedPosts();
     }, [data]);
 
-    const getSelectedPosts = () => {
-        let holder = [];
-        if (highlights.length > 0) {
-            if (highlights.length === 1 || highlights.length === 2 || highlights.length === 3) {
-                holder = [...highlights]
-            } else {
-                holder = [highlights[postCounter], highlights[(postCounter + 1) % (highlights.length)], highlights[(postCounter + 2) % (highlights.length)]];
-            }
-        }
-        console.log('returning holder as: ', holder);
-        return holder;
+  const getSelectedPosts = () => {
+    let holder = [];
+    if (highlights.length > 0) {
+      if (
+        highlights.length === 1 ||
+        highlights.length === 2 ||
+        highlights.length === 3
+      ) {
+        holder = [...highlights];
+      } else {
+        holder = [
+          highlights[postCounter],
+          highlights[(postCounter + 1) % highlights.length],
+          highlights[(postCounter + 2) % highlights.length],
+        ];
+      }
     }
+    console.log("returning holder as: ", holder);
+    return holder;
+  };
 
-    const highlightMoveForward = () => {
-        setPostCounter((postCounter + 1) % (highlights.length))
-    }
+  const highlightMoveForward = () => {
+    setPostCounter((postCounter + 1) % highlights.length);
+  };
 
-    const highlightMoveBack = () => {
-        setPostCounter((((postCounter - 1) % highlights.length) + highlights.length) % highlights.length);
-    }
+  const highlightMoveBack = () => {
+    setPostCounter(
+      (((postCounter - 1) % highlights.length) + highlights.length) %
+        highlights.length
+    );
+  };
 
-    //UNCOMMENT FOR 2.0 RELEASE
-    // useEffect(() => {
-    //     setVouchers(programs);
-    // }, [])
+  //UNCOMMENT FOR 2.0 RELEASE
+  // useEffect(() => {
+  //     setVouchers(programs);
+  // }, [])
 
-    if (isLoading || loadingPosts) {
-        return <div>Loading...</div>;
-    }
-      
-    if (error) {
-        navigate('*');
-    }
+  if (isLoading || loadingPosts) {
+    return <div>Loading...</div>;
+  }
 
-    // if (!data || !data.pages[0]?.data) {
-    //     return <div>No data available</div>;
-    // }
+  if (error) {
+    navigate("*");
+  }
 
-    // UNCOMMENT FOR 2.0 RELEASE!
-    // const voucherClick = (item) => {
-    //     console.log('item is: ', item);
-    //     const holder = vouchers.filter((voucher) => voucher === item);
-    //     setVouchers(holder);
-    // }
+  // if (!data || !data.pages[0]?.data) {
+  //     return <div>No data available</div>;
+  // }
 
-    return (
-        <div className='indv-doctor-about-container' >
-            {/* UNCOMMENT FOR 2.0 RELEASE */}
-            {/* <div className='indv-vouchers-big-container' >
+  // UNCOMMENT FOR 2.0 RELEASE!
+  // const voucherClick = (item) => {
+  //     console.log('item is: ', item);
+  //     const holder = vouchers.filter((voucher) => voucher === item);
+  //     setVouchers(holder);
+  // }
+
+  return (
+    <div className="indv-doctor-about-container">
+      {/* UNCOMMENT FOR 2.0 RELEASE */}
+      {/* <div className='indv-vouchers-big-container' >
                 <div className='vouchers-title-container' >
                     <h3 className='indv-vouchers-title' >Vouchers</h3>
                 </div>
@@ -149,19 +167,23 @@ const DoctorAbout = ({encodedMemberId}) => {
                     }) : <h3 className='indv-no-vouchers-title' >No vouchers currently available, check back later for more great deals!</h3>}
                 </div>
             </div> */}
-            <div className='indv-specialization-big-container' >
-                <div className='specialization-title-container' >
-                    <h3 className='indv-specialization-title' >Specialization</h3>
-                </div>
-                <div className='specialization-tabs-container' >
-                    {specializations?.map((item, index) => {
-                        return <SpecializationIcon specialization={item} key={index} />
-                    })}
-                </div>
-            </div>
-            <HighlightCases selected={getSelectedPosts()} moveBack={highlightMoveBack} moveForward={highlightMoveForward} />
-            {/* UNCOMMENT FOR 2.0 RELEASE */}
-            {/* <div className='indv-customer-review-container' >
+      <div className="indv-specialization-big-container">
+        <div className="specialization-title-container">
+          <h3 className="indv-specialization-title">Specialization</h3>
+        </div>
+        <div className="specialization-tabs-container">
+          {specializations?.map((item, index) => {
+            return <SpecializationIcon specialization={item} key={index} />;
+          })}
+        </div>
+      </div>
+      <HighlightCases
+        selected={getSelectedPosts()}
+        moveBack={highlightMoveBack}
+        moveForward={highlightMoveForward}
+      />
+      {/* UNCOMMENT FOR 2.0 RELEASE */}
+      {/* <div className='indv-customer-review-container' >
                 <div className='customer-review-section-title-container' >
                     <h3 className='customer-review-section-title' >Customer Review</h3>
                 </div>
@@ -169,121 +191,152 @@ const DoctorAbout = ({encodedMemberId}) => {
                     <DoctorReviewGrid />
                 </div>
             </div> */}
+    </div>
+  );
+};
+
+const SpecializationIcon = ({ specialization }) => {
+  const imgUrl = specialization.content;
+  const title = convertTitle(specialization.title);
+  return (
+    <div className="indv-procedure-icon-container">
+      <div className="indv-procedure-icon-img-container">
+        <img className="indv-procedure-icon-img" src={imgUrl} alt="procedure" />
+      </div>
+      <div className="indv-procedure-icon-title-container">
+        <h3 className="indv-procedure-icon-title">{title}</h3>
+      </div>
+    </div>
+  );
+};
+
+const HighlightCases = ({ selected, moveBack, moveForward }) => {
+  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const [IsModalOpen, setIsModelOpen] = useState(false);
+  const setPostID = usePostQueryStore((state) => state.setPostID);
+  const setUserName = usePostQueryStore((state) => state.setUserName);
+  const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
+  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+  // const postQuery = usePostQueryStore((state) => state.postQuery);
+  const setMemberID = usePostQueryStore((state) => state.setMemberID);
+  const setTitle = usePostQueryStore((state) => state.setTitle);
+  const handleClickPost = (
+    ID,
+    avatar,
+    username,
+    title,
+    memberId,
+    isHighlight,
+    isPrivate
+  ) => {
+    setIsModelOpen(true);
+    setPostID(ID);
+    setUserAvatar(avatar);
+    setUserName(username);
+    setTitle(title);
+    setMemberID(memberId);
+    // setIsHighlight(isHighlight);
+    setIsPrivate(isPrivate);
+  };
+  return (
+    <div className="indv-highlight-cases-container">
+      <div className="highlight-cases-top-row">
+        <div className="highlight-cases-title-container">
+          <h3 className="highlight-cases-title">Highlight Cases</h3>
         </div>
-    )
-}
-
-const SpecializationIcon = ({specialization}) => {
-    const imgUrl = specialization.content;
-    const title = convertTitle(specialization.title);
-    return (
-        <div className='indv-procedure-icon-container' >
-            <div className='indv-procedure-icon-img-container' >
-                <img className='indv-procedure-icon-img' src={imgUrl} alt='procedure' />
-            </div>
-            <div className='indv-procedure-icon-title-container' >
-                <h3 className='indv-procedure-icon-title' >{title}</h3>
-            </div>
+        <div className="highlight-cases-arrows-container">
+          <div className="highlight-cases-arrow-container">
+            <img
+              src={backArrow}
+              className="highlight-cases-back-arrow highlight-cases-arrow"
+              onClick={moveBack}
+              alt="back arrow"
+            />
+          </div>
+          <div className="highlight-cases-arrow-container">
+            <img
+              src={backArrow}
+              className="highlight-cases-forward-arrow highlight-cases-arrow"
+              onClick={moveForward}
+              alt="forward arrow"
+            />
+          </div>
         </div>
-    )
-}
+      </div>
+      <div
+        className={`highlight-cases-cases-container ${
+          selected?.length > 0 ? "highlight-cases-container-space-around" : ""
+        }`}
+      >
+        {IsModalOpen && (
+          <PostDetail
+            show={IsModalOpen}
+            onHide={() => setIsModelOpen(false)}
+            isMobile={isMobile}
+          />
+        )}
+        {selected.length > 0 ? (
+          selected.map((item) => {
+            return (
+              <div className="highlight-cases-highlights-container">
+                {" "}
+                <HighlightPost
+                  post={item}
+                  handlePostClick={handleClickPost}
+                  key={item?.id}
+                />{" "}
+              </div>
+            );
+          })
+        ) : (
+          <div className="highlight-cases-no-posts-text-container">
+            <h2 className="highlight-cases-no-posts-text">
+              This doctor has no highlighted posts. Check back later!
+            </h2>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-const HighlightCases = ({selected, moveBack, moveForward}) => {
-    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
-    const [IsModalOpen, setIsModelOpen] = useState(false);
-    const setPostID = usePostQueryStore((state) => state.setPostID);
-    const setUserName = usePostQueryStore((state) => state.setUserName);
-    const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
-    const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
-    const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-    // const postQuery = usePostQueryStore((state) => state.postQuery);
-    const setMemberID = usePostQueryStore((state) => state.setMemberID);
-    const setTitle = usePostQueryStore((state) => state.setTitle);
-    const handleClickPost = (
-        ID,
-        avatar,
-        username,
-        title,
-        memberId,
-        isHighlight,
-        isPrivate,
-      ) => {
-        setIsModelOpen(true);
-        setPostID(ID);
-        setUserAvatar(avatar);
-        setUserName(username);
-        setTitle(title);
-        setMemberID(memberId);
-        // setIsHighlight(isHighlight);
-        setIsPrivate(isPrivate);
-      };
-    return (
-        <div className='indv-highlight-cases-container' >
-                <div className='highlight-cases-top-row' >
-                    <div className='highlight-cases-title-container' >
-                        <h3 className='highlight-cases-title' >Highlight Cases</h3>
-                    </div>
-                    <div className='highlight-cases-arrows-container'>
-                        <div className='highlight-cases-arrow-container'>
-                            <img src={backArrow} className='highlight-cases-back-arrow highlight-cases-arrow' onClick={moveBack} alt='back arrow' />
-                        </div>
-                        <div className='highlight-cases-arrow-container'>
-                            <img src={backArrow} className='highlight-cases-forward-arrow highlight-cases-arrow' onClick={moveForward} alt='forward arrow' />
-                        </div>
-                    </div>
-                </div>
-                <div className={`highlight-cases-cases-container ${selected?.length > 0 ? 'highlight-cases-container-space-around' : ''}`} >
-                    {IsModalOpen && (
-                        <PostDetail
-                        show={IsModalOpen}
-                        onHide={() => setIsModelOpen(false)}
-                        isMobile={isMobile}
-                        />
-                    )}
-                    {selected.length > 0 ? selected.map((item) => { return <div className='highlight-cases-highlights-container' > <HighlightPost post={item} handlePostClick={handleClickPost} key={item?.id} /> </div>}) : 
-                    
-                    <div className='highlight-cases-no-posts-text-container'>
-                        <h2 className='highlight-cases-no-posts-text'>This doctor has no highlighted posts. Check back later!</h2>
-                    </div>}
-                </div>
-            </div>
-    )
-}
-
-const HighlightPost = ({post, handlePostClick}) => {
-    return (
-        <div className='highlight-post-container'>
-            <div
-                className='btn'
-                onClick={() => {
-                    handlePostClick(
-                    post.id,
-                    post.avatar,
-                    post.nickname,
-                    post.title,
-                    post.memberId,
-                    );
-                }}
-                >
-                <CommunityPost
-                    dummyPrivate={post?.isDisplay}
-                    id={post?.id}
-                    imageURL={post?.coverImg || []}
-                    text={post?.title || ''}
-                    profileImage={post?.avatar || ''}
-                    authorName={post?.nickname || ''}
-                    likes={post?.likedCount || 0}
-                />
-                </div>
-           </div>
-    )
-}
+const HighlightPost = ({ post, handlePostClick }) => {
+  return (
+    <div className="highlight-post-container">
+      <div
+        className="btn"
+        onClick={() => {
+          handlePostClick(
+            post.id,
+            post.avatar,
+            post.nickname,
+            post.title,
+            post.memberId
+          );
+        }}
+      >
+        <CommunityPost
+          dummyPrivate={post?.isDisplay}
+          id={post?.id}
+          imageURL={post?.coverImg || []}
+          text={post?.title || ""}
+          profileImage={post?.avatar || ""}
+          authorName={post?.nickname || ""}
+          likes={post?.likedCount || 0}
+        />
+      </div>
+    </div>
+  );
+};
 
 const convertTitle = (string) => {
-    const splitItem = string.split('_');
-    const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-    const procedureTitle = upperCased.join(' ');
-    return procedureTitle;
-}
-
+  const splitItem = string.split("_");
+  const upperCased = splitItem.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+  );
+  const procedureTitle = upperCased.join(" ");
+  return procedureTitle;
+};
+export { HighlightCases };
 export default DoctorAbout;

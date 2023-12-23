@@ -41,23 +41,23 @@ export function useUserRegister() {
   );
 }
 export async function retrieveUserFollowList() {
-  const apiClient = new APIClient('/user/follows');
-    const fetchAllUsersWeFollow = async () => {
-      try {
-        const res = await apiClient.post({
-          "currentPage": 0,
-          "pageSize": 100
+  const apiClient = new APIClient("/user/follows");
+  const fetchAllUsersWeFollow = async () => {
+    try {
+      const res = await apiClient.post({
+        currentPage: 0,
+        pageSize: 100,
       });
       const idArray = [];
       let myObjectArray = res?.data?.data;
       myObjectArray.forEach((followedUser) => idArray.push(followedUser.id));
       return idArray;
-      } catch (err) {
-        console.log('Error retrieving all followed users: ', err);
-      }
+    } catch (err) {
+      console.log("Error retrieving all followed users: ", err);
     }
-    const followRes = await fetchAllUsersWeFollow();
-    return followRes;
+  };
+  const followRes = await fetchAllUsersWeFollow();
+  return followRes;
 }
 export function useUserEmailLogin() {
   const apiClient = new APIClient("/login/user");
@@ -206,7 +206,7 @@ export function useGetUserInfo() {
   const userInfo = userInfoQueryStore((s) => s.userInfo);
 
   const fetchGetUserInfo = async () => {
-    const res = await apiClient.post();
+    const res = await apiClient.get();
     return res.data;
   };
 
