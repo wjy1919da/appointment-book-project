@@ -31,40 +31,40 @@ const DoctorAbout = ({encodedMemberId}) => {
     const navigate = useNavigate();
     // console.log('doctor about data is: ', data);
 
-//     const objArray = [{
-//         "id": 13,
-//         "title": "哈哈哈",
-//         "coverImg": "http://dxm72.longcai.pw/uploads/20220403/5235ed292a68dc6e07fe8b11e49af30a.png",
-//         "memberId": 262,
-//         "nickname": "DrJohnDoe",
-//         "avatar": "http://example.com/path-to-user-image.jpg",
-//         "likedCount": 4
-//     }, {
-//         "id": 96,
-//         "title": "test",
-//         "coverImg": "http://charm.zihai.shop/uploads/20230309/c901c6b01512a69bb47d71ba661f9dde.png",
-//         "memberId": 108,
-//         "nickname": "lmlyb",
-//         "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-//         "likedCount": 4
-//     }, {
-//         "id": 97,
-//         "title": "e",
-//         "coverImg": "http://charm.zihai.shop/uploads/20230311/f735a4a8be791b70c5dc3688671ef421.png",
-//         "memberId": 85,
-//         "nickname": "dd2",
-//         "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-//         "likedCount": 5
-//     }, {
-//         "id": 113,
-//         "title": "这次又有",
-//         "coverImg": "http://charm.zihai.shop/uploads/20230410/0ae250dbac59a798b7c72abd4f12f9cf.png",
-//         "memberId": 106,
-//         "nickname": "用户1",
-//         "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
-//         "likedCount": 1
-//     }
-// ]
+    const objArray = [{
+        "id": 13,
+        "title": "哈哈哈",
+        "coverImg": "http://dxm72.longcai.pw/uploads/20220403/5235ed292a68dc6e07fe8b11e49af30a.png",
+        "memberId": 262,
+        "nickname": "DrJohnDoe",
+        "avatar": "http://example.com/path-to-user-image.jpg",
+        "likedCount": 4
+    }, {
+        "id": 96,
+        "title": "test",
+        "coverImg": "http://charm.zihai.shop/uploads/20230309/c901c6b01512a69bb47d71ba661f9dde.png",
+        "memberId": 108,
+        "nickname": "lmlyb",
+        "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+        "likedCount": 4
+    }, {
+        "id": 97,
+        "title": "e",
+        "coverImg": "http://charm.zihai.shop/uploads/20230311/f735a4a8be791b70c5dc3688671ef421.png",
+        "memberId": 85,
+        "nickname": "dd2",
+        "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+        "likedCount": 5
+    }, {
+        "id": 113,
+        "title": "这次又有",
+        "coverImg": "http://charm.zihai.shop/uploads/20230410/0ae250dbac59a798b7c72abd4f12f9cf.png",
+        "memberId": 106,
+        "nickname": "用户1",
+        "avatar": "http://dxm72.zihai.shop/uploads/20220321/baf4631f46ca84d67baefc36657f95e8.png",
+        "likedCount": 1
+    }
+]
 
     useEffect(() => {  // for grabbing specializations
         if (data?.pages[0]?.data?.interesteds) {
@@ -74,11 +74,11 @@ const DoctorAbout = ({encodedMemberId}) => {
             const apiClient = new APIClient(`/post/highlight/${encodedMemberId}`);
             try {
                 const res = await apiClient.get();
-                console.log('doctor highlights returned as: ', res);
+                // console.log('doctor highlights returned as: ', res);
                 if (res?.data?.data?.length === 0) {
                     throw new Error;
                 } else {
-                    console.log('HERE1000!')
+                    // console.log('HERE1000!')
                     setHighlights(res?.data?.data);
                 }
             } catch (err) {

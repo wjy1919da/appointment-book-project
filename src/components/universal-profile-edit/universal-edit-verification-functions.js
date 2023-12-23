@@ -124,3 +124,34 @@ export async function setUserData(userData) {
         throw new Error('Unable to send userData to backend');
     }
 }
+
+export async function sendEmailUpdateVerification(email) {
+    const body = {
+        email: email
+    }
+    try {
+        const apiClient = new APIClient("/user/user_profile/update_email");
+        // const apiClient = new APIClient("/user/user_profile/verification_email");
+        const res = await apiClient.post(body);
+        console.log('sendVerificationEmail res is: ', res);
+        return res;
+    } catch (err) {
+        console.log('unable to send verification email to: ', email);
+        throw new Error(err);
+    }
+}
+
+export const proceduresId = {
+     'botox_injections': 1,
+     'breast_augmentation': 2,
+     'chemical_peels': 3,
+     'fox_eyes': 4,
+     'lip_augmentation': 5,
+      'laser_hair_removal': 6,
+      'teeth_whitening': 7,
+      'chin_implants': 8,
+      'neck_contouring': 9,
+      'facelift': 10,
+      'otoplasty': 11,
+      'tummy_tuck': 12
+}
