@@ -48,7 +48,9 @@ const CreatePostPage = () => {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
+  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(
+    uploadedFiles.length - 1 || 0
+  ); // thumbnail click masking
   const [clickedRadio, setClickedRadio] = useState(false);
   const fileInputRef = useRef(null);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -65,11 +67,16 @@ const CreatePostPage = () => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
+    const displayImage =
+      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
+    // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
+
     console.log("data::", data, displayThumbnails, uploadedFiles);
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: uploadedFiles[uploadedFiles.length - 1],
+      coverImg: displayImage,
       isDisplay: 1,
       lat: "",
       location: "",
@@ -123,6 +130,12 @@ const CreatePostPage = () => {
     }
   }, [data, toast]);
 
+  useEffect(() => {
+    if (uploadedFiles.length > 0) {
+      setSelectedImage(uploadedFiles[uploadedFiles.length - 1]);
+    }
+  }, [uploadedFiles]);
+
   // back button
   const handleClickCreatePostBack = () => {
     const source = location.state?.source;
@@ -157,7 +170,10 @@ const CreatePostPage = () => {
   const handleClickMask = (index) => {
     // console.log('clicked');
     setSelectedImage(uploadedFiles[index]);
-    setClickedThumbnailIndex(index);
+    // setClickedThumbnailIndex(index);
+    setClickedThumbnailIndex((prevIndex) =>
+      prevIndex === index ? null : index
+    );
   };
 
   // thumbnail
@@ -166,9 +182,7 @@ const CreatePostPage = () => {
       ? uploadedFiles.map((file, index) => (
           <div key={index} className="create-post-page-thumbnail">
             <div
-              className={`thumbnail ${
-                index === uploadedFiles.length - 1 ? "clicked" : ""
-              }`}
+              className={`thumbnail ${selectedImage === file ? "clicked" : ""}`}
               onClick={() => handleClickMask(index)}
             >
               <img
@@ -205,11 +219,6 @@ const CreatePostPage = () => {
           </div>
         ))
       : null;
-
-  const displayImage =
-    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
-
-  // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   return (
     <div>
@@ -250,7 +259,7 @@ const CreatePostPage = () => {
             <div className="create-post-pic-wrapper">
               {uploadedFiles.length > 0 ? (
                 <img
-                  src={selectedImage || uploadedFiles[0]}
+                  src={selectedImage}
                   style={{
                     marginBottom: "20px",
                     maxWidth: "100%",

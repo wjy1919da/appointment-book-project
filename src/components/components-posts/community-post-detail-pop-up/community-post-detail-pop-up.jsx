@@ -472,11 +472,11 @@ const CommunityPostDetailPopUP = ({
                       : "Private"}
                   </button>
                 )}
-                {isAuthor && (
+                {/* {isAuthor && ( */}
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
                   </button>
-                )}
+                {/* )} */}
               </div>
             </div>
           </>

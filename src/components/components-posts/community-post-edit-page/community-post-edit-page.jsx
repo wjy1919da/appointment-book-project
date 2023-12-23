@@ -104,6 +104,9 @@ const EditPostPage = () => {
 
   // api
   const onSubmit = (data) => {
+    const displayImage =
+      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
     const formData = {
       address: "",
       brief: data.description,
@@ -166,6 +169,12 @@ const EditPostPage = () => {
     }
   }, [data, toast]);
 
+  useEffect(() => {
+    if (uploadedFiles.length > 0) {
+      setSelectedImage(uploadedFiles[uploadedFiles.length - 1]);
+    }
+  }, [uploadedFiles]);
+
   // back button
   const handleClickCreatePostBack = () => {
     localStorage.getItem("accountType") === "2"
@@ -204,9 +213,7 @@ const EditPostPage = () => {
       ? uploadedFiles.map((file, index) => (
           <div key={index} className="edit-post-page-thumbnail">
             <div
-              className={`thumbnail ${
-                index === uploadedFiles.length - 1 ? "clicked" : ""
-              }`}
+              className={`thumbnail ${selectedImage === file ? "clicked" : ""}`}
               onClick={() => handleClickMask(index)}
             >
               <img
@@ -244,9 +251,6 @@ const EditPostPage = () => {
           </div>
         ))
       : null;
-
-  const displayImage =
-    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
 
   return (
     <div>
@@ -327,8 +331,8 @@ const EditPostPage = () => {
             <div className="edit-post-page-thumbnail-container">
               {displayThumbnails}
 
-              {/* thumbnail create */}
-              {displayThumbnails && (
+              {/* create thumbnail */}
+              {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
                   className="edit-post-page-add-thumbnail"
                   onDrop={handleDrop}

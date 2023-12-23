@@ -38,6 +38,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   // const postQuery = usePostQueryStore((state) => state.postQuery);
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
@@ -70,7 +71,8 @@ const DoctorPostGrid = ({ isAbout }) => {
     title,
     memberId,
     isHighlight,
-    isPrivate
+    isPrivate,
+    isLike
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -80,6 +82,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     setMemberID(memberId);
     setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
+    setIsLike(isLike);
   };
   if (error) {
     navigate("*");
@@ -113,6 +116,7 @@ const DoctorPostGrid = ({ isAbout }) => {
         profileImage={post.avatar || ""}
         authorName={post.nickname || ""}
         likes={post.likedCount || 0}
+        liked={post.isLike}
       />
     </div>
   ));

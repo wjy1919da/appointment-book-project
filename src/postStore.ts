@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface PostQuery {
   filterType: number;
@@ -22,6 +22,7 @@ interface PostQuery {
   isPrivate?: boolean;
   isHighlight?: boolean;
   myPostTrigger: number;
+  isLike: boolean;
 }
 
 interface postQueryStore {
@@ -45,6 +46,7 @@ interface postQueryStore {
   setCommentId?: (commentId: number) => void;
   setIsPrivate?: (isPrivate: boolean) => void;
   setIsHighlight?: (isHighlight: boolean) => void;
+  setIsLike?: (isLike: boolean) => void;
   refreshMyPost?: () => void;
 }
 
@@ -53,23 +55,24 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     pageSize: 15,
     filterType: 2,
     postID: 0,
-    userName: "",
-    userAvatar: "",
+    userName: '',
+    userAvatar: '',
     filterCondition: [],
-    postBy: ["doctor", "user"],
-    tag: "",
+    postBy: ['doctor', 'user'],
+    tag: '',
     trigger: 0,
-    tempSearchParam: "",
-    postSearchParam: "",
-    title: "",
-    description: "",
+    tempSearchParam: '',
+    postSearchParam: '',
+    title: '',
+    description: '',
     pictures: [],
     memberID: 0,
-    tempCommentStatus: "",
+    tempCommentStatus: '',
     commentId: 0,
     isPrivate: false,
     isHighlight: false,
     myPostTrigger: 0,
+    isLike: false,
   },
   setFilterType: (filterType) =>
     set((state) => ({ postQuery: { ...state.postQuery, filterType } })),
@@ -102,7 +105,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({
       postQuery: {
         ...state.postQuery,
-        tempCommentStatus: isOpen ? status : "",
+        tempCommentStatus: isOpen ? status : '',
       },
     })),
   setCommentId: (commentId) =>
@@ -111,6 +114,8 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({ postQuery: { ...state.postQuery, isPrivate } })),
   setIsHighlight: (isHighlight) =>
     set((state) => ({ postQuery: { ...state.postQuery, isHighlight } })),
+  setIsLike: (isLike) =>
+    set((state) => ({ postQuery: { ...state.postQuery, isLike } })),
   refreshMyPost: () =>
     set((state) => ({
       postQuery: {
