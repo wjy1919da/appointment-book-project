@@ -122,7 +122,7 @@ const DoctorPostGrid = ({ isAbout }) => {
       <InfiniteScroll
         dataLength={flatData.length}
         next={() => fetchNextPage}
-        hasMore={hasNextPage}
+        hasMore={!!hasNextPage}
         scrollThreshold={0.8}
       >
         {flatData && (
