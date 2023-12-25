@@ -1,28 +1,51 @@
 import React, { useState, useEffect } from "react";
-import "./community-post.styles.scss";
-import heartIcon from "../../../assets/post/heart.png";
 import { useMediaQuery } from "react-responsive";
-import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+
+// hooks
+import { useGetLikesPost } from "../../../hooks/useGetPosts";
+
+// stores
+import usePostQueryStore from "../../../postStore.ts";
+
+// scss
+import "./community-post.styles.scss";
 
 // images
 import defaultImage from "../../../assets/post/default_image.png";
 import LockIcon from "../../../assets/post/lock_icon.svg";
+import heartIcon from "../../../assets/post/heart.png";
+import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import userInfoQueryStore from "../../../userStore";
 
 const CommunityPost = ({
+  id,
   dummyHighlight,
   dummyPrivate,
   imageURL,
   text,
   profileImage,
   authorName,
-  likes,
-  isLike,
+  likes, // likeCount
   isProfile,
+  liked, // isLike
 }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+  const postQuery = usePostQueryStore((state) => state.postQuery);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
+
   const [width, setWidth] = useState("");
-  const [liked, setLiked] = useState(isLike);
   const [displayImage, setDisplayImage] = useState(imageURL);
+
+  // likes
+  const [isHeartLiked, setIsHeartLiked] = useState(liked);
+  const [countLikes, setCountLikes] = useState(likes);
+  useEffect(() => {
+    setIsHeartLiked(liked);
+    // setIsLike(liked);
+    setCountLikes(likes);
+  }, [liked, likes]);
 
   useEffect(() => {
     if (isMobile) {
@@ -32,13 +55,29 @@ const CommunityPost = ({
     }
   }, [isMobile]);
 
-  const toggleLike = () => {
-    setLiked((prevLiked) => !prevLiked);
-    // window.location.href = "/download";
-  };
-
+  // default image when image is not loaded
   const handleImageError = () => {
     setDisplayImage(defaultImage);
+  };
+
+  // likes hook import
+  const { mutate: apiLikeMutate } = useGetLikesPost();
+
+  // like button
+  const handleHeartIconClick = (e) => {
+    e.stopPropagation(); // prevent to open pop up when like button is clicked
+    if (!userInfo.token) {
+      togglePopup(true, "accountType");
+      return;
+    }
+    apiLikeMutate({ postId: id });
+    // setIsLike(!isHeartLiked);
+
+    setIsHeartLiked((prev) => {
+      const newCountLikes = prev ? countLikes - 1 : countLikes + 1;
+      setCountLikes(newCountLikes);
+      return !prev;
+    });
   };
 
   return (
@@ -49,7 +88,7 @@ const CommunityPost = ({
         backgroundColor: dummyHighlight === 1 ? "#352C28" : "",
       }}
     >
-      {dummyPrivate === 1 && (
+      {dummyPrivate === 0 && (
         <img
           src={LockIcon}
           alt="Icon-Lock"
@@ -73,13 +112,13 @@ const CommunityPost = ({
           </div>
           <div className="likeNumber">
             <img
-              src={liked ? heartIconFilled : heartIcon}
+              src={isHeartLiked ? heartIconFilled : heartIcon}
               className="heartIcon"
-              onClick={toggleLike}
+              onClick={(e) => handleHeartIconClick(e)}
               alt="Like Icon"
             />
-
-            <span className="gray-text">{likes}</span>
+            <span className="gray-text">{countLikes}</span>
+            {/* <span className='gray-text'>{likes}</span> */}
           </div>
         </div>
       </div>

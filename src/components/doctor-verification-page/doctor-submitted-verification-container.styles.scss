@@ -1,0 +1,39 @@
+.doctor-submmited-license-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:700px;
+    gap:50px;
+}
+.submmited-license-container
+{
+    width: 166.67px;
+    height: 166.67px;
+    flex-shrink: 0;
+}
+.submmited-license-title
+{
+    color: var(--text-1-footer, #352C29);
+    text-align: center;
+    /* NEW TYPE/NEW title */
+    font-family: Open Sans;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.submmited-license-text
+{
+    color: #675D59;
+
+    text-align: center;
+    /* NEW TYPE/NEW sub title */
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    
+}

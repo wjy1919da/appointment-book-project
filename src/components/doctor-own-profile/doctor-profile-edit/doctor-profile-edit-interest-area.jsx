@@ -1,59 +1,52 @@
 import React from 'react';
 import './doctor-profile-interest-category-area.styles.scss';
+import { useGetProcedureCategories } from '../../../hooks/useGetProcedures';
+import { Link } from 'react-router-dom';
 import imageSrc from '../../../assets/procedure/Facelift.png'; // Imported image
+const ProcedureItem = ({ categoryName }) => {
+  const [isSelected, setIsSelected] = React.useState(false);
 
-const ImageTextComponent = ({ imageSrc, text, onClick, isSelected }) => (
-    <div className="image-text" onClick={onClick}>
+  const formatTitle = (name) => {
+    return name.replace(/_/g, ' ').toUpperCase();
+  };
+
+  const handleItemClick = () => {
+    setIsSelected(!isSelected); // Toggle the selected state
+  };
+
+  return (
+    <div className='interest-category-combination' onClick={handleItemClick}>
       <img 
-        src={imageSrc} 
-        alt={text} 
-        className={`circle-img ${isSelected ? 'selected' : ''}`}
+        src={require(`../../../assets/procedure/${categoryName}.svg`)} 
+        className={`procedure-main-icon-pic ${isSelected ? 'selected' : ''}`} 
+        alt={categoryName} 
       />
-      <p>{text}</p>
+      <div className='procedure-main-title-container'>
+        <div className='procedure-main-pic-title'>{formatTitle(categoryName)}</div>
+      </div>
     </div>
   );
-
-  const RowComponent = ({ rowIndex, imageSrc, text, onImageClick, selectedId }) => (
-    <div className="row">
-      {[...Array(3)].map((_, itemIndex) => {
-        const id = `${rowIndex}-${itemIndex}`;
-        return (
-          <ImageTextComponent
-            key={id}
-            imageSrc={imageSrc}
-            text={text}
-            onClick={() => onImageClick(id)}
-            isSelected={selectedId === id}
-          />
-        );
-      })}
-    </div>
+};
+const ProceduresGrid = ({ data }) => {
+  return (
+      <div className="procedures-grid-container">
+          {data.map((item) => (
+              <ProcedureItem key={item.categoryName} categoryName={item.categoryName} />
+          ))}
+      </div>
   );
+};
 
   const DoctorEditInterestCategory = () => {
-    const [selectedId, setSelectedId] = React.useState(null);
-    const text = "Procedure"; // Your text
-  
-    const handleImageClick = (id) => {
-      if (selectedId === id) {
-        setSelectedId(null); // Deselect if the same item is clicked
-      } else {
-        setSelectedId(id);
-      }
-    };
+    const { data, isLoading, error } = useGetProcedureCategories();
+    const [selectedId, setSelectedId] = React.useState(null); // Correct placement for useState
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    console.log("what is the procedure data,",data);
   
     return (
-      <div className="grid">
-        {[...Array(7)].map((_, rowIndex) => (
-          <RowComponent
-            key={rowIndex}
-            rowIndex={rowIndex}
-            imageSrc={imageSrc}
-            text={text}
-            onImageClick={handleImageClick}
-            selectedId={selectedId}
-          />
-        ))}
+      <div className="interest-category-main-container">
+        <ProceduresGrid data={data.data}  />
       </div>
     );
   };

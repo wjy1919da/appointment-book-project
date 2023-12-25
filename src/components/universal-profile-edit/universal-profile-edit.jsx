@@ -1,13 +1,15 @@
 import './universal-profile-edit.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
 import { useUserEmailLogin, useDoctorLogin, useClickVerification } from '../../hooks/useAuth';
 import useUploadImg from '../../hooks/useUploadImg';
 import defaultPhoto from '../../assets/post/user-profile-avatar.png';
 import backArrow from '../../assets/doctor/left_back.png';
 import axios from 'axios';
 import * as editFuncs from './universal-edit-verification-functions';
+import trashcan from '../../assets/doctor/trashcan.svg';
 import APIClient from '../../services/api-client';
 import {
     Modal,
@@ -35,10 +37,12 @@ const UniversalProfileEdit = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState(false);
     const [bio, setBio] = useState("");
-    const [interests, setInterests] = useState([]);  // the array of interests returned from the backend
+    const [imageLink, setImageLink] = useState("");
+    const [interests, setInterests] = useState([]);  // the array of interests returned from the backend that we display as options
     const [interestSelections, setInterestSelections] = useState([]);  // the array that we put what the user selects their interests as in
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [errorSubmitting, setErrorSubmitting] = useState(false);
     const [accountType, setAccountType] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
@@ -46,77 +50,140 @@ const UniversalProfileEdit = () => {
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const [changesSaved, setChangesSaved] = useState(false);
     // const originalObj = {'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': ''};
-    const [originalInformation, setOriginalInformation] = useState({'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': ''});
+    const [originalInformation, setOriginalInformation] = useState({'name': '', 'gender': 0, 'birthday': '', 'email': '', 'phoneNumber': '', 'bio': '', 'interests': [], 'image': ''});
     const navigate = useNavigate();
     const userEmailLogin = useUserEmailLogin();
     const doctorLogin = useDoctorLogin();
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     // const modalDisclosure = useDisclosure();
-    const userInfo = userInfoQueryStore((state) => state.userInfo);
-    const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
-    
+    // const userInfo = userInfoQueryStore((state) => state.userInfo);
+    const proceduresIdObj = editFuncs.proceduresId;
+    // const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
+    const {
+        selectedFiles,
+        setSelectedFiles,
+        handleFileSelection,
+        uploadProgress,
+        isLoading: isUploadLoading,
+        isError: isUploadError,
+        uploadedFiles,
+        resetFiles,
+        removeUploadedFile,
+      } = useUploadImg();
+    const fileInputRef = useRef(null);
+    const handleBrowseFiles = () => {
+        fileInputRef.current.click();
+      };
+    const handleDragOver = (e) => {
+    e.preventDefault();
+    };
 
+    const handleDrop = (e) => {
+    e.preventDefault();
+    handleFileSelection({ target: { files: e.dataTransfer.files } });
+    };
+
+    useEffect(() => {
+        if (uploadedFiles.length > 0) {
+            setImageLink(uploadedFiles[uploadedFiles.length - 1]);
+        }
+    }, [uploadedFiles])
+    
     const retrieveAccountType = () => {
         const accountNumber = localStorage.getItem("accountType");
         if (accountNumber === null) throw new Error('No account type found...');
+        console.log('userID is: ', userInfo.userId);
         return Number(accountNumber);
     }
+    const establishOriginalInfo = async (userObjResponse) => {
+        let { nickname, bio, email, avatar, birthday, gender, phoneNumber, interestedProcedure } = userObjResponse?.data?.data;
+        let holder = JSON.parse(JSON.stringify(originalInformation));
+        // establishOriginalInfo(interestedProcedure, setInterestSelections, holder, 'interests');
+        if (nickname) {
+            setName(nickname);
+            holder = {...holder, 'name': nickname};
+        }
+        if (bio) {
+            setBio(bio);
+            holder = {...holder, 'bio': bio};
+        }
+        if (email) {
+            setEmail(email);
+            holder = {...holder, 'email': email};
+        }
+        if (avatar) {
+            setImageLink(avatar);
+            holder = {...holder, 'image': avatar};
+        }
+        if (birthday) {
+            setBirthday(birthday);
+            holder = {...holder, 'birthday': birthday};
+        }
+        if (gender) {
+            let genderNumber = 0;
+            if (gender === 'Male') {
+                genderNumber = 1;
+            } else if (gender === 'Female') {
+                genderNumber = 2;
+            } else if (gender === 'Other') {
+                genderNumber = 3;
+            }
+            setGender(genderNumber);
+            holder = {...holder, 'gender': genderNumber};
+        }
+        if (phoneNumber) {
+            setPhoneNumber(phoneNumber);
+            holder = {...holder, 'phoneNumber': phoneNumber};
+        }
+        if (interestedProcedure) {
+            setInterestSelections(interestedProcedure);
+            holder = {...holder, 'interests': interestedProcedure};
+        }
+        console.log('OriginalInfo is: ', holder);
+        setOriginalInformation(holder);
+    }
+
     useEffect(() => {
         setIsLoading(true);
         try {
-            const grabUserInfo = async () => {
+            setAccountType(retrieveAccountType());
+            const grabUserInfoAndProcedures = async () => {
                 console.log('attempting to grab user info!');
-                // call get API for user info when implemented
-                // then put all info into states if that info exists;
-                // const userObj = { 'name' : '', 'gender': '', 'birthday': '', 'email': '', 'phone': '', 'bio': '', 'interests': ''};
-                // setOriginalInformation(...)
                 try {
                     const response = await editFuncs.getUserData();
                     console.log('getUSER response returned as: ', response);
-                    let { nickname, description, image } = response?.data?.data;
-                    let holder = JSON.parse(JSON.stringify(originalInformation));
-                    if (nickname) {
-                        setName(nickname);
-                        holder = {...holder, 'name': nickname};
-                        //setOriginalInformation({...originalInformation, 'name': nickname});
-                    }
-                    if (description) {
-                        setBio(description);
-                        holder = {...holder, 'bio': description};
-                        //setOriginalInformation({...originalInformation, 'bio': description});
-                    }
-                    setOriginalInformation(holder);
+                    await establishOriginalInfo(response);
+                    const procedures = await editFuncs.getProcedures();
+                    await alterInterests(procedures);
+                    setIsLoading(false);
                 } catch (err) {
                     throw new Error(err);
-                }
-                
+                } 
             } 
-            grabUserInfo();
+            grabUserInfoAndProcedures();
+            // retrieveProcedures(); 
         } catch (err) {
             console.log('Error retrieving user info for edit page: ', err);
             setError(err);
+        } finally {
+            setTimeout(() => {
+                // add a small delay, otherwise the page loads before the data has been rendered;
+                setIsLoading(false);
+            }, 3500);
         }
     }, [])
 
-    useEffect(() => {
-        try {
-            setAccountType(retrieveAccountType());
-            const retrieveProcedures = async () => {
-                try {
-                    const procedures = await editFuncs.getProcedures();
-                    setInterestSelections(procedures);
-                } catch (err) {
-                    throw new Error(err);
-                }
-            }
-            retrieveProcedures(); 
-        } catch (err) {
-            console.log('Error retrieving procedures info for edit page: ', err);
-            setError(err);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [])
+    // useEffect(() => {
+    //     try {
+            
+            
+    //     } catch (err) {
+    //         console.log('Error retrieving procedures info for edit page: ', err);
+    //         setError(err);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // }, [])
 
     // useEffect(() => {
     //     if (oldPasswordError) {
@@ -127,11 +194,32 @@ const UniversalProfileEdit = () => {
     //     }
     // }, [oldPasswordError])
 
-    const alterInterestsForSending = () => {
-        const holder = [];
-        interestSelections.forEach((item) => {
-
-        })
+    const alterInterests = async (procedures) => {  // needed for if in the future, we hold the procedure imgs somewhere else (not in assets folder)
+        const alteredProcedures = [];
+        // console.log('procedures are: ', procedures);
+        for (let i = 0; i < procedures.length; i++) {
+            const location = procedures[i]?.location;
+            const locationProcedureArray = procedures[i]?.procedures;
+            const holder = [];
+            locationProcedureArray.forEach((item) => {
+                let imgUrl = '';
+                let procedureTitle = '';
+                if (item?.imageUrl) {
+                    imgUrl = item?.imageUrl;
+                }
+                if (item?.procedureTitle) {
+                    procedureTitle = item?.procedureTitle;
+                } else {
+                    procedureTitle = item;
+                }
+                const obj = {imageUrl: imgUrl, procedureTitle: procedureTitle};
+                holder.push(obj);
+            });
+            const newObj = {location: location, procedures: holder};
+            alteredProcedures.push(newObj);
+        }
+        setInterests(alteredProcedures);
+        return;
     }
 
     const goBack = () => {
@@ -139,17 +227,22 @@ const UniversalProfileEdit = () => {
     }
 
     const addToInterests = (item) => {
-        setInterests((array) => [...array, item]);
+        // console.log('adding to interests array: ', item);
+        setInterestSelections((array) => [...array, item]);
     }
 
     const removeFromInterests = (item) => {
-        const filteredArray = interests.filter((procedure) => procedure !== item);
-        setInterests(filteredArray);
+        // console.log('removing from interests array: ', item);
+        const filteredArray = interestSelections.filter((procedure) => procedure.procedureTitle !== item.procedureTitle);
+        setInterestSelections(filteredArray);
     }
 
     const handleInterestsClick = (item) => {
         // console.log('originalInfo is: ', originalInformation);
-        if (!interests.includes(item)) addToInterests(item);
+        const procedureHolderArray = [];
+        // console.log('INTERESTS ARRAY IS: ', interestsArray);
+        interestSelections.forEach((element) => procedureHolderArray.push(element.procedureTitle));
+        if (!procedureHolderArray.includes(item.procedureTitle)) addToInterests(item);
         else removeFromInterests(item);
     }
 
@@ -161,6 +254,7 @@ const UniversalProfileEdit = () => {
     const handleButtonClick = (event) => {
         event.preventDefault();
         setChangesSaved(false);
+        setErrorSubmitting(false);
         if (checkForErrors()) return;
         // if (checkForPasswordInputError()) return;
         setIsModalOpen(true);
@@ -182,17 +276,17 @@ const UniversalProfileEdit = () => {
         1. (conditional) If the user is trying to change their password, check that the provided 'current password' is correct. If not, we do not save any data
         2. (conditional) If the user is trying to change their email, call verifyEmail. If the email is not valid, we will not save anything. If it is valid, somehow wait until the user has clicked 'verify' before proceeding. 
         */
-        if (email) {
-            console.log('testing verification!');
-            const verifyEmail = async () => {
-                let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
-                const isEmailValid = await editFuncs.verifyEmailForChange(email, userRole);  // checks to see if this new email is already in use or not
-                if (!isEmailValid) {  // USE DIFFERENT ERROR HANDLING HERE!
-                    console.log('Unable to use this email, please use a different email.');
-                }
-            }
-            await verifyEmail();
-        }
+        // if (email) {
+        //     console.log('testing verification!');
+        //     const verifyEmail = async () => {
+        //         let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
+        //         const isEmailValid = await editFuncs.verifyEmailForChange(email, userRole);  // checks to see if this new email is already in use or not
+        //         if (!isEmailValid) {  // USE DIFFERENT ERROR HANDLING HERE!
+        //             console.log('Unable to use this email, please use a different email.');
+        //         }
+        //     }
+        //     await verifyEmail();
+        // }
 
         // if (oldPassword && newPassword) {
         //     console.log('attempting to change password...');
@@ -216,26 +310,53 @@ const UniversalProfileEdit = () => {
         //         return;
         //     }
         // }
+        const data = {};
 
-        if (name || bio) {
-            console.log('attempting to change name or bio');
-            const data = {};
-            const changeName = async () => {
-                try {
-                    // if (name && name !== originalInformation.name) data['name'] = name;
-                    if (name) data['name'] = name;
-                    // console.log('data name is: ', data);
-                    // if (bio && bio !== originalInformation.bio) data['bio'] = bio;
-                    if (bio) data['bio'] = bio;
-                    console.log('sending data as: ', data);
-                    const res = await editFuncs.setUserData(data);
-                    console.log('name res returned as: ', res);
-                } catch (err) {
-                    console.log('Could not change name or bio: ', err);
-                }
-            }
-            await changeName();
+        if (name && name !== originalInformation.name) {
+            data.nickname = name;
         }
+        if (bio && bio !== originalInformation.bio) {
+            data.bio = bio;
+        }
+        if (gender && gender !== originalInformation.gender) {
+            data.gender = gender;
+        }
+        if (birthday && birthday !== originalInformation.birthday) {
+            data.birthday = birthday;
+        }
+        if (phoneNumber && phoneNumber !== originalInformation.phoneNumber) {
+            data.mobile = phoneNumber;
+        }
+        if (interestSelections !== originalInformation.interests) {
+            // console.log('HERE YAY!: ', originalInformation.interests);
+            // console.log('2nd!!: ', interestSelections);
+            const holder = [];
+            interestSelections.forEach((item) => holder.push(proceduresIdObj[item.procedureTitle]));
+            // console.log('holder is: ', holder);
+            data.interested = holder;
+        }
+        if (imageLink && imageLink !== originalInformation.image) {
+            data.img = imageLink;
+        }
+        console.log('sending data as: ', data);
+        let errorSubmitting = false;
+        const submitForm = async () => {
+            try {
+                const res = await editFuncs.setUserData(data);
+                console.log('edit profile res returned as: ', res);
+                if (res?.data?.code === 500) {
+                    throw new Error('Couldn\'t save some or all of the submitted data...');
+                } else {
+                    setChangesSaved(true);
+                }
+            } catch (err) {
+                console.log('Could not change edit profile page...');
+                setErrorSubmitting(true);
+            } finally {
+                setIsLoadingModalOpen(false);
+            }
+        }
+        submitForm();
         
         // const sendVerificationEmail = async () => {
         //     if (await verifyEmail()) {
@@ -246,19 +367,22 @@ const UniversalProfileEdit = () => {
         //         })
         //     }
         // }
-        
-        // const obj = {
-        //     'name': name,
-        //     'birthday': birthday,
-        //     'gender': gender,
-        //     'email': email,
-        //     'mobile': phoneNumber,
-        //     'bio': bio,
-        //     'interests': interests
+        // if (!errorSubmitting) {
+        //     setChangesSaved(true);
         // }
-        // console.log('submission obj is: ', obj);
-        setChangesSaved(true);
-        setIsLoadingModalOpen(false);
+        // setIsLoadingModalOpen(false);
+    }
+
+    // const handlePhotoChange = () => {
+    //     console.log('attempting to change photo');
+    // }
+
+    const handlePhotoReset = () => {
+        if (imageLink === originalInformation.image) return;
+        console.log('attempting to remove photo!');
+        resetFiles();
+        console.log('uploadedFiles is: ', uploadedFiles);
+        setImageLink("");
     }
     
 
@@ -296,6 +420,7 @@ const UniversalProfileEdit = () => {
                     <div className='univ-edit-top-row-right-col univ-edit-top-row-col'>
                         <div className='univ-edit-form-button-container'>
                             {changesSaved && <p className='univ-edit-form-changes-saved-text'>Changes saved!</p>}
+                            {errorSubmitting && <p className='univ-edit-form-changes-unsaved-text'>Unable to save changes at this time.</p>}
                             <button className='univ-edit-form-button' type='submit' form='univ-edit-info-form' onClick={(e) => handleButtonClick(e)}>Save Changes</button>
                         </div>
                     </div>
@@ -310,7 +435,30 @@ const UniversalProfileEdit = () => {
                         <form className='univ-edit-info-form-container' id='univ-edit-info-form'>
                             <div className='univ-edit-info-form-top-row'>
                                 <div className='univ-edit-info-form-profile-pic-container'>
-                                    <img src={defaultPhoto} alt='profilePicture' className='univ-edit-info-form-profile-pic' />
+                                    <div className='univ-edit-profile-pic-cover-container' onDrop={handleDrop}
+                                        onDragOver={handleDragOver}>
+                                        <div className='univ-edit-profile-pic-cover'>
+                                            <p className='univ-edit-profile-pic-change-text' onClick={handleBrowseFiles}>Click to Change</p>
+                                            <div className='univ-edit-profile-pic-trash-container' onClick={handlePhotoReset}>
+                                                <img src={trashcan} alt='remove profile picture' className='univ-edit-profile-pic-trash' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input
+                                        ref={fileInputRef}
+                                        type="file"
+                                        id="imageUpload"
+                                        accept="image/*"
+                                        style={{ display: "none" }}
+                                        onChange={handleFileSelection}
+                                    />
+                                    {/* <div
+                                        className="univ-edit-profile-upload-div"
+                                        
+                                        
+                                    >
+                                    </div> */}
+                                    <img src={imageLink ? imageLink : originalInformation.image ? originalInformation.image : defaultPhoto} alt='profile Picture' className='univ-edit-info-form-profile-pic' />
                                 </div>
                                 <div className='univ-edit-info-form-name-and-gender-container'>
                                     <div className='univ-edit-info-form-name-container'>
@@ -320,7 +468,7 @@ const UniversalProfileEdit = () => {
                                         <h4 className='univ-edit-info-form-label univ-edit-text'>Gender</h4>
                                         <div className='univ-edit-info-form-gender-radio-container'>
                                             <div className='univ-edit-info-form-gender-radio'>
-                                                <input type='radio' id='female' name='gender' className='univ-edit-info-form-gender-radio-button' value={0} onClick={() => setGender(0)} defaultChecked={gender === 0 ? "checked" : ""} />
+                                                <input type='radio' id='female' name='gender' className='univ-edit-info-form-gender-radio-button' value={2} onClick={() => setGender(2)} defaultChecked={gender === 2 ? "checked" : ""} />
                                                 <label className='univ-edit-info-form-gender-radio-label'>Female</label>
                                             </div>
                                             <div className='univ-edit-info-form-gender-radio'>
@@ -328,7 +476,7 @@ const UniversalProfileEdit = () => {
                                                 <label className='univ-edit-info-form-gender-radio-label'>Male</label>
                                             </div>
                                             <div className='univ-edit-info-form-gender-radio'>
-                                                <input type='radio' id='other' name='gender' className='univ-edit-info-form-gender-radio-button' value={2} onClick={() => setGender(2)} defaultChecked={gender === 2 ? "checked" : ""}/>
+                                                <input type='radio' id='other' name='gender' className='univ-edit-info-form-gender-radio-button' value={3} onClick={() => setGender(3)} defaultChecked={gender === 3 ? "checked" : ""}/>
                                                 <label className='univ-edit-info-form-gender-radio-label'>Other</label>
                                             </div>
                                         </div>
@@ -359,7 +507,7 @@ const UniversalProfileEdit = () => {
                 </div>
                 <div className='univ-edit-right-column-container'>
                     <div className='univ-edit-sub-container univ-edit-interests-container-container'>
-                        <UniversalInfoInterestsSelection interestsArray={interestSelections} interestOnClick={handleInterestsClick} userInterests={interests} accountType={accountType} />
+                        <UniversalInfoInterestsSelection interestsArray={interests} interestOnClick={handleInterestsClick} userInterests={interestSelections} accountType={accountType} />
                     </div>
                     <div className='univ-edit-change-password-button-container' >
                         <button type='button' className='univ-edit-change-password-button' onClick={() => setIsPasswordModalOpen(true)} >Change Password</button>
@@ -395,14 +543,17 @@ const UniversalInfoFormInput = ({onChange, stateVariable, placeholder, label, po
     )
 }
 
-const UploadProfilePic = () => {
-    const { selectedFiles, uploadedFiles, handleFileSelection, uploadingFiles, isError, isLoading, resetFiles, removeFiles} = useUploadImg();
-}
+// const UploadProfilePic = () => {
+//     const { selectedFiles, uploadedFiles, handleFileSelection, uploadingFiles, isError, isLoading, resetFiles, removeFiles} = useUploadImg();
+// }
 
 const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userInterests, accountType}) => {
     const [interestTab, setInterestTab] = useState(0);
     const [locations, setLocations] = useState([]);
     const [procedures, setProcedures] = useState([]);
+    const [procedureTitles, setProcedureTitles] = useState([]);
+    // console.log('user interests are: ', userInterests);
+    // console.log('interests array is: ', interestsArray)
     const selectTab = (index) => {
         setInterestTab(index);
       };
@@ -410,7 +561,12 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
         const holderArray = [];
         interestsArray.forEach((element) => holderArray.push(element?.location.charAt(0).toUpperCase() + element?.location.slice(1)));
         setLocations(holderArray);
-    }, [interestsArray])
+        const procedureHolderArray = [];
+        // console.log('INTERESTS ARRAY IS: ', interestsArray);
+        userInterests.forEach((element) => procedureHolderArray.push(element.procedureTitle));
+        console.log('procedureHolderArray is: ', procedureHolderArray);
+        setProcedureTitles(procedureHolderArray);
+    }, [interestsArray, userInterests])
     useEffect(() => {
         setProcedures(interestsArray[interestTab]?.procedures);
         // console.log('Setting procedures as: ', interestsArray[interestTab]?.procedures);
@@ -430,12 +586,14 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
             
             <div className='univ-edit-interests-selection-interests-container'>
                 {procedures?.map((item, index) => {
-                    const splitItem = item.split('_');
+                    const imgUrl = item?.imgUrl;
+                    const itemTitle = item?.procedureTitle || item;
+                    const splitItem = itemTitle.split('_');
                     const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
                     const procedureTitle = upperCased.join(' ');
-                    return (<div className='procedure-wrapper univ-edit-procedure-wrapper' onClick={() => interestOnClick(item)} key={index+100}>
-                                <div className={`procedure-photo-container univ-edit-procedure-photo-container ${userInterests.includes(item) ? 'univ-edit-procedure-selected' : ''}`}>
-                                    {item ? <img src={require(`../../assets/procedure/${item}.svg`)} alt='procedure' className='procedure-photo' /> : <div className='blank-procedure-photo'></div>}
+                    return (<div className='univ-edit-procedure-wrapper' onClick={() => interestOnClick(item)} key={index+100}>
+                                <div className={`procedure-photo-container univ-edit-procedure-photo-container ${procedureTitles.includes(item?.procedureTitle) ? 'univ-edit-procedure-selected' : ''}`}>
+                                    {imgUrl ? <img src={imgUrl} alt='procedure' className='procedure-photo' /> : <img src={require(`../../assets/procedure/${itemTitle}.svg`)} alt='procedure' className='procedure-photo' />}
                                 </div>
                                 <p className='procedure-subtitle'>{procedureTitle}</p>
                             </div>
@@ -476,7 +634,7 @@ const ChakraPasswordModal = ({title, approveButtonText, isModalOpen, closeModalF
     }
 
     const handlePasswordButtonClick = async () => {
-        console.log('attempting to click the submission button!')
+        // console.log('attempting to click the submission button!')
         if (checkForPasswordInputError()) {
             return;
         }
@@ -486,14 +644,21 @@ const ChakraPasswordModal = ({title, approveButtonText, isModalOpen, closeModalF
     }
 
     const handlePasswordFormSubmission = async () => {
-        console.log('attempting to submit the password form!');
+        // console.log('attempting to submit the password form!');
+        // setIsLoadingModalOpen(true);
         const obj = {
-            'oldPW': oldPassword,
-            'newPW': newPassword,
-            'newPWRep': newPasswordRepeated
+            'currentPassword': oldPassword,
+            'newPassword': newPassword,
+            'confirmNewPassword': newPasswordRepeated
         }
-        console.log('submitting: ', obj);
-        
+        try {
+            const res = await editFuncs.setUserData(obj)
+            console.log('new password res is: ', res);
+        } catch (err) {
+            if (err.message === 'Incorrect password, please try again.') {
+                setOldPasswordError('Incorrect password, please try again.');
+            }
+        }
     }
 
     return (
@@ -528,6 +693,7 @@ const ChakraEmailModal = ({title, approveButtonText, isModalOpen, closeModalFunc
     const [newEmail, setNewEmail] = useState("");
     const [newEmailError, setNewEmailError] = useState(false);
     const [hasSentEmail, setHasSentEmail] = useState(false);
+    const [emailSendingError, setEmailSendingError] = useState(false);
 
     const handleEmailButtonClick = async () => {
         if (newEmailError) return;
@@ -536,8 +702,43 @@ const ChakraEmailModal = ({title, approveButtonText, isModalOpen, closeModalFunc
             return;
         }
         console.log('attempting to change email to: ', newEmail);
-        setHasSentEmail(true);
+        try {
+            openLoadingModal();
+            const res = await editFuncs.sendEmailUpdateVerification(newEmail);
+            setHasSentEmail(true);
+        } catch (err) {
+            setEmailSendingError(true);
+            console.log(err);
+        } finally {
+            closeLoadingModal();
+        }
+        
     }
+
+    if (emailSendingError) return (
+        <Modal isOpen={isModalOpen} onClose={closeModalFunc} >
+            <ModalOverlay />
+            <ModalContent bg="#FBFCFF" border="2px" borderColor="#675D59" borderRadius="12px" p="30px 36px" minWidth="40%" >
+            <ModalBody >
+                <Text fontSize="3xl" color="#352C29" fontWeight="600" >
+                    {title}
+                </Text>
+            </ModalBody>
+
+            <ModalFooter display="flex" flexDirection="column" justifyContent="center" rowGap="1rem">
+                {/* <Button bgColor="#675D59" px="28px" py="20px" color="white" _hover={{ bg: "#4c4542" }} onClick={closeModalFunc}>
+                {cancelButtonText}
+                </Button> */}
+                <Text fontSize="m" color="#352C29" fontWeight="400" >
+                {`We could not send a verification link to ${newEmail} at this time, please try again later.`}
+                </Text>
+                <Button bgGradient="linear(to-r, #F48C8A, #F0A484)" color="white" _hover={{ bgGradient: "linear(to-r, #f27673, #ee9570)" }} px="28px" py="20px" width="100%" onClick={closeModalFunc}>
+                {'Close'}
+                </Button>
+            </ModalFooter>
+            </ModalContent>
+        </Modal>
+    )
 
     if (hasSentEmail) return (
         <Modal isOpen={isModalOpen} onClose={closeModalFunc} >

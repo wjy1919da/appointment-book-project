@@ -19,6 +19,7 @@ import "./doctor-own-profile-grid.scss";
 import post1 from "../../assets/doctor/post3.png";
 import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
+import { is } from "date-fns/locale";
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const {
@@ -40,12 +41,11 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
+
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
-  // console.log("flatData in doctor profile", flatData);
-  // hook
 
-  // create a post + icon button
   const handleIconClick = () => {
     // setShowCreatePost(true);
     navigate("/posts/create", { state: { source: "doctorProfile" } });
@@ -73,7 +73,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     title,
     memberId,
     isPrivate,
-    isHighlight
+    isHighlight,
+    isLike
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -81,8 +82,9 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setUserName(username);
     setTitle(title);
     setMemberID(memberId);
-    // setIsHighlight(isHighlight);
+    setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
+    setIsLike(isLike);
   };
 
   const postList = flatData.map((post, index) => (
@@ -108,6 +110,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         likes={post.like_count || 0}
         dummyPrivate={post.isDisplay}
         dummyHighlight={post.highlightStatus}
+        id={post.id}
+        liked={post.isLike}
       />
     </div>
   ));

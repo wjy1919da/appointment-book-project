@@ -20,6 +20,7 @@ import creatPostIcon from "../../assets/post/create-post-icon.png";
 
 const UserProfileLike = () => {
   // calling hook
+  console.log("user profile like");
   const { data, isLoading, isError } = useGetUserLikededPost();
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -30,10 +31,6 @@ const UserProfileLike = () => {
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-
-  useEffect(() => {
-    console.log("Likes Page Data", data);
-  }, [data]);
 
   const [gutterwidth, setGutterWidth] = useState("10px");
   const breakPoint = {
@@ -85,11 +82,15 @@ const UserProfileLike = () => {
       }
     >
       <CommunityPost
+        dummyHighlight={post.isHighlight}
+        dummyPrivate={post.isDisplay}
+        id={post.id}
         imageURL={post.coverImg || []}
         text={post.title || ""}
         profileImage={post.avatar || ""}
-        authorName={post.username || ""}
+        authorName={post.nickname || ""}
         likes={post.like_count || 0}
+        liked={post.isLike}
       />
     </div>
   ));

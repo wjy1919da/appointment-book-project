@@ -34,8 +34,15 @@ const CommentCard = ({
   commentId,
   onClick,
   replies,
+  likeCount,
+  isLiked,
 }) => {
-  const [likedComment, setLikedComment] = useState(false); // like commment
+  const [likedComment, setLikedComment] = useState(isLiked || 0); // like commment
+  const [commentLikeCount, setCommentLikeCount] = useState(likeCount); // like count
+  useEffect(() => {
+    setCommentLikeCount(likeCount);
+    setLikedComment(isLiked);
+  }, [likeCount, isLiked]);
 
   const toast = useToast();
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -85,6 +92,10 @@ const CommentCard = ({
 
   const handleClickCommentLike = (commentId) => {
     setLikedComment((prev) => !prev);
+    let newCountLikes = likedComment
+      ? commentLikeCount - 1
+      : commentLikeCount + 1;
+    setCommentLikeCount(newCountLikes);
     apiCommentLikeMutate({ commentId: commentId });
   };
 
@@ -137,12 +148,9 @@ const CommentCard = ({
                     src={likedComment ? heartIconFilled : heartIcon}
                     alt="like"
                     onClick={() => handleClickCommentLike(commentId)}
-                    // onClick={onClick}
                   ></img>
                 </span>
-                {/* <span>
-                    <img className='post-detail-icon' src={commentIcon} alt='comment' onClick={onClick}></img>
-                </span> */}
+                <div className="commentcard-likeCount">{commentLikeCount}</div>
               </div>
             </div>
           </div>
@@ -161,6 +169,8 @@ const CommentCard = ({
                   commentId={reply.id}
                   date={formatDate(reply.commentDate)}
                   replies={reply.comments || []}
+                  likeCount={reply.likeCount}
+                  isLiked={reply.isLike}
                 />
               ))}
               {/* Show more or less buttons */}
