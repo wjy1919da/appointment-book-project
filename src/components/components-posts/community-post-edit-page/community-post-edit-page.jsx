@@ -47,8 +47,18 @@ const EditPostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-  const { mutate: apiEditMutate, data } = useApiRequestEditPost();
-  const { mutate: apiDeleteMutate, data: deleteData } = useDeletePost();
+  const {
+    mutate: apiEditMutate,
+    data,
+    isSuccess: isEditSuccess,
+    isError: isEditError,
+  } = useApiRequestEditPost();
+  const {
+    mutate: apiDeleteMutate,
+    data: deleteData,
+    isSuccess: isDeleteSuccess,
+    isError: isDeleteError,
+  } = useDeletePost();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [clickedRadio, setClickedRadio] = useState(false); // restrict over 18
@@ -56,6 +66,7 @@ const EditPostPage = () => {
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   // console.log("EditPostPage", postQuery);
 
   // refs
@@ -96,7 +107,7 @@ const EditPostPage = () => {
 
   // when click on delete button
   const handleClickDelete = () => {
-    console.log("POSTQUERY:", postQuery);
+    // console.log("POSTQUERY:", postQuery);
     const postId = postQuery.postID;
     apiDeleteMutate(postId);
     onClose();
@@ -104,10 +115,13 @@ const EditPostPage = () => {
 
   // api
   const onSubmit = (data) => {
+    const displayImage =
+      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: "",
+      coverImg: displayImage,
       // postID
       id: postQuery.postID,
       isDisplay: 1,
@@ -138,8 +152,7 @@ const EditPostPage = () => {
   };
 
   useEffect(() => {
-    // console.log("data::", data);
-    if (data?.code === 100) {
+    if (isDeleteSuccess || isEditSuccess) {
       resetFiles();
       reset({
         title: "",
@@ -147,24 +160,31 @@ const EditPostPage = () => {
       });
       setSelectedImage(null);
       toast({
-        title: "Post edit successfully.",
+        title: "Success!.",
         status: "success",
         duration: 1000,
         isClosable: true,
       });
+      refreshMyPost();
       localStorage.getItem("accountType") === "2"
-        ? navigate("/doctor-profile")
+        ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
-    if (data?.code === 500) {
+    if (isEditError || isDeleteError) {
       toast({
-        title: "Failed to create post.",
+        title: "Failed.",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
     }
-  }, [data, toast]);
+  }, [isDeleteSuccess, isEditSuccess, isDeleteError, isEditError, toast]);
+
+  useEffect(() => {
+    if (uploadedFiles.length > 0) {
+      setSelectedImage(uploadedFiles[uploadedFiles.length - 1]);
+    }
+  }, [uploadedFiles]);
 
   // back button
   const handleClickCreatePostBack = () => {
@@ -204,9 +224,7 @@ const EditPostPage = () => {
       ? uploadedFiles.map((file, index) => (
           <div key={index} className="edit-post-page-thumbnail">
             <div
-              className={`thumbnail ${
-                index === uploadedFiles.length - 1 ? "clicked" : ""
-              }`}
+              className={`thumbnail ${selectedImage === file ? "clicked" : ""}`}
               onClick={() => handleClickMask(index)}
             >
               <img
@@ -244,9 +262,6 @@ const EditPostPage = () => {
           </div>
         ))
       : null;
-
-  const displayImage =
-    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
 
   return (
     <div>
@@ -327,8 +342,8 @@ const EditPostPage = () => {
             <div className="edit-post-page-thumbnail-container">
               {displayThumbnails}
 
-              {/* thumbnail create */}
-              {displayThumbnails && (
+              {/* create thumbnail */}
+              {displayThumbnails && uploadedFiles.length < 3 && (
                 <div
                   className="edit-post-page-add-thumbnail"
                   onDrop={handleDrop}

@@ -3,17 +3,18 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import usePostQueryStore from "../../../postStore.ts";
+import { useToast } from "@chakra-ui/react";
 
 // components
 import CommunityPost from "../community-post/community-post.component";
 import PostDetail from "../community-post-detail/community-post-detail.component";
 import HomeSpinner from "../../home-spinner/home-spinner.component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ErrorMsg from "../../error-msg/error-msg.component";
+// import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook
 import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-import { useGetLikesPost } from "../../../hooks/useGetPosts";
+// import { useGetLikesPost } from "../../../hooks/useGetPosts";
 
 // scss
 import "./doctor-post-grid.styles.scss";
@@ -21,7 +22,6 @@ import "./doctor-post-grid.styles.scss";
 // images
 import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
-import { set } from "date-fns";
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -38,6 +38,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setUserName = usePostQueryStore((state) => state.setUserName);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   // const postQuery = usePostQueryStore((state) => state.postQuery);
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
@@ -50,6 +51,18 @@ const DoctorPostGrid = ({ isAbout }) => {
   // console.log("flatData", flatData);
 
   const { postid } = useParams();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (hasNextPage === undefined) {
+      toast({
+        title: "No more posts",
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  }, [hasNextPage, toast]);
 
   const handleClickPost = (
     ID,
@@ -58,7 +71,8 @@ const DoctorPostGrid = ({ isAbout }) => {
     title,
     memberId,
     isHighlight,
-    isPrivate
+    isPrivate,
+    isLike
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -68,6 +82,7 @@ const DoctorPostGrid = ({ isAbout }) => {
     setMemberID(memberId);
     setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
+    setIsLike(isLike);
   };
   if (error) {
     navigate("*");
@@ -75,7 +90,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
-  if (isLoading) return <HomeSpinner />;
+  // if (isLoading) return <HomeSpinner />;
 
   const postCardList = flatData.map((post) => (
     <div
@@ -101,19 +116,20 @@ const DoctorPostGrid = ({ isAbout }) => {
         profileImage={post.avatar || ""}
         authorName={post.nickname || ""}
         likes={post.likedCount || 0}
+        liked={post.isLike}
       />
     </div>
   ));
 
   return (
     <div className="doctor-post-grid-inner-container">
-      {flatData && (
-        <InfiniteScroll
-          dataLength={flatData.length}
-          next={fetchNextPage}
-          hasMore={hasNextPage}
-          scrollThreshold={0.8}
-        >
+      <InfiniteScroll
+        dataLength={flatData.length}
+        next={() => fetchNextPage}
+        hasMore={!!hasNextPage}
+        scrollThreshold={0.8}
+      >
+        {flatData && (
           <ResponsiveMasonry
             columnsCountBreakPoints={{
               default: 5,
@@ -128,8 +144,9 @@ const DoctorPostGrid = ({ isAbout }) => {
           >
             <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
           </ResponsiveMasonry>
-        </InfiniteScroll>
-      )}
+        )}
+      </InfiniteScroll>
+
       {IsModalOpen && (
         <PostDetail
           show={IsModalOpen}
@@ -150,6 +167,7 @@ const DoctorPostGrid = ({ isAbout }) => {
             <div className="download-button-text">DownLoad APP</div>
           </button>
         </Link>
+        {/* </div> */}
       </div>
     </div>
   );

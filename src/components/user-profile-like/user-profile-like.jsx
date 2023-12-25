@@ -82,11 +82,15 @@ const UserProfileLike = () => {
       }
     >
       <CommunityPost
+        dummyHighlight={post.isHighlight}
+        dummyPrivate={post.isDisplay}
+        id={post.id}
         imageURL={post.coverImg || []}
         text={post.title || ""}
         profileImage={post.avatar || ""}
-        authorName={post.username || ""}
+        authorName={post.nickname || ""}
         likes={post.like_count || 0}
+        liked={post.isLike}
       />
     </div>
   ));
