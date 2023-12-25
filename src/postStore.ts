@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface PostQuery {
   filterType: number;
@@ -55,19 +55,19 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     pageSize: 15,
     filterType: 2,
     postID: 0,
-    userName: '',
-    userAvatar: '',
+    userName: "",
+    userAvatar: "",
     filterCondition: [],
-    postBy: ['doctor', 'user'],
-    tag: '',
+    postBy: ["doctor"],
+    tag: "",
     trigger: 0,
-    tempSearchParam: '',
-    postSearchParam: '',
-    title: '',
-    description: '',
+    tempSearchParam: "",
+    postSearchParam: "",
+    title: "",
+    description: "",
     pictures: [],
     memberID: 0,
-    tempCommentStatus: '',
+    tempCommentStatus: "",
     commentId: 0,
     isPrivate: false,
     isHighlight: false,
@@ -105,7 +105,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     set((state) => ({
       postQuery: {
         ...state.postQuery,
-        tempCommentStatus: isOpen ? status : '',
+        tempCommentStatus: isOpen ? status : "",
       },
     })),
   setCommentId: (commentId) =>

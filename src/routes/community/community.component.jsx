@@ -176,34 +176,35 @@ const Community = () => {
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
                 />
+                {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
               </div>
-              <span
-                className="postby"
-                style={{ marginLeft: "20px", fontSize: "27px" }}
-              >
-                Post By
-              </span>
-              <button
-                className={`filter-button ${
-                  postQuery.postBy.includes("user")
-                    ? "filter-button-selected"
-                    : ""
-                }`}
-                onClick={() => handleOnClick("user")}
-              >
-                Member
-              </button>
-              <button
-                className={`filter-button ${
-                  postQuery.postBy.includes("doctor")
-                    ? "filter-button-selected"
-                    : ""
-                }`}
-                onClick={() => handleOnClick("doctor")}
-              >
-                Doctor
-              </button>
+              <div className="community-post-header-filter-container">
+                <span className="postby">Post By</span>
+                <button
+                  // className={`filter-button-member ${
+                  className={`filter-button ${
+                    postQuery.postBy.includes("user")
+                      ? "filter-button-selected"
+                      : ""
+                  }`}
+                  onClick={() => handleOnClick("user")}
+                >
+                  Member
+                </button>
+                <button
+                  // className={`filter-button-doctor ${
+                  className={`filter-button ${
+                    postQuery.postBy.includes("doctor")
+                      ? "filter-button-selected"
+                      : ""
+                  }`}
+                  onClick={() => handleOnClick("doctor")}
+                >
+                  Doctor
+                </button>
+              </div>
+
               {/* <PostDropDown
                options={dropdownContentsByProcedure}
                handleFilters={handleFilters}
