@@ -58,7 +58,7 @@ const usePostQueryStore = create<postQueryStore>((set) => ({
     userName: "",
     userAvatar: "",
     filterCondition: [],
-    postBy: ["doctor"],
+    postBy: ["user"],
     tag: "",
     trigger: 0,
     tempSearchParam: "",

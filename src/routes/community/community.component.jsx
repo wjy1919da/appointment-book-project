@@ -1,5 +1,7 @@
 import usePostQueryStore from "../../postStore.ts";
 import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 // components
 import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
@@ -13,10 +15,15 @@ import PostSearchBoxDropDown from "../../components/components-posts/community-p
 import "./community.styles.scss";
 import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
+import Arrow1 from "../../assets/post/arrow1_grid.png";
+
 const toDisplayFormat = (param) => {
   return param.replace(/_/g, " ");
 };
 const Community = () => {
+  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -222,6 +229,27 @@ const Community = () => {
             </div>
           </div>
           <DoctorPostGrid />
+          {/* <div className="down-load-more-container">
+            {!isMobile && (
+              // <img src={Arrow} alt="arrow" className="arrow-containter" />
+              <FontAwesomeIcon
+                icon={faAnglesDown}
+                className="arrow-containter"
+              />
+            )}
+            {isMobile && (
+              <img src={Arrow1} alt="arrow1" className="arrow1-containter" />
+            )}
+            <div className="download-text">
+              Join Charm community to view more
+            </div>
+            <Link to="/download">
+              <button className="download-button">
+                <div className="download-button-text">DownLoad APP</div>
+              </button>
+            </Link>
+         
+          </div> */}
         </div>
       </div>
     </div>
