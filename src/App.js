@@ -148,10 +148,7 @@ const App = () => {
 
               {/* <Route path='register/verifyEmail/:token' element={<Verification />} /> */}
               <Route path="register/verifyEmail" element={<Verification />} />
-              <Route
-                path="update/verifyEmail"
-                element={<UpdateVerification />}
-              />
+              <Route path="updateEmail/verification" element={<UpdateVerification />} />
               <Route
                 path="doctorVerification"
                 element={<DoctorVerificationMainPage />}

@@ -56,7 +56,8 @@ const UniversalProfileEdit = () => {
     const doctorLogin = useDoctorLogin();
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     // const modalDisclosure = useDisclosure();
-    const userInfo = userInfoQueryStore((state) => state.userInfo);
+    // const userInfo = userInfoQueryStore((state) => state.userInfo);
+    const proceduresIdObj = editFuncs.proceduresId;
     // const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
     const {
         selectedFiles,
@@ -91,6 +92,7 @@ const UniversalProfileEdit = () => {
     const retrieveAccountType = () => {
         const accountNumber = localStorage.getItem("accountType");
         if (accountNumber === null) throw new Error('No account type found...');
+        console.log('userID is: ', userInfo.userId);
         return Number(accountNumber);
     }
     const establishOriginalInfo = async (userObjResponse) => {
@@ -194,6 +196,7 @@ const UniversalProfileEdit = () => {
 
     const alterInterests = async (procedures) => {  // needed for if in the future, we hold the procedure imgs somewhere else (not in assets folder)
         const alteredProcedures = [];
+        // console.log('procedures are: ', procedures);
         for (let i = 0; i < procedures.length; i++) {
             const location = procedures[i]?.location;
             const locationProcedureArray = procedures[i]?.procedures;
@@ -230,13 +233,16 @@ const UniversalProfileEdit = () => {
 
     const removeFromInterests = (item) => {
         // console.log('removing from interests array: ', item);
-        const filteredArray = interestSelections.filter((procedure) => procedure !== item);
+        const filteredArray = interestSelections.filter((procedure) => procedure.procedureTitle !== item.procedureTitle);
         setInterestSelections(filteredArray);
     }
 
     const handleInterestsClick = (item) => {
         // console.log('originalInfo is: ', originalInformation);
-        if (!interestSelections.includes(item)) addToInterests(item);
+        const procedureHolderArray = [];
+        // console.log('INTERESTS ARRAY IS: ', interestsArray);
+        interestSelections.forEach((element) => procedureHolderArray.push(element.procedureTitle));
+        if (!procedureHolderArray.includes(item.procedureTitle)) addToInterests(item);
         else removeFromInterests(item);
     }
 
@@ -321,8 +327,13 @@ const UniversalProfileEdit = () => {
         if (phoneNumber && phoneNumber !== originalInformation.phoneNumber) {
             data.mobile = phoneNumber;
         }
-        if (interestSelections && interestSelections !== originalInformation.interests) {
-            data.interested = interestSelections;
+        if (interestSelections !== originalInformation.interests) {
+            // console.log('HERE YAY!: ', originalInformation.interests);
+            // console.log('2nd!!: ', interestSelections);
+            const holder = [];
+            interestSelections.forEach((item) => holder.push(proceduresIdObj[item.procedureTitle]));
+            // console.log('holder is: ', holder);
+            data.interested = holder;
         }
         if (imageLink && imageLink !== originalInformation.image) {
             data.img = imageLink;
@@ -359,7 +370,7 @@ const UniversalProfileEdit = () => {
         // if (!errorSubmitting) {
         //     setChangesSaved(true);
         // }
-        setIsLoadingModalOpen(false);
+        // setIsLoadingModalOpen(false);
     }
 
     // const handlePhotoChange = () => {
@@ -540,6 +551,9 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
     const [interestTab, setInterestTab] = useState(0);
     const [locations, setLocations] = useState([]);
     const [procedures, setProcedures] = useState([]);
+    const [procedureTitles, setProcedureTitles] = useState([]);
+    // console.log('user interests are: ', userInterests);
+    // console.log('interests array is: ', interestsArray)
     const selectTab = (index) => {
         setInterestTab(index);
       };
@@ -547,7 +561,12 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
         const holderArray = [];
         interestsArray.forEach((element) => holderArray.push(element?.location.charAt(0).toUpperCase() + element?.location.slice(1)));
         setLocations(holderArray);
-    }, [interestsArray])
+        const procedureHolderArray = [];
+        // console.log('INTERESTS ARRAY IS: ', interestsArray);
+        userInterests.forEach((element) => procedureHolderArray.push(element.procedureTitle));
+        console.log('procedureHolderArray is: ', procedureHolderArray);
+        setProcedureTitles(procedureHolderArray);
+    }, [interestsArray, userInterests])
     useEffect(() => {
         setProcedures(interestsArray[interestTab]?.procedures);
         // console.log('Setting procedures as: ', interestsArray[interestTab]?.procedures);
@@ -573,7 +592,7 @@ const UniversalInfoInterestsSelection = ({interestsArray, interestOnClick, userI
                     const upperCased = splitItem.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
                     const procedureTitle = upperCased.join(' ');
                     return (<div className='univ-edit-procedure-wrapper' onClick={() => interestOnClick(item)} key={index+100}>
-                                <div className={`procedure-photo-container univ-edit-procedure-photo-container ${userInterests.includes(item) ? 'univ-edit-procedure-selected' : ''}`}>
+                                <div className={`procedure-photo-container univ-edit-procedure-photo-container ${procedureTitles.includes(item?.procedureTitle) ? 'univ-edit-procedure-selected' : ''}`}>
                                     {imgUrl ? <img src={imgUrl} alt='procedure' className='procedure-photo' /> : <img src={require(`../../assets/procedure/${itemTitle}.svg`)} alt='procedure' className='procedure-photo' />}
                                 </div>
                                 <p className='procedure-subtitle'>{procedureTitle}</p>
@@ -615,7 +634,7 @@ const ChakraPasswordModal = ({title, approveButtonText, isModalOpen, closeModalF
     }
 
     const handlePasswordButtonClick = async () => {
-        console.log('attempting to click the submission button!')
+        // console.log('attempting to click the submission button!')
         if (checkForPasswordInputError()) {
             return;
         }
@@ -625,7 +644,7 @@ const ChakraPasswordModal = ({title, approveButtonText, isModalOpen, closeModalF
     }
 
     const handlePasswordFormSubmission = async () => {
-        console.log('attempting to submit the password form!');
+        // console.log('attempting to submit the password form!');
         // setIsLoadingModalOpen(true);
         const obj = {
             'currentPassword': oldPassword,
@@ -674,6 +693,7 @@ const ChakraEmailModal = ({title, approveButtonText, isModalOpen, closeModalFunc
     const [newEmail, setNewEmail] = useState("");
     const [newEmailError, setNewEmailError] = useState(false);
     const [hasSentEmail, setHasSentEmail] = useState(false);
+    const [emailSendingError, setEmailSendingError] = useState(false);
 
     const handleEmailButtonClick = async () => {
         if (newEmailError) return;
@@ -682,8 +702,43 @@ const ChakraEmailModal = ({title, approveButtonText, isModalOpen, closeModalFunc
             return;
         }
         console.log('attempting to change email to: ', newEmail);
-        setHasSentEmail(true);
+        try {
+            openLoadingModal();
+            const res = await editFuncs.sendEmailUpdateVerification(newEmail);
+            setHasSentEmail(true);
+        } catch (err) {
+            setEmailSendingError(true);
+            console.log(err);
+        } finally {
+            closeLoadingModal();
+        }
+        
     }
+
+    if (emailSendingError) return (
+        <Modal isOpen={isModalOpen} onClose={closeModalFunc} >
+            <ModalOverlay />
+            <ModalContent bg="#FBFCFF" border="2px" borderColor="#675D59" borderRadius="12px" p="30px 36px" minWidth="40%" >
+            <ModalBody >
+                <Text fontSize="3xl" color="#352C29" fontWeight="600" >
+                    {title}
+                </Text>
+            </ModalBody>
+
+            <ModalFooter display="flex" flexDirection="column" justifyContent="center" rowGap="1rem">
+                {/* <Button bgColor="#675D59" px="28px" py="20px" color="white" _hover={{ bg: "#4c4542" }} onClick={closeModalFunc}>
+                {cancelButtonText}
+                </Button> */}
+                <Text fontSize="m" color="#352C29" fontWeight="400" >
+                {`We could not send a verification link to ${newEmail} at this time, please try again later.`}
+                </Text>
+                <Button bgGradient="linear(to-r, #F48C8A, #F0A484)" color="white" _hover={{ bgGradient: "linear(to-r, #f27673, #ee9570)" }} px="28px" py="20px" width="100%" onClick={closeModalFunc}>
+                {'Close'}
+                </Button>
+            </ModalFooter>
+            </ModalContent>
+        </Modal>
+    )
 
     if (hasSentEmail) return (
         <Modal isOpen={isModalOpen} onClose={closeModalFunc} >
