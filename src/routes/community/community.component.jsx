@@ -1,29 +1,30 @@
 import usePostQueryStore from "../../postStore.ts";
-import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+// import { Link } from "react-router-dom";
 
 // components
 import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
 import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
-import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
-import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
 import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
-import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
+import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
+// import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
+// import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
+// import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
 
 // scss
 import "./community.styles.scss";
-import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-import Arrow1 from "../../assets/post/arrow1_grid.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
+// import Arrow1 from "../../assets/post/arrow1_grid.png";
 
 const toDisplayFormat = (param) => {
   return param.replace(/_/g, " ");
 };
+
 const Community = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 993px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -182,6 +183,7 @@ const Community = () => {
                   onChange={handleInputChange}
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
+                  isMobile={isMobile}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
