@@ -1,4 +1,11 @@
 // default css for 1440 and above
+.community-component-container {
+  background: var(
+    --background-gradient-color,
+    linear-gradient(180deg, #fff2ed 24.48%, rgba(255, 248, 244, 0) 100%)
+  );
+}
+
 .doctor-post-outer-container {
   display: flex;
   flex-direction: column;

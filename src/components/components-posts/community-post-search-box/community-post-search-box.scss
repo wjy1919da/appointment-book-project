@@ -39,8 +39,11 @@
   margin: 45px 0 0 -10px;
 }
 
-@media (max-width: 993px) {
+@media (max-width: 1133px) {
   .community-post-search-box-input {
     width: 350px !important;
   }
+}
+
+@media (max-width: 744px) {
 }
