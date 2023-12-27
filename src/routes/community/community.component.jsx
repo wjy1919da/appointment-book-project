@@ -137,7 +137,7 @@ const Community = () => {
     setIsPostDropDownOpen(!isPostDropDownOpen);
   };
   const handleSearch = () => {
-    console.log('handleSearch is clicked')
+    console.log('handleSearch is clicked');
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
       JSON.parse(localStorage.getItem('postSearchHistory')) || [];
