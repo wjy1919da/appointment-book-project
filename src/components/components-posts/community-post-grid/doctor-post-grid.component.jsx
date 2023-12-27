@@ -12,6 +12,7 @@ import CommunityPost from "../community-post/community-post.component";
 import PostDetail from "../community-post-detail/community-post-detail.component";
 import HomeSpinner from "../../home-spinner/home-spinner.component";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CommunityPostSkeleton from "../community-post/community-post-skeleton.component.jsx";
 // import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook

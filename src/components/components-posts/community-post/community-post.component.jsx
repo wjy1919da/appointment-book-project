@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
 
 // hooks
 import { useGetLikesPost } from "../../../hooks/useGetPosts";
@@ -36,7 +37,7 @@ const CommunityPost = ({
   const setIsLike = usePostQueryStore((state) => state.setIsLike);
 
   const [width, setWidth] = useState("");
-  const [displayImage, setDisplayImage] = useState(imageURL);
+  // const [displayImage, setDisplayImage] = useState(imageURL);
 
   // likes
   const [isHeartLiked, setIsHeartLiked] = useState(liked);
@@ -56,9 +57,9 @@ const CommunityPost = ({
   }, [isMobile]);
 
   // default image when image is not loaded
-  const handleImageError = () => {
-    setDisplayImage(defaultImage);
-  };
+  // const handleImageError = () => {
+  //   setDisplayImage(defaultImage);
+  // };
 
   // likes hook import
   const { mutate: apiLikeMutate } = useGetLikesPost();
@@ -96,13 +97,17 @@ const CommunityPost = ({
         />
       )}
 
-      <div className="post-Image">
-        <img
-          src={displayImage}
-          className="postImage"
-          onError={handleImageError}
-        />
-      </div>
+      {imageURL ? (
+        <div className="post-Image">
+          <img
+            src={imageURL}
+            className="postImage"
+            // onError={handleImageError}
+          />
+        </div>
+      ) : (
+        <Skeleton height="186px" width={width} />
+      )}
       <div className="post-information">
         <span className="post-text">{text}</span>
         <div className="profile">
