@@ -2,6 +2,8 @@
   position: relative;
   display: flex;
   background-color: white;
+  border: 1px solid #675d59;
+  border-radius: 6px;
   margin-left: auto;
   padding: 8px;
 }
@@ -13,7 +15,7 @@
 .community-post-search-box-input {
   position: relative;
   background: white;
-  border-radius: 5px;
+  // border-radius: 5px;
   border: none;
   // border: 1px solid #675d59;
   outline: none;
@@ -29,9 +31,9 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border: 1px solid #675d59;
-  border-radius: 5px;
-  pointer-events: none;
+  // border: 1px solid #675d59;
+  // border-radius: 5px;
+  // pointer-events: none;
 }
 
 .search-dropdown-container {
@@ -46,4 +48,6 @@
 }
 
 @media (max-width: 744px) {
+  // .community-post-search-box-container {
+  // }
 }

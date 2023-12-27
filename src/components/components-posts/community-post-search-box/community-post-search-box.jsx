@@ -27,7 +27,7 @@ const PostSearchBox = ({ value, handleSearch, isMobile, ...otherProps }) => {
   };
 
   return (
-    <div className={`community-post-search-box-container ${isInputVisible ? 'active' : ''}`}>
+    <div className='community-post-search-box-container'>
       {isMobile && !isInputVisible && (
         <button
           type='button'
@@ -72,25 +72,3 @@ const PostSearchBox = ({ value, handleSearch, isMobile, ...otherProps }) => {
 
 export default PostSearchBox;
 
-// const PostSearchBox = ({ value = '', handleSearch, ...otherProps }) => {
-//   return (
-//     <div className='community-post-search-box-container'>
-//       <input
-//         type='text'
-//         value={value}
-//         {...otherProps}
-//         className='community-post-search-box-input'
-//       />
-//       <button type='button'>
-//         <img
-//           src={SearchIcon}
-//           alt='Image-Search-Icon'
-//           className='community-post-search-box-icon'
-//           onClick={handleSearch}
-//         />
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default PostSearchBox;
