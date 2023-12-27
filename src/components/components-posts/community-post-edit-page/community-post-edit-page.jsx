@@ -404,7 +404,7 @@ const EditPostPage = () => {
 
             <div className='edit-post-page-button-wrapper'>
               {/* --- radio button --- */}
-              <div className='edit-post-page-radio-button-container'>
+              {/* <div className='edit-post-page-radio-button-container'>
                 <input
                   id='input-linked'
                   type='radio'
@@ -419,7 +419,7 @@ const EditPostPage = () => {
                 >
                   Restrict my post to viewers over 18
                 </label>
-              </div>
+              </div> */}
 
               {/* --- button --- */}
               <div className='post-information-sendButton'>

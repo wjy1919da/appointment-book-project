@@ -373,7 +373,7 @@ const CreatePostPage = () => {
 
             <div className='create-post-page-button-wrapper'>
               {/* --- radio button --- */}
-              <div className='create-post-page-radio-button-container'>
+              {/* <div className='create-post-page-radio-button-container'>
                 <input
                   id='input-linked'
                   type='radio'
@@ -389,7 +389,7 @@ const CreatePostPage = () => {
                   Restrict my post to viewers over 18
                 </label>
               </div>
-
+ */}
               {/* --- button --- */}
               <div className='post-information-sendButton'>
                 <FormButton
