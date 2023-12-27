@@ -1,4 +1,4 @@
-// screen bigger than 1025px
+// screen bigger than 1440px
 .edit-post-page-container {
   display: flex;
   flex-direction: column;
@@ -210,6 +210,16 @@
 .post-information-sendButton {
   display: flex;
   align-items: center;
+
+  .edit-post-page-repost-button {
+    padding: 5px 23px;
+    height: 41px;
+  }
+}
+
+.edit-post-page-trash-icon {
+  width: 48px;
+  height: 48px;
 }
 
 // image mask effect
@@ -218,7 +228,7 @@
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -235,10 +245,77 @@
   content: none; // This removes the ::before content, effectively removing the mask
 }
 
-// screen 769px to 1024px
-@media (max-width: 1024px) {
+// small screens
+@media (max-width: 1133px) {
+  .edit-post-page-container {
+    .pink-background-1 {
+      position: absolute;
+      top: 65px;
+      left: 0;
+      z-index: 0;
+      border-radius: 0 236px 236px 0;
+      background: var(
+        --new-gradient,
+        linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+      );
+      width: 400px;
+      height: 330px;
+    }
+
+    .pink-background-2 {
+      top: 600px;
+      z-index: -1;
+    }
+
+    .edit-post-page-inner-container {
+      width: 880px;
+      height: 490px;
+    }
+
+    .edit-post-page-title,
+    .edit-post-page-description {
+      width: 400px;
+    }
+  }
 }
 
-// small screens
-@media (max-width: 768px) {
+// mobile
+@media (max-width: 744px) {
+  .edit-post-page-container {
+    .pink-background-1 {
+      top: 55px;
+    }
+
+    .pink-background-2 {
+      top: 1000px;
+      right: 0;
+    }
+
+    .edit-post-page-inner-container {
+      display: flex;
+      flex-direction: column;
+      width: 480px;
+      height: 900px;
+    }
+
+    .edit-post-page-title,
+    .edit-post-page-description {
+      width: 370px;
+    }
+
+    .edit-post-input-radio-button-label {
+      font-size: 13px;
+    }
+
+    .edit-post-page-trash-icon {
+      width: 38px;
+      height: 38px;
+    }
+
+    .edit-post-page-repost-button {
+      font-size: 14px;
+      padding: 5px 20px;
+      height: 41px;
+    }
+  }
 }
