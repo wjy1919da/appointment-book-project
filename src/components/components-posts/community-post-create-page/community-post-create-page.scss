@@ -207,6 +207,11 @@
     }
   }
 
+  .create-post-custom-button {
+    padding: 5px 23px;
+    height: 41px;
+  }
+
   // image mask effect
   .thumbnail {
     position: relative;
@@ -245,12 +250,12 @@
       width: 400px;
       height: 330px;
     }
-  
+
     .pink-background-2 {
       top: 600px;
       z-index: -1;
     }
-  
+
     .create-post-page-inner-container {
       width: 880px;
       height: 460px;
@@ -269,22 +274,36 @@
     .pink-background-1 {
       top: 55px;
     }
-  
+
     .pink-background-2 {
       top: 1000px;
       right: 0;
     }
-  
+
     .create-post-page-inner-container {
       display: flex;
       flex-direction: column;
       width: 480px;
-      height: 820px;
+      height: 900px;
     }
-  
+
     .create-post-page-title,
     .create-post-page-description {
       width: 370px;
+    }
+
+    .create-post-page-button-wrapper {
+      justify-content: center;
+    }
+
+    .create-post-input-radio-button-label {
+      font-size: 13px;
+    }
+
+    .create-post-custom-button {
+      font-size: 14px;
+      padding: 5px 20px;
+      height: 41px;
     }
   }
 }
