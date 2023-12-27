@@ -18,25 +18,19 @@ import highlightVerified from "../../../assets/doctor/highlight-verified.png";
 import highlightAppointment from "../../../assets/doctor/highlight-appointment.png";
 import backArrow from "../../../assets/doctor/left_back.png";
 
-const DoctorAbout = ({ encodedMemberId }) => {
-  // const [voucherExpanded, setVoucherExpanded] = useState(false);
-  const [specializations, setSpecializations] = useState([]);
-  const [highlights, setHighlights] = useState([]);
-  const [loadingPosts, setLoadingPosts] = useState(true);
-  const [postCounter, setPostCounter] = useState(0);
-  // const [selectedPosts, setSelectedPosts] = useState([]);
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useGetDoctorAbout();
-  // UNCOMMENT FOR 2.0 RELEASE
-  // const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
-  const navigate = useNavigate();
-  // console.log('doctor about data is: ', data);
+const DoctorAbout = ({encodedMemberId}) => {
+    // const [voucherExpanded, setVoucherExpanded] = useState(false);
+    const [specializations, setSpecializations] = useState([]);
+    const [highlights, setHighlights] = useState([]);
+    const [loadingPosts, setLoadingPosts] = useState(true);
+    const [postCounter, setPostCounter] = useState(0);
+    // const [selectedPosts, setSelectedPosts] = useState([]);
+    const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetDoctorAbout();
+    // UNCOMMENT FOR 2.0 RELEASE
+    // const [vouchers, setVouchers] = useState([{'FakeKey': "FakeValue"}]);
+    const navigate = useNavigate();
+    const isMobilePhone = useMediaQuery({ query: `(max-width: 744px)` });
+    // console.log('doctor about data is: ', data);
 
     const objArray = [{
         "id": 13,
@@ -98,26 +92,28 @@ const DoctorAbout = ({ encodedMemberId }) => {
       retrieveHighlightedPosts();
     }, [data]);
 
-  const getSelectedPosts = () => {
-    let holder = [];
-    if (highlights.length > 0) {
-      if (
-        highlights.length === 1 ||
-        highlights.length === 2 ||
-        highlights.length === 3
-      ) {
-        holder = [...highlights];
-      } else {
-        holder = [
-          highlights[postCounter],
-          highlights[(postCounter + 1) % highlights.length],
-          highlights[(postCounter + 2) % highlights.length],
-        ];
-      }
+    const getSelectedPosts = () => {
+        let holder = [];
+        console.log('isMobilePhone is: ', isMobilePhone);
+        if (highlights.length > 0) {
+            if (isMobilePhone) {  // only want to show 2 highlighted posts when user is on mobile
+                if (highlights.length === 1 || highlights.length === 2) {
+                    holder = [...highlights]
+                } else {
+                    holder = [highlights[postCounter], highlights[(postCounter + 1) % (highlights.length)]];
+                }
+            } else {
+                if (highlights.length === 1 || highlights.length === 2 || highlights.length === 3) {
+                    holder = [...highlights]
+                } else {
+                    holder = [highlights[postCounter], highlights[(postCounter + 1) % (highlights.length)], highlights[(postCounter + 2) % (highlights.length)]];
+                }
+            }
+            
+        }
+        console.log('returning holder as: ', holder);
+        return holder;
     }
-    console.log("returning holder as: ", holder);
-    return holder;
-  };
 
   const highlightMoveForward = () => {
     setPostCounter((postCounter + 1) % highlights.length);

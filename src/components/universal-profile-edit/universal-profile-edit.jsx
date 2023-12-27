@@ -92,7 +92,7 @@ const UniversalProfileEdit = () => {
     const retrieveAccountType = () => {
         const accountNumber = localStorage.getItem("accountType");
         if (accountNumber === null) throw new Error('No account type found...');
-        console.log('userID is: ', userInfo.userId);
+        // console.log('userID is: ', userInfo.userId);
         return Number(accountNumber);
     }
     const establishOriginalInfo = async (userObjResponse) => {
