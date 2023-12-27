@@ -1,12 +1,12 @@
-.community-post-search-box-container {
-  position: relative;
-  display: flex;
-  background-color: white;
-  border: 1px solid #675d59;
-  border-radius: 6px;
-  margin-left: auto;
-  padding: 8px;
-}
+// .community-post-search-box-container {
+//   position: relative;
+//   display: flex;
+//   background-color: white;
+//   border: 1px solid #675d59;
+//   border-radius: 6px;
+//   margin-left: auto;
+//   padding: 8px;
+// }
 
 .mobile-search-button {
   margin-left: auto;
@@ -24,17 +24,24 @@
   // height: 40px;
 }
 
-.community-post-search-box-container.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  // border: 1px solid #675d59;
-  // border-radius: 5px;
-  // pointer-events: none;
+.search-input-container {
+  background: #ffffff;
+  border: 1px solid #675d59;
+  border-radius: 6px;
+  padding: 6px;
 }
+
+// .community-post-search-box-container.active::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   border: 1px solid #675d59;
+//   border-radius: 5px;
+//   pointer-events: none;
+// }
 
 .search-dropdown-container {
   position: absolute;

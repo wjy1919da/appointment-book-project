@@ -25,6 +25,7 @@ const toDisplayFormat = (param) => {
 
 const Community = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const isDesktop = useMediaQuery({ query: `(max-width: 1133px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -185,6 +186,7 @@ const Community = () => {
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
                   isMobile={isMobile}
+                  isDesktop={isDesktop}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
