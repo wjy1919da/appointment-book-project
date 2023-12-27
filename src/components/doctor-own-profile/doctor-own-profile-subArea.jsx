@@ -56,7 +56,11 @@ const DoctorProfileSubArea = () => {
       <div className="bottom-rendering">
         {activeTab === "About" && <DocotorOwnAbout />}
         {activeTab === "Posts" && <DoctorProfileGrid />}
-        {activeTab === "Likes" && <UserProfileLike />}
+        {activeTab === "Likes" && (
+          <div className="doctor-profile-likePost-container">
+            <UserProfileLike />
+          </div>
+        )}
       </div>
     </div>
   );

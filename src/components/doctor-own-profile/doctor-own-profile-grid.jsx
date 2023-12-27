@@ -41,6 +41,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const setDescription = usePostQueryStore((state) => state.setDescription);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
+
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
 
@@ -71,7 +73,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     title,
     memberId,
     isPrivate,
-    isHighlight
+    isHighlight,
+    isLike
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -81,6 +84,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setMemberID(memberId);
     setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
+    setIsLike(isLike);
   };
 
   const postList = flatData.map((post, index) => (
@@ -106,6 +110,8 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         likes={post.like_count || 0}
         dummyPrivate={post.isDisplay}
         dummyHighlight={post.highlightStatus}
+        id={post.id}
+        liked={post.isLike}
       />
     </div>
   ));

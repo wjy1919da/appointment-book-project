@@ -15,6 +15,7 @@ import defaultImage from "../../../assets/post/default_image.png";
 import LockIcon from "../../../assets/post/lock_icon.svg";
 import heartIcon from "../../../assets/post/heart.png";
 import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import userInfoQueryStore from "../../../userStore";
 
 const CommunityPost = ({
   id,
@@ -24,20 +25,27 @@ const CommunityPost = ({
   text,
   profileImage,
   authorName,
-  likes,
+  likes, // likeCount
   isProfile,
+  liked, // isLike
 }) => {
-  // console.log("Likes:", likes);
-
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  const setIsLike = usePostQueryStore((state) => state.setIsLike);
 
   const [width, setWidth] = useState("");
   const [displayImage, setDisplayImage] = useState(imageURL);
 
-  // like states ready
-  const [isLiked, setIsLiked] = useState(false);
+  // likes
+  const [isHeartLiked, setIsHeartLiked] = useState(liked);
   const [countLikes, setCountLikes] = useState(likes);
+  useEffect(() => {
+    setIsHeartLiked(liked);
+    // setIsLike(liked);
+    setCountLikes(likes);
+  }, [liked, likes]);
 
   useEffect(() => {
     if (isMobile) {
@@ -56,20 +64,19 @@ const CommunityPost = ({
   const { mutate: apiLikeMutate } = useGetLikesPost();
 
   // like button
-  // prevent to open pop up when like button is clicked
   const handleHeartIconClick = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // prevent to open pop up when like button is clicked
+    if (!userInfo.token) {
+      togglePopup(true, "accountType");
+      return;
+    }
     apiLikeMutate({ postId: id });
+    // setIsLike(!isHeartLiked);
 
-    setIsLiked((prevLiked) => {
-      const newCountLikes = prevLiked ? countLikes - 1 : countLikes + 1;
+    setIsHeartLiked((prev) => {
+      const newCountLikes = prev ? countLikes - 1 : countLikes + 1;
       setCountLikes(newCountLikes);
-
-      // save the likes to local storage
-      localStorage.setItem(`post_${id}_liked`, !prevLiked);
-      localStorage.setItem(`post_${id}_likes`, newCountLikes.toString());
-
-      return !prevLiked;
+      return !prev;
     });
   };
 
@@ -105,13 +112,13 @@ const CommunityPost = ({
           </div>
           <div className="likeNumber">
             <img
-              src={isLiked ? heartIconFilled : heartIcon}
+              src={isHeartLiked ? heartIconFilled : heartIcon}
               className="heartIcon"
               onClick={(e) => handleHeartIconClick(e)}
               alt="Like Icon"
             />
-            {/* <span className='gray-text'>{likes}</span> */}
             <span className="gray-text">{countLikes}</span>
+            {/* <span className='gray-text'>{likes}</span> */}
           </div>
         </div>
       </div>

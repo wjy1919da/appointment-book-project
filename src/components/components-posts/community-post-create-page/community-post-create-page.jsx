@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import userInfoQueryStore from "../../../userStore";
+import usePostQueryStore from "../../../postStore";
 // import { useDisclosure } from '@chakra-ui/react';
 
 // components
@@ -36,7 +37,12 @@ const CreatePostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-  const { mutate: apiMutate, data } = useApiRequestPost({
+  const {
+    mutate: apiMutate,
+    data,
+    isSuccess: createPostSuccess,
+    isError: createPostError,
+  } = useApiRequestPost({
     onError: (error) => {
       toast({
         title: "Failed to create post.",
@@ -48,7 +54,10 @@ const CreatePostPage = () => {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(null); // thumbnail click masking
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
+  const [clickedThumbnailIndex, setClickedThumbnailIndex] = useState(
+    uploadedFiles.length - 1 || 0
+  ); // thumbnail click masking
   const [clickedRadio, setClickedRadio] = useState(false);
   const fileInputRef = useRef(null);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -65,11 +74,16 @@ const CreatePostPage = () => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log("data::", data, displayThumbnails, uploadedFiles);
+    const displayImage =
+      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
+    // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
+
+    // console.log("data::", data, displayThumbnails, uploadedFiles);
     const formData = {
       address: "",
       brief: data.description,
-      coverImg: uploadedFiles[uploadedFiles.length - 1],
+      coverImg: displayImage,
       isDisplay: 1,
       lat: "",
       location: "",
@@ -96,8 +110,7 @@ const CreatePostPage = () => {
   };
 
   useEffect(() => {
-    // console.log("data::", data);
-    if (data?.code === 100) {
+    if (createPostSuccess) {
       resetFiles();
       reset({
         title: "",
@@ -109,11 +122,12 @@ const CreatePostPage = () => {
         duration: 1000,
         isClosable: true,
       });
+      refreshMyPost();
       localStorage.getItem("accountType") === "2"
         ? navigate("/doctorProfile/#Posts")
         : navigate("/userProfile");
     }
-    if (data?.code === 500) {
+    if (createPostError) {
       toast({
         title: "Failed to create post.",
         status: "error",
@@ -121,7 +135,13 @@ const CreatePostPage = () => {
         isClosable: true,
       });
     }
-  }, [data, toast]);
+  }, [createPostSuccess, createPostError, toast]);
+
+  useEffect(() => {
+    if (uploadedFiles.length > 0) {
+      setSelectedImage(uploadedFiles[uploadedFiles.length - 1]);
+    }
+  }, [uploadedFiles]);
 
   // back button
   const handleClickCreatePostBack = () => {
@@ -157,7 +177,10 @@ const CreatePostPage = () => {
   const handleClickMask = (index) => {
     // console.log('clicked');
     setSelectedImage(uploadedFiles[index]);
-    setClickedThumbnailIndex(index);
+    // setClickedThumbnailIndex(index);
+    setClickedThumbnailIndex((prevIndex) =>
+      prevIndex === index ? null : index
+    );
   };
 
   // thumbnail
@@ -166,9 +189,7 @@ const CreatePostPage = () => {
       ? uploadedFiles.map((file, index) => (
           <div key={index} className="create-post-page-thumbnail">
             <div
-              className={`thumbnail ${
-                index === uploadedFiles.length - 1 ? "clicked" : ""
-              }`}
+              className={`thumbnail ${selectedImage === file ? "clicked" : ""}`}
               onClick={() => handleClickMask(index)}
             >
               <img
@@ -205,11 +226,6 @@ const CreatePostPage = () => {
           </div>
         ))
       : null;
-
-  const displayImage =
-    selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
-
-  // const displayImage = uploadedFiles.length > 0 ? uploadedFiles[0] : null;
 
   return (
     <div>
@@ -250,7 +266,7 @@ const CreatePostPage = () => {
             <div className="create-post-pic-wrapper">
               {uploadedFiles.length > 0 ? (
                 <img
-                  src={selectedImage || uploadedFiles[0]}
+                  src={selectedImage}
                   style={{
                     marginBottom: "20px",
                     maxWidth: "100%",
