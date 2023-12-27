@@ -4,6 +4,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import usePostQueryStore from "../../../postStore.ts";
 import { useToast } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 
 // components
 import CommunityPost from "../community-post/community-post.component";
@@ -20,7 +22,7 @@ import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter"
 import "./doctor-post-grid.styles.scss";
 
 // images
-import Arrow from "../../../assets/post/arrow_grid.png";
+// import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
 
 // import userInfoQueryStore from '../../../userStore.ts';
@@ -154,21 +156,26 @@ const DoctorPostGrid = ({ isAbout }) => {
           isMobile={isMobile}
         />
       )}
-      <div className="down-load-more-container">
-        {!isMobile && (
-          <img src={Arrow} alt="arrow" className="arrow-containter" />
-        )}
-        {isMobile && (
-          <img src={Arrow1} alt="arrow1" className="arrow1-containter" />
-        )}
-        <div className="download-text">Join Charm community to view more</div>
-        <Link to="/download">
-          <button className="download-button">
-            <div className="download-button-text">DownLoad APP</div>
-          </button>
-        </Link>
-        {/* </div> */}
-      </div>
+      {flatData.length && (
+        <div className="down-load-more-container">
+          {!isMobile && (
+            // <img src={Arrow} alt="arrow" className="arrow-containter" />
+            <FontAwesomeIcon icon={faAnglesDown} className="arrow-containter" />
+          )}
+          {isMobile && (
+            <img src={Arrow1} alt="arrow1" className="arrow1-containter" />
+          )}
+          <div className="download-text">Join Charm community to view more</div>
+          <Link to="/download">
+            <button className="download-button">
+              <div className="download-button-text">DownLoad APP</div>
+            </button>
+          </Link>
+        </div>
+      )}
+      {!flatData.length && (
+        <span className="post-search-no-results">No results found.</span>
+      )}
     </div>
   );
 };
