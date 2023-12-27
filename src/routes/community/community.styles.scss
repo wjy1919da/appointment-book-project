@@ -33,6 +33,7 @@
 
 .doctor-post-header-button-container {
   display: flex;
+  margin: 40px 0;
 }
 
 .doctor-post-outer-title {
@@ -44,6 +45,7 @@
   line-height: normal;
   // margin-right: auto;
   margin-right: 30px;
+  margin-top: -30px;
 }
 .community-post-header-filter-container {
   display: flex;
@@ -231,7 +233,7 @@
   .doctor-post-header-button-container {
     flex-direction: column;
     gap: 15px;
-    margin-top: 40px;
+    // margin-top: 40px;
   }
   .doctor-post-outer-title {
     font-size: 28px;
@@ -257,8 +259,7 @@
   }
 
   .doctor-post-header-button-container {
-    margin-top: 0;
-    margin-left: 0;
+    margin: 0;
   }
 
   .post-search-box-position-container {
