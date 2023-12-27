@@ -295,7 +295,8 @@
       display: flex;
       flex-direction: column;
       width: 480px;
-      height: 900px;
+      min-height: 800px;
+      height: auto;
     }
 
     .edit-post-page-title,
