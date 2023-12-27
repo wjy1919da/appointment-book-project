@@ -68,9 +68,10 @@
     border: 2px solid #675d59;
     background: #fbfcff;
     display: flex;
-    padding: 50px;
+    padding: 0 50px;
+    padding-bottom: 30px;
     width: 1000px;
-    height: 580px;
+    height: 520px;
     margin: 220px 0;
 
     // left container
@@ -85,10 +86,11 @@
     }
   }
   .edit-post-pic-wrapper {
-    height: 320px;
+    // height: 320px;
     border-radius: 15px;
-    margin-bottom: 15px;
-    overflow: hidden;
+    // margin-bottom: 15px;
+    margin-top: 50px;
+    // overflow: hidden;
   }
 
   .edit-post-page-add {
@@ -145,6 +147,10 @@
 }
 
 // right container
+.edit-post-page-right-inner-container {
+  margin-top: 25px;
+}
+
 .edit-post-page-title,
 .edit-post-page-description {
   border-radius: 8px;
@@ -269,7 +275,7 @@
 
     .edit-post-page-inner-container {
       width: 880px;
-      height: 490px;
+      // height: 490px;
     }
 
     .edit-post-page-title,
@@ -294,6 +300,7 @@
     .edit-post-page-inner-container {
       display: flex;
       flex-direction: column;
+      padding: 60px 0;
       width: 480px;
       min-height: 800px;
       height: auto;

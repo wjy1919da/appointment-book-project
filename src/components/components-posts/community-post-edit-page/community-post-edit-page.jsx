@@ -363,7 +363,7 @@ const EditPostPage = () => {
           </div>
 
           <div className='edit-post-page-right-container'>
-            <div>
+            <div className='edit-post-page-right-inner-container'>
               <input
                 type='text'
                 placeholder='Title'

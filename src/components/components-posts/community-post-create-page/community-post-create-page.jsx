@@ -333,7 +333,7 @@ const CreatePostPage = () => {
           </div>
 
           <div className='create-post-page-right-container'>
-            <div>
+            <div className='create-post-page-right-inner-container'>
               <input
                 type='text'
                 placeholder='Title'
