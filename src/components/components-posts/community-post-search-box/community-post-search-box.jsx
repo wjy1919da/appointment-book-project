@@ -22,15 +22,10 @@ const PostSearchBox = ({
   value,
   handleSearch,
   isMobile,
-  isDesktop,
+  handleResponsiveButtonClick,
+  isInputVisible,
   ...otherProps
 }) => {
-  const [isInputVisible, setIsInputVisible] = useState(false);
-
-  // small screens search icon button
-  const handleResponsiveButtonClick = () => {
-    setIsInputVisible(!isInputVisible);
-  };
 
   return (
     <div className='community-post-search-box-container'>
@@ -39,7 +34,7 @@ const PostSearchBox = ({
           type='button'
           className='mobile-search-button'
           style={{
-            textAlign: 'center',
+            display: 'flex',
             border: '1px solid #675D59',
             borderRadius: '8px',
             padding: '7px',

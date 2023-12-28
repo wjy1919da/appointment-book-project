@@ -1,7 +1,6 @@
 import usePostQueryStore from '../../postStore.ts';
 import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
-// import { Link } from "react-router-dom";
 
 // components
 import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
@@ -25,10 +24,12 @@ const toDisplayFormat = (param) => {
 
 const Community = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
-  const isDesktop = useMediaQuery({ query: `(max-width: 1133px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isDoctorTitleVisible, setIsDoctorTitleVisible] = useState(true);
+
   const postContainerRef = useRef(null);
   const setTempSearchParam = usePostQueryStore(
     (state) => state.setTempSearchParam
@@ -106,6 +107,12 @@ const Community = () => {
   //   }
   // };
 
+  // small screens search icon button
+  const handleResponsiveButtonClick = () => {
+    setIsInputVisible(!isInputVisible);
+    setIsDoctorTitleVisible(!isDoctorTitleVisible);
+  };
+
   const handleOnClick = (role) => {
     if (postQuery.postBy.includes(role)) {
       setPostBy(postQuery.postBy.filter((item) => item !== role));
@@ -174,7 +181,12 @@ const Community = () => {
         <PostPageMain />
         <div className='doctor-post-outer-container'>
           <div className='doctor-post-header-container'>
-            <h1 className='doctor-post-outer-title'>Community Posts</h1>
+            <h1
+              className='doctor-post-outer-title'
+              style={{ opacity: isDoctorTitleVisible ? 1 : 0.7 }}
+            >
+              Community Posts
+            </h1>
             <div className='doctor-post-header-button-container'>
               <div
                 className='post-search-box-position-container'
@@ -186,7 +198,8 @@ const Community = () => {
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
                   isMobile={isMobile}
-                  isDesktop={isDesktop}
+                  handleResponsiveButtonClick={handleResponsiveButtonClick}
+                  isInputVisible={isInputVisible}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
