@@ -272,7 +272,12 @@
 
   .doctor-post-outer-title {
     position: relative;
+    margin-top: -55px;
     z-index: 1;
+  }
+
+  .community-post-header-filter-container {
+    margin-top: 10px;
   }
 
   // .postby {
@@ -287,8 +292,17 @@
   }
 }
 
-@media (max-width: 586px) {
-  .doctor-post-outer-title {
-    font-size: 18px;
+// @media (max-width: 586px) {
+//   .doctor-post-outer-title {
+//   }
+// }
+
+// mobile (based on iphones)
+@media (max-width: 430px) {  
+  .community-post-header-filter-container {
+    position: absolute;
+    top: 1190px;
+    right: 30px;
+    z-index: 100;
   }
 }
