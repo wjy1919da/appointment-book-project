@@ -12,14 +12,10 @@
 }
 
 .search-input-container {
-  position: absolute;
-  top: 1175px;
-  right: 30px;
   background: #ffffff;
   outline: 1px solid #675d59;
   border-radius: 6px;
   padding: 6px;
-  z-index: 100;
 }
 
 .search-dropdown-container {
@@ -34,4 +30,10 @@
 }
 
 @media (max-width: 744px) {
+  .search-input-container {
+    position: absolute;
+    top: 1175px;
+    right: 30px;
+    z-index: 100;
+  }
 }
