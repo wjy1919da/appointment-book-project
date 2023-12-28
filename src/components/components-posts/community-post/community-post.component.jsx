@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Skeleton,
+  SkeletonText,
+  SkeletonCircle,
+} from "@chakra-ui/react";
 
 // hooks
 import { useGetLikesPost } from "../../../hooks/useGetPosts";
@@ -37,6 +43,9 @@ const CommunityPost = ({
   const setIsLike = usePostQueryStore((state) => state.setIsLike);
 
   const [width, setWidth] = useState("");
+  const [isImageLoaded, setIsImageLoaded] = useState(true);
+  const [isAvatarLoaded, setIsAvatarLoaded] = useState(true);
+
   // const [displayImage, setDisplayImage] = useState(imageURL);
 
   // likes
@@ -57,9 +66,13 @@ const CommunityPost = ({
   }, [isMobile]);
 
   // default image when image is not loaded
-  // const handleImageError = () => {
-  //   setDisplayImage(defaultImage);
-  // };
+  const handleImageError = () => {
+    setIsImageLoaded(false);
+    // setDisplayImage(defaultImage);
+  };
+  const handleAvatarError = () => {
+    setIsAvatarLoaded(false);
+  };
 
   // likes hook import
   const { mutate: apiLikeMutate } = useGetLikesPost();
@@ -97,22 +110,30 @@ const CommunityPost = ({
         />
       )}
 
-      {imageURL ? (
+      {imageURL && isImageLoaded ? (
         <div className="post-Image">
           <img
             src={imageURL}
             className="postImage"
-            // onError={handleImageError}
+            onError={handleImageError}
           />
         </div>
       ) : (
-        <Skeleton height="186px" width={width} />
+        <Skeleton height="186px" width="100%" />
       )}
       <div className="post-information">
         <span className="post-text">{text}</span>
         <div className="profile">
           <div className="profileImage">
-            <img className="profile-pic" src={profileImage}></img>
+            {profileImage && isAvatarLoaded ? (
+              <img
+                className="profile-pic"
+                src={profileImage}
+                onError={handleAvatarError}
+              ></img>
+            ) : (
+              <SkeletonCircle size="7" />
+            )}
             <span className="gray-text">{authorName}</span>
           </div>
           <div className="likeNumber">

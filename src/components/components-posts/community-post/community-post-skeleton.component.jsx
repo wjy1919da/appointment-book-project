@@ -1,4 +1,5 @@
 import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
+// import Comm
 const CommunityPostSkeleton = () => {
   return (
     <Card>
@@ -7,25 +8,18 @@ const CommunityPostSkeleton = () => {
         <Skeleton height="186px" width="100%" mb="4" />
 
         {/* Skeleton for the text */}
-        <SkeletonText mt="4" noOfLines={4} spacing="4" />
+        <SkeletonText mt="4" noOfLines={1} spacing="4" />
 
         {/* Skeleton for the profile section */}
         <div style={{ display: "flex", alignItems: "center", marginTop: "4" }}>
           {/* Skeleton for the profile image */}
-          <Skeleton circle size="40px" />
+          <Skeleton circle size="7px" />
 
           {/* Skeleton for the author name */}
-          <Skeleton height="20px" width="70%" ml="4" />
+          {/* <Skeleton height="20px" width="70%" ml="4" /> */}
         </div>
 
         {/* Skeleton for the like section */}
-        <div style={{ display: "flex", alignItems: "center", marginTop: "4" }}>
-          {/* Skeleton for the like icon */}
-          <Skeleton circle size="24px" />
-
-          {/* Skeleton for the like count */}
-          <Skeleton height="20px" width="30%" ml="4" />
-        </div>
       </CardBody>
     </Card>
   );
