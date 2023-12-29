@@ -34,8 +34,8 @@ const DoctorPostGrid = ({ isAbout }) => {
   const navigate = useNavigate();
 
   // hook
-  // const { data, error, isLoading, fetchNextPage, hasNextPage } =
-  //   useApiRequestPostFilter();
+  const { data, error, isLoading, fetchNextPage, hasNextPage } =
+    useApiRequestPostFilter();
 
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
@@ -48,8 +48,8 @@ const DoctorPostGrid = ({ isAbout }) => {
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
   const setTitle = usePostQueryStore((state) => state.setTitle);
   // const [title, setTitle] = useState("");
-  // const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
-  const flatData = [];
+  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+  // const flatData = [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile || isAbout;
@@ -89,16 +89,16 @@ const DoctorPostGrid = ({ isAbout }) => {
     setIsPrivate(isPrivate);
     setIsLike(isLike);
   };
-  // if (error) {
-  //   navigate("*");
-  // }
+  if (error) {
+    navigate("*");
+  }
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
   // if (isLoading) return <HomeSpinner />;
-  const skeletons = [1, 2, 3, 4, 5, 6];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7];
 
-  const isLoading = true;
+  // const isLoading = true;
 
   const postCardList = isLoading
     ? skeletons.map((skeleton) => <CommunityPostSkeleton key={skeleton} />)

@@ -119,7 +119,9 @@ const CommunityPost = ({
           />
         </div>
       ) : (
-        <Skeleton height="186px" width="100%" />
+        // <div className="post-Image">
+        <Skeleton height="200px" width="100%" />
+        // </div>
       )}
       <div className="post-information">
         <span className="post-text">{text}</span>

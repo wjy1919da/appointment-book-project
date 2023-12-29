@@ -4,8 +4,8 @@ import APIClient from "../services/api-client";
 const s3Client = new S3Client({
   region: "us-west-1",
   credentials: {
-    accessKeyId: "AKIAWQE6ZUZGIH2WI7PP",
-    secretAccessKey: "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",
+    accessKeyId: "AKIAWQE6ZUZGKDFRGFEM",
+    secretAccessKey: "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",
     apiVersion: "2006-03-01",
     signatureVersion: "v4",
   },
