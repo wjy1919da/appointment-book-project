@@ -28,7 +28,6 @@
       --new-gradient,
       linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
     );
-    // width: 907px;
     width: 630px;
     height: 300px;
   }
@@ -275,6 +274,26 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  .post-main-link-button {
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    color: #fff;
+    font-family: Open Sans;
+    // font-size: 34px;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 1000px 0px 0px 1000px;
+    margin-top: 100px;
+    padding: 16px 50px;
   }
 
   .community-posts {
