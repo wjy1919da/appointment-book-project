@@ -144,6 +144,60 @@
   display: flex;
   align-items: center;
 }
+// .down-load-more-container {
+//   margin-top: -500px;
+//   bottom: 270px;
+//   width: 100%;
+//   height: 15%; /* Adjust as needed to cover the bottom half */
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 30px;
+//   z-index: 1111;
+//   backdrop-filter: blur(10px); /* Apply blur effect */
+//   background-color: rgba(128, 128, 128, 0.5); /* Grey color with 50% opacity */
+//   padding: 30px;
+// }
+
+// .arrow-containter {
+//   width: 32px;
+//   height: 43.428px;
+//   flex-shrink: 0;
+// }
+// .arrow1-containter {
+//   width: 22px;
+//   height: 22px;
+//   flex-shrink: 0;
+// }
+// .download-button {
+//   display: inline-flex;
+//   height: 56px;
+//   padding: 8px 32px;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 12px;
+//   flex-shrink: 0;
+//   border-radius: 8px;
+//   background: var(--unnamed, #352c29);
+// }
+// .download-button-text {
+//   color: #fff;
+//   text-align: center;
+//   /* Interactive 1 */
+//   font-size: 15px;
+//   font-family: Open Sans;
+//   font-weight: 600;
+//   line-height: 100%;
+// }
+// .download-text {
+//   color: var(--unnamed, #a5a6a8);
+//   /* Interactive 3 */
+//   font-size: 16px;
+//   font-family: Open Sans;
+//   font-weight: 600;
+//   line-height: 100%;
+// }
 @media (min-width: 1134px) and (max-width: 1290px) {
   .community-post-header-filter-container {
     gap: 10px;
