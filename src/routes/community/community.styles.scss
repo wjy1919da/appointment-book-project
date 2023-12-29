@@ -214,15 +214,18 @@
   .community-post-header-filter-container {
     gap: 10px;
   }
+
   .doctor-post-outer-title {
     margin-right: auto;
     font-size: 30px;
   }
+
   .community-post-header-filter-container {
     margin-left: auto;
   }
 }
 
+// screen 1133px and below
 @media (max-width: 1133px) {
   .doctor-post-header-container {
     justify-content: space-between;
@@ -250,6 +253,7 @@
 @media (min-width: 775px) and (max-width: 922px) {
 }
 
+// screen 744px and below
 @media (max-width: 744px) {
   .doctor-post-outer-container {
     padding: 0 20px;
@@ -287,8 +291,11 @@
 }
 
 @media (max-width: 603px) {
-  .doctor-post-outer-title {
-    font-size: 26px;
+  .community-post-header-filter-container {
+    position: absolute;
+    top: 1190px;
+    right: 30px;
+    z-index: 100;
   }
 }
 
