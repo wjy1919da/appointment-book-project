@@ -81,8 +81,8 @@
 }
 
 .indv-highlight-cases-container {
-    border: 2px solid #F48C8A;
-    border-radius: 8px;
+    // border: 2px solid #F48C8A;
+    // border-radius: 8px;
     padding: 2.5rem;
     width: 100%;
     margin-bottom: 4rem;
@@ -124,7 +124,7 @@
 }
 
 .highlight-cases-cases-container {
-    width: 95%;
+    // width: 95%;
     min-height: 24rem;
     margin: auto;
     padding-top: 1.5rem;
@@ -133,7 +133,7 @@
 }
 
 .highlight-cases-container-space-around {
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .highlight-cases-highlights-container {
@@ -176,4 +176,26 @@
 .customer-review-section-title {
     font-size: 24px;
     font-weight: 600;
+}
+
+@media (max-width: 744px) {
+    .specialization-tabs-container {
+        column-gap: 2rem;
+        justify-content: space-around;
+    }
+    .indv-procedure-icon-container {
+        max-width: 8rem;
+    }
+    .indv-procedure-icon-img-container {
+        width: 7rem;
+    }
+    .indv-procedure-icon-title {
+        text-align: center;
+    }
+    .indv-highlight-cases-container {
+        padding: 0rem;
+    }
+    .highlight-cases-highlights-container {
+        width: 50%;
+    }
 }

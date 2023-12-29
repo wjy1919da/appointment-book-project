@@ -1,0 +1,21 @@
+name: GitGuardian Scan
+
+# 定义触发工作流的事件
+on: [push, pull_request]
+
+jobs:
+  gitguardian-scan:
+    name: GitGuardian Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 运行 GitGuardian 扫描
+      - name: Run GitGuardian scan
+        uses: GitGuardian/ggshield-action@master
+        env:
+          # 确保已经在仓库的 Secrets 中设置了 GITGUARDIAN_API_KEY
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
