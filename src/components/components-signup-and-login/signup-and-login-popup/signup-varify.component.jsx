@@ -12,8 +12,10 @@ const SignupVerify = () => {
    const [countdown, setCountdown] = useState(10);
    const [isTiming, setIsTiming] = useState(false);
    var email;
+   var userRole;
    useEffect(() => {
        email = localStorage.getItem('email');
+       userRole = localStorage.getItem("accountType") === "1"? "USER" : "DOCTOR";
    });
    const handleOnClick = () => {
         if(!email){
@@ -22,7 +24,8 @@ const SignupVerify = () => {
             return;
         }
          mutate({
-              email: email
+              email: email,
+              userRole: userRole,
          });
         setCountdown(10);
         setIsTiming(true);
