@@ -28,7 +28,6 @@
       --new-gradient,
       linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
     );
-    // width: 907px;
     width: 630px;
     height: 300px;
   }
@@ -251,7 +250,6 @@
     font-weight: 700;
     line-height: normal;
     border-radius: 1000px 0px 0px 1000px;
-    // border-radius: 0px 1000px 1000px 0px;
     margin-top: 100px;
     padding: 16px 50px;
   }
@@ -265,4 +263,14 @@
     background-color: #f0f0f0;
     padding: 20px;
   }
+}
+
+@media (max-width: 1133px) {
+  .post-main-shape {
+    width: 550px;
+    height: 347px;
+  }
+}
+
+@media (max-width: 744px) {
 }
