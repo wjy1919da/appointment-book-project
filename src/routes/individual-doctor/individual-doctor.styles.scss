@@ -187,6 +187,48 @@
   background-position: bottom;  /* Position the background at the bottom, like a border */
 }
 
+@media (max-width: 744px) {
+  .indv-doctor-page-container {
+    width: 92.5%;
+    padding-top: 3rem;
+  }
+
+  .indv-doctor-profile-picture-container {
+    margin-bottom: 3rem;
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .indv-top-row-left-side {
+    width: 70%;
+  }
+
+  .indv-top-row-right-side {
+    width: 30%;
+  }
+
+  .indv-follow-button,
+  .indv-unfollow-button {
+    width: 30%;
+  }
+
+  .indv-doctor-info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .indv-doctor-info-sub-container {
+    width: 100%;
+    padding-left: 0rem;
+  }
+
+  .indv-fourth-row {
+    justify-content: normal;
+    flex-wrap: wrap;
+    column-gap: 2%;
+  }
+}
+
 
 // .individual-doctor-container {
 //   margin-top: 126px;
