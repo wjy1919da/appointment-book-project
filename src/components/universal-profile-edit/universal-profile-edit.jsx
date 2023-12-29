@@ -56,7 +56,7 @@ const UniversalProfileEdit = () => {
     const doctorLogin = useDoctorLogin();
     const authHook = accountType === '1' ? userEmailLogin : doctorLogin;
     // const modalDisclosure = useDisclosure();
-    // const userInfo = userInfoQueryStore((state) => state.userInfo);
+    const userInfo = userInfoQueryStore((state) => state.userInfo);
     const proceduresIdObj = editFuncs.proceduresId;
     // const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
     const {
