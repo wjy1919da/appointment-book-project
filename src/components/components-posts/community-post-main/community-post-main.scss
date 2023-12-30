@@ -14,6 +14,65 @@
 
 .post-main-container {
   margin-top: 18rem;
+
+  @media (max-width: 744px) {
+    .post-main-link-button {
+      margin-top: 425px;
+      width: 500px;
+    }
+    .post-main-shape {
+      top: 350px;
+    }
+    .occaecat {
+      margin-top: -120px;
+    }
+    .adipiscing {
+      margin-top: -120px;
+    }
+    .lorem {
+      margin-top: -150px;
+    }
+    .eiusmod {
+      bottom: -200px;
+      right: -90px;
+    }
+    h1{
+      position: relative;
+      top: -260px;
+      left: -220px;
+      margin: 0;
+    }
+    h6 {
+      position: relative;
+      top: -250px;
+      left: -220px;
+      margin: 0;
+    }
+    .excepteur {
+      bottom: -325px;
+    }
+    .photo-girl {
+      margin-top: -120px;
+    }
+    .post-main-photograph-caption {
+      top: 480px;
+    }
+    .post-main-photograph-like {
+      top: 515px;
+    }
+    .post-main-likes-container img {
+      top: 515px;
+    }
+    .post-main-photograph {
+      margin-top: -120px;
+    }
+    .photo-1 {
+      top: 350px;
+    }
+    .photo-2 {
+      top: 275px;
+    }
+  }
 }
 .post-main-shape {
   position: absolute;
