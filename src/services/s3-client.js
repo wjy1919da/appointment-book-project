@@ -1,19 +1,10 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import APIClient from "../services/api-client";
-const s3Client = new S3Client({
-  region: "us-west-1",
-  credentials: {
-    accessKeyId: "AKIAWQE6ZUZGIH2WI7PP",
-    secretAccessKey: "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",
-    apiVersion: "2006-03-01",
-    signatureVersion: "v4",
-  },
-  logger: console,
-});
 
 const uploadImgToS3 = async (file) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
+
   if (file.size > maxFileSize) {
     return {
       success: false,
@@ -21,65 +12,85 @@ const uploadImgToS3 = async (file) => {
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
-  const params = {
-    Bucket: "charm-post-img",
-    Key: fileName,
-    Body: file,
-  };
+  const apiClient = new APIClient("/upload/sign");
 
-  const command = new PutObjectCommand(params);
+  const res = await apiClient.get({ fileName });
+  if (res?.data?.code === 100) {
+    var presignedUrl = res.data.msg;
+  }
   try {
-    const data = await s3Client.send(command);
-    // console.log("upload result", data);
-    return {
-      success: true,
-      message: "Upload successful!",
-      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
-        params.Key
-      )}`,
-    };
+    const response = await fetch(presignedUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (response.ok) {
+      const uploadedFileName = fileName;
+      const bucketName = "charm-post-img";
+      const region = "us-west-1";
+      const accessUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${uploadedFileName}`;
+
+      return {
+        success: true,
+        message: "Image uploaded successfully.",
+        location: accessUrl,
+      };
+    } else {
+      // console.error("Upload failed.");
+      return { success: false, message: "Upload failed." };
+    }
   } catch (error) {
-    console.error("upload error", error);
-    return {
-      success: false,
-      message: "Upload failed. Please try again.",
-    };
+    // console.error("Error uploading file: ", error);
+    return { success: false, message: "Error occurred during image upload." };
   }
 };
 
 const uploadToS3 = async (file) => {
   const maxFileSize = 8 * 1024 * 1024; // 8MB
+
   if (file.size > maxFileSize) {
     return {
       success: false,
-      message: "File size is too large. Max file size is 8MB.",
+      message: "FIle size is too large. Max file size is 8MB.",
     };
   }
   const fileName = `${Date.now()}-${file.name}`;
-  const params = {
-    Bucket: "verificationbucketcharm",
-    Key: fileName,
-    Body: file,
-  };
+  const apiClient = new APIClient("/upload/sign");
 
-  const command = new PutObjectCommand(params);
-
+  const res = await apiClient.get({ fileName });
+  if (res?.data?.code === 100) {
+    var presignedUrl = res.data.msg;
+  }
   try {
-    const data = await s3Client.send(command);
-    console.log("upload result", data);
-    return {
-      success: true,
-      message: "Upload successful!",
-      location: `https://${params.Bucket}.s3.amazonaws.com/${encodeURIComponent(
-        params.Key
-      )}`,
-    };
+    const response = await fetch(presignedUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (response.ok) {
+      const uploadedFileName = fileName;
+      const bucketName = "charm-post-img";
+      const region = "us-west-1";
+      const accessUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${uploadedFileName}`;
+
+      return {
+        success: true,
+        message: "File uploaded successfully.",
+        location: accessUrl,
+      };
+    } else {
+      // console.error("Upload failed.");
+      return { success: false, message: "Upload failed." };
+    }
   } catch (error) {
-    console.error("upload error", error);
-    return {
-      success: false,
-      message: "Upload failed. Please try again.",
-    };
+    // console.error("Error uploading file: ", error);
+    return { success: false, message: "Error occurred during file upload." };
   }
 };
 
