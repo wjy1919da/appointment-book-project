@@ -4,8 +4,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import usePostQueryStore from "../../../postStore.ts";
 import { Skeleton, useToast } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 
 // components
 import CommunityPost from "../community-post/community-post.component";
@@ -13,6 +11,7 @@ import PostDetail from "../community-post-detail/community-post-detail.component
 import HomeSpinner from "../../home-spinner/home-spinner.component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityPostSkeleton from "../community-post/community-post-skeleton.component.jsx";
+import DoctorSearchLoadingBar from "../../doctor-search-loading-bar/doctor-search-loading-bar.component.jsx";
 // import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook
@@ -25,7 +24,8 @@ import "./doctor-post-grid.styles.scss";
 // images
 // import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
-import { is } from "date-fns/locale";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 
 // import userInfoQueryStore from '../../../userStore.ts';
 // import Cookie from 'js-cookie';
@@ -135,6 +135,7 @@ const DoctorPostGrid = ({ isAbout }) => {
       ));
   return (
     <div className="doctor-post-grid-inner-container">
+      {isLoading && <DoctorSearchLoadingBar />}
       <InfiniteScroll
         dataLength={flatData.length}
         // next={() => fetchNextPage}
@@ -157,13 +158,6 @@ const DoctorPostGrid = ({ isAbout }) => {
         </ResponsiveMasonry>
       </InfiniteScroll>
 
-      {IsModalOpen && (
-        <PostDetail
-          show={IsModalOpen}
-          onHide={() => setIsModelOpen(false)}
-          isMobile={isMobile}
-        />
-      )}
       {flatData.length && (
         <div className="down-load-more-container">
           {!isMobile && (
@@ -183,6 +177,13 @@ const DoctorPostGrid = ({ isAbout }) => {
       )}
       {!flatData.length && !isLoading && (
         <span className="post-search-no-results">No results found.</span>
+      )}
+      {IsModalOpen && (
+        <PostDetail
+          show={IsModalOpen}
+          onHide={() => setIsModelOpen(false)}
+          isMobile={isMobile}
+        />
       )}
     </div>
   );

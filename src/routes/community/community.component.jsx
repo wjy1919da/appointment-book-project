@@ -135,6 +135,11 @@ const Community = () => {
   const handleShowContainer = () => {
     setIsPostDropDownOpen(!isPostDropDownOpen);
   };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
   const handleSearch = () => {
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
@@ -182,6 +187,7 @@ const Community = () => {
                   onChange={handleInputChange}
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
+                  onKeyPress={handleKeyPress}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}

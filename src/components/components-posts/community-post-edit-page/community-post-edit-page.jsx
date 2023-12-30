@@ -189,7 +189,7 @@ const EditPostPage = () => {
   // back button
   const handleClickCreatePostBack = () => {
     localStorage.getItem("accountType") === "2"
-      ? navigate("/doctor-profile")
+      ? navigate("/doctorProfile/#Posts")
       : navigate("/userProfile");
   };
 
@@ -426,7 +426,7 @@ const EditPostPage = () => {
               <div className="post-information-sendButton">
                 <FormButton
                   buttonName="Repost"
-                  className="create-post-custom-button"
+                  // className="create-post-custom-button"
                 />
                 <img
                   src={Trash}

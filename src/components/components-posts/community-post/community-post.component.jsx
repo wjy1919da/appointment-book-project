@@ -28,6 +28,7 @@ const CommunityPost = ({
   id,
   dummyHighlight,
   dummyPrivate,
+  status,
   imageURL,
   text,
   profileImage,
@@ -114,7 +115,7 @@ const CommunityPost = ({
         <div className="post-Image">
           <img
             src={imageURL}
-            className="postImage"
+            className={`postImage ${status === 0 ? "grayed-out" : ""}`}
             onError={handleImageError}
           />
         </div>

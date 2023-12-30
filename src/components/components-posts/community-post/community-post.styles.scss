@@ -23,6 +23,12 @@
   object-position: center; /* This will center the image in the div */
   border-radius: 10px 10px 0 0;
 }
+.grayed-out {
+  content: "";
+  background-color: gray;
+  border-radius: 8px;
+  opacity: 0.6;
+}
 .post-information {
   display: flex;
   flex-direction: column;
@@ -124,4 +130,5 @@
   padding: 10px;
   width: 45px;
   height: 45px;
+  z-index: 111;
 }

@@ -76,11 +76,20 @@
     right: 0;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    color: gray;
+  }
 
-    .post-detail-icon {
-      width: 18px;
-    }
+  .post-detail-icon {
+    width: 18px;
+  }
+  .likeCount-text {
+    color: gray;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 100%;
   }
 
   .comment-card-reply-input-container {
@@ -154,4 +163,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+.reply-author-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }

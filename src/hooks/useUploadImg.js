@@ -80,11 +80,11 @@ const useUploadImg = () => {
               setUploadedFiles((prevFiles) => [...prevFiles, result.location]);
             } else {
               setIsError(true);
-              console.log("error uploading file", result.message);
+              // console.log("error uploading file", result.message);
             }
           } catch (err) {
             setIsError(true);
-            console.log("error uploading file", err);
+            // console.log("error uploading file", err);
           } finally {
             setUploadingFiles((prevUploadingFiles) =>
               prevUploadingFiles.filter(
@@ -96,7 +96,7 @@ const useUploadImg = () => {
       );
     } catch (err) {
       setIsError(true);
-      console.log("error uploading files", err);
+      // console.log("error uploading files", err);
     } finally {
       setIsLoading(false);
     }

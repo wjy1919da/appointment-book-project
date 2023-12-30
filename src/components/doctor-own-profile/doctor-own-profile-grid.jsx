@@ -112,6 +112,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
         dummyHighlight={post.highlightStatus}
         id={post.id}
         liked={post.isLike}
+        status={post.status}
       />
     </div>
   ));
