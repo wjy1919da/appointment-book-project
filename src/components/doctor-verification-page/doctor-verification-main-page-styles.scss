@@ -8,6 +8,8 @@
     background: #fbfcff;
     align-items: center;
     width: calc(100% - 96px); 
+    margin-left: auto;
+    margin-right: auto;
     
 }
 .doctor-verification-main-container
@@ -16,7 +18,6 @@
     margin-bottom: 100px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
 
 }
 .doctor-verification-main-page-button-container
