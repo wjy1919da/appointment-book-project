@@ -22,9 +22,9 @@
 
   .pink-background-2 {
     position: absolute;
-    top: 690px;
+    top: 680px;
     right: 0;
-    z-index: 0;
+    z-index: -1;
     border-radius: 236px 0 0 236px;
     background: var(
       --new-gradient,
@@ -269,7 +269,7 @@
     }
 
     .pink-background-2 {
-      top: 600px;
+      top: 670px;
       z-index: -1;
     }
 
@@ -293,8 +293,9 @@
     }
 
     .pink-background-2 {
-      top: 1000px;
+      top: 1200px;
       right: 0;
+      height: 390px;
     }
 
     .edit-post-page-inner-container {
