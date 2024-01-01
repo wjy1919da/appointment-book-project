@@ -1,62 +1,59 @@
-.home-button{
+.home-button {
+  display: inline-flex;
+  height: 56px;
+  padding: 8px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #675d59;
+  // background: var(--unnamed, #352C29);
+  color: white;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 140%;
+  .HomeButton-icon {
+    left: 12.5%;
+    right: 12.5%;
+    top: 12.5%;
+    bottom: 12.5%;
+    border-radius: 0;
+    //border: 2.4px solid #FFFFFF;
+    width: 15px; /* 或其他你希望的尺寸 */
+    height: 15px; /* 或其他你希望的尺寸 */
+    margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+  }
+}
+@media screen and (max-width: 576px) {
+  .home-button {
     display: inline-flex;
-    height: 56px;
+    height: 40px;
     padding: 8px 32px;
     justify-content: center;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: var(--unnamed, #352C29);
-    color:white;
+    background: var(--unnamed, #352c29);
+    color: white;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 140%;
-    .HomeButton-icon
-    {
-        left: 12.5%;
-        right: 12.5%;
-        top: 12.5%;
-        bottom: 12.5%;
-        border-radius: 0;
-        //border: 2.4px solid #FFFFFF;
-        width: 15px; /* 或其他你希望的尺寸 */
-        height: 15px; /* 或其他你希望的尺寸 */
-        margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
+    .HomeButton-icon {
+      left: 12.5%;
+      right: 12.5%;
+      top: 12.5%;
+      bottom: 12.5%;
+      border-radius: 0;
+      //border: 2.4px solid #FFFFFF;
+      width: 15px; /* 或其他你希望的尺寸 */
+      height: 15px; /* 或其他你希望的尺寸 */
+      margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
     }
-
+  }
 }
-@media screen and (max-width: 576px) {
-    .home-button{
-        display: inline-flex;
-        height: 40px;
-        padding: 8px 32px;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        flex-shrink: 0;
-        border-radius: 8px;
-        background: var(--unnamed, #352C29);
-        color:white;
-        font-family: 'Open Sans';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 140%;
-        .HomeButton-icon
-        {
-            left: 12.5%;
-            right: 12.5%;
-            top: 12.5%;
-            bottom: 12.5%;
-            border-radius: 0;
-            //border: 2.4px solid #FFFFFF;
-            width: 15px; /* 或其他你希望的尺寸 */
-            height: 15px; /* 或其他你希望的尺寸 */
-            margin-right: 8px; /* 添加一些间隙在图标和文字之间 */
-        }
-    }
-}
-    

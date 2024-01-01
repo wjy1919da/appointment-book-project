@@ -63,7 +63,6 @@ const UserProfileBasic = () => {
                   title='Edit Profile'
                   width='176px'
                   height='56px'
-                  backgroundColor='#675D59'
                   onClick={navigateToEditProfile}
                 />
               </div>
