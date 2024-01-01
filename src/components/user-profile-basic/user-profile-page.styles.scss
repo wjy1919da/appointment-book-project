@@ -22,6 +22,12 @@
     width: 100%;
   }
 
+  // profile picture
+  .user-profile-image {
+    width: 250px;
+    height: auto;
+  }
+
   // user name
   .user-profile-basic-user-name {
     color: #352c29;
@@ -82,17 +88,41 @@
   }
 }
 
-@media (max-width: 1133px) {
-  // .user-profile-basic-avatar {
-  //   width: 100%;
-  // }
-
+@media (min-width: 1441px) {
   .user-profile-image {
     width: 200px;
     height: 200px;
   }
 }
 
+@media (min-width: 1134px) and (max-width: 1440px) {
+  .user-profile-image {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* * * * * * * * *
+     1133px 
+* * * * * * * * */
+@media (max-width: 1133px) {
+  // profile picture
+  .user-profile-image {
+    max-width: 200px;
+    height: auto;
+  }
+}
+
+@media (min-width: 1134px) {
+  .user-profile-image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* * * * * * * * *
+     744px 
+* * * * * * * * */
 @media (max-width: 744px) {
   .user-profile-basic-container {
     padding: 0 64px;
@@ -104,7 +134,7 @@
 
   .user-profie-image {
     width: 178px;
-    height: 178px;
+    height: auto;
   }
 
   .user-profile-basic-name-and-editButton {
@@ -121,13 +151,9 @@
   // }
 }
 
-@media (max-width: 1133px) {
-}
-
-@media (max-width: 744px) {
-}
-
-/* * * iphones * * */
+/* * * * * * * * *
+     iphones 
+* * * * * * * * */
 @media (max-width: 530px) {
   .user-profile-basic-container {
     display: flex;
@@ -141,6 +167,12 @@
   .image-and-name-and-button-container {
     display: flex;
     justify-content: space-between;
+  }
+
+  // profile picture
+  .user-profile-image {
+    max-width: 120px;
+    height: auto;
   }
 
   // user name
