@@ -222,6 +222,7 @@
 
   .doctor-own-basic-avatar {
     img {
+      margin-top: -150px;
       width: 170px;
       height: auto;
     }
@@ -231,8 +232,14 @@
 @media (max-width: 530px) {
   .doctor-own-basic-avatar {
     img {
+      margin-top: -150px;
+      margin-left: 20px;
       width: 89px;
       height: auto;
     }
+  }
+
+  .doctor-follow-number, .doctor-own-follow-text {
+    font-size: 10px;
   }
 }
