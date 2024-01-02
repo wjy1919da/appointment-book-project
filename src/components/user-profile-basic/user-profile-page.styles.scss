@@ -169,6 +169,13 @@
     justify-content: space-between;
   }
 
+    // user name, edit button
+    .user-profile-basic-name-and-editButton {
+      margin-left: -200px !important;
+      width: 0 !important;
+    }
+
+
   // profile picture
   .user-profile-image {
     max-width: 120px;
@@ -177,22 +184,12 @@
 
   // user name
   .user-profile-basic-user-name {
-    color: #352c29;
-    font-family: Open Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    font-size: 24px !important;
   }
 
   // @ user name
-  .user-profile-basic-name-text {
-    color: #352c29;
-    font-family: Open Sans;
-    font-size: 18.734px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  .user-profile-basic-create-name {
+    font-size: 18.734px !important;
   }
 
   // user profile image
@@ -204,7 +201,7 @@
   // description, followers
   .description-and-followers-container {
     margin-top: 30px;
-    margin-left: -250px !important;
+    margin-left: -340px !important;
     padding: 0 15px;
   }
 

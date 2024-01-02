@@ -36,8 +36,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../assets/post/archive_filter.png"),
-    url("../../assets/post/archive_girl.png");
+  background-image: url('../../assets/post/archive_filter.png'),
+    url('../../assets/post/archive_girl.png');
   background-size: cover;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -53,5 +53,41 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+  }
+}
+
+@media (max-width: 1133px) {
+    .choose-picture-section-image-post {
+    width: 200px;
+    height: 200px;
+  }
+
+  .archive-posts-button-container {
+    width: 200px;
+    height: 200px;
+
+    // .archive-title {
+    //   font-size: 12px !important;
+    // }
+  }
+
+}
+
+@media (max-width: 744px) {
+}
+
+@media (max-width: 530px) {
+  .choose-picture-section-image-post {
+    width: 120px;
+    height: 120px;
+  }
+
+  .archive-posts-button-container {
+    width: 120px;
+    height: 120px;
+
+    .archive-title {
+      font-size: 12px !important;
+    }
   }
 }

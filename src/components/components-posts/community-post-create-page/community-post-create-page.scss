@@ -6,7 +6,7 @@
   align-items: center;
   width: 100%;
 
-  .pink-background-1 {
+  .create-pink-background-1 {
     position: absolute;
     top: 65px;
     left: 0;
@@ -20,7 +20,7 @@
     height: 330px;
   }
 
-  .pink-background-2 {
+  .create-pink-background-2 {
     position: absolute;
     top: 680px;
     right: 0;
@@ -243,7 +243,7 @@
 // small screens
 @media (max-width: 1133px) {
   .create-post-page-container {
-    .pink-background-1 {
+    .create-pink-background-1 {
       position: absolute;
       top: 65px;
       left: 0;
@@ -257,7 +257,7 @@
       height: 330px;
     }
 
-    .pink-background-2 {
+    .create-pink-background-2 {
       top: 670px;
       z-index: -1;
     }
@@ -277,11 +277,11 @@
 // mobile
 @media (max-width: 744px) {
   .create-post-page-container {
-    .pink-background-1 {
+    .create-pink-background-1 {
       top: 55px;
     }
 
-    .pink-background-2 {
+    .create-pink-background-2 {
       top: 1070px;
       right: 0;
       height: 390px;
@@ -312,4 +312,26 @@
       height: 41px;
     }
   }
+}
+
+@media (max-width: 530px) {
+  .create-post-page-inner-container {
+    width: 360px !important;
+  }
+
+  .create-pink-background-1 {
+    width: 300px !important;
+  }
+
+  .create-pink-background-2 {
+    top: 1100px !important;
+    width: 300px !important;
+  }
+
+  .create-post-page-title, .create-post-page-description {
+    width: 300px !important;
+  }
+}
+
+@media (max-width: 375px) {
 }

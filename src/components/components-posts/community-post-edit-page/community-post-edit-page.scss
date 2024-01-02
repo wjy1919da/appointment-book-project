@@ -328,3 +328,30 @@
     }
   }
 }
+
+@media (max-width: 530px) {
+  .edit-post-page-inner-container {
+    width: 360px !important;
+  }
+
+  .pink-background-1 {
+    width: 300px !important;
+  }
+
+  .pink-background-2 {
+    top: 1100px !important;
+    width: 300px !important;
+  }
+
+  .edit-post-page-title,
+  .edit-post-page-description {
+    width: 300px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .pink-background-2 {
+    right: 0 !important;
+    width: 300px !important;
+  }
+}
