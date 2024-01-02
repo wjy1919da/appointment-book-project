@@ -228,17 +228,21 @@
 }
 
 @media (max-width: 530px) {
-  .doctor-own-basic-avatar {
-    img {
-      margin-top: -140px;
-      margin-left: 20px;
-      width: 89px;
-      height: auto;
+  .doctor-own-basic-conatiner {
+    padding: 0;
+    
+    .doctor-own-basic-avatar {
+      img {
+        margin-top: -140px;
+        margin-left: 20px;
+        width: 89px;
+        height: auto;
+      }
     }
-  }
 
-  .doctor-follow-number,
-  .doctor-own-follow-text {
-    font-size: 10px;
+    .doctor-follow-number,
+    .doctor-own-follow-text {
+      font-size: 10px;
+    }
   }
 }
