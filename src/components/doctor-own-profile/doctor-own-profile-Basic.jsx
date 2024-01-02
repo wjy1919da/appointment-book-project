@@ -1,31 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import doctorAvartar from '../../assets/doctor/doctor-profile-image.png';
+
+// components
+import DoctorOwnProfileEditButton from './doctor-own-profile-edit-button';
+
+// stores
+import doctorInfoQueryStore from '../../doctorStore';
+import userInfoQueryStore from '../../userStore';
+
+// scss
+import './doctor-own-profile-Basic.styles.scss';
+
+// images
 import doctorVerify from '../../assets/doctor/Group.png';
-import calendar from '../../assets/doctor/calendar.png';
 import glassIcon from '../../assets/user/glassesIcon.png';
 import badgeIcon from '../../assets/user/badgeIcon.png';
 import locationIcon from '../../assets/user/locationIcon.png';
 import gradIcon from '../../assets/user/Graduation Cap.png';
 import certified from '../../assets/user/Certificate.png';
-import './doctor-own-profile-Basic.styles.scss';
-import verificationStatusIcon from '../../assets/doctor/VerificationStatus.png';
-import { useGetUserInfo } from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
-import DoctorOwnProfileEditButton from './doctor-own-profile-edit-button';
-import doctorInfoQueryStore from '../../doctorStore';
-import userInfoQueryStore from '../../userStore';
-import HomeSpinner from '../home-spinner/home-spinner.component';
-import { useMediaQuery } from 'react-responsive';
+import Verification from '../../assets/doctor/doctor-verification-status.svg'
+
+// import doctorAvartar from '../../assets/doctor/doctor-profile-image.png';
+// import { useGetUserInfo } from '../../hooks/useAuth';
+// import { Link } from 'react-router-dom';
+// import HomeSpinner from '../home-spinner/home-spinner.component';
+// import calendar from '../../assets/doctor/calendar.png';
+
 const DocotorOwnBasic = () => {
-  const navigate = useNavigate();
-  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [showManageButton, setShowManageButton] = useState(false);
   const [VerificationStatus, setVerificationStatus] = useState(false);
   const { isVerificationSubmitted } = doctorInfoQueryStore();
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const navigate = useNavigate();
+
   const handleFirstButtonClick = () => {
     setShowManageButton(true); // This will show the second button
   };
+
   const onClick = () => {
     navigate('/doctorProfileEdit');
   };
@@ -34,7 +47,7 @@ const DocotorOwnBasic = () => {
   };
 
   // screen size
- const isIpadScreen = useMediaQuery({
+  const isIpadScreen = useMediaQuery({
     query: '(max-width: 744px)',
   });
 
@@ -54,7 +67,8 @@ const DocotorOwnBasic = () => {
                 className='doctor-profile-verification-button'
                 onClick={handleVerificationClick}
               >
-                {isVerificationSubmitted ? 'Verifying' : 'Verification'}
+                <img src={Verification} alt="Icon-Verification" />
+                {/* {isVerificationSubmitted ? 'Verifying' : 'Verification'} */}
               </button>
             )}
             {VerificationStatus && (
@@ -128,12 +142,12 @@ const DocotorOwnBasic = () => {
           <div className='doctor-info-category'>
             <img src={glassIcon} className='doctor-own-info-icon'></img>
             <span className='doctor-own-info-text'>
-              specilization in Field{' '}
+              Specilization in Field
             </span>
           </div>
           <div className='doctor-info-category'>
             <img src={badgeIcon} className='doctor-own-info-icon'></img>
-            <span className='doctor-own-info-text'>verified by CharmLife</span>
+            <span className='doctor-own-info-text'>Verified by CharmLife</span>
           </div>
           <div className='doctor-info-category'>
             <img src={gradIcon} className='doctor-own-info-icon'></img>
