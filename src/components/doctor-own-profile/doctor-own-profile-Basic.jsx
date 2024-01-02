@@ -34,8 +34,8 @@ const DocotorOwnBasic = () => {
   };
 
   // screen size
-  const isSmallScreen = useMediaQuery({
-    query: '(max-width: 1133px)',
+ const isIpadScreen = useMediaQuery({
+    query: '(max-width: 744px)',
   });
 
   return (
@@ -68,7 +68,7 @@ const DocotorOwnBasic = () => {
             {/* <Link to="/doctorProfileEdit" className="top-edit-button-1">
               edit profile
             </Link> */}
-            {isSmallScreen ? (
+            {isIpadScreen ? (
               ''
             ) : (
               <DoctorOwnProfileEditButton
@@ -146,7 +146,7 @@ const DocotorOwnBasic = () => {
             </span>
           </div>
         </div>
-        {isSmallScreen && (
+        {isIpadScreen && (
           <DoctorOwnProfileEditButton onClick={onClick} title='Edit profile' />
         )}
       </div>
