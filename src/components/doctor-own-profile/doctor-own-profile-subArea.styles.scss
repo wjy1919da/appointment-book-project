@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 5%;
-  padding: 15px;
+  padding: 0 7%;
   // padding-left: 10%;
   padding-bottom: 80px;
 
@@ -11,12 +11,12 @@
     display: flex;
     justify-content: space-between;
     color: #000;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
-    width: 250px;
+    width: 180px;
   }
 
   .nav-tab-about,
@@ -48,4 +48,22 @@
 }
 .doctor-profile-likePost-container {
   margin-left: -110px;
+}
+
+@media (max-width: 1133px) {
+}
+
+@media (max-width: 744px) {
+}
+
+@media (max-width: 530px) {
+  .doctor-profile-subArea-container {
+    padding: 20px;
+  }
+
+  .nav-tab-about,
+  .nav-tab-posts,
+  .nav-tab-like {
+    font-size: 12px;
+  }
 }

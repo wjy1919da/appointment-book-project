@@ -1,6 +1,5 @@
 .doctor-own-basic-conatiner {
   display: flex;
-  flex-direction: row;
   margin-top: 100px;
   gap: 40px;
   align-items: center;
@@ -42,10 +41,10 @@
   margin-top: 10px;
   justify-content: space-between;
 }
-.doctor-own-basic-specialization {
-}
-.doctor-own-basic-app-button {
-}
+// .doctor-own-basic-specialization {
+// }
+// .doctor-own-basic-app-button {
+// }
 .doctor-own-basic-medium {
   display: flex;
   margin-top: 10px;
@@ -120,12 +119,10 @@
   box-shadow: 0px 4.95427px 6.60569px 0px rgba(226, 227, 231, 0.25),
     0px 0px 16.51423px 0px rgba(255, 164, 163, 0.1);
 }
-.doctor-calendar-img {
-}
+// .doctor-calendar-img {
+// }
 .doctor-specialization-text {
   color: #000;
-
-  /* NEW TYPE/NEW body2 */
   font-family: Open Sans;
   font-size: 14px;
   font-style: normal;
@@ -134,7 +131,6 @@
 }
 .doctor-follow-number {
   color: var(--text-2-button, #675d59);
-  /* NEW TYPE/NEW sub title */
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
@@ -143,7 +139,6 @@
 }
 .doctor-own-follow-text {
   color: var(--text-2-button, #675d59);
-  /* NEW TYPE/NEW sub title */
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
@@ -158,7 +153,6 @@
   overflow: hidden;
   color: var(--text-2-button, #675d59);
   text-overflow: ellipsis;
-  /* NEW TYPE/NEW caption */
   font-family: Open Sans;
   font-size: 10px;
   font-style: normal;
@@ -209,9 +203,13 @@
 }
 
 @media (max-width: 1133px) {
-  .top-edit-button-1 {
-    margin-top: 20px;
-    width: 150px;
+  .doctor-own-basic-conatiner {
+    padding: 0 30px;
+
+    .top-edit-button-1 {
+      margin-top: 20px;
+      width: 150px;
+    }
   }
 }
 
@@ -232,14 +230,15 @@
 @media (max-width: 530px) {
   .doctor-own-basic-avatar {
     img {
-      margin-top: -150px;
+      margin-top: -140px;
       margin-left: 20px;
       width: 89px;
       height: auto;
     }
   }
 
-  .doctor-follow-number, .doctor-own-follow-text {
+  .doctor-follow-number,
+  .doctor-own-follow-text {
     font-size: 10px;
   }
 }
