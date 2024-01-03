@@ -1,141 +1,230 @@
-* {
-  color: #352c29;
-  font-family: Open Sans;
-  font-style: normal;
-  line-height: normal;
-}
-
 .user-profile-basic-container {
-  display: flex;
-  gap: 49px;
   margin-top: 120px;
-  padding: 0 100px;
+  padding-left: 80px;
+  padding-right: 140px;
 
-  .user-profile-basic-avatar {
-    order: 0;
-  }
-
-  .wrapper {
+  .image-and-name-and-button-container {
     display: flex;
-    align-items: center;
   }
 
-  .user-profile-basic-information-container {
-    order: 1;
+  .test {
     display: flex;
     flex-direction: column;
-    // align-items: flex-end;
-    width: 80%;
+    width: 100%;
+  }
 
+  // user name, edit button
+  .user-profile-basic-name-and-editButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 85px;
+    width: 100%;
+  }
+
+  // profile picture
+  .user-profile-image {
+    width: 250px;
+    height: auto;
+  }
+
+  // user name
+  .user-profile-basic-user-name {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  // @ user name
+  .user-profile-basic-create-name {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .user-profile-basic-name {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  // description, followers
+  .description-and-followers-container {
+    margin-top: 80px;
+    margin-left: 50px;
+    padding: 0 15px;
+    width: 100%;
+  }
+
+  // description
+  .user-profile-basic-info-text {
+    font-size: 18px;
+    margin-top: -50px;
+    margin-bottom: 20px;
+  }
+
+  // followers
+  .user-profile-basic-info-following-section {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+  }
+
+  // follower numbers
+  .user-profile-black-text {
+    color: #352c29;
+    margin-right: 4px;
+  }
+
+  // posts, follower, following texts
+  .user-profile-gray-text {
+    color: #675d59;
+  }
+}
+
+@media (min-width: 1441px) {
+  .user-profile-image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 1134px) and (max-width: 1440px) {
+  .user-profile-image {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* * * * * * * * *
+     1133px 
+* * * * * * * * */
+@media (max-width: 1133px) {
+  // profile picture
+  .user-profile-image {
+    max-width: 200px;
+    height: auto;
+  }
+}
+
+@media (min-width: 1134px) {
+  .user-profile-image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* * * * * * * * *
+     744px 
+* * * * * * * * */
+@media (max-width: 744px) {
+  .user-profile-basic-container {
+    padding: 0 64px;
+  }
+
+  .user-profile-basic-avatar {
+    width: 100%;
+  }
+
+  .user-profie-image {
+    width: 178px;
+    height: auto;
+  }
+
+  .user-profile-basic-name-and-editButton {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .user-profile-basic-edit-button {
+    margin-top: 30px;
+  }
+
+  // .user-profile-basic-name {
+  //   gap: 0 !important;
+  // }
+}
+
+/* * * * * * * * *
+     iphones 
+* * * * * * * * */
+@media (max-width: 530px) {
+  .user-profile-basic-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    padding-left: 30px;
+    padding-right: 70px;
+  }
+
+  // user profile image, user name, edit button
+  .image-and-name-and-button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+    // user name, edit button
     .user-profile-basic-name-and-editButton {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      width: 100%;
-
-      .user-profile-basic-name {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-
-        .user-profile-basic-name-title {
-          display: flex;
-          align-items: center;
-          gap: 17px;
-          color: #000;
-          /* Heading 3 */
-          font-family: Playfair Display;
-          font-size: 40px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 135%; /* 54px */
-        }
-
-        .user-profile-basic-user-name {
-          font-size: 34px;
-          font-weight: 700;
-        }
-
-        .user-profile-basic-name-text {
-          color: #000;
-          /* Body 3 */
-          font-family: Lora;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 160%; /* 25.6px */
-        }
-
-        .user-profile-basic-create-name {
-          font-size: 21px;
-          font-weight: 600;
-        }
-      }
+      margin-left: -200px !important;
+      width: 0 !important;
     }
 
-    .user-profile-basic-booking-button-container button {
-      border-radius: 8px;
-      border: 2px solid var(--new-gradient, #f48c8a);
-      margin-left: 12px;
-      padding: 10px 22px;
-    }
 
-    .user-profile-basic-info-text {
-      margin-top: 20px;
-      width: 80%;
-      color: #000;
-      font-family: PingFang SC;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 160%;
-    }
+  // profile picture
+  .user-profile-image {
+    max-width: 120px;
+    height: auto;
+  }
 
-    .user-profile-basic-description {
-      font-size: 18px;
-      font-weight: 400;
-      width: 842px;
-    }
+  // user name
+  .user-profile-basic-user-name {
+    font-size: 24px !important;
+  }
 
-    .user-profile-basic-info-following-section {
-      display: flex;
-      width: 325px;
-      align-items: flex-start;
-      gap: 30px;
-      margin-top: 30px;
+  // @ user name
+  .user-profile-basic-create-name {
+    font-size: 18.734px !important;
+  }
 
-      .user-profile-number-cate-combimation {
-        display: flex;
-        width: 59px;
-        height: 32px;
-        flex-shrink: 0;
-        align-items: center;
-        gap: 5px;
+  // user profile image
+  .user-profile-image {
+    width: 120px;
+    height: 120px;
+  }
 
-        .user-profile-black-text {
-          color: #000;
-          text-align: center;
-          font-family: PingFang SC;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 160%;
-        }
+  // description, followers
+  .description-and-followers-container {
+    margin-top: 30px;
+    margin-left: -340px !important;
+    padding: 0 15px;
+  }
 
-        .user-profile-gray-text {
-          font-family: PingFang SC;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 160%;
-          /* identical to box height, or 16px */
-          width: 70%;
-          display: flex;
-          align-items: center;
-          color: #a5a6a8;
-        }
-      }
-    }
+  // description
+  .user-profile-basic-info-text {
+    margin-top: -50px;
+    margin-bottom: 20px;
+  }
+
+  // followers
+  .user-profile-basic-info-following-section {
+    display: flex;
+    gap: 20px;
+  }
+
+  // follower numbers
+  .user-profile-black-text {
+    color: #352c29;
+    margin-right: 4px;
+  }
+
+  // posts, follower, following texts
+  .user-profile-gray-text {
+    color: #675d59;
   }
 }
