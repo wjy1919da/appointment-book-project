@@ -75,10 +75,17 @@ function DoctorVerificationPage({ pageNumber,onFileSelected }) {
               Verify your Profile.
             </div>
             <Select placeholder="Select your License to upload" size="md">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </Select>
+              <option value="medicalLicense">Medical License - Issued by the medical board in the state where they practice.</option>
+              <option value="boardCertification">Board Certification - By entities like the American Society of Plastic Surgeons (ASPS).</option>
+              <option value="malpracticeInsurance">Malpractice Insurance - Proof of current malpractice insurance.</option>
+              <option value="educationalCredentials">Educational Credentials - Copies of medical school diploma and relevant certificates.</option>
+              <option value="proofOfAddress">Proof of Address - Document proving the practice address.</option>
+              <option value="stateControlledSubstanceRegistration">State Controlled Substance Registration - Required in some states for prescribing certain medications.</option>
+              <option value="cvOrResume">CV or Resume (Optional)</option>
+              <option value="proofOfIdentity">Proof of Identity - Government-issued ID like a passport or driver's license.</option>
+              <option value="nationalProviderIdentifier">National Provider Identifier (NPI) - Unique ID for health care providers in the US.</option>
+              <option value="others">Others</option>
+          </Select>
           </div>
           <div className="doctor-verification-content-sub-area">
             <div className="doctor-verification-content-sub-title">

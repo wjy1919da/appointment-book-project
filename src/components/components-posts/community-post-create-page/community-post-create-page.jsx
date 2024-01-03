@@ -233,8 +233,8 @@ const CreatePostPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="create-post-page-container"
       >
-        <div className="pink-background-1"></div>
-        <div className="pink-background-2"></div>
+        <div className="create-pink-background-1"></div>
+        <div className="create-pink-background-2"></div>
 
         <button
           type="button"
@@ -298,7 +298,7 @@ const CreatePostPage = () => {
                       />
                     </div>
                     <div className="create-post-page-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing
+                      Add Png/Jpeg File Here!
                     </div>
                   </div>
                 </>
@@ -333,7 +333,7 @@ const CreatePostPage = () => {
           </div>
 
           <div className="create-post-page-right-container">
-            <div>
+            <div className="create-post-page-right-inner-container">
               <input
                 type="text"
                 placeholder="Title"
@@ -373,23 +373,23 @@ const CreatePostPage = () => {
 
             <div className="create-post-page-button-wrapper">
               {/* --- radio button --- */}
-              <div className="create-post-page-radio-button-container">
+              {/* <div className='create-post-page-radio-button-container'>
                 <input
-                  id="input-linked"
-                  type="radio"
-                  name="input-radio-button"
+                  id='input-linked'
+                  type='radio'
+                  name='input-radio-button'
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className="create-post-input-radio-button"
+                  className='create-post-input-radio-button'
                 />
                 <label
-                  htmlFor="input-linked"
-                  className="create-post-input-radio-button-label"
+                  htmlFor='input-linked'
+                  className='create-post-input-radio-button-label'
                 >
                   Restrict my post to viewers over 18
                 </label>
               </div>
-
+ */}
               {/* --- button --- */}
               <div className="post-information-sendButton">
                 <FormButton

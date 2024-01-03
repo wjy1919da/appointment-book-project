@@ -255,8 +255,7 @@ const EditPostPage = () => {
               <img
                 src={DeleteButton}
                 alt="Icon-Delete-Button"
-                className="create-edit-post-page-delete-button"
-                style={{}}
+                className="edit-post-page-delete-button"
               />
             </button>
           </div>
@@ -331,7 +330,7 @@ const EditPostPage = () => {
                       />
                     </div>
                     <div className="edit-post-page-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing
+                      Add Png/Jpeg File Here!
                     </div>
                   </div>
                 </>
@@ -364,7 +363,7 @@ const EditPostPage = () => {
           </div>
 
           <div className="edit-post-page-right-container">
-            <div>
+            <div className="edit-post-page-right-inner-container">
               <input
                 type="text"
                 placeholder="Title"
@@ -405,22 +404,22 @@ const EditPostPage = () => {
 
             <div className="edit-post-page-button-wrapper">
               {/* --- radio button --- */}
-              <div className="edit-post-page-radio-button-container">
+              {/* <div className='edit-post-page-radio-button-container'>
                 <input
-                  id="input-linked"
-                  type="radio"
-                  name="input-radio-button"
+                  id='input-linked'
+                  type='radio'
+                  name='input-radio-button'
                   checked={clickedRadio}
                   onChange={handleRadioClick}
-                  className="edit-post-input-radio-button"
+                  className='edit-post-input-radio-button'
                 />
                 <label
-                  htmlFor="input-linked"
-                  className="edit-post-input-radio-button-label"
+                  htmlFor='input-linked'
+                  className='edit-post-input-radio-button-label'
                 >
                   Restrict my post to viewers over 18
                 </label>
-              </div>
+              </div> */}
 
               {/* --- button --- */}
               <div className="post-information-sendButton">
@@ -431,11 +430,8 @@ const EditPostPage = () => {
                 <img
                   src={Trash}
                   alt="Image-Trash-Icon"
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                  }}
                   onClick={handleClickModal}
+                  className="edit-post-page-trash-icon"
                 />
               </div>
             </div>

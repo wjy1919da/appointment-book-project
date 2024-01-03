@@ -4,7 +4,7 @@ import DoctorProfileGrid from "./doctor-own-profile-grid";
 
 const DocotorOwnMain = () => {
   return (
-    <div className="doctor-own-profile-main-conatiner container">
+    <div className="doctor-own-profile-main-conatiner">
       <DocotorOwnBasic />
       <DoctorProfileSubArea />
     </div>

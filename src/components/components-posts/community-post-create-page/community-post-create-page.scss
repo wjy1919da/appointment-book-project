@@ -1,4 +1,4 @@
-// screen bigger than 1025px
+// screen bigger than 1440px
 .create-post-page-container {
   display: flex;
   flex-direction: column;
@@ -6,9 +6,9 @@
   align-items: center;
   width: 100%;
 
-  .pink-background-1 {
+  .create-pink-background-1 {
     position: absolute;
-    top: 65px;
+    top: -30px;
     left: 0;
     z-index: 0;
     border-radius: 0 236px 236px 0;
@@ -16,43 +16,40 @@
       --new-gradient,
       linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
     );
-    width: 400px;
-    height: 330px;
+    width: 450px;
+    height: 370px;
   }
 
-  .pink-background-2 {
+  .create-pink-background-2 {
     position: absolute;
-    top: 690px;
+    top: 650px;
     right: 0;
-    z-index: 0;
+    z-index: -1;
     border-radius: 236px 0 0 236px;
     background: var(
       --new-gradient,
       linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
     );
     width: 400px;
-    height: 330px;
+    height: 400px;
   }
 
   .create-post-page-back-button-container {
     position: absolute;
-    top: 130px;
-    left: 50px;
+    top: 120px;
+    left: 60px;
     display: flex;
     align-items: center;
     gap: 20px;
+    color: #fbfcff;
+    font-family: Open Sans;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 
     .create-post-page-arrow-back-button {
       rotate: 180deg;
-    }
-
-    .create-post-page-label-back-button {
-      color: #fbfcff;
-      font-family: Open Sans;
-      font-size: 25px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
     }
   }
 
@@ -67,9 +64,10 @@
     border: 2px solid #675d59;
     background: #fbfcff;
     display: flex;
-    padding: 50px;
+    padding: 0 50px;
+    padding-bottom: 30px;
     width: 1000px;
-    height: 580px;
+    height: 520px;
     margin: 220px 0;
   }
 
@@ -81,13 +79,15 @@
 
   .create-post-page-left-container {
     position: relative;
+    margin-bottom: 20px;
   }
 
   .create-post-pic-wrapper {
-    height: 320px;
+    // height: 320px;
     border-radius: 15px;
-    margin-bottom: 15px;
-    overflow: hidden;
+    // margin-bottom: 15px;
+    margin-top: 50px;
+    // overflow: hidden;
   }
 
   .create-post-page-add {
@@ -95,7 +95,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: var(--White, #fbfcff);
+    background: #fbfcff;
     box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
     margin-top: -65px;
     margin-bottom: 20px;
@@ -144,6 +144,10 @@
   }
 
   // right container
+  .create-post-page-right-inner-container {
+    margin-top: 25px;
+  }
+
   .create-post-page-title,
   .create-post-page-description {
     border-radius: 8px;
@@ -171,26 +175,26 @@
   }
 
   // tag, location button
-  .create-post-page-tag-name {
-    top: -460px;
-    left: 16px;
-  }
+  // .create-post-page-tag-name {
+  //   top: -460px;
+  //   left: 16px;
+  // }
 
-  .create-post-page-location-tag-name {
-    right: 16px;
-  }
+  // .create-post-page-location-tag-name {
+  //   right: 16px;
+  // }
 
-  .create-post-page-tag-name,
-  .create-post-page-location-tag-name {
-    position: absolute;
-    bottom: 20px;
-    color: #675d59;
-    font-family: Open Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
+  // .create-post-page-tag-name,
+  // .create-post-page-location-tag-name {
+  //   position: absolute;
+  //   bottom: 20px;
+  //   color: #675d59;
+  //   font-family: Open Sans;
+  //   font-size: 16px;
+  //   font-style: normal;
+  //   font-weight: 600;
+  //   line-height: normal;
+  // }
 
   .create-post-page-button-wrapper {
     display: flex;
@@ -205,6 +209,11 @@
     .create-post-input-radio-button-label {
       margin-right: 12px;
     }
+  }
+
+  .create-post-custom-button {
+    padding: 5px 23px;
+    height: 41px;
   }
 
   // image mask effect
@@ -227,12 +236,116 @@
   .thumbnail.clicked::before {
     content: none;
   }
+}
 
-  // screen 769px to 1024px
-  @media (max-width: 1024px) {
+// small screens
+@media (max-width: 1133px) {
+  .create-post-page-container {
+    .create-pink-background-1 {
+      position: absolute;
+      // top: 65px;
+      left: 0;
+      z-index: -1;
+      border-radius: 0 236px 236px 0;
+      background: var(
+        --new-gradient,
+        linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+      );
+      // width: 400px;
+      // height: 330px;
+    }
+
+    .create-pink-background-2 {
+      top: 570px;
+      z-index: -1;
+    }
+
+    .create-post-page-inner-container {
+      width: 875px;
+      height: 460px;
+    }
+
+    .create-post-page-title,
+    .create-post-page-description {
+      width: 400px;
+    }
+  }
+}
+
+// mobile
+@media (max-width: 744px) {
+  .create-post-page-container {
+    .create-pink-background-1 {
+      top: -80px;
+      z-index: -1;
+    }
+
+    .create-pink-background-2 {
+      top: 1000px;
+      right: 0;
+      height: 460px;
+    }
+
+    .create-post-page-inner-container {
+      display: flex;
+      flex-direction: column;
+      margin: 150px 0;
+      padding: 60px 0;
+      width: 480px;
+      min-height: 800px;
+      height: auto;
+    }
+
+    .create-post-page-back-button-container {
+      top: 110px;
+      left: 60px;
+      font-size: 28px;
+    }
+
+    .create-post-page-title,
+    .create-post-page-description {
+      width: 370px;
+    }
+
+    .create-post-input-radio-button-label {
+      font-size: 13px;
+    }
+
+    .create-post-custom-button {
+      font-size: 14px;
+      padding: 5px 20px;
+      height: 41px;
+    }
+  }
+}
+
+@media (max-width: 530px) {
+  .create-post-page-inner-container {
+    width: 360px !important;
   }
 
-  // small screens
-  @media (max-width: 768px) {
+  .create-pink-background-1 {
+    width: 300px !important;
   }
+
+  .create-pink-background-2 {
+    top: 1000px !important;
+    width: 300px !important;
+  }
+
+  .create-post-page-back-button-container {
+    left: 40px !important;
+  }
+
+  .create-post-page-title, .create-post-page-description {
+    width: 300px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .create-pink-background-2 {
+    right: 0 !important;
+    width: 300px !important;
+  }
+
 }

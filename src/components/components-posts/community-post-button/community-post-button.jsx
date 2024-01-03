@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react';
 
 // scss
-import "./community-post-button.scss";
+import './community-post-button.scss';
 
-const FormButton = ({ buttonName, onClick, type }) => {
+const FormButton = ({ buttonName, onClick, className }) => {
   return (
-    <button type="submit" class="create-post-button" onClick={onClick}>
+    <button
+      type='submit'
+      className={`create-post-button ${className}`}
+      onClick={onClick}
+    >
       {buttonName}
     </button>
   );

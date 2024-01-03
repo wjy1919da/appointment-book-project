@@ -1,32 +1,35 @@
 import usePostQueryStore from "../../postStore.ts";
-import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
 // components
 import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
 import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
-import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
-import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
 import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
-import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
+import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
+// import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
+// import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
+// import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
 
 // scss
 import "./community.styles.scss";
-import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-import Arrow1 from "../../assets/post/arrow1_grid.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
+// import Arrow1 from "../../assets/post/arrow1_grid.png";
 
 const toDisplayFormat = (param) => {
   return param.replace(/_/g, " ");
 };
+
 const Community = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isDoctorTitleVisible, setIsDoctorTitleVisible] = useState(true);
+
   const postContainerRef = useRef(null);
   const setTempSearchParam = usePostQueryStore(
     (state) => state.setTempSearchParam
@@ -104,6 +107,12 @@ const Community = () => {
   //   }
   // };
 
+  // small screens search icon button
+  const handleResponsiveButtonClick = () => {
+    setIsInputVisible(!isInputVisible);
+    setIsDoctorTitleVisible(!isDoctorTitleVisible);
+  };
+
   const handleOnClick = (role) => {
     if (postQuery.postBy.includes(role)) {
       setPostBy(postQuery.postBy.filter((item) => item !== role));
@@ -141,6 +150,7 @@ const Community = () => {
     }
   };
   const handleSearch = () => {
+    console.log("handleSearch is clicked");
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
       JSON.parse(localStorage.getItem("postSearchHistory")) || [];
@@ -171,12 +181,17 @@ const Community = () => {
   // };
 
   return (
-    <div>
+    <div className="community-component-container">
       <div>
         <PostPageMain />
         <div className="doctor-post-outer-container">
           <div className="doctor-post-header-container">
-            <h1 className="doctor-post-outer-title">Community Posts</h1>
+            <h1
+              className="doctor-post-outer-title"
+              style={{ opacity: isDoctorTitleVisible ? 1 : 0.7 }}
+            >
+              Community Posts
+            </h1>
             <div className="doctor-post-header-button-container">
               <div
                 className="post-search-box-position-container"
@@ -187,7 +202,9 @@ const Community = () => {
                   onChange={handleInputChange}
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
-                  onKeyPress={handleKeyPress}
+                  isMobile={isMobile}
+                  handleResponsiveButtonClick={handleResponsiveButtonClick}
+                  isInputVisible={isInputVisible}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
