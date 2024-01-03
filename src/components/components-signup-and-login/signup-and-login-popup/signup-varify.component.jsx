@@ -6,43 +6,23 @@ import { useClickVerification } from "../../../hooks/useAuth";
 import NextButton from "./next-button.component";
 import { useEffect, useState } from "react";
 const SignupVerify = () => {
-   const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
-   const userInfo = userInfoQueryStore(state=>state.userInfo);
-   const {mutate,data,isLoading,isError,error} = useClickVerification();
-   const [countdown, setCountdown] = useState(10);
-   const [isTiming, setIsTiming] = useState(false);
-   var email;
-   var userRole;
-   useEffect(() => {
-       email = localStorage.getItem('email');
-       userRole = localStorage.getItem("accountType") === "1"? "USER" : "DOCTOR";
-   });
-   const handleOnClick = () => {
-        if(!email){
-            alert("email is empty");
-            switchPopupTab('sendVerifyEmail');
-            return;
-        }
-         mutate({
-              email: email,
-              userRole: userRole,
-         });
-        setCountdown(10);
-        setIsTiming(true);
-   }; 
- 
-    useEffect(() => {
-        if (isTiming) {
-            if (countdown > 0) {
-                const timerId = setTimeout(() => {
-                    setCountdown(prevCount => prevCount - 1);
-                }, 1000);
-                return () => clearTimeout(timerId);
-            } else {
-                setIsTiming(false);
-            }
-        }
-    }, [isTiming, countdown]); 
+  const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const { mutate, data, isLoading, isError, error } = useClickVerification();
+  const [countdown, setCountdown] = useState(10);
+  const [isTiming, setIsTiming] = useState(false);
+  var email;
+  var userRole;
+  useEffect(() => {
+    email = localStorage.getItem("email");
+    userRole = localStorage.getItem("accountType") === "1" ? "USER" : "DOCTOR";
+  });
+  const handleOnClick = () => {
+    if (!email) {
+      alert("email is empty");
+      switchPopupTab("sendVerifyEmail");
+      return;
+    }
     mutate({
       email: email,
       userRole: userRole,
@@ -55,7 +35,18 @@ const SignupVerify = () => {
       alert(data.msg);
     }
   }, [data]);
-
+  useEffect(() => {
+    if (isTiming) {
+      if (countdown > 0) {
+        const timerId = setTimeout(() => {
+          setCountdown((prevCount) => prevCount - 1);
+        }, 1000);
+        return () => clearTimeout(timerId);
+      } else {
+        setIsTiming(false);
+      }
+    }
+  }, [isTiming, countdown]);
   if (error) {
     alert(error);
   }
