@@ -233,8 +233,8 @@ const CreatePostPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='create-post-page-container'
       >
-        <div className='pink-background-1'></div>
-        <div className='pink-background-2'></div>
+        <div className='create-pink-background-1'></div>
+        <div className='create-pink-background-2'></div>
 
         <button
           type='button'
