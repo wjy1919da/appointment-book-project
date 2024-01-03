@@ -458,16 +458,19 @@ const CommunityPostDetailPopUP = ({
             </div>
             <div className="user-detail">
               <div className="user-detail-inner">
-                {isAvatarLoaded && postQuery.userAvatar && (
+                {isAvatarLoaded && postQuery.userAvatar ? (
                   <img
                     src={postQuery.userAvatar}
                     alt="Image-User-Picture"
                     className="user-detail-profile-image"
                     onError={() => setIsAvatarLoaded(false)}
                   />
+                ) : (
+                  <SkeletonCircle size="10" />
                 )}
                 <span>{postQuery.userName}</span>
               </div>
+
               <div className="user-detail-button-container">
                 {isDoctorAuthor && (
                   <button
