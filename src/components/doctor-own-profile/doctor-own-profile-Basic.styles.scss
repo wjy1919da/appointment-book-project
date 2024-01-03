@@ -82,7 +82,6 @@
   color: var(--White, #fbfcff);
   /* gradient button text shadow */
   text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
-  /* NEW TYPE/NEW button */
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
@@ -106,7 +105,6 @@
 }
 .text-management-button {
   color: var(--text-1-footer, #352c29);
-  /* NEW TYPE/NEW input, navi */
   font-family: Open Sans;
   font-size: 12px;
   font-style: normal;
@@ -230,7 +228,7 @@
 @media (max-width: 530px) {
   .doctor-own-basic-conatiner {
     padding: 0;
-    
+
     .doctor-own-basic-avatar {
       img {
         margin-top: -140px;
