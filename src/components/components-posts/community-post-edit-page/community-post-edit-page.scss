@@ -36,14 +36,14 @@
 
   .edit-post-page-back-button-container {
     position: absolute;
-    top: 130px;
+    top: 120px;
     left: 60px;
     display: flex;
     align-items: center;
     gap: 20px;
     color: #fbfcff;
     font-family: Open Sans;
-    font-size: 25px;
+    font-size: 34px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -174,25 +174,25 @@
 }
 
 // tag, location button
-.create-post-page-tag-name {
-  left: 16px;
-}
+// .create-post-page-tag-name {
+//   left: 16px;
+// }
 
-.create-post-page-location-tag-name {
-  right: 16px;
-}
+// .create-post-page-location-tag-name {
+//   right: 16px;
+// }
 
-.create-post-page-tag-name,
-.create-post-page-location-tag-name {
-  position: absolute;
-  bottom: 20px;
-  color: #675d59;
-  font-family: Open Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+// .create-post-page-tag-name,
+// .create-post-page-location-tag-name {
+//   position: absolute;
+//   bottom: 20px;
+//   color: #675d59;
+//   font-family: Open Sans;
+//   font-size: 16px;
+//   font-style: normal;
+//   font-weight: 600;
+//   line-height: normal;
+// }
 
 .edit-post-page-button-wrapper {
   display: flex;
@@ -225,7 +225,6 @@
 }
 
 // image mask effect
-// All thumbnails have a mask by default
 .thumbnail {
   position: relative;
 
