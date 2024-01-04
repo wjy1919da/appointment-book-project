@@ -30,6 +30,7 @@ import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
 import DoctorAppointmentPage from './components/doctor-appointment/doctor-appointment-page';
+import DoctorAppointmentPage2 from './components/doctor-appointment/doctor-appointmet-page-2';
 
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx';
@@ -100,6 +101,10 @@ const App = () => {
               <Route
                 path='doctor-appointment'
                 element={<DoctorAppointmentPage />}
+              />
+              <Route
+                path='doctor-appointment-2'
+                element={<DoctorAppointmentPage2 />}
               />
               <Route path='posts' element={<DoctorPost />} />
               <Route

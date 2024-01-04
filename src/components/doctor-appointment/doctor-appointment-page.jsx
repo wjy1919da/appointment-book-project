@@ -20,6 +20,10 @@ const DoctorAppointmentPage = () => {
     navigate('/doctorProfile');
   };
 
+  const handleGoNextDoctorAppointment = () => {
+    navigate('/doctor-appointment-2');
+  }
+
   return (
     <div className='doctor-appointment-container'>
       <div className='doctor-appointment-pink-background-1'></div>
@@ -83,6 +87,7 @@ const DoctorAppointmentPage = () => {
           <Button
             buttonName='Next'
             className='doctor-appointment-next-button'
+            onClick={handleGoNextDoctorAppointment}
           />
         </div>
       </div>
