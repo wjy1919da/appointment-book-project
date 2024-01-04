@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import DoctorOwnProfileEditButton from "./doctor-own-profile-edit-button";
 
 // stores
-import doctorInfoQueryStore from "../../doctorStore";
 import userInfoQueryStore from "../../userStore";
+import doctorInfoQueryStore from "../../doctorStore";
 
 // scss
 import "./doctor-own-profile-Basic.styles.scss";
@@ -78,12 +78,14 @@ const DocotorOwnBasic = () => {
               className="doctor-profile-verification-button"
               onClick={handleVerificationClick}
             >
-              {/* <img src={Verification} alt="Icon-Verification" /> */}
-              {userInfo.verificationStatus === 0
+              <img src={Verification} alt="Icon-Verification" />
+              
+              {/* this part is uncommented due to design change */}
+              {/* {userInfo.verificationStatus === 0
                 ? "Verification"
                 : userInfo.verificationStatus === 1
                 ? "Verified"
-                : "Rejected"}
+                : "Rejected"} */}
             </button>
           </div>
           <div className="doctor-own-basic-edits-buttons">
