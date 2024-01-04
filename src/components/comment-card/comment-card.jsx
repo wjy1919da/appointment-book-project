@@ -129,7 +129,8 @@ const CommentCard = ({
                       onError={handleAvatarError}
                     ></img>
                   ) : (
-                    <SkeletonCircle size="8" />
+                    // <SkeletonCircle size="8" />
+                    <div class="grey-circle"></div>
                   )}
                 </div>
                 <div className="reviewer-information">

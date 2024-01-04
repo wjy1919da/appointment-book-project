@@ -120,9 +120,7 @@ const CommunityPost = ({
           />
         </div>
       ) : (
-        // <div className="post-Image">
-        <Skeleton height="200px" width="100%" />
-        // </div>
+        <div className="grey-image"></div>
       )}
       <div className="post-information">
         <span className="post-text">{text}</span>
@@ -135,7 +133,7 @@ const CommunityPost = ({
                 onError={handleAvatarError}
               ></img>
             ) : (
-              <SkeletonCircle size="7" />
+              <div class="community-grey-circle"></div>
             )}
             <span className="gray-text">{authorName}</span>
           </div>

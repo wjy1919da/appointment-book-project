@@ -439,7 +439,7 @@ const CommunityPostDetailPopUP = ({
                   alt="detail-pic"
                 />
               ) : (
-                <Skeleton height="200px" width="100%" />
+                <div className="post-detail-grey-image"></div>
               )}
               {currentImageIndex < picture.length - 1 && showArrows && (
                 <FontAwesomeIcon
@@ -466,7 +466,7 @@ const CommunityPostDetailPopUP = ({
                     onError={() => setIsAvatarLoaded(false)}
                   />
                 ) : (
-                  <SkeletonCircle size="10" />
+                  <div className="post-detail-grey-circle"></div>
                 )}
                 <span>{postQuery.userName}</span>
               </div>

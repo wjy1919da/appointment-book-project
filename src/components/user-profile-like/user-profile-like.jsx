@@ -17,6 +17,7 @@ import "../create-post/create-post.style.scss";
 import post1 from "../../assets/doctor/post3.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 import creatPostIcon from "../../assets/post/create-post-icon.png";
+import CommunityPostSkeleton from "../components-posts/community-post/community-post-skeleton.component.jsx";
 
 const UserProfileLike = () => {
   // calling hook
@@ -58,6 +59,7 @@ const UserProfileLike = () => {
       };
     });
   }, []);
+  const skeletons = [1, 2, 3, 4, 5, 6, 7];
 
   const handleClickPost = (ID, avatar, username, title, memberId) => {
     setIsModelOpen(true);
@@ -68,32 +70,34 @@ const UserProfileLike = () => {
     setMemberID(memberId);
   };
 
-  const postList = flatData.map((post, index) => (
-    <div
-      key={index}
-      onClick={() =>
-        handleClickPost(
-          post.id,
-          post.avatar,
-          post.username,
-          post.title,
-          post.memberId
-        )
-      }
-    >
-      <CommunityPost
-        dummyHighlight={post.isHighlight}
-        dummyPrivate={post.isDisplay}
-        id={post.id}
-        imageURL={post.coverImg || []}
-        text={post.title || ""}
-        profileImage={post.avatar || ""}
-        authorName={post.nickname || ""}
-        likes={post.like_count || 0}
-        liked={post.isLike}
-      />
-    </div>
-  ));
+  const postList = isLoading
+    ? skeletons.map((skeleton) => <CommunityPostSkeleton key={skeleton} />)
+    : flatData.map((post, index) => (
+        <div
+          key={index}
+          onClick={() =>
+            handleClickPost(
+              post.id,
+              post.avatar,
+              post.username,
+              post.title,
+              post.memberId
+            )
+          }
+        >
+          <CommunityPost
+            dummyHighlight={post.isHighlight}
+            dummyPrivate={post.isDisplay}
+            id={post.id}
+            imageURL={post.coverImg || []}
+            text={post.title || ""}
+            profileImage={post.avatar || ""}
+            authorName={post.nickname || ""}
+            likes={post.like_count || 0}
+            liked={post.isLike}
+          />
+        </div>
+      ));
 
   return (
     <div className="user-profile-post-area-container">

@@ -150,7 +150,7 @@ const Community = () => {
     }
   };
   const handleSearch = () => {
-    console.log("handleSearch is clicked");
+    // console.log("handleSearch is clicked");
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
       JSON.parse(localStorage.getItem("postSearchHistory")) || [];
@@ -205,6 +205,7 @@ const Community = () => {
                   isMobile={isMobile}
                   handleResponsiveButtonClick={handleResponsiveButtonClick}
                   isInputVisible={isInputVisible}
+                  onKeyPress={handleKeyPress}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}

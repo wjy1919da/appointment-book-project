@@ -9,6 +9,7 @@ import CreatePostOfUser from "../create-post/create-post";
 import CommunityPost from "../components-posts/community-post/community-post.component";
 import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
 // import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
+import CommunityPostSkeleton from "../components-posts/community-post/community-post-skeleton.component.jsx";
 
 // hook
 import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
@@ -41,6 +42,7 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setIsLike = usePostQueryStore((state) => state.setIsLike);
+  const skeletons = [1, 2, 3, 4, 5, 6, 7];
 
   const navigate = useNavigate();
 
@@ -84,34 +86,36 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
     setIsLike(isLike);
   };
 
-  const postList = flatData.map((post, index) => (
-    <div
-      key={index}
-      onClick={() =>
-        handleClickPost(
-          post.id,
-          post.avatar,
-          post.username,
-          post.title,
-          post.memberId,
-          post.isDisplay
-        )
-      }
-    >
-      <CommunityPost
-        id={post.id}
-        // dummyHighlight={post.highlight}
-        dummyPrivate={post.isDisplay}
-        imageURL={post.coverImg || []}
-        text={post.title || ""}
-        profileImage={post.avatar || ""}
-        authorName={post.username || ""}
-        likes={post.like_count || 0}
-        liked={post.isLike}
-        status={post.status}
-      />
-    </div>
-  ));
+  const postList = isLoading
+    ? skeletons.map((skeleton, index) => <CommunityPostSkeleton key={index} />)
+    : flatData.map((post, index) => (
+        <div
+          key={index}
+          onClick={() =>
+            handleClickPost(
+              post.id,
+              post.avatar,
+              post.username,
+              post.title,
+              post.memberId,
+              post.isDisplay
+            )
+          }
+        >
+          <CommunityPost
+            id={post.id}
+            // dummyHighlight={post.highlight}
+            dummyPrivate={post.isDisplay}
+            imageURL={post.coverImg || []}
+            text={post.title || ""}
+            profileImage={post.avatar || ""}
+            authorName={post.username || ""}
+            likes={post.like_count || 0}
+            liked={post.isLike}
+            status={post.status}
+          />
+        </div>
+      ));
 
   // var userName;
   // var avatar;
