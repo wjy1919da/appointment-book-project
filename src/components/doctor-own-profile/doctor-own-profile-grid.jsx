@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 // import CreatePostOfUser from '../../create-post/create-post';
 import CommunityPost from "../../components/components-posts/community-post/community-post.component.jsx";
 import PostDetail from "../../components/components-posts/community-post-detail/community-post-detail.component.jsx";
+import CommunityPostSkeleton from "../../components/components-posts/community-post/community-post-skeleton.component.jsx";
 
 // hook
 import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
@@ -19,7 +20,6 @@ import "./doctor-own-profile-grid.scss";
 import post1 from "../../assets/doctor/post3.png";
 import creatPostIcon from "../../assets/post/create-post-icon.png";
 import userPostAvatar from "../../assets/post/user-profile-avatar.png";
-import { is } from "date-fns/locale";
 
 const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
   const {
@@ -45,6 +45,7 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
 
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   const navigate = useNavigate();
+  const skeletons = [1, 2, 3, 4, 5, 6, 7];
 
   const handleIconClick = () => {
     // setShowCreatePost(true);
@@ -87,34 +88,37 @@ const DoctorProfileGrid = ({ showCreatePost, setShowCreatePost }) => {
     setIsLike(isLike);
   };
 
-  const postList = flatData.map((post, index) => (
-    <div
-      key={index}
-      onClick={() =>
-        handleClickPost(
-          post.id,
-          post.avatar,
-          post.username,
-          post.title,
-          post.memberId,
-          post.isDisplay,
-          post.highlightStatus
-        )
-      }
-    >
-      <CommunityPost
-        imageURL={post.coverImg || []}
-        text={post.title || ""}
-        profileImage={post.avatar || ""}
-        authorName={post.username || ""}
-        likes={post.like_count || 0}
-        dummyPrivate={post.isDisplay}
-        dummyHighlight={post.highlightStatus}
-        id={post.id}
-        liked={post.isLike}
-      />
-    </div>
-  ));
+  const postList = isLoading
+    ? skeletons.map((skeleton) => <CommunityPostSkeleton key={skeleton} />)
+    : flatData.map((post, index) => (
+        <div
+          key={index}
+          onClick={() =>
+            handleClickPost(
+              post.id,
+              post.avatar,
+              post.username,
+              post.title,
+              post.memberId,
+              post.isDisplay,
+              post.highlightStatus
+            )
+          }
+        >
+          <CommunityPost
+            imageURL={post.coverImg || []}
+            text={post.title || ""}
+            profileImage={post.avatar || ""}
+            authorName={post.username || ""}
+            likes={post.like_count || 0}
+            dummyPrivate={post.isDisplay}
+            dummyHighlight={post.highlightStatus}
+            id={post.id}
+            liked={post.isLike}
+            status={post.status}
+          />
+        </div>
+      ));
 
   useEffect(() => {
     const images = [creatPostIcon, post1, userPostAvatar];

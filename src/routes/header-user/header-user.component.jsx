@@ -5,6 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
+import defaultAvatar from "../../assets/post/user-profile-avatar.png";
+
 import useTimer from "../../hooks/useTimer";
 import {
   Modal,
@@ -26,24 +28,14 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
-import defaultAvatar from "../../assets/post/user-profile-avatar.png";
+
 const HeaderUser = () => {
   const location = useLocation();
   const loginIcon = require("../../assets/home/login-user.png");
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   // console.log("userInfo in header", userInfo);
-  const setAccountType = userInfoQueryStore((state) => state.setAccountType);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const setUsername = userInfoQueryStore((state) => state.setUsername);
-  const setPostCount = userInfoQueryStore((state) => state.setPostCount);
-  const setAvatar = userInfoQueryStore((state) => state.setAvatar);
-  const setFollowerCount = userInfoQueryStore(
-    (state) => state.setFollowerCount
-  );
-  const setFollowingCount = userInfoQueryStore(
-    (state) => state.setFollowingCount
-  );
-  const setDescription = userInfoQueryStore((state) => state.setDescription);
+
   const removeToken = userInfoQueryStore((state) => state.removeToken);
 
   const handleLogOutClick = () => {
@@ -55,32 +47,8 @@ const HeaderUser = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const modalDisclosure = useDisclosure();
   const menuDisclosure = useDisclosure();
+  // Fetch user info
   const { data, isLoading, isError, error } = useGetUserInfo();
-  /* Rfresh token */
-  useTimer(
-    () => {
-      if (data === undefined) {
-        localStorage.removeItem("token");
-        removeToken();
-        if (userInfo.popupState === false) {
-          togglePopup(true, "accountType");
-        }
-      }
-    },
-    data ? null : 30000
-  );
-  useEffect(() => {
-    if (data?.data) {
-      // console.log("data setting is called", data);
-      setUsername(data.data.nickname);
-      setAccountType(data.data.accountType);
-      setPostCount(data.data.postsNumber);
-      setFollowerCount(data.data.follower);
-      setFollowingCount(data.data.followings);
-      setDescription(data.data.description);
-      setAvatar(data?.data?.image || defaultAvatar);
-    }
-  }, [data]);
   const toggle = () => {
     if (menuDisclosure.isOpen) {
       menuDisclosure.onClose();

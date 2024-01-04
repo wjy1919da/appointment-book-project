@@ -4,6 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: var(
+    --background-gradient-color,
+    linear-gradient(180deg, #fff3ec 0%, #fff 100%)
+  );
   width: 100%;
 
   .pink-background-1 {
@@ -24,7 +28,7 @@
     position: absolute;
     top: 650px;
     right: 0;
-    z-index: -1;
+    z-index: 1;
     border-radius: 236px 0 0 236px;
     background: var(
       --new-gradient,
@@ -34,6 +38,7 @@
     height: 400px;
   }
 
+  // go back button
   .edit-post-page-back-button-container {
     position: absolute;
     top: 120px;
@@ -47,6 +52,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    z-index: 100;
 
     .edit-post-page-arrow-icon-back-button {
       rotate: 180deg;
@@ -251,26 +257,23 @@
   .edit-post-page-container {
     .pink-background-1 {
       position: absolute;
-      // top: -30px;
       left: 0;
-      z-index: -1;
+      z-index: 1;
       border-radius: 0 236px 236px 0;
       background: var(
         --new-gradient,
         linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
       );
-      // width: 450px;
-      // height: 380px;
     }
 
     .pink-background-2 {
       top: 570px;
-      z-index: -1;
+      z-index: 1;
     }
 
     .edit-post-page-inner-container {
       width: 875px;
-      height: 460px;
+      height: 490px;
     }
 
     .edit-post-page-title,
@@ -281,15 +284,15 @@
 }
 
 // mobile
-@media (max-width: 744px) {
+@media (max-width: 880px) {
   .edit-post-page-container {
     .pink-background-1 {
       top: -80px;
-      z-index: -1;
+      z-index: 1;
     }
 
     .pink-background-2 {
-      top: 1000px;
+      top: 950px;
       right: 0;
       height: 460px;
     }
@@ -297,16 +300,17 @@
     .edit-post-page-inner-container {
       display: flex;
       flex-direction: column;
-      margin: 150px 0;
+      margin: 180px 0;
       padding: 60px 0;
       width: 480px;
       min-height: 800px;
       height: auto;
     }
 
+    // go back button
     .edit-post-page-back-button-container {
-      top: 110px;
-      left: 100px;
+      top: 100px;
+      left: 50px;
       font-size: 28px;
     }
 
@@ -342,12 +346,27 @@
   }
 
   .pink-background-2 {
-    top: 1000px !important;
+    top: 920px !important;
     width: 300px !important;
   }
 
+  // go back button
   .edit-post-page-back-button-container {
     left: 40px !important;
+
+    .edit-post-page-arrow-icon-back-button {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    .edit-post-page-label-back-button {
+      font-size: 20px !important;
+    }
+  }
+
+  .edit-post-page-add {
+    width: 300px !important;
+    height: 300px !important;
   }
 
   .edit-post-page-title,

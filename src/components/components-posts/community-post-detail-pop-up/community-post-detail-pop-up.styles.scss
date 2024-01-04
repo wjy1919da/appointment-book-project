@@ -221,6 +221,13 @@
   // height: var(--bs-modal-height);
   object-fit: cover;
 }
+.post-detail-grey-image {
+  width: 100%;
+  height: auto;
+  // height: var(--bs-modal-height);
+  object-fit: cover;
+  background-color: #e2e3e7;
+}
 
 .postdetail-popUp-left-container {
   position: relative;
@@ -290,7 +297,13 @@
   right: 10%; /* Adjus ted for positioning */
   z-index: 1000;
 }
-
+.post-detail-grey-circle {
+  width: 35.84px;
+  height: 35.84px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e2e3e7;
+}
 // 1024px up
 @media (max-width: 1024px) {
   .post-detail-popUp-container {
