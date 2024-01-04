@@ -86,28 +86,21 @@ const DoctorAppointmentPage1 = () => {
         </div>
 
         <div className='doctor-appointment-button-container'>
+          <div className='blank'></div>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
+            <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='newtab' />
+            <input type='radio' />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='newwindow' />
+            <input type='radio' />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
+            <input type='radio' />
             <span class='radio-text'></span>
           </label>
           <Button

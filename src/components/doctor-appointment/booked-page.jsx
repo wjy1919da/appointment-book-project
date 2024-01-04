@@ -72,6 +72,7 @@ const BookedPage = () => {
             className='doctor-appointment-back-button'
             onClick={handleGoBackDoctorAppointment}
           /> */}
+          <div className='blank'></div>
           <label class='radio-label'>
             <input type='radio' name='open-page' value='currenttab' checked />
             <span class='radio-text'></span>

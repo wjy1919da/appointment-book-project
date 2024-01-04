@@ -168,6 +168,10 @@
     align-items: center;
     // padding: 0 90px;
 
+    .blank {
+      padding: 15px 25px;
+    }
+
     .doctor-appointment-next-button {
       display: flex;
       flex-direction: row-reverse;

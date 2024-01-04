@@ -57,27 +57,19 @@ const DoctorAppointmentPage4 = () => {
             onClick={handleGoBackDoctorAppointment}
           />
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
+            <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='newtab' />
+            <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='newwindow' />
+            <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
           <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
+            <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
           <Button
