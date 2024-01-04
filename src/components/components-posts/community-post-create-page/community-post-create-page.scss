@@ -36,7 +36,7 @@
 
   .create-post-page-back-button-container {
     position: absolute;
-    top: 120px;
+    top: 115px;
     left: 60px;
     display: flex;
     align-items: center;
@@ -243,7 +243,6 @@
   .create-post-page-container {
     .create-pink-background-1 {
       position: absolute;
-      // top: 65px;
       left: 0;
       z-index: -1;
       border-radius: 0 236px 236px 0;
@@ -251,8 +250,6 @@
         --new-gradient,
         linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
       );
-      // width: 400px;
-      // height: 330px;
     }
 
     .create-pink-background-2 {
@@ -273,7 +270,7 @@
 }
 
 // mobile
-@media (max-width: 744px) {
+@media (max-width: 880px) {
   .create-post-page-container {
     .create-pink-background-1 {
       top: -80px;
@@ -281,7 +278,7 @@
     }
 
     .create-pink-background-2 {
-      top: 1000px;
+      top: 850px;
       right: 0;
       height: 460px;
     }
@@ -289,7 +286,7 @@
     .create-post-page-inner-container {
       display: flex;
       flex-direction: column;
-      margin: 150px 0;
+      margin: 180px 0;
       padding: 60px 0;
       width: 480px;
       min-height: 800px;
@@ -297,9 +294,24 @@
     }
 
     .create-post-page-back-button-container {
-      top: 110px;
+      top: 100px;
       left: 60px;
       font-size: 28px;
+    }
+
+    .create-post-page-add {
+      width: 300px !important;
+      height: 300px !important;
+    }
+
+    .create-post-page-title,
+    .create-post-page-description {
+      width: 300px !important;
+    }
+
+    .create-post-page-add {
+      width: 370px;
+      height: 370px;
     }
 
     .create-post-page-title,
@@ -329,15 +341,30 @@
   }
 
   .create-pink-background-2 {
-    top: 1000px !important;
     width: 300px !important;
   }
 
   .create-post-page-back-button-container {
+    top: 85px !important;
     left: 40px !important;
+
+    .create-post-page-arrow-back-button {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    .create-post-page-label-back-button {
+      font-size: 20px !important;
+    }
   }
 
-  .create-post-page-title, .create-post-page-description {
+  .create-post-page-add {
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+  .create-post-page-title,
+  .create-post-page-description {
     width: 300px !important;
   }
 }
@@ -348,4 +375,7 @@
     width: 300px !important;
   }
 
+  .create-post-page-inner-container {
+    width: 340px !important;
+  }
 }
