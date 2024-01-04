@@ -121,14 +121,14 @@ const SignUpForm = () => {
         } else {
           console.error("Token not found in data");
         }
-        toast({
-          title: "Success",
-          description: "Register success",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top", 
-        });
+        // toast({
+        //   title: "Success",
+        //   description: "Register success",
+        //   status: "success",
+        //   duration: 5000,
+        //   isClosable: true,
+        //   position: "top", 
+        // });
         switchPopupTab("gender");
       }
     }
