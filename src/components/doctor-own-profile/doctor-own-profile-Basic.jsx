@@ -22,13 +22,20 @@ import gradIcon from "../../assets/user/Graduation Cap.png";
 import certified from "../../assets/user/Certificate.png";
 import Verification from "../../assets/doctor/doctor-verification-status.svg";
 
+// import doctorAvartar from '../../assets/doctor/doctor-profile-image.png';
+// import { useGetUserInfo } from '../../hooks/useAuth';
+// import { Link } from 'react-router-dom';
+// import HomeSpinner from '../home-spinner/home-spinner.component';
+import calendar from "../../assets/doctor/calendar.png";
+
 const DocotorOwnBasic = () => {
   const [showManageButton, setShowManageButton] = useState(false);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
 
   const handleFirstButtonClick = () => {
-    setShowManageButton(true); // This will show the second button
+    setShowManageButton(true);
+    navigate("/doctor-appointment");
   };
 
   const onClick = () => {
@@ -78,12 +85,12 @@ const DocotorOwnBasic = () => {
                 title="Edit profile"
               />
             )}
-            {/* <button
+            <button
               onClick={handleFirstButtonClick}
               className="top-edit-button-2"
             >
               <img src={calendar} className="doctor-calendar-img"></img>
-            </button> */}
+            </button>
           </div>
         </div>
         <div className="doctor-own-basic-top-text">
