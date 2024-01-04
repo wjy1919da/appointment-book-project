@@ -14,9 +14,9 @@ import "../components-posts/community-post-detail-pop-up/community-post-detail-p
 import heartIcon from "../../assets/post/heart.png";
 import heartIconFilled from "../../assets/post/heart-fill-Icon.png";
 import SendIcon from "../../assets/post/send_icon.svg";
+import PlayIcon from "../../assets/post/Play.svg";
 
 // import commentIcon from '../../assets/post/chat_bubble.png';
-import CommentReplyInput from "./comment-reply-input";
 import {
   Accordion,
   AccordionItem,
@@ -24,6 +24,9 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  SkeletonCircle,
+  Skeleton,
+  SkeletonText,
 } from "@chakra-ui/react";
 
 const CommentCard = ({
@@ -36,9 +39,11 @@ const CommentCard = ({
   replies,
   likeCount,
   isLiked,
+  replyAuthor,
 }) => {
   const [likedComment, setLikedComment] = useState(isLiked || 0); // like commment
   const [commentLikeCount, setCommentLikeCount] = useState(likeCount); // like count
+  const [isAvatarLoaded, setIsAvatarLoaded] = useState(true);
   useEffect(() => {
     setCommentLikeCount(likeCount);
     setLikedComment(isLiked);
@@ -58,6 +63,9 @@ const CommentCard = ({
     if (!isPanelOpen && visibleReplies > 3) {
       setVisibleReplies(3); // If panel is being closed, reset to show only 3 replies
     }
+  };
+  const handleAvatarError = (e) => {
+    setIsAvatarLoaded(false);
   };
 
   const handleShowMoreReplies = () => {
@@ -113,17 +121,32 @@ const CommentCard = ({
             <div className="comment-card-profile-information-wrapper">
               <div className="reviewer-profile-information">
                 <div className="reviewer-progile-avatar">
-                  <img
-                    src={avatar}
-                    className="reviewer-avatar"
-                    alt="avatar"
-                  ></img>
+                  {avatar && isAvatarLoaded ? (
+                    <img
+                      src={avatar}
+                      className="reviewer-avatar"
+                      alt="avatar"
+                      onError={handleAvatarError}
+                    ></img>
+                  ) : (
+                    // <SkeletonCircle size="8" />
+                    <div class="grey-circle"></div>
+                  )}
                 </div>
                 <div className="reviewer-information">
                   <div className="userName-date">
-                    <span className="detail-gray-font">
-                      {name ? convertUnicode(name) : ""}
-                    </span>
+                    <div className="reply-author-container">
+                      <span className="detail-gray-font">
+                        {name ? convertUnicode(name) : ""}
+                      </span>
+                      {replyAuthor && (
+                        <img src={PlayIcon} className="reply-icon" />
+                      )}
+                      {replyAuthor && (
+                        <span className="detail-gray-font">{replyAuthor}</span>
+                      )}
+                    </div>
+
                     <span className="detail-comment-text">
                       {commentText ? convertUnicode(commentText) : ""}
                     </span>
@@ -150,7 +173,7 @@ const CommentCard = ({
                     onClick={() => handleClickCommentLike(commentId)}
                   ></img>
                 </span>
-                <div className="commentcard-likeCount">{commentLikeCount}</div>
+                <div className="likeCount-text">{commentLikeCount}</div>
               </div>
             </div>
           </div>
@@ -171,6 +194,7 @@ const CommentCard = ({
                   replies={reply.comments || []}
                   likeCount={reply.likeCount}
                   isLiked={reply.isLike}
+                  replyAuthor={name}
                 />
               ))}
               {/* Show more or less buttons */}

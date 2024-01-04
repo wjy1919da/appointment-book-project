@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import {
+  Card,
+  CardBody,
+  Skeleton,
+  SkeletonText,
+  SkeletonCircle,
+} from "@chakra-ui/react";
 
 // hooks
 import { useGetLikesPost } from "../../../hooks/useGetPosts";
@@ -21,6 +28,7 @@ const CommunityPost = ({
   id,
   dummyHighlight,
   dummyPrivate,
+  status,
   imageURL,
   text,
   profileImage,
@@ -36,7 +44,10 @@ const CommunityPost = ({
   const setIsLike = usePostQueryStore((state) => state.setIsLike);
 
   const [width, setWidth] = useState("");
-  const [displayImage, setDisplayImage] = useState(imageURL);
+  const [isImageLoaded, setIsImageLoaded] = useState(true);
+  const [isAvatarLoaded, setIsAvatarLoaded] = useState(true);
+
+  // const [displayImage, setDisplayImage] = useState(imageURL);
 
   // likes
   const [isHeartLiked, setIsHeartLiked] = useState(liked);
@@ -57,7 +68,11 @@ const CommunityPost = ({
 
   // default image when image is not loaded
   const handleImageError = () => {
-    setDisplayImage(defaultImage);
+    setIsImageLoaded(false);
+    // setDisplayImage(defaultImage);
+  };
+  const handleAvatarError = () => {
+    setIsAvatarLoaded(false);
   };
 
   // likes hook import
@@ -96,18 +111,30 @@ const CommunityPost = ({
         />
       )}
 
-      <div className="post-Image">
-        <img
-          src={displayImage}
-          className="postImage"
-          onError={handleImageError}
-        />
-      </div>
+      {imageURL && isImageLoaded ? (
+        <div className="post-Image">
+          <img
+            src={imageURL}
+            className={`postImage ${status === 0 ? "grayed-out" : ""}`}
+            onError={handleImageError}
+          />
+        </div>
+      ) : (
+        <div className="grey-image"></div>
+      )}
       <div className="post-information">
         <span className="post-text">{text}</span>
         <div className="profile">
           <div className="profileImage">
-            <img className="profile-pic" src={profileImage}></img>
+            {profileImage && isAvatarLoaded ? (
+              <img
+                className="profile-pic"
+                src={profileImage}
+                onError={handleAvatarError}
+              ></img>
+            ) : (
+              <div class="community-grey-circle"></div>
+            )}
             <span className="gray-text">{authorName}</span>
           </div>
           <div className="likeNumber">
