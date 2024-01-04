@@ -85,19 +85,19 @@ const DoctorAppointmentPage3 = () => {
             className='doctor-appointment-back-button'
             onClick={handleGoBackDoctorAppointment}
           />
-          <label class='radio-label'>
+          <label class='doctor-appointment-consultation-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-consultation-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-consultation-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-consultation-radio-label'>
             <input type='radio' />
             <span class='radio-text'></span>
           </label>

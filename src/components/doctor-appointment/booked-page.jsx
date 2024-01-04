@@ -30,11 +30,6 @@ const BookedPage = () => {
         className='doctor-appointment-booked-back-button-container'
         // onClick={handleGoBackDoctorAppointment}
       >
-        {/* <img
-          src={Arrow}
-          alt='Icon-Arrow'
-          className='doctor-appointment-arrow-back-button'
-        /> */}
         <span className='doctor-appointment-booked-label-back-button'>
           Appointment
         </span>
@@ -65,38 +60,7 @@ const BookedPage = () => {
         </div>
 
         <div className='doctor-appointment-button-container'>
-          {/* <Button
-            buttonName='Back'
-            icon={Arrow}
-            rotateIcon={true}
-            className='doctor-appointment-back-button'
-            onClick={handleGoBackDoctorAppointment}
-          /> */}
-          <div className='blank'></div>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='newtab' />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='newwindow' />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
-          <label class='radio-label'>
-            <input type='radio' name='open-page' value='currenttab' checked />
-            <span class='radio-text'></span>
-          </label>
+          <Button buttonName='Home' className='doctor-appointment-home-button' />
           <Button
             buttonName='My Appointment'
             icon={Arrow}

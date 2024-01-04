@@ -24,51 +24,43 @@ const DoctorAppointmentPage4 = () => {
   };
 
   return (
-    <div className='doctor-appointment-details-container'>
-      {/* not used due to new figma design */}
-      {/* <div className='doctor-appointment-pink-background-1'></div>
-      <div className='doctor-appointment-pink-background-2'></div> */}
+    <div className='doctor-appointment-payment-container'>
       <div
-        className='doctor-appointment-details-back-button-container'
+        className='doctor-appointment-payment-back-button-container'
         // onClick={handleGoBackDoctorAppointment}
       >
-        {/* <img
-          src={Arrow}
-          alt='Icon-Arrow'
-          className='doctor-appointment-arrow-back-button'
-        /> */}
-        <span className='doctor-appointment-details-label-back-button'>
+        <span className='doctor-appointment-payment-label-back-button'>
           Appointment
         </span>
       </div>
-      <div className='doctor-appointment-details-inner-container'>
-        <div className='doctor-appointment-details-description-container'>
-          <p className='doctor-appointment-details-description'>
-            Currently, in process of Figma.{' '}
+      <div className='doctor-appointment-payment-inner-container'>
+        <div className='doctor-appointment-payment-description-container'>
+          <p className='doctor-appointment-payment-description'>
+            Currently, in process of Figma.
           </p>
         </div>
 
-        <div className='doctor-appointment-button-container'>
+        <div className='doctor-appointment-payment-button-container'>
           <Button
             buttonName='Back'
             icon={Arrow}
             rotateIcon={true}
-            className='doctor-appointment-back-button'
+            className='doctor-appointment-payment-back-button'
             onClick={handleGoBackDoctorAppointment}
           />
-          <label class='radio-label'>
+          <label class='doctor-appointment-payment-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-payment-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-payment-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
-          <label class='radio-label'>
+          <label class='doctor-appointment-payment-radio-label'>
             <input type='radio' checked />
             <span class='radio-text'></span>
           </label>
@@ -76,7 +68,7 @@ const DoctorAppointmentPage4 = () => {
             buttonName='Next'
             icon={Arrow}
             // rotateIcon={true}
-            className='doctor-appointment-next-button'
+            className='doctor-appointment-payment-next-button'
             onClick={handleGoNextDoctorAppointment}
           />
         </div>
