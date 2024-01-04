@@ -14,6 +14,11 @@ import {
   ModalHeader,
   ModalFooter,
   Button,
+  Card,
+  CardBody,
+  Skeleton,
+  SkeletonText,
+  SkeletonCircle,
 } from "@chakra-ui/react";
 
 // stores
@@ -70,6 +75,8 @@ const CommunityPostDetailPopUP = ({
   }, [likeCount, isLiked]);
 
   const postQuery = usePostQueryStore((state) => state.postQuery);
+  const [isImageLoaded, setIsImageLoaded] = useState(true);
+  const [isAvatarLoaded, setIsAvatarLoaded] = useState(true);
 
   // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
   const refresh = usePostQueryStore((state) => state.refresh);
@@ -423,12 +430,17 @@ const CommunityPostDetailPopUP = ({
                   style={{ color: "#fafcff" }}
                 />
               )}
-              <img
-                src={picture[currentImageIndex]}
-                ref={imageRef}
-                className="post-detail-image"
-                alt="detail-pic"
-              />
+              {picture && isImageLoaded ? (
+                <img
+                  src={picture[currentImageIndex]}
+                  ref={imageRef}
+                  onError={() => setIsImageLoaded(false)}
+                  className="post-detail-image"
+                  alt="detail-pic"
+                />
+              ) : (
+                <div className="post-detail-grey-image"></div>
+              )}
               {currentImageIndex < picture.length - 1 && showArrows && (
                 <FontAwesomeIcon
                   className="arrow-icon arrow-right"
@@ -446,13 +458,19 @@ const CommunityPostDetailPopUP = ({
             </div>
             <div className="user-detail">
               <div className="user-detail-inner">
-                <img
-                  src={postQuery.userAvatar}
-                  alt="Image-User-Picture"
-                  className="user-detail-profile-image"
-                />
+                {isAvatarLoaded && postQuery.userAvatar ? (
+                  <img
+                    src={postQuery.userAvatar}
+                    alt="Image-User-Picture"
+                    className="user-detail-profile-image"
+                    onError={() => setIsAvatarLoaded(false)}
+                  />
+                ) : (
+                  <div className="post-detail-grey-circle"></div>
+                )}
                 <span>{postQuery.userName}</span>
               </div>
+
               <div className="user-detail-button-container">
                 {isDoctorAuthor && (
                   <button
@@ -474,11 +492,11 @@ const CommunityPostDetailPopUP = ({
                       : "Private"}
                   </button>
                 )}
-                {/* {isAuthor && ( */}
+                {isAuthor && (
                   <button className="button-edit" onClick={handleGoToEdit}>
                     Edit your Post
                   </button>
-                {/* )} */}
+                )}
               </div>
             </div>
           </>

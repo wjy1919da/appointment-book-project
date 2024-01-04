@@ -1,113 +1,116 @@
-.home-footer-container{
-    width: 100%;
+.home-footer-container {
+  width: 100%;
 }
 .footer-mobile-container {
-    background-color: rgba(53, 44, 41, 1);
+  background-color: rgba(53, 44, 41, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 100;
+  margin-top: 10%;
+  // position:absolute;
+  // top: 3000px;
+
+  .footer-mobile-text {
+    margin-top: 5%;
+    color: white;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: 10%;
-    // position:absolute;
-    // top: 3000px;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: 'Open Sans';
+  }
 
-    .footer-mobile-text {
-        margin-top: 5%;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        font-family: 'Open Sans';
-    }
+  .footer-mobile-subtext {
+    color: white;
+    width: 300px;
+    margin-top: 5%;
+    text-align: center;
+    font-family: 'Open Sans';
+  }
 
-    .footer-mobile-subtext {
-        color: white;
-        width: 300px;
-        margin-top: 5%;
-        text-align: center;
-        font-family: 'Open Sans';
-    }
-
-    .social-media-icons {
-        display: flex;
-        justify-content: flex-start;
-        margin-top: 15px;
-        gap: 40px;
-        margin-bottom: 15%;
-
-        .social-media-icon {
-            width: 20px;
-            height: 20px;
-            border: none;
-        }
-    }
-
-}
-.footer-container {
-    opacity: 1.0;
-    width: 100%;
-    background: #352C29;
-    padding: 50px 15% 0;
-    // position: absolute;
-    // top: 3250px;
-
-    .footer-nav-container {
-        width: 100%;
-        margin: 0 auto;
-        padding-bottom: 50px;
-    }
-
-    .footer-nav-title {
-        font-size: 14px;
-        font-weight: 500;
-        color: #f8fafa;
-        margin: 0;
-    }
-
-    .footer-nav-link {
-        width: fit-content;
-        font-size: 12px;
-        font-weight: 500;
-        color: #FFFFFF;
-        margin: 15px 0;
-        text-decoration: none;
-        display: flex;
-        justify-content: left;
-    }
-
-    .footer-nav-contact-title {
-        font-size: 12px;
-        font-weight: 500;
-        color: #FFFFFF;
-        margin: 15px 0;
-    }
-
-    .footer-nav-contact-content {
-        font-size: 11px;
-        font-weight: 500;
-        color: #FFFFFF;
-        margin: 15px 0;
-    }
-
-    .social-media-icons {
-        display: flex;
-        justify-content: flex-start;
-        margin-top: 15px;
-    }
+  .social-media-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+    gap: 40px;
+    margin-bottom: 15%;
 
     .social-media-icon {
-        width: 20px;
-        height: 20px;
-        border: none;
+      width: 20px;
+      height: 20px;
+      border: none;
     }
+  }
+}
+.footer-container {
+  opacity: 1;
+  width: 100%;
+  background: #352c29;
+  padding: 50px 15% 0;
+  // position: absolute;
+  // top: 3250px;
+  position: absolute;
+  z-index: 100;
 
-    .social-media-icon:hover {
-        filter: invert(42%) sepia(74%) saturate(342%) hue-rotate(146deg) brightness(103%) contrast(48%);
-    }
+  .footer-nav-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
 
-    .social-media-link {
-        margin: 0 20px 0 0;
-        width: fit-content;
-    }
+  .footer-nav-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #f8fafa;
+    margin: 0;
+  }
+
+  .footer-nav-link {
+    width: fit-content;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 15px 0;
+    text-decoration: none;
+    display: flex;
+    justify-content: left;
+  }
+
+  .footer-nav-contact-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 15px 0;
+  }
+
+  .footer-nav-contact-content {
+    font-size: 11px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 15px 0;
+  }
+
+  .social-media-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+  }
+
+  .social-media-icon {
+    width: 20px;
+    height: 20px;
+    border: none;
+  }
+
+  .social-media-icon:hover {
+    filter: invert(42%) sepia(74%) saturate(342%) hue-rotate(146deg)
+      brightness(103%) contrast(48%);
+  }
+
+  .social-media-link {
+    margin: 0 20px 0 0;
+    width: fit-content;
+  }
 }
