@@ -140,30 +140,30 @@ export function useSetUserProfile() {
   const apiClient = new APIClient("/user/set_user_profile");
   //const token = localStorage.getItem('token');
   const fetchSetUserProfile = async (
-    gender,
-    interestArea,
-    // email,
+    bio,
     birthday,
-    nickname
+    gender,
+    interested,
+    nickname,
   ) => {
     // if (!token) {
     //     alert('user not login');
     // }
     const res = await apiClient.post({
-      gender,
-      interestArea,
-      // email,
+      bio,
       birthday,
+      gender,
+      interested,
       nickname,
     });
     return res.data;
   };
   return useMutation((credentials) =>
     fetchSetUserProfile(
-      credentials.gender,
-      credentials.interestArea,
-      // credentials.email,
+      credentials.bio,
       credentials.birthday,
+      credentials.gender,
+      credentials.interested,
       credentials.nickname
     )
   );

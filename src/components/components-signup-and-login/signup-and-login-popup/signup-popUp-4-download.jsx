@@ -42,15 +42,15 @@ const SignUpDownloadPopUp = () => {
         return procedureToIdMapping[formattedName];
     }).filter(Boolean);  // This will filter out any null or undefined values
     const {mutate,data,isLoading,isError,error} = useSetUserProfile();
-    const handleOnClick = ()=>{
+    const handleOnClick = () => {
         mutate({
-            gender: userInfo.gender,
-            interestArea: interestArea,
-            email: userInfo.email,
-            birthday: userInfo.birthday,
-            nickname: userInfo.username,
+          bio: "",
+          birthday: userInfo.birthday,
+          gender: userInfo.gender,
+          interested: userInfo.interested,
+          nickname: userInfo.nickname,
         });
-    }
+      };
     useEffect(() => {
        if(data?.msg){
             alert(data.msg);
