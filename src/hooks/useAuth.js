@@ -142,7 +142,7 @@ export function useSetUserProfile() {
   const fetchSetUserProfile = async (
     gender,
     interestArea,
-    email,
+    // email,
     birthday,
     nickname
   ) => {
@@ -152,7 +152,7 @@ export function useSetUserProfile() {
     const res = await apiClient.post({
       gender,
       interestArea,
-      email,
+      // email,
       birthday,
       nickname,
     });
@@ -162,7 +162,7 @@ export function useSetUserProfile() {
     fetchSetUserProfile(
       credentials.gender,
       credentials.interestArea,
-      credentials.email,
+      // credentials.email,
       credentials.birthday,
       credentials.nickname
     )
