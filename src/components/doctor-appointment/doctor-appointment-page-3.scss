@@ -1,4 +1,4 @@
-.doctor-appointment-details-container {
+.doctor-appointment-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +39,7 @@
   //   height: 330px;
   // }
 
-  .doctor-appointment-details-back-button-container {
+  .doctor-appointment-back-button-container {
     position: absolute;
     top: 150px;
     left: 150px;
@@ -51,7 +51,7 @@
     //   rotate: 180deg;
     // }
 
-    .doctor-appointment-details-label-back-button {
+    .doctor-appointment-label-back-button {
       color: #352c29;
       text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
       font-family: Open Sans;
@@ -62,7 +62,7 @@
     }
   }
 
-  .doctor-appointment-details-inner-container {
+  .doctor-appointment-inner-container {
     background: #fbfcff;
     border: 1px solid #000;
     border-radius: 18px;
@@ -71,12 +71,12 @@
     height: 640px;
     z-index: 20;
 
-    .doctor-appointment-details-description-container {
+    .doctor-appointment-description-container {
       display: flex;
       align-items: center;
       padding-top: 100px;
 
-      .doctor-appointment-details-description {
+      .doctor-appointment-description {
         color: #000;
         font-family: Open Sans;
         font-size: 21px;
@@ -87,78 +87,51 @@
         height: 61px;
       }
     }
-  }
 
-  // gender and birthday
-  .gender-and-birthday-container {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-
-    // gender radio buttons
-    .doctor-appointment-details-gender-radio-button-container {
+    .icon-container {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
 
-      .radio-gender-label {
-        display: block;
-      }
-
-      .radio-gender-label-gender {
-        color: #352c29;
-        font-size: 18px;
-        margin-right: 10px;
-      }
-
-      .radio-gender-text {
+      .icon-inner-container {
         display: flex;
-        align-items: center;
-        gap: 6px;
-        color: #352c29;
-        font-size: 16px;
-        font-weight: 600;
-        margin-left: 10px;
+        gap: 150px;
+
+        .icon-set {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .caption-label {
+            color: #000;
+            font-family: Open Sans;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-top: 20px;
+          }
+
+          .caption-price {
+            color: #f39389;
+            font-family: Open Sans;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-top: 30px;
+          }
+        }
+
+        img {
+          background: #fbfcff;
+          border: 2px solid var(--avatar-color-image, #e2e3e7);
+          border-radius: 8px;
+          box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
+          padding: 25px 25px;
+        }
       }
-
-      input[type='radio'] {
-        display: none;
-      }
-
-      .radio-gender-text:before {
-        content: '';
-        display: inline-block;
-        margin-right: 6px;
-        border-width: 1px;
-        border-style: solid;
-        border-radius: 50%;
-        padding: 2px;
-        background-clip: content-box;
-        width: 20px;
-        height: 20px;
-      }
-
-      input[type='radio']:not(:checked) + .radio-gender-text:before {
-        border: 2px solid #f39389;
-      }
-
-      input[type='radio']:checked + .radio-gender-text:before {
-        border: 2px solid #f39389;
-        background-color: #f39389;
-      }
-    }
-
-    .birthday-label {
-      color: #352c29;
-      font-size: 18px;
-      margin-right: 10px;
-    }
-
-    .birthday-input {
-      background: #fbfcff;
-      border: 1px solid #675d59;
-      border-radius: 6px;
-      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.1);
-      padding: 10px;
-      width: 300px;
     }
   }
 
@@ -168,11 +141,21 @@
     align-items: center;
     // padding: 0 90px;
 
+    .doctor-appointment-back-button,
+    .doctor-appointment-next-button {
+      border-radius: 8px;
+      padding: 15px 25px;
+    }
+
     .doctor-appointment-next-button {
       display: flex;
       flex-direction: row-reverse;
-      border-radius: 8px;
-      padding: 15px 25px;
+    }
+
+    .doctor-appointment-back-button {
+      display: flex;
+      justify-content: flex-start;
+      background: #675d59;
     }
 
     // input radio

@@ -29,8 +29,12 @@ import { useMediaQuery } from 'react-responsive';
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
-import DoctorAppointmentPage from './components/doctor-appointment/doctor-appointment-page-1';
-import DoctorAppointmentPage2 from './components/doctor-appointment/doctor-appointmet-page-2';
+// doctor appointment components
+import DoctorAppointmentPage1 from './components/doctor-appointment/doctor-appointment-page-1';
+import DoctorAppointmentPage2 from './components/doctor-appointment/doctor-appointment-page-2';
+import DoctorAppointmentPage3 from './components/doctor-appointment/doctor-appointment-page-3';
+import DoctorAppointmentPage4 from './components/doctor-appointment/doctor-appointment-page-4';
+import BookedPage from './components/doctor-appointment/booked-page';
 
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx';
@@ -98,14 +102,29 @@ const App = () => {
               <Route path='instrument' element={<Instrument />} />
               <Route path='instrument/:name' element={<SubInstrument />} />
               <Route path='sign-in' element={<Authentication />} />
+
+              {/* doctor appointments routes */}
               <Route
-                path='doctor-appointment'
-                element={<DoctorAppointmentPage />}
+                path='doctor-appointment-1'
+                element={<DoctorAppointmentPage1 />}
               />
               <Route
                 path='doctor-appointment-2'
                 element={<DoctorAppointmentPage2 />}
               />
+              <Route
+                path='doctor-appointment-3'
+                element={<DoctorAppointmentPage3 />}
+              />
+              <Route
+                path='doctor-appointment-4'
+                element={<DoctorAppointmentPage4 />}
+              />
+              <Route
+                path='doctor-appointment-booked-page'
+                element={<BookedPage />}
+              />
+
               <Route path='posts' element={<DoctorPost />} />
               <Route
                 path='doctorProfileEdit'

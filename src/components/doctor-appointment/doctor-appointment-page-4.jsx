@@ -1,28 +1,26 @@
-import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
 import Button from '../components-posts/community-post-button/community-post-button';
 
 // scss
-import './doctor-appointment-page-1.scss';
+import './doctor-appointment-page-4.scss';
 
 // images
 import Arrow from '../../assets/post/iconoir_arrow-right.svg';
 
-const DoctorAppointmentPage1 = () => {
-  const [dob, setDob] = useState('');
-
+const DoctorAppointmentPage4 = () => {
   const navigate = useNavigate();
+
+  // back button
+  const handleGoBackDoctorAppointment = () => {
+    navigate('/doctor-appointment-3');
+  };
 
   // next button
   const handleGoNextDoctorAppointment = () => {
-    navigate('/doctor-appointment-2');
-  };
-
-  // birthday input
-  const handleDateChange = (e) => {
-    setDob(e.target.value);
+    navigate('/doctor-appointment-booked-page');
   };
 
   return (
@@ -46,46 +44,18 @@ const DoctorAppointmentPage1 = () => {
       <div className='doctor-appointment-details-inner-container'>
         <div className='doctor-appointment-details-description-container'>
           <p className='doctor-appointment-details-description'>
-            Please fill out the following information regarding your details.
+            Currently, in process of Figma.{' '}
           </p>
         </div>
 
-        <div className='gender-and-birthday-container'>
-          {/* gender radio buttons */}
-          <div className='doctor-appointment-details-gender-radio-button-container'>
-            <span className='radio-gender-label-gender'>Gender</span>
-            <label class='radio-gender-label'>
-              <input type='radio' name='open-page' value='currenttab' checked />
-              <span className='radio-gender-text'>Female</span>
-            </label>
-            <label class='radio-gender-label'>
-              <input type='radio' name='open-page' value='newtab' />
-              <span className='radio-gender-text'>Male</span>
-            </label>
-            <label class='radio-gender-label'>
-              <input type='radio' name='open-page' value='newwindow' />
-              <span className='radio-gender-text'>Other</span>
-            </label>
-          </div>
-
-          {/* birthday input */}
-          <div className='doctor-appointment-details-birthday-container'>
-            <label htmlFor='dob' className='birthday-label'>
-              Birthday
-            </label>
-            <input
-              type='date'
-              id='dob'
-              name='dob'
-              value={dob}
-              onChange={(e) => handleDateChange(e)}
-              max={new Date().toISOString().split('T')[0]}
-              className='birthday-input'
-            />
-          </div>
-        </div>
-
         <div className='doctor-appointment-button-container'>
+          <Button
+            buttonName='Back'
+            icon={Arrow}
+            rotateIcon={true}
+            className='doctor-appointment-back-button'
+            onClick={handleGoBackDoctorAppointment}
+          />
           <label class='radio-label'>
             <input type='radio' name='open-page' value='currenttab' checked />
             <span class='radio-text'></span>
@@ -123,4 +93,4 @@ const DoctorAppointmentPage1 = () => {
   );
 };
 
-export default DoctorAppointmentPage1;
+export default DoctorAppointmentPage4;
