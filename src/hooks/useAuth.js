@@ -2,6 +2,7 @@ import userInfoQueryStore from "../userStore.ts";
 import { useMutation } from "react-query";
 import { useQuery } from "react-query";
 import APIClient from "../services/api-client.js";
+import defaultAvatar from "../assets/post/user-profile-avatar.png";
 
 export function useUserOptLogin() {
   const apiClient = new APIClient("/login/phone/validate-otp");
@@ -204,6 +205,18 @@ export function useDoctorLogin() {
 export function useGetUserInfo() {
   const apiClient = new APIClient("/user/fetch_user_profile");
   const userInfo = userInfoQueryStore((s) => s.userInfo);
+  const setAvatar = userInfoQueryStore((s) => s.setAvatar);
+  const setUsername = userInfoQueryStore((s) => s.setUsername);
+  const setAccountType = userInfoQueryStore((s) => s.setAccountType);
+  const setPostCount = userInfoQueryStore((s) => s.setPostCount);
+  const setFollowerCount = userInfoQueryStore((s) => s.setFollowerCount);
+  const setFollowingCount = userInfoQueryStore((s) => s.setFollowingCount);
+  const setDescription = userInfoQueryStore((s) => s.setDescription);
+  const togglePopup = userInfoQueryStore((s) => s.togglePopup);
+  const removeToken = userInfoQueryStore((s) => s.removeToken);
+  const setVerificationStatus = userInfoQueryStore(
+    (s) => s.setVerificationStatus
+  );
 
   const fetchGetUserInfo = async () => {
     const res = await apiClient.get();
@@ -212,6 +225,23 @@ export function useGetUserInfo() {
 
   return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo, {
     retry: 1,
+    onSuccess: (data) => {
+      setUsername(data.data.nickname);
+      setAccountType(data.data.accountType);
+      setPostCount(data.data.postsNumber);
+      setFollowerCount(data.data.follower);
+      setFollowingCount(data.data.followings);
+      setDescription(data.data.description);
+      setAvatar(data.data.image || defaultAvatar);
+      setVerificationStatus(data.data.status || 0);
+    },
+    onError: (error) => {
+      localStorage.removeItem("token");
+      removeToken();
+      if (userInfo.popupState === false) {
+        togglePopup(true, "accountType");
+      }
+    },
   });
 }
 

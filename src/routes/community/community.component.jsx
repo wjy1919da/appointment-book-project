@@ -1,25 +1,25 @@
-import usePostQueryStore from '../../postStore.ts';
-import React, { useState, useEffect, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import usePostQueryStore from "../../postStore.ts";
+import React, { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 // components
-import PostPageMain from '../../components/components-posts/community-post-main/community-post-main.jsx';
-import DoctorPostGrid from '../../components/components-posts/community-post-grid/doctor-post-grid.component';
-import PostSearchBox from '../../components/components-posts/community-post-search-box/community-post-search-box.jsx';
-import PostDropDownContents from '../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx';
+import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
+import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
+import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
+import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 // import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
 // import PostDropDown from "../../components/components-posts/community-post-dropdown/post-drop-down.component";
 // import ResetAllButton from "../../components/components-posts/community-post-dropdown-reset/community-post-dropdown-reset.jsx";
 
 // scss
-import './community.styles.scss';
+import "./community.styles.scss";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 // import Arrow1 from "../../assets/post/arrow1_grid.png";
 
 const toDisplayFormat = (param) => {
-  return param.replace(/_/g, ' ');
+  return param.replace(/_/g, " ");
 };
 
 const Community = () => {
@@ -52,13 +52,13 @@ const Community = () => {
   // ];
 
   const dropdownContentsByProcedure = [
-    { value: 'by user', label: 'By User' },
-    { value: 'by doctor', label: 'By Doctor' },
+    { value: "by user", label: "By User" },
+    { value: "by doctor", label: "By Doctor" },
   ];
 
   const dropdownContentsByLocation = [
-    { value: 'by user', label: 'OK' },
-    { value: 'by doctor', label: 'NO' },
+    { value: "by user", label: "OK" },
+    { value: "by doctor", label: "NO" },
   ];
 
   // Handle the situation of user not login but still want to see the post
@@ -135,24 +135,29 @@ const Community = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [postContainerRef]);
 
   const handleShowContainer = () => {
     setIsPostDropDownOpen(!isPostDropDownOpen);
   };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
   const handleSearch = () => {
-    console.log('handleSearch is clicked');
+    // console.log("handleSearch is clicked");
     setPostSearchParam(postQuery.tempSearchParam);
     const postSearchHistory =
-      JSON.parse(localStorage.getItem('postSearchHistory')) || [];
+      JSON.parse(localStorage.getItem("postSearchHistory")) || [];
     if (!postSearchHistory.includes(postQuery.tempSearchParam)) {
       postSearchHistory.push(postQuery.tempSearchParam);
       localStorage.setItem(
-        'postSearchHistory',
+        "postSearchHistory",
         JSON.stringify(postSearchHistory)
       );
     }
@@ -176,20 +181,20 @@ const Community = () => {
   // };
 
   return (
-    <div className='community-component-container'>
+    <div className="community-component-container">
       <div>
         <PostPageMain />
-        <div className='doctor-post-outer-container'>
-          <div className='doctor-post-header-container'>
+        <div className="doctor-post-outer-container">
+          <div className="doctor-post-header-container">
             <h1
-              className='doctor-post-outer-title'
+              className="doctor-post-outer-title"
               style={{ opacity: isDoctorTitleVisible ? 1 : 0.7 }}
             >
               Community Posts
             </h1>
-            <div className='doctor-post-header-button-container'>
+            <div className="doctor-post-header-button-container">
               <div
-                className='post-search-box-position-container'
+                className="post-search-box-position-container"
                 ref={postContainerRef}
               >
                 <PostSearchBox
@@ -200,31 +205,32 @@ const Community = () => {
                   isMobile={isMobile}
                   handleResponsiveButtonClick={handleResponsiveButtonClick}
                   isInputVisible={isInputVisible}
+                  onKeyPress={handleKeyPress}
                 />
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
               </div>
-              <div className='community-post-header-filter-container'>
-                <span className='postby'>Post By</span>
+              <div className="community-post-header-filter-container">
+                <span className="postby">Post By</span>
                 <button
                   // className={`filter-button-member ${
                   className={`filter-button ${
-                    postQuery.postBy.includes('user')
-                      ? 'filter-button-selected'
-                      : ''
+                    postQuery.postBy.includes("user")
+                      ? "filter-button-selected"
+                      : ""
                   }`}
-                  onClick={() => handleOnClick('user')}
+                  onClick={() => handleOnClick("user")}
                 >
                   Member
                 </button>
                 <button
                   // className={`filter-button-doctor ${
                   className={`filter-button ${
-                    postQuery.postBy.includes('doctor')
-                      ? 'filter-button-selected'
-                      : ''
+                    postQuery.postBy.includes("doctor")
+                      ? "filter-button-selected"
+                      : ""
                   }`}
-                  onClick={() => handleOnClick('doctor')}
+                  onClick={() => handleOnClick("doctor")}
                 >
                   Doctor
                 </button>

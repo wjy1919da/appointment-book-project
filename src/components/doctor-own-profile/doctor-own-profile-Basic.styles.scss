@@ -163,9 +163,9 @@
   padding: 2px 5px;
   align-items: center;
   gap: 10px;
-  // border-radius: 4px;
-  // border: 1px solid var(--new-gradient, #f48c8a);
-  // color: #ffa4a3;
+  border-radius: 4px;
+  border: 1px solid var(--new-gradient, #f48c8a);
+  color: #ffa4a3;
   font-family: Open Sans;
   font-size: 14px;
   font-style: normal;
@@ -177,6 +177,12 @@
 .doctor-profile-verification-button:active {
   justify-content: center;
   background: rgba(255, 164, 163, 0.2);
+}
+.profile-grey-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+  background-color: #e2e3e7;
 }
 
 @media (min-width: 1441px) {
