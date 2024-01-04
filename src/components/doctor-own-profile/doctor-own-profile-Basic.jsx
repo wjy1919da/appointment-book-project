@@ -30,6 +30,7 @@ import calendar from "../../assets/doctor/calendar.png";
 
 const DocotorOwnBasic = () => {
   const [showManageButton, setShowManageButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigate = useNavigate();
 
@@ -50,10 +51,22 @@ const DocotorOwnBasic = () => {
     query: "(max-width: 744px)",
   });
 
+  const handleAvatarError = (e) => {
+    setIsLoading(true);
+  };
+
   return (
     <div className="doctor-own-basic-conatiner ">
       <div className="doctor-own-basic-avatar">
-        <img src={userInfo.avatar} className="doctor-own-avatar-img"></img>
+        {userInfo.avatar && !isLoading ? (
+          <img
+            src={userInfo.avatar}
+            onError={handleAvatarError}
+            className="doctor-own-avatar-img"
+          ></img>
+        ) : (
+          <div className="profile-grey-avatar"></div>
+        )}
       </div>
       <div className="doctor-own-basic-info">
         <div className="doctor-own-basic-top-name">

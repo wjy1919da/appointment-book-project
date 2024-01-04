@@ -144,11 +144,11 @@ const DoctorPostGrid = ({ isAbout }) => {
       >
         <ResponsiveMasonry
           columnsCountBreakPoints={{
-            default: 5,
-            2500: 8,
-            2047: 7,
+            default: 4,
+            2500: 6,
+            2047: 6,
             1700: 6,
-            1024: 5,
+            1024: 4,
             767: 3,
             430: 2,
           }}

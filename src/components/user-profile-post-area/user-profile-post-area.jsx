@@ -53,9 +53,9 @@ const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
 
   const breakPoint = {
     default: 4,
-    2500: 4,
-    2047: 4,
-    1700: 4,
+    2500: 5,
+    2047: 5,
+    1700: 5,
     1024: 4,
     767: 3,
     430: 2,
