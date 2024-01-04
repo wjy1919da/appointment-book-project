@@ -29,7 +29,7 @@ import { useMediaQuery } from 'react-responsive';
 import CreatePostOfUser from './components/create-post/create-post.jsx';
 import UserProfilePage from './components/user-profile-page/user-profile-page';
 import CreatePostPage from './components/components-posts/community-post-create-page/community-post-create-page';
-import DoctorAppointmentPage from './components/doctor-appointment/doctor-appointment-page';
+import DoctorAppointmentPage from './components/doctor-appointment/doctor-appointment-page-1';
 import DoctorAppointmentPage2 from './components/doctor-appointment/doctor-appointmet-page-2';
 
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
