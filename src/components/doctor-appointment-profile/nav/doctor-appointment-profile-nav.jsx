@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 // components
 import DoctorAppointmentProfileAppointmentTab from '../tabs/doctor-appointment-profile-appointment';
+import DoctorAppointmentProfileSetting from '../tabs/doctor-appointment-profile-setting';
 
 // scss
 import './doctor-appointment-profile-nav.scss';
@@ -48,8 +49,7 @@ const DoctorAppointmentProfileNav = () => {
         {activeTab === 'Appointment' && (
           <DoctorAppointmentProfileAppointmentTab />
         )}
-        {/* {activeTab === 'Posts' && <UserProfilePost />}
-        {activeTab === 'Doctors' && <UserProfileReview />} */}
+        {activeTab === 'Setting' && <DoctorAppointmentProfileSetting />}
       </div>
       {/* <div className='bottom-rendering'>
           {activeTab === 'Posts' && (
