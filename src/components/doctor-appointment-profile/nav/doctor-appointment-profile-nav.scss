@@ -2,14 +2,14 @@
   .doctor-appointmen-profile-navbar {
     display: flex;
     justify-content: space-between;
-    color: #000;
-    font-family: 'Roboto', sans-serif;
+    color: #675d59;
+    font-family: Open Sans;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
     margin: 30px 100px;
-    width: 300px;
+    width: 230px;
   }
 
   .nav-tab-appointment,
@@ -26,8 +26,9 @@
     }
 
     &.active {
-      font-family: Inter;
-    //   font-weight: 700;
+      color: #352c29;
+      font-family: Open Sans;
+      font-weight: 600;
       padding-bottom: 4px;
       background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%) no-repeat;
       background-size: 50% 4px;

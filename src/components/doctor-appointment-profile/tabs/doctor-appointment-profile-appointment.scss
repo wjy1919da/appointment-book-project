@@ -1,0 +1,42 @@
+.doctor-appointment-profile-appointment-tab-container {
+  padding: 30px 100px;
+
+  .doctor-appointment-profile-appointment-tab-inner-container {
+    display: flex;
+    gap: 30px;
+
+    .doctor-appointment-profile-calendar {
+      background: lightgrey;
+      border-radius: 10px;
+      width: 336px;
+      height: 267px;
+    }
+
+    .doctor-appointment-profile-appointment-tab-button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 0;
+      width: 336px;
+
+      .doctor-appointment-profile-appointment-tab-open-button {
+        background: #675d59;
+      }
+
+      .doctor-appointment-profile-appointment-tab-close-button {
+        color: #675d59;
+        background: #fff;
+        border: 1px solid #675d59;
+      }
+    }
+
+    .doctor-appointment-profile-appointment-tab-date-title {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import Button from '../components-posts/community-post-button/community-post-button';
-import DoctorAppointmentProfileNav from './doctor-appointment-profile-nav';
+import DoctorAppointmentProfileNav from './nav/doctor-appointment-profile-nav';
 
 // scss
 import './doctor-appointment-profile.scss';

@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// components
+import DoctorAppointmentProfileAppointmentTab from '../tabs/doctor-appointment-profile-appointment';
+
 // scss
 import './doctor-appointment-profile-nav.scss';
 
@@ -42,8 +45,10 @@ const DoctorAppointmentProfileNav = () => {
         </div>
       </div>
       <div className='bottom-rendering'>
-        {/* {activeTab === 'Likes' && <UserProfileLike />}
-        {activeTab === 'Posts' && <UserProfilePost />}
+        {activeTab === 'Appointment' && (
+          <DoctorAppointmentProfileAppointmentTab />
+        )}
+        {/* {activeTab === 'Posts' && <UserProfilePost />}
         {activeTab === 'Doctors' && <UserProfileReview />} */}
       </div>
       {/* <div className='bottom-rendering'>
