@@ -1,5 +1,7 @@
 .doctor-appointment-profile-appointment-tab-container {
-  padding: 30px 100px;
+  padding: 0 100px;
+  padding-top: 30px;
+  padding-bottom: 100px;
 
   .doctor-appointment-profile-appointment-tab-inner-container {
     display: flex;
@@ -30,6 +32,7 @@
       }
     }
 
+    // right container
     .doctor-appointment-profile-appointment-tab-date-title {
       color: #352c29;
       font-family: Open Sans;
@@ -37,6 +40,83 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+    }
+
+    .doctor-appointment-profile-appointment-tab-list-container {
+      display: flex;
+      align-items: center;
+      background: #fbfcff;
+      border-radius: 6px;
+      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.2);
+      margin: 10px 0;
+      padding: 16px 24px;
+      width: 1000px;
+      height: 64px;
+
+      .doctor-appointment-profile-appointment-tab-time {
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        padding-right: 20px;
+      }
+
+      .doctor-appointment-profile-appointment-tab-await {
+        color: #675d59;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        padding-right: 20px;
+      }
+
+      .doctor-appointment-profile-appointment-tab-tag-container {
+        margin: 0 50px;
+
+        .doctor-appointment-profile-appointment-tab-tag-1,
+        .doctor-appointment-profile-appointment-tab-tag-2 {
+          color: #fff;
+          border-radius: 40px;
+          border: 1px solid #f48c8a;
+          background: var(
+            --new-gradient,
+            linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+          );
+          margin: 0 5px;
+          padding: 4px 32px;
+        }
+      }
+
+      .doctor-appointment-profile-appointment-tab-status-open-slot {
+        color: #fff;
+        border-radius: 8px;
+        background: #675d59;
+        margin-left: auto;
+        padding: 8px 18px;
+      }
+
+      .doctor-appointment-profile-appointment-tab-status-close-slot {
+        color: #675d59;
+        background: #fbfcff;
+        border-radius: 8px;
+        border: 2px solid #675d59;
+        margin-left: auto;
+        padding: 8px 18px;
+      }
+
+      .doctor-appointment-profile-appointment-tab-status-confirm {
+        color: #fff;
+        border-radius: 8px;
+        background: var(
+          --new-gradient,
+          linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+        );
+        margin-left: auto;
+        padding: 8px 18px;
+      }
     }
   }
 }
