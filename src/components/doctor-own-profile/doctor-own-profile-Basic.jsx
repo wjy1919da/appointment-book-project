@@ -36,7 +36,7 @@ const DocotorOwnBasic = () => {
 
   const handleFirstButtonClick = () => {
     setShowManageButton(true);
-    navigate('/doctor-appointment-1');
+    navigate('/doctor-profile-appointment');
   };
 
   const onClick = () => {

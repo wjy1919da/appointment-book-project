@@ -35,6 +35,8 @@ import DoctorAppointmentPage2 from './components/doctor-appointment/doctor-appoi
 import DoctorAppointmentPage3 from './components/doctor-appointment/doctor-appointment-page-3';
 import DoctorAppointmentPage4 from './components/doctor-appointment/doctor-appointment-page-4';
 import BookedPage from './components/doctor-appointment/booked-page';
+// doctor profile appointment components
+import DoctorAppointmentProfilePage from './components/doctor-appointment-profile/doctor-appointment-profile';
 
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx';
@@ -123,6 +125,12 @@ const App = () => {
               <Route
                 path='doctor-appointment-booked-page'
                 element={<BookedPage />}
+              />
+
+              {/* doctor profile appointment routes */}
+              <Route
+                path='doctor-profile-appointment'
+                element={<DoctorAppointmentProfilePage />}
               />
 
               <Route path='posts' element={<DoctorPost />} />
