@@ -49,9 +49,7 @@ const DocotorOwnSpecialization = () => {
       </span>
       <div>
         <SimpleGrid
-          //   columns={{ sm: 4, md: 4, lg: 7 }}
           minChildWidth='120px'
-          spacing={2}
           style={{
             marginTop: '10px',
           }}
