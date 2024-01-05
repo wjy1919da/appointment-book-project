@@ -1,32 +1,67 @@
+import { nanoid } from 'nanoid';
 import '../components-home/home-instruments/home-instruments.styles.scss';
-import { Box, SimpleGrid, Image } from '@chakra-ui/react';
+import InstrumentImage from '../../assets/procedure/Chin-Implants.png';
+// import { Box, SimpleGrid, Image } from '@chakra-ui/react';
 
 const DocotorOwnSpecialization = () => {
-  const formatTitle = (title) => {
-    return title
-      .split('_')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
-  const instruments_names = [
-    'Chin-Implants',
-    'Chin-Implants',
-    'Chin-Implants',
-    'Chin-Implants',
+  const instrumentsData = [
+    {
+      id: nanoid(),
+      src: InstrumentImage,
+      name: 'Chin-Implants',
+    },
+    {
+      id: nanoid(),
+      src: InstrumentImage,
+      name: 'Chin-Implants',
+    },
+    {
+      id: nanoid(),
+      src: InstrumentImage,
+      name: 'Chin-Implants',
+    },
+    {
+      id: nanoid(),
+      src: InstrumentImage,
+      name: 'Chin-Implants',
+    },
   ];
-  const instrumentsGrid = instruments_names.map((name, index) => (
-    <Box as='div' className='home-instrument' key={index}>
-      <Image
-        src={require(`../../assets/procedure/${name}.png`)}
-        alt={name}
-        className='home-instrument-pic'
-        style={{ width: '150px', height: '150px' }}
-      />
-      <div style={{ fontSize: '18px', fontWeight: '400', textAlign: 'center', marginTop: '10px' }}>
-        {name}
-      </div>
-    </Box>
-  ));
+
+  // const formatTitle = (title) => {
+  //   return title
+  //     .split('_')
+  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //     .join(' ');
+  // };
+
+  // const instruments_names = [
+  //   'Chin-Implants',
+  //   'Chin-Implants',
+  //   'Chin-Implants',
+  //   'Chin-Implants',
+  // ];
+
+  // const instrumentsGrid = instruments_names.map((name, index) => (
+  //   <Box as='div' className='home-instrument' key={index}>
+  //     <Image
+  //       src={require(`../../assets/procedure/${name}.png`)}
+  //       alt={name}
+  //       className='home-instrument-pic'
+  //       style={{ width: '150px', height: '150px' }}
+  //     />
+  //     <div
+  //       style={{
+  //         fontSize: '18px',
+  //         fontWeight: '400',
+  //         textAlign: 'center',
+  //         marginTop: '10px',
+  //       }}
+  //     >
+  //       {name}
+  //     </div>
+  //   </Box>
+  // ));
+
   return (
     <div
       style={{
@@ -47,7 +82,21 @@ const DocotorOwnSpecialization = () => {
       >
         Specialization
       </span>
-      <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {instrumentsData.map((item, index) => (
+          <div key={index}>
+            <figure style={{ textAlign: 'center' }}>
+              <img
+                src={item.src}
+                alt='Image'
+                style={{ marginRight: '30px', width: '150px', height: '150px' }}
+              />
+              <figcaption style={{ marginTop: '20px' }}>{item.name}</figcaption>
+            </figure>
+          </div>
+        ))}
+      </div>
+      {/* <div>
         <SimpleGrid
           minChildWidth='120px'
           style={{
@@ -56,7 +105,7 @@ const DocotorOwnSpecialization = () => {
         >
           {instrumentsGrid}
         </SimpleGrid>
-      </div>
+      </div> */}
     </div>
   );
 };
