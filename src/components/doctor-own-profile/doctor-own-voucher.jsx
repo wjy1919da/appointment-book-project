@@ -1,17 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+
+// components
 import DocotorOwnVoucherCard from './doctor-profile-voucher-card';
+
+// scss
+import './doctor-own-voucher.scss';
+
 const DocotorOwnVoucher = () => {
     return (
         <div className='doctor-own-voucher-container' style={{display:'flex',flexDirection:'column',gap:'30px',}}>
-            <spna style={{
+            <span style={{
                 fontFamily:'Open Sans',
-                fontSize:'20px;',
+                fontSize:'24px',
                 fontStyle:'normal',
-                fontWeight:'700',
-                color:'pink'
+                fontWeight:'600',
+                color:'#F29E86',
 
-            }}>Vouchers</spna>
-            <div style={{display:'flex',gap:'50px'}}>
+            }}>Vouchers</span>
+            <div class='doctor-profile-voucher-card-container'>
             <DocotorOwnVoucherCard/>
             <DocotorOwnVoucherCard/>
             </div>
