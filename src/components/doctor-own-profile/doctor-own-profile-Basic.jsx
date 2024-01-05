@@ -95,17 +95,20 @@ const DocotorOwnBasic = () => {
             {isIpadScreen ? (
               ''
             ) : (
-              <DoctorOwnProfileEditButton
-                onClick={onClick}
-                title='Edit profile'
-              />
+              <>
+                <DoctorOwnProfileEditButton
+                  onClick={onClick}
+                  title='Edit profile'
+                />
+
+                <button
+                  onClick={handleFirstButtonClick}
+                  className='top-edit-button-2'
+                >
+                  <img src={calendar} className='doctor-calendar-img'></img>
+                </button>
+              </>
             )}
-            <button
-              onClick={handleFirstButtonClick}
-              className='top-edit-button-2'
-            >
-              <img src={calendar} className='doctor-calendar-img'></img>
-            </button>
           </div>
         </div>
         <div className='doctor-own-basic-top-text'>
@@ -169,7 +172,18 @@ const DocotorOwnBasic = () => {
           </div>
         </div>
         {isIpadScreen && (
-          <DoctorOwnProfileEditButton onClick={onClick} title='Edit profile' />
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <DoctorOwnProfileEditButton
+              onClick={onClick}
+              title='Edit profile'
+            />
+            <button
+              onClick={handleFirstButtonClick}
+              className='top-edit-button-2'
+            >
+              <img src={calendar} className='doctor-calendar-img'></img>
+            </button>
+          </div>
         )}
       </div>
     </div>
