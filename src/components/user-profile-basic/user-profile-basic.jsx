@@ -22,7 +22,7 @@ const UserProfileBasic = () => {
   const togglePopup = AppInfoQueryStore((state) => state.togglePopup);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const navigateToAppointment = () => {
-    togglePopup(true, 'mainSection');
+    navigate("/userAppointment");
   };
   const navigateToEditProfile = () => {
     navigate('/userProfileEdit');

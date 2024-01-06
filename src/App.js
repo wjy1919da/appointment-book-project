@@ -91,17 +91,13 @@ const App = () => {
                 path='/procedureMobile'
                 element={isMobile ? <DoctorProcudreMobile /> : <Download />}
               />
-              <Route path='procedure' element={<ProcedureMainPage />} />
-              <Route path='doctor' element={<Doctor />} />
-              <Route path='userAppointment' element={<UserAppointmentMain />} />
-              <Route path='instrument' element={<Instrument />} />
-              <Route path='instrument/:name' element={<SubInstrument />} />
-              <Route path='sign-in' element={<Authentication />} />
-              <Route
-                path='doctor-appointment'
-                element={<DoctorAppointmentPage />}
-              />
-              <Route path='posts' element={<DoctorPost />} />
+              <Route path="procedure" element={<ProcedureMainPage />} />
+              <Route path="doctor" element={<Doctor />} />
+              {/* <Route path="userAppointment" element={<UserAppointmentMain />} /> */}
+              <Route path="instrument" element={<Instrument />} />
+              <Route path="instrument/:name" element={<SubInstrument />} />
+              <Route path="sign-in" element={<Authentication />} />
+              <Route path="posts" element={<DoctorPost />} />
               <Route
                 path='doctorProfileEdit'
                 element={
@@ -128,6 +124,14 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <UserProfilePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="userAppointment"
+                element={
+                  <PrivateRoute>
+                    <UserAppointmentMain />
                   </PrivateRoute>
                 }
               />
