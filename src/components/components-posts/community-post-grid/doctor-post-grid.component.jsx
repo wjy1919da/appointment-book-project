@@ -136,27 +136,31 @@ const DoctorPostGrid = ({ isAbout }) => {
   return (
     <div className="doctor-post-grid-inner-container">
       {isLoading && <DoctorSearchLoadingBar />}
-      <InfiniteScroll
-        dataLength={flatData.length}
-        // next={() => fetchNextPage}
-        // hasMore={!!hasNextPage}
-        scrollThreshold={0.8}
-      >
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{
-            default: 4,
-            2500: 6,
-            2047: 6,
-            1700: 6,
-            1024: 4,
-            767: 3,
-            430: 2,
-          }}
-          gutter={gutterwidth}
-        >
-          <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
-        </ResponsiveMasonry>
-      </InfiniteScroll>
+      {flatData.length && (
+        <div className="doctor-post-grid-container">
+          <InfiniteScroll
+            dataLength={flatData.length}
+            // next={() => fetchNextPage}
+            // hasMore={!!hasNextPage}
+            scrollThreshold={0.8}
+          >
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{
+                default: 4,
+                2500: 6,
+                2047: 6,
+                1700: 6,
+                1024: 4,
+                767: 3,
+                430: 2,
+              }}
+              gutter={gutterwidth}
+            >
+              <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
+            </ResponsiveMasonry>
+          </InfiniteScroll>
+        </div>
+      )}
 
       {flatData.length && (
         <div className="down-load-more-container">
