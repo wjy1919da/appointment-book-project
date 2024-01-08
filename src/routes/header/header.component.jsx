@@ -17,7 +17,7 @@ const Header = () => {
   const loginIcon = require('../../assets/home/login-user.png');
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMediaQuery({ query: `(max-width: 875px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 743px)` });
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isPopupOpen = userInfo.popupState !== 'closed';
 

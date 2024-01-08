@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import HomeButtonPink from '../home-button-pink/home-button-pink';
 import procedureItem from '../../assets/procedure/Chin-Implants.png';
 import backArrow from '../../assets/doctor/left_back.png';
-import './doctor-own-voucher-card.styles.scss'
+import './doctor-profile-voucher-card.scss'
+
 const DocotorOwnVoucherCard = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const expandedOnClick = () => {
