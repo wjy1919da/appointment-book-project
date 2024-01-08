@@ -270,7 +270,7 @@
 }
 
 // mobile
-@media (max-width: 880px) {
+@media (max-width: 774px) {
   .create-post-page-container {
     .create-pink-background-1 {
       top: -80px;
@@ -331,51 +331,51 @@
   }
 }
 
-@media (max-width: 530px) {
-  .create-post-page-inner-container {
-    width: 360px !important;
-  }
+// @media (max-width: 530px) {
+//   .create-post-page-inner-container {
+//     width: 360px !important;
+//   }
 
-  .create-pink-background-1 {
-    width: 300px !important;
-  }
+//   .create-pink-background-1 {
+//     width: 300px !important;
+//   }
 
-  .create-pink-background-2 {
-    width: 300px !important;
-  }
+//   .create-pink-background-2 {
+//     width: 300px !important;
+//   }
 
-  .create-post-page-back-button-container {
-    top: 85px !important;
-    left: 40px !important;
+//   .create-post-page-back-button-container {
+//     top: 85px !important;
+//     left: 40px !important;
 
-    .create-post-page-arrow-back-button {
-      width: 20px !important;
-      height: 20px !important;
-    }
+//     .create-post-page-arrow-back-button {
+//       width: 20px !important;
+//       height: 20px !important;
+//     }
 
-    .create-post-page-label-back-button {
-      font-size: 20px !important;
-    }
-  }
+//     .create-post-page-label-back-button {
+//       font-size: 20px !important;
+//     }
+//   }
 
-  .create-post-page-add {
-    width: 300px !important;
-    height: 300px !important;
-  }
+//   .create-post-page-add {
+//     width: 300px !important;
+//     height: 300px !important;
+//   }
 
-  .create-post-page-title,
-  .create-post-page-description {
-    width: 300px !important;
-  }
-}
+//   .create-post-page-title,
+//   .create-post-page-description {
+//     width: 300px !important;
+//   }
+// }
 
-@media (max-width: 375px) {
-  .create-pink-background-2 {
-    right: 0 !important;
-    width: 300px !important;
-  }
+// @media (max-width: 375px) {
+//   .create-pink-background-2 {
+//     right: 0 !important;
+//     width: 300px !important;
+//   }
 
-  .create-post-page-inner-container {
-    width: 340px !important;
-  }
-}
+//   .create-post-page-inner-container {
+//     width: 340px !important;
+//   }
+// }
