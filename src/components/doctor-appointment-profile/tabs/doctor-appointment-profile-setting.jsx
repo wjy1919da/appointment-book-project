@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import Calendar from 'react-calendar';
 
 // components
 import MeterSlider from '../components/doctor-appointment-profile-meter-slider';
 
 // scss
 import './doctor-appointment-profile-setting.scss';
+import '../components/doctor-appointment-profile-calendar.scss';
+import 'react-calendar/dist/Calendar.css';
 
 // images
 import VideoIcon from '../../../assets/doctor/video-call-icon.svg';
@@ -12,10 +15,29 @@ import VoiceIcon from '../../../assets/doctor/voice-icon.svg';
 import PhoneIcon from '../../../assets/doctor/phone-icon.svg';
 
 const DoctorAppointmentProfileSetting = () => {
+  const [date, setDate] = useState(new Date());
   const [selectedValue, setSelectedValue] = useState('');
 
   const handleDropdownChange = (e) => {
     setSelectedValue(e.target.value);
+  };
+
+  const handleChange = (newDate) => {
+    setDate(newDate);
+  };
+
+  const tileClassName = ({ date, view }) => {
+    const isToday =
+      date.getDate() === new Date().getDate() &&
+      date.getMonth() === new Date().getMonth() &&
+      date.getFullYear() === new Date().getFullYear();
+
+    return isToday ? 'today-tile' : '';
+  };
+
+  const formatShortWeekday = (locale, date) => {
+    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    return weekdays[date.getDay()];
   };
 
   return (
@@ -23,7 +45,13 @@ const DoctorAppointmentProfileSetting = () => {
       <div className='doctor-appointment-profile-setting-tab-inner-container-1'>
         {/* left container */}
         <div className='doctor-appointment-profile-setting-tab-left-container'>
-          <div className='doctor-appointment-profile-setting-tab-calendar'></div>
+          <Calendar
+            onChange={handleChange}
+            value={date}
+            locale='en-GB'
+            formatShortWeekday={formatShortWeekday}
+            tileClassName={tileClassName}
+          />
         </div>
         {/* right container */}
         <div className='doctor-appointment-profile-setting-tab-right-container'>
