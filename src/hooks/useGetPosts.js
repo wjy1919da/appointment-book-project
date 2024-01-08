@@ -107,10 +107,7 @@ export function usePostDetail() {
   };
   return useQuery(
     ["postDetail", postQuery.postID, postQuery.trigger],
-    fetchPostDetail,
-    {
-      placeholderData: { data: {} }, // Default object to use before fetching completes
-    }
+    fetchPostDetail
   );
 }
 
