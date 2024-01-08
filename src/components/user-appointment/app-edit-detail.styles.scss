@@ -1,29 +1,72 @@
 .user-appointment-edit-container
 {
-    width: 1000px;
-    height: 550px;
-    margin-top: -20px;
+    width: 100%;
+    // margin: auto;
+    // margin-top: -20px;
+}
+.app-calendar-doctor-avatar-container {
+  width: 125px;
+  height: 125px;
+}
+.app-calendar-doctor-avatar {
+  width: 100%;
+  height: 100%;
+}
+.app-calendar-doctor-text {
+  color: #FBFCFF;
+  text-shadow: 0px 2px 4px rgba($color: #303030, $alpha: 0.1);
+  font-size: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+.app-calendar-doctor-name {
+  font-size: 1.75rem;
 }
 .app-edit-main-section
 {
-    margin-top: 40px;
-    margin-left: 20px;
+    // margin-top: 40px;
+    // margin-left: 20px;
+    // padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    margin-top: 2rem;
     border-radius: 18px;
     border: 1px solid #000;
-    width: 850px;
-    height: 450px;
+    width: 100%;
+    // width: 850px;
+    // height: 450px;
     background-color: white;
     display: flex;
+    flex-direction: column;
 }
-.app-edit-cnext-button
-{
-    margin-top: -50px;
-    margin-left: 750px;
+.app-edit-calendar-section-container {
+  display: flex;
+  justify-content: space-around;
 }
-.app-edit-calendar-section
+.app-edit-cnext-button-container
 {
-    margin-top: 50px;
-    margin-left: 50px;
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  padding-top: 2rem;
+  margin: auto;
+  // padding-right: 3rem;
+    // margin-top: -50px;
+    // margin-left: 750px;
+}
+// .app-edit-calendar-section
+// {
+//     // margin-top: 50px;
+//     // margin-left: 50px;
+// }
+.app-edit-calendar-description-container {
+  padding-bottom: 3rem;
+}
+.app-edit-calendar-description {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: Open Sans;
 }
 .app-edit-time-section
 {
@@ -59,10 +102,6 @@
     display: flex;
     flex-direction: column;
     gap:30px;
-}
-.app-edit-calendar-section
-{
-    margin-top: 90px;
 }
 .react-calendar {
     width: 400px;
