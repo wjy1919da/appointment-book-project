@@ -2,6 +2,7 @@
   padding: 10px;
 }
 
+// prev, next button
 .react-calendar__navigation {
   display: flex;
   justify-content: center;
@@ -9,7 +10,6 @@
 
   button {
     color: #fff;
-    // color: blue;
     font-size: 16px;
   }
 
@@ -42,6 +42,7 @@
   opacity: 0.4;
 }
 
+// to remove the default January 2024
 .react-calendar__navigation__label {
   flex-grow: 0 !important;
 }
@@ -68,6 +69,26 @@
 }
 
 .today-tile {
+  position: relative;
+  color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+}
+
+.today-tile:before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
   background: #f48c8a;
   border-radius: 6px;
+  transform: translateX(-50%);
+  width: 60%;
 }

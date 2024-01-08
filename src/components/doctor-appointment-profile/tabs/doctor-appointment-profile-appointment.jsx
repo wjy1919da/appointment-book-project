@@ -36,7 +36,6 @@ const DoctorAppointmentProfileAppointmentTab = () => {
     <div className='doctor-appointment-profile-appointment-tab-container'>
       <div className='doctor-appointment-profile-appointment-tab-inner-container'>
         <div className='doctor-appointment-profile-appointment-tab-left-container'>
-          {/* <div className='doctor-appointment-profile-calendar'></div> */}
           <Calendar
             onChange={handleChange}
             value={date}
