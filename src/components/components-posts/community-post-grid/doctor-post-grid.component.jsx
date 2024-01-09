@@ -135,7 +135,7 @@ const DoctorPostGrid = ({
   return (
     <div className="doctor-post-grid-inner-container">
       <div className="doctor-post-grid-container">
-        {hasData ? (
+        {hasData || isLoading ? (
           <InfiniteScroll
             dataLength={flatData.length}
             next={fetchNextPage ? () => fetchNextPage() : undefined}
@@ -163,6 +163,7 @@ const DoctorPostGrid = ({
           )
         )}
       </div>
+
       {hasData && (
         <div className="down-load-more-container">
           {!isMobile && (
