@@ -87,7 +87,15 @@ export function useGetDoctorPost() {
     staleTime: 1 * 6 * 1000 * 60 * 3,
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPages) => {
-      return undefined;
+      if (!lastPage.pageInfo) {
+        // console.log("lastPage.pageInfo is undefined");
+        return undefined;
+      }
+
+      const nextPage = lastPage.pageInfo.currentPage + 1;
+      const totalPage = lastPage.pageInfo.totalPage;
+
+      return nextPage <= totalPage ? nextPage : undefined;
     },
   });
 }
