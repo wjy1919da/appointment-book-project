@@ -12,5 +12,19 @@
   .doctor-own-specialization-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
+    .doctor-own-specialization-image {
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+}
+
+@media (max-width: 744px) {
+  .doctor-own-specialization-container {
+    .doctor-own-specialization-image {
+      width: 130px !important;
+      height: 130px !important;
+    }
   }
 }
