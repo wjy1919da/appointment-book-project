@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 // components
 import DoctorSearchLoadingBar from "../../components/doctor-search-loading-bar/doctor-search-loading-bar.component";
 import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
-import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
+import DoctorPostGrid from "../../components/components-posts/community-post-grid/community-post-grid.component.jsx";
 import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
 import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 // import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
@@ -15,9 +15,6 @@ import PostDropDownContents from "../../components/components-posts/community-po
 // scss
 import "./community.styles.scss";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-// import Arrow1 from "../../assets/post/arrow1_grid.png";
 // hook
 import { useApiRequestPostFilter } from "../../hooks/useApiRequestPostFilter";
 
@@ -269,6 +266,7 @@ const Community = () => {
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}
             error={error}
+            download={true}
           />
           {/* </div> */}
 

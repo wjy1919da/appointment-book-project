@@ -1,186 +1,179 @@
-import { useState, useEffect } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import usePostQueryStore from "../../postStore.ts";
-import { useMediaQuery } from "react-responsive";
-import { useNavigate } from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+// import usePostQueryStore from "../../postStore.ts";
+// import { useMediaQuery } from "react-responsive";
+// import { useNavigate } from "react-router-dom";
 
-// components
-import CreatePostOfUser from "../create-post/create-post";
-import CommunityPost from "../components-posts/community-post/community-post.component";
-import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
-// import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
-import CommunityPostSkeleton from "../components-posts/community-post/community-post-skeleton.component.jsx";
+// // components
+// import CreatePostOfUser from "../create-post/create-post";
+// import CommunityPost from "../components-posts/community-post/community-post.component";
+// import PostDetail from "../components-posts/community-post-detail/community-post-detail.component";
+// // import UserProfileReview from '../user-profile-review-area/user-profile-review-area';
+// import CommunityPostSkeleton from "../components-posts/community-post/community-post-skeleton.component.jsx";
 
-// hook
-import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
+// // hook
+// import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
 
-// scss
-import "./user-profile-post-area.styles.scss";
-import "../create-post/create-post.style.scss";
+// // scss
+// import "./user-profile-post-area.styles.scss";
+// import "../create-post/create-post.style.scss";
 
-// images
-import post1 from "../../assets/doctor/post3.png";
-import creatPostIcon from "../../assets/post/create-post-icon.png";
-import userPostAvatar from "../../assets/post/user-profile-avatar.png";
+// // images
+// import post1 from "../../assets/doctor/post3.png";
+// import creatPostIcon from "../../assets/post/create-post-icon.png";
+// import userPostAvatar from "../../assets/post/user-profile-avatar.png";
 
-const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
-  const {
-    data,
-    error,
-    isLoading,
-    // fetchNextPage,
-    // isFetchingNextPage,
-    // hasNextPage,
-  } = useGetUserPostedPost();
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [IsModalOpen, setIsModelOpen] = useState(false);
-  const setPostID = usePostQueryStore((state) => state.setPostID);
-  const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
-  const setMemberID = usePostQueryStore((state) => state.setMemberID);
-  const setTitle = usePostQueryStore((state) => state.setTitle);
-  const setUserName = usePostQueryStore((state) => state.setUserName);
-  const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-  const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
-  const setIsLike = usePostQueryStore((state) => state.setIsLike);
-  const skeletons = [1, 2, 3, 4, 5, 6, 7];
+// const UserProfilePost = ({ showCreatePost, setShowCreatePost }) => {
 
-  const navigate = useNavigate();
+//   const [imagesLoaded, setImagesLoaded] = useState(false);
+//   const [IsModalOpen, setIsModelOpen] = useState(false);
+//   const setPostID = usePostQueryStore((state) => state.setPostID);
+//   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
+//   const setMemberID = usePostQueryStore((state) => state.setMemberID);
+//   const setTitle = usePostQueryStore((state) => state.setTitle);
+//   const setUserName = usePostQueryStore((state) => state.setUserName);
+//   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
+//   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
+//   const setIsLike = usePostQueryStore((state) => state.setIsLike);
+//   const skeletons = [1, 2, 3, 4, 5, 6, 7];
 
-  // width
-  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+//   const navigate = useNavigate();
 
-  const [gutterwidth, setGutterWidth] = useState("20px");
+//   // width
+//   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
 
-  const breakPoint = {
-    default: 4,
-    2500: 5,
-    2047: 5,
-    1700: 5,
-    1024: 4,
-    767: 3,
-    430: 2,
-  };
+//   const [gutterwidth, setGutterWidth] = useState("20px");
 
-  // create a post + icon button
-  const handleIconClick = () => {
-    // setShowCreatePost(true);
-    navigate("/posts/create", { state: { source: "userProfile" } });
-  };
+//   const breakPoint = {
+//     default: 4,
+//     2500: 5,
+//     2047: 5,
+//     1700: 5,
+//     1024: 4,
+//     767: 3,
+//     430: 2,
+//   };
 
-  const handleClickPost = (
-    ID,
-    avatar,
-    username,
-    title,
-    memberId,
-    isPrivate,
-    isLike
-  ) => {
-    setIsModelOpen(true);
-    setPostID(ID);
-    setUserAvatar(avatar);
-    setUserName(username);
-    setTitle(title);
-    setMemberID(memberId);
-    setIsPrivate(isPrivate);
-    setIsLike(isLike);
-  };
+//   // create a post + icon button
+//   const handleIconClick = () => {
+//     // setShowCreatePost(true);
+//     navigate("/posts/create", { state: { source: "userProfile" } });
+//   };
 
-  const postList = isLoading
-    ? skeletons.map((skeleton, index) => <CommunityPostSkeleton key={index} />)
-    : flatData.map((post, index) => (
-        <div
-          key={index}
-          onClick={() =>
-            handleClickPost(
-              post.id,
-              post.avatar,
-              post.username,
-              post.title,
-              post.memberId,
-              post.isDisplay
-            )
-          }
-        >
-          <CommunityPost
-            id={post.id}
-            // dummyHighlight={post.highlight}
-            dummyPrivate={post.isDisplay}
-            imageURL={post.coverImg || []}
-            text={post.title || ""}
-            profileImage={post.avatar || ""}
-            authorName={post.username || ""}
-            likes={post.like_count || 0}
-            liked={post.isLike}
-            status={post.status}
-          />
-        </div>
-      ));
+//   const handleClickPost = (
+//     ID,
+//     avatar,
+//     username,
+//     title,
+//     memberId,
+//     isPrivate,
+//     isLike
+//   ) => {
+//     setIsModelOpen(true);
+//     setPostID(ID);
+//     setUserAvatar(avatar);
+//     setUserName(username);
+//     setTitle(title);
+//     setMemberID(memberId);
+//     setIsPrivate(isPrivate);
+//     setIsLike(isLike);
+//   };
 
-  // var userName;
-  // var avatar;
+//   const postList = isLoading
+//     ? skeletons.map((skeleton, index) => <CommunityPostSkeleton key={index} />)
+//     : flatData.map((post, index) => (
+//         <div
+//           key={index}
+//           onClick={() =>
+//             handleClickPost(
+//               post.id,
+//               post.avatar,
+//               post.username,
+//               post.title,
+//               post.memberId,
+//               post.isDisplay
+//             )
+//           }
+//         >
+//           <CommunityPost
+//             id={post.id}
+//             // dummyHighlight={post.highlight}
+//             dummyPrivate={post.isDisplay}
+//             imageURL={post.coverImg || []}
+//             text={post.title || ""}
+//             profileImage={post.avatar || ""}
+//             authorName={post.username || ""}
+//             likes={post.like_count || 0}
+//             liked={post.isLike}
+//             status={post.status}
+//           />
+//         </div>
+//       ));
 
-  //console.log('userpostedCallBackdata', data);
-  //console.log('userPostedpostin', flatData);
+//   // var userName;
+//   // var avatar;
 
-  useEffect(() => {
-    const images = [creatPostIcon, post1, userPostAvatar];
+//   //console.log('userpostedCallBackdata', data);
+//   //console.log('userPostedpostin', flatData);
 
-    let loadedImagesCount = 0;
+//   useEffect(() => {
+//     const images = [creatPostIcon, post1, userPostAvatar];
 
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        loadedImagesCount += 1;
-        if (loadedImagesCount === images.length) {
-          setImagesLoaded(true);
-        }
-      };
-    });
-  }, []);
+//     let loadedImagesCount = 0;
 
-  return (
-    <div className="user-profile-post-area-container">
-      {!showCreatePost && imagesLoaded && (
-        <div className="choose-picture-conatiner-post">
-          <ResponsiveMasonry
-            columnsCountBreakPoints={breakPoint}
-            gutter={gutterwidth}
-          >
-            <Masonry gutter={gutterwidth}>
-              <div className="choose-picture-section-image-post">
-                <img
-                  src={creatPostIcon}
-                  onClick={handleIconClick}
-                  className="choose-picture-section-image"
-                  alt="Create Post"
-                />
-              </div>
+//     images.forEach((src) => {
+//       const img = new Image();
+//       img.src = src;
+//       img.onload = () => {
+//         loadedImagesCount += 1;
+//         if (loadedImagesCount === images.length) {
+//           setImagesLoaded(true);
+//         }
+//       };
+//     });
+//   }, []);
 
-              {/* archive posts button */}
-              <div className="archive-posts-button-container">
-                <span className="archive-title">Archived Posts</span>
-              </div>
+//   return (
+//     <div className="user-profile-post-area-container">
+//       {!showCreatePost && imagesLoaded && (
+//         <div className="choose-picture-conatiner-post">
+//           <ResponsiveMasonry
+//             columnsCountBreakPoints={breakPoint}
+//             gutter={gutterwidth}
+//           >
+//             <Masonry gutter={gutterwidth}>
+//               <div className="choose-picture-section-image-post">
+//                 <img
+//                   src={creatPostIcon}
+//                   onClick={handleIconClick}
+//                   className="choose-picture-section-image"
+//                   alt="Create Post"
+//                 />
+//               </div>
 
-              {/* Rest of the posts */}
-              {postList}
-            </Masonry>
-          </ResponsiveMasonry>
-        </div>
-      )}
+//               {/* archive posts button */}
+//               <div className="archive-posts-button-container">
+//                 <span className="archive-title">Archived Posts</span>
+//               </div>
 
-      {showCreatePost && <CreatePostOfUser />}
+//               {/* Rest of the posts */}
+//               {postList}
+//             </Masonry>
+//           </ResponsiveMasonry>
+//         </div>
+//       )}
 
-      {IsModalOpen && (
-        <PostDetail
-          show={IsModalOpen}
-          onHide={() => setIsModelOpen(false)}
-          isMobile={isMobile}
-        />
-      )}
-    </div>
-  );
-};
+//       {showCreatePost && <CreatePostOfUser />}
 
-export default UserProfilePost;
+//       {IsModalOpen && (
+//         <PostDetail
+//           show={IsModalOpen}
+//           onHide={() => setIsModelOpen(false)}
+//           isMobile={isMobile}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default UserProfilePost;

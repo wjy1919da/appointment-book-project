@@ -6,23 +6,15 @@ import usePostQueryStore from "../../../postStore.ts";
 import { Skeleton, useToast } from "@chakra-ui/react";
 
 // components
-import CommunityPost from "../community-post/community-post.component";
-import PostDetail from "../community-post-detail/community-post-detail.component";
-import HomeSpinner from "../../home-spinner/home-spinner.component";
+import CommunityPost from "../community-post/community-post.component.jsx";
+import PostDetail from "../community-post-detail/community-post-detail.component.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityPostSkeleton from "../community-post/community-post-skeleton.component.jsx";
-// import DoctorSearchLoadingBar from "../../doctor-search-loading-bar/doctor-search-loading-bar.component.jsx";
-// import ErrorMsg from "../../error-msg/error-msg.component";
-
-// hook
-import { useApiRequestPostFilter } from "../../../hooks/useApiRequestPostFilter";
-// import { useGetLikesPost } from "../../../hooks/useGetPosts";
 
 // scss
-import "./doctor-post-grid.styles.scss";
+import "./community-post-grid.styles.scss";
 
 // images
-// import Arrow from "../../../assets/post/arrow_grid.png";
 import Arrow1 from "../../../assets/post/arrow1_grid.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
@@ -33,6 +25,7 @@ const DoctorPostGrid = ({
   hasNextPage,
   isLoading,
   error,
+  download,
 }) => {
   // console.log("isLoading", isLoading);
   const hasData = data?.pages?.some(
@@ -98,7 +91,6 @@ const DoctorPostGrid = ({
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  console.log("skeletons", isLoading);
   const postCardList = isLoading
     ? skeletons.map((skeleton) => <CommunityPostSkeleton key={skeleton} />)
     : flatData.map((post) => (
@@ -129,6 +121,7 @@ const DoctorPostGrid = ({
             authorName={post.nickname || ""}
             likes={post.likedCount || 0}
             liked={post.isLike}
+            status={post.status}
           />
         </div>
       ));
@@ -145,9 +138,9 @@ const DoctorPostGrid = ({
             <ResponsiveMasonry
               columnsCountBreakPoints={{
                 default: 4,
-                2500: 6,
-                2047: 6,
-                1700: 6,
+                2500: 5,
+                2047: 5,
+                1700: 5,
                 1024: 4,
                 767: 3,
                 430: 2,
@@ -164,7 +157,7 @@ const DoctorPostGrid = ({
         )}
       </div>
 
-      {hasData && (
+      {hasData && download && (
         <div className="down-load-more-container">
           {!isMobile && (
             // <img src={Arrow} alt="arrow" className="arrow-containter" />

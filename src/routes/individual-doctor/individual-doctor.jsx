@@ -21,7 +21,7 @@ import UserProfileDoctorPostGrid from "../../components/user-profile-doctor-post
 import LogInAccessPopUp from "../../components/log-in-access-popup/log-in-access-popup.jsx";
 import { Spinner } from "@chakra-ui/react";
 import userInfoQueryStore from "../../userStore.ts";
-import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component.jsx";
+import DoctorPostGrid from "../../components/components-posts/community-post-grid/community-post-grid.component.jsx";
 
 // hook
 import { useGetDoctorInfo } from "../../hooks/useGetIndividualDoctor.js";
@@ -152,6 +152,7 @@ const IndividualDoctor = () => {
             error={postIsError}
             fetchNextPage={postFetchNextPage}
             hasNextPage={postHasNextPage}
+            download={false}
           />
         </div>
       )}

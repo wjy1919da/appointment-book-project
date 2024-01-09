@@ -3,12 +3,28 @@ import { useLocation } from "react-router-dom";
 import "./doctor-own-profile-subArea.styles.scss";
 import DocotorOwnAbout from "./doctor-own-about-area";
 import DoctorProfileGrid from "./doctor-own-profile-grid";
-import UserProfileLike from "../user-profile-like/user-profile-like";
+import DoctorPostGrid from "../components-posts/community-post-grid/community-post-grid.component";
+import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
+import { useGetUserLikededPost } from "../../hooks/useGetPosts.js";
 
 const DoctorProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("About"); // by default, "about" is the active tab
   const [showCreatePost, setShowCreatePost] = useState(false);
-
+  const {
+    data: posts,
+    error: postsError,
+    isLoading: postsIsLoading,
+    fetchNextPage: postsFetchNextPage,
+    isFetchingNextPage: postsIsFetchingNextPage,
+    hasNextPage: postsHasNextPage,
+  } = useGetUserPostedPost();
+  const {
+    data: userLikedPost,
+    isLoading: userLikedPostIsLoading,
+    error: userLikedPostError,
+    fetchNextPage: userLikedPostFetchNextPage,
+    hasNextPage: userLikedPostHasNextPage,
+  } = useGetUserLikededPost();
   const { hash } = useLocation();
 
   useEffect(() => {
@@ -55,11 +71,25 @@ const DoctorProfileSubArea = () => {
       </div>
       <div className="bottom-rendering">
         {activeTab === "About" && <DocotorOwnAbout />}
-        {activeTab === "Posts" && <DoctorProfileGrid />}
+        {activeTab === "Posts" && (
+          <DoctorPostGrid
+            data={posts}
+            fetchNextPage={postsFetchNextPage}
+            hasNextPage={postsHasNextPage}
+            isLoading={postsIsLoading}
+            error={postsError}
+            download={false}
+          />
+        )}
         {activeTab === "Likes" && (
-          <div className="doctor-profile-likePost-container">
-            <UserProfileLike />
-          </div>
+          <DoctorPostGrid
+            data={userLikedPost}
+            error={userLikedPostError}
+            isLoading={userLikedPostIsLoading}
+            fetchNextPage={userLikedPostFetchNextPage}
+            hasNextPage={userLikedPostHasNextPage}
+            download={false}
+          />
         )}
       </div>
     </div>
