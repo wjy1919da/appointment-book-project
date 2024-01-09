@@ -71,7 +71,9 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                 {desc.dot ? (
                   <>
                     <img
-                      className={`doctor-profile-appointment-tab-dot dot-${index+1}`}
+                      className={`doctor-profile-appointment-tab-dot dot-${
+                        index + 1
+                      }`}
                       src={desc.dot}
                       alt={`Icon ${index + 1}`}
                     />
@@ -97,7 +99,15 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                 <span className='doctor-appointment-profile-appointment-tab-time'>
                   {item.time}
                 </span>
-                {/* <span>{item.src}</span> */}
+                {item.src ? (
+                  <>
+                    <img
+                      className='doctor-profile-appointment-contact-icon'
+                      src={item.src}
+                      alt={`Icon ${index + 1}`}
+                    />
+                  </>
+                ) : null}
                 <span className='doctor-appointment-profile-appointment-tab-await'>
                   {item.await}
                 </span>

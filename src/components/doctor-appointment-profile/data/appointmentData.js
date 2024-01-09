@@ -4,7 +4,7 @@ export const appointmentData = [
   {
     id: nanoid(),
     time: '10:00 AM - 10:30 AM',
-    src: '../../../assets/doctor/video-call-icon.svg',
+    src: require('../../../assets/doctor/video-call-icon.svg').default,
     await: 'Jessica Mandez',
     tag1: 'Injection',
     tag2: 'Breasts',
@@ -16,14 +16,13 @@ export const appointmentData = [
     src: [
       '../../../assets/doctor/video-call-icon.svg',
       '../../../assets/doctor/voice-icon.svg',
-      '../../../assets/doctor/phone-icon.svg',
     ],
     await: 'Waiting for Booking',
     status: 'Close Slot',
   },
   {
     id: nanoid(),
-    time: '11:30 AM - 11:30 AM',
+    time: '11:00 AM - 11:30 AM',
     src: '',
     await: 'Not Open',
     status: 'Open Slot',
@@ -31,7 +30,7 @@ export const appointmentData = [
   {
     id: nanoid(),
     time: '11:30 AM - 12:00 PM',
-    src: '../../../assets/doctor/phone-icon.svg',
+    src: require('../../../assets/doctor/phone-icon.svg').default,
     await: 'William Zhu',
     tag1: 'Breasts',
     tag2: 'Nose',
@@ -65,7 +64,7 @@ export const appointmentData = [
   {
     id: nanoid(),
     time: '1:30 PM - 2:00 PM',
-    src: '../../../assets/doctor/phone-icon.svg',
+    src: require('../../../assets/doctor/phone-icon.svg').default,
     await: 'Chloe Mandez',
     tag1: 'Breasts',
     tag2: 'Nose',
