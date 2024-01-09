@@ -23,17 +23,19 @@ const UserAppointmentMain = () => {
     };
     return (
         <div className='user-appointment-main-container'>
-            <div className='user-appointment-right-background'>
-                
-            </div>
-            <div className='user-appointment-previous-step-arrow' onClick={navigateToPreviousStep}>
-                <button className='user-app-go-back-arrow'>
-                    <img src = {arrowLeft} style={{width:'20px', height:'20px'}}></img>
-                    <span style={{color:'white'}}>My Appointment</span>  
-                </button> 
-            </div>
-            <div className='user-appointment-content-container'>
-                <UserAppoinmentSection1/>
+            {/* <div className='user-appointment-right-background'></div> */}
+            <div className='user-appointment-body-container'>
+                <div className='user-appointment-top-row'>
+                    {/* <div className='user-appointment-previous-step-arrow' onClick={navigateToPreviousStep}>
+                        <img src={arrowLeft} className='user-appointment-go-back-arrow' />
+                    </div> */}
+                    <div className='user-appointment-title-text-container'>
+                        <h3 className='user-appointment-title-text'>My Appointments</h3>
+                    </div>
+                </div>
+                <div className='user-appointment-content-container'>
+                    <UserAppoinmentSection1/>
+                </div>
             </div>
         </div>
     );   

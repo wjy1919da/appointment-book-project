@@ -3,8 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
 // components
+import DoctorSearchLoadingBar from "../../components/doctor-search-loading-bar/doctor-search-loading-bar.component";
 import PostPageMain from "../../components/components-posts/community-post-main/community-post-main.jsx";
-import DoctorPostGrid from "../../components/components-posts/community-post-grid/doctor-post-grid.component";
+import DoctorPostGrid from "../../components/community-post-grid/community-post-grid.component.jsx";
 import PostSearchBox from "../../components/components-posts/community-post-search-box/community-post-search-box.jsx";
 import PostDropDownContents from "../../components/components-posts/community-post-dropdown-contents/community-post-dropdown-contents.jsx";
 // import PostSearchBoxDropDown from "../../components/components-posts/community-post-search-box-dropdown/community-post-search-box-dropdown.jsx";
@@ -14,13 +15,8 @@ import PostDropDownContents from "../../components/components-posts/community-po
 // scss
 import "./community.styles.scss";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-// import Arrow1 from "../../assets/post/arrow1_grid.png";
-
-const toDisplayFormat = (param) => {
-  return param.replace(/_/g, " ");
-};
+// hook
+import { useApiRequestPostFilter } from "../../hooks/useApiRequestPostFilter";
 
 const Community = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
@@ -29,6 +25,13 @@ const Community = () => {
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [isDoctorTitleVisible, setIsDoctorTitleVisible] = useState(true);
+  const { data, error, isLoading, fetchNextPage, hasNextPage } =
+    useApiRequestPostFilter();
+  // let data = [];
+  // let isLoading = true;
+  // let error = null;
+  // let hasNextPage = false;
+  // const fetchNextPage = () => {};
 
   const postContainerRef = useRef(null);
   const setTempSearchParam = usePostQueryStore(
@@ -51,15 +54,15 @@ const Community = () => {
   //   { value: 'body', label: 'Body' },
   // ];
 
-  const dropdownContentsByProcedure = [
-    { value: "by user", label: "By User" },
-    { value: "by doctor", label: "By Doctor" },
-  ];
+  // const dropdownContentsByProcedure = [
+  //   { value: "by user", label: "By User" },
+  //   { value: "by doctor", label: "By Doctor" },
+  // ];
 
-  const dropdownContentsByLocation = [
-    { value: "by user", label: "OK" },
-    { value: "by doctor", label: "NO" },
-  ];
+  // const dropdownContentsByLocation = [
+  //   { value: "by user", label: "OK" },
+  //   { value: "by doctor", label: "NO" },
+  // ];
 
   // Handle the situation of user not login but still want to see the post
   //  const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -184,6 +187,7 @@ const Community = () => {
     <div className="community-component-container">
       <div>
         <PostPageMain />
+
         <div className="doctor-post-outer-container">
           <div className="doctor-post-header-container">
             <h1
@@ -192,6 +196,7 @@ const Community = () => {
             >
               Community Posts
             </h1>
+
             <div className="doctor-post-header-button-container">
               <div
                 className="post-search-box-position-container"
@@ -210,6 +215,7 @@ const Community = () => {
                 {/* 1.0 version do not need dropdown */}
                 {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
               </div>
+
               <div className="community-post-header-filter-container">
                 <span className="postby">Post By</span>
                 <button
@@ -252,7 +258,18 @@ const Community = () => {
              /> */}
             </div>
           </div>
-          <DoctorPostGrid />
+          {/* <div> */}
+          {isLoading && <DoctorSearchLoadingBar />}
+          <DoctorPostGrid
+            data={data}
+            isLoading={isLoading}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+            error={error}
+            download={true}
+          />
+          {/* </div> */}
+
           {/* <div className="down-load-more-container">
             {!isMobile && (
               // <img src={Arrow} alt="arrow" className="arrow-containter" />
