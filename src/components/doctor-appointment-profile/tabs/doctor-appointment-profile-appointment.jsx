@@ -5,6 +5,8 @@ import Calendar from 'react-calendar';
 import Button from '../../components-posts/community-post-button/community-post-button';
 // dummy data
 import { appointmentData } from '../data/appointmentData';
+// slots decription data
+import { slotsDescriptionData } from '../data/slotsDescriptionData';
 
 // scss
 import './doctor-appointment-profile-appointment.scss';
@@ -52,6 +54,34 @@ const DoctorAppointmentProfileAppointmentTab = () => {
               buttonName='Close all unbooked slots'
               className='doctor-appointment-profile-appointment-tab-close-button'
             />
+          </div>
+          <div className='doctor-appointment-profile-appointment-tab-button-description-container'>
+            {slotsDescriptionData.map((desc, index) => (
+              <div
+                key={desc.id}
+                className='doctor-appointment-profile-appointment-tab-description-container'
+              >
+                <span
+                  className={`doctor-profile-appointment-tab-icon icon-${
+                    index + 1
+                  }`}
+                >
+                  {desc.icon}
+                </span>
+                {desc.dot ? (
+                  <>
+                    <img
+                      className={`doctor-profile-appointment-tab-dot dot-${index+1}`}
+                      src={desc.dot}
+                      alt={`Icon ${index + 1}`}
+                    />
+                  </>
+                ) : null}
+                <span className='doctor-profile-appointment-tab-description'>
+                  {desc.description}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
         <div className='doctor-appointment-profile-appointment-tab-right-container'>

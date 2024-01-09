@@ -18,8 +18,9 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding: 20px 0;
-      width: 336px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      width: 372px;
 
       .doctor-appointment-profile-appointment-tab-open-button {
         background: #675d59;
@@ -29,6 +30,21 @@
         color: #675d59;
         background: #fff;
         border: 1px solid #675d59;
+      }
+    }
+
+    .doctor-appointment-profile-appointment-tab-description-container {
+      color: #352c29;
+      font-size: 14px;
+      color: var(--text-1-footer, #352c29);
+      font-family: Open Sans;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      .doctor-profile-appointment-tab-description {
+        padding: 2px 6px;
       }
     }
 
@@ -117,6 +133,54 @@
         margin-left: auto;
         padding: 8px 18px;
       }
+    }
+  }
+
+  .doctor-appointment-profile-appointment-tab-description-container {
+    margin: 12px 0;
+
+    // icon style
+    .doctor-profile-appointment-tab-icon {
+      display: inline-block;
+      text-align: center;
+      border-radius: 6px;
+      padding: 4px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .doctor-profile-appointment-tab-dot {
+      position: absolute;
+      bottom: 350px;
+      left: 118px;
+      z-index: 100;
+    }
+
+    .dot-3 {
+      position: absolute;
+      bottom: 430px;
+      left: 118px;
+      z-index: 100;
+    }
+
+    .icon-1,
+    .icon-3 {
+      color: #675d59;
+    }
+
+    .icon-2 {
+      color: #f48c8a;
+    }
+
+    .icon-4,
+    .icon-5 {
+      color: #f48c8a;
+      background: #352c29;
+    }
+
+    .icon-6 {
+      color: #fbfcff;
+      background: #f48c8a;
     }
   }
 }
