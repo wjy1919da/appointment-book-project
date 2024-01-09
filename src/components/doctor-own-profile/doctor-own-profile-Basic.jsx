@@ -48,7 +48,7 @@ const DocotorOwnBasic = () => {
 
   // screen size
   const isIpadScreen = useMediaQuery({
-    query: '(max-width: 744px)',
+    query: '(max-width: 1133px)',
   });
 
   const handleAvatarError = (e) => {
