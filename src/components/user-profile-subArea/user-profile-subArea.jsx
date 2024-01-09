@@ -8,7 +8,7 @@ import "./user-profile-subArea.styles.scss";
 // import UserProfilePost from "../user-profile-post-area/user-profile-post-area";
 import UserProfileReview from "../user-profile-review-area/user-profile-review-area";
 import UserProfileLike from "../user-profile-like/user-profile-like";
-import DoctorPostGrid from "../components-posts/community-post-grid/community-post-grid.component";
+import DoctorPostGrid from "../community-post-grid/community-post-grid.component";
 
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import CreatePostOfUser from '../create-post/create-post';

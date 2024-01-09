@@ -5,7 +5,7 @@ import DoctorSearchPhone from "../../../assets/doctor/doctor-search-phone.png";
 import FeatureDoctor from "../doctor-search-feature/doctor-search-feature.component";
 import IntroDoctor from "../doctor-search-info/doctor-search-info.component";
 import DoctorSearchMultiInput from "../doctor-search-multiInput/doctor-search-multiInput.component";
-import DoctorPostGrid from "../../components-posts/community-post-grid/community-post-grid.component";
+import DoctorPostGrid from "../../community-post-grid/community-post-grid.component";
 import { useMediaQuery } from "react-responsive";
 const DoctorMobilWebpage = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });

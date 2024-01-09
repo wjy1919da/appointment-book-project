@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import usePostQueryStore from "../../../postStore.ts";
+import usePostQueryStore from "../../postStore.ts";
 import { Skeleton, useToast } from "@chakra-ui/react";
 
 // components
-import CommunityPost from "../community-post/community-post.component.jsx";
-import PostDetail from "../community-post-detail/community-post-detail.component.jsx";
+import CommunityPost from "../components-posts/community-post/community-post.component.jsx";
+import PostDetail from "../components-posts/community-post-detail/community-post-detail.component.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-import CommunityPostSkeleton from "../community-post/community-post-skeleton.component.jsx";
+import CommunityPostSkeleton from "../components-posts/community-post/community-post-skeleton.component.jsx";
 
 // scss
 import "./community-post-grid.styles.scss";
 
 // images
-import Arrow1 from "../../../assets/post/arrow1_grid.png";
+import Arrow1 from "../../assets/post/arrow1_grid.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-
+import { set } from "date-fns";
 const DoctorPostGrid = ({
   data,
   fetchNextPage,
@@ -27,11 +27,13 @@ const DoctorPostGrid = ({
   error,
   download,
 }) => {
-  // console.log("isLoading", isLoading);
   const hasData = data?.pages?.some(
     (page) => page.data && page.data.length > 0
   );
+  const [originalPath, setOriginalPath] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
@@ -39,10 +41,8 @@ const DoctorPostGrid = ({
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setIsLike = usePostQueryStore((state) => state.setIsLike);
   const setUserAvatar = usePostQueryStore((state) => state.setUserAvatar);
-  // const postQuery = usePostQueryStore((state) => state.postQuery);
   const setMemberID = usePostQueryStore((state) => state.setMemberID);
   const setTitle = usePostQueryStore((state) => state.setTitle);
-  // const [title, setTitle] = useState("");
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   // const flatData = [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
@@ -72,7 +72,8 @@ const DoctorPostGrid = ({
     memberId,
     isHighlight,
     isPrivate,
-    isLike
+    isLike,
+    highlightStatus
   ) => {
     setIsModelOpen(true);
     setPostID(ID);
@@ -83,6 +84,7 @@ const DoctorPostGrid = ({
     setIsHighlight(isHighlight);
     setIsPrivate(isPrivate);
     setIsLike(isLike);
+    setIsHighlight(highlightStatus);
   };
   if (error) {
     navigate("*");
@@ -100,26 +102,29 @@ const DoctorPostGrid = ({
             handleClickPost(
               post.id,
               post.avatar,
-              post.nickname,
+              post.nickname || post.username,
               post.title,
               post.memberId,
               post.isHighlight,
               post.isDisplay,
-              post.isLike
+              post.isLike,
+              post.highlightStatus
             );
-            navigate("/posts/" + post.id);
+            setOriginalPath(location.pathname);
+            const newPath = `${location.pathname}/${post.id}`;
+            navigate(newPath);
           }}
           key={post.id}
         >
           <CommunityPost
-            dummyHighlight={post.isHighlight}
+            dummyHighlight={post.highlightStatus}
             dummyPrivate={post.isDisplay}
             id={post.id}
             imageURL={post.coverImg || ""}
             text={post.title || ""}
             profileImage={post.avatar || ""}
-            authorName={post.nickname || ""}
-            likes={post.likedCount || 0}
+            authorName={post.nickname || post.username || ""}
+            likes={post.likedCount || post.like_count || 0}
             liked={post.isLike}
             status={post.status}
           />
@@ -160,7 +165,6 @@ const DoctorPostGrid = ({
       {hasData && download && (
         <div className="down-load-more-container">
           {!isMobile && (
-            // <img src={Arrow} alt="arrow" className="arrow-containter" />
             <FontAwesomeIcon icon={faAnglesDown} className="arrow-containter" />
           )}
           {isMobile && (
@@ -174,13 +178,13 @@ const DoctorPostGrid = ({
           </Link>
         </div>
       )}
-      {/* {!hasData && !isLoading && (
-        <span className="post-search-no-results">No results here.</span>
-      )} */}
       {IsModalOpen && (
         <PostDetail
           show={IsModalOpen}
-          onHide={() => setIsModelOpen(false)}
+          onHide={() => {
+            setIsModelOpen(false);
+            navigate(originalPath);
+          }}
           isMobile={isMobile}
         />
       )}

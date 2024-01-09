@@ -127,7 +127,23 @@ const App = () => {
                 }
               />
               <Route
+                path="doctorProfile/:postid"
+                element={
+                  <PrivateRoute>
+                    <DocotorOwnMain />
+                  </PrivateRoute>
+                }
+              />
+              <Route
                 path="userProfile"
+                element={
+                  <PrivateRoute>
+                    <UserProfilePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="userProfile/:postid"
                 element={
                   <PrivateRoute>
                     <UserProfilePage />

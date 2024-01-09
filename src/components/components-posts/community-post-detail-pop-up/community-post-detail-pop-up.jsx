@@ -212,6 +212,7 @@ const CommunityPostDetailPopUP = ({
       if (validateTokenAndPopup()) {
         apiMutation({ id: postQuery.postID });
       }
+
       onClose();
     }
   };
@@ -238,6 +239,7 @@ const CommunityPostDetailPopUP = ({
       if (validateTokenAndPopup()) {
         apiHighlightMutation({ id: postQuery.postID });
       }
+      refreshMyPost();
       onClose();
     }
   };
@@ -263,6 +265,7 @@ const CommunityPostDetailPopUP = ({
       setIsPopupLiked((prev) => !prev);
       if (validateTokenAndPopup()) {
         apiLikePopupMutate({ postId: postQuery.postID });
+        refreshMyPost();
       }
     }
   };
