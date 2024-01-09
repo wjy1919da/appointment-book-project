@@ -20,10 +20,10 @@ const DoctorAppointmentProfilePage = () => {
             Appointment Dashboard
           </span>
         </div>
-        <Button
+        {/* <Button
           buttonName='Save Changes'
           className='doctor-appointment-profile-save-changes-button'
-        />
+        /> */}
       </div>
       <div className='doctor-appointment-profile-inner-container'>
         <DoctorAppointmentProfileNav />

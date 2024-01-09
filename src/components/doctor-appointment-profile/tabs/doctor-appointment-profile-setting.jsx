@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 
 // components
-import MeterSlider from '../components/doctor-appointment-profile-meter-slider';
+// import MeterSlider from '../components/doctor-appointment-profile-meter-slider';
 
 // scss
 import './doctor-appointment-profile-setting.scss';
 import '../components/doctor-appointment-profile-calendar.scss';
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
 
 // images
 import VideoIcon from '../../../assets/doctor/video-call-icon.svg';
@@ -15,36 +15,37 @@ import VoiceIcon from '../../../assets/doctor/voice-icon.svg';
 import PhoneIcon from '../../../assets/doctor/phone-icon.svg';
 
 const DoctorAppointmentProfileSetting = () => {
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const [selectedValue, setSelectedValue] = useState('');
 
   const handleDropdownChange = (e) => {
     setSelectedValue(e.target.value);
   };
 
-  const handleChange = (newDate) => {
-    setDate(newDate);
-  };
+  // uncommented calender is removed on figma now
+  // const handleChange = (newDate) => {
+  //   setDate(newDate);
+  // };
 
-  const tileClassName = ({ date, view }) => {
-    const isToday =
-      date.getDate() === new Date().getDate() &&
-      date.getMonth() === new Date().getMonth() &&
-      date.getFullYear() === new Date().getFullYear();
+  // const tileClassName = ({ date, view }) => {
+  //   const isToday =
+  //     date.getDate() === new Date().getDate() &&
+  //     date.getMonth() === new Date().getMonth() &&
+  //     date.getFullYear() === new Date().getFullYear();
 
-    return isToday ? 'today-tile' : '';
-  };
+  //   return isToday ? 'today-tile' : '';
+  // };
 
-  const formatShortWeekday = (locale, date) => {
-    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-    return weekdays[date.getDay()];
-  };
+  // const formatShortWeekday = (locale, date) => {
+  //   const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  //   return weekdays[date.getDay()];
+  // };
 
   return (
     <div className='doctor-appointment-profile-setting-tab-container'>
       <div className='doctor-appointment-profile-setting-tab-inner-container-1'>
         {/* left container */}
-        <div className='doctor-appointment-profile-setting-tab-left-container'>
+        {/* <div className='doctor-appointment-profile-setting-tab-left-container'>
           <Calendar
             onChange={handleChange}
             value={date}
@@ -52,7 +53,7 @@ const DoctorAppointmentProfileSetting = () => {
             formatShortWeekday={formatShortWeekday}
             tileClassName={tileClassName}
           />
-        </div>
+        </div> */}
         {/* right container */}
         <div className='doctor-appointment-profile-setting-tab-right-container'>
           <p className='doctor-appointment-profile-setting-tab-title-1'>
@@ -153,9 +154,9 @@ const DoctorAppointmentProfileSetting = () => {
           value='$30'
           className='doctor-appointment-profile-setting-tab-video-consultation-input'
         />
-        <MeterSlider />
+        {/* <MeterSlider /> */}
         {/* voice consultation */}
-        <div className='doctor-appointment-profile-setting-tab-voice-consultation-container'>
+        {/* <div className='doctor-appointment-profile-setting-tab-voice-consultation-container'>
           <div className='doctor-appointment-profile-setting-tab-voice-consultation-title'>
             <img src={VoiceIcon} alt='Icon-Voice' />
             <span>Voice Consultation</span>
@@ -168,13 +169,13 @@ const DoctorAppointmentProfileSetting = () => {
           type='text'
           value='$30'
           className='doctor-appointment-profile-setting-tab-voice-consultation-input'
-        />
-        <MeterSlider />
+        /> */}
+        {/* <MeterSlider /> */}
         {/* phone consultation */}
         <div className='doctor-appointment-profile-setting-tab-phone-consultation-container'>
           <div className='doctor-appointment-profile-setting-tab-phone-consultation-title'>
             <img src={PhoneIcon} alt='Icon-Phone' />
-            <span>Phone Consultation</span>
+            <span>Audio Consultation</span>
           </div>
           <div className='doctor-appointment-profile-setting-tab-phone-consultation-status'>
             Open Video Consultation
