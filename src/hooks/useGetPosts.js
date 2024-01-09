@@ -56,10 +56,15 @@ export function useGetUserPostedPost() {
       // lastPage is an array of posts
       // allPages is an array of pages
       getNextPageParam: (lastPage, allPages) => {
-        // hasNextPage
-        //console.log("lastPage data",lastPage.pageInfo)
-        //return lastPage.pageInfo.totalPage > lastPage.pageInfo.currentPage ? allPages.length + 1 : undefined;
-        return undefined;
+        if (!lastPage.pageInfo) {
+          // console.log("lastPage.pageInfo is undefined");
+          return undefined;
+        }
+
+        const nextPage = lastPage.pageInfo.currentPage + 1;
+        const totalPage = lastPage.pageInfo.totalPage;
+
+        return nextPage <= totalPage ? nextPage : undefined;
       },
     }
   );
