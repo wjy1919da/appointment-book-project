@@ -1,3 +1,7 @@
+.user-appointment-description-main-container {
+    padding: 3rem 1.5rem;
+}
+
 .app-cancel-button
 {
     border-radius: 6.307px;
@@ -25,4 +29,8 @@
     margin-top: 100px;
     gap:50px;
     justify-content: center;
+}
+
+.app-invisible-button {
+    visibility: hidden;
 }
