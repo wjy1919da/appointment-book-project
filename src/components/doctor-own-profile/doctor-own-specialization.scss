@@ -1,0 +1,10 @@
+.doctor-own-specialization-container {
+  display: flex;
+}
+
+@media (max-width: 1133px) {
+  .doctor-own-specialization-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
