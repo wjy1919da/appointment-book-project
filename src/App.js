@@ -135,6 +135,14 @@ const App = () => {
                 }
               />
               <Route
+                path="doctor-profile-appointment"
+                element={
+                  <PrivateRoute>
+                    <DoctorAppointmentProfilePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
                 path="userProfile"
                 element={
                   <PrivateRoute>
@@ -183,6 +191,7 @@ const App = () => {
                 path="updateEmail/verification"
                 element={<UpdateVerification />}
               />
+
               <Route
                 path="doctorVerification"
                 element={<DoctorVerificationMainPage />}
