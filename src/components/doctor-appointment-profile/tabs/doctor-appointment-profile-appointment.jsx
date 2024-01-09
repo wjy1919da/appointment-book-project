@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState } from 'react';
+import Calendar from 'react-calendar';
 
 // components
 import Button from '../../components-posts/community-post-button/community-post-button';
@@ -7,13 +8,41 @@ import { appointmentData } from '../data/appointmentData';
 
 // scss
 import './doctor-appointment-profile-appointment.scss';
+import '../components/doctor-appointment-profile-calendar.scss';
+import 'react-calendar/dist/Calendar.css';
 
 const DoctorAppointmentProfileAppointmentTab = () => {
+  const [date, setDate] = useState(new Date());
+
+  const handleChange = (newDate) => {
+    setDate(newDate);
+  };
+
+  const tileClassName = ({ date, view }) => {
+    const isToday =
+      date.getDate() === new Date().getDate() &&
+      date.getMonth() === new Date().getMonth() &&
+      date.getFullYear() === new Date().getFullYear();
+
+    return isToday ? 'today-tile' : '';
+  };
+
+  const formatShortWeekday = (locale, date) => {
+    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    return weekdays[date.getDay()];
+  };
+
   return (
     <div className='doctor-appointment-profile-appointment-tab-container'>
       <div className='doctor-appointment-profile-appointment-tab-inner-container'>
         <div className='doctor-appointment-profile-appointment-tab-left-container'>
-          <div className='doctor-appointment-profile-calendar'></div>
+          <Calendar
+            onChange={handleChange}
+            value={date}
+            locale='en-GB'
+            formatShortWeekday={formatShortWeekday}
+            tileClassName={tileClassName}
+          />
           <div className='doctor-appointment-profile-appointment-tab-button-container'>
             <Button
               buttonName='Open all unavailable slots'

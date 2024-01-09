@@ -3,6 +3,9 @@ import '../components-home/home-instruments/home-instruments.styles.scss';
 import InstrumentImage from '../../assets/procedure/Chin-Implants.png';
 // import { Box, SimpleGrid, Image } from '@chakra-ui/react';
 
+// scss
+import './doctor-own-specialization.scss'
+
 const DocotorOwnSpecialization = () => {
   const instrumentsData = [
     {
@@ -82,10 +85,16 @@ const DocotorOwnSpecialization = () => {
       >
         Specialization
       </span>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className='doctor-own-specialization-container'>
         {instrumentsData.map((item, index) => (
           <div key={index}>
-            <figure style={{ textAlign: 'center' }}>
+            <figure
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
               <img
                 src={item.src}
                 alt='Image'
