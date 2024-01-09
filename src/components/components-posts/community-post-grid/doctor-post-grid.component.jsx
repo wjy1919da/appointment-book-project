@@ -11,7 +11,7 @@ import PostDetail from "../community-post-detail/community-post-detail.component
 import HomeSpinner from "../../home-spinner/home-spinner.component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityPostSkeleton from "../community-post/community-post-skeleton.component.jsx";
-import DoctorSearchLoadingBar from "../../doctor-search-loading-bar/doctor-search-loading-bar.component.jsx";
+// import DoctorSearchLoadingBar from "../../doctor-search-loading-bar/doctor-search-loading-bar.component.jsx";
 // import ErrorMsg from "../../error-msg/error-msg.component";
 
 // hook
@@ -27,16 +27,18 @@ import Arrow1 from "../../../assets/post/arrow1_grid.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 
-// import userInfoQueryStore from '../../../userStore.ts';
-// import Cookie from 'js-cookie';
-
-const DoctorPostGrid = ({ isAbout }) => {
+const DoctorPostGrid = ({
+  data,
+  fetchNextPage,
+  hasNextPage,
+  isLoading,
+  error,
+}) => {
+  // console.log("isLoading", isLoading);
+  const hasData = data?.pages?.some(
+    (page) => page.data && page.data.length > 0
+  );
   const navigate = useNavigate();
-
-  // hook
-  const { data, error, isLoading, fetchNextPage, hasNextPage } =
-    useApiRequestPostFilter();
-
   const [IsModalOpen, setIsModelOpen] = useState(false);
   const setPostID = usePostQueryStore((state) => state.setPostID);
   const setUserName = usePostQueryStore((state) => state.setUserName);
@@ -52,7 +54,7 @@ const DoctorPostGrid = ({ isAbout }) => {
   // const flatData = [];
   const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
-  const isMobileOrAbout = isMobile || isAbout;
+  const isMobileOrAbout = isMobile;
   // console.log("flatData", flatData);
 
   const { postid } = useParams();
@@ -95,11 +97,8 @@ const DoctorPostGrid = ({ isAbout }) => {
   useEffect(() => {
     setGutterWidth(isMobileOrAbout ? "0px" : "10px");
   }, [isMobile]);
-  // if (isLoading) return <HomeSpinner />;
-  const skeletons = [1, 2, 3, 4, 5, 6, 7];
-
-  // const isLoading = true;
-
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  console.log("skeletons", isLoading);
   const postCardList = isLoading
     ? skeletons.map((skeleton) => <CommunityPostSkeleton key={skeleton} />)
     : flatData.map((post) => (
@@ -135,30 +134,36 @@ const DoctorPostGrid = ({ isAbout }) => {
       ));
   return (
     <div className="doctor-post-grid-inner-container">
-      {isLoading && <DoctorSearchLoadingBar />}
-      <InfiniteScroll
-        dataLength={flatData.length}
-        // next={() => fetchNextPage}
-        // hasMore={!!hasNextPage}
-        scrollThreshold={0.8}
-      >
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{
-            default: 4,
-            2500: 6,
-            2047: 6,
-            1700: 6,
-            1024: 4,
-            767: 3,
-            430: 2,
-          }}
-          gutter={gutterwidth}
-        >
-          <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
-        </ResponsiveMasonry>
-      </InfiniteScroll>
-
-      {flatData.length && (
+      <div className="doctor-post-grid-container">
+        {hasData ? (
+          <InfiniteScroll
+            dataLength={flatData.length}
+            next={fetchNextPage ? () => fetchNextPage() : undefined}
+            hasMore={!!hasNextPage}
+            scrollThreshold={0.8}
+          >
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{
+                default: 4,
+                2500: 6,
+                2047: 6,
+                1700: 6,
+                1024: 4,
+                767: 3,
+                430: 2,
+              }}
+              gutter={gutterwidth}
+            >
+              <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
+            </ResponsiveMasonry>
+          </InfiniteScroll>
+        ) : (
+          !isLoading && (
+            <span className="post-search-no-results">No results here.</span>
+          )
+        )}
+      </div>
+      {hasData && (
         <div className="down-load-more-container">
           {!isMobile && (
             // <img src={Arrow} alt="arrow" className="arrow-containter" />
@@ -175,9 +180,9 @@ const DoctorPostGrid = ({ isAbout }) => {
           </Link>
         </div>
       )}
-      {!flatData.length && !isLoading && (
-        <span className="post-search-no-results">No results found.</span>
-      )}
+      {/* {!hasData && !isLoading && (
+        <span className="post-search-no-results">No results here.</span>
+      )} */}
       {IsModalOpen && (
         <PostDetail
           show={IsModalOpen}

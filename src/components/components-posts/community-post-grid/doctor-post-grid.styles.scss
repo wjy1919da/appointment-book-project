@@ -1,19 +1,20 @@
 .doctor-post-grid-inner-container {
   width: 100%;
+  // width: 95%;
   // padding: 40px 20px;
   align-items: center; /* 水平居中 */
   justify-content: center; /* 垂直居中 */
   // margin-bottom: 40px;
   min-height: 200px;
 }
-.doctor-post-grid-inner-container-V2 {
-  width: 100%;
-  padding: 40px 20px;
-  height: 800px;
-  align-items: center; /* 水平居中 */
-  justify-content: center; /* 垂直居中 */
-  margin-bottom: 40px;
-}
+// .doctor-post-grid-inner-container-V2 {
+//   width: 100%;
+//   padding: 40px 20px;
+//   height: 800px;
+//   align-items: center; /* 水平居中 */
+//   justify-content: center; /* 垂直居中 */
+//   margin-bottom: 40px;
+// }
 .my-masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -94,4 +95,7 @@
   justify-content: center;
   font-size: 2rem;
   padding: 2rem 0rem;
+}
+.doctor-post-grid-container {
+  min-height: 500px;
 }
