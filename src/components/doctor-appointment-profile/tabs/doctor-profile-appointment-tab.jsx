@@ -104,17 +104,17 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                   item.src.map((src, srcIndex) => (
                     <img
                       key={srcIndex}
-                      className="doctor-profile-appointment-contact-icon"
+                      className="doctor-profile-appointment-tab-contact-icon"
                       src={src}
                       alt={`Icon ${index + 1}`}
                     />
                   ))}
-                <span className="doctor-appointment-profile-appointment-tab-await">
+                <span className="doctor-profile-appointment-tab-await">
                   {item.await}
                 </span>
-                <div className="doctor-appointment-profile-appointment-tab-tag-container">
+                <div className="doctor-profile-appointment-tab-tag-container">
                   {item.tag1 && (
-                    <span className="doctor-appointment-profile-appointment-tab-tag-1">
+                    <span className="doctor-profile-appointment-tab-tag-1">
                       {item.tag1}
                     </span>
                   )}

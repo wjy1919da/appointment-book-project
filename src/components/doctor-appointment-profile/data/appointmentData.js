@@ -3,8 +3,8 @@ import { nanoid } from "nanoid";
 video-call: https://appointment-icons.s3.us-west-1.amazonaws.com/video-call-icon.svg
 voice: https://appointment-icons.s3.us-west-1.amazonaws.com/voice-icon.svg
 phone: https://appointment-icons.s3.us-west-1.amazonaws.com/phone-icon.svg
-
 */
+
 export const appointmentData = [
   {
     id: nanoid(),
