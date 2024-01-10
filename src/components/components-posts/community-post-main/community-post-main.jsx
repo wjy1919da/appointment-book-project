@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 // components
-import PostPageTitle from "../../community-post-main-title/community-post-main-title";
+// import PostPageTitle from "../../community-post-main-title/community-post-main-title";
 
 // scss
 import "./community-post-main.scss";
@@ -12,6 +12,7 @@ import PhotoGirl from "../../../assets/post/pic.png";
 import Photo from "../../../assets/post/decoration-post-1.png";
 import Heart from "../../../assets/post/heart_like.svg";
 import userInfoQueryStore from "../../../userStore";
+
 const PostPageMain = () => {
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
@@ -56,7 +57,7 @@ const PostPageMain = () => {
             <h1 className="post-main-contents">
               Join a community of beauty and empowerment
             </h1>
-            <h6>
+            <h6 className="community-post-main-sub-title">
               Charm Life lets you share your cosmetic experience with others and
               stay on-trend
             </h6>
@@ -65,7 +66,7 @@ const PostPageMain = () => {
                 className="post-main-link-button"
                 onClick={handleCreatePostClick}
               >
-                Creating a post{" "}
+                Creating a post
                 <img
                   src={ArrowRight}
                   alt="ArrowRight"

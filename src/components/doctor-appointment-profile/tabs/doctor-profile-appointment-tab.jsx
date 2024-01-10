@@ -10,10 +10,9 @@ import { slotsDescriptionData } from "../data/slotsDescriptionData";
 
 // scss
 import "./doctor-profile-appointment-tab.scss";
-//src/components/doctor-appointment-profile/tabs/doctor-profile-appointment-tab.scss
 import "../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss";
 import "react-calendar/dist/Calendar.css";
-//src/components/doctor-appointment-profile/doctor-appointment-components/doctor-profile-appointment-calendar.scss
+
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date());
 
