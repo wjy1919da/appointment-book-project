@@ -1,4 +1,6 @@
 import { nanoid } from 'nanoid';
+// import Video from '../../../assets/doctor/video-call-icon.svg';
+// import Voice from '../../../assets/doctor/voice-icon.svg';
 
 export const appointmentData = [
   {
@@ -14,8 +16,8 @@ export const appointmentData = [
     id: nanoid(),
     time: '10:30 AM - 11:00 AM',
     src: [
-      '../../../assets/doctor/video-call-icon.svg',
-      '../../../assets/doctor/voice-icon.svg',
+      require('../../../assets/doctor/video-call-icon.svg').default,
+      require('../../../assets/doctor/voice-icon.svg').default,
     ],
     await: 'Waiting for Booking',
     status: 'Close Slot',

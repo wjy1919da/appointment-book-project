@@ -36,7 +36,7 @@ import DoctorAppointmentPage3 from './components/doctor-appointment/doctor-appoi
 import DoctorAppointmentPage4 from './components/doctor-appointment/doctor-appointment-page-4';
 import BookedPage from './components/doctor-appointment/booked-page';
 // doctor profile appointment components
-import DoctorAppointmentProfilePage from './components/doctor-appointment-profile/doctor-appointment-profile';
+import DoctorAppointmentProfilePage from './components/doctor-appointment-profile/doctor-profile-appointment-main';
 
 import UserProfileSubArea from './components/user-profile-subArea/user-profile-subArea.jsx';
 import UserProfileEdit from './components/user-profile-edit/user-profile-edit.jsx';

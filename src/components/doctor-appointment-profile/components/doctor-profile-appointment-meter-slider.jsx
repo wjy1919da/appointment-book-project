@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // scss
-import './doctor-appointment-profile-meter-slider.scss';
+import './doctor-profile-appointment-meter-slider.scss';
 
 const MeterSlider = () => {
   const [sliderValue, setSliderValue] = useState(50);
