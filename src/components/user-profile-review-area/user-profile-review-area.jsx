@@ -1,27 +1,27 @@
-import React, { useState, useRef } from 'react';
-import Hashids from 'hashids';
+import React, { useState, useRef } from "react";
+import Hashids from "hashids";
 // import { Link } from 'react-router-dom';
 
 // components
-import DoctorSearchCard from '../doctor-search-card/doctor-search-card.component';
-import HomeSpinner from '../home-spinner/home-spinner.component';
-import CollapseButton from '../collapse-button/collapse-button.component';
+import DoctorSearchCard from "../doctor-search-card/doctor-search-card.component";
+import HomeSpinner from "../home-spinner/home-spinner.component";
+import CollapseButton from "../collapse-button/collapse-button.component";
 // import DoctorCard from '../doctor-card/doctor-card.component';
 // import StarRate from '../starRate/starRate';
 // import UserProfileReviewCard from '../user-profile-review-card/user-profile-review-card';
 
 // scss
-import './user-profile-review-area.style.scss';
+import "./user-profile-review-area.style.scss";
 // import '../starRate/starRate.styles.scss';
 
 // custom hooks
 import {
   useSearchMultiConditionsPopUp,
   useSearchMultiConditions,
-} from '../../hooks/useSearchDoctors';
+} from "../../hooks/useSearchDoctors";
 
 // images
-import RightArrow from '../../assets/post/arrow-right.svg';
+import RightArrow from "../../assets/post/arrow-right.svg";
 // import DoctorProfilePicture from '../../assets/post/doctor_profile_picture.svg';
 // import LocationPinIcon from '../../assets/post/location_pin.svg';
 // import SpecializationIcon from '../../assets/post/glasses.svg';
@@ -32,63 +32,63 @@ import RightArrow from '../../assets/post/arrow-right.svg';
 // import DoctorSearchPopup from '../components-doctor-search/doctor-search-popup/doctor-search-popup.component';
 //import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 //import CreatePostOfUser from '../create-post/create-post';
-import { InputGroup, SimpleGrid, Text } from '@chakra-ui/react';
+import { InputGroup, SimpleGrid, Text } from "@chakra-ui/react";
 
 const UserProfileReview = () => {
   const doctorsCard = [
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
     {
-      cityName: 'City, State',
-      name: 'Dr. Name Name',
-      field: 'Specialization in Field Field',
-      license: 'License or Verification',
-      locationIcon: '../../assets/post/location_pin.svg',
-      fieldIcon: '../../assets/post/glasses.svg',
-      licenseIcon: '../../assets/post/verified_badge_icon.svg',
+      cityName: "City, State",
+      name: "Dr. Name Name",
+      field: "Specialization in Field Field",
+      license: "License or Verification",
+      locationIcon: "../../assets/post/location_pin.svg",
+      fieldIcon: "../../assets/post/glasses.svg",
+      licenseIcon: "../../assets/post/verified_badge_icon.svg",
     },
   ];
 
@@ -100,8 +100,8 @@ const UserProfileReview = () => {
     setClicked(updatedClickedState);
   };
 
-  const hashids = new Hashids('Encode the Url');
-  const [activeTab, setActiveTab] = useState('like'); // By default, "like" is the active taba
+  const hashids = new Hashids("Encode the Url");
+  const [activeTab, setActiveTab] = useState("like"); // By default, "like" is the active taba
   // const mergeDoctorsByNickname = (pages) => {
   //     const mergedDoctors = {};
 
@@ -158,8 +158,8 @@ const UserProfileReview = () => {
   if (isLoading) return <HomeSpinner />;
 
   return (
-    <div className='user-profile-review-container'>
-      <div className='review-recommande-doctor'>
+    <div className="user-profile-review-container">
+      <div className="review-recommande-doctor">
         {/* <div
           className='scroll-indicator scroll-left'
           onClick={handleLeftScroll}
@@ -195,14 +195,14 @@ const UserProfileReview = () => {
           &gt;
         </div> */}
       </div>
-      <div className='recommend-doctor-highly-rated-container'>
-        <h3 className='recommend-doctor-highly-rated-title'>
+      <div className="recommend-doctor-highly-rated-container">
+        <h3 className="recommend-doctor-highly-rated-title">
           Highly Rated by Charlotte
         </h3>
-        <img src={RightArrow} alt='DownArrow' />
+        <img src={RightArrow} alt="DownArrow" />
       </div>
-      <div className='recommande-doctor-summary'>
-        <div className='recommend-doctor-box-wrapper'>
+      <div className="recommande-doctor-summary">
+        <div className="recommend-doctor-box-wrapper">
           {dataArray?.map((x, index) => (
             <DoctorSearchCard doctorObj={x} key={index} />
             //   <div
@@ -249,11 +249,11 @@ const UserProfileReview = () => {
           ))}
         </div>
 
-        <div className='section-container-user-profile'>
+        {/* <div className='section-container-user-profile'>
           <CollapseButton title = "Face"/>
           <CollapseButton title = "Breast"/>
           <CollapseButton title = "Body"/>
-        </div>
+        </div> */}
 
         {/* <div className='summary-title'>
           <span>How did User_Name think?</span>
