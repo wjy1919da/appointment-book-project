@@ -1,37 +1,10 @@
-// useEffect(() => {
-//   if (isDeleteSuccess || isEditSuccess) {
-//     resetFiles();
-//     reset({
-//       title: "",
-//       description: "",
-//     });
-//     setSelectedImage(null);
-//     toast({
-//       title: "Success!.",
-//       status: "success",
-//       duration: 1000,
-//       isClosable: true,
-//     });
-//     refreshMyPost();
-//     localStorage.getItem("accountType") === "2"
-//       ? navigate("/doctorProfile/#Posts")
-//       : navigate("/userProfile");
-//   }
-//   if (isEditError || isDeleteError) {
-//     toast({
-//       title: "Failed.",
-//       status: "error",
-//       duration: 9000,
-//       isClosable: true,
-//     });
-//   }
-// }, [isDeleteSuccess, isEditSuccess, isDeleteError, isEditError, toast]);
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import userInfoQueryStore from "../../../userStore";
 import usePostQueryStore from "../../../postStore";
 import { Toast, useToast } from "@chakra-ui/react";
+import ChakraModal from "../../chakra-modal/chakra-modal";
 
 import {
   useDisclosure,
@@ -465,7 +438,7 @@ const EditPostPage = () => {
         </div>
       </form>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay
           style={{
             display: "flex",
@@ -499,7 +472,15 @@ const EditPostPage = () => {
             </Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
+      <ChakraModal
+        title="Are you sure to delete this post?"
+        cancelButtonText="Back"
+        approveButtonText="Delete"
+        approveCallback={handleClickDelete}
+        isModalOpen={isOpen}
+        closeModalFunc={onClose}
+      />
     </div>
   );
 };
