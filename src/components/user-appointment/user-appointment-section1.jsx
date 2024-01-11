@@ -10,6 +10,8 @@ import AppDetailDescription from './appointment-detail-description';
 import AppEditDetail from './app-edit-detail';
 import AppointmentFinish from './app-finish-page';
 import UserAppointmentCard from './user-appointment-card';
+import AppointmentCancel from './app-cancel-page';
+import AppointmentCancelFinish from './app-cancel-finish';
 const UserAppoinmentSection1 = () => {
     const appInfo = AppInfoQueryStore(state => state.appointInfo);
     const togglePopup = AppInfoQueryStore(state=>state.togglePopup);
@@ -25,7 +27,7 @@ const UserAppoinmentSection1 = () => {
         togglePopup(true,'appointmentDetail')
       };
     const handleCloseCardClick = () => {
-        setSelectedAppointmentObj();
+        setSelectedAppointmentObj({});
         setIsCardClicked(false);
     }
     useEffect(() => {
@@ -45,7 +47,8 @@ const UserAppoinmentSection1 = () => {
                     </div>
                     {appInfo.popupState === 'appointmentDetail' &&
                         <div className='appointment-detail-section'>
-                            <AppointmentDetail appointmentObj={selectedAppointmentObj}/>
+                            {/* <AppointmentDetail appointmentObj={selectedAppointmentObj} type={1}/> */}
+                            <AppointmentDetail appointmentObj={selectedAppointmentObj} />
                         </div>
                     }   
                     {appInfo.popupState === 'appointmentDescription' &&
@@ -57,7 +60,17 @@ const UserAppoinmentSection1 = () => {
                         <div className='appointment-detail-section'>
                             <AppEditDetail appointmentObj={selectedAppointmentObj} />
                         </div>
-                    } 
+                    }
+                    {appInfo.popupState === 'cancelAppointment' &&
+                        <div className='appointment-detail-section'>
+                            <AppointmentCancel appointmentObj={selectedAppointmentObj} />
+                        </div>
+                    }
+                    {appInfo.popupState === 'cancelAppointmentFinish' &&
+                        <div className='appointment-detail-section'>
+                            <AppointmentCancelFinish appointmentObj={selectedAppointmentObj} />
+                        </div>
+                    }
                     {appInfo.popupState === 'finish' &&
                         <div className='appointment-detail-section'>
                             <AppointmentFinish appointmentObj={selectedAppointmentObj}/>
@@ -82,7 +95,7 @@ const UserAppoinmentSection1 = () => {
                     <div className='user-appointment-regular-list'>
                         <UserAppointmentCard date = 'Thursday, 4 June' time = '10:00 - 10:30 AM EST' name = 'Dr.Name Name' type={1} isIndexOdd={true} onClick={handleCardClick} />
                         <UserAppointmentCard date = 'Thursday, 4 June' time = '10:00 - 10:30 AM EST' name = 'Dr.Name Name' type={2} isIndexOdd={false} onClick={handleCardClick} />
-                        <UserAppointmentCard date = 'Thursday, 4 June' time = '10:00 - 10:30 AM EST' name = 'Dr.Name Name' type={2} isIndexOdd={true} onClick={handleCardClick} />
+                        <UserAppointmentCard date = 'Thursday, 4 June' time = '10:00 - 10:30 AM EST' name = 'Dr.Name Name' type={2} isIndexOdd={true} appointmentPending={true} onClick={handleCardClick} />
                     </div>
                     <div className='user-appointment-history-subdivider'>
                         <div className='user-appointment-history-title-container'>
