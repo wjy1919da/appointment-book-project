@@ -1,0 +1,147 @@
+.doctor-appointment-booked-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(
+    --background-gradient-color,
+    linear-gradient(180deg, #fff3ec 0%, #fff 100%)
+  );
+  padding: 230px 0;
+  width: 100%;
+
+  .doctor-appointment-booked-back-button-container {
+    position: absolute;
+    top: 150px;
+    left: 150px;
+    display: flex;
+    align-items: center;
+    // gap: 20px;
+
+    .doctor-appointment-booked-label-back-button {
+      color: #352c29;
+      text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+      font-family: Open Sans;
+      font-size: 34px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .doctor-appointment-booked-inner-container {
+    background: #fbfcff;
+    border: 1px solid #000;
+    border-radius: 18px;
+    padding: 0 100px;
+    width: 1200px;
+    height: 640px;
+    z-index: 20;
+
+    .doctor-appointment-booked-description-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 100px;
+
+      .doctor-appointment-booked-description {
+        color: #000;
+        font-family: Open Sans;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        height: 61px;
+      }
+    }
+  }
+
+  .doctor-appointment-booked-doctor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+
+    .doctor-appointment-booked-name {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .doctor-appointment-booked-date,
+    .doctor-appointment-booked-time {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+
+  .doctor-appointment-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    // padding: 0 90px;
+
+    .doctor-appointment-next-button {
+      border-radius: 8px;
+      padding: 15px 25px;
+    }
+
+    .doctor-appointment-next-button {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .doctor-appointment-home-button {
+      color: #f48c8a;
+      background: #fff;
+      border: 1px solid #f48c8a;
+      margin-right: 15px;
+      padding: 15px 25px;
+    }
+
+    // input radio
+    .radio-label {
+      display: block;
+      margin: 0 -300px;
+    }
+
+    input[type='radio'] {
+      display: none;
+    }
+
+    .radio-text:before {
+      content: '';
+      display: inline-block;
+      margin-right: 6px;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 50%;
+      padding: 2px;
+      background-clip: content-box;
+      width: 20px;
+      height: 20px;
+    }
+
+    input[type='radio']:not(:checked) + .radio-text:before {
+      border: 2px solid #f39389;
+    }
+
+    input[type='radio']:checked + .radio-text:before {
+      border: 2px solid #f39389;
+      background-color: #f39389;
+    }
+  }
+}
+
+@media (max-width: 1133px) {
+}
+
+@media (max-width: 744px) {
+}

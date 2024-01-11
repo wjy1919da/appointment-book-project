@@ -1,0 +1,165 @@
+.doctor-appointment-profile-setting-tab-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 150px;
+
+  .doctor-appointment-profile-setting-tab-inner-container-1,
+  .doctor-appointment-profile-setting-tab-inner-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid #675d59;
+    border-radius: 12px;
+    width: 1280px;
+    height: 600px;
+
+    .doctor-appointment-profile-setting-tab-calendar {
+      background: lightgrey;
+      border-radius: 10px;
+      width: 336px;
+      height: 267px;
+    }
+
+    .doctor-appointment-profile-setting-tab-right-container {
+      margin-top: -50px;
+
+      .doctor-appointment-profile-setting-tab-title-1 {
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .doctor-appointment-profile-setting-tab-dropdown-container-1 {
+        display: flex;
+
+        .doctor-appointment-profile-setting-tab-select-day-dropdown-container,
+        .doctor-appointment-profile-setting-tab-select-ending-day-dropdown-container {
+          select {
+            border: 1px solid #675d59;
+            border-radius: 6px;
+            background: #fbfcff;
+            margin-right: 15px;
+            padding: 10px;
+            width: 330px;
+          }
+        }
+      }
+
+      .doctor-appointment-profile-setting-tab-dropdown-container-2 {
+        display: flex;
+        padding: 20px 0;
+
+        .doctor-appointment-profile-setting-tab-select-time-dropdown-container,
+        .doctor-appointment-profile-setting-tab-select-ending-time-dropdown-container {
+          select {
+            border: 1px solid #675d59;
+            border-radius: 6px;
+            background: #fbfcff;
+            margin-right: 15px;
+            padding: 10px;
+            width: 256px;
+          }
+        }
+
+        .doctor-appointment-profile-setting-tab-select-time-zone-dropdown-container {
+          select {
+            border: 1px solid #675d59;
+            border-radius: 6px;
+            background: #fbfcff;
+            margin-right: 15px;
+            padding: 10px;
+            width: 130px;
+          }
+        }
+      }
+
+      .doctor-appointment-profile-setting-tab-dropdown-container-3 {
+        .doctor-appointment-profile-setting-tab-select-appointment-time-period-dropdown-container {
+          select {
+            border: 1px solid #675d59;
+            border-radius: 6px;
+            background: #fbfcff;
+            padding: 10px;
+            width: 673px;
+          }
+        }
+      }
+    }
+  }
+  .doctor-appointment-profile-setting-tab-inner-container-2 {
+    display: flex;
+    flex-direction: column;
+
+    // edit consultation title
+    .doctor-appointment-profile-setting-tab-title-2 {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      padding-left: 300px;
+      width: 100%;
+    }
+
+    .doctor-appointment-profile-setting-tab-video-consultation-container,
+    .doctor-appointment-profile-setting-tab-voice-consultation-container,
+    .doctor-appointment-profile-setting-tab-phone-consultation-container {
+      display: flex;
+      align-items: center;
+      gap: 200px;
+
+      .doctor-appointment-profile-setting-tab-video-consultation-title,
+      .doctor-appointment-profile-setting-tab-voice-consultation-title,
+      .doctor-appointment-profile-setting-tab-phone-consultation-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #352c29;
+        font-family: Open Sans;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .doctor-appointment-profile-setting-tab-video-consultation-status,
+      .doctor-appointment-profile-setting-tab-voice-consultation-status {
+        color: #675d59;
+        border: 2px solid #675d59;
+        border-radius: 8px;
+        padding: 8px 16px;
+      }
+
+      .doctor-appointment-profile-setting-tab-phone-consultation-status {
+        color: #fff;
+        border: 2px solid #675d59;
+        background: #675d59;
+        border-radius: 8px;
+        padding: 8px 16px;
+      }
+    }
+  }
+
+  .doctor-appointment-profile-setting-tab-video-consultation-input,
+  .doctor-appointment-profile-setting-tab-voice-consultation-input,
+  .doctor-appointment-profile-setting-tab-phone-consultation-input {
+    border: 1px solid #675d59;
+    border-radius: 8px;
+    outline: none;
+    padding: 10px;
+    width: 667px;
+  }
+}
+
+@media (max-width: 1133px) {
+}
+
+@media (max-width: 744px) {
+}

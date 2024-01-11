@@ -8,11 +8,11 @@ import "./doctor-own-profile-about.scss";
 const DocotorOwnAbout = () => {
   return (
     <div className="doctor-own-profile-about-container">
-      {/* <DocotorOwnVoucher/> */}
+      <DocotorOwnVoucher/>
       <DocotorOwnSpecialization />
 
       <DocotorOwnHightLight />
-      {/* <DocotorOwnReview/> */}
+      <DocotorOwnReview/>
     </div>
   );
 };

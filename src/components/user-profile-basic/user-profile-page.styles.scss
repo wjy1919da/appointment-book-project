@@ -26,6 +26,7 @@
   .user-profile-image {
     width: 250px;
     height: auto;
+    border-radius: 100%;
   }
 
   // user name
@@ -154,77 +155,76 @@
 /* * * * * * * * *
      iphones 
 * * * * * * * * */
-@media (max-width: 530px) {
-  .user-profile-basic-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 80px;
-    padding-left: 30px;
-    padding-right: 70px;
-  }
+// @media (max-width: 530px) {
+//   .user-profile-basic-container {
+//     display: flex;
+//     flex-direction: column;
+//     margin-top: 80px;
+//     padding-left: 30px;
+//     padding-right: 70px;
+//   }
 
-  // user profile image, user name, edit button
-  .image-and-name-and-button-container {
-    display: flex;
-    justify-content: space-between;
-  }
+//   // user profile image, user name, edit button
+//   .image-and-name-and-button-container {
+//     display: flex;
+//     justify-content: space-between;
+//   }
 
-    // user name, edit button
-    .user-profile-basic-name-and-editButton {
-      margin-left: -200px !important;
-      width: 0 !important;
-    }
+//     // user name, edit button
+//     .user-profile-basic-name-and-editButton {
+//       margin-left: -200px !important;
+//       width: 0 !important;
+//     }
 
+//   // profile picture
+//   .user-profile-image {
+//     max-width: 120px;
+//     height: auto;
+//   }
 
-  // profile picture
-  .user-profile-image {
-    max-width: 120px;
-    height: auto;
-  }
+//   // user name
+//   .user-profile-basic-user-name {
+//     font-size: 24px !important;
+//   }
 
-  // user name
-  .user-profile-basic-user-name {
-    font-size: 24px !important;
-  }
+//   // @ user name
+//   .user-profile-basic-create-name {
+//     font-size: 18.734px !important;
+//   }
 
-  // @ user name
-  .user-profile-basic-create-name {
-    font-size: 18.734px !important;
-  }
+//   // user profile image
+//   .user-profile-image {
+//     width: 120px;
+//     height: 120px;
+//   }
 
-  // user profile image
-  .user-profile-image {
-    width: 120px;
-    height: 120px;
-  }
+//   // description, followers
+//   .description-and-followers-container {
+//     margin-top: 30px;
+//     margin-left: -340px !important;
+//     padding: 0 15px;
+//   }
 
-  // description, followers
-  .description-and-followers-container {
-    margin-top: 30px;
-    margin-left: -340px !important;
-    padding: 0 15px;
-  }
+//   // description
+//   .user-profile-basic-info-text {
+//     margin-top: -50px;
+//     margin-bottom: 20px;
+//   }
 
-  // description
-  .user-profile-basic-info-text {
-    margin-top: -50px;
-    margin-bottom: 20px;
-  }
+//   // followers
+//   .user-profile-basic-info-following-section {
+//     display: flex;
+//     gap: 20px;
+//   }
 
-  // followers
-  .user-profile-basic-info-following-section {
-    display: flex;
-    gap: 20px;
-  }
+//   // follower numbers
+//   .user-profile-black-text {
+//     color: #352c29;
+//     margin-right: 4px;
+//   }
 
-  // follower numbers
-  .user-profile-black-text {
-    color: #352c29;
-    margin-right: 4px;
-  }
-
-  // posts, follower, following texts
-  .user-profile-gray-text {
-    color: #675d59;
-  }
-}
+//   // posts, follower, following texts
+//   .user-profile-gray-text {
+//     color: #675d59;
+//   }
+// }

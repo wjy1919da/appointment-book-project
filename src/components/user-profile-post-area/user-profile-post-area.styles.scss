@@ -1,93 +1,93 @@
-.user-profile-post-area-container {
-  margin: 0 110px;
-}
+// .user-profile-post-area-container {
+//   margin: 0 110px;
+// }
 
-.user-profile-post-area-container-post {
-  position: absolute;
-  top: 100px;
-  left: 200px;
-  width: 80%;
-}
+// .user-profile-post-area-container-post {
+//   position: absolute;
+//   top: 100px;
+//   left: 200px;
+//   width: 80%;
+// }
 
-.choose-picture-section-image-post {
-  width: 240px;
-  height: 240px; // Height of your CommunityPost items
-  background-color: white; // Assuming posts have a light background color
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Adding a shadow for the box
-  border-radius: 8px; // If your posts have rounded corners, make sure to match that
-  cursor: pointer; // To indicate it's clickable
-}
+// .choose-picture-section-image-post {
+//   width: 240px;
+//   height: 240px; // Height of your CommunityPost items
+//   background-color: white; // Assuming posts have a light background color
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Adding a shadow for the box
+//   border-radius: 8px; // If your posts have rounded corners, make sure to match that
+//   cursor: pointer; // To indicate it's clickable
+// }
 
-.choose-picture-section-image-post img {
-  width: 50%; // Or whatever size you want for the create-post icon within the box
-  height: auto;
-}
-.choose-picture-section-post {
-  width: 50%;
-}
+// .choose-picture-section-image-post img {
+//   width: 50%; // Or whatever size you want for the create-post icon within the box
+//   height: auto;
+// }
+// .choose-picture-section-post {
+//   width: 50%;
+// }
 
-// archive posts button
-.archive-posts-button-container {
-  position: relative;
-  z-index: 50;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../../assets/post/archive_filter.png'),
-    url('../../assets/post/archive_girl.png');
-  background-size: cover;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  width: 240px;
-  height: 240px;
+// // archive posts button
+// .archive-posts-button-container {
+//   position: relative;
+//   z-index: 50;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-image: url('../../assets/post/archive_filter.png'),
+//     url('../../assets/post/archive_girl.png');
+//   background-size: cover;
+//   border-radius: 8px;
+//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+//   cursor: pointer;
+//   width: 240px;
+//   height: 240px;
 
-  .archive-title {
-    z-index: 100;
-    color: #fbfcff;
-    font-family: Open Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-}
+//   .archive-title {
+//     z-index: 100;
+//     color: #fbfcff;
+//     font-family: Open Sans;
+//     font-size: 24px;
+//     font-style: normal;
+//     font-weight: 600;
+//     line-height: normal;
+//   }
+// }
 
-@media (max-width: 1133px) {
-    .choose-picture-section-image-post {
-    width: 200px;
-    height: 200px;
-  }
+// @media (max-width: 1133px) {
+//     .choose-picture-section-image-post {
+//     width: 200px;
+//     height: 200px;
+//   }
 
-  .archive-posts-button-container {
-    width: 200px;
-    height: 200px;
+//   .archive-posts-button-container {
+//     width: 200px;
+//     height: 200px;
 
-    // .archive-title {
-    //   font-size: 12px !important;
-    // }
-  }
+//     // .archive-title {
+//     //   font-size: 12px !important;
+//     // }
+//   }
 
-}
+// }
 
-@media (max-width: 744px) {
-}
+// @media (max-width: 744px) {
+// }
 
-@media (max-width: 530px) {
-  .choose-picture-section-image-post {
-    width: 120px;
-    height: 120px;
-  }
+// @media (max-width: 530px) {
+//   .choose-picture-section-image-post {
+//     width: 120px;
+//     height: 120px;
+//   }
 
-  .archive-posts-button-container {
-    width: 120px;
-    height: 120px;
+//   .archive-posts-button-container {
+//     width: 120px;
+//     height: 120px;
 
-    .archive-title {
-      font-size: 12px !important;
-    }
-  }
-}
+//     .archive-title {
+//       font-size: 12px !important;
+//     }
+//   }
+// }

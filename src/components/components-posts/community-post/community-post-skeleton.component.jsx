@@ -10,10 +10,13 @@ import "./community-post.styles.scss";
 // import Comm
 const CommunityPostSkeleton = () => {
   return (
-    <div className="community-post-container">
-      {/* <div className="post-Image"> */}
-      <Skeleton height="186px" width="100%" />
-      {/* </div> */}
+    <div className="community-post-container" style={{ height: "280px" }}>
+      <Skeleton
+        height="200px"
+        width="100%"
+        borderTopLeftRadius="8px"
+        borderTopRightRadius="8px"
+      />
 
       <div className="post-information">
         {/* <span className="post-text">{text}</span> */}

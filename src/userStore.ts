@@ -36,6 +36,7 @@ interface userInfo {
   description?: string;
   avatar?: string;
   verificationStatus?: number;
+  trigger?: number;
   // Used to control the register popup page and open/close
   popupState:
     | "closed"
@@ -73,7 +74,9 @@ interface userInfoQuery {
   setFollowingCount: (followingCount: number) => void;
   setDescription: (description: string) => void;
   setAvatar: (avatar: string) => void;
+
   setVerificationStatus: (verificationStatus: number) => void;
+  refreshProfile: (trigger: number) => void;
   togglePopup: (
     open: boolean,
     initialState?:
@@ -125,6 +128,7 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     avatar: "",
     verificationStatus: 0,
     popupState: "closed",
+    trigger: 0,
   },
 
   setEmail: (email: string) => {
@@ -191,6 +195,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
   setAvatar: (avatar: string) => {
     set((store) => ({
       userInfo: { ...store.userInfo, avatar },
+    }));
+  },
+  refreshProfile(trigger) {
+    set((store) => ({
+      userInfo: { ...store.userInfo, trigger },
     }));
   },
   setVerificationStatus: (verificationStatus: number) => {

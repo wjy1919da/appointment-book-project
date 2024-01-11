@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import DoctorOwnProfileEditButton from "./doctor-own-profile-edit-button";
 
 // stores
-import doctorInfoQueryStore from "../../doctorStore";
 import userInfoQueryStore from "../../userStore";
+import doctorInfoQueryStore from "../../doctorStore";
 
 // scss
 import "./doctor-own-profile-Basic.styles.scss";
@@ -36,7 +36,7 @@ const DocotorOwnBasic = () => {
 
   const handleFirstButtonClick = () => {
     setShowManageButton(true);
-    navigate("/doctor-appointment");
+    navigate("/doctor-profile-appointment");
   };
 
   const onClick = () => {
@@ -48,7 +48,7 @@ const DocotorOwnBasic = () => {
 
   // screen size
   const isIpadScreen = useMediaQuery({
-    query: "(max-width: 744px)",
+    query: "(max-width: 1133px)",
   });
 
   const handleAvatarError = (e) => {
@@ -78,7 +78,9 @@ const DocotorOwnBasic = () => {
               className="doctor-profile-verification-button"
               onClick={handleVerificationClick}
             >
-              {/* <img src={Verification} alt="Icon-Verification" /> */}
+              {/* <img src={Verification} alt='Icon-Verification' /> */}
+
+              {/* this part is uncommented due to design change */}
               {userInfo.verificationStatus === 0
                 ? "Verification"
                 : userInfo.verificationStatus === 1
@@ -93,17 +95,20 @@ const DocotorOwnBasic = () => {
             {isIpadScreen ? (
               ""
             ) : (
-              <DoctorOwnProfileEditButton
-                onClick={onClick}
-                title="Edit profile"
-              />
+              <>
+                <DoctorOwnProfileEditButton
+                  onClick={onClick}
+                  title="Edit profile"
+                />
+
+                <button
+                  onClick={handleFirstButtonClick}
+                  className="top-edit-button-2"
+                >
+                  <img src={calendar} className="doctor-calendar-img"></img>
+                </button>
+              </>
             )}
-            <button
-              onClick={handleFirstButtonClick}
-              className="top-edit-button-2"
-            >
-              <img src={calendar} className="doctor-calendar-img"></img>
-            </button>
           </div>
         </div>
         <div className="doctor-own-basic-top-text">
@@ -167,7 +172,18 @@ const DocotorOwnBasic = () => {
           </div>
         </div>
         {isIpadScreen && (
-          <DoctorOwnProfileEditButton onClick={onClick} title="Edit profile" />
+          <div style={{ display: "flex", gap: "15px" }}>
+            <DoctorOwnProfileEditButton
+              onClick={onClick}
+              title="Edit profile"
+            />
+            <button
+              onClick={handleFirstButtonClick}
+              className="top-edit-button-2"
+            >
+              <img src={calendar} className="doctor-calendar-img"></img>
+            </button>
+          </div>
         )}
       </div>
     </div>
