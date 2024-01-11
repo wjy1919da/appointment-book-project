@@ -16,15 +16,13 @@ const PostPageMain = () => {
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
       togglePopup(true, "accountType");
     } else {
-      navigate("/posts/create");
+      navigate("/posts/create-post");
     }
   };
-
   return (
     <div>
       <div className="post-main-container-wrapper">

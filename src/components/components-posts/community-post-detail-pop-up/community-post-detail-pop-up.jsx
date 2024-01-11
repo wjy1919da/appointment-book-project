@@ -31,11 +31,11 @@ import CommentCard from "../../comment-card/comment-card";
 // hooks
 import { useAddComment } from "../../../hooks/useComment";
 import { useRplyComment } from "../../../hooks/useComment";
-import { useGetLikesPost } from "../../../hooks/useGetPosts.js";
-import { useHighlightPost } from "../../../hooks/useGetPosts.js";
-import { useRemoveHighlightPost } from "../../../hooks/useGetPosts.js";
-import { useApiRequestSetPostDisplay } from "../../../hooks/useApiRequestPost"; // private
-import { useApiRequestSetPostPublic } from "../../../hooks/useApiRequestPost"; // remove private
+import { useGetLikesPost } from "../../../hooks/useInteractPosts.js";
+import { useHighlightPost } from "../../../hooks/useInteractPosts.js";
+import { useRemoveHighlightPost } from "../../../hooks/useInteractPosts.js";
+import { useApiRequestSetPostDisplay } from "../../../hooks/useInteractPosts.js"; // private
+import { useApiRequestSetPostPublic } from "../../../hooks/useInteractPosts.js"; // remove private
 
 // scss
 import "./community-post-detail-pop-up.styles.scss";
@@ -132,59 +132,23 @@ const CommunityPostDetailPopUP = ({
 
   // highlight api import
   const { mutate: apiMutateHightlight, isSuccess: highlightSuccess } =
-    useHighlightPost({
-      onError: (error) => {
-        toast({
-          title: "Failed.",
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-      },
-    });
+    useHighlightPost();
 
   // remove highlight api import
   const {
     mutate: apiMutateRemoveHighlight,
     isSuccess: removeHighlightSuccess,
-  } = useRemoveHighlightPost({
-    onError: (error) => {
-      toast({
-        title: "Failed to remove highlight.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  } = useRemoveHighlightPost();
 
   // private api import
   const { mutate: apiMutateSetPostDisplay, isSuccess: privatePostSuceess } =
-    useApiRequestSetPostDisplay({
-      onError: (error) => {
-        toast({
-          title: "Failed.",
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-      },
-    });
+    useApiRequestSetPostDisplay();
 
   //  remove private api import
   const {
     mutate: apiMutateSetPostPublic,
     isSuccess: removePrivatePostSuccess,
-  } = useApiRequestSetPostPublic({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  } = useApiRequestSetPostPublic();
   // private click
   const handlePrivateClick = () => {
     if (validateTokenAndPopup()) {
@@ -212,7 +176,6 @@ const CommunityPostDetailPopUP = ({
       if (validateTokenAndPopup()) {
         apiMutation({ id: postQuery.postID });
       }
-
       onClose();
     }
   };
@@ -239,22 +202,13 @@ const CommunityPostDetailPopUP = ({
       if (validateTokenAndPopup()) {
         apiHighlightMutation({ id: postQuery.postID });
       }
-      refreshMyPost();
+      // refreshMyPost();
       onClose();
     }
   };
 
   // likes hook
-  const { mutate: apiLikePopupMutate } = useGetLikesPost({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
+  const { mutate: apiLikePopupMutate } = useGetLikesPost();
   // like buttton
   const toggleGetLikes = () => {
     if (validateTokenAndPopup()) {
@@ -265,7 +219,7 @@ const CommunityPostDetailPopUP = ({
       setIsPopupLiked((prev) => !prev);
       if (validateTokenAndPopup()) {
         apiLikePopupMutate({ postId: postQuery.postID });
-        refreshMyPost();
+        // refreshMyPost();
       }
     }
   };
@@ -273,25 +227,7 @@ const CommunityPostDetailPopUP = ({
     mutate,
     isSuccess: addCommentSucces,
     data: commentData,
-  } = useAddComment({
-    onError: (error) => {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-    onSuccess: (commentData) => {
-      toast({
-        title: "Send Success.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
-      refresh();
-    },
-  });
+  } = useAddComment();
 
   const {
     register,
@@ -324,28 +260,6 @@ const CommunityPostDetailPopUP = ({
       }
     }
   };
-
-  useEffect(() => {
-    if (addCommentSucces || addRplySuccess) {
-      refresh();
-      reset();
-    }
-  }, [addCommentSucces, addRplySuccess]);
-  useEffect(() => {
-    if (
-      highlightSuccess ||
-      removeHighlightSuccess ||
-      privatePostSuceess ||
-      removePrivatePostSuccess
-    ) {
-      refreshMyPost();
-    }
-  }, [
-    highlightSuccess,
-    removeHighlightSuccess,
-    privatePostSuceess,
-    removePrivatePostSuccess,
-  ]);
 
   const validateTokenAndPopup = () => {
     if (!userInfo.token) {
@@ -397,9 +311,8 @@ const CommunityPostDetailPopUP = ({
   const handleGoToEdit = () => {
     setDescription(brief);
     setPictures(picture);
-    navigate(`/edit-post/${postQuery.postID}`);
+    navigate("/posts/edit-post");
   };
-
   return (
     <div className="post-detail-popUp-container" ref={containerRef}>
       {/* Moblie */}

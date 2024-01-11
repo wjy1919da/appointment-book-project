@@ -53,17 +53,6 @@ const DoctorPostGrid = ({
   const { postid } = useParams();
   const toast = useToast();
 
-  // useEffect(() => {
-  //   if (hasNextPage === undefined) {
-  //     toast({
-  //       title: "No more posts",
-  //       status: "info",
-  //       duration: 2000,
-  //       isClosable: true,
-  //     });
-  //   }
-  // }, [hasNextPage, toast]);
-
   const handleClickPost = (
     ID,
     avatar,
@@ -85,6 +74,14 @@ const DoctorPostGrid = ({
     setIsPrivate(isPrivate);
     setIsLike(isLike);
     setIsHighlight(highlightStatus);
+    setOriginalPath(location.pathname);
+
+    const normalizedPathname = location.pathname.endsWith("/")
+      ? location.pathname.slice(0, -1)
+      : location.pathname;
+
+    const newPath = `${normalizedPathname}/${ID}`;
+    navigate(newPath);
   };
   if (error) {
     navigate("*");
@@ -110,9 +107,6 @@ const DoctorPostGrid = ({
               post.isLike,
               post.highlightStatus
             );
-            setOriginalPath(location.pathname);
-            const newPath = `${location.pathname}/${post.id}`;
-            navigate(newPath);
           }}
           key={post.id}
         >

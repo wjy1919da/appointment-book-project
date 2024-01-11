@@ -28,7 +28,7 @@ import ContactUs from "./routes/contact-us/contact-us.component.jsx";
 import { useMediaQuery } from "react-responsive";
 import CreatePostOfUser from "./components/create-post/create-post.jsx";
 import UserProfilePage from "./components/user-profile-page/user-profile-page";
-import CreatePostPage from "./components/components-posts/community-post-create-page/community-post-create-page";
+// import CreatePostPage from "./components/components-posts/community-post-create-page/community-post-create-page";
 // doctor appointment components
 import DoctorAppointmentPage1 from "./components/doctor-appointment/doctor-appointment-page-1";
 import DoctorAppointmentPage2 from "./components/doctor-appointment/doctor-appointment-page-2";
@@ -60,14 +60,10 @@ import DoctorVerificationMainPage from "./components/doctor-verification-page/do
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
-  // const userInfo = userInfoQueryStore((state) => state.userInfo);
-  /* Load token from cookie*/
-  //console.log('userInfo init', userInfo);
+
   const token = userInfoQueryStore((state) => state.userInfo.token);
   const setToken = userInfoQueryStore((state) => state.setToken);
   const setAccountType = userInfoQueryStore((state) => state.setAccountType);
-  // const { data, isLoading, isError, error } = useGetUserInfo();
-  const setUsername = userInfoQueryStore((state) => state.setUsername);
   useEffect(() => {
     const cookieToken = localStorage.getItem("token");
     if (cookieToken && cookieToken !== token) {
@@ -106,6 +102,10 @@ const App = () => {
               <Route path="sign-in" element={<Authentication />} />
               <Route path="posts" element={<DoctorPost />} />
               <Route
+                path="doctor/:encodedMemberId"
+                element={<IndividualDoctor />}
+              />
+              <Route
                 path="doctorProfileEdit"
                 element={
                   <PrivateRoute>
@@ -114,10 +114,7 @@ const App = () => {
                 }
               />
               <Route path="posts/:postid" element={<DoctorPost />} />
-              <Route
-                path="doctor/:encodedMemberId"
-                element={<IndividualDoctor />}
-              />
+
               <Route
                 path="doctorProfile"
                 element={
@@ -169,8 +166,24 @@ const App = () => {
 
               <Route path="download" element={<Download />} />
               {/* <Route path="create-post" element={<CreatePostOfUser />} /> */}
-              <Route path="/posts/create" element={<CreatePostPage />} />
-              <Route path="/edit-post/:postid" element={<EditPostPage />} />
+              {/* <Route path="/posts/create" element={<CreatePostPage />} /> */}
+
+              <Route
+                path="posts/edit-post"
+                element={
+                  <PrivateRoute>
+                    <EditPostPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/posts/create-post"
+                element={
+                  <PrivateRoute>
+                    <EditPostPage />
+                  </PrivateRoute>
+                }
+              />
               {/* <Route path="/edit-post" element={<EditPostPage />} /> */}
               <Route path="health-check" element={<HealthCheck />} />
               <Route path="userProfile" element={<UserProfilePage />} />

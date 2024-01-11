@@ -1,5 +1,5 @@
 import React from "react";
-import { usePostDetail } from "../../../hooks/useGetPosts";
+import { usePostDetail } from "../../../hooks/useApiRequestPostFilter";
 import Modal from "react-bootstrap/Modal";
 import PostDetailPopUP from "../community-post-detail-pop-up/community-post-detail-pop-up";
 import "./community-post-detail.styles.scss";
