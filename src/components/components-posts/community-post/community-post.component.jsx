@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 // hooks
-import { useGetLikesPost } from "../../../hooks/useGetPosts";
+import { useGetLikesPost } from "../../../hooks/useInteractPosts";
 
 // stores
 import usePostQueryStore from "../../../postStore.ts";

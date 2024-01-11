@@ -23,10 +23,9 @@ const PostPageMain = () => {
     if (!userInfo.token) {
       togglePopup(true, 'accountType');
     } else {
-      navigate('/posts/create');
+      navigate("/posts/create-post");
     }
   };
-
   return (
     <div className='community-post-main-container'>
       {/* left container */}

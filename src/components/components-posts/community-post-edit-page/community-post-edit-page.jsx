@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import userInfoQueryStore from "../../../userStore";
 import usePostQueryStore from "../../../postStore";
 import { Toast, useToast } from "@chakra-ui/react";
-import { uploadToS3 } from "../../../services/s3-client";
+import ChakraModal from "../../chakra-modal/chakra-modal";
+
 import {
   useDisclosure,
   Modal,
@@ -20,9 +21,10 @@ import FormButton from "../../components-posts/community-post-button/community-p
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
-import { useApiRequestEditPost } from "../../../hooks/useApiRequestPost";
-import { useDeletePost } from "../../../hooks/useDeletePost";
+import { useApiRequestEditPost } from "../../../hooks/useApiEditPost";
+import { useDeletePost } from "../../../hooks/useApiEditPost";
 import useUploadImg from "../../../hooks/useUploadImg";
+import { useApiRequestPost } from "../../../hooks/useApiEditPost"; // Create post
 
 // scss
 import "./community-post-edit-page.scss";
@@ -34,6 +36,9 @@ import Trash from "../../../assets/post/trash_icon.svg";
 import DeleteButton from "../../../assets/post/thumbnail_delete.png";
 
 const EditPostPage = () => {
+  const location = useLocation();
+  const isCreatePost = location.pathname.includes("/posts/create-post");
+
   // call api hooks
   const {
     selectedFiles,
@@ -47,12 +52,8 @@ const EditPostPage = () => {
     resetFiles,
     removeUploadedFile,
   } = useUploadImg();
-  const {
-    mutate: apiEditMutate,
-    data,
-    isSuccess: isEditSuccess,
-    isError: isEditError,
-  } = useApiRequestEditPost();
+  const { mutate: apiEditMutate } = useApiRequestEditPost();
+  const { mutate: apiCreateMutate } = useApiRequestPost();
   const {
     mutate: apiDeleteMutate,
     data: deleteData,
@@ -95,10 +96,49 @@ const EditPostPage = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      title: postQuery.title,
-      description: postQuery.description,
+      title: isCreatePost ? "" : postQuery.title,
+      description: isCreatePost ? "" : postQuery.description,
     },
   });
+  // api
+  const onSubmit = (data) => {
+    const displayImage =
+      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
+
+    const formData = {
+      address: "",
+      brief: data.description,
+      coverImg: displayImage,
+      isDisplay: 1,
+      lat: "",
+      location: "",
+      lon: "",
+      pictures: uploadedFiles,
+      tags: [
+        {
+          tagId: 0,
+          tagName: "",
+        },
+      ],
+      title: data.title,
+    };
+    if (!userInfo?.token) {
+      toast({
+        title: "Please login first.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (isCreatePost) {
+      apiCreateMutate(formData);
+    } else {
+      formData.id = postQuery.postID;
+      apiEditMutate(formData);
+    }
+    resetFiles();
+  };
 
   // when click on trash icon
   const handleClickModal = () => {
@@ -113,73 +153,17 @@ const EditPostPage = () => {
     onClose();
   };
 
-  // api
-  const onSubmit = (data) => {
-    const displayImage =
-      selectedImage || (uploadedFiles.length > 0 ? uploadedFiles[0] : null);
-
-    const formData = {
-      address: "",
-      brief: data.description,
-      coverImg: displayImage,
-      // postID
-      id: postQuery.postID,
-      isDisplay: 1,
-      lat: "",
-      location: "",
-      lon: "",
-      pictures: uploadedFiles,
-      tags: [
-        {
-          tagId: 0,
-          tagName: "",
-        },
-      ],
-      title: data.title,
-    };
-
-    if (!userInfo?.token) {
-      toast({
-        title: "Please login first.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
-    }
-    apiEditMutate(formData);
-    resetFiles();
-  };
-
   useEffect(() => {
-    if (isDeleteSuccess || isEditSuccess) {
-      resetFiles();
-      reset({
-        title: "",
-        description: "",
-      });
+    if (isCreatePost) {
+      setUploadedFiles([]);
       setSelectedImage(null);
-      toast({
-        title: "Success!.",
-        status: "success",
-        duration: 1000,
-        isClosable: true,
-      });
-      refreshMyPost();
-      localStorage.getItem("accountType") === "2"
-        ? navigate("/doctorProfile/#Posts")
-        : navigate("/userProfile");
+    } else {
+      setUploadedFiles(postQuery.pictures);
+      if (postQuery.pictures && postQuery.pictures.length > 0) {
+        setSelectedImage(postQuery.pictures[postQuery.pictures.length - 1]);
+      }
     }
-    if (isEditError || isDeleteError) {
-      toast({
-        title: "Failed.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-    }
-  }, [isDeleteSuccess, isEditSuccess, isDeleteError, isEditError, toast]);
-
+  }, [isCreatePost, postQuery.pictures]);
   useEffect(() => {
     if (uploadedFiles.length > 0) {
       setSelectedImage(uploadedFiles[uploadedFiles.length - 1]);
@@ -188,11 +172,20 @@ const EditPostPage = () => {
 
   // back button
   const handleClickCreatePostBack = () => {
-    localStorage.getItem("accountType") === "2"
-      ? navigate("/doctorProfile/#Posts")
-      : navigate("/userProfile");
-  };
+    const accountType = localStorage.getItem("accountType");
 
+    if (location.pathname.includes("/posts/create-post")) {
+      navigate("/posts");
+    } else if (location.pathname.includes("/posts/edit-post")) {
+      if (accountType === "1") {
+        navigate("/doctorProfile/#Posts");
+      } else if (accountType === "2") {
+        navigate("/userProfile/#Posts");
+      } else {
+        navigate("/");
+      }
+    }
+  };
   // file upload
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -281,7 +274,9 @@ const EditPostPage = () => {
             alt="Image-Arrow-Icon"
             className="edit-post-page-arrow-icon-back-button"
           />
-          <span className="edit-post-page-label-back-button">Edit a post</span>
+          <span className="edit-post-page-label-back-button">
+            {isCreatePost ? "Create Post" : "Edit Your Post"}
+          </span>
         </button>
 
         <div className="edit-post-page-inner-container">
@@ -424,56 +419,30 @@ const EditPostPage = () => {
               {/* --- button --- */}
               <div className="post-information-sendButton">
                 <FormButton
-                  buttonName="Repost"
+                  buttonName={isCreatePost ? "Create" : "Repost"}
                   // className="create-post-custom-button"
                 />
-                <img
-                  src={Trash}
-                  alt="Image-Trash-Icon"
-                  onClick={handleClickModal}
-                  className="edit-post-page-trash-icon"
-                />
+                {!isCreatePost && (
+                  <img
+                    src={Trash}
+                    alt="Image-Trash-Icon"
+                    onClick={handleClickModal}
+                    className="edit-post-page-trash-icon"
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
       </form>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent backgroundColor="transparent" boxShadow="none">
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Are you sure to delete this post?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={onClose}
-            >
-              Back
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handleClickDelete}
-            >
-              Delete
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ChakraModal
+        title="Are you sure to delete this post?"
+        cancelButtonText="Back"
+        approveButtonText="Delete"
+        approveCallback={handleClickDelete}
+        isModalOpen={isOpen}
+        closeModalFunc={onClose}
+      />
     </div>
   );
 };

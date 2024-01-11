@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import APIClient from "../services/api-client.js";
 import defaultAvatar from "../assets/post/user-profile-avatar.png";
 import { useToast } from "@chakra-ui/react";
-
 export function useUserOptLogin() {
   const apiClient = new APIClient("/login/phone/validate-otp");
   const fetchUserOtpRegisterValidate = async (mobile, otp, userRole) => {
@@ -242,26 +241,30 @@ export function useGetUserInfo() {
     return res.data;
   };
 
-  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo, {
-    retry: 1,
-    onSuccess: (data) => {
-      setUsername(data.data.nickname);
-      setAccountType(data.data.accountType);
-      setPostCount(data.data.postsNumber);
-      setFollowerCount(data.data.follower);
-      setFollowingCount(data.data.followings);
-      setDescription(data.data.description);
-      setAvatar(data.data.image || defaultAvatar);
-      setVerificationStatus(data.data.status || 0);
-    },
-    onError: (error) => {
-      localStorage.removeItem("token");
-      removeToken();
-      if (userInfo.popupState === false) {
-        togglePopup(true, "accountType");
-      }
-    },
-  });
+  return useQuery(
+    ["getUserInfo", userInfo.token, userInfo.trigger],
+    fetchGetUserInfo,
+    {
+      retry: 1,
+      onSuccess: (data) => {
+        setUsername(data.data.nickname);
+        setAccountType(data.data.accountType);
+        setPostCount(data.data.postsNumber);
+        setFollowerCount(data.data.follower);
+        setFollowingCount(data.data.followings);
+        setDescription(data.data.description);
+        setAvatar(data.data.image || defaultAvatar);
+        setVerificationStatus(data.data.status || 0);
+      },
+      onError: (error) => {
+        localStorage.removeItem("token");
+        removeToken();
+        if (userInfo.popupState === false) {
+          togglePopup(true, "accountType");
+        }
+      },
+    }
+  );
 }
 
 export function useGetDoctorInfo() {

@@ -39,6 +39,16 @@
     border-color: orange;
     outline: none; /* 移除默认的轮廓 */
 }
+.nickname {
+    margin: 10px;
+    width: 100%;
+    width: 300px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid  rgba(20, 20, 20, 0.50);
+  }
+  
 .profile-section-container{
     display: flex;
     flex-direction: column;

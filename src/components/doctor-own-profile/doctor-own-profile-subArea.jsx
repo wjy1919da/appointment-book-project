@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./doctor-own-profile-subArea.styles.scss";
 import DocotorOwnAbout from "./doctor-own-about-area";
-import DoctorProfileGrid from "./doctor-own-profile-grid";
 import DoctorPostGrid from "../community-post-grid/community-post-grid.component";
-import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
-import { useGetUserLikededPost } from "../../hooks/useGetPosts.js";
+import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
+import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
 
 const DoctorProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("About"); // by default, "about" is the active tab
@@ -70,7 +69,11 @@ const DoctorProfileSubArea = () => {
         </div>
       </div>
       <div className="bottom-rendering">
-        {activeTab === "About" && <DocotorOwnAbout />}
+        {activeTab === "About" && (
+          <div style={{ padding: "0 7%" }}>
+            <DocotorOwnAbout />
+          </div>
+        )}
         {activeTab === "Posts" && (
           <DoctorPostGrid
             data={posts}

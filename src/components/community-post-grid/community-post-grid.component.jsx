@@ -53,17 +53,6 @@ const DoctorPostGrid = ({
   const { postid } = useParams();
   const toast = useToast();
 
-  // useEffect(() => {
-  //   if (hasNextPage === undefined) {
-  //     toast({
-  //       title: "No more posts",
-  //       status: "info",
-  //       duration: 2000,
-  //       isClosable: true,
-  //     });
-  //   }
-  // }, [hasNextPage, toast]);
-
   const handleClickPost = (
     ID,
     avatar,
@@ -85,6 +74,14 @@ const DoctorPostGrid = ({
     setIsPrivate(isPrivate);
     setIsLike(isLike);
     setIsHighlight(highlightStatus);
+    setOriginalPath(location.pathname);
+
+    const normalizedPathname = location.pathname.endsWith("/")
+      ? location.pathname.slice(0, -1)
+      : location.pathname;
+
+    const newPath = `${normalizedPathname}/${ID}`;
+    navigate(newPath);
   };
   if (error) {
     navigate("*");
@@ -110,9 +107,6 @@ const DoctorPostGrid = ({
               post.isLike,
               post.highlightStatus
             );
-            setOriginalPath(location.pathname);
-            const newPath = `${location.pathname}/${post.id}`;
-            navigate(newPath);
           }}
           key={post.id}
         >
@@ -140,20 +134,22 @@ const DoctorPostGrid = ({
             hasMore={!!hasNextPage}
             scrollThreshold={0.8}
           >
-            <ResponsiveMasonry
-              columnsCountBreakPoints={{
-                default: 4,
-                2500: 5,
-                2047: 5,
-                1700: 5,
-                1024: 4,
-                767: 3,
-                430: 2,
-              }}
-              gutter={gutterwidth}
-            >
-              <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
-            </ResponsiveMasonry>
+            <div style={{ padding: "0 7%" }}>
+              <ResponsiveMasonry
+                columnsCountBreakPoints={{
+                  default: 5,
+                  2500: 5,
+                  2047: 5,
+                  1700: 5,
+                  1024: 4,
+                  767: 3,
+                  430: 2,
+                }}
+                gutter={gutterwidth}
+              >
+                <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
+              </ResponsiveMasonry>
+            </div>
           </InfiniteScroll>
         ) : (
           !isLoading && (

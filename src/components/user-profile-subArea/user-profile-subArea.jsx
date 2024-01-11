@@ -5,16 +5,12 @@ import { useLocation } from "react-router-dom";
 import "./user-profile-subArea.styles.scss";
 
 // components
-// import UserProfilePost from "../user-profile-post-area/user-profile-post-area";
 import UserProfileReview from "../user-profile-review-area/user-profile-review-area";
-import UserProfileLike from "../user-profile-like/user-profile-like";
 import DoctorPostGrid from "../community-post-grid/community-post-grid.component";
 
-// import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
-// import CreatePostOfUser from '../create-post/create-post';
 // Hooks
-import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
-import { useGetUserLikededPost } from "../../hooks/useGetPosts.js";
+import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
+import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
 
 import Doctor from "../../routes/doctor/doctor.component";
 
@@ -115,16 +111,6 @@ const UserProfileSubArea = () => {
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
       </div>
-      {/* <div className='bottom-rendering'>
-        {activeTab === 'Posts' && (
-          <UserProfilePost
-            showCreatePost={showCreatePost}
-            setShowCreatePost={setShowCreatePost}
-          />
-        )}
-        {activeTab === 'Like' && <UserProfileLike />}
-        {activeTab === 'Reviews' && <UserProfileReview />}
-      </div> */}
     </div>
   );
 };
