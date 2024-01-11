@@ -21,39 +21,41 @@
   .community-post-main-left-container {
     .community-post-main-girl-image {
       position: relative;
-      top: 120px;
+      top: 165px;
       left: 110px;
+      width: 679px;
+      // height: 697px;
     }
   }
 
   .community-post-main-right-container {
     margin-top: 17rem;
     width: 60%;
-  }
 
-  // join a community...
-  .community-post-main-title {
-    color: #352c29;
-    font-family: Open Sans;
-    font-size: 46px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-left: -20px;
-  }
+    // join a community...
+    .community-post-main-title {
+      position: relative;
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 46px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      margin-left: -20px;
+    }
 
-  // charm life lets you share...
-  .community-post-main-sub-title {
-    color: #352c29;
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin-top: 30px;
-    margin-left: 110px;
+    // charm life lets you share...
+    .community-post-main-sub-title {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-top: 30px;
+      margin-left: 110px;
+    }
   }
-
   // create button
   .community-post-main-create-button-container {
     display: flex;
@@ -76,6 +78,83 @@
       border-radius: 1000px 0px 0px 1000px;
       padding: 36px 120px;
       // padding: 16px 50px;
+    }
+  }
+}
+
+@media (max-width: 1133px) {
+  .community-post-main-container {
+    // height: 700px;
+
+    .commynity-post-main-pink-background {
+      width: 550px;
+      height: 347px;
+    }
+
+    .community-post-main-left-container {
+      .community-post-main-girl-image {
+        top: 160px;
+        left: 70px;
+        width: 530px;
+        // height: 544px;
+      }
+    }
+
+    .community-post-main-right-container {
+      margin-top: 15rem;
+
+      .community-post-main-title {
+        margin-left: 120px;
+      }
+    }
+
+    .community-post-main-create-button-container {
+      .community-post-main-create-button {
+      }
+    }
+  }
+}
+
+@media (max-width: 744px) {
+  .community-post-main-container {
+    flex-direction: column-reverse;
+    height: 1200px;
+
+    .community-post-main-pink-background {
+      top: 420px;
+      width: 582px;
+      height: 291px;
+    }
+
+    .community-post-main-left-container {
+      .community-post-main-girl-image {
+        top: -200px;
+        left: 70px;
+        width: 530px;
+        // height: 544px;
+      }
+    }
+
+    .community-post-main-right-container {
+      width: 600px;
+      left: -80px;
+      position: absolute;
+      top: -140px;
+      margin-top: 15rem;
+
+      .community-post-main-title {
+        margin-left: 120px;
+      }
+    }
+
+    .community-post-main-create-button-container {
+      position: absolute;
+      top: 550px;
+      right: 0;
+
+      .community-post-main-create-button {
+        margin-top: 340px;
+      }
     }
   }
 }
