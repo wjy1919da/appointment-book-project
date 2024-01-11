@@ -1,37 +1,10 @@
-// useEffect(() => {
-//   if (isDeleteSuccess || isEditSuccess) {
-//     resetFiles();
-//     reset({
-//       title: "",
-//       description: "",
-//     });
-//     setSelectedImage(null);
-//     toast({
-//       title: "Success!.",
-//       status: "success",
-//       duration: 1000,
-//       isClosable: true,
-//     });
-//     refreshMyPost();
-//     localStorage.getItem("accountType") === "2"
-//       ? navigate("/doctorProfile/#Posts")
-//       : navigate("/userProfile");
-//   }
-//   if (isEditError || isDeleteError) {
-//     toast({
-//       title: "Failed.",
-//       status: "error",
-//       duration: 9000,
-//       isClosable: true,
-//     });
-//   }
-// }, [isDeleteSuccess, isEditSuccess, isDeleteError, isEditError, toast]);
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import userInfoQueryStore from "../../../userStore";
 import usePostQueryStore from "../../../postStore";
 import { Toast, useToast } from "@chakra-ui/react";
+import ChakraModal from "../../chakra-modal/chakra-modal";
 
 import {
   useDisclosure,
@@ -61,8 +34,6 @@ import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
 import Trash from "../../../assets/post/trash_icon.svg";
 import DeleteButton from "../../../assets/post/thumbnail_delete.png";
-import { set } from "date-fns";
-import { is } from "date-fns/locale";
 
 const EditPostPage = () => {
   const location = useLocation();
@@ -464,42 +435,14 @@ const EditPostPage = () => {
           </div>
         </div>
       </form>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent backgroundColor="transparent" boxShadow="none">
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Are you sure to delete this post?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={onClose}
-            >
-              Back
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handleClickDelete}
-            >
-              Delete
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ChakraModal
+        title="Are you sure to delete this post?"
+        cancelButtonText="Back"
+        approveButtonText="Delete"
+        approveCallback={handleClickDelete}
+        isModalOpen={isOpen}
+        closeModalFunc={onClose}
+      />
     </div>
   );
 };

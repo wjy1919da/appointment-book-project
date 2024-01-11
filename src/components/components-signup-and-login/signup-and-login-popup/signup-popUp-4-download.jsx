@@ -47,7 +47,8 @@ const SignUpDownloadPopUp = () => {
     mutate({
       birthday: userInfo.birthday,
       gender: userInfo.gender,
-      interested: userInfo.selectedInterests,
+      interested: interestArea,
+      // interested: userInfo.selectedInterests,
       nickname: "default user name",
     });
   };

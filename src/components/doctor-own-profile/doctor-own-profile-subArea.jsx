@@ -69,7 +69,11 @@ const DoctorProfileSubArea = () => {
         </div>
       </div>
       <div className="bottom-rendering">
-        {activeTab === "About" && <DocotorOwnAbout />}
+        {activeTab === "About" && (
+          <div style={{ padding: "0 7%" }}>
+            <DocotorOwnAbout />
+          </div>
+        )}
         {activeTab === "Posts" && (
           <DoctorPostGrid
             data={posts}

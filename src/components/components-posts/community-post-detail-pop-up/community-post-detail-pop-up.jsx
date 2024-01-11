@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import ChakraModal from "../../chakra-modal/chakra-modal.jsx";
 
 import {
   useDisclosure,
@@ -65,7 +66,6 @@ const CommunityPostDetailPopUP = ({
   isLiked,
 }) => {
   // like count
-  // console.log("isLiked", isLiked);
   const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
   const [isPopupLiked, setIsPopupLiked] = useState(isLiked); // like
 
@@ -77,10 +77,6 @@ const CommunityPostDetailPopUP = ({
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isImageLoaded, setIsImageLoaded] = useState(true);
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(true);
-
-  // console.log("my post detail", postQuery.postID in the liked array); set/map like_set.has(postQuery.postID)=== true icon red
-  const refresh = usePostQueryStore((state) => state.refresh);
-  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
@@ -152,13 +148,14 @@ const CommunityPostDetailPopUP = ({
   // private click
   const handlePrivateClick = () => {
     if (validateTokenAndPopup()) {
+      console.log("postQuery.isPrivate", postQuery.isPrivate);
       setModalStatus("private");
-      if (postQuery.isPrivate !== 0) {
+      if (!!postQuery.isPrivate) {
         setModalHeader("Private Post");
         setModalContent("Private");
       } else {
         setModalHeader("Remove Private");
-        setModalContent("Remove Private");
+        setModalContent("Remove");
       }
       onOpen();
     }
@@ -187,7 +184,7 @@ const CommunityPostDetailPopUP = ({
         setModalContent("Highlight");
       } else {
         setModalHeader("Remove Highlight");
-        setModalContent("Remove Highlight");
+        setModalContent("Remove");
       }
       onOpen();
     }
@@ -521,49 +518,16 @@ const CommunityPostDetailPopUP = ({
           </div>
         </div>
       </div>
-
-      {/* highlight modal */}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent
-          backgroundColor="transparent"
-          boxShadow="none"
-          textAlign="center"
-        >
-          <ModalHeader color="#ffffff" fontSize="25px">
-            {modalHeader}
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={
-                modalStatus === "private" ? handlePrivate : handleHighlight
-              }
-            >
-              {modalContent}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ChakraModal
+        title={modalHeader}
+        cancelButtonText="Cancel"
+        approveButtonText={modalContent}
+        approveCallback={
+          modalStatus === "private" ? handlePrivate : handleHighlight
+        }
+        isModalOpen={isOpen}
+        closeModalFunc={onClose}
+      />
     </div>
   );
 };

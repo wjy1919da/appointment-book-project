@@ -122,19 +122,39 @@ export function useApiRequestEditPost() {
 }
 
 export function useDeletePost() {
+  const toast = useToast();
   const apiClient = new APIClient("/post");
+  const refreshMyPost = usePostQueryStore((state) => state.refreshMyPost);
+  const navigate = useNavigate();
   const useDeletePost = useMutation(
     async (postId) => {
-      console.log("POSTID", postId);
+      // console.log("POSTID", postId);
       const response = await apiClient.delete(postId);
       return response.data;
     },
     {
       onSuccess: (data) => {
-        console.log("OK", data);
+        // console.log("OK", data);
+        toast({
+          title: "Delete success",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        refreshMyPost();
+        localStorage.getItem("accountType") === "2"
+          ? navigate("/doctorProfile/#Posts")
+          : navigate("/userProfile");
       },
       onError: (error) => {
-        console.error("ERROR", error);
+        // console.error("ERROR", error);
+        toast({
+          title: "Delete failed",
+          description: error.message || "Something went wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
       },
     }
   );
