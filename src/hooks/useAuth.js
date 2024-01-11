@@ -242,26 +242,30 @@ export function useGetUserInfo() {
     return res.data;
   };
 
-  return useQuery(["getUserInfo", userInfo.token], fetchGetUserInfo, {
-    retry: 1,
-    onSuccess: (data) => {
-      setUsername(data.data.nickname);
-      setAccountType(data.data.accountType);
-      setPostCount(data.data.postsNumber);
-      setFollowerCount(data.data.follower);
-      setFollowingCount(data.data.followings);
-      setDescription(data.data.description);
-      setAvatar(data.data.image || defaultAvatar);
-      setVerificationStatus(data.data.status || 0);
-    },
-    onError: (error) => {
-      localStorage.removeItem("token");
-      removeToken();
-      if (userInfo.popupState === false) {
-        togglePopup(true, "accountType");
-      }
-    },
-  });
+  return useQuery(
+    ["getUserInfo", userInfo.token, userInfo.trigger],
+    fetchGetUserInfo,
+    {
+      retry: 1,
+      onSuccess: (data) => {
+        setUsername(data.data.nickname);
+        setAccountType(data.data.accountType);
+        setPostCount(data.data.postsNumber);
+        setFollowerCount(data.data.follower);
+        setFollowingCount(data.data.followings);
+        setDescription(data.data.description);
+        setAvatar(data.data.image || defaultAvatar);
+        setVerificationStatus(data.data.status || 0);
+      },
+      onError: (error) => {
+        localStorage.removeItem("token");
+        removeToken();
+        if (userInfo.popupState === false) {
+          togglePopup(true, "accountType");
+        }
+      },
+    }
+  );
 }
 
 export function useGetDoctorInfo() {
