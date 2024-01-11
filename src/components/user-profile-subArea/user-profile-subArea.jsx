@@ -13,8 +13,8 @@ import DoctorPostGrid from "../community-post-grid/community-post-grid.component
 // import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
 // import CreatePostOfUser from '../create-post/create-post';
 // Hooks
-import { useGetUserPostedPost } from "../../hooks/useGetPosts.js";
-import { useGetUserLikededPost } from "../../hooks/useGetPosts.js";
+import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
+import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
 
 import Doctor from "../../routes/doctor/doctor.component";
 

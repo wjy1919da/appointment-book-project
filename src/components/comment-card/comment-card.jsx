@@ -3,7 +3,7 @@ import React from "react";
 import { useToast } from "@chakra-ui/react";
 import usePostQueryStore from "../../postStore.ts";
 // hooks
-import { useGetCommentLikesPost } from "../../hooks/useGetPosts.js";
+import { useGetCommentLikesPost } from "../../hooks/useInteractPosts.js";
 
 // scss
 import "./comment-card.styles.scss";
