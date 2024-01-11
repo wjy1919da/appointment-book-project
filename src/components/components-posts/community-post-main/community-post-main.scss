@@ -1,367 +1,215 @@
-// css reset
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.post-main-container-wrapper {
+.community-post-main-container {
   display: flex;
-  justify-content: flex-end;
-  background: var(
-    --background-gradient-color,
-    linear-gradient(180deg, #fff2ed 24.48%, rgba(255, 248, 244, 0) 100%)
-  );
-  height: 820px;
-}
-
-.post-main-container {
-  margin-top: 18rem;
-}
-
-// pink background
-.post-main-shape {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  border-radius: 0px 1000px 1000px 0px;
-  background: var(
-    --new-gradient,
-    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-  );
-  width: 640px;
-  height: 460px;
-}
-
-.post-main-link {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.post-main-link-button {
-  background: var(
-    --new-gradient,
-    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-  );
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  color: #fff;
-  font-family: Open Sans;
-  // font-size: 34px;
-  font-size: 23px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  border-radius: 1000px 0px 0px 1000px;
-  // border-radius: 0px 1000px 1000px 0px;
-  margin-top: 200px;
-  padding: 16px 50px;
-}
-
-.wrapper {
-  position: relative;
-}
-
-.post-main-photograph {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-  top: 200px;
-  left: 160px;
-  z-index: 50;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 16px 40px 0px rgba(32, 32, 33, 0.2),
-    0px 8px 16px 0px rgba(32, 32, 33, 0.1),
-    0px 0px 40px 0px rgba(255, 164, 163, 0.1);
-  height: 480px;
-  width: 400px;
-  padding: 20px;
-}
-
-// small tags
-.occaecat,
-.adipiscing,
-.lorem,
-.eiusmod,
-.excepteur {
-  position: absolute;
-  color: var(--text-2-button, #675d59);
-  font-family: Open Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding: 2px 12px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  background: var(--White, #fbfcff);
-  box-shadow: 0px 4px 16px 0px rgba(32, 32, 33, 0.08),
-    0px 2px 4px 0px rgba(32, 32, 33, 0.04),
-    0px 0px 16px 0px rgba(255, 164, 163, 0.1);
-}
-
-.occaecat {
-  top: 140px;
-  left: 150px;
-}
-
-.adipiscing {
-  top: 160px;
-  right: 50px;
-}
-
-.lorem {
-  top: 380px;
-  left: 95px;
-  z-index: 0;
-}
-
-.eiusmod {
-  bottom: -210px;
-  right: -100px;
-}
-
-.excepteur {
-  bottom: -300px;
-  right: 100px;
-}
-
-// top makeup trends for spring 2023
-.post-main-photograph-caption {
-  position: absolute;
-  left: 180px;
-  bottom: -180px;
-  z-index: 100;
-  font-family: Open Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-// heart
-.post-main-likes-container img {
-  position: absolute;
-  left: 180px;
-  bottom: -200px;
-  z-index: 100;
-}
-
-// 1.8k
-.post-main-photograph-like {
-  position: absolute;
-  left: 205px;
-  bottom: -215px;
-  z-index: 100;
-  color: var(--text-2-button, #675d59);
-  font-family: Open Sans;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-}
-
-.photo-girl {
-  position: absolute;
-  top: 220px;
-  left: 180px;
-  z-index: 50;
-}
-
-.photo-1 {
-  position: absolute;
-  left: 100px;
-  bottom: -330px;
-  z-index: 0;
-}
-
-.photo-2 {
-  position: absolute;
-  right: -50px;
-  bottom: -190px;
-  z-index: 0;
-  width: 200px;
-  height: 200px;
-}
-
-.post-main-contents {
-  color: #352c29;
-  font-family: Open Sans;
-  font-size: 46px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-right: 160px;
-  width: 640px !important;
-}
-
-.community-post-main-sub-title {
-  color: #352c29;
-  font-family: Open Sans;
-  font-size: 21px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin-top: 30px;
-  margin-right: 30px;
-  width: 630px;
-}
-
-.post-main-link-button {
-  color: #fbfcff;
-  font-size: 34px;
-  padding: 36px 120px;
-}
-
-@media (max-width: 1133px) {
-  .post-main-contents {
-    padding-left: 13px;
-    width: 430px;
-    margin-right: 30px;
-  }
-
-  h6 {
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  .post-main-link-button {
-    width: calc(100% - 15px);
-    padding: 35px 50px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-h6 {
-  margin: 0px auto;
-  width: 430px;
-}
-
-.post-main-contents {
-  color: #000;
-  font-family: Open Sans;
-  font-size: 46px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 630px;
-}
-
-@media (max-width: 1133px) {
-  .post-main-contents {
-    padding-left: 13px;
-    width: 430px;
-    margin-right: 30px;
-  }
-
-  h6 {
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-
-  .post-main-link-button {
-    width: calc(100% - 15px);
-    padding: 35px 50px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-.community-posts {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  text-align: center;
-  background-color: #f0f0f0;
-  padding: 20px;
+  height: 800px;
+
+  // pink background
+  .community-post-main-pink-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 0px 1000px 1000px 0px;
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    width: 547px;
+    height: 403px;
+  }
+
+  .community-post-main-left-container {
+    .community-post-main-girl-image {
+      position: relative;
+      top: 120px;
+      left: 110px;
+    }
+  }
+
+  .community-post-main-right-container {
+    margin-top: 17rem;
+    width: 60%;
+  }
+
+  // join a community...
+  .community-post-main-title {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 46px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: -20px;
+  }
+
+  // charm life lets you share...
+  .community-post-main-sub-title {
+    color: #352c29;
+    font-family: Open Sans;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 30px;
+    margin-left: 110px;
+  }
+
+  // create button
+  .community-post-main-create-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 150px;
+
+    .community-post-main-create-button {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #fbfcff;
+      font-family: Open Sans;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: normal;
+      background: var(
+        --new-gradient,
+        linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+      );
+      border-radius: 1000px 0px 0px 1000px;
+      padding: 36px 120px;
+      // padding: 16px 50px;
+    }
+  }
 }
 
-@media (max-width: 744px) {
-  .post-main-link-button {
-    margin-top: 425px;
-    width: 500px;
-  }
+// @media (max-width: 1133px) {
+//   .community-post-main-pink-background {
+//     width: 600px;
+//     height: 390px;
+//   }
 
-  .post-main-shape {
-    top: 350px;
-  }
+//   // small tags
+//   .occaecat {
+//     top: 140px;
+//     left: 150px;
+//   }
 
-  // small tags
-  .occaecat {
-    margin-top: -120px;
-  }
+//   .adipiscing {
+//     top: 160px;
+//     right: 50px;
+//   }
 
-  .adipiscing {
-    margin-top: -120px;
-  }
+//   .lorem {
+//     top: 340px;
+//     left: 95px;
+//     z-index: 0;
+//   }
 
-  .lorem {
-    margin-top: -150px;
-  }
+//   .eiusmod {
+//     bottom: -210px;
+//     right: -100px;
+//   }
 
-  .eiusmod {
-    bottom: -200px;
-    right: -90px;
-  }
+//   .excepteur {
+//     bottom: -300px;
+//     right: 100px;
+//   }
 
-  .excepteur {
-    bottom: -325px;
-  }
+//   .community-post-main-title {
+//     width: 480px !important;
+//   }
 
-  h1 {
-    position: relative;
-    top: -260px;
-    left: -220px;
-    margin: 0;
-  }
+//   .community-post-main-sub-title {
+//     font-family: Open Sans;
+//     font-size: 21px;
+//     font-style: normal;
+//     font-weight: 600;
+//     line-height: normal;
+//   }
 
-  h6 {
-    position: relative;
-    top: -250px;
-    left: -220px;
-    margin: 0;
-  }
+//   .community-post-main-link-button {
+//     width: calc(100% - 15px);
+//     padding: 35px 50px;
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//   }
+// }
 
-  .photo-girl {
-    margin-top: -120px;
-  }
+// h6 {
+//   margin: 0px auto;
+//   width: 430px;
+// }
 
-  .post-main-photograph-caption {
-    top: 480px;
-  }
+// @media (max-width: 744px) {
+//   .community-post-main-link-button {
+//     margin-top: 425px;
+//     width: 500px;
+//   }
 
-  .post-main-photograph-like {
-    top: 515px;
-  }
+//   .community-post-main-pink-background {
+//     top: 350px;
+//   }
 
-  .post-main-likes-container img {
-    top: 515px;
-  }
+//   // small tags
+//   .occaecat {
+//     margin-top: -120px;
+//   }
 
-  .post-main-photograph {
-    margin-top: -120px;
-  }
+//   .adipiscing {
+//     margin-top: -120px;
+//   }
 
-  .photo-1 {
-    top: 350px;
-  }
+//   .lorem {
+//     margin-top: -150px;
+//   }
 
-  .photo-2 {
-    top: 275px;
-  }
-}
+//   .eiusmod {
+//     bottom: -200px;
+//     right: -90px;
+//   }
+
+//   .excepteur {
+//     bottom: -325px;
+//   }
+
+//   h1 {
+//     position: relative;
+//     top: -260px;
+//     left: -220px;
+//     margin: 0;
+//   }
+
+//   h6 {
+//     position: relative;
+//     top: -250px;
+//     left: -220px;
+//     margin: 0;
+//   }
+
+//   .community-post-main-photo-girl {
+//     margin-top: -120px;
+//   }
+
+//   .community-post-main-photograph-caption {
+//     top: 480px;
+//   }
+
+//   .community-post-main-photograph-like {
+//     top: 515px;
+//   }
+
+//   .community-post-main-likes-container img {
+//     top: 515px;
+//   }
+
+//   .community-post-main-photograph {
+//     margin-top: -120px;
+//   }
+
+//   .community-post-main-photo-1 {
+//     top: 350px;
+//   }
+
+//   .community-post-main-photo-2 {
+//     top: 275px;
+//   }
+// }
