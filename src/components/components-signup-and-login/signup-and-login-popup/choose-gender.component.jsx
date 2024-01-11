@@ -15,6 +15,8 @@ const ChooseGender = () => {
   const [selectedGender, setSelectedGender] = useState(userInfo.gender);
   const setBirthday = userInfoQueryStore((state) => state.setBirthday);
   const [maxDate, setMaxDate] = useState('');
+  const setNickName = userInfoQueryStore((state) => state.setUsername);
+  const [nickname, nicknameChanged] = useState('');
 
   const onChangeGrender = (value) => {
     setSelectedGender(value);
@@ -26,8 +28,13 @@ const ChooseGender = () => {
   };
   // console.log("userInfo in gender page",userInfo);
   const handleOnClick = () => {
+
+    setNickName(nickname);
     setBirthday(birthday);
     switchPopupTab("interest");
+  };
+  const onChangeNickname = (e) => {
+    nicknameChanged(e.target.value);
   };
   const handleSkip = () => {
     setBirthday(null);
@@ -69,6 +76,16 @@ const ChooseGender = () => {
               </Stack>
             </RadioGroup>
           </div>
+          <div style={{ fontSize: '16px', fontWeight: 600, marginLeft: "10px"}}>Your Name</div>
+          <Input 
+          type="text" 
+          placeholder="Enter Your Name Here" 
+          size="md"
+          className="nickname" 
+          value={nickname}
+          onChange={onChangeNickname}
+          />
+          
           <div className="profile-section-container">
             <div>Birthday</div>
             <Input

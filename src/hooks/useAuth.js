@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { useQuery } from "react-query";
 import APIClient from "../services/api-client.js";
 import defaultAvatar from "../assets/post/user-profile-avatar.png";
-
+import { useToast } from "@chakra-ui/react";
 export function useUserOptLogin() {
   const apiClient = new APIClient("/login/phone/validate-otp");
   const fetchUserOtpRegisterValidate = async (mobile, otp, userRole) => {
@@ -137,20 +137,15 @@ export function useUserEmailRegisterValidate(token) {
   );
 }
 export function useSetUserProfile() {
+  const toast = useToast();
   const apiClient = new APIClient("/user/set_user_profile");
-  //const token = localStorage.getItem('token');
   const fetchSetUserProfile = async (
-    bio,
     birthday,
     gender,
     interested,
-    nickname,
+    nickname
   ) => {
-    // if (!token) {
-    //     alert('user not login');
-    // }
     const res = await apiClient.post({
-      bio,
       birthday,
       gender,
       interested,
@@ -158,14 +153,36 @@ export function useSetUserProfile() {
     });
     return res.data;
   };
-  return useMutation((credentials) =>
-    fetchSetUserProfile(
-      credentials.bio,
-      credentials.birthday,
-      credentials.gender,
-      credentials.interested,
-      credentials.nickname
-    )
+  return useMutation(
+    (credentials) =>
+      fetchSetUserProfile(
+        credentials.birthday,
+        credentials.gender,
+        credentials.interested,
+        credentials.nickname
+      ),
+    {
+      onSuccess: (data) => {
+        if (data.code === 100) {
+          toast({
+            title: "Profile updated successfully.",
+            description: data.msg,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      },
+      onError: (error) => {
+        toast({
+          title: "Profile updated failed.",
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+    }
   );
 }
 export function useClickVerification() {

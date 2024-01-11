@@ -44,21 +44,14 @@ const SignUpDownloadPopUp = () => {
     const {mutate,data,isLoading,isError,error} = useSetUserProfile();
     const handleOnClick = () => {
         mutate({
-          bio: "",
+          //bio: "",
           birthday: userInfo.birthday,
           gender: userInfo.gender,
-          interested: userInfo.interested,
-          nickname: userInfo.nickname,
+          interested: interestArea,
+          nickname: userInfo.username,
         });
       };
-    useEffect(() => {
-       if(data?.msg){
-            alert(data.msg);
-            if(data.code === 100){
-                togglePopup(false);
-            }
-       }
-    }, [data]);
+    //console.log(userInfo.username, userInfo.birthday, userInfo.gender);
     return (
         <div className='signUp-download'>
             <div className='signUp-download-header'>
