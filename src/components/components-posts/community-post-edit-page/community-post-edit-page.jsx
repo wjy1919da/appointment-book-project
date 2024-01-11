@@ -34,8 +34,6 @@ import createPostIcon from "../../../assets/post/create-post-icon.png";
 import Arrow from "../../../assets/post/iconoir_arrow-right.svg";
 import Trash from "../../../assets/post/trash_icon.svg";
 import DeleteButton from "../../../assets/post/thumbnail_delete.png";
-import { set } from "date-fns";
-import { is } from "date-fns/locale";
 
 const EditPostPage = () => {
   const location = useLocation();
@@ -437,42 +435,6 @@ const EditPostPage = () => {
           </div>
         </div>
       </form>
-
-      {/* <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ModalContent backgroundColor="transparent" boxShadow="none">
-          <ModalHeader color="#ffffff" fontSize="25px">
-            Are you sure to delete this post?
-          </ModalHeader>
-          <ModalFooter display="flex" justifyContent="space-between">
-            <Button
-              color="#ffffff"
-              backgroundColor="#675f5a"
-              outline="none"
-              _hover="none"
-              mr={3}
-              onClick={onClose}
-            >
-              Back
-            </Button>
-            <Button
-              color="#ffffff"
-              backgroundColor="#f1a285"
-              outline="none"
-              _hover="none"
-              onClick={handleClickDelete}
-            >
-              Delete
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal> */}
       <ChakraModal
         title="Are you sure to delete this post?"
         cancelButtonText="Back"

@@ -111,16 +111,6 @@ const UserProfileSubArea = () => {
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
       </div>
-      {/* <div className='bottom-rendering'>
-        {activeTab === 'Posts' && (
-          <UserProfilePost
-            showCreatePost={showCreatePost}
-            setShowCreatePost={setShowCreatePost}
-          />
-        )}
-        {activeTab === 'Like' && <UserProfileLike />}
-        {activeTab === 'Reviews' && <UserProfileReview />}
-      </div> */}
     </div>
   );
 };
