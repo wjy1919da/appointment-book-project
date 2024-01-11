@@ -96,7 +96,6 @@
         top: 160px;
         left: 70px;
         width: 530px;
-        // height: 544px;
       }
     }
 
@@ -108,10 +107,10 @@
       }
     }
 
-    .community-post-main-create-button-container {
-      .community-post-main-create-button {
-      }
-    }
+    // .community-post-main-create-button-container {
+    //   .community-post-main-create-button {
+    //   }
+    // }
   }
 }
 
@@ -131,7 +130,6 @@
         top: -200px;
         left: 70px;
         width: 530px;
-        // height: 544px;
       }
     }
 
@@ -158,137 +156,3 @@
     }
   }
 }
-
-// @media (max-width: 1133px) {
-//   .community-post-main-pink-background {
-//     width: 600px;
-//     height: 390px;
-//   }
-
-//   // small tags
-//   .occaecat {
-//     top: 140px;
-//     left: 150px;
-//   }
-
-//   .adipiscing {
-//     top: 160px;
-//     right: 50px;
-//   }
-
-//   .lorem {
-//     top: 340px;
-//     left: 95px;
-//     z-index: 0;
-//   }
-
-//   .eiusmod {
-//     bottom: -210px;
-//     right: -100px;
-//   }
-
-//   .excepteur {
-//     bottom: -300px;
-//     right: 100px;
-//   }
-
-//   .community-post-main-title {
-//     width: 480px !important;
-//   }
-
-//   .community-post-main-sub-title {
-//     font-family: Open Sans;
-//     font-size: 21px;
-//     font-style: normal;
-//     font-weight: 600;
-//     line-height: normal;
-//   }
-
-//   .community-post-main-link-button {
-//     width: calc(100% - 15px);
-//     padding: 35px 50px;
-//     display: flex;
-//     justify-content: center;
-//     text-align: center;
-//   }
-// }
-
-// h6 {
-//   margin: 0px auto;
-//   width: 430px;
-// }
-
-// @media (max-width: 744px) {
-//   .community-post-main-link-button {
-//     margin-top: 425px;
-//     width: 500px;
-//   }
-
-//   .community-post-main-pink-background {
-//     top: 350px;
-//   }
-
-//   // small tags
-//   .occaecat {
-//     margin-top: -120px;
-//   }
-
-//   .adipiscing {
-//     margin-top: -120px;
-//   }
-
-//   .lorem {
-//     margin-top: -150px;
-//   }
-
-//   .eiusmod {
-//     bottom: -200px;
-//     right: -90px;
-//   }
-
-//   .excepteur {
-//     bottom: -325px;
-//   }
-
-//   h1 {
-//     position: relative;
-//     top: -260px;
-//     left: -220px;
-//     margin: 0;
-//   }
-
-//   h6 {
-//     position: relative;
-//     top: -250px;
-//     left: -220px;
-//     margin: 0;
-//   }
-
-//   .community-post-main-photo-girl {
-//     margin-top: -120px;
-//   }
-
-//   .community-post-main-photograph-caption {
-//     top: 480px;
-//   }
-
-//   .community-post-main-photograph-like {
-//     top: 515px;
-//   }
-
-//   .community-post-main-likes-container img {
-//     top: 515px;
-//   }
-
-//   .community-post-main-photograph {
-//     margin-top: -120px;
-//   }
-
-//   .community-post-main-photo-1 {
-//     top: 350px;
-//   }
-
-//   .community-post-main-photo-2 {
-//     top: 275px;
-//   }
-// }
