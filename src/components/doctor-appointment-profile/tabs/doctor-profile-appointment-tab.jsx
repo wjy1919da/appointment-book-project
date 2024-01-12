@@ -1,17 +1,17 @@
-import { useState } from "react";
-import Calendar from "react-calendar";
+import { useState } from 'react';
+import Calendar from 'react-calendar';
 
 // components
-import Button from "../../components-posts/community-post-button/community-post-button";
+import Button from '../../components-posts/community-post-button/community-post-button';
 // dummy data
-import { appointmentData } from "../data/appointmentData";
+import { appointmentData } from '../data/appointmentData';
 // slots decription data
-import { slotsDescriptionData } from "../data/slotsDescriptionData";
+// import { slotsDescriptionData } from "../data/slotsDescriptionData";
 
 // scss
-import "./doctor-profile-appointment-tab.scss";
-import "../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss";
-import "react-calendar/dist/Calendar.css";
+import './doctor-profile-appointment-tab.scss';
+import '../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss';
+import 'react-calendar/dist/Calendar.css';
 
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date());
@@ -26,36 +26,36 @@ const DoctorAppointmentProfileAppointmentTab = () => {
       date.getMonth() === new Date().getMonth() &&
       date.getFullYear() === new Date().getFullYear();
 
-    return isToday ? "today-tile" : "";
+    return isToday ? 'today-tile' : '';
   };
 
   const formatShortWeekday = (locale, date) => {
-    const weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     return weekdays[date.getDay()];
   };
 
   return (
-    <div className="doctor-profile-appointment-tab-container">
-      <div className="doctor-profile-appointment-tab-inner-container">
-        <div className="doctor-profile-appointment-tab-left-container">
+    <div className='doctor-profile-appointment-tab-container'>
+      <div className='doctor-profile-appointment-tab-inner-container'>
+        <div className='doctor-profile-appointment-tab-left-container'>
           <Calendar
             onChange={handleChange}
             value={date}
-            locale="en-GB"
+            locale='en-GB'
             formatShortWeekday={formatShortWeekday}
             tileClassName={tileClassName}
           />
-          <div className="doctor-profile-appointment-tab-button-container">
+          <div className='doctor-profile-appointment-tab-button-container'>
             <Button
-              buttonName="Open all unavailable slots"
-              className="doctor-profile-appointment-tab-open-button"
+              buttonName='Open all unavailable slots'
+              className='doctor-profile-appointment-tab-open-button'
             />
             <Button
-              buttonName="Close all unbooked slots"
-              className="doctor-profile-appointment-tab-close-button"
+              buttonName='Close all unbooked slots'
+              className='doctor-profile-appointment-tab-close-button'
             />
           </div>
-          <div className="doctor-profile-appointment-tab-button-description-container">
+          {/* <div className="doctor-profile-appointment-tab-button-description-container">
             {slotsDescriptionData.map((desc, index) => (
               <div
                 key={desc.id}
@@ -84,57 +84,91 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                 </span>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
-        <div className="doctor-profile-appointment-tab-right-container">
-          <p className="doctor-profile-appointment-tab-date-title">
+        <div className='doctor-profile-appointment-tab-right-container'>
+          <p className='doctor-profile-appointment-tab-date-title'>
             Friday, 6 January 2023
           </p>
           <div>
             {appointmentData.map((item, index) => (
               <div
                 key={index}
-                className="doctor-profile-appointment-tab-list-container"
+                className={`doctor-profile-appointment-tab-list-container ${
+                  index >= 2
+                    ? 'doctor-profile-appointment-tab-list-active'
+                    : 'doctor-profile-appointment-tab-list-disabled'
+                }`}
               >
-                <span className="doctor-profile-appointment-tab-time">
+                <span className={`doctor-profile-appointment-tab-time ${
+                        index >= 2
+                          ? 'doctor-profile-appointment-tab-time-active'
+                          : 'doctor-profile-appointment-tab-time-disabled'
+                      }`}>
                   {item.time}
                 </span>
                 {item.src &&
                   item.src.map((src, srcIndex) => (
                     <img
                       key={srcIndex}
-                      className="doctor-profile-appointment-tab-contact-icon"
+                      className='doctor-profile-appointment-tab-contact-icon'
                       src={src}
                       alt={`Icon ${index + 1}`}
                     />
                   ))}
-                <span className="doctor-profile-appointment-tab-await">
+                <span className='doctor-profile-appointment-tab-await'>
                   {item.await}
                 </span>
-                <div className="doctor-profile-appointment-tab-tag-container">
+                <div className='doctor-profile-appointment-tab-tag-container'>
                   {item.tag1 && (
-                    <span className="doctor-profile-appointment-tab-tag-1">
+                    <span
+                      className={`doctor-profile-appointment-tab-tag-1 ${
+                        index >= 2
+                          ? 'doctor-profile-appointment-tab-tag-1-active'
+                          : 'doctor-profile-appointment-tab-tag-2-disabled'
+                      }`}
+                    >
                       {item.tag1}
                     </span>
                   )}
                   {item.tag2 && (
-                    <span className="doctor-profile-appointment-tab-tag-2">
+                    <span
+                      className={`doctor-profile-appointment-tab-tag-2 ${
+                        index >= 2
+                          ? 'doctor-profile-appointment-tab-tag-2-active'
+                          : 'doctor-profile-appointment-tab-tag-2-disabled'
+                      }`}
+                    >
                       {item.tag2}
                     </span>
                   )}
+                  {!item.tag1 && !item.tag2 && item.cancel && (
+                  <span className="doctor-profile-appointment-tab-cancel">
+                    {item.cancel}
+                  </span>
+                )}
                 </div>
                 <span
                   className={`${
-                    item.status === "Open Slot"
-                      ? "doctor-profile-appointment-tab-status-open-slot"
-                      : item.status === "Close Slot"
-                      ? "doctor-profile-appointment-tab-status-close-slot"
-                      : item.status === "Confirm"
-                      ? "doctor-profile-appointment-tab-status-confirm"
-                      : ""
+                    item.status === 'Open Slot'
+                      ? 'doctor-profile-appointment-tab-status-open-slot'
+                      : item.status === 'Close Slot'
+                      ? 'doctor-profile-appointment-tab-status-close-slot'
+                      : item.status === 'Confirm'
+                      ? 'doctor-profile-appointment-tab-status-confirm'
+                      : item.status === 'Confirmed'
+                      ? 'doctor-profile-appointment-tab-status-confirmed'
+                      : item.status === 'Declined'
+                      ? 'doctor-profile-appointment-tab-status-confirmed'
+                      : item.status === 'Confirm and Refund'
+                      ? 'doctor-profile-appointment-tab-status-confirm'
+                      : ''
                   }`}
                 >
-                  {item.status}
+                  <span className='doctor-profile-appointment-tab-status-container'>
+                    {item.icon && <img src={item.icon} alt='Icon' />}
+                    {item.status}
+                  </span>
                 </span>
               </div>
             ))}
