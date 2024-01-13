@@ -61,6 +61,7 @@
 
     .doctor-profile-appointment-tab-list-container {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       border-radius: 6px;
       box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.2);
@@ -69,12 +70,6 @@
       width: 930px;
       height: 64px;
 
-      .doctor-profile-appointment-tab-contact-icon {
-        margin-right: 10px;
-        width: 24px;
-        height: 24px;
-      }
-
       .doctor-profile-appointment-tab-time {
         font-family: Open Sans;
         font-size: 16px;
@@ -82,20 +77,32 @@
         font-weight: 600;
         line-height: normal;
         padding-right: 20px;
+        width: 180px;
       }
 
-      .doctor-profile-appointment-tab-await {
-        color: #675d59;
-        font-family: Open Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        padding-right: 20px;
+      .doctor-profile-appointment-tab-icon-and-await {
+        display: flex;
+        gap: 6px;
+
+        .doctor-profile-appointment-tab-contact-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .doctor-profile-appointment-tab-await {
+          color: #675d59;
+          font-family: Open Sans;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          padding-right: 90px;
+        }
       }
 
       .doctor-profile-appointment-tab-tag-container {
-        margin: 0 50px;
+        // margin: 0 50px;
+        width: 280px;
 
         .doctor-profile-appointment-tab-tag-1,
         .doctor-profile-appointment-tab-tag-2 {

@@ -100,25 +100,29 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     : 'doctor-profile-appointment-tab-list-disabled'
                 }`}
               >
-                <span className={`doctor-profile-appointment-tab-time ${
-                        index >= 2
-                          ? 'doctor-profile-appointment-tab-time-active'
-                          : 'doctor-profile-appointment-tab-time-disabled'
-                      }`}>
+                <span
+                  className={`doctor-profile-appointment-tab-time ${
+                    index >= 2
+                      ? 'doctor-profile-appointment-tab-time-active'
+                      : 'doctor-profile-appointment-tab-time-disabled'
+                  }`}
+                >
                   {item.time}
                 </span>
-                {item.src &&
-                  item.src.map((src, srcIndex) => (
-                    <img
-                      key={srcIndex}
-                      className='doctor-profile-appointment-tab-contact-icon'
-                      src={src}
-                      alt={`Icon ${index + 1}`}
-                    />
-                  ))}
-                <span className='doctor-profile-appointment-tab-await'>
-                  {item.await}
-                </span>
+                <div className='doctor-profile-appointment-tab-icon-and-await'>
+                  {item.src &&
+                    item.src.map((src, srcIndex) => (
+                      <img
+                        key={srcIndex}
+                        className='doctor-profile-appointment-tab-contact-icon'
+                        src={src}
+                        alt={`Icon ${index + 1}`}
+                      />
+                    ))}
+                  <span className='doctor-profile-appointment-tab-await'>
+                    {item.await}
+                  </span>
+                </div>
                 <div className='doctor-profile-appointment-tab-tag-container'>
                   {item.tag1 && (
                     <span
@@ -143,10 +147,10 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     </span>
                   )}
                   {!item.tag1 && !item.tag2 && item.cancel && (
-                  <span className="doctor-profile-appointment-tab-cancel">
-                    {item.cancel}
-                  </span>
-                )}
+                    <span className='doctor-profile-appointment-tab-cancel'>
+                      {item.cancel}
+                    </span>
+                  )}
                 </div>
                 <span
                   className={`${
