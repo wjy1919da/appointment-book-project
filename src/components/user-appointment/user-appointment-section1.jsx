@@ -71,6 +71,11 @@ const UserAppoinmentSection1 = () => {
                             <AppointmentCancelFinish appointmentObj={selectedAppointmentObj} />
                         </div>
                     }
+                    {appInfo.popupState === 'editAppointmentFinish' &&
+                        <div className='appointment-detail-section'>
+                            <AppointmentFinish appointmentObj={selectedAppointmentObj} changedSaved={true} />
+                        </div>
+                    }
                     {appInfo.popupState === 'finish' &&
                         <div className='appointment-detail-section'>
                             <AppointmentFinish appointmentObj={selectedAppointmentObj}/>

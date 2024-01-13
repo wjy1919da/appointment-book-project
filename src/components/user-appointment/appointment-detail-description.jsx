@@ -11,6 +11,7 @@ import ChakraModal from '../chakra-modal/chakra-modal';
 import { UniversalInfoFormInput } from '../universal-profile-edit/universal-profile-edit';
 import * as editFuncs from "../universal-profile-edit/universal-edit-verification-functions";
 import useUploadImg from "../../hooks/useUploadImg";
+import trashcan from "../../assets/doctor/trashcan.svg";
 
 const consultationItems = ['Eyes', 'Body', 'Injections', 'Nose', 'Lips', 'Breasts'];
 
@@ -39,7 +40,7 @@ const AppDetailDescription = ({appointmentObj}) => {
     const handleSaveChanges = (e) => {
         e.preventDefault();
         console.log('attempting to save changes!');
-        togglePopup(true, 'finish')
+        togglePopup(true, 'editAppointmentFinish')
     }
     const handleCancelAppointment = (e) => {
         e.preventDefault();
@@ -231,7 +232,15 @@ const AppDetailDescription = ({appointmentObj}) => {
                                 onDragOver={handleDragOver} onClick={handleBrowseFiles} >+</div>
                             {imageLinks.map((item, index) => { return (
                                 <div className='app-description-photo-container' key={index}>
-                                    <div className='user-appointment-remove-photo-button' onClick={() => removeUploadedFile(index)}>x</div>
+                                    <div className='user-appointment-photo-cover-container'>
+                                        <img
+                                            src={trashcan}
+                                            alt="remove picture"
+                                            className="user-appointment-pic-trash"
+                                            onClick={() => removeUploadedFile(index)}
+                                            />
+                                    </div>
+                                    {/* <div className='user-appointment-remove-photo-button' onClick={() => removeUploadedFile(index)}>x</div> */}
                                     <img className='app-description-photo' src={imageLinks[index]} alt='app description' />
                                 </div>
                             )})}
