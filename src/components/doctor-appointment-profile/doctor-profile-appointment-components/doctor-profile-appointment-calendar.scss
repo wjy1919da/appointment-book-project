@@ -209,24 +209,10 @@
       color: #fff !important;
     }
   }
+}
 
-  // remove the default background blue when click
-  // .react-calendar__tile--active,
-  // .react-calendar__tile--range,
-  // .react-calendar__tile--rangeStart,
-  // .react-calendar__tile--rangeEnd,
-  // .react-calendar__tile--rangeBothEnds,
-  // .react-calendar__month-view__days__day:active,
-  // .react-calendar__month-view__days__day--weekend:active {
-  //   color: #675d59 !important;
-  //   background: transparent !important;
-  // }
-
-  .react-calendar__month-view__days__day:active,
-  .react-calendar__month-view__days__day--weekend:active,
-  .today-tile:active,
-  .today-tile--weekend:active {
-    color: #675d59 !important;
-    background: transparent !important;
-  }
+// remove the default background blue when click
+.react-calendar__tile--active:enabled:hover {
+  color: #675d59;
+  background: transparent;
 }
