@@ -26,16 +26,16 @@
     height: 25px;
     padding-bottom: 5px;
   }
+}
 
-  .react-calendar__navigation__prev2-button,
-  .react-calendar__navigation__next2-button {
-    display: none;
-  }
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
 
-  .react-calendar__navigation button:enabled:hover,
-  .react-calendar__navigation button:enabled:focus {
-    background: #ee7070;
-  }
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background: #ee7070;
 }
 
 // dates that are not that month
