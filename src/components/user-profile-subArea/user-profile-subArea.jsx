@@ -13,6 +13,7 @@ import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
 import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
 
 import Doctor from "../../routes/doctor/doctor.component";
+import ProfileMessage from "../profile-message/profile-message.component";
 
 const UserProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("Likes");
@@ -99,7 +100,6 @@ const UserProfileSubArea = () => {
           />
         )}
         {activeTab === "Posts" && (
-          // <UserProfilePost />
           <DoctorPostGrid
             data={userPostedPost}
             error={userPostedPostError}
@@ -110,6 +110,7 @@ const UserProfileSubArea = () => {
           />
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
+        {activeTab === "Inbox" && <ProfileMessage />}
       </div>
     </div>
   );

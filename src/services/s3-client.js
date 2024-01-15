@@ -75,7 +75,7 @@ const uploadToS3 = async (file) => {
 
     if (response.ok) {
       const uploadedFileName = fileName;
-      const bucketName = "charm-post-img";
+      const bucketName = "verificationbucketcharm";
       const region = "us-west-1";
       const accessUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${uploadedFileName}`;
 
