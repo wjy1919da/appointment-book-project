@@ -3,9 +3,13 @@ import DocotorOwnBasic from "./doctor-own-profile-Basic";
 
 const DocotorOwnMain = () => {
   return (
-    <div className="doctor-own-profile-main-conatiner">
-      <DocotorOwnBasic />
-      <DoctorProfileSubArea />
+    <div className='home-container'>
+      <div className='section container'>
+        <DocotorOwnBasic />
+      </div>
+      <div className='section-container'>
+        <DoctorProfileSubArea />
+      </div>
     </div>
   );
 };

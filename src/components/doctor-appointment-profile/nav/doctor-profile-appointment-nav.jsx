@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // components
-import DoctorAppointmentProfileAppointmentTab from '../tabs/doctor-appointment-profile-appointment';
-import DoctorAppointmentProfileSetting from '../tabs/doctor-appointment-profile-setting';
+import DoctorAppointmentProfileAppointmentTab from '../tabs/doctor-profile-appointment-tab.jsx';
+import DoctorAppointmentProfileSetting from '../tabs/doctor-profile-appointment-setting-tab.jsx';
 
 // scss
-import './doctor-appointment-profile-nav.scss';
+import './doctor-profile-appointment-nav.scss';
 
 const DoctorAppointmentProfileNav = () => {
   const [activeTab, setActiveTab] = useState('Appointment');
@@ -22,13 +22,13 @@ const DoctorAppointmentProfileNav = () => {
   }, [hash]);
 
   return (
-    <div className='doctor-appointment-profile-nav-container'>
-      <div className='doctor-appointmen-profile-navbar'>
+    <div className='doctor-profile-appointment-nav-container'>
+      <div className='doctor-profile-appointment-nav'>
         <div
           onClick={() => setActiveTab('Appointment')}
           className={`item ${activeTab === 'Appointment' ? 'active' : ''}`}
         >
-          <a href='#Appointment' className='nav-tab-appointment'>
+          <a href='#Appointment' className='doctor-profile-appointment-nav-tab'>
             Appointment
           </a>
         </div>
@@ -40,7 +40,7 @@ const DoctorAppointmentProfileNav = () => {
           }}
           className={`item ${activeTab === 'Setting' ? 'active' : ''}`}
         >
-          <a href='#Setting' className='nav-tab-setting'>
+          <a href='#Setting' className='doctor-profile-appointment-setting-nav-tab'>
             Setting
           </a>
         </div>

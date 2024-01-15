@@ -98,6 +98,7 @@ const DocotorOwnSpecialization = () => {
               <img
                 src={item.src}
                 alt='Image'
+                className='doctor-own-specialization-image'
                 style={{ marginRight: '30px', width: '150px', height: '150px' }}
               />
               <figcaption style={{ marginTop: '20px' }}>{item.name}</figcaption>
