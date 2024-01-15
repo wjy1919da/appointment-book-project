@@ -183,6 +183,11 @@
 .today-tile {
   position: relative;
   color: #fff;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
   border-radius: 6px;
   overflow: hidden;
   background: white;
@@ -202,6 +207,17 @@
     background: #ee7070;
     border-radius: 6px;
     width: 50%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 12px;
+    right: 12px;
+    border-top: 3px solid white !important;
+    border-bottom: 3px solid white !important;
   }
 
   .today-tile--weekend {
