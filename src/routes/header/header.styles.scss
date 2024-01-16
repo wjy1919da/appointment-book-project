@@ -4,7 +4,7 @@
 
 .header-container {
   width: 100%;
-  background: rgba($color: #ffffff, $alpha: 0.8);
+  background: #FBFCFF;
   display: flex;
   justify-content: space-between;
   border: 0;
@@ -17,6 +17,7 @@
   position: fixed;
   align-items: center;
   border-bottom: 1px solid var(--avatar-color-image, #e2e3e7);
+  padding-right: 50px;
 
   .header-logo-container {
     display: flex;
@@ -25,7 +26,7 @@
     // height: 40px;
     // left: 40px;
     // top: calc(50% - 40px/2);
-    margin-left: 90px;
+    padding-left: 50px;
     align-items: center;
     .logo {
       height: 40px;

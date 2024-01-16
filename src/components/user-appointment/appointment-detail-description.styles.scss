@@ -1,35 +1,213 @@
 .user-appointment-description-main-container {
-    padding: 3rem 1.5rem;
+    padding: 2.25rem 5rem;
+    // width: 80rem;
 }
 
-.app-cancel-button
-{
-    border-radius: 6.307px;
-    background:  #E2E3E7;
-    display: inline-flex;
-    height: 35px;
-    padding: 5.115px 20.46px;
+.user-appointment-description-form-title {
+    padding-right: 14rem;
+    padding-bottom: 1rem;
+    font-size: 28px;
+    font-weight: 600;
+    color: #352C29;
+}
+
+.user-appointment-edit-info-form-gender-container {
+    display: flex;
+    column-gap: 2rem;
+    width: 40%;
+    align-items: center;
+}
+
+.user-appointment-edit-info-form-label,
+.user-appointment-description-form-birthday-title {
+    margin-bottom: 0;
+}
+
+.user-appointment-description-form-top-row {
+    display: flex;
+    width: 100%;
+    // column-gap: 2rem;
+}
+.user-appointment-description-form-birthday-label {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    width: 100%;
+}
+.user-appointment-description-form-birthday-container {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+.user-appointment-description-form-birthday-input {
+    border: 1px solid #675D59;
+    border-radius: 6px;
+    padding: 6px 18px;
+    width: 60%;
+}
+.user-appointment-description-form-birthday-title {
+    font-size: 18px;
+    font-weight: 400;
+}
+.user-appointment-description-form-interests-row {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 1rem;
+    width: 100%;
+}
+.user-appointment-description-form-interests-container {
+    display: flex;
+    width: 100%;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+}
+.user-appointment-interests-button {
+    text-align: center;
+    // font-family: PingFang SC;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    color: rgba($color: #141414, $alpha: 0.5);
+    border: 1px solid rgba($color: #141414, $alpha: 0.5);
+    padding: 12px 32px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.user-appointment-interests-selected {
+    color: #FBFCFF;
+    background: linear-gradient(to right, #F48C8A, #F0A484);
+    border: 1px solid #F48C8A;
+}
+.user-appointment-description-form-description-row {
+    width: 100%;
+    padding-top: 1rem;
+}
+.user-appointment-description-form-description-label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.user-appointment-description-form-description {
+    border: 1px solid #675D59;
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #675D59;
+    font-size: 16px;
+    font-weight: 600;
+    max-height: 10rem;
+    min-height: 4rem;
+}
+.user-appointment-description-form-photos-row {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.user-appointment-photo-cover-container {
+    opacity: 0%;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    // border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background: rgba($color: #141414, $alpha: 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 9.461px;
-    flex-shrink: 0;
-    color:  #838383;
-    text-align: center;
-    /* Interactive 1 */
-    font-family: Open Sans;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 100%; /* 22px */
 }
-.app-detail-description-button
-{
+.user-appointment-photo-cover-container:hover {
+    opacity: 100%;
+}
+.user-appointment-pic-trash {
+    width: 2rem;
+    height: 2rem;
+}
+.user-appointment-pic-trash:hover {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+.user-appointment-description-form-photos-container {
     display: flex;
-    margin: auto;
-    margin-top: 100px;
-    gap:50px;
-    justify-content: center;
+    width: 100%;
+    column-gap: 1rem;
+    padding-top: 1rem;
 }
+.user-appointment-description-form-add-photo {
+    width: 120px;
+    height: 100px;
+    // padding: 10px 12px;
+    border: 2px solid #675D59;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #675D59;
+    font-weight: 400;
+    cursor: pointer;
+}
+.user-appointment-remove-photo-button {
+    position: absolute;
+    top: -0.35rem;
+    right: -0.35rem;
+    z-index: 2;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.15rem;
+    cursor: pointer;
+    font-size: 12px;
+    color: #FBFCFF;
+    background: #f08c7a;
+    border-radius: 50%;
+}
+.user-appointment-remove-photo-button:hover {
+    background: #ce5e50;
+}
+.user-appointment-description-form-bottom-row {
+    width: 100%;
+    display: flex;
+    column-gap: 1.5rem;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+}
+// .app-cancel-button
+// {
+//     border-radius: 6.307px;
+//     background:  #E2E3E7;
+//     display: inline-flex;
+//     height: 35px;
+//     padding: 5.115px 20.46px;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 9.461px;
+//     flex-shrink: 0;
+//     color:  #838383;
+//     text-align: center;
+//     /* Interactive 1 */
+//     font-family: Open Sans;
+//     font-size: 14px;
+//     font-style: normal;
+//     font-weight: 600;
+//     line-height: 100%; /* 22px */
+// }
+// .app-detail-description-button
+// {
+//     display: flex;
+//     margin: auto;
+//     margin-top: 100px;
+//     gap:50px;
+//     justify-content: center;
+// }
 
 .app-invisible-button {
     visibility: hidden;

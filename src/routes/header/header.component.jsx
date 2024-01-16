@@ -17,7 +17,7 @@ const Header = () => {
   const loginIcon = require('../../assets/home/login-user.png');
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMediaQuery({ query: `(max-width: 743px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isPopupOpen = userInfo.popupState !== 'closed';
 
@@ -119,14 +119,20 @@ const Header = () => {
                 className={`header-nav header-nav-link ${
                   location.pathname === '/doctor' ? 'active-link' : ''
                 }`}
-                to='/doctor' title="Doctors"
-              >Doctors</Link>
+                to='/doctor'
+                title='Doctors'
+              >
+                Doctors
+              </Link>
               <Link
                 className={`header-nav header-nav-link ${
                   location.pathname === '/posts' ? 'active-link' : ''
                 }`}
-                to='/posts' title='Posts'
-              >Posts</Link>
+                to='/posts'
+                title='Posts'
+              >
+                Posts
+              </Link>
               <span className='header-nav dropdown-center'>
                 <Link
                   className={`header-nav-link ${
@@ -139,7 +145,7 @@ const Header = () => {
                   // aria-expanded='false'
                   //onMouseOver={() => setIsModelOpen(true)}
                   // onClick={() => setIsModalOpen(true)}
-                  to = '/procedure'
+                  to='/procedure'
                   title='Procedure'
                 >
                   Procedure
@@ -158,25 +164,27 @@ const Header = () => {
                 className={`header-nav header-nav-link ${
                   location.pathname === '/instrument' ? 'active-link' : ''
                 }`}
-                to='/instrument' title="Instruments"
-              >Instruments</Link>
+                to='/instrument'
+                title='Instruments'
+              >
+                Instruments
+              </Link>
             </div>
             <HeaderUser />
           </div>
           <Outlet />
         </>
-        )}
-        {isPopupOpen &&
-                <SignupPopup3
-                show = {isPopupOpen}
-                onHide={() => {togglePopup(false)}}
-            />  
-        }
-     </>
-   );
- }; 
-
-
-
+      )}
+      {isPopupOpen && (
+        <SignupPopup3
+          show={isPopupOpen}
+          onHide={() => {
+            togglePopup(false);
+          }}
+        />
+      )}
+    </>
+  );
+};
 
 export default Header;

@@ -1,0 +1,218 @@
+.react-calendar {
+  padding: 10px;
+  width: 372px;
+}
+
+// prev, next button
+.react-calendar__navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .react-calendar__navigation__prev-button,
+  .react-calendar__navigation__next-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background: #ee7070;
+    border-radius: 4px;
+    min-width: 25px;
+    height: 25px;
+    padding-bottom: 5px;
+  }
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background: #ee7070;
+}
+
+// dates that are not that month
+.react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.4;
+}
+
+// to remove the default January 2024
+.react-calendar__navigation__label {
+  flex-grow: 0 !important;
+}
+
+// January 2024
+.react-calendar__navigation__label__labelText {
+  color: #352c29;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+// days of the week
+.react-calendar__month-view__weekdays__weekday abbr {
+  color: #675d59;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  text-decoration: none !important;
+}
+
+// targeting 15th
+.react-calendar__month-view__days__day:nth-child(15) {
+  position: relative;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #ee7070;
+    border-radius: 6px;
+    width: 50%;
+  }
+}
+
+// targeting 16th
+.react-calendar__month-view__days__day:nth-child(16) {
+  position: relative;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #ee7070;
+    border-radius: 6px;
+    width: 50%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 13%;
+    width: 12px;
+    height: 12px;
+    background-color: #ee7070;
+    border-radius: 50%;
+  }
+}
+
+// targeting 17th
+.react-calendar__month-view__days__day:nth-child(17) {
+  position: relative;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #675d59;
+    border-radius: 6px;
+    width: 50%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 13%;
+    width: 12px;
+    height: 12px;
+    background-color: #ee7070;
+    border-radius: 50%;
+  }
+}
+
+// targeting 18th
+.react-calendar__month-view__days__day:nth-child(18) {
+  position: relative;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+
+  &:before {
+    content: url('../../../assets/doctor/doctor-history.svg');
+    position: absolute;
+    top: 5%;
+    right: 13%;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+// saturday, sunday
+.react-calendar__month-view__days__day--weekend {
+  color: #675d59;
+}
+
+// current date
+.today-tile {
+  position: relative;
+  color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+
+  abbr {
+    position: relative;
+    z-index: 100;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ee7070;
+    border-radius: 6px;
+    width: 50%;
+  }
+
+  .today-tile--weekend {
+    &:active {
+      color: #fff !important;
+    }
+  }
+}
+
+// remove the default background blue when click
+.react-calendar__tile--active:enabled:hover {
+  color: #675d59;
+  background: transparent;
+}

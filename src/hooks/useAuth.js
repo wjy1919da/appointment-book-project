@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import APIClient from "../services/api-client.js";
 import defaultAvatar from "../assets/post/user-profile-avatar.png";
 import { useToast } from "@chakra-ui/react";
-
 export function useUserOptLogin() {
   const apiClient = new APIClient("/login/phone/validate-otp");
   const fetchUserOtpRegisterValidate = async (mobile, otp, userRole) => {

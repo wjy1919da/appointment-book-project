@@ -127,7 +127,6 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     description: "",
     avatar: "",
     verificationStatus: 0,
-    // Initial state is closed
     popupState: "closed",
     trigger: 0,
   },

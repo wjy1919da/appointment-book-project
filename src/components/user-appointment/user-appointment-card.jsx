@@ -3,6 +3,9 @@ import videoConsul from '../../assets/user/Video Call.png'
 import videoCamera from '../../assets/user/videoCamera.svg';
 import TodayIcon from '../../assets/user/Today.png'
 import AppInfoQueryStore from '../../appointmentStore.ts'
+import badgeAppointmentConfirmed from '../../assets/user/badgeAppointmentConfirmed.svg';
+import badgeAppointmentPending from '../../assets/user/badgeAppointmentPending.svg';
+import badgeAppointmentDeclined from '../../assets/user/badgeAppointmentDeclined.svg';
 /**
  * type: 0 = reschedule, 1 = in time range to start, 2 = not in time range to start
  * 
@@ -14,7 +17,8 @@ const UserAppointmentCard = ({date,time,name,type, isIndexOdd, onClick, appointm
     const appointmentButtonClasses = `appointment-start-button ${type === 1 ? 'appointment-start-button-ready' : 'appointment-start-button-unready'}`;
     const appointmentCardClasses = `user-appointment-card-container ${type === 0 ? 'user-appointment-card-container-schedule' : type === 1 ? 'user-appointment-card-container-start' : 'user-appointment-card-container-regular'} ${isIndexOdd && 'user-appointment-card-container-odd'}`;
     const appointmentInfoClasses = type === 0 ? 'appointment-info-schedule' : 'appointment-info-regular';
-    const endingText = type === 0 ? 'Not Confirmed' : appointmentPending ? 'Waiting for Confirmation' : 'Appointment Confirmed';
+    const endingText = type === 0 ? 'Declined' : appointmentPending ? 'Waiting for Confirmation' : 'Appointment Confirmed';
+    const appointmentBadge = type === 0 ? badgeAppointmentDeclined : appointmentPending ? badgeAppointmentPending : badgeAppointmentConfirmed;
     const handleCardClick = () => {
         onClick(); // Call the onClick function passed from the parent component
       };
@@ -30,13 +34,16 @@ const UserAppointmentCard = ({date,time,name,type, isIndexOdd, onClick, appointm
                 <span className={`appointment-name1 ${appointmentInfoClasses}`}>{name}</span>
                 <div className='appointment-type-section'>
                     <img src={videoCamera} className={type === 0 ? 'appointment-video-camera-schedule' : 'appointment-video-camera-regular'} alt='video camera' /> 
-                    <span className={`appointment-type1 ${type === 0 ? 'appointment-type1-schedule' : 'appointment-type1-regular'}`}>{type === 0 ? 'Video Consultation' : appointmentPending ? 'Waiting for Confirmation' : 'Confirmed Appointment'}</span>
+                    <span className={`appointment-type1 ${type === 0 ? 'appointment-type1-schedule' : 'appointment-type1-regular'}`}>{type === 0 ? 'Video Consultation' : appointmentPending ? 'Waiting for Confirmation' : 'Appointment Confirmed'}</span>
                 </div>
                 {!isHistory && type === 1 && <button className={appointmentButtonClasses}>Join the Consulting Room</button>}
                 {!isHistory && type === 2 && <button disabled className={appointmentButtonClasses}>Not Available Yet</button>}
             </div>
             <div className='appointment-ending-section'>
-                {!isHistory && <span className='appointment-ending-section-text'>{endingText}</span>}
+                {!isHistory && <div className='appointment-ending-section-top-row'>
+                        <div className='appointment-ending-section-badge-container'> <img className='appointment-ending-section-badge' src={appointmentBadge} alt='appointment badge' /> </div>
+                        <span className={`appointment-ending-section-text ${type === 0 && 'appointment-ending-section-text-declined'}`}>{endingText}</span>
+                     </div> }
                 <button className='appointment-ending-button' onClick={handleCardClick}>View Details</button>
             </div>
             {/* <div className='appointment-today-Icon'>
