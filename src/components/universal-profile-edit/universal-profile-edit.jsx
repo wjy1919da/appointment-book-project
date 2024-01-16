@@ -737,7 +737,7 @@ const UniversalProfileEdit = () => {
   );
 };
 
-const UniversalInfoFormInput = ({
+export const UniversalInfoFormInput = ({
   onChange,
   stateVariable,
   placeholder,
