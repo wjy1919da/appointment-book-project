@@ -7,7 +7,7 @@ import Button from '../../components-posts/community-post-button/community-post-
 import AppointmentDetail from '../../user-appointment/appointment-detail';
 
 // data
-import { appointmentData } from '../data/appointmentData';
+import { appointmentData as initialAppointmentData } from '../data/appointmentData';
 // import { slotsDescriptionData } from "../data/slotsDescriptionData";
 
 // scss
@@ -21,6 +21,9 @@ import xIcon from '../../../assets/user/xIcon.svg';
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date());
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [appointmentData, setAppointmentData] = useState(
+    initialAppointmentData
+  );
 
   const handleChange = (newDate) => {
     setDate(newDate);
@@ -52,6 +55,28 @@ const DoctorAppointmentProfileAppointmentTab = () => {
   // pop up close
   const handleClickPopupClose = () => {
     setPopupOpen(false);
+  };
+
+  // toggle slots
+  const toggleSlots = (index) => {
+    setPopupOpen(false);
+    setAppointmentData((prevData) => {
+      const updatedSlots = prevData.map((slot, i) => {
+        if (i === index) {
+          return {
+            ...slot,
+            status:
+              slot.status === 'Open Slot'
+                ? 'Close Slot'
+                : slot.status === 'Close Slot'
+                ? 'Open Slot'
+                : slot.status,
+          };
+        }
+        return slot;
+      });
+      return updatedSlots;
+    });
   };
 
   return (
@@ -192,7 +217,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     </span>
                   )}
                 </div>
-                <span
+                <button
                   className={`${
                     item.status === 'Open Slot'
                       ? 'doctor-profile-appointment-tab-status-open-slot'
@@ -208,12 +233,14 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                       ? 'doctor-profile-appointment-tab-status-confirm'
                       : ''
                   }`}
+                  onClick={() => toggleSlots(index)}
                 >
+                  {/* status with icon */}
                   <span className='doctor-profile-appointment-tab-status-container'>
                     {item.icon && <img src={item.icon} alt='Icon' />}
                     {item.status}
                   </span>
-                </span>
+                </button>
               </div>
             ))}
           </div>
