@@ -19,6 +19,13 @@ export default function CustomizedApp() {
                 setCurrentChannelUrl(channel.url);
               }
             }}
+            allowProfileEdit={true}
+            onThemeChange={(theme) => {
+              alert(`New theme is: ${theme}`);
+            }}
+            onProfileEditSuccess={(user) => {
+              alert(`New nickname is: ${user.nickname}`);
+            }}
           />
         </div>
         <div className="sendbird-app__conversation-wrap">
@@ -29,17 +36,17 @@ export default function CustomizedApp() {
             }}
           />
         </div>
+        {showSettings && (
+          <div className="sendbird-app__settingspanel-wrap">
+            <SBChannelSettings
+              channelUrl={currentChannelUrl}
+              onCloseClick={() => {
+                setShowSettings(false);
+              }}
+            />
+          </div>
+        )}
       </div>
-      {showSettings && (
-        <div className="sendbird-app__settingspanel-wrap">
-          <SBChannelSettings
-            channelUrl={currentChannelUrl}
-            onCloseClick={() => {
-              setShowSettings(false);
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 }
