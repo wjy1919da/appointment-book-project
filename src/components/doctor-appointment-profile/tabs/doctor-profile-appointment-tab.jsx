@@ -87,14 +87,17 @@ const DoctorAppointmentProfileAppointmentTab = () => {
             className='doctor-profile-appointment-tab-darkened'
             onClick={(e) => handleClickList(e)}
           ></div>
-          <div onClick={handleClickPopupClose}>
-            <img
-              src={xIcon}
-              className='doctor-profile-appointment-tab-close-icon'
-              alt='Close-Icon'
-            />
-          </div>
-          <div className='doctor-profile-appointment-popup'>
+          <div className='doctor-profile-appointment-tab-popup-container'>
+            <div
+              className='doctor-profile-appointment-tab-close-icon-container'
+              onClick={handleClickPopupClose}
+            >
+              <img
+                src={xIcon}
+                className='doctor-profile-appointment-tab-close-icon'
+                alt='Close-Icon'
+              />
+            </div>
             <AppointmentDetail />
           </div>
         </div>
