@@ -42,7 +42,9 @@ const DoctorAppointmentProfileAppointmentTab = () => {
 
   // pop up
   const handleClickList = (e) => {
-    if (e.target.classList.contains('doctor-profile-appointment-tab-list-active')) {
+    if (
+      e.target.classList.contains('doctor-profile-appointment-tab-list-active')
+    ) {
       setPopupOpen(true);
     }
   };
@@ -58,7 +60,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
         <div className='doctor-profile-appointment-tab-darkened-container'>
           <div
             className='doctor-profile-appointment-tab-darkened'
-            onClick={handleClickList}
+            onClick={(e) => handleClickList(e)}
           ></div>
           <div onClick={handleClickPopupClose}>
             <img
@@ -136,7 +138,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     ? 'doctor-profile-appointment-tab-list-active'
                     : 'doctor-profile-appointment-tab-list-disabled'
                 }`}
-                onClick={handleClickList}
+                onClick={(e) => handleClickList(e)}
               >
                 <span
                   className={`doctor-profile-appointment-tab-time ${
