@@ -3,9 +3,11 @@ import Calendar from 'react-calendar';
 
 // components
 import Button from '../../components-posts/community-post-button/community-post-button';
-// dummy data
+// import UserAppoinmentSection1 from '../../user-appointment/user-appointment-section1';
+import AppointmentDetail from '../../user-appointment/appointment-detail';
+
+// data
 import { appointmentData } from '../data/appointmentData';
-// slots decription data
 // import { slotsDescriptionData } from "../data/slotsDescriptionData";
 
 // scss
@@ -13,8 +15,12 @@ import './doctor-profile-appointment-tab.scss';
 import '../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss';
 import 'react-calendar/dist/Calendar.css';
 
+// images
+import xIcon from '../../../assets/user/xIcon.svg';
+
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date());
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
   const handleChange = (newDate) => {
     setDate(newDate);
@@ -34,8 +40,41 @@ const DoctorAppointmentProfileAppointmentTab = () => {
     return weekdays[date.getDay()];
   };
 
+  // pop up
+  const handleClickList = (e) => {
+    if (
+      e.target.classList.contains('doctor-profile-appointment-tab-list-active')
+    ) {
+      setPopupOpen(true);
+    }
+  };
+
+  // pop up close
+  const handleClickPopupClose = () => {
+    setPopupOpen(false);
+  };
+
   return (
     <div className='doctor-profile-appointment-tab-container'>
+      {isPopupOpen && (
+        <div className='doctor-profile-appointment-tab-darkened-container'>
+          <div
+            className='doctor-profile-appointment-tab-darkened'
+            onClick={(e) => handleClickList(e)}
+          ></div>
+          <div onClick={handleClickPopupClose}>
+            <img
+              src={xIcon}
+              className='doctor-profile-appointment-tab-close-icon'
+              alt='Close-Icon'
+            />
+          </div>
+          <div className='doctor-profile-appointment-popup'>
+            <AppointmentDetail />
+          </div>
+        </div>
+      )}
+
       <div className='doctor-profile-appointment-tab-inner-container'>
         <div className='doctor-profile-appointment-tab-left-container'>
           <Calendar
@@ -99,6 +138,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     ? 'doctor-profile-appointment-tab-list-active'
                     : 'doctor-profile-appointment-tab-list-disabled'
                 }`}
+                onClick={(e) => handleClickList(e)}
               >
                 <span
                   className={`doctor-profile-appointment-tab-time ${
