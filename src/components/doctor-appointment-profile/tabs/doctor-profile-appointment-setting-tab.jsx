@@ -136,7 +136,7 @@ const DoctorAppointmentProfileSetting = () => {
       </div>
       {/* edit consultation */}
       <div className='doctor-profile-appointment-setting-tab-inner-container-2'>
-        <div className='test1'>
+        <div className='doctor-profile-appointment-setting-tab-edit-consultation-container'>
           <div className='doctor-profile-appointment-setting-tab-title-2'>
             Edit Consultation
           </div>

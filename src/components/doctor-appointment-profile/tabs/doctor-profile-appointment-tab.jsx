@@ -81,6 +81,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
 
   return (
     <div className='doctor-profile-appointment-tab-container'>
+      {/* pop up */}
       {isPopupOpen && (
         <div className='doctor-profile-appointment-tab-darkened-container'>
           <div
