@@ -3,8 +3,8 @@ import Calendar from 'react-calendar';
 
 // components
 import Button from '../../components-posts/community-post-button/community-post-button';
-// import UserAppoinmentSection1 from '../../user-appointment/user-appointment-section1';
 import AppointmentDetail from '../../user-appointment/appointment-detail';
+import DarkenConfirmationModal from '../../chakra-modal/chakra-modal';
 
 // data
 import { appointmentData as initialAppointmentData } from '../data/appointmentData';
@@ -17,10 +17,13 @@ import 'react-calendar/dist/Calendar.css';
 
 // images
 import xIcon from '../../../assets/user/xIcon.svg';
+import confirmedIcon from '../../../assets/doctor/doctor-verification-status.svg';
 
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date());
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const [appointmentData, setAppointmentData] = useState(
     initialAppointmentData
   );
@@ -44,11 +47,12 @@ const DoctorAppointmentProfileAppointmentTab = () => {
   };
 
   // pop up
-  const handleClickList = (e) => {
+  const handleClickList = (e, index) => {
     if (
       e.target.classList.contains('doctor-profile-appointment-tab-list-active')
     ) {
       setPopupOpen(true);
+      setCurrentIndex(index);
     }
   };
 
@@ -71,6 +75,31 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                 : slot.status === 'Close Slot'
                 ? 'Open Slot'
                 : slot.status,
+          };
+        }
+        return slot;
+      });
+      return updatedSlots;
+    });
+  };
+
+  // modal secondary confirmation
+  const handleConfirmClick = () => {
+    setModalOpen(true);
+  };
+
+  // call slots and modal both
+  const handleConfirmAndToggle = async (index) => {
+    console.log('Both Called');
+    await handleConfirmClick();
+    toggleSlots(index);
+    // update the status to confirmed
+    setAppointmentData((prevData) => {
+      const updatedSlots = prevData.map((slot, i) => {
+        if (i === index) {
+          return {
+            ...slot,
+            status: 'Confirmed',
           };
         }
         return slot;
@@ -103,6 +132,22 @@ const DoctorAppointmentProfileAppointmentTab = () => {
           </div>
         </div>
       )}
+
+      {/* darken secondary confirmation modal pop up */}
+      <DarkenConfirmationModal
+        title='Secondary Confirmation '
+        cancelButtonText='No'
+        approveButtonText='Yes'
+        approveCallback={() => {
+          if (appointmentData[currentIndex]?.status !== 'Confirmed') {
+            handleConfirmAndToggle(currentIndex);
+            setModalOpen(false);
+            setAppointmentData((prevData) => [...prevData]);
+          }
+        }}
+        isModalOpen={isModalOpen}
+        closeModalFunc={() => setModalOpen(false)}
+      />
 
       <div className='doctor-profile-appointment-tab-inner-container'>
         <div className='doctor-profile-appointment-tab-left-container'>
@@ -237,12 +282,22 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                       ? 'doctor-profile-appointment-tab-status-confirm'
                       : ''
                   }`}
-                  onClick={() => toggleSlots(index)}
+                  // onClick={() => handleConfirmAndToggle(index)}
+                  onClick={() => {
+                    if (item.status !== 'Confirmed') {
+                      handleConfirmAndToggle(index);
+                    }
+                  }}
                 >
                   {/* status with icon */}
                   <span className='doctor-profile-appointment-tab-status-container'>
-                    {item.icon && <img src={item.icon} alt='Icon' />}
-                    {item.status}
+                    {item.status === 'Confirmed' && (
+                      <>
+                        <img src={confirmedIcon} alt='Confirmed Icon' />
+                        Confirmed
+                      </>
+                    )}
+                    {item.status !== 'Confirmed' && item.status}
                   </span>
                 </button>
               </div>
