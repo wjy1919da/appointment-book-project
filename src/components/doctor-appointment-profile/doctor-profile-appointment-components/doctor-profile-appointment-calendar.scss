@@ -1,3 +1,9 @@
+// color variables
+$main-background: #f87d63; // #ee7070
+$main-text: #675d59;
+$basic-white: #fbfcff;
+$title: #352c29;
+
 .react-calendar {
   padding: 10px;
   width: 372px;
@@ -10,7 +16,7 @@
   align-items: center;
 
   button {
-    color: #fff;
+    color: $basic-white;
     font-size: 16px;
   }
 
@@ -20,7 +26,7 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    background: #ee7070;
+    background: $main-background;
     border-radius: 4px;
     min-width: 25px;
     height: 25px;
@@ -35,7 +41,7 @@
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-  background: #ee7070;
+  background: $main-background;
 }
 
 // dates that are not that month
@@ -50,14 +56,14 @@
 
 // January 2024
 .react-calendar__navigation__label__labelText {
-  color: #352c29;
+  color: $title;
   font-size: 14px;
   padding: 0 10px;
 }
 
-// days of the week
+// monday to sunday
 .react-calendar__month-view__weekdays__weekday abbr {
-  color: #675d59;
+  color: $main-text;
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
@@ -65,6 +71,11 @@
   line-height: normal;
   text-transform: capitalize;
   text-decoration: none !important;
+}
+
+// days
+.react-calendar__month-view__days__day {
+  color: $main-text;
 }
 
 // targeting 15th
@@ -83,9 +94,9 @@
     bottom: 14%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #ee7070;
+    border: 1px solid $main-background;
     border-radius: 6px;
-    width: 50%;
+    width: 60%;
   }
 }
 
@@ -105,9 +116,9 @@
     bottom: 14%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #ee7070;
+    border: 1px solid $main-background;
     border-radius: 6px;
-    width: 50%;
+    width: 60%;
   }
 
   &:after {
@@ -117,7 +128,7 @@
     right: 13%;
     width: 12px;
     height: 12px;
-    background-color: #ee7070;
+    background-color: $main-background;
     border-radius: 50%;
   }
 }
@@ -138,9 +149,9 @@
     bottom: 14%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #675d59;
+    border: 1px solid $main-text;
     border-radius: 6px;
-    width: 50%;
+    width: 60%;
   }
 
   &:after {
@@ -150,7 +161,7 @@
     right: 13%;
     width: 12px;
     height: 12px;
-    background-color: #ee7070;
+    background-color: $main-background;
     border-radius: 50%;
   }
 }
@@ -176,13 +187,13 @@
 
 // saturday, sunday
 .react-calendar__month-view__days__day--weekend {
-  color: #675d59;
+  color: $main-text;
 }
 
 // current date
 .today-tile {
   position: relative;
-  color: #fff;
+  color: $basic-white;
   font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
@@ -190,7 +201,7 @@
   line-height: normal;
   border-radius: 6px;
   overflow: hidden;
-  background: white;
+  background: $basic-white;
 
   abbr {
     position: relative;
@@ -204,9 +215,9 @@
     bottom: 14%;
     left: 50%;
     transform: translateX(-50%);
-    background: #ee7070;
+    background: $main-background;
     border-radius: 6px;
-    width: 50%;
+    width: 60%;
   }
 
   &:after {
@@ -216,19 +227,19 @@
     bottom: 20%;
     left: 12px;
     right: 12px;
-    border-top: 2px solid white !important;
-    border-bottom: 2px solid white !important;
+    border-top: 2px solid $basic-white !important;
+    border-bottom: 2px solid $basic-white !important;
   }
 
   .today-tile--weekend {
     &:active {
-      color: #fff !important;
+      color: $basic-white !important;
     }
   }
 }
 
 // remove the default background blue when click
 .react-calendar__tile--active:enabled:hover {
-  color: #675d59;
+  color: $main-text;
   background: transparent;
 }
