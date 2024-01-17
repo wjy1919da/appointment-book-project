@@ -13,15 +13,15 @@
     gap: 20px;
     border: 2px solid #675d59;
     border-radius: 12px;
-    width: 1280px;
-    height: 600px;
+    width: 100%;
+    height: 450px;
 
-    .doctor-profile-appointment-setting-tab-calendar {
-      background: lightgrey;
-      border-radius: 10px;
-      width: 336px;
-      height: 267px;
-    }
+    // .doctor-profile-appointment-setting-tab-calendar {
+    //   background: lightgrey;
+    //   border-radius: 10px;
+    //   width: 336px;
+    //   height: 267px;
+    // }
 
     .doctor-profile-appointment-setting-tab-right-container {
       margin-top: -50px;
@@ -44,7 +44,7 @@
             border: 1px solid #675d59;
             border-radius: 6px;
             background: #fbfcff;
-            margin-right: 15px;
+            margin: 20px 15px 0 0;
             padding: 10px;
             width: 330px;
           }
@@ -94,7 +94,6 @@
   }
   .doctor-profile-appointment-setting-tab-inner-container-2 {
     display: flex;
-    flex-direction: column;
 
     // edit consultation title
     .doctor-profile-appointment-setting-tab-title-2 {
@@ -104,7 +103,6 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
-      padding-left: 300px;
       width: 100%;
     }
 
@@ -127,6 +125,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        margin: 20px 0;
       }
 
       .doctor-profile-appointment-setting-tab-video-consultation-status,
