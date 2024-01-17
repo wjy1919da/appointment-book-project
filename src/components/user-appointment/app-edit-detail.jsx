@@ -27,7 +27,7 @@ const AppEditDetail = ({appointmentObj}) => {
         setSelectedTime(time);
     }
     const rescheduleAppointmentCallback = () => {
-        togglePopup(true, 'finish');
+        togglePopup(true, 'editAppointmentFinish');
         setIsModalOpen(false);
     }
     const dontRescheduleAppointmentCallback = () => {

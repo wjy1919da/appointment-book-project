@@ -40,7 +40,7 @@ const AppDetailDescription = ({appointmentObj}) => {
     const handleSaveChanges = (e) => {
         e.preventDefault();
         console.log('attempting to save changes!');
-        togglePopup(true, 'editAppointmentFinish')
+        togglePopup(true, 'finish');
     }
     const handleCancelAppointment = (e) => {
         e.preventDefault();
