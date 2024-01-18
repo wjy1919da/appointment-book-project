@@ -32,7 +32,28 @@ import APIClient from "../../services/api-client.js";
 import { useNavigate } from "react-router-dom";
 import { retrieveUserFollowList } from "../../hooks/useAuth.js";
 import { useGetDoctorPost } from "../../hooks/useApiRequestPostFilter.js";
+import ProfileMessage from "../../components/profile-message/profile-message.component";
 
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Text,
+  useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@chakra-ui/react";
 // scss
 import "./individual-doctor.styles.scss";
 
@@ -40,7 +61,7 @@ const IndividualDoctor = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const inboxDisclosure = useDisclosure();
   const { encodedMemberId } = useParams();
   const navigate = useNavigate();
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
@@ -115,7 +136,8 @@ const IndividualDoctor = () => {
         data3={data3}
         encodedMemberId={encodedMemberId}
       />
-
+      {/* Inbox test button */}
+      <div onClick={inboxDisclosure.onOpen}>SendMessage</div>
       <div className="indv-doctor-navbar">
         <div
           onClick={() => selectTab(0)}
@@ -156,6 +178,24 @@ const IndividualDoctor = () => {
           />
         </div>
       )}
+      <Modal
+        onClose={inboxDisclosure.onClose}
+        isOpen={inboxDisclosure.isOpen}
+        size="xl"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent width="1200px" maxW="1400px">
+          <ModalHeader>Inbox</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <ProfileMessage isConversion={true} />
+          </ModalBody>
+          <ModalFooter>
+            {/* <Button onClick={inboxDisclosure.onClose}>Close</Button> */}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 

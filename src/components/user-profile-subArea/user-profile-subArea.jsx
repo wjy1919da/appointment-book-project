@@ -41,8 +41,7 @@ const UserProfileSubArea = () => {
     if (
       cleanHash === "Likes" ||
       cleanHash === "Posts" ||
-      cleanHash === "Doctors" ||
-      cleanHash === "Inbox"
+      cleanHash === "Doctors"
     ) {
       setActiveTab(cleanHash);
     }
@@ -79,14 +78,14 @@ const UserProfileSubArea = () => {
             Doctors
           </a>
         </div>
-        <div
+        {/* <div
           onClick={() => setActiveTab("Inbox")}
           className={`item ${activeTab === "Inbox" ? "active" : ""}`}
         >
           <a href="#Inbox" className="nav-tab-inbox">
             Inbox
           </a>
-        </div>
+        </div> */}
       </div>
       <div className="bottom-rendering">
         {activeTab === "Likes" && (
@@ -110,7 +109,7 @@ const UserProfileSubArea = () => {
           />
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
-        {activeTab === "Inbox" && <ProfileMessage />}
+        {/* {activeTab === "Inbox" && <ProfileMessage />} */}
       </div>
     </div>
   );

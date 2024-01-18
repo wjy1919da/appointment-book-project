@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import "./profile-message-conversion.styles.scss";
+import React, { useState, useEffect } from "react";
 
 import SBConversation from "@sendbird/uikit-react/Channel";
 import SBChannelList from "@sendbird/uikit-react/ChannelList";
 import SBChannelSettings from "@sendbird/uikit-react/ChannelSettings";
-
-export default function CustomizedApp() {
-  // useState
-  const [showSettings, setShowSettings] = useState(false);
-  const [currentChannelUrl, setCurrentChannelUrl] = useState("");
+const ProfileMessageConversion = ({ initialChannelUrl }) => {
+  const [currentChannelUrl, setCurrentChannelUrl] = useState(
+    initialChannelUrl || ""
+  );
+  useEffect(() => {
+    if (initialChannelUrl) {
+      setCurrentChannelUrl(initialChannelUrl);
+    }
+  }, [initialChannelUrl]);
 
   return (
-    <div className="customized-app">
+    <div>
       <div className="sendbird-app__wrap">
         <div className="sendbird-app__channellist-wrap">
           <SBChannelList
@@ -25,14 +30,11 @@ export default function CustomizedApp() {
           />
         </div>
         <div className="sendbird-app__conversation-wrap">
-          <SBConversation
-            channelUrl={currentChannelUrl}
-            onChatHeaderActionClick={() => {
-              setShowSettings(true);
-            }}
-          />
+          <SBConversation channelUrl={currentChannelUrl} />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProfileMessageConversion;
