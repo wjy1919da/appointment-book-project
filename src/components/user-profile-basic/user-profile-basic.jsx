@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 // images
 import UserProfilePicture from "../../assets/post/user_profile_pic.png";
-// import BookingIcon from '../../assets/post/booking-icon.png';
+import BookingIcon from '../../assets/post/booking-icon.png';
 
 // components
 import HomeButton from "../home-button/home-button.component";
@@ -57,7 +57,7 @@ const UserProfileBasic = () => {
                 </span>
               </div>
             </div>
-            <div className="wrapper">
+            <div className="user-profile-buttons-wrapper">
               <div className="user-profile-basic-edit-button">
                 <HomeButton
                   title="Edit Profile"
@@ -66,7 +66,7 @@ const UserProfileBasic = () => {
                   onClick={navigateToEditProfile}
                 />
               </div>
-              {/* <div className="user-profile-basic-booking-button-container">
+              <div className="user-profile-basic-booking-button-container">
               <button
                 className="user-profile-basic-booking-button"
                 onClick={navigateToAppointment}
@@ -78,7 +78,7 @@ const UserProfileBasic = () => {
                   height="33px"
                 />
               </button>
-            </div> */}
+            </div>
             </div>
           </div>
 

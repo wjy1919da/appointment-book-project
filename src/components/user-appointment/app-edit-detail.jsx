@@ -14,7 +14,7 @@ import badgeIcon from '../../assets/user/badgeIconSVG.svg'
 import glassesIcon from '../../assets/user/glassesIconSVG.svg'
 import ChakraUserAppointmentModal from '../chakra-modal/chakra-user-appointment-modal';
 
-const AppEditDetail = ({appointmentObj}) => {
+const AppEditDetail = ({appointmentObj, isNewApp}) => {
     const togglePopup = AppInfoQueryStore(state=>state.togglePopup);
     const [value, onChange] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(null);
@@ -31,7 +31,7 @@ const AppEditDetail = ({appointmentObj}) => {
         setIsModalOpen(false);
     }
     const dontRescheduleAppointmentCallback = () => {
-        togglePopup(true,'mainSection');
+        // togglePopup(true,'mainSection');
         setIsModalOpen(false);
     }
     return (
@@ -103,7 +103,7 @@ const AppEditDetail = ({appointmentObj}) => {
                             </div>
                         </div>
                         </div>
-                        <div className='app-edit-cnext-button-container'>
+                        {!isNewApp && <div className='app-edit-cnext-button-container'>
                             {selectedTime ? <button className='app-edit-cnext-button' 
                             onClick={() => {
                                 console.log(`Value and time is: ${value} and ${selectedTime}`);
@@ -112,7 +112,7 @@ const AppEditDetail = ({appointmentObj}) => {
                             >Confirm</button> : <button title='Please select a time.' className='app-edit-cnext-button-disabled' disabled
                             >Confirm</button>}
                             
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

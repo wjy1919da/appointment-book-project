@@ -298,7 +298,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   const navigate = useNavigate();
 
   const handleGoToAppointmentPageNow = () => {
-    navigate("/doctor-appointment-1");
+    navigate(`/createAppointment/${data?.memberId}`);
   };
 
   return (
@@ -432,6 +432,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
             </div>
           </div>
           <div className="indv-doctor-info-row indv-fifth-row">
+          <button type='button' className='indv-button indv-consultation-button' onClick={handleGoToAppointmentPageNow}>Book a Consultation with Me!</button>
             {isUserFollowing ? (
               <button
                 type="button"
@@ -450,10 +451,9 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               </button>
             )}
             {/* UNCOMMENT FOR 2.0 RELEASE (WHEN API IS IMPLEMENTED) */}
-            {/* <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button> */}
           </div>
           {/* this is dummu button to navigate to doctor appointment page for demo */}
-          <button onClick={handleGoToAppointmentPageNow}>Dummy</button>
+          {/* <button onClick={handleGoToAppointmentPageNow}>Dummy</button> */}
         </div>
       </div>
     </>
