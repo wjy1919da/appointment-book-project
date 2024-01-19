@@ -125,7 +125,8 @@ const AppointmentDetail = ({
                   Join the Consultation Room
                 </button>
               )
-            ) : type !== 1 ? (
+            ) : // * * * doctor profile appointment popup
+            type !== 1 ? (
               <>
                 <button
                   className={className}
@@ -134,16 +135,7 @@ const AppointmentDetail = ({
                     background:
                       'linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)',
                   }}
-                  // onClick={() => {
-                  //   console.log('EDIT Link clicked');
-                  //   togglePopup(true, 'appointmentDescription');
-                  // }}
                 >
-                  {/* <img
-                  src={editIcon}
-                  alt='edit'
-                  className='app-doctor-ending-edit-icon'
-                /> */}
                   Confirm
                 </button>
                 <button
