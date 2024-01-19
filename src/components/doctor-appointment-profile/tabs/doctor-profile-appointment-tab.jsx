@@ -108,7 +108,10 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                 alt='Close-Icon'
               />
             </div>
-            <AppointmentDetail />
+            {/* confirmed */}
+            <AppointmentDetail className='doctor-profile-appointment-tab-button' />
+            {/* not confirmed */}
+            {/* <AppointmentDetail type={1} className='doctor-profile-appointment-tab-button' /> */}
           </div>
         </div>
       )}
