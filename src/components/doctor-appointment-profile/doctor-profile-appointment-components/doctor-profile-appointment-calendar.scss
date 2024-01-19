@@ -230,13 +230,23 @@ $title: #352c29;
     right: 12px;
     // border-top: 2px solid $basic-white !important;
     // border-bottom: 2px solid $basic-white !important;
-    border: 2px solid white;
+    // border: 2px solid white;
   }
 
   .today-tile--weekend {
     &:active {
       color: $basic-white !important;
     }
+  }
+
+  .is-today {
+    position: absolute;
+    background: #8317171a;
+    height: 24px;
+    width: 38px;
+    top: 9px;
+    border: 4px solid white;
+    left: 6px;
   }
 }
 

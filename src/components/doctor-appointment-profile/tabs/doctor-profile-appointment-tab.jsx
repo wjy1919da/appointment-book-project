@@ -18,6 +18,10 @@ import 'react-calendar/dist/Calendar.css';
 // images
 import xIcon from '../../../assets/user/xIcon.svg';
 
+function isToday(date) {
+  return new Date().toDateString() === date.toDateString();
+}
+
 const DoctorAppointmentProfileAppointmentTab = () => {
   const [date, setDate] = useState(new Date()); // react-calendar date
   const [isPopupOpen, setPopupOpen] = useState(false); // pop up
@@ -134,6 +138,13 @@ const DoctorAppointmentProfileAppointmentTab = () => {
             locale='en-GB'
             formatShortWeekday={formatShortWeekday}
             tileClassName={tileClassName}
+            tileContent={({ date, view }) => {
+              if (view === 'month') {
+                if (isToday(date)) {
+                  return <div className='is-today'></div>;
+                }
+              }
+            }}
           />
           <div className='doctor-profile-appointment-tab-button-container'>
             <Button
