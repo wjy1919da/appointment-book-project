@@ -134,7 +134,7 @@ $title: #352c29;
 }
 
 // targeting 17th
-.react-calendar__month-view__days__day:nth-child(17) {
+.react-calendar__month-view__days__day:nth-child(18) {
   position: relative;
 
   abbr {
@@ -167,7 +167,7 @@ $title: #352c29;
 }
 
 // targeting 18th
-.react-calendar__month-view__days__day:nth-child(18) {
+.react-calendar__month-view__days__day:nth-child(17) {
   position: relative;
 
   abbr {
@@ -202,6 +202,7 @@ $title: #352c29;
   border-radius: 6px;
   overflow: hidden;
   background: $basic-white;
+  // background: orange;
 
   abbr {
     position: relative;
@@ -225,10 +226,11 @@ $title: #352c29;
     position: absolute;
     top: 20%;
     bottom: 20%;
-    left: 12px;
+    // left: 12px;
     right: 12px;
-    border-top: 2px solid $basic-white !important;
-    border-bottom: 2px solid $basic-white !important;
+    // border-top: 2px solid $basic-white !important;
+    // border-bottom: 2px solid $basic-white !important;
+    border: 2px solid white;
   }
 
   .today-tile--weekend {
