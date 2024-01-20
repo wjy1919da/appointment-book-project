@@ -134,7 +134,7 @@ $title: #352c29;
 }
 
 // targeting 17th
-.react-calendar__month-view__days__day:nth-child(18) {
+.react-calendar__month-view__days__day:nth-child(17) {
   position: relative;
 
   abbr {
@@ -167,7 +167,7 @@ $title: #352c29;
 }
 
 // targeting 18th
-.react-calendar__month-view__days__day:nth-child(17) {
+.react-calendar__month-view__days__day:nth-child(18) {
   position: relative;
 
   abbr {
@@ -175,11 +175,11 @@ $title: #352c29;
     z-index: 10;
   }
 
-  &:before {
+  &:after {
     content: url('../../../assets/doctor/doctor-history.svg');
     position: absolute;
-    top: 5%;
-    right: 13%;
+    top: 0;
+    right: 15%;
     width: 10px;
     height: 10px;
   }
@@ -239,15 +239,16 @@ $title: #352c29;
     }
   }
 
+  // white lines for current date
   .is-today {
     position: absolute;
-    background: #8317171a;
-    height: 24px;
-    width: 38px;
     top: 9px;
-    border: 4px solid #fbfcff;
     left: 6px;
+    background: #8317171a;
+    border: 3px solid $basic-white;
     border-radius: 5px;
+    width: 38px;
+    height: 24px;
   }
 }
 
@@ -255,7 +256,8 @@ $title: #352c29;
 .react-calendar__tile--active:enabled:hover {
   color: $main-text;
   background: transparent;
+
   .is-today {
-    border-color: white;
+    border-color: $basic-white;
   }
 }
