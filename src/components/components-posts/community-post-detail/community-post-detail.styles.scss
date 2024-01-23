@@ -9,16 +9,6 @@
   background-color: transparent;
 }
 
-.close-button img {
-  position: relative;
-  top: -30px;
-  right: -140px;
-  background-color: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
 .modal-dialog {
   margin: 0.5rem auto;
   max-width: 100%;
@@ -45,31 +35,20 @@
   overflow-y: auto; /* 如果内容超过高度，会有滚动条 */
   flex-grow: 1; /* 允许modal-body填充剩余空间 */
 }
+
 .modal-content {
   width: 70%;
   height: 90%;
   margin: 0 auto;
   border-radius: 25px;
-}
 
-// @media (min-width: 576px) {
-// }
-
-@media (max-width: 1024px) {
-  .close-button img {
-    right: -120px;
-  }
-}
-
-@media (max-width: 576px) {
-  .modal-content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    height: 80%;
-  }
-
-  .close-button img {
-    right: -80px;
+  // x icon
+  .modal-content-close-button-container {
+    position: relative;
+    top: -1rem;
+    right: -9.6rem;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
