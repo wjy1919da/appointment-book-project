@@ -91,7 +91,7 @@ const IndividualDoctor = () => {
     fetchNextPage: postFetchNextPage,
     hasNextPage: postHasNextPage,
   } = useGetDoctorPost();
-  console.log("doctor post data", postData, postIsLoading);
+  // console.log("doctor post data", postData, postIsLoading);
   const { nickname } = data?.nickname || {};
   const [activeTab, setActiveTab] = useState(0);
   const tabs = ["About", "Posts", "Likes"];
@@ -189,7 +189,10 @@ const IndividualDoctor = () => {
           <ModalHeader>Inbox</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ProfileMessage isConversion={true} />
+            <ProfileMessage
+              isConversion={true}
+              receiverId={doctorQuery.memberId}
+            />
           </ModalBody>
           <ModalFooter>
             {/* <Button onClick={inboxDisclosure.onClose}>Close</Button> */}

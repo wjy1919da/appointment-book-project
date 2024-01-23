@@ -4,7 +4,7 @@
 
 .header-container {
   width: 100%;
-  background: #FBFCFF;
+  background: #fbfcff;
   display: flex;
   justify-content: space-between;
   border: 0;
@@ -56,7 +56,7 @@
 
     .header-nav-link {
       padding: 6px 0;
-      font-family: 'Open Sans';
+      font-family: "Open Sans";
       font-style: normal;
       font-size: 16px;
       font-weight: 400;
@@ -133,7 +133,7 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 744px) {
   .header-container-mobile {
     display: flex;
     flex-direction: row;
@@ -172,12 +172,12 @@
       justify-content: center;
       display: flex;
       border-bottom: 1px solid black;
-      font-family: 'Open Sans';
+      font-family: "Open Sans";
       font-weight: 600;
       size: 18px;
       line-height: 18px;
     }
-    
+
     .header-logo-container-mobile {
       position: relative;
       display: flex;
@@ -251,7 +251,7 @@
   //   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 744px) {
   .header-container {
     .header-logo-container {
       .logo {
