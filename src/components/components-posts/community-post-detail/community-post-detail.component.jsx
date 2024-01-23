@@ -21,7 +21,6 @@ const PostDetail = ({ show, onHide, isMobile }) => {
           onHide={onHide}
           size='xl'
           aria-labelledby='example-custom-modal-styling-title'
-          // style={{ marginTop: "50px" }}
         >
           <div className='modal-content-centering-wrapper'>
             <div className='modal-content first-modal-content'>
@@ -46,7 +45,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
               aria-labelledby='example-custom-modal-styling-title'
               style={{ marginTop: '20px' }}
             >
-              <div style={{ border: '10px solid white', borderRadius: '50px' }}>
+              <div className="modal-content-main-container">
                 {isLoading ? (
                   <CommunityPostDetailPopUPSkeleton />
                 ) : (
