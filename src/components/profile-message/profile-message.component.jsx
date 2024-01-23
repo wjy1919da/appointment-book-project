@@ -24,7 +24,6 @@ const ProfileMessage = ({ receiverId, isConversion }) => {
       setNickname(userInfo.username);
     }
   }, [userInfo?.username]);
-  //   console.log();
 
   const { mutate: createOrRetrieveChannel, data: channelData } =
     useCreateOrRetrieveChannel(APP_ID, USER_ID);
@@ -33,9 +32,6 @@ const ProfileMessage = ({ receiverId, isConversion }) => {
       createOrRetrieveChannel(receiverId, doctorQuery.nickName);
     }
   }, [isConversion, receiverId, doctorQuery.nickName]);
-  if (channelData) {
-    console.log("channelData", channelData.channel_url);
-  }
 
   return (
     <div className="channels-container">
