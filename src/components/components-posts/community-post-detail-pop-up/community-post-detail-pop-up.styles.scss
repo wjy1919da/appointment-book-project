@@ -402,31 +402,31 @@
     }
   }
 
-  .fixed-input-box {
-    display: none;
+  // .fixed-input-box {
+  //   display: none;
 
-    .Icon-display {
-      display: none;
+  //   .Icon-display {
+  //     display: none;
 
-      .Icon-size {
-        display: none;
-      }
+  //     .Icon-size {
+  //       display: none;
+  //     }
 
-      .Icon-count {
-        display: none;
-      }
-    }
+  //     .Icon-count {
+  //       display: none;
+  //     }
+  //   }
 
-    .new-comment-input {
-      .input-blank {
-        display: none;
-      }
+  //   .new-comment-input {
+  //     .input-blank {
+  //       display: none;
+  //     }
 
-      .input-blank.focus {
-        display: none;
-      }
-    }
-  }
+  //     .input-blank.focus {
+  //       display: none;
+  //     }
+  //   }
+  // }
 }
 
 .user-detail {
@@ -565,5 +565,9 @@
         gap: 3px;
       }
     }
+  }
+
+  .fixed-input-box {
+    left: 0;
   }
 }
