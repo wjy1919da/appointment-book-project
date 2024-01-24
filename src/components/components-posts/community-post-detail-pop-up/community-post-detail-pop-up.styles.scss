@@ -527,12 +527,6 @@
   border-radius: 10px;
 }
 
-.test {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @media (max-width: 744px) {
   .post-detail-popUp-container {
     .postdetail-popUp-left-container {
@@ -567,6 +561,7 @@
     }
   }
 
+  // likes, comments bar
   .fixed-input-box {
     left: 0;
   }

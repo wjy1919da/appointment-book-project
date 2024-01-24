@@ -333,94 +333,88 @@ const CommunityPostDetailPopUP = ({
         </div>
       </div> */}
 
-      {/* Web */}
       <div className='postdetail-popUp-left-container'>
         {/* {!isMobile && picture && ( */}
-          <>
-            <div
-              className='post-detail-image-wrapper'
-              onMouseEnter={() => setShowArrows(true)}
-              onMouseLeave={() => setShowArrows(false)}
-            >
-              {currentImageIndex > 0 && showArrows && (
-                <FontAwesomeIcon
-                  className='arrow-icon arrow-left'
-                  icon={faArrowLeft}
-                  size='lg'
-                  onClick={goToPreviousImage}
-                  style={{ color: '#fafcff' }}
-                />
-              )}
-              {picture && isImageLoaded ? (
+        <>
+          <div
+            className='post-detail-image-wrapper'
+            onMouseEnter={() => setShowArrows(true)}
+            onMouseLeave={() => setShowArrows(false)}
+          >
+            {currentImageIndex > 0 && showArrows && (
+              <FontAwesomeIcon
+                className='arrow-icon arrow-left'
+                icon={faArrowLeft}
+                size='lg'
+                onClick={goToPreviousImage}
+                style={{ color: '#fafcff' }}
+              />
+            )}
+            {picture && isImageLoaded ? (
+              <img
+                src={picture[currentImageIndex]}
+                ref={imageRef}
+                onError={() => setIsImageLoaded(false)}
+                className='post-detail-image'
+                alt='detail-pic'
+              />
+            ) : (
+              <div className='post-detail-grey-image'></div>
+            )}
+            {currentImageIndex < picture.length - 1 && showArrows && (
+              <FontAwesomeIcon
+                className='arrow-icon arrow-right'
+                icon={faArrowRight}
+                size='lg'
+                onClick={goToNextImage}
+                style={{ color: '#fafcff' }}
+              />
+            )}
+            {showArrows && (
+              <div className='image-index-tag'>
+                {currentImageIndex + 1} / {picture.length}
+              </div>
+            )}
+          </div>
+          <div className='user-detail'>
+            <div className='user-detail-inner'>
+              {isAvatarLoaded && postQuery.userAvatar ? (
                 <img
-                  src={picture[currentImageIndex]}
-                  ref={imageRef}
-                  onError={() => setIsImageLoaded(false)}
-                  className='post-detail-image'
-                  alt='detail-pic'
+                  src={postQuery.userAvatar}
+                  alt='Image-User-Picture'
+                  className='user-detail-profile-image'
+                  onError={() => setIsAvatarLoaded(false)}
                 />
               ) : (
-                <div className='post-detail-grey-image'></div>
+                <div className='post-detail-grey-circle'></div>
               )}
-              {currentImageIndex < picture.length - 1 && showArrows && (
-                <FontAwesomeIcon
-                  className='arrow-icon arrow-right'
-                  icon={faArrowRight}
-                  size='lg'
-                  onClick={goToNextImage}
-                  style={{ color: '#fafcff' }}
-                />
-              )}
-              {showArrows && (
-                <div className='image-index-tag'>
-                  {currentImageIndex + 1} / {picture.length}
-                </div>
-              )}
+              <span>{postQuery.userName}</span>
             </div>
-            <div className='user-detail'>
-                <div className='user-detail-inner'>
-                  {isAvatarLoaded && postQuery.userAvatar ? (
-                    <img
-                      src={postQuery.userAvatar}
-                      alt='Image-User-Picture'
-                      className='user-detail-profile-image'
-                      onError={() => setIsAvatarLoaded(false)}
-                    />
-                  ) : (
-                    <div className='post-detail-grey-circle'></div>
-                  )}
-                  <span>{postQuery.userName}</span>
-                </div>
 
-              <div className='user-detail-button-container'>
-                {isDoctorAuthor && (
-                  <button
-                    className='button-highlight'
-                    onClick={handleHighlightClick}
-                  >
-                    {postQuery.isHighlight
-                      ? 'Remove from Highlight'
-                      : 'Highlight'}
-                  </button>
-                )}
-                {isAuthor && (
-                  <button
-                    className='button-private'
-                    onClick={handlePrivateClick}
-                  >
-                    {postQuery.isPrivate == 0
-                      ? 'Remove from Private'
-                      : 'Private'}
-                  </button>
-                )}
-                {isAuthor && (
-                  <button className='button-edit' onClick={handleGoToEdit}>
-                    Edit your Post
-                  </button>
-                )}
-              </div>
+            <div className='user-detail-button-container'>
+              {isDoctorAuthor && (
+                <button
+                  className='button-highlight'
+                  onClick={handleHighlightClick}
+                >
+                  {postQuery.isHighlight
+                    ? 'Remove from Highlight'
+                    : 'Highlight'}
+                </button>
+              )}
+              {isAuthor && (
+                <button className='button-private' onClick={handlePrivateClick}>
+                  {postQuery.isPrivate == 0 ? 'Remove from Private' : 'Private'}
+                </button>
+              )}
+              {isAuthor && (
+                <button className='button-edit' onClick={handleGoToEdit}>
+                  Edit your Post
+                </button>
+              )}
             </div>
-          </>
+          </div>
+        </>
         {/* )} */}
         {isMobile && <img src={picture} ref={imageRef}></img>}
       </div>
@@ -490,7 +484,6 @@ const CommunityPostDetailPopUP = ({
           </div>
         )}
 
-        {/* Web */}
         <div className='fixed-input-box'>
           <div className='post-detail-send-box-outer-container'>
             <div className='Icon-display'>
