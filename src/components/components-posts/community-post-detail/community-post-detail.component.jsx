@@ -24,11 +24,15 @@ const PostDetail = ({ show, onHide, isMobile }) => {
         >
           <div className='modal-content-centering-wrapper'>
             <div className='modal-content first-modal-content'>
-              <button className='close-button' onClick={onHide}>
-                <div className='modal-content-close-button-container'>
-                  <img src={CloseButton} alt='Icon-Close-Button' />
-                </div>
-              </button>
+              {/* x button */}
+              <div
+                className='modal-content-close-button-container'
+                onClick={onHide}
+              >
+                {/* <button className='close-button' onClick={onHide}> */}
+                <img src={CloseButton} alt='Icon-Close-Button' />
+              </div>
+              {/* </button> */}
             </div>
           </div>
         </Modal>
@@ -45,7 +49,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
               aria-labelledby='example-custom-modal-styling-title'
               style={{ marginTop: '20px' }}
             >
-              <div className="modal-content-main-container">
+              <div className='modal-content-main-container'>
                 {isLoading ? (
                   <CommunityPostDetailPopUPSkeleton />
                 ) : (
