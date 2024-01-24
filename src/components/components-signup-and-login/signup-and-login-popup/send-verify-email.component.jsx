@@ -9,10 +9,12 @@ import './send-verify-email.styles.scss';
 import CustomInput from '../custom-input/custom-input.component';
 import { Form, InputGroup } from 'react-bootstrap';
 import NextButton from './next-button.component';
+import { useToast } from '@chakra-ui/react';
 const SendVerifyEmail = () => {
     const schema = z.object({
         email: z.string().email(),
     });
+    const toast = useToast();
     const { register, handleSubmit, formState: { errors,isValid } } = useForm({
         resolver: zodResolver(schema),
     });
@@ -35,7 +37,7 @@ const SendVerifyEmail = () => {
     };
     useEffect(() => {
         if (data?.msg) {
-            alert(data.msg);
+            toast({description: data.msg});
             if (data.code === 100 && data.msg !== "Already verified") {
                 switchPopupTab('verifyEmail');
             }

@@ -82,7 +82,7 @@ const LoginForm = (props) => {
         }
     }, [resp]);
     if (error) {
-        alert(error.message);
+        toast({title: error.message, status: 'error',})
     }
     return (
         <div className="sign-in-form-container">

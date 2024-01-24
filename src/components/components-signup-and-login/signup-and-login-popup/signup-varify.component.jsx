@@ -5,12 +5,14 @@ import LoginRegisterTitle from "./login-register-title.component";
 import { useClickVerification } from "../../../hooks/useAuth";
 import NextButton from "./next-button.component";
 import { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
 const SignupVerify = () => {
   const switchPopupTab = userInfoQueryStore((state) => state.switchPopupTab);
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const { mutate, data, isLoading, isError, error } = useClickVerification();
   const [countdown, setCountdown] = useState(10);
   const [isTiming, setIsTiming] = useState(false);
+  const toast = useToast();
   var email;
   var userRole;
   useEffect(() => {
@@ -19,7 +21,7 @@ const SignupVerify = () => {
   });
   const handleOnClick = () => {
     if (!email) {
-      alert("email is empty");
+      toast({title: "email is empty", status: 'info'});
       switchPopupTab("sendVerifyEmail");
       return;
     }
@@ -32,7 +34,7 @@ const SignupVerify = () => {
   };
   useEffect(() => {
     if (data?.msg) {
-      alert(data.msg);
+      toast({title: data.msg});
     }
   }, [data]);
   useEffect(() => {
@@ -48,7 +50,7 @@ const SignupVerify = () => {
     }
   }, [isTiming, countdown]);
   if (error) {
-    alert(error);
+    toast({status: "error", title: error.msg})
   }
   return (
     <div className="signip-varify-container">

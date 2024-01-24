@@ -11,7 +11,7 @@ const GoogleLoginButton = ({setToken, setEmail, togglePopup, ...props }) => {
     const [response, setResponse] = useState(null);
 
     const handleSuccess = async (codeResponse) => {
-        console.log(codeResponse);
+        console.log("THIS IS THE CODE RESPONSE", codeResponse);
         const googleAccessToken = codeResponse.googleAccessToken;
 
         try {

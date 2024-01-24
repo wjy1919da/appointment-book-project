@@ -10,10 +10,13 @@ import CustomInput from '../custom-input/custom-input.component';
 import NextButton from './next-button.component';
 import LoginRegisterTitle from './login-register-title.component';
 import {useUserOtpRegister} from '../../../hooks/useAuth';
+import { useToast } from '@chakra-ui/react';
+
 const LoginPhone = () => {
     const switchPopupTab = userInfoQueryStore(state=>state.switchPopupTab);
     const setPhoneNumber = userInfoQueryStore(state=>state.setPhoneNumber);
     const togglePopup = userInfoQueryStore(state=>state.togglePopup);
+    const toast = useToast();
     const userInfo = userInfoQueryStore((state) => state.userInfo);
     var userRole = localStorage.getItem('accountType');
     const usPhoneNumberPattern = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}$/;
@@ -36,15 +39,15 @@ const LoginPhone = () => {
     useEffect(() => {
         if (data?.code === 100) {
             /* TODO：alert component */ 
-            alert(data.msg);
+            toast({title:data.message})
             switchPopupTab('sendOtpVerification');
         }
         if (data?.code === 500 || data?.code === 403) {
-            alert(data.msg);  
+            toast({title:data.message});
         }
     }, [data]);
     if(isError){
-        alert(error.message);
+        toast({title:error.message});
     }
     return (
         <div className="verify-email-container">
