@@ -82,6 +82,24 @@
     background: linear-gradient(to right, #F48C8A, #F0A484);
     border: 1px solid #F48C8A;
 }
+.user-appointment-topic-addition-container {
+    display: flex;
+}
+.user-appointment-interests-input {
+    text-align: left;
+}
+.user-appointment-add-button {
+    width: 1rem;
+    height: 1rem;
+    color: #FBFCFF;
+    background-color: rgb(127, 206, 8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    cursor: pointer;
+}
 .user-appointment-description-form-description-row {
     width: 100%;
     padding-top: 1rem;

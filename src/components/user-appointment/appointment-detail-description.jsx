@@ -13,9 +13,9 @@ import * as editFuncs from "../universal-profile-edit/universal-edit-verificatio
 import useUploadImg from "../../hooks/useUploadImg";
 import trashcan from "../../assets/doctor/trashcan.svg";
 
-const consultationItems = ['Eyes', 'Body', 'Injections', 'Nose', 'Lips', 'Breasts'];
 
-const AppDetailDescription = ({appointmentObj}) => {
+
+const AppDetailDescription = ({appointmentObj, isNewApp}) => {
     const togglePopup = AppInfoQueryStore(state=>state.togglePopup);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [gender, setGender] = useState(2);
@@ -24,11 +24,15 @@ const AppDetailDescription = ({appointmentObj}) => {
     const [consultation, setConsultation] = useState([]);
     const [description, setDescription] = useState('');
     const [imageLinks, setImageLinks] = useState([]);
+    const [isButtonInputOpen, setIsButtonInputOpen] = useState(false);
+    const [consultationItems, setConsultationItems] = useState(['Eyes', 'Body', 'Injections', 'Nose', 'Lips', 'Breasts']);
+    const [newTopic, setNewTopic] = useState('');
     const cancelAppointment = () => {
         console.log('User is trying to cancel the appointment!');
         setIsModalOpen(false);
     }
     const handleConsultationClick = (itemName) => {
+        console.log('THIS ITEM WAS CLICKED: ', itemName);
         if (consultation.includes(itemName)) {
             const holder = consultation.filter((item) => item !== itemName);
             setConsultation(holder);
@@ -40,7 +44,7 @@ const AppDetailDescription = ({appointmentObj}) => {
     const handleSaveChanges = (e) => {
         e.preventDefault();
         console.log('attempting to save changes!');
-        togglePopup(true, 'editAppointmentFinish')
+        togglePopup(true, 'finish');
     }
     const handleCancelAppointment = (e) => {
         e.preventDefault();
@@ -71,6 +75,25 @@ const AppDetailDescription = ({appointmentObj}) => {
     handleFileSelection({ target: { files: e.dataTransfer.files } });
     };
 
+    const handleButtonInputSubmit = (e) => {
+        // e.preventDefault();
+        // console.log('e is: ', e);
+        // console.log('e is: ', e);
+        // setNewTopic(e.target.value);
+        setConsultationItems([...consultationItems, newTopic]);
+        setConsultation([...consultation, newTopic]);
+        setIsButtonInputOpen(false);
+        setNewTopic('');
+    }
+
+    const handleButtonInputKeyDown = (e) => {
+        console.log('KEY DOWN e is: ', e);
+    }
+
+    const handleMainFormSubmission = (e) => {
+        e.preventDefault();
+    }
+
     useEffect(() => {
         setImageLinks(uploadedFiles);
       }, [uploadedFiles]);
@@ -80,7 +103,7 @@ const AppDetailDescription = ({appointmentObj}) => {
         {/* <ChakraModal title={'Are you sure you want to cancel this appointment?'} cancelButtonText={'Don\'t Cancel'} approveButtonText={'Confirm'} approveCallback={cancelAppointment} isModalOpen={isModalOpen} closeModalFunc={() => setIsModalOpen(false)} /> */}
         <div className='user-appointment-description-main-container'>
             <div className='user-appointment-description-form-container'>
-                <form className='user-appointment-description-form' id='appointment-form' name='appointment-form'>
+                <form className='user-appointment-description-form' id='appointment-form' name='appointment-form' onSubmit={handleMainFormSubmission}>
                     <h3 className='user-appointment-description-form-title'>Please fill out the following information regarding your details.</h3>
                     <div className='user-appointment-description-form-top-row'>
                         <div className="user-appointment-edit-info-form-gender-container">
@@ -202,13 +225,8 @@ const AppDetailDescription = ({appointmentObj}) => {
                             {consultationItems.map((item, index) => 
                                  <button key={index} className={`user-appointment-interests-button ${consultation.includes(item) && 'user-appointment-interests-selected'} `} onClick={(e) => {e.preventDefault(); handleConsultationClick(item);}} >{item}</button>
                             )}
-                            {/* <button disabled className='user-appointment-interests-button' >Eyes</button>
-                            <button disabled className='user-appointment-interests-button' >Body</button>
-                            <button disabled className='user-appointment-interests-button' >Injections</button>
-                            <button disabled className='user-appointment-interests-button' >Nose</button>
-                            <button disabled className='user-appointment-interests-button user-appointment-interests-selected' >Lips</button>
-                            <button disabled className='user-appointment-interests-button' >Breasts</button> */}
-                            <button disabled className='user-appointment-interests-button' >Not what you want? Add here...</button>
+                            {!isButtonInputOpen && <div className='user-appointment-interests-button' onClick={() => setIsButtonInputOpen(true)} >Not what you want? Add here...</div>}
+                            {isButtonInputOpen && <div className='user-appointment-topic-addition-container'><input value={newTopic} onChange={e => setNewTopic(e.target.value)} className='user-appointment-interests-button user-appointment-interests-input' placeholder='Add here...' /> <span onClick={handleButtonInputSubmit} className='user-appointment-add-button'>+</span></div>}
                         </div>
                     </div>
                     <div className='user-appointment-description-form-description-row'>
@@ -246,11 +264,11 @@ const AppDetailDescription = ({appointmentObj}) => {
                             )})}
                         </div>
                     </div>
-                    <div className='user-appointment-description-form-bottom-row'>
+                    {!isNewApp && <div className='user-appointment-description-form-bottom-row'>
                         <button className='app-ending-reschedule-button' onClick={() => togglePopup(true, 'EditAppointment')} >Reschedule</button>
                         <button className='app-ending-cancel-button' onClick={(e) => handleCancelAppointment(e)} >Cancel Appointment</button>
                         <button className='app-doctor-ending-join-consultation-button' onClick={(e) => handleSaveChanges(e)}>Save Changes</button>
-                    </div>
+                    </div>}
                 </form>
             </div>
         </div>

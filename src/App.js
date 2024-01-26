@@ -19,6 +19,7 @@ import Doctor from "./routes/doctor/doctor.component";
 import DocotorOwnMain from "./components/doctor-own-profile/doctor-own-profile-main";
 import DoctorPost from "./routes/community/community.component";
 import UserAppointmentMain from "./components/user-appointment/user-appointment-main.jsx";
+import CreateAppointment from "./routes/create-appointment/create-appointment";
 import IndividualDoctor from "./routes/individual-doctor/individual-doctor";
 import Download from "./routes/download/download.component";
 import HealthCheck from "./routes/health-check/health-check.component";
@@ -162,6 +163,14 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <UserAppointmentMain />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="createAppointment/:doctorId"
+                element={
+                  <PrivateRoute>
+                    <CreateAppointment />
                   </PrivateRoute>
                 }
               />

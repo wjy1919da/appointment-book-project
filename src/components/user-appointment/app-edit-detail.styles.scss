@@ -33,7 +33,7 @@
     width: 100%;
     // width: 850px;
     // height: 450px;
-    background-color: white;
+    background: #FBFCFF;
     display: flex;
     flex-direction: column;
 }
@@ -102,6 +102,7 @@
     overflow: auto;
     max-height: 20rem;
     padding-right: 0.75rem;
+    width: 80%;
     // width: 50%;
     // margin-left: 30px;
 }
