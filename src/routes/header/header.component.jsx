@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import userInfoQueryStore from '../../userStore.ts';
 import HeaderUser from '../header-user/header-user.component';
+import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 import './header.styles.scss';
 // import ArrowIcon from '../../assets/home/arrow-icon.png';
 // import menuBar from '../../assets/home/menu-bar.png';
@@ -10,7 +11,6 @@ import './header.styles.scss';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
 // import { Button, Dropdown, Form } from 'react-bootstrap';
 // import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-// import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
 
 // images
 import UserIcon from '../../assets/user/user.svg';
@@ -78,6 +78,14 @@ const Header = () => {
         {!isMobile ? (
           <>
             <HeaderUser />
+            {isPopupOpen && (
+              <SignupPopup3
+                show={isPopupOpen}
+                onHide={() => {
+                  togglePopup(false);
+                }}
+              />
+            )}
           </>
         ) : (
           <div className='header-login-icon-container'>
