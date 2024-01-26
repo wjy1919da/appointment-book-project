@@ -238,6 +238,7 @@ const SubInstrument = () => {
                {data?.data?.description&&
                <div style={{ marginTop: '-40px' }}>
                    <SubTxt text={data?.data?.description}/>
+                   
                </div>
                }
            </div>
@@ -257,6 +258,7 @@ const SubInstrument = () => {
             prosAndCons&&
                 <div className='instrument-sub-text'>
                         <SubTxt title={subcategories[1].subCategoryTitle} text={subcategories[1].explanation} />
+                        
                 </div>
           }   
           {

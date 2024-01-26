@@ -13,7 +13,7 @@ const Instrument = () => {
     // useLayoutEffect(() => {
     //     window.scrollTo(0, 0);
     // });
-    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+    const isMobile = useMediaQuery({ query: `(max-width:49px)` });
     console.log(instrumentJSONData);
     // const thermageObj = instrumentJSONData[0];
 
