@@ -45,7 +45,8 @@ const DoctorPostGrid = ({
   const setTitle = usePostQueryStore((state) => state.setTitle);
   const flatData = data?.pages?.flatMap((page) => page.data || []) || [];
   // const flatData = [];
-  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  // const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile;
   // console.log("flatData", flatData);

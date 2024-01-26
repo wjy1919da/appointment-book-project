@@ -86,7 +86,9 @@ export const appointmentData = [
   {
     id: nanoid(),
     time: '12:30 PM - 1:00 PM',
-    src: ['https://appointment-icons.s3.us-west-1.amazonaws.com/video-call-icon.svg'],
+    src: [
+      'https://appointment-icons.s3.us-west-1.amazonaws.com/video-call-icon.svg',
+    ],
     await: 'Chloe Mandez',
     cancel: 'Appointment was Cancelled',
     status: 'Confirm and Refund',

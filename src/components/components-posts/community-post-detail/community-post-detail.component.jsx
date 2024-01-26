@@ -1,12 +1,12 @@
-import React from "react";
-import { usePostDetail } from "../../../hooks/useApiRequestPostFilter";
-import Modal from "react-bootstrap/Modal";
-import PostDetailPopUP from "../community-post-detail-pop-up/community-post-detail-pop-up";
-import "./community-post-detail.styles.scss";
-import CommunityPostDetailPopUPSkeleton from "../community-post-detail-pop-up/community-post-detail-popup-skeleton";
+import React from 'react';
+import { usePostDetail } from '../../../hooks/useApiRequestPostFilter';
+import Modal from 'react-bootstrap/Modal';
+import PostDetailPopUP from '../community-post-detail-pop-up/community-post-detail-pop-up';
+import './community-post-detail.styles.scss';
+import CommunityPostDetailPopUPSkeleton from '../community-post-detail-pop-up/community-post-detail-popup-skeleton';
 
 // images
-import CloseButton from "../../../assets/post/pop-up-close-button.png";
+import CloseButton from '../../../assets/post/pop-up-close-button.png';
 
 const PostDetail = ({ show, onHide, isMobile }) => {
   const { data, error, isLoading } = usePostDetail();
@@ -14,20 +14,25 @@ const PostDetail = ({ show, onHide, isMobile }) => {
   // let isLoading = true;
   return (
     <div>
-      <div className="modal-parent-container">
+      <div className='modal-parent-container'>
         <Modal
-          dialogClassName="close-button-modal"
+          dialogClassName='close-button-modal'
           show={show}
           onHide={onHide}
-          size="xl"
-          aria-labelledby="example-custom-modal-styling-title"
-          // style={{ marginTop: "50px" }}
+          size='xl'
+          aria-labelledby='example-custom-modal-styling-title'
         >
-          <div className="modal-content-centering-wrapper">
-            <div className="modal-content first-modal-content">
-              <button className="close-button" onClick={onHide}>
-                <img src={CloseButton} alt="Icon-Close-Button" />
-              </button>
+          <div className='modal-content-centering-wrapper'>
+            <div className='modal-content first-modal-content'>
+              {/* x button */}
+              <div
+                className='modal-content-close-button-container'
+                onClick={onHide}
+              >
+                {/* <button className='close-button' onClick={onHide}> */}
+                <img src={CloseButton} alt='Icon-Close-Button' />
+              </div>
+              {/* </button> */}
             </div>
           </div>
         </Modal>
@@ -35,16 +40,16 @@ const PostDetail = ({ show, onHide, isMobile }) => {
 
       {isMobile ? (
         <div>
-          <div class="modal-parent-container">
+          <div class='modal-parent-container'>
             <Modal
-              dialogClassName="post-detail-mobile-modals"
+              dialogClassName='post-detail-mobile-modals'
               show={show}
               onHide={onHide}
-              size="xl"
-              aria-labelledby="example-custom-modal-styling-title"
-              style={{ marginTop: "20px" }}
+              size='xl'
+              aria-labelledby='example-custom-modal-styling-title'
+              style={{ marginTop: '20px' }}
             >
-              <div style={{ border: "10px solid white", borderRadius: "50px" }}>
+              <div className='modal-content-main-container'>
                 {isLoading ? (
                   <CommunityPostDetailPopUPSkeleton />
                 ) : (
@@ -61,7 +66,6 @@ const PostDetail = ({ show, onHide, isMobile }) => {
                       isLiked={data.data.isLike}
                     />
                   )
-                  // <div>hello</div>
                 )}
               </div>
             </Modal>
@@ -69,11 +73,11 @@ const PostDetail = ({ show, onHide, isMobile }) => {
         </div>
       ) : (
         <Modal
-          dialogClassName="custom-modal-size"
+          dialogClassName='custom-modal-size'
           show={show}
           onHide={onHide}
-          aria-labelledby="example-custom-modal-styling-title"
-          style={{ marginTop: "20px", borderRadius: "55px" }}
+          aria-labelledby='example-custom-modal-styling-title'
+          style={{ marginTop: '20px', borderRadius: '55px' }}
           centered
         >
           {isLoading ? (
@@ -92,7 +96,6 @@ const PostDetail = ({ show, onHide, isMobile }) => {
                 isLiked={data.data.isLike}
               />
             )
-            // <div>hello</div>
           )}
         </Modal>
       )}

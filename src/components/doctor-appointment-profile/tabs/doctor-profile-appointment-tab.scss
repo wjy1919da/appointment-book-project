@@ -1,52 +1,68 @@
 .doctor-profile-appointment-tab-container {
-  padding: 0 50px;
   padding-top: 30px;
   padding-bottom: 100px;
+  width: 100%;
 
   .doctor-profile-appointment-tab-darkened-container {
     position: fixed;
-    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 30;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: auto;
     width: 100%;
     height: 100%;
-    z-index: 30;
 
     .doctor-profile-appointment-tab-darkened {
       position: fixed;
       z-index: 30;
+      background: rgba($color: #434343, $alpha: 0.7);
       width: 100%;
       height: 100%;
-      background: rgba($color: #434343, $alpha: 0.7);
     }
 
-    .doctor-profile-appointment-tab-close-icon {
-      position: absolute;
-      top: 190px;
-      right: 150px;
-      z-index: 100;
-    }
-
-    .doctor-profile-appointment-popup {
-      max-width: 70%;
+    // pop up
+    .doctor-profile-appointment-tab-popup-container {
       position: fixed;
-      border-radius: 18px;
-      margin-top: 4rem;
       z-index: 100;
       background: white;
-      z-index: 100;
+      border-radius: 18px;
+      margin-top: 4rem;
+      max-width: 70%;
+
+      // x icon
+      .doctor-profile-appointment-tab-close-icon-container {
+        position: absolute;
+        top: -3rem;
+        right: -3.5rem;
+        z-index: 100;
+        cursor: pointer;
+        width: 5rem;
+      }
+
+      // buttons in pop up
+      .doctor-profile-appointment-tab-button {
+        font-family: Open Sans;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+        border-radius: 8px;
+        margin-left: 20px;
+        padding: 12px 32px;
+      }
     }
   }
 
   .doctor-profile-appointment-tab-inner-container {
     display: flex;
     gap: 30px;
+    width: 100%;
 
     .doctor-profile-appointment-tab-calendar {
       background: lightgrey;
@@ -91,220 +107,223 @@
     // }
 
     // right container
-    .doctor-profile-appointment-tab-date-title {
-      color: #352c29;
-      font-family: Open Sans;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
+    .doctor-profile-appointment-tab-right-container {
+      flex-grow: 1;
 
-    .doctor-profile-appointment-tab-list-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 6px;
-      box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.2);
-      margin: 10px 0;
-      padding: 16px 24px;
-      width: 930px;
-      height: 64px;
-
-      .doctor-profile-appointment-tab-time {
+      .doctor-profile-appointment-tab-date-title {
+        color: #352c29;
         font-family: Open Sans;
-        font-size: 16px;
+        font-size: 24px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        padding-right: 20px;
-        width: 180px;
       }
 
-      .doctor-profile-appointment-tab-icon-and-await {
+      .doctor-profile-appointment-tab-list-container {
         display: flex;
-        gap: 6px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 6px;
+        box-shadow: 2px 4px 16px 0px rgba(103, 93, 89, 0.2);
+        margin: 10px 0;
+        padding: 16px 24px;
+        width: 100%;
 
-        .doctor-profile-appointment-tab-contact-icon {
-          width: 24px;
-          height: 24px;
-        }
-
-        .doctor-profile-appointment-tab-await {
-          color: #675d59;
+        .doctor-profile-appointment-tab-time {
           font-family: Open Sans;
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
           line-height: normal;
-          padding-right: 90px;
+          padding-right: 20px;
+          width: 180px;
+        }
+
+        .doctor-profile-appointment-tab-icon-and-await {
+          display: flex;
+          gap: 6px;
+
+          .doctor-profile-appointment-tab-contact-icon {
+            width: 24px;
+            height: 24px;
+          }
+
+          .doctor-profile-appointment-tab-await {
+            color: #675d59;
+            font-family: Open Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            padding-right: 90px;
+          }
+        }
+
+        .doctor-profile-appointment-tab-tag-container {
+          // margin: 0 50px;
+          width: 280px;
+
+          .doctor-profile-appointment-tab-tag-1,
+          .doctor-profile-appointment-tab-tag-2 {
+            border-radius: 40px;
+            margin: 0 5px;
+            padding: 4px 32px;
+          }
+        }
+
+        // slots and status
+        .doctor-profile-appointment-tab-status-container {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .doctor-profile-appointment-tab-status-open-slot,
+        .doctor-profile-appointment-tab-status-close-slot,
+        .doctor-profile-appointment-tab-status-confirm {
+          font-family: Open Sans;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          border-radius: 8px;
+          padding: 6px 16px;
+          margin-left: auto;
+        }
+
+        // open slot
+        .doctor-profile-appointment-tab-status-open-slot {
+          color: #fff;
+          background: #675d59;
+        }
+
+        // close slot
+        .doctor-profile-appointment-tab-status-close-slot {
+          color: #675d59;
+          background: #fbfcff;
+          border: 2px solid #675d59;
+        }
+
+        // confirm, confirm and refund * * * sharing same style
+        .doctor-profile-appointment-tab-status-confirm {
+          color: #fff;
+          background: var(
+            --new-gradient,
+            linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+          );
+        }
+
+        // confirmed, declined * * * sharing same style
+        .doctor-profile-appointment-tab-status-confirmed {
+          color: #352c29;
+          font-family: Open Sans;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          margin-left: auto;
         }
       }
 
-      .doctor-profile-appointment-tab-tag-container {
-        // margin: 0 50px;
-        width: 280px;
-
-        .doctor-profile-appointment-tab-tag-1,
-        .doctor-profile-appointment-tab-tag-2 {
-          border-radius: 40px;
-          margin: 0 5px;
-          padding: 4px 32px;
-        }
-      }
-
-      // slots and status
-      .doctor-profile-appointment-tab-status-container {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .doctor-profile-appointment-tab-status-open-slot,
-      .doctor-profile-appointment-tab-status-close-slot,
-      .doctor-profile-appointment-tab-status-confirm {
-        font-family: Open Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        border-radius: 8px;
-        padding: 6px 16px;
-        margin-left: auto;
-      }
-
-      // open slot
-      .doctor-profile-appointment-tab-status-open-slot {
-        color: #fff;
-        background: #675d59;
-      }
-
-      // close slot
-      .doctor-profile-appointment-tab-status-close-slot {
-        color: #675d59;
+      // active list
+      .doctor-profile-appointment-tab-list-active {
         background: #fbfcff;
-        border: 2px solid #675d59;
       }
 
-      // confirm, confirm and refund * * * sharing same style
-      .doctor-profile-appointment-tab-status-confirm {
+      // disabled list
+      .doctor-profile-appointment-tab-list-disabled {
+        background: #e2e3e7;
+      }
+
+      // active tags
+      .doctor-profile-appointment-tab-tag-1-active,
+      .doctor-profile-appointment-tab-tag-2-active {
         color: #fff;
+        border: 1px solid #f48c8a;
         background: var(
           --new-gradient,
           linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
         );
       }
 
-      // confirmed, declined * * * sharing same style
-      .doctor-profile-appointment-tab-status-confirmed {
+      // disabled tags
+      .doctor-profile-appointment-tab-tag-1-disabled,
+      .doctor-profile-appointment-tab-tag-2-disabled {
+        color: #675d59;
+        border: 1px solid #675d59;
+        background: none;
+      }
+
+      // active time
+      .doctor-profile-appointment-tab-time-active {
         color: #352c29;
+      }
+
+      // disabled time
+      .doctor-profile-appointment-tab-time-disabled {
+        color: #675d59;
+      }
+
+      // appointment was canceled
+      .doctor-profile-appointment-tab-cancel {
+        color: #ee7070;
         font-family: Open Sans;
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: normal;
-        margin-left: auto;
       }
     }
 
-    // active list
-    .doctor-profile-appointment-tab-list-active {
-      background: #fbfcff;
-    }
+    // * * * description unused in figma now but we might use it again?
+    // .doctor-profile-appointment-tab-description-container {
+    //   margin: 12px 0;
 
-    // disabled list
-    .doctor-profile-appointment-tab-list-disabled {
-      background: #e2e3e7;
-    }
+    //   // icon style
+    //   .doctor-profile-appointment-tab-icon {
+    //     display: inline-block;
+    //     text-align: center;
+    //     border-radius: 6px;
+    //     padding: 4px;
+    //     width: 28px;
+    //     height: 28px;
+    //   }
 
-    // active tags
-    .doctor-profile-appointment-tab-tag-1-active,
-    .doctor-profile-appointment-tab-tag-2-active {
-      color: #fff;
-      border: 1px solid #f48c8a;
-      background: var(
-        --new-gradient,
-        linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-      );
-    }
+    //   .doctor-profile-appointment-tab-dot {
+    //     position: absolute;
+    //     bottom: 350px;
+    //     left: 118px;
+    //     z-index: 100;
+    //   }
 
-    // disabled tags
-    .doctor-profile-appointment-tab-tag-1-disabled,
-    .doctor-profile-appointment-tab-tag-2-disabled {
-      color: #675d59;
-      border: 1px solid #675d59;
-      background: none;
-    }
+    //   .dot-3 {
+    //     position: absolute;
+    //     bottom: 430px;
+    //     left: 118px;
+    //     z-index: 100;
+    //   }
 
-    // active time
-    .doctor-profile-appointment-tab-time-active {
-      color: #352c29;
-    }
+    //   .icon-1,
+    //   .icon-3 {
+    //     color: #675d59;
+    //   }
 
-    // disabled time
-    .doctor-profile-appointment-tab-time-disabled {
-      color: #675d59;
-    }
+    //   .icon-2 {
+    //     color: #f48c8a;
+    //   }
 
-    // appointment was canceled
-    .doctor-profile-appointment-tab-cancel {
-      color: #ee7070;
-      font-family: Open Sans;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
+    //   .icon-4,
+    //   .icon-5 {
+    //     color: #f48c8a;
+    //     background: #352c29;
+    //   }
+
+    //   .icon-6 {
+    //     color: #fbfcff;
+    //     background: #f48c8a;
+    //   }
+    // }
   }
-
-  // * * * description unused in figma now but we might use it again?
-  // .doctor-profile-appointment-tab-description-container {
-  //   margin: 12px 0;
-
-  //   // icon style
-  //   .doctor-profile-appointment-tab-icon {
-  //     display: inline-block;
-  //     text-align: center;
-  //     border-radius: 6px;
-  //     padding: 4px;
-  //     width: 28px;
-  //     height: 28px;
-  //   }
-
-  //   .doctor-profile-appointment-tab-dot {
-  //     position: absolute;
-  //     bottom: 350px;
-  //     left: 118px;
-  //     z-index: 100;
-  //   }
-
-  //   .dot-3 {
-  //     position: absolute;
-  //     bottom: 430px;
-  //     left: 118px;
-  //     z-index: 100;
-  //   }
-
-  //   .icon-1,
-  //   .icon-3 {
-  //     color: #675d59;
-  //   }
-
-  //   .icon-2 {
-  //     color: #f48c8a;
-  //   }
-
-  //   .icon-4,
-  //   .icon-5 {
-  //     color: #f48c8a;
-  //     background: #352c29;
-  //   }
-
-  //   .icon-6 {
-  //     color: #fbfcff;
-  //     background: #f48c8a;
-  //   }
-  // }
 }
 
 @media (max-width: 1133px) {
