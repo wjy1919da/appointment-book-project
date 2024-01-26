@@ -26,6 +26,7 @@ const DoctorPostGrid = ({
   isLoading,
   error,
   download,
+  breakPoints,
 }) => {
   const hasData = data?.pages?.some(
     (page) => page.data && page.data.length > 0
@@ -137,15 +138,7 @@ const DoctorPostGrid = ({
           >
             <div style={{ padding: "0 7%" }}>
               <ResponsiveMasonry
-                columnsCountBreakPoints={{
-                  default: 5,
-                  2500: 5,
-                  2047: 5,
-                  1700: 5,
-                  1024: 4,
-                  767: 3,
-                  430: 2,
-                }}
+                columnsCountBreakPoints={breakPoints}
                 gutter={gutterwidth}
               >
                 <Masonry gutter={gutterwidth}>{postCardList}</Masonry>
