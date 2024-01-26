@@ -1,14 +1,14 @@
 import { nanoid } from 'nanoid';
-import Verification from '../../../routes/verification/verificaiton.component';
+import VerificationStatus from '../../../assets/doctor/doctor-verification-status.svg';
+import VerificationStatusGray from '../../../assets/doctor/doctor-verification-status-gray.svg';
+import Declined from '../../../assets/doctor/doctor-declined-gray.svg';
+// import Verification from '../../../routes/verification/verificaiton.component';
+
 /*
 video-call: https://appointment-icons.s3.us-west-1.amazonaws.com/video-call-icon.svg
 voice: https://appointment-icons.s3.us-west-1.amazonaws.com/voice-icon.svg
 phone: https://appointment-icons.s3.us-west-1.amazonaws.com/phone-icon.svg
 */
-
-import VerificationStatus from '../../../assets/doctor/doctor-verification-status.svg';
-import VerificationStatusGray from '../../../assets/doctor/doctor-verification-status-gray.svg';
-import Declined from '../../../assets/doctor/doctor-declined-gray.svg';
 
 export const appointmentData = [
   {
@@ -101,7 +101,6 @@ export const appointmentData = [
     tag1: 'Injections',
     tag2: 'Lips',
     icon: VerificationStatus,
-    // icon: require('../../../assets/doctor/VerificationStatus.png').default,
     status: 'Confirmed',
   },
   {

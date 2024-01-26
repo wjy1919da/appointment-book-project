@@ -3,6 +3,47 @@
   padding-top: 30px;
   padding-bottom: 100px;
 
+  .doctor-profile-appointment-tab-darkened-container {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+
+    .doctor-profile-appointment-tab-darkened {
+      position: fixed;
+      z-index: 30;
+      width: 100%;
+      height: 100%;
+      background: rgba($color: #434343, $alpha: 0.7);
+    }
+
+    .doctor-profile-appointment-tab-close-icon {
+      position: absolute;
+      top: 190px;
+      right: 150px;
+      z-index: 100;
+    }
+
+    .doctor-profile-appointment-popup {
+      max-width: 70%;
+      position: fixed;
+      border-radius: 18px;
+      margin-top: 4rem;
+      z-index: 100;
+      background: white;
+      z-index: 100;
+    }
+  }
+
   .doctor-profile-appointment-tab-inner-container {
     display: flex;
     gap: 30px;

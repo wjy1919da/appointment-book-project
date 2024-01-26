@@ -73,7 +73,7 @@
 
   abbr {
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &:before {
@@ -95,7 +95,7 @@
 
   abbr {
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &:before {
@@ -128,7 +128,7 @@
 
   abbr {
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &:before {
@@ -161,7 +161,7 @@
 
   abbr {
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &:before {
@@ -183,13 +183,18 @@
 .today-tile {
   position: relative;
   color: #fff;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
   border-radius: 6px;
   overflow: hidden;
   background: white;
 
   abbr {
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &:before {
@@ -202,6 +207,17 @@
     background: #ee7070;
     border-radius: 6px;
     width: 50%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 12px;
+    right: 12px;
+    border-top: 2px solid white !important;
+    border-bottom: 2px solid white !important;
   }
 
   .today-tile--weekend {
