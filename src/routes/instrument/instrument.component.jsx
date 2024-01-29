@@ -13,18 +13,18 @@ const Instrument = () => {
     // useLayoutEffect(() => {
     //     window.scrollTo(0, 0);
     // });
-    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+    const isMobile = useMediaQuery({ query: `(max-width:744px)` });
     console.log(instrumentJSONData);
     // const thermageObj = instrumentJSONData[0];
 
     return (
         <div className='instrument-container animate__animated animate__fadeIn'>
             <div>
-                {isMobile ? 
+                {/* {isMobile ? 
                 (
                     'Mobile Component here!'
                 ) : 
-                (   <>
+                (   <> */}
                         {/* <div className='instrument-top-container'>
                             <div className='instrument-title-container'>
                                 <h2 className='instrument-text instrument-page-title'>Discover our most up-to-date instruments</h2>
@@ -53,8 +53,8 @@ const Instrument = () => {
                                 </div>
                             ))}
                         </div>
-                    </>
-                )}
+                    {/* </>
+                )} */}
             </div>
             {/* <img className='instrument-pic' src={InstrumentPic} alt='instrument' />
             <div className='slide-in-animation'>
