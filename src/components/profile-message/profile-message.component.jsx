@@ -10,14 +10,15 @@ import "@sendbird/uikit-react/dist/index.css";
 import CustomizedApp from "./profile-message-components/customized-app.component";
 import userInfoQueryStore from "../../userStore";
 import useDoctorQueryStore from "../../store.ts";
+import ProfileMessageCustomInput from "./profile-message-components/profile-message-conversion/profile-message-custom-input";
 
 import ProfileMessageConversion from "./profile-message-components/profile-message-conversion/profile-message-conversion.component";
 const ProfileMessage = ({ receiverId, isConversion }) => {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-  console.log("doctorQuery", doctorQuery);
+  // console.log("doctorQuery", doctorQuery);
   const [nickname, setNickname] = useState("test_user");
   const userInfo = userInfoQueryStore((state) => state.userInfo);
-  const APP_ID = "A622C1D4-19A8-4991-BBBF-04242ED70259";
+  const APP_ID = "03EB6025-A8DF-44E6-AEBB-09781295279C";
   const USER_ID = userInfo?.userId || "1";
   useEffect(() => {
     if (userInfo?.username) {
@@ -32,6 +33,9 @@ const ProfileMessage = ({ receiverId, isConversion }) => {
       createOrRetrieveChannel(receiverId, doctorQuery.nickName);
     }
   }, [isConversion, receiverId, doctorQuery.nickName]);
+  // if (channelData) {
+  //   console.log("channelData", channelData.channel_url);
+  // }
 
   return (
     <div className="channels-container">
@@ -42,7 +46,7 @@ const ProfileMessage = ({ receiverId, isConversion }) => {
         nickname={nickname}
       >
         {!isConversion && <CustomizedApp />}
-        {isConversion && channelData?.channel_url && (
+        {isConversion && (channelData?.channel_url ?? null) && (
           <ProfileMessageConversion
             initialChannelUrl={channelData.channel_url}
           />

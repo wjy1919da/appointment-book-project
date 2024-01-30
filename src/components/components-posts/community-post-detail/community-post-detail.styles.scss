@@ -55,21 +55,21 @@
 // @media (min-width: 576px) {
 // }
 
-@media (max-width: 1024px) {
+@media (max-width: 745px) {
   .close-button img {
     right: -120px;
   }
 }
 
-@media (max-width: 576px) {
-  .modal-content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    height: 80%;
-  }
+// @media (max-width: 576px) {
+//   .modal-content {
+//     margin-left: auto;
+//     margin-right: auto;
+//     width: 80%;
+//     height: 80%;
+//   }
 
-  .close-button img {
-    right: -80px;
-  }
-}
+//   .close-button img {
+//     right: -80px;
+//   }
+// }
