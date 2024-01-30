@@ -14,6 +14,7 @@ const Instrument = () => {
     //     window.scrollTo(0, 0);
     // });
     const isMobile = useMediaQuery({ query: `(max-width:744px)` });
+    
     console.log(instrumentJSONData);
     // const thermageObj = instrumentJSONData[0];
 
@@ -41,8 +42,8 @@ const Instrument = () => {
                             </div>
                         </div> */}
                         <MainPageIntro 
-                            title="Discover our most up-to-date instruments"
-                            description="CharmLife helps you discover our instruments." />
+                            title="Discover Our most up-to-date instruments"
+                            description="Charm Life helps you discover our instruments." />
                         <div className='instrument-body-container'>
                             <div className='instrument-body-title-container'>
                                 <h2 className='instrument-text instrument-body-title'>Our Instruments</h2>
