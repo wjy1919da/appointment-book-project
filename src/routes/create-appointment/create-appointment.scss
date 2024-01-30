@@ -1,0 +1,87 @@
+.create-appointment-container {
+    width: 100%;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    background: linear-gradient(to bottom, #FFF3EC 0%, #FFFFFF 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-appointment-title-container {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+}
+
+.create-appointment-title {
+    color: #352C29;
+    font-weight: 700;
+    font-size: 34px;
+    text-shadow: 0px 2px 2px #baaeaa;
+}
+
+.create-appointment-appointment-info-container {
+    width: 87%;
+    background: #FBFCFF;
+    border: 1px solid #352C29;
+    border-radius: 16px;
+}
+
+.create-appointment-page-container {
+    padding-top: 1rem;
+}
+
+.create-appointment-navigation-bar {
+    display: flex;
+    padding: 3rem 1rem;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.create-appointment-next-button {
+    display: flex;
+    flex-direction: row-reverse;
+    column-gap: 0.25rem;
+    align-items: center;
+    font-size: 22px;
+}
+
+.create-appointment-back-button {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.25rem;
+    align-items: center;
+    font-size: 22px;
+    background: #675D59;
+}
+
+.create-appointment-disabled-button {
+    visibility: hidden;
+}
+
+.create-appointment-radio-navigation-buttons {
+    display: flex;
+    justify-content: center;
+    column-gap: 1.25rem;
+}
+
+.create-appointment-radio-button-container {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #F48C8A;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-appointment-filled-radio-button {
+    width: 60%;
+    height: 60%;
+    // margin: auto;
+    border-radius: 50%;
+    background: #F48C8A;
+}

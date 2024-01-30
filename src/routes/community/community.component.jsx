@@ -47,6 +47,15 @@ const Community = () => {
   const dropdownContentsByFilter = () => {
     return <PostDropDownContents />;
   };
+  const mainPageBreakPoints = {
+    default: 5,
+    2500: 5,
+    2047: 5,
+    1700: 5,
+    1024: 4,
+    767: 3,
+    430: 2,
+  };
 
   // const dropdownContentsByFilter = [
   //   { value: 'facial', label: 'Facial' },
@@ -267,6 +276,7 @@ const Community = () => {
             fetchNextPage={fetchNextPage}
             error={error}
             download={true}
+            breakPoints={mainPageBreakPoints}
           />
           {/* </div> */}
 

@@ -46,6 +46,15 @@ const UserProfileSubArea = () => {
       setActiveTab(cleanHash);
     }
   }, [hash]);
+  const userProfileBreakPoints = {
+    default: 4,
+    2500: 4,
+    2047: 4,
+    1700: 4,
+    1024: 4,
+    767: 3,
+    430: 2,
+  };
 
   return (
     <div className="user-profile-subArea-container">
@@ -96,6 +105,7 @@ const UserProfileSubArea = () => {
             fetchNextPage={userLikedPostFetchNextPage}
             hasNextPage={userLikedPostHasNextPage}
             download={false}
+            breakPoints={userProfileBreakPoints}
           />
         )}
         {activeTab === "Posts" && (
@@ -107,6 +117,7 @@ const UserProfileSubArea = () => {
             fetchNextPage={userPostedPostFetchNextPage}
             hasNextPage={userPostedPostHasNextPage}
             download={false}
+            breakPoints={userProfileBreakPoints}
           />
         )}
         {activeTab === "Doctors" && <UserProfileReview />}

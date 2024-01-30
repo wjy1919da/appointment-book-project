@@ -1,0 +1,68 @@
+.user-appointment-consultation-type-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-appointment-consultation-type-header-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 85%;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+}
+
+.user-appointment-consultation-type-header {
+    color: #352C29;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.user-appointment-consultation-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.user-appointment-consultation-type-consultation-section {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    column-gap: 4rem;
+    padding: 3rem 1rem;
+}
+
+.user-appointment-consultation-item-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+    border-radius: 8px;
+    border: 2px solid #E2E3E7;
+    box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.1);
+    cursor: pointer;
+}
+
+.user-appointment-consultation-item-image-container-selected {
+    border: 3px solid #F48C8A;
+}
+
+.user-appointment-consultation-item-filter {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(46%) saturate(427%) hue-rotate(314deg) brightness(99%) contrast(92%);
+}
+
+.user-appointment-consultation-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #352C29;
+}
+
+.user-appointment-consultation-cost {
+    font-size: 24px;
+    font-weight: 600;
+    color: #F48C8A;
+}
+
