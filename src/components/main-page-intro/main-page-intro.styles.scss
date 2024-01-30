@@ -3,25 +3,36 @@
   padding-top: 8rem;
   font-size: 60px;
   font-weight: 700;
-  width: 55%;
+  width: 57%;
+  //width: 55%;
 }
 .main-title-container {
-  width: 90%;
+  width: 95%; //just added
+  //width: 90%;
   margin: auto;
 }
 .main-page-subtitle {
+  padding-top: 2rem; //just added
   font-weight: 600;
   font-size: 21px;
+  width: 480px; //just added
+  height:58px;
 }
 .main-top-row {
   display: flex;
   justify-content: right;
+  padding-right: 0rem;  //just added
   padding-bottom: 4rem;
+  width:757px;  //length of the bullet
 }
 .main-top-img-container {
-  width: 50%;
-  height: 25rem;
+  // width: 50%;
+  width: 1011px; //just added
+  // height: 25rem;
+  height: 596px;  //just added
   right: 0px;
+  left: 90%; //just added
+  top: -35px;  //just added
   background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
   border-radius: 1000px 0px 0px 1000px;
   position: relative;
@@ -29,12 +40,18 @@
 }
 .main-doctor-img-container {
   position: absolute;
-  right: 25%;
-  bottom: -3px;
-  width: 19rem;
+  right: 15%;
+  // bottom: -3px;
+  bottom: -206.5px;
+  
+  // width: 25rem;
+  height: 900px;
 }
 .main-doctor-img {
-  width: 100%;
+  width: 420px;
+  height: 697px;
+  left:258px;
+
 }
 .main-top-container {
   background: linear-gradient(
@@ -42,6 +59,140 @@
     #fff2ed 24.48%,
     rgba(255, 248, 244, 0) 100%
   );
+}
+
+@media (max-width: 1134px) {
+  .main-page-title {
+    padding-top: 6rem;
+    padding-left:1rem;
+    font-size: 48px;
+    font-weight: 700;
+    width: 60%;
+    //width: 55%;
+  }
+  .main-title-container {
+    width: 96%; //just added
+    //width: 90%;
+    margin: auto;
+  }
+  .main-page-subtitle {
+    padding-top: 2.5rem; //just added
+    padding-left:1rem;
+    font-weight: 600;
+    font-size: 21px;
+    width: 414px; //just added
+    height:84px;
+  }
+  .main-top-row {
+    display: flex;
+    justify-content: right;
+    padding-right: 0rem;  //just added
+    padding-bottom: 4rem;
+    width:757px;  //length of the bullet
+  }
+  .main-top-img-container {
+    // width: 50%;
+    width: 692px; //just added
+    // height: 25rem;
+    height: 472px;  //just added
+    
+    right: 0px;
+    left: 50%; //just added
+    top: -35px;  //just added
+    background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
+    border-radius: 1000px 0px 0px 1000px;
+    position: relative;
+    // overflow: hidden;
+  }
+  .main-doctor-img-container {
+    position: absolute;
+    right: 15%;
+    // bottom: -3px;
+    //bottom: -206.5px;
+    top:-122px;
+    // width: 25rem;
+    height: 900px;
+  }
+  .main-doctor-img {
+    width: 362px;
+    height: 596px;
+    left:258px;
+    
+  }
+  .main-top-container {
+    background: linear-gradient(
+      180deg,
+      #fff2ed 24.48%,
+      rgba(255, 248, 244, 0) 100%
+    );
+  }
+}
+
+@media (max-width: 745px) {
+  .main-page-title {
+    padding-top: 10rem;
+    padding-left:32px;
+    font-size: 48px;
+    font-weight: 700;
+    width: 60%;
+    //width: 55%;
+  }
+  .main-title-container {
+    width: 150%; //just added
+    //width: 90%;
+    margin: auto;
+  }
+  .main-page-subtitle {
+    padding-top: 2.5rem; //just added
+    padding-left:1rem;
+    font-weight: 600;
+    font-size: 21px;
+    width: 414px; //just added
+    height:84px;
+  }
+  .main-top-row {
+    display: flex;
+    justify-content: right;
+    padding-right: 0rem;  //just added
+    padding-bottom: 4rem;
+    width:757px;  //length of the bullet
+  }
+  .main-top-img-container {
+    // width: 50%;
+    width: 692px; //just added
+    // height: 25rem;
+    height: 472px;  //just added
+    
+    right: 0px;
+    left: 50%; //just added
+    top: -35px;  //just added
+    background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
+    border-radius: 1000px 0px 0px 1000px;
+    position: relative;
+    // overflow: hidden;
+  }
+  .main-doctor-img-container {
+    position: absolute;
+    right: 15%;
+    // bottom: -3px;
+    //bottom: -206.5px;
+    top:-122px;
+    // width: 25rem;
+    height: 900px;
+  }
+  .main-doctor-img {
+    width: 362px;
+    height: 596px;
+    left:258px;
+    
+  }
+  .main-top-container {
+    background: linear-gradient(
+      180deg,
+      #fff2ed 24.48%,
+      rgba(255, 248, 244, 0) 100%
+    );
+  }
 }
 
 @media (max-width: 768px) {
