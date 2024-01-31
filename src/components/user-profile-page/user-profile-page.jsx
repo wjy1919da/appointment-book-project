@@ -9,8 +9,10 @@ const UserProfilePage = () => {
   return (
     <div className='user-profile-outter-container'>
       <div className='user-profile-page-container'>
-        <UserProfileBasic />
-        <UserProfileSubArea />
+        <div className='section container'>
+          <UserProfileBasic />
+          <UserProfileSubArea />
+        </div>
       </div>
     </div>
   );
