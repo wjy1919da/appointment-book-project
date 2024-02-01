@@ -3,6 +3,7 @@ import MainDcotor from '../../assets/doctor/featureDoctor1.png'
 import './main-page-intro.styles.scss'
 const MainPageIntro = ({title, description}) => {
   return (
+    <div className='main-page-header-container'>
     <div className='main-top-container'>
         <div className='main-title-container'>
             <h2 className='main-text main-page-title'>{title}</h2>
@@ -17,6 +18,7 @@ const MainPageIntro = ({title, description}) => {
                 </div>
             </div>
         </div>
+    </div>
     </div>
   )
 }

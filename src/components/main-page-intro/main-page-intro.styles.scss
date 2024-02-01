@@ -1,9 +1,20 @@
 // base
+
+//Hoang added this one, testing
+.main-page-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0%;
+  margin-top: 0%;
+  width: 100%;
+  height: 800px;
+
+  @media(min-width:1134px){
 .main-page-title {
   padding-top: 8rem;
-  font-size: 60px;
+  font-size: 48px;
   font-weight: 700;
-  width: 57%;
+  width: 50%;
   //width: 55%;
 }
 .main-title-container {
@@ -22,43 +33,49 @@
   display: flex;
   justify-content: right;
   padding-right: 0rem;  //just added
+  
+  padding-top:1rem;
   padding-bottom: 0rem;
-  width:757px;  //length of the bullet
+  width: 52.6%;  //length of the bullet
 }
 .main-top-img-container {
-  // width: 50%;
-  width: 1011px; //just added
+  width: 85%;
   // height: 25rem;
-  height: 596px;  //just added
-  right: 0px;
-  left: 90%; //just added
-  top: -35px;  //just added
+  height: 472px;
+  right: -90%;
+  bottom: 2rem;  //just added, me
   background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
   border-radius: 1000px 0px 0px 1000px;
   position: relative;
   // overflow: hidden;
+
+  // width: 50%;
+  //       height: 100%;
+  //       right: 0px;
+  //       background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
+  //       border-radius: 1000px 0px 0px 1000px;
+  //       position: relative;
 }
 .main-doctor-img-container {
   position: absolute;
-  right: 15%;
-  // bottom: -3px;
-  bottom: -206.5px;
-  
+  right: 12%;
+  bottom: -307.2px;
   // width: 25rem;
   height: 900px;
 }
 .main-doctor-img {
-  width: 420px;
-  height: 697px;
-  left:258px;
-
+  width: 362px;
+  height: 596px;
 }
 .main-top-container {
+  width: 100%;
   background: linear-gradient(
     180deg,
     #fff2ed 24.48%,
     rgba(255, 248, 244, 0) 100%
   );
+  
+}
 }
 
 @media (max-width: 1134px) {
@@ -88,7 +105,7 @@
     justify-content: right;
     padding-right: 0rem;  //just added
     padding-bottom: 0rem;
-    width:757px;  //length of the bullet
+    width: 66.6%;  //length of the bullet
   }
   .main-top-img-container {
     // width: 50%;
@@ -106,9 +123,7 @@
   }
   .main-doctor-img-container {
     position: absolute;
-    right: 15%;
-    // bottom: -3px;
-    //bottom: -206.5px;
+    right: 18%;
     top:-122px;
     // width: 25rem;
     height: 900px;
@@ -116,10 +131,9 @@
   .main-doctor-img {
     width: 362px;
     height: 596px;
-    left:258px;
-    
   }
   .main-top-container {
+    width:100%;
     background: linear-gradient(
       180deg,
       #fff2ed 24.48%,
@@ -157,12 +171,10 @@
     padding-right: 0rem;  //just added
     padding-bottom: 0rem;
     padding-top:8rem;
-    width:757px;  //length of the bullet
+    width: 102%;  //length of the bullet
   }
   .main-top-img-container {
-    // width: 50%;
     width: 449px; //just added
-    // height: 25rem;
     height: 283px;  //just added
     right: 0px;
     left: -1.75%; //just added
@@ -174,9 +186,7 @@
   }
   .main-doctor-img-container {
     position: absolute;
-    right: 15%;
-    // bottom: -3px;
-    //bottom: -206.5px;
+    right: 28%;
     top:-49px;
     // width: 25rem;
     height: 900px;
@@ -184,10 +194,9 @@
   .main-doctor-img {
     width: 189.06px;
     height: 333.13px;
-    left:258px;
-    
   }
   .main-top-container {
+    width:100%;
     background: linear-gradient(
       180deg,
       #fff2ed 24.48%,
@@ -196,15 +205,16 @@
   }
 }
 
-@media (max-width: 768px) {
-  // tablet
-}
+// @media (max-width: 768px) {
+//   // tablet
+// }
 
-@media (max-width: 576px) {
-  // phone
-}
+// @media (max-width: 576px) {
+//   // phone
+// }
 
 .main-text {
   font-family: "Open Sans";
   color: #352c29;
+}
 }
