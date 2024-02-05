@@ -263,7 +263,7 @@ const EditPostPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='edit-post-page-container'
       >
-        <PinkBackgroundComponent />
+        <PinkBackgroundComponent renderBothBackgrounds={true} />
         <button
           type='button'
           onClick={handleClickCreatePostBack}

@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-// components
-// import PostPageTitle from "../../community-post-main-title/community-post-main-title";
-
 // scss
 import './community-post-main.scss';
 
@@ -11,6 +8,7 @@ import './community-post-main.scss';
 import ArrowRight from '../../../assets/post/iconoir_arrow-right.svg';
 import GirlPhotoMain from '../../../assets/post/girl_photo_main.png';
 import userInfoQueryStore from '../../../userStore';
+import PinkBackgroundComponent from '../../../_mutual_components/_pink_background/_pink_background';
 
 const PostPageMain = () => {
   const navigate = useNavigate();
@@ -30,7 +28,7 @@ const PostPageMain = () => {
     <div className='community-post-main-container'>
       {/* left container */}
       <div className='community-post-main-left-container'>
-        <div className='community-post-main-pink-background'></div>
+        <PinkBackgroundComponent renderBothBackgrounds={false} />
         <img
           src={GirlPhotoMain}
           alt='Image'
