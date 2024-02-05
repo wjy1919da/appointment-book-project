@@ -8,7 +8,7 @@ import './community-post-main.scss';
 import ArrowRight from '../../../assets/post/iconoir_arrow-right.svg';
 import GirlPhotoMain from '../../../assets/post/girl_photo_main.png';
 import userInfoQueryStore from '../../../userStore';
-import PinkBackgroundComponent from '../../../_mutual_components/_pink_background/_pink_background';
+import PinkBackgroundComponent from '../../../mutual_components/pink_background/pink_background';
 
 const PostPageMain = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const PostPageMain = () => {
     if (!userInfo.token) {
       togglePopup(true, 'accountType');
     } else {
-      navigate("/posts/create-post");
+      navigate('/posts/create-post');
     }
   };
   return (

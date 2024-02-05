@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from '../../components-posts/community-post-button/community-post-button';
 import AppointmentDetail from '../../user-appointment/appointment-detail';
 import DarkenConfirmationModal from '../../chakra-modal/chakra-modal';
-import CalendarComponent from '../../../_mutual_components/_calendar/_calendar';
+import CalendarComponent from '../../../mutual_components/calendar/calendar';
 
 // data
 import { appointmentData as initialAppointmentData } from '../data/appointmentData';

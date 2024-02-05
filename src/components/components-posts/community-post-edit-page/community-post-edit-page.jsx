@@ -18,7 +18,7 @@ import {
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
-import PinkBackgroundComponent from '../../../_mutual_components/_pink_background/_pink_background';
+import PinkBackgroundComponent from '../../../mutual_components/pink_background/pink_background';
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
