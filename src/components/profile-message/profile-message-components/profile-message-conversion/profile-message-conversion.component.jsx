@@ -1,13 +1,13 @@
 import "./profile-message-conversion.styles.scss";
 import React, { useState, useEffect } from "react";
 import SendBird from "sendbird";
-import ProfileMessageCustomInput from "./profile-message-custom-input";
+// import ProfileMessageCustomInput from "./profile-message-custom-input";
 
 import SBConversation from "@sendbird/uikit-react/Channel";
 import SBChannelList from "@sendbird/uikit-react/ChannelList";
 import SBChannelSettings from "@sendbird/uikit-react/ChannelSettings";
 const ProfileMessageConversion = ({ initialChannelUrl }) => {
-  //   console.log("initialChannelUrl", initialChannelUrl, userId, appId);
+  console.log("initialChannelUrl", initialChannelUrl);
   const [currentChannelUrl, setCurrentChannelUrl] = useState(
     initialChannelUrl || ""
   );
@@ -16,6 +16,7 @@ const ProfileMessageConversion = ({ initialChannelUrl }) => {
       setCurrentChannelUrl(initialChannelUrl);
     }
   }, [initialChannelUrl]);
+  console.log("currentChannelUrl", currentChannelUrl);
 
   return (
     <div>
@@ -35,9 +36,9 @@ const ProfileMessageConversion = ({ initialChannelUrl }) => {
         <div className="sendbird-app__conversation-wrap">
           <SBConversation
             channelUrl={currentChannelUrl}
-            renderMessageInput={() => (
-              <ProfileMessageCustomInput channelUrl={currentChannelUrl} />
-            )}
+            // renderMessageInput={() => (
+            //   <ProfileMessageCustomInput channelUrl={currentChannelUrl} />
+            // )}
           />
         </div>
       </div>

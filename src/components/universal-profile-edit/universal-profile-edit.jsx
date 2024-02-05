@@ -72,17 +72,18 @@ const UniversalProfileEdit = () => {
   // const userInfo = userInfoQueryStore((state) => state.userInfo);
   const proceduresIdObj = editFuncs.proceduresId;
   // const {mutate,data, isLoading: isVerificationLoading,isError,error: verificationError} = useClickVerification();
+  const imageSize = 8 * 1024 * 1024; // 8MB
+  // call api hooks
   const {
     selectedFiles,
     setSelectedFiles,
     handleFileSelection,
     uploadProgress,
-    isLoading: isUploadLoading,
-    isError: isUploadError,
     uploadedFiles,
+    setUploadedFiles,
     resetFiles,
     removeUploadedFile,
-  } = useUploadImg();
+  } = useUploadImg({ fileSize: imageSize });
   const fileInputRef = useRef(null);
   const handleBrowseFiles = () => {
     fileInputRef.current.click();

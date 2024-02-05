@@ -3,7 +3,6 @@ import DoctorVerificationPage from "./doctor-verification-page.component";
 import Arrow from "../../assets/post/iconoir_arrow-left.svg";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import useUploadFile from "../../hooks/useUploadFile";
 import { useDoctorAddProfile } from "../../hooks/useDoctorAddProfile";
 import DoctorVerifiedSubmitted from "./dotcor-verification-submmitted-page";
 import HomeButtonPink from "../home-button-pink/home-button-pink";
@@ -21,17 +20,6 @@ const DoctorVerificationMainPage = () => {
   const refreshProfile = userInfoQueryStore((state) => state.refreshProfile);
 
   const [showSubmittedPage, setShowSubmittedPage] = useState(false);
-  const {
-    selectedFiles,
-    uploadedFiles,
-    uploadProgress,
-    isLoading,
-    handleFileSelection,
-    handleUpload,
-    removeFile,
-    resetFiles,
-    removeUploadedFile,
-  } = useUploadFile();
   const handleOnClick = () => {
     navigate("/doctorProfile");
   };

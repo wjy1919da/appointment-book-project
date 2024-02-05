@@ -23,7 +23,7 @@ export function useCreateOrRetrieveChannel(APP_ID, USER_ID) {
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
 
   const headers = {
-    "Api-Token": "8ac0a9f2362e2a19dd5f1267ca33758f5b20f21b", // Replace with your SendBird API Token
+    "Api-Token": "b84b88de200433b63a78172155760f0f3c90f346", // Replace with your SendBird API Token
     "Content-Type": "application/json",
   };
 

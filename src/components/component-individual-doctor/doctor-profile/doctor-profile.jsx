@@ -11,7 +11,10 @@ import StarRate from "../../starRate/starRate";
 import backIcon from "../../../assets/doctor/left_back.png";
 import { useMediaQuery } from "react-responsive";
 import HomeButton from "../../home-button/home-button.component";
+import { useCreateOrRetrieveChannel } from "../../hooks/useCreateOrRetrieveChannel.js";
 import ProfileMessage from "../../profile-message/profile-message.component";
+import userInfoQueryStore from "../../../userStore";
+import useDoctorQueryStore from "../../../store.ts";
 import {
   Modal,
   ModalOverlay,
@@ -34,6 +37,8 @@ import {
 } from "@chakra-ui/react";
 const DoctorProfile = ({ nickname, projects, mechName, address }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
+  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
   const buttonHeight = isMobile ? "50px" : "56px";
   const {
     data,
@@ -53,6 +58,13 @@ const DoctorProfile = ({ nickname, projects, mechName, address }) => {
   const handleOnClick = () => {
     navigate("/download");
   };
+  const { mutate: createOrRetrieveChannel, data: channelData } =
+    useCreateOrRetrieveChannel(APP_ID, USER_ID);
+  useEffect(() => {
+    if (userInfo.userId && doctorQuery.nickName) {
+      createOrRetrieveChannel(userInfo.userId, doctorQuery.nickName);
+    }
+  }, [doctorQuery.nickName]);
   const inboxDisclosure = useDisclosure();
   return (
     <div className="doctor-profile-container">

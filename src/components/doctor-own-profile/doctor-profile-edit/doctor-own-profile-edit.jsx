@@ -8,15 +8,18 @@ import DoctorEditVerificationSession from "./doctor-own-profile-verification-ses
 import DoctorEditHightLightSession from "./doctor-edit-profile-hightlight-session";
 import useUploadImg from "../../../hooks/useUploadImg";
 const DoctorProfileEdit = () => {
+  const imageSize = 8 * 1024 * 1024; // 8MB
+  // call api hooks
   const {
     selectedFiles,
+    setSelectedFiles,
     handleFileSelection,
     uploadProgress,
-    isLoading,
-    isError,
     uploadedFiles,
+    setUploadedFiles,
     resetFiles,
-  } = useUploadImg();
+    removeUploadedFile,
+  } = useUploadImg({ fileSize: imageSize });
   const fileInputRef = useRef(null);
   const [changePic, setChangePic] = useState(false);
   const [isTextClicked, setIsTextClicked] = useState([

@@ -1,9 +1,9 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import APIClient from "../services/api-client";
-
-const uploadImgToS3 = async (file) => {
-  const maxFileSize = 8 * 1024 * 1024; // 8MB
+import axios from "axios";
+const uploadImgToS3 = async (file, maxFileSize) => {
+  // const maxFileSize = 8 * 1024 * 1024; // 8MB
 
   if (file.size > maxFileSize) {
     return {
@@ -19,19 +19,11 @@ const uploadImgToS3 = async (file) => {
     var presignedUrl = res.data.msg;
   }
   try {
-    const response = await fetch(presignedUrl, {
-      method: "PUT",
-      body: file,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (response.ok) {
-      const uploadedFileName = fileName;
+    const response = await axios.put(presignedUrl, file);
+    if (response.status === 200) {
       const bucketName = "charm-post-img";
       const region = "us-west-1";
-      const accessUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${uploadedFileName}`;
+      const accessUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${fileName}`;
 
       return {
         success: true,
@@ -39,11 +31,10 @@ const uploadImgToS3 = async (file) => {
         location: accessUrl,
       };
     } else {
-      // console.error("Upload failed.");
       return { success: false, message: "Upload failed." };
     }
   } catch (error) {
-    // console.error("Error uploading file: ", error);
+    console.error("Error uploading file: ", error);
     return { success: false, message: "Error occurred during image upload." };
   }
 };
@@ -94,4 +85,4 @@ const uploadToS3 = async (file) => {
   }
 };
 
-export { uploadToS3, uploadImgToS3 };
+export { uploadImgToS3, uploadToS3 };
