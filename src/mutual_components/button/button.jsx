@@ -1,8 +1,5 @@
 import React from 'react';
 
-// scss
-import './button.scss';
-
 const FormButton = ({
   buttonName,
   onClick,
