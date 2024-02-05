@@ -50,6 +50,7 @@ const CommunityPost = ({
   // const [displayImage, setDisplayImage] = useState(imageURL);
 
   // likes
+  // useEffect to update state when props (liked and likes) change
   const [isHeartLiked, setIsHeartLiked] = useState(liked);
   const [countLikes, setCountLikes] = useState(likes);
   useEffect(() => {
@@ -88,6 +89,7 @@ const CommunityPost = ({
     apiLikeMutate({ postId: id });
     // setIsLike(!isHeartLiked);
 
+    // count up function in ternary conditional
     setIsHeartLiked((prev) => {
       const newCountLikes = prev ? countLikes - 1 : countLikes + 1;
       setCountLikes(newCountLikes);
