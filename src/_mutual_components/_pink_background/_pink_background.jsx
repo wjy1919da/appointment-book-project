@@ -1,11 +1,17 @@
 import React from 'react';
 import './_pink_background.scss';
 
-const PinkBackgroundComponent = () => {
+const PinkBackgroundComponent = ({ renderBothBackgrounds }) => {
   return (
     <>
-      <div className='pink-background-1'></div>
-      <div className='pink-background-2'></div>
+      {renderBothBackgrounds ? (
+        <>
+          <div className='pink-background-1'></div>
+          <div className='pink-background-2'></div>
+        </>
+      ) : (
+        <div className='pink-background-1'></div>
+      )}
     </>
   );
 };
