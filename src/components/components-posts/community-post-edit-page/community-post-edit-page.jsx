@@ -18,6 +18,7 @@ import {
 
 // components
 import FormButton from '../../components-posts/community-post-button/community-post-button';
+import PinkBackgroundComponent from '../../../_mutual_components/_pink_background/_pink_background';
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
 // hook
@@ -262,9 +263,7 @@ const EditPostPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='edit-post-page-container'
       >
-        <div className='pink-background-1'></div>
-        <div className='pink-background-2'></div>
-
+        <PinkBackgroundComponent />
         <button
           type='button'
           onClick={handleClickCreatePostBack}
