@@ -1,5 +1,5 @@
 import React from 'react';
-import './_pink_background.scss';
+import './pink_background.scss';
 
 const PinkBackgroundComponent = ({ renderBothBackgrounds }) => {
   return (
