@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import Button from '../components-posts/community-post-button/community-post-button';
+import FormButton from '../../mutual_components/button/button';
 
 // scss
 import './doctor-appointment-page-3.scss';
@@ -78,7 +78,7 @@ const DoctorAppointmentPage3 = () => {
           </div>
         </div>
         <div className='doctor-appointment-button-container'>
-          <Button
+          <FormButton
             buttonName='Back'
             icon={Arrow}
             rotateIcon={true}
@@ -101,7 +101,7 @@ const DoctorAppointmentPage3 = () => {
             <input type='radio' />
             <span class='radio-text'></span>
           </label>
-          <Button
+          <FormButton
             buttonName='Next'
             icon={Arrow}
             // rotateIcon={true}

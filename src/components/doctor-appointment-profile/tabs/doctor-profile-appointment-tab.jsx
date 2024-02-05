@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // components
-import Button from '../../components-posts/community-post-button/community-post-button';
+import FormButton from '../../../mutual_components/button/button';
 import AppointmentDetail from '../../user-appointment/appointment-detail';
 import DarkenConfirmationModal from '../../chakra-modal/chakra-modal';
 import CalendarComponent from '../../../mutual_components/calendar/calendar';
@@ -107,11 +107,11 @@ const DoctorAppointmentProfileAppointmentTab = () => {
         <div className='doctor-profile-appointment-tab-left-container'>
           <CalendarComponent />
           <div className='doctor-profile-appointment-tab-button-container'>
-            <Button
+            <FormButton
               buttonName='Open all unavailable slots'
               className='doctor-profile-appointment-tab-open-button'
             />
-            <Button
+            <FormButton
               buttonName='Close all unbooked slots'
               className='doctor-profile-appointment-tab-close-button'
             />

@@ -224,6 +224,19 @@
   content: none; // This removes the ::before content, effectively removing the mask
 }
 
+.edit-post-page-button {
+  color: #fff;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f48c8a 0%, #f0a484 100%);
+  padding: 12px 25px;
+  // height: 41px;
+}
+
 // small screens
 @media (max-width: 1133px) {
   .edit-post-page-container {

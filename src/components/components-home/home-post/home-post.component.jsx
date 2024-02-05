@@ -5,7 +5,6 @@ import { Fragment } from 'react';
 // components
 import HomeLink from '../home-link/home-link.component';
 import HomeMobileSubText from '../home-text-mobile/home-mobile-subText.component';
-import Button from '../../components-posts/community-post-button/community-post-button';
 
 // scss
 import './home-post.styles.scss';

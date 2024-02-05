@@ -76,17 +76,31 @@
       flex-direction: column;
       gap: 20px;
       padding-top: 20px;
-      padding-bottom: 10px;
       width: 372px;
 
       .doctor-profile-appointment-tab-open-button {
+        color: #fbfcff;
+        font-family: 'Open Sans';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
         background: #675d59;
+        border-radius: 8px;
+        padding: 12px 32px;
       }
 
       .doctor-profile-appointment-tab-close-button {
         color: #675d59;
+        font-family: 'Open Sans';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
         background: #fff;
         border: 1px solid #675d59;
+        border-radius: 8px;
+        padding: 12px 32px;
       }
     }
 

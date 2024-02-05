@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 // components
-import FormButton from '../../components-posts/community-post-button/community-post-button';
+import FormButton from '../../../mutual_components/button/button';
 import PinkBackgroundComponent from '../../../mutual_components/pink_background/pink_background';
 // import PostDropDownFilter from '../community-post-dropdown-filter/community-post-dropdown-filter';
 
@@ -420,7 +420,7 @@ const EditPostPage = () => {
               <div className='post-information-sendButton'>
                 <FormButton
                   buttonName={isCreatePost ? 'Create' : 'Repost'}
-                  // className="create-post-custom-button"
+                  className="edit-post-page-button"
                 />
                 {!isCreatePost && (
                   <img
