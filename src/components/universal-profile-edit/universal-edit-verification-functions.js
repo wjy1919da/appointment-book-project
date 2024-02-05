@@ -17,6 +17,7 @@ export function isValidEmail(input) {
 
 export function isValidDate(input) {
     // your desired pattern
+    if (input.length > 10) return false;
     const pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)(\d{2})/;
     const match = input.match(pattern);
     if (!match) return false;

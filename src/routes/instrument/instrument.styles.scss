@@ -9,7 +9,7 @@
         margin: auto;
     }
 
-    @media (min-width: 768px) { // desktop
+    @media (min-width: 736px) { // desktop
         .instrument-page-title {
             padding-top: 8rem;
             font-size: 60px;
@@ -48,9 +48,9 @@
             width: 100%;
         }
         .instrument-body-title {
-            padding-top: 8rem;
+            padding-top: 4rem;
             padding-bottom: 2rem;
-            font-size: 60px;
+            font-size: 48px;
             font-weight: 700;
         }
         .instrument-card {

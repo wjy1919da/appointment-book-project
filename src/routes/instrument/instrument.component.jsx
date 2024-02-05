@@ -44,6 +44,7 @@ const Instrument = () => {
                         <MainPageIntro 
                             title="Discover Our most up-to-date instruments"
                             description="Charm Life helps you discover our instruments." />
+                            
                         <div className='instrument-body-container'>
                             <div className='instrument-body-title-container'>
                                 <h2 className='instrument-text instrument-body-title'>Our Instruments</h2>

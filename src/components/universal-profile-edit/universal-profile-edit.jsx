@@ -550,6 +550,7 @@ const UniversalProfileEdit = () => {
                     </h4>
                     <div className="univ-edit-info-form-gender-radio-container">
                       <div className="univ-edit-info-form-gender-radio">
+                      <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="female"
@@ -559,11 +560,11 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(2)}
                           defaultChecked={gender === 2 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
                           Female
                         </label>
                       </div>
                       <div className="univ-edit-info-form-gender-radio">
+                        <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="male"
@@ -573,11 +574,11 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(1)}
                           defaultChecked={gender === 1 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
                           Male
                         </label>
                       </div>
                       <div className="univ-edit-info-form-gender-radio">
+                        <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="other"
@@ -587,8 +588,7 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(3)}
                           defaultChecked={gender === 3 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
-                          Other
+                          <span>Other</span>
                         </label>
                       </div>
                     </div>
@@ -610,7 +610,7 @@ const UniversalProfileEdit = () => {
                     placeholder={"mm/dd/yyyy"}
                     label={"Birthday"}
                     possibleError={birthdayError}
-                    errorMessage={"Invalid date, please enter a valid date."}
+                    errorMessage={"Invalid date, please enter a valid date. (mm/dd/yyyy)"}
                   />
                 </div>
                 <div className="univ-edit-info-form-email-container">
