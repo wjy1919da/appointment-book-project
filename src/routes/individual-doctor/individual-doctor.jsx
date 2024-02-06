@@ -33,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 import { retrieveUserFollowList } from "../../hooks/useAuth.js";
 import { useGetDoctorPost } from "../../hooks/useApiRequestPostFilter.js";
 import ProfileMessage from "../../components/profile-message/profile-message.component";
-
+import { useCreateOrRetrieveChannel } from "../../hooks/useCreateOrRetrieveChannel.js";
 import {
   Modal,
   ModalOverlay,

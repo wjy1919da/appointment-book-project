@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Select } from "@chakra-ui/react";
 import cancelIcon from "../../assets/doctor/Cancel.png";
 import UploadIcon from "../../assets/doctor/Upload.svg";
+import useUploadImg from "../../hooks/useUploadImg";
 import DoctorOwnProfileEditButton from "../doctor-own-profile/doctor-own-profile-edit-button";
-import useUploadFile from "../../hooks/useUploadFile";
 import { useRef, useEffect } from "react";
 import DoctorSearchLoadingBar from "../doctor-search-loading-bar/doctor-search-loading-bar.component";
 function DoctorVerificationPage({ pageNumber, onFileSelected }) {
@@ -13,6 +13,7 @@ function DoctorVerificationPage({ pageNumber, onFileSelected }) {
   const handleOnClick = () => {
     navigate("/doctorProfile");
   };
+  const verificationFileSize = 8 * 1024 * 1024; // 8MB
   const fileInputRef = useRef(null);
   const {
     selectedFiles,

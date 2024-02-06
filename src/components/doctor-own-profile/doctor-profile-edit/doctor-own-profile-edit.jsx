@@ -8,6 +8,7 @@ import DoctorEditVerificationSession from "./doctor-own-profile-verification-ses
 import DoctorEditHightLightSession from "./doctor-edit-profile-hightlight-session";
 import useUploadImg from "../../../hooks/useUploadImg";
 const DoctorProfileEdit = () => {
+  const verificationFileSize = 8 * 1024 * 1024; // 8MB
   const {
     selectedFiles,
     handleFileSelection,
@@ -16,7 +17,10 @@ const DoctorProfileEdit = () => {
     isError,
     uploadedFiles,
     resetFiles,
-  } = useUploadImg();
+  } = useUploadImg({
+    fileSize: verificationFileSize,
+    bucketName: process.env.REACT_APP_VERIFICATION_BUCKET,
+  });
   const fileInputRef = useRef(null);
   const [changePic, setChangePic] = useState(false);
   const [isTextClicked, setIsTextClicked] = useState([

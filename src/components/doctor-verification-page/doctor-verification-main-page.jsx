@@ -3,7 +3,6 @@ import DoctorVerificationPage from "./doctor-verification-page.component";
 import Arrow from "../../assets/post/iconoir_arrow-left.svg";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import useUploadFile from "../../hooks/useUploadFile";
 import { useDoctorAddProfile } from "../../hooks/useDoctorAddProfile";
 import DoctorVerifiedSubmitted from "./dotcor-verification-submmitted-page";
 import HomeButtonPink from "../home-button-pink/home-button-pink";
@@ -12,6 +11,7 @@ import postMoreIcon from "../../assets/post/create-post-icon.png";
 import "./doctor-verification-page.styles.scss";
 import doctorInfoQueryStore from "../../doctorStore";
 import userInfoQueryStore from "../../userStore";
+import useUploadImg from "../../hooks/useUploadImg";
 
 const DoctorVerificationMainPage = () => {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const DoctorVerificationMainPage = () => {
   const refreshProfile = userInfoQueryStore((state) => state.refreshProfile);
 
   const [showSubmittedPage, setShowSubmittedPage] = useState(false);
+  const verificationFileSize = 8 * 1024 * 1024; // 8MB
   const {
     selectedFiles,
     uploadedFiles,
@@ -31,7 +32,10 @@ const DoctorVerificationMainPage = () => {
     removeFile,
     resetFiles,
     removeUploadedFile,
-  } = useUploadFile();
+  } = useUploadImg({
+    fileSize: verificationFileSize,
+    bucketName: process.env.REACT_APP_VERIFICATION_BUCKET,
+  });
   const handleOnClick = () => {
     navigate("/doctorProfile");
   };
