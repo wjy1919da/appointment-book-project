@@ -38,7 +38,7 @@ import DeleteButton from "../../../assets/post/thumbnail_delete.png";
 const EditPostPage = () => {
   const location = useLocation();
   const isCreatePost = location.pathname.includes("/posts/create-post");
-  const imageSize = 8 * 1024 * 1024; // 8MB
+
   // call api hooks
   const {
     selectedFiles,
@@ -51,7 +51,7 @@ const EditPostPage = () => {
     setUploadedFiles,
     resetFiles,
     removeUploadedFile,
-  } = useUploadImg({ fileSize: imageSize });
+  } = useUploadImg();
   const { mutate: apiEditMutate } = useApiRequestEditPost();
   const { mutate: apiCreateMutate } = useApiRequestPost();
   const {

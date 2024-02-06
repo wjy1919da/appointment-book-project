@@ -5,7 +5,7 @@ import { Select } from "@chakra-ui/react";
 import cancelIcon from "../../assets/doctor/Cancel.png";
 import UploadIcon from "../../assets/doctor/Upload.svg";
 import DoctorOwnProfileEditButton from "../doctor-own-profile/doctor-own-profile-edit-button";
-import useUploadImg from "../../hooks/useUploadImg";
+import useUploadFile from "../../hooks/useUploadFile";
 import { useRef, useEffect } from "react";
 import DoctorSearchLoadingBar from "../doctor-search-loading-bar/doctor-search-loading-bar.component";
 function DoctorVerificationPage({ pageNumber, onFileSelected }) {
@@ -14,17 +14,14 @@ function DoctorVerificationPage({ pageNumber, onFileSelected }) {
     navigate("/doctorProfile");
   };
   const fileInputRef = useRef(null);
-  const verificationFileSize = 8 * 1024 * 1024; // 8MB
-  // call api hooks
   const {
     selectedFiles,
-    setSelectedFiles,
-    handleFileSelection,
+    uploadedFiles,
     uploadProgress,
     isLoading,
-    isError,
-    uploadedFiles,
-    setUploadedFiles,
+    handleFileSelection,
+    handleUpload,
+    removeFile,
     resetFiles,
     removeUploadedFile,
   } = useUploadImg({

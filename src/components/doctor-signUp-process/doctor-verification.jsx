@@ -4,22 +4,21 @@ import CloseButton from "../../assets/doctor/doctor-verification-close-Icon.png"
 import UploadIcon from "../../assets/doctor/Upload.png";
 import { Button, Dropdown, Form } from "react-bootstrap";
 import React, { useState, useRef } from "react";
-import useUploadImg from "../../hooks/useUploadImg";
+import useUploadFile from "../../hooks/useUploadFile";
 const DoctorVerification = () => {
   const fileInputRef = useRef(null);
-  const verificationFileSize = 8 * 1024 * 1024; // 8MB
-  // call api hooks
   const {
     selectedFiles,
-    setSelectedFiles,
     handleFileSelection,
     uploadProgress,
-    uploadingFiles,
+    isLoading,
+    isError,
     uploadedFiles,
-    setUploadedFiles,
     resetFiles,
-    removeUploadedFile,
-  } = useUploadImg({ fileSize: verificationFileSize });
+    removeFile,
+    handleUpload,
+    uploadingFiles,
+  } = useUploadFile();
 
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -106,7 +105,7 @@ const DoctorVerification = () => {
               </span>
               <img
                 src={CloseButton}
-                onClick={() => removeUploadedFile(file)}
+                onClick={() => removeFile(file)}
                 style={{
                   width: "15px",
                   height: "15px",
@@ -135,7 +134,10 @@ const DoctorVerification = () => {
         ))}
       </div>
       <div className="doctor-verification-upload-button">
-        <button className="doctor-verification-upload-button">
+        <button
+          className="doctor-verification-upload-button"
+          onClick={handleUpload}
+        >
           UPLOAD FILES
         </button>
       </div>

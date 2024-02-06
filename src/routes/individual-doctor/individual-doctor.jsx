@@ -12,7 +12,7 @@ import gradIcon from "../../assets/user/Graduation Cap.png";
 import verifiedBadge from "../../assets/doctor/Group.png";
 import certified from "../../assets/user/Certificate.png";
 import appointmentCalendar from "../../assets/doctor/calendar.png";
-import { useCreateOrRetrieveChannel } from "../../hooks/useCreateOrRetrieveChannel.js";
+
 // components
 import DoctorProfile from "../../components/component-individual-doctor/doctor-profile/doctor-profile";
 import DoctorAbout from "../../components/component-individual-doctor/doctor-about/doctor-about.component";
@@ -69,7 +69,6 @@ const IndividualDoctor = () => {
   const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
   const { data, error, isLoading } = useGetDoctorInfo();
-
   const {
     data: data2,
     error: error2,

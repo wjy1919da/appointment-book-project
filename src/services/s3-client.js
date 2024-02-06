@@ -29,10 +29,11 @@ const uploadImgToS3 = async ({ file, maxFileSize, bucketName }) => {
         location: accessUrl,
       };
     } else {
+      // console.error("Upload failed.");
       return { success: false, message: "Upload failed." };
     }
   } catch (error) {
-    console.error("Error uploading file: ", error);
+    // console.error("Error uploading file: ", error);
     return { success: false, message: "Error occurred during image upload." };
   }
 };

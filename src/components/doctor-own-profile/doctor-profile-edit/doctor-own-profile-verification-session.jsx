@@ -3,27 +3,25 @@ import "./doctor-own-profile-verification-session.styles.scss";
 import { Button, Dropdown, Form } from "react-bootstrap";
 import UploadIcon from "../../../assets/doctor/Upload.png";
 import DoctorVerification from "../../doctor-signUp-process/doctor-verification";
+import useUploadFile from "../../../hooks/useUploadFile";
 import CloseButton from "../../../assets/doctor/doctor-verification-close-Icon.png";
-import useUploadImg from "../../../hooks/useUploadImg";
 
 const DoctorEditVerificationSession = () => {
   const options = ["Doctor Profile", "Option 2", "Option 3"];
   const defaultOption = options[0];
-  const imageSize = 8 * 1024 * 1024; // 8MB
-  // call api hooks
   const {
     selectedFiles,
-    setSelectedFiles,
     handleFileSelection,
     uploadProgress,
     isLoading,
     isError,
     uploadedFiles,
-    uploadingFiles,
-    setUploadedFiles,
     resetFiles,
+    removeFile,
+    handleUpload,
+    uploadingFiles,
     removeUploadedFile,
-  } = useUploadImg({ fileSize: imageSize });
+  } = useUploadFile();
   const fileInputRef = useRef(null);
   const handleBrowseFiles = () => {
     fileInputRef.current.click();
@@ -108,7 +106,7 @@ const DoctorEditVerificationSession = () => {
                 </span>
                 <img
                   src={CloseButton}
-                  onClick={() => removeUploadedFile(file)}
+                  onClick={() => removeFile(file)}
                   style={{
                     width: "15px",
                     height: "15px",
@@ -148,7 +146,9 @@ const DoctorEditVerificationSession = () => {
           ))}
         </div>
         <div className="doctor-edit-upload-button-section">
-          <button className="doctor-edit-upload-button">UPLOAD FILES</button>
+          <button className="doctor-edit-upload-button" onClick={handleUpload}>
+            UPLOAD FILES
+          </button>
         </div>
       </div>
     </div>
