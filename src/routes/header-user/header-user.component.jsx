@@ -7,7 +7,8 @@ import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
 import defaultAvatar from "../../assets/post/user-profile-avatar.png";
 import ProfileMessage from "../../components/profile-message/profile-message.component";
-
+import { useGetSendbirdUserInfo } from "../../hooks/useGetSendbirdUserInfo.js";
+//src/hooks/useGetSendbirdUserInfo.js
 import {
   Modal,
   ModalOverlay,
@@ -50,6 +51,9 @@ const HeaderUser = () => {
   const inboxDisclosure = useDisclosure();
   // Fetch user info
   const { data, isLoading, isError, error } = useGetUserInfo();
+  // Fetch sendbird token
+  const { data: sendbirdInfo } = useGetSendbirdUserInfo();
+  // console.log("sendbirdInfo", sendbirdInfo, "userInfo:::", userInfo);
   const toggle = () => {
     if (menuDisclosure.isOpen) {
       menuDisclosure.onClose();

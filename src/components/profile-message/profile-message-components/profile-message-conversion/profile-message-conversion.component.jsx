@@ -7,7 +7,7 @@ import SBConversation from "@sendbird/uikit-react/Channel";
 import SBChannelList from "@sendbird/uikit-react/ChannelList";
 import SBChannelSettings from "@sendbird/uikit-react/ChannelSettings";
 const ProfileMessageConversion = ({ initialChannelUrl }) => {
-  console.log("initialChannelUrl", initialChannelUrl);
+  // console.log("initialChannelUrl", initialChannelUrl);
   const [currentChannelUrl, setCurrentChannelUrl] = useState(
     initialChannelUrl || ""
   );
@@ -16,7 +16,7 @@ const ProfileMessageConversion = ({ initialChannelUrl }) => {
       setCurrentChannelUrl(initialChannelUrl);
     }
   }, [initialChannelUrl]);
-  console.log("currentChannelUrl", currentChannelUrl);
+  // console.log("currentChannelUrl", currentChannelUrl);
 
   return (
     <div>

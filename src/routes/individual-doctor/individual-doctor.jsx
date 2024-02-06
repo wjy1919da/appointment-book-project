@@ -1,6 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useDoctorQueryStore from "../../store.ts";
 
 //images
 import glassIcon from "../../assets/user/glassesIcon.png";
@@ -20,9 +19,10 @@ import DoctorAbout from "../../components/component-individual-doctor/doctor-abo
 import UserProfileDoctorPostGrid from "../../components/user-profile-doctor-post-grid/user-profile-doctor-post-grid";
 import LogInAccessPopUp from "../../components/log-in-access-popup/log-in-access-popup.jsx";
 import { Spinner } from "@chakra-ui/react";
-import userInfoQueryStore from "../../userStore.ts";
 import DoctorPostGrid from "../../components/community-post-grid/community-post-grid.component.jsx";
-
+//store
+import userInfoQueryStore from "../../userStore.ts";
+import useDoctorQueryStore from "../../store.ts";
 // hook
 import { useGetDoctorInfo } from "../../hooks/useGetIndividualDoctor.js";
 import { useGetDoctorAbout } from "../../hooks/useGetIndividualDoctor";
@@ -65,16 +65,11 @@ const IndividualDoctor = () => {
   const { encodedMemberId } = useParams();
   const navigate = useNavigate();
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
   const { data, error, isLoading } = useGetDoctorInfo();
-  const { mutate: createOrRetrieveChannel, data: channelData } =
-    useCreateOrRetrieveChannel(APP_ID, USER_ID);
-  useEffect(() => {
-    if (userInfo.userId && doctorQuery.nickName) {
-      createOrRetrieveChannel(userInfo.userId, doctorQuery.nickName);
-    }
-  }, [doctorQuery.nickName]);
+
   const {
     data: data2,
     error: error2,
@@ -98,17 +93,31 @@ const IndividualDoctor = () => {
     fetchNextPage: postFetchNextPage,
     hasNextPage: postHasNextPage,
   } = useGetDoctorPost();
+  // Retrieve the channel
+  const { mutate: createOrRetrieveChannel, data: channelData } =
+    useCreateOrRetrieveChannel();
   // console.log("doctor post data", postData, postIsLoading);
   const { nickname } = data?.nickname || {};
   const [activeTab, setActiveTab] = useState(0);
   const tabs = ["About", "Posts", "Likes"];
+  const [initialChannelUrl, setInitialChannelUrl] = useState("");
 
   useEffect(() => {
     setMemberId(encodedMemberId);
-    if (data) {
+    if (data && data.nickname) {
       setNickName(data.nickname);
+      createOrRetrieveChannel({
+        receiverId: encodedMemberId,
+        nickName: data.nickname,
+      });
     }
   }, [encodedMemberId, data]);
+
+  useEffect(() => {
+    if (channelData && channelData.channel_url) {
+      setInitialChannelUrl(channelData.channel_url);
+    }
+  }, [channelData]);
 
   if (isLoading || isLoading2 || isLoading3) {
     return (
@@ -196,10 +205,12 @@ const IndividualDoctor = () => {
           <ModalHeader>Inbox</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ProfileMessage
-              isConversion={true}
-              receiverId={doctorQuery.memberId}
-            />
+            {initialChannelUrl && (
+              <ProfileMessage
+                isConversion={true}
+                initialChannelUrl={initialChannelUrl}
+              />
+            )}
           </ModalBody>
           <ModalFooter>
             {/* <Button onClick={inboxDisclosure.onClose}>Close</Button> */}

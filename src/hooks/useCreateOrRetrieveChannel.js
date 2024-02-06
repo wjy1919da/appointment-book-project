@@ -1,6 +1,11 @@
 import { useMutation } from "react-query";
 import axios from "axios";
-import useDoctorQueryStore from "../store";
+import userInfoQueryStore from "../userStore";
+const headers = {
+  "Api-Token": process.env.REACT_APP_API_TOKEN,
+  "Content-Type": "application/json",
+};
+const apiEndpoint = `https://api-${process.env.REACT_APP_APP_ID}.sendbird.com/v3`;
 
 export async function checkUserExists(apiEndpoint, headers, userId) {
   try {
@@ -18,35 +23,24 @@ export async function checkUserExists(apiEndpoint, headers, userId) {
     throw error;
   }
 }
-export function useCreateOrRetrieveChannel(APP_ID, USER_ID) {
-  const apiEndpoint = `https://api-${APP_ID}.sendbird.com/v3`;
-  const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
-
-  const headers = {
-    "Api-Token": "b84b88de200433b63a78172155760f0f3c90f346", // Replace with your SendBird API Token
-    "Content-Type": "application/json",
+export async function createUser({ userId, nickname }) {
+  const body = {
+    user_id: userId,
+    nickname: nickname || "test_user",
+    profile_url: "https://sendbird.com/main/img/profiles/profile_05_512px.png",
+    issue_access_token: true,
+    metadata: {
+      font_preference: "times new roman",
+      font_color: "black",
+    },
   };
-
-  // Internal function to create a user
-  const createUser = async ({ userId, nickname }) => {
-    // console.log("create user", userId, nickname);
-    const body = {
-      user_id: userId,
-      nickname: doctorQuery.nickName || "test_user",
-      profile_url:
-        "https://sendbird.com/main/img/profiles/profile_05_512px.png",
-      issue_access_token: true,
-      metadata: {
-        font_preference: "times new roman",
-        font_color: "black",
-      },
-    };
-
-    const response = await axios.post(`${apiEndpoint}/users`, body, {
-      headers,
-    });
-    return response.data;
-  };
+  const response = await axios.post(`${apiEndpoint}/users`, body, {
+    headers,
+  });
+  return response.data;
+}
+export function useCreateOrRetrieveChannel() {
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const checkChannelMessages = async (channelUrl) => {
     const response = await axios.get(
       `${apiEndpoint}/group_channels/${channelUrl}/messages/total_count`,
@@ -70,7 +64,7 @@ export function useCreateOrRetrieveChannel(APP_ID, USER_ID) {
   };
 
   // Function to create or retrieve a channel
-  const createOrRetrieveChannel = async (receiverId, nickName) => {
+  const createOrRetrieveChannel = async ({ receiverId, nickName }) => {
     // console.log("createOrRetrieveChannel", receiverId, nickName);
     // Check if receiverId corresponds to an existing user
     const userExists = await checkUserExists(apiEndpoint, headers, receiverId);
@@ -83,8 +77,8 @@ export function useCreateOrRetrieveChannel(APP_ID, USER_ID) {
     // Proceed to create the channel
     const channelBody = {
       is_distinct: true,
-      user_ids: [USER_ID, receiverId],
-      operator_ids: [USER_ID],
+      user_ids: [userInfo.userId, receiverId],
+      operator_ids: [userInfo.userId],
     };
     const channelResponse = await axios.post(
       `${apiEndpoint}/group_channels`,

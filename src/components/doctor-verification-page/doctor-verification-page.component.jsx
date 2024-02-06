@@ -27,14 +27,16 @@ function DoctorVerificationPage({ pageNumber, onFileSelected }) {
     setUploadedFiles,
     resetFiles,
     removeUploadedFile,
-  } = useUploadImg({ fileSize: verificationFileSize });
+  } = useUploadImg({
+    fileSize: verificationFileSize,
+    bucketName: process.env.REACT_APP_VERIFICATION_BUCKET,
+  });
   function extractFileName(url) {
     const decodedUrl = decodeURIComponent(url);
     const fileName = decodedUrl.split("/").pop();
     return fileName.replace(/^\d+-/, ""); // Remove the leading digits and hyphen
   }
   useEffect(() => {
-    console.log("Uploaded Files changed:", uploadedFiles);
     if (uploadedFiles.length > 0) {
       handleFileSelectedAndUploaded(uploadedFiles[0]);
     }

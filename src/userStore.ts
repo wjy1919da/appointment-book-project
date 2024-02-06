@@ -19,6 +19,7 @@ interface DecodedToken {
 
 interface userInfo {
   token?: string;
+  sendBirdToken?: string;
   googleToken?: string;
   userId?: string;
   email?: string;
@@ -56,6 +57,7 @@ interface userInfo {
 
 interface userInfoQuery {
   userInfo: userInfo;
+  setSendBirdToken: (sendBirdToken: string) => void;
   setEmail: (email: string) => void;
   setPhoneNumber: (phoneNumber: string) => void;
   setPassword: (password: string) => void;
@@ -111,6 +113,7 @@ interface userInfoQuery {
 const userInfoQueryStore = create<userInfoQuery>((set) => ({
   userInfo: {
     token: "",
+    sendBirdToken: "",
     userId: "",
     email: "",
     phoneNumber: "",
@@ -129,6 +132,11 @@ const userInfoQueryStore = create<userInfoQuery>((set) => ({
     verificationStatus: 0,
     popupState: "closed",
     trigger: 0,
+  },
+  setSendBirdToken: (sendBirdToken: string) => {
+    set((store) => ({
+      userInfo: { ...store.userInfo, sendBirdToken },
+    }));
   },
 
   setEmail: (email: string) => {

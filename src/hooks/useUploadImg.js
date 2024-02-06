@@ -2,7 +2,10 @@ import { useState, useRef } from "react";
 import { uploadImgToS3 } from "../services/s3-client.js";
 import { useToast } from "@chakra-ui/react";
 
-const useUploadImg = ({ fileSize = 0 }) => {
+const useUploadImg = ({
+  fileSize = 0,
+  bucketName = process.env.REACT_APP_IMG_BUCKET_NAME,
+}) => {
   // console.log("fileSize", fileSize);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -56,7 +59,11 @@ const useUploadImg = ({ fileSize = 0 }) => {
     const uploadPromises = newFiles.map((file) => {
       // const controller = new AbortController();
       // uploadControllers.current.set(file, controller);
-      return uploadImgToS3(file, fileSize);
+      return uploadImgToS3({
+        file: file,
+        maxFileSize: fileSize,
+        bucketName: bucketName,
+      });
     });
 
     toast.promise(
@@ -90,7 +97,6 @@ const useUploadImg = ({ fileSize = 0 }) => {
       );
     });
     setIsLoading(false);
-    // }
   };
 
   return {
