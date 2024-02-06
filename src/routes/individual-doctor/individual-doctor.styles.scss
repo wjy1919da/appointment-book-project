@@ -150,14 +150,12 @@
 }
 
 .indv-unfollow-button {
-  color: #f48c8a;
+  color: #675d59;
   font-weight: 600;
-  background: linear-gradient(#fbfcff, #fbfcff) padding-box,
-    linear-gradient(to right, #f48c8a, #f0a484) border-box;
+  background: #fbfcff;
   padding: 0.55rem 0;
   border-radius: 8px;
-  border: 2px solid transparent;
-  width: 12%;
+  border: 2px solid #675d59;
 }
 
 .indv-consultation-button {
@@ -330,6 +328,26 @@
 
   .indv-fifth-row {
     padding-top: 1rem;
+  }
+
+  .indv-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fbfcff;
+    text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+    font-family: 'Open Sans';
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 8px 12px;
+    height: 36px;
+  }
+
+  .indv-unfollow-button {
+    font-size: 13px;
+    padding: 0;
   }
 }
 

@@ -472,16 +472,17 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                   <button
                     type='button'
                     onClick={() => unfollowUser(data?.memberId)}
-                    className='indv-unfollow-button'
+                    className='indv-button indv-unfollow-button'
+                    style={{ width: '10rem' }}
                   >
-                    Unfollow
+                    Following
                   </button>
                 ) : (
                   <button
                     type='button'
                     onClick={() => followUser(data?.memberId)}
                     className='indv-button indv-follow-button'
-                    style={{ width: '7rem' }}
+                    style={{ width: '8rem' }}
                   >
                     Follow
                   </button>
