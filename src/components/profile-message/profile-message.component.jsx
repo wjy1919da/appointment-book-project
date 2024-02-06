@@ -10,7 +10,6 @@ import "@sendbird/uikit-react/dist/index.css";
 import CustomizedApp from "./profile-message-components/customized-app.component";
 import userInfoQueryStore from "../../userStore";
 import useDoctorQueryStore from "../../store.ts";
-import ProfileMessageCustomInput from "./profile-message-components/profile-message-conversion/profile-message-custom-input";
 
 import ProfileMessageConversion from "./profile-message-components/profile-message-conversion/profile-message-conversion.component";
 const ProfileMessage = ({ isConversion, initialChannelUrl }) => {

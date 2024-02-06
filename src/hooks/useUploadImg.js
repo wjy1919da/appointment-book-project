@@ -5,7 +5,7 @@ import { useToast } from "@chakra-ui/react";
 const useUploadImg = ({
   fileSize = 0,
   bucketName = process.env.REACT_APP_IMG_BUCKET_NAME,
-}) => {
+} = {}) => {
   // console.log("fileSize", fileSize);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
