@@ -5,15 +5,15 @@ import useDoctorQueryStore from '../../store.ts';
 
 //images
 import glassIcon from '../../assets/user/glasses-badge-icon.svg';
-import mailIcon from '../../assets/doctor/mailIcon.svg';
-import phoneIcon from '../../assets/doctor/phoneIcon.svg';
-import stripedGlobeIcon from '../../assets/doctor/stripedGlobeIcon.svg';
+import mailIcon from '../../assets/user/email-icon.svg';
+import phoneIcon from '../../assets/user/call-icon.svg';
+import stripedGlobeIcon from '../../assets/user/web-icon.svg';
 import badgeIcon from '../../assets/user/verified-badge-icon.svg';
 import locationIcon from '../../assets/user/location-icon.svg';
 import gradIcon from '../../assets/user/grad-badge-icon.svg';
 import verifiedBadge from '../../assets/doctor/Group.png';
 import certified from '../../assets/user/certified-badge-icon.svg';
-import ChatIcon from '../../assets/post/bubbles_icon.svg';
+import ChatIcon from '../../assets/user/chat-icon.svg';
 // import appointmentCalendar from '../../assets/doctor/calendar.png';
 
 // components
@@ -373,7 +373,6 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                     <img
                       src={ChatIcon}
                       className='indv-doctor-info-icon'
-                      style={{ width: '30px' }}
                       alt='chat'
                     />
                   </div>
