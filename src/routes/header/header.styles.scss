@@ -116,6 +116,19 @@
   }
 }
 
+// iPhones
+@media (max-width: 430px) {
+  .header-container {
+    .header-inner-container {
+      .header-logo-and-nav-container {
+        .header-nav-container {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 // * * * previus codes are here
 // .header-navbar {
 //   display: none;
