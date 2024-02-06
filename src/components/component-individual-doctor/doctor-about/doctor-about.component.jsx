@@ -230,14 +230,14 @@ const DoctorAbout = ({ encodedMemberId }) => {
         moveForward={highlightMoveForward}
       />
       {/* UNCOMMENT FOR 2.0 RELEASE */}
-      {/* <div className='indv-customer-review-container' >
-                <div className='customer-review-section-title-container' >
-                    <h3 className='customer-review-section-title' >Customer Review</h3>
-                </div>
-                <div className='customer-review-review-container' >
-                    <DoctorReviewGrid />
-                </div>
-            </div> */}
+      <div className='indv-customer-review-container'>
+        <div className='customer-review-section-title-container'>
+          <h3 className='customer-review-section-title'>Customer Review</h3>
+        </div>
+        <div className='customer-review-review-container'>
+          <DoctorReviewGrid />
+        </div>
+      </div>
     </div>
   );
 };
