@@ -361,12 +361,13 @@
             margin-top: 0.3rem;
             margin-left: -0.5rem;
             order: 2;
-          }
 
-          .doctor-profile-appointment-tab-status-container {
-            .doctor-profile-appointment-tab-status-open-slot,
-            .doctor-profile-appointment-tab-status-close-slot,
-            .doctor-profile-appointment-tab-status-confirm {
+            &:not(
+                :has(.doctor-profile-appointment-tab-tag-1):has(
+                    .doctor-profile-appointment-tab-tag-2
+                  )
+              ) {
+              display: none;
             }
           }
         }
