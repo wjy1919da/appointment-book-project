@@ -339,7 +339,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               </div>
             </div>
             <div className='indv-top-row-right-side'>
-            <div className='indv-doctor-info-icon-container'>
+              <div className='indv-doctor-info-icon-container'>
                 <img
                   src={stripedGlobeIcon}
                   className='indv-doctor-info-icon'
@@ -454,7 +454,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               className='indv-button indv-consultation-button'
               onClick={handleGoToAppointmentPageNow}
             >
-              Book a Consultation with Me!
+              Book a Consultation
             </button>
             {isUserFollowing ? (
               <button
@@ -469,6 +469,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                 type='button'
                 onClick={() => followUser(data?.memberId)}
                 className='indv-button indv-follow-button'
+                style={{ width: '7rem' }}
               >
                 Follow
               </button>

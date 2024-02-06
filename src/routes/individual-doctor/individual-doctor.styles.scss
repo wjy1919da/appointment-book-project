@@ -96,14 +96,15 @@
 }
 
 .indv-doctor-description {
+  color: #352c29;
   font-size: 18px;
-  color: black;
 }
 
 .indv-third-row {
   column-gap: 2rem;
   font-size: 24px;
   font-weight: 600;
+  padding-top: 1rem;
 }
 
 .gray-text-container {
@@ -136,6 +137,7 @@
 
 .indv-button {
   color: #fbfcff;
+  font-size: 22px;
   font-weight: 600;
   background: linear-gradient(to right, #f48c8a, #f0a484);
   padding: 0.75rem 0;
@@ -157,10 +159,14 @@
   width: 40%;
 }
 
-.indv-follow-button,
-.indv-unfollow-button {
-  width: 15%;
+.indv-follow-button {
+  background: #675d59;
 }
+
+// .indv-follow-button,
+// .indv-unfollow-button {
+//   width: 10%;
+// }
 
 .indv-fifth-row {
   padding-top: 2rem;
@@ -215,8 +221,8 @@
 
   .indv-doctor-profile-picture-container {
     margin-bottom: 3rem;
-    width: 22rem;
-    height: 22rem;
+    width: 312px;
+    height: 312px;
   }
 
   .indv-top-row-left-side {
@@ -235,6 +241,7 @@
   .indv-doctor-info-container {
     flex-direction: column;
     align-items: center;
+    margin-top: 3rem !important;
   }
 
   .indv-doctor-info-sub-container {

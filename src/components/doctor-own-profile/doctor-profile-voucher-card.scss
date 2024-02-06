@@ -154,5 +154,19 @@
   align-items: center;
 }
 
+@media (max-width: 1133px) {
+  .doctor-own-voucher-card-container {
+    padding: 0 40px;
+    width: 470px;
+    height: 280px;
+  }
+}
+
 @media (max-width: 744px) {
+  .doctor-own-voucher-card-container {
+    padding: 0;
+    width: 470px;
+    height: 190px;
+  }
+
 }
