@@ -256,6 +256,40 @@
   }
 }
 
+@media (max-width: 430px) {
+  .mob-indv-container {
+    margin-right: auto;
+  }
+
+  .mob-indv-doctor-name-right-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mob-indv-doctor-profile-container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .mob-indv-doctor-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .indv-doctor-profile-picture {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mob-contact-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding-top: 0.4rem;
+  }
+}
+
 // .individual-doctor-container {
 //   margin-top: 126px;
 //   display: flex;

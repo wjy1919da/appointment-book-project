@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import useDoctorQueryStore from '../../store.ts';
 
 //images
@@ -215,6 +216,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   // console.log('data3 is: ', data3);
 
   // const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const iPhoneScreen = useMediaQuery({ query: '(max-width: 430px)' });
   const [isUserFollowing, setIsUserFollowing] = useState(false);
   const [followers, setFollowers] = useState(
     data3?.pages[0]?.data?.data?.followers
@@ -313,172 +315,257 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   return (
     <>
       <div className='indv-doctor-info-container'>
-        <div className='indv-doctor-profile-picture-container'>
-          <img
-            className='indv-doctor-profile-picture'
-            src={data?.img}
-            alt='Doctor'
-          />
-        </div>
-        <div className='indv-doctor-info-sub-container'>
-          <div className='indv-doctor-info-row indv-top-row'>
-            <div className='indv-top-row-left-side'>
-              <div className='indv-doctor-name-container'>
-                {data?.nickname ? (
-                  <h2 className='indv-doctor-name'>Dr. {data.nickname}</h2>
-                ) : (
-                  <h2 className='indv-doctor-name'>Doctor</h2>
-                )}
-              </div>
-              <div className='indv-doctor-verified-container'>
-                <img
-                  className='indv-doctor-verified-badge'
-                  src={verifiedBadge}
-                  alt='verified'
-                />
-              </div>
+        {/* profile picture */}
+        {!iPhoneScreen ? (
+          <>
+            <div className='indv-doctor-profile-picture-container'>
+              <img
+                className='indv-doctor-profile-picture'
+                src={data?.img}
+                alt='Doctor'
+              />
             </div>
-            <div className='indv-top-row-right-side'>
-              <div className='indv-doctor-info-icon-container'>
-                <img
-                  src={stripedGlobeIcon}
-                  className='indv-doctor-info-icon'
-                  alt='globe'
-                />
-              </div>
-              <div className='indv-doctor-info-icon-container'>
-                <img
-                  src={mailIcon}
-                  className='indv-doctor-info-icon'
-                  alt='email'
-                />
-              </div>
-              <div className='indv-doctor-info-icon-container'>
-                <img
-                  src={phoneIcon}
-                  className='indv-doctor-info-icon'
-                  alt='phone'
-                />
-              </div>
-              <div className='indv-doctor-info-icon-container'>
-                <img
-                  src={ChatIcon}
-                  className='indv-doctor-info-icon'
-                  style={{ width: '30px' }}
-                  alt='chat'
-                />
-              </div>
-              {/* <div className='indv-appointment-management-container' >
+            <div className='indv-doctor-info-sub-container'>
+              <div className='indv-doctor-info-row indv-top-row'>
+                {/* doctor user name + verified icon */}
+                <div className='indv-top-row-left-side'>
+                  {/* doctor user name */}
+                  <div className='indv-doctor-name-container'>
+                    {data?.nickname ? (
+                      <h2 className='indv-doctor-name'>Dr. {data.nickname}</h2>
+                    ) : (
+                      <h2 className='indv-doctor-name'>Doctor</h2>
+                    )}
+                  </div>
+                  {/* verified icon */}
+                  <div className='indv-doctor-verified-container'>
+                    <img
+                      className='indv-doctor-verified-badge'
+                      src={verifiedBadge}
+                      alt='verified'
+                    />
+                  </div>
+                </div>
+                {/* contact icons */}
+                <div className='indv-top-row-right-side'>
+                  <div className='indv-doctor-info-icon-container'>
+                    <img
+                      src={stripedGlobeIcon}
+                      className='indv-doctor-info-icon'
+                      alt='globe'
+                    />
+                  </div>
+                  <div className='indv-doctor-info-icon-container'>
+                    <img
+                      src={mailIcon}
+                      className='indv-doctor-info-icon'
+                      alt='email'
+                    />
+                  </div>
+                  <div className='indv-doctor-info-icon-container'>
+                    <img
+                      src={phoneIcon}
+                      className='indv-doctor-info-icon'
+                      alt='phone'
+                    />
+                  </div>
+                  <div className='indv-doctor-info-icon-container'>
+                    <img
+                      src={ChatIcon}
+                      className='indv-doctor-info-icon'
+                      style={{ width: '30px' }}
+                      alt='chat'
+                    />
+                  </div>
+                  {/* <div className='indv-appointment-management-container' >
                 <img className='indv-appointment-mangament' src={appointmentCalendar} alt='calendar appointments' />
               </div> */}
+                </div>
+              </div>
+
+              <div className='indv-doctor-info-row indv-second-row'>
+                <div className='indv-doctor-description-container'>
+                  {data?.miaoshu ? (
+                    <p className='indv-doctor-description'>{data.miaoshu}</p>
+                  ) : (
+                    <p className='indv-doctor-description'>Cosmetic Doctor</p>
+                  )}
+                </div>
+              </div>
+              <div className='indv-doctor-info-row indv-third-row'>
+                <div className='indv-posts-total-container'>
+                  {postNumber}{' '}
+                  <span className='gray-text-container'>posts</span>
+                </div>
+                <div className='indv-followers-total-container'>
+                  {followers}{' '}
+                  <span className='gray-text-container'>followers</span>
+                </div>
+                <div className='indv-following-total-container'>
+                  {followings}{' '}
+                  <span className='gray-text-container'>following</span>
+                </div>
+              </div>
+              <div className='indv-doctor-info-row indv-fourth-row'>
+                <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
+                  <img
+                    src={locationIcon}
+                    className='location-img'
+                    alt='location'
+                  />
+                  {data?.address && (
+                    <span className='indv-doctor-city-state indv-doctor-info'>
+                      {data?.address}
+                    </span>
+                  )}
+                </div>
+                <div className='indv-doctor-specialization-container indv-doctor-info-subrow'>
+                  <img
+                    src={glassIcon}
+                    className='specialization-img'
+                    alt='specialization'
+                  />
+                  {data?.name?.length > 0 && (
+                    <span className='indv-doctor-specialization indv-doctor-info'>
+                      Specialization in {convertTitle(data?.name[0])}
+                    </span>
+                  )}
+                </div>
+                <div className='indv-doctor-verification-container indv-doctor-info-subrow'>
+                  <img
+                    src={badgeIcon}
+                    className='verification-img'
+                    alt='verification'
+                  />
+                  <span className='indv-doctor-specialization indv-doctor-info'>
+                    Verified by CharmLife
+                  </span>
+                </div>
+                <div className='indv-doctor-graduation-container indv-doctor-info-subrow'>
+                  <img
+                    src={gradIcon}
+                    className='graduation-img'
+                    alt='graduation cap'
+                  />
+                  {data?.school && (
+                    <span className='indv-doctor-graduation indv-doctor-info'>
+                      {data.school}
+                    </span>
+                  )}
+                </div>
+                <div className='indv-doctor-certification-container indv-doctor-info-subrow'>
+                  <img
+                    src={certified}
+                    className='certification-img'
+                    alt='graduation cap'
+                  />
+                  <span className='indv-doctor-certification indv-doctor-info'>
+                    Board Certified
+                  </span>
+                </div>
+              </div>
+              <div className='indv-doctor-info-row indv-fifth-row'>
+                <button
+                  type='button'
+                  className='indv-button indv-consultation-button'
+                  onClick={handleGoToAppointmentPageNow}
+                >
+                  Book a Consultation
+                </button>
+                {isUserFollowing ? (
+                  <button
+                    type='button'
+                    onClick={() => unfollowUser(data?.memberId)}
+                    className='indv-unfollow-button'
+                  >
+                    Unfollow
+                  </button>
+                ) : (
+                  <button
+                    type='button'
+                    onClick={() => followUser(data?.memberId)}
+                    className='indv-button indv-follow-button'
+                    style={{ width: '7rem' }}
+                  >
+                    Follow
+                  </button>
+                )}
+                {/* UNCOMMENT FOR 2.0 RELEASE (WHEN API IS IMPLEMENTED) */}
+              </div>
+              {/* this is dummu button to navigate to doctor appointment page for demo */}
+              {/* <button onClick={handleGoToAppointmentPageNow}>Dummy</button> */}
             </div>
-          </div>
-          <div className='indv-doctor-info-row indv-second-row'>
-            <div className='indv-doctor-description-container'>
-              {data?.miaoshu ? (
-                <p className='indv-doctor-description'>{data.miaoshu}</p>
-              ) : (
-                <p className='indv-doctor-description'>Cosmetic Doctor</p>
-              )}
+          </>
+        ) : (
+          <>
+            <div className='mob-indv-container'>
+              {/* doctor profile picture */}
+              <div className='mob-indv-doctor-profile-container'>
+                <div>
+                  <img
+                    className='indv-doctor-profile-picture'
+                    src={data?.img}
+                    alt='Doctor'
+                  />
+                </div>
+                <div className='mob-indv-doctor-name-right-container'>
+                  <div className='mob-indv-doctor-name-container'>
+                    {/* user name */}
+                    <div>
+                      {data?.nickname ? (
+                        <h2 className='indv-doctor-name'>
+                          Dr. {data.nickname}
+                        </h2>
+                      ) : (
+                        <h2 className='indv-doctor-name'>Doctor</h2>
+                      )}
+                    </div>
+                    {/* verified icon */}
+                    <div>
+                      <img
+                        src={verifiedBadge}
+                        style={{ marginTop: '-5px', width: '20px', height: '20px' }}
+                        alt='verified'
+                      />
+                    </div>
+                  </div>
+
+                  {/* contact icons */}
+                  <div className='mob-contact-icon-container'>
+                    <div className=''>
+                      <img
+                        src={stripedGlobeIcon}
+                        style={{ width: '24px' }}
+                        alt='globe'
+                      />
+                    </div>
+                    <div className=''>
+                      <img
+                        src={mailIcon}
+                        style={{ width: '24px' }}
+                        alt='email'
+                      />
+                    </div>
+                    <div className=''>
+                      <img
+                        src={phoneIcon}
+                        style={{ width: '24px' }}
+                        alt='phone'
+                      />
+                    </div>
+                    <div className='i'>
+                      <img
+                        src={ChatIcon}
+                        style={{ width: '20px' }}
+                        alt='chat'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className='indv-doctor-info-row indv-third-row'>
-            <div className='indv-posts-total-container'>
-              {postNumber} <span className='gray-text-container'>posts</span>
-            </div>
-            <div className='indv-followers-total-container'>
-              {followers} <span className='gray-text-container'>followers</span>
-            </div>
-            <div className='indv-following-total-container'>
-              {followings}{' '}
-              <span className='gray-text-container'>following</span>
-            </div>
-          </div>
-          <div className='indv-doctor-info-row indv-fourth-row'>
-            <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
-              <img src={locationIcon} className='location-img' alt='location' />
-              {data?.address && (
-                <span className='indv-doctor-city-state indv-doctor-info'>
-                  {data?.address}
-                </span>
-              )}
-            </div>
-            <div className='indv-doctor-specialization-container indv-doctor-info-subrow'>
-              <img
-                src={glassIcon}
-                className='specialization-img'
-                alt='specialization'
-              />
-              {data?.name?.length > 0 && (
-                <span className='indv-doctor-specialization indv-doctor-info'>
-                  Specialization in {convertTitle(data?.name[0])}
-                </span>
-              )}
-            </div>
-            <div className='indv-doctor-verification-container indv-doctor-info-subrow'>
-              <img
-                src={badgeIcon}
-                className='verification-img'
-                alt='verification'
-              />
-              <span className='indv-doctor-specialization indv-doctor-info'>
-                Verified by CharmLife
-              </span>
-            </div>
-            <div className='indv-doctor-graduation-container indv-doctor-info-subrow'>
-              <img
-                src={gradIcon}
-                className='graduation-img'
-                alt='graduation cap'
-              />
-              {data?.school && (
-                <span className='indv-doctor-graduation indv-doctor-info'>
-                  {data.school}
-                </span>
-              )}
-            </div>
-            <div className='indv-doctor-certification-container indv-doctor-info-subrow'>
-              <img
-                src={certified}
-                className='certification-img'
-                alt='graduation cap'
-              />
-              <span className='indv-doctor-certification indv-doctor-info'>
-                Board Certified
-              </span>
-            </div>
-          </div>
-          <div className='indv-doctor-info-row indv-fifth-row'>
-            <button
-              type='button'
-              className='indv-button indv-consultation-button'
-              onClick={handleGoToAppointmentPageNow}
-            >
-              Book a Consultation
-            </button>
-            {isUserFollowing ? (
-              <button
-                type='button'
-                onClick={() => unfollowUser(data?.memberId)}
-                className='indv-unfollow-button'
-              >
-                Unfollow
-              </button>
-            ) : (
-              <button
-                type='button'
-                onClick={() => followUser(data?.memberId)}
-                className='indv-button indv-follow-button'
-                style={{ width: '7rem' }}
-              >
-                Follow
-              </button>
-            )}
-            {/* UNCOMMENT FOR 2.0 RELEASE (WHEN API IS IMPLEMENTED) */}
-          </div>
-          {/* this is dummu button to navigate to doctor appointment page for demo */}
-          {/* <button onClick={handleGoToAppointmentPageNow}>Dummy</button> */}
-        </div>
+          </>
+        )}
       </div>
     </>
   );
