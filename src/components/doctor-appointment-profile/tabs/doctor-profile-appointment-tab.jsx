@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 // components
 import FormButton from '../../../mutual_components/button/button';
@@ -22,6 +23,8 @@ const DoctorAppointmentProfileAppointmentTab = () => {
   const [appointmentData, setAppointmentData] = useState(
     initialAppointmentData
   ); // appointment list data
+
+  const iPadScreen = useMediaQuery({ maxWidth: 1133 });
 
   // pop up
   const handleClickList = (e) => {
@@ -185,35 +188,38 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     {item.await}
                   </span>
                 </div>
-                <div className='doctor-profile-appointment-tab-tag-container'>
-                  {item.tag1 && (
-                    <span
-                      className={`doctor-profile-appointment-tab-tag-1 ${
-                        index >= 2
-                          ? 'doctor-profile-appointment-tab-tag-1-active'
-                          : 'doctor-profile-appointment-tab-tag-2-disabled'
-                      }`}
-                    >
-                      {item.tag1}
-                    </span>
-                  )}
-                  {item.tag2 && (
-                    <span
-                      className={`doctor-profile-appointment-tab-tag-2 ${
-                        index >= 2
-                          ? 'doctor-profile-appointment-tab-tag-2-active'
-                          : 'doctor-profile-appointment-tab-tag-2-disabled'
-                      }`}
-                    >
-                      {item.tag2}
-                    </span>
-                  )}
-                  {!item.tag1 && !item.tag2 && item.cancel && (
-                    <span className='doctor-profile-appointment-tab-cancel'>
-                      {item.cancel}
-                    </span>
-                  )}
-                </div>
+                {/* {!iPadScreen && ( */}
+                  <div className='doctor-profile-appointment-tab-tag-container'>
+                    {item.tag1 && (
+                      <span
+                        className={`doctor-profile-appointment-tab-tag-1 ${
+                          index >= 2
+                            ? 'doctor-profile-appointment-tab-tag-1-active'
+                            : 'doctor-profile-appointment-tab-tag-2-disabled'
+                        }`}
+                      >
+                        {item.tag1}
+                      </span>
+                    )}
+                    {item.tag2 && (
+                      <span
+                        className={`doctor-profile-appointment-tab-tag-2 ${
+                          index >= 2
+                            ? 'doctor-profile-appointment-tab-tag-2-active'
+                            : 'doctor-profile-appointment-tab-tag-2-disabled'
+                        }`}
+                      >
+                        {item.tag2}
+                      </span>
+                    )}
+                    {!item.tag1 && !item.tag2 && item.cancel && (
+                      <span className='doctor-profile-appointment-tab-cancel'>
+                        {item.cancel}
+                      </span>
+                    )}
+                  </div>
+                {/* )} */}
+
                 <button
                   className={`${
                     item.status === 'Open Slot'

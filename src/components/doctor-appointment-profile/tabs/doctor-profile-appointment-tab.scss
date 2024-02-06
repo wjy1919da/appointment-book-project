@@ -341,6 +341,38 @@
 }
 
 @media (max-width: 1133px) {
+  .doctor-profile-appointment-tab-container {
+    .doctor-profile-appointment-tab-inner-container {
+      .doctor-profile-appointment-tab-right-container {
+        .doctor-profile-appointment-tab-list-container {
+          display: flex;
+          justify-content: initial;
+          flex-wrap: wrap;
+          flex: 1 0 50%;
+          height: 110px;
+
+          .doctor-profile-appointment-tab-icon-and-await {
+            .doctor-profile-appointment-tab-await {
+              padding: 0;
+            }
+          }
+
+          .doctor-profile-appointment-tab-tag-container {
+            margin-top: 0.3rem;
+            margin-left: -0.5rem;
+            order: 2;
+          }
+
+          .doctor-profile-appointment-tab-status-container {
+            .doctor-profile-appointment-tab-status-open-slot,
+            .doctor-profile-appointment-tab-status-close-slot,
+            .doctor-profile-appointment-tab-status-confirm {
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 744px) {
