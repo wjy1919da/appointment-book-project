@@ -107,8 +107,15 @@
   padding-top: 1rem;
 }
 
+.indv-posts-total-container,
+.indv-followers-total-container,
+.indv-following-total-container {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .gray-text-container {
-  color: #a5a6a8;
+  color: #352c29;
 }
 
 .indv-fourth-row {
@@ -287,6 +294,44 @@
     align-items: center;
     gap: 0.7rem;
     padding-top: 0.4rem;
+  }
+
+  .mob-indv-doctor-info-container {
+    margin-top: 1rem;
+    margin-right: auto;
+  }
+
+  .mob-indv-doctor-description {
+    margin-bottom: 0;
+  }
+
+  .indv-third-row {
+    margin-bottom: 1rem;
+  }
+
+  .indv-posts-total-container,
+  .indv-followers-total-container,
+  .indv-following-total-container {
+    font-size: 18px;
+  }
+
+  .mob-indv-doctor-details-wrap {
+    color: #675d59;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .mob-indv-doctor-details-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .indv-fifth-row {
+    padding-top: 1rem;
   }
 }
 

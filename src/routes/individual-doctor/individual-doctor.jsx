@@ -4,17 +4,17 @@ import { useMediaQuery } from 'react-responsive';
 import useDoctorQueryStore from '../../store.ts';
 
 //images
-import glassIcon from '../../assets/user/glassesIcon.png';
+import glassIcon from '../../assets/user/glasses-badge-icon.svg';
 import mailIcon from '../../assets/doctor/mailIcon.svg';
 import phoneIcon from '../../assets/doctor/phoneIcon.svg';
 import stripedGlobeIcon from '../../assets/doctor/stripedGlobeIcon.svg';
-import badgeIcon from '../../assets/user/badgeIcon.png';
-import locationIcon from '../../assets/user/locationIcon.png';
-import gradIcon from '../../assets/user/Graduation Cap.png';
+import badgeIcon from '../../assets/user/verified-badge-icon.svg';
+import locationIcon from '../../assets/user/location-icon.svg';
+import gradIcon from '../../assets/user/grad-badge-icon.svg';
 import verifiedBadge from '../../assets/doctor/Group.png';
-import certified from '../../assets/user/Certificate.png';
+import certified from '../../assets/user/certified-badge-icon.svg';
 import ChatIcon from '../../assets/post/bubbles_icon.svg';
-import appointmentCalendar from '../../assets/doctor/calendar.png';
+// import appointmentCalendar from '../../assets/doctor/calendar.png';
 
 // components
 import DoctorProfile from '../../components/component-individual-doctor/doctor-profile/doctor-profile';
@@ -394,25 +394,21 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               </div>
               <div className='indv-doctor-info-row indv-third-row'>
                 <div className='indv-posts-total-container'>
-                  {postNumber}{' '}
+                  {postNumber}
                   <span className='gray-text-container'>posts</span>
                 </div>
                 <div className='indv-followers-total-container'>
-                  {followers}{' '}
+                  {followers}
                   <span className='gray-text-container'>followers</span>
                 </div>
                 <div className='indv-following-total-container'>
-                  {followings}{' '}
+                  {followings}
                   <span className='gray-text-container'>following</span>
                 </div>
               </div>
               <div className='indv-doctor-info-row indv-fourth-row'>
                 <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
-                  <img
-                    src={locationIcon}
-                    className='location-img'
-                    alt='location'
-                  />
+                  <img src={locationIcon} alt='location' />
                   {data?.address && (
                     <span className='indv-doctor-city-state indv-doctor-info'>
                       {data?.address}
@@ -524,7 +520,11 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                     <div>
                       <img
                         src={verifiedBadge}
-                        style={{ marginTop: '-5px', width: '20px', height: '20px' }}
+                        style={{
+                          marginTop: '-5px',
+                          width: '20px',
+                          height: '20px',
+                        }}
                         alt='verified'
                       />
                     </div>
@@ -563,6 +563,124 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className='mob-indv-doctor-info-container'>
+              <div>
+                {data?.miaoshu ? (
+                  <p className='mob-indv-doctor-description'>{data.miaoshu}</p>
+                ) : (
+                  <p className='mob-indv-doctor-description'>Cosmetic Doctor</p>
+                )}
+              </div>
+
+              <div className='indv-doctor-info-row indv-third-row'>
+                <div className='indv-posts-total-container'>
+                  {postNumber}
+                  <span className='gray-text-container'>posts</span>
+                </div>
+                <div className='indv-followers-total-container'>
+                  {followers}
+                  <span className='gray-text-container'>followers</span>
+                </div>
+                <div className='indv-following-total-container'>
+                  {followings}
+                  <span className='gray-text-container'>following</span>
+                </div>
+              </div>
+
+              <div className='mob-indv-doctor-details-wrap'>
+                <div className='mob-indv-doctor-details-container'>
+                  <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
+                    <img
+                      src={locationIcon}
+                      className='location-img'
+                      alt='location'
+                    />
+                    {data?.address && (
+                      <span className='indv-doctor-city-state indv-doctor-info'>
+                        {data?.address}
+                      </span>
+                    )}
+                  </div>
+                  <div className='indv-doctor-specialization-container indv-doctor-info-subrow'>
+                    <img
+                      src={glassIcon}
+                      className='specialization-img'
+                      alt='specialization'
+                    />
+                    {data?.name?.length > 0 && (
+                      <span className='indv-doctor-specialization indv-doctor-info'>
+                        Specialization in {convertTitle(data?.name[0])}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className='mob-indv-doctor-details-container'>
+                  <div className='indv-doctor-verification-container indv-doctor-info-subrow'>
+                    <img
+                      src={badgeIcon}
+                      className='verification-img'
+                      alt='verification'
+                    />
+                    <span className='indv-doctor-specialization indv-doctor-info'>
+                      Verified by CharmLife
+                    </span>
+                  </div>
+                  <div className='indv-doctor-graduation-container indv-doctor-info-subrow'>
+                    <img
+                      src={gradIcon}
+                      className='graduation-img'
+                      alt='graduation cap'
+                    />
+                    {data?.school && (
+                      <span className='indv-doctor-graduation indv-doctor-info'>
+                        {data.school}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className='indv-doctor-certification-container indv-doctor-info-subrow'>
+                  <img
+                    src={certified}
+                    className='certification-img'
+                    alt='graduation cap'
+                  />
+                  <span className='indv-doctor-certification indv-doctor-info'>
+                    Board Certified
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className='indv-doctor-info-row indv-fifth-row'>
+              <button
+                type='button'
+                className='indv-button indv-consultation-button'
+                onClick={handleGoToAppointmentPageNow}
+              >
+                Book a Consultation
+              </button>
+              {isUserFollowing ? (
+                <button
+                  type='button'
+                  onClick={() => unfollowUser(data?.memberId)}
+                  className='indv-unfollow-button'
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  type='button'
+                  onClick={() => followUser(data?.memberId)}
+                  className='indv-button indv-follow-button'
+                  style={{ width: '7rem' }}
+                >
+                  Follow
+                </button>
+              )}
             </div>
           </>
         )}
