@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AppDetailDescription from '../user-appointment/appointment-detail-description';
 
 // components
-import Button from '../components-posts/community-post-button/community-post-button';
+import FormButton from '../../mutual_components/button/button';
 
 // scss
 import './doctor-appointment-page-1.scss';

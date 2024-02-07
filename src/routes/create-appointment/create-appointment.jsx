@@ -8,7 +8,7 @@ import AppDetailDescription from "../../components/user-appointment/appointment-
 import AppConsultationType from "../../components/user-appointment/app-choose-consultation-type";
 import AppStripePage from "./appointment-stripe-page";
 
-import Button from '../../components/components-posts/community-post-button/community-post-button';
+import FormButton from '../../mutual_components/button/button';
 import Arrow from '../../assets/post/iconoir_arrow-right.svg';
 
 const CreateAppointment = () => {
@@ -49,7 +49,7 @@ const NavigationBar = ({goBack, goForward, maxPages, currPage}) => {
     }
     return (
         <div className="create-appointment-navigation-bar">
-        <Button
+        <FormButton
             buttonName='Back'
             icon={Arrow}
             rotateIcon={true}
@@ -61,7 +61,7 @@ const NavigationBar = ({goBack, goForward, maxPages, currPage}) => {
                 return (<div key={index} className="create-appointment-radio-button-container">{item}</div>);
             })}
         </div>
-        <Button
+        <FormButton
             buttonName='Next'
             icon={Arrow}
             // rotateIcon={true}

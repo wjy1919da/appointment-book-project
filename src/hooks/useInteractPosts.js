@@ -5,9 +5,10 @@ import userInfoQueryStore from "../userStore.ts";
 import { useToast } from "@chakra-ui/react";
 
 // user like post
+// to get likes data 
 export function useGetLikesPost() {
-  const toast = useToast();
-  const apiClient = new APIClient("/post/like");
+  // const toast = useToast();
+  const apiClient = new APIClient("/post/like"); // end point
 
   const fetchLikeData = async (postId) => {
     const res = await apiClient.post({
@@ -17,11 +18,12 @@ export function useGetLikesPost() {
   };
 
   return useMutation((credentials) => fetchLikeData(credentials.postId), {
-    onSuccess: (data) => {
+    onSuccess: (data) => { // callback
       console.log("OK", data);
     },
-    onError: (error) => {
+    onError: (error) => { // callback
       console.error("ERROR", error);
+      // toast.error("エラー");
     },
   });
 }

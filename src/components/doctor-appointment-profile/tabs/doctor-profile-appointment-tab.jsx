@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import Calendar from 'react-calendar';
+import { useMediaQuery } from 'react-responsive';
 
 // components
-import Button from '../../components-posts/community-post-button/community-post-button';
+import FormButton from '../../../mutual_components/button/button';
 import AppointmentDetail from '../../user-appointment/appointment-detail';
 import DarkenConfirmationModal from '../../chakra-modal/chakra-modal';
+import CalendarComponent from '../../../mutual_components/calendar/calendar';
 
 // data
 import { appointmentData as initialAppointmentData } from '../data/appointmentData';
@@ -12,43 +13,18 @@ import { appointmentData as initialAppointmentData } from '../data/appointmentDa
 
 // scss
 import './doctor-profile-appointment-tab.scss';
-import '../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss';
-import 'react-calendar/dist/Calendar.css';
 
 // images
 import xIcon from '../../../assets/user/xIcon.svg';
 
-function isToday(date) {
-  return new Date().toDateString() === date.toDateString();
-}
-
 const DoctorAppointmentProfileAppointmentTab = () => {
-  const [date, setDate] = useState(new Date()); // react-calendar date
   const [isPopupOpen, setPopupOpen] = useState(false); // pop up
   const [isModalOpen, setModalOpen] = useState(false); // secondary confirmation modal
   const [appointmentData, setAppointmentData] = useState(
     initialAppointmentData
   ); // appointment list data
 
-  const handleChangeDate = (newDate) => {
-    setDate(newDate);
-  };
-
-  const tileClassName = ({ date }) => {
-    const isToday =
-      date.getDate() === new Date().getDate() &&
-      date.getMonth() === new Date().getMonth() &&
-      date.getFullYear() === new Date().getFullYear();
-
-    return isToday ? 'today-tile' : '';
-  };
-
-  // change the week day format to two letters
-  const formatShortWeekday = (locale, date) => {
-    // date = new Date();
-    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-    return weekdays[date.getDay()];
-  };
+  const iPadScreen = useMediaQuery({ maxWidth: 1133 });
 
   // pop up
   const handleClickList = (e) => {
@@ -132,26 +108,13 @@ const DoctorAppointmentProfileAppointmentTab = () => {
 
       <div className='doctor-profile-appointment-tab-inner-container'>
         <div className='doctor-profile-appointment-tab-left-container'>
-          <Calendar
-            onChange={handleChangeDate}
-            value={date}
-            locale='en-GB'
-            formatShortWeekday={formatShortWeekday}
-            tileClassName={tileClassName}
-            tileContent={({ date, view }) => {
-              if (view === 'month') {
-                if (isToday(date)) {
-                  return <div className='is-today'></div>;
-                }
-              }
-            }}
-          />
+          <CalendarComponent />
           <div className='doctor-profile-appointment-tab-button-container'>
-            <Button
+            <FormButton
               buttonName='Open all unavailable slots'
               className='doctor-profile-appointment-tab-open-button'
             />
-            <Button
+            <FormButton
               buttonName='Close all unbooked slots'
               className='doctor-profile-appointment-tab-close-button'
             />
@@ -225,35 +188,38 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     {item.await}
                   </span>
                 </div>
-                <div className='doctor-profile-appointment-tab-tag-container'>
-                  {item.tag1 && (
-                    <span
-                      className={`doctor-profile-appointment-tab-tag-1 ${
-                        index >= 2
-                          ? 'doctor-profile-appointment-tab-tag-1-active'
-                          : 'doctor-profile-appointment-tab-tag-2-disabled'
-                      }`}
-                    >
-                      {item.tag1}
-                    </span>
-                  )}
-                  {item.tag2 && (
-                    <span
-                      className={`doctor-profile-appointment-tab-tag-2 ${
-                        index >= 2
-                          ? 'doctor-profile-appointment-tab-tag-2-active'
-                          : 'doctor-profile-appointment-tab-tag-2-disabled'
-                      }`}
-                    >
-                      {item.tag2}
-                    </span>
-                  )}
-                  {!item.tag1 && !item.tag2 && item.cancel && (
-                    <span className='doctor-profile-appointment-tab-cancel'>
-                      {item.cancel}
-                    </span>
-                  )}
-                </div>
+                {/* {!iPadScreen && ( */}
+                  <div className='doctor-profile-appointment-tab-tag-container'>
+                    {item.tag1 && (
+                      <span
+                        className={`doctor-profile-appointment-tab-tag-1 ${
+                          index >= 2
+                            ? 'doctor-profile-appointment-tab-tag-1-active'
+                            : 'doctor-profile-appointment-tab-tag-2-disabled'
+                        }`}
+                      >
+                        {item.tag1}
+                      </span>
+                    )}
+                    {item.tag2 && (
+                      <span
+                        className={`doctor-profile-appointment-tab-tag-2 ${
+                          index >= 2
+                            ? 'doctor-profile-appointment-tab-tag-2-active'
+                            : 'doctor-profile-appointment-tab-tag-2-disabled'
+                        }`}
+                      >
+                        {item.tag2}
+                      </span>
+                    )}
+                    {!item.tag1 && !item.tag2 && item.cancel && (
+                      <span className='doctor-profile-appointment-tab-cancel'>
+                        {item.cancel}
+                      </span>
+                    )}
+                  </div>
+                {/* )} */}
+
                 <button
                   className={`${
                     item.status === 'Open Slot'

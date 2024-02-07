@@ -76,17 +76,31 @@
       flex-direction: column;
       gap: 20px;
       padding-top: 20px;
-      padding-bottom: 10px;
       width: 372px;
 
       .doctor-profile-appointment-tab-open-button {
+        color: #fbfcff;
+        font-family: 'Open Sans';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
         background: #675d59;
+        border-radius: 8px;
+        padding: 12px 32px;
       }
 
       .doctor-profile-appointment-tab-close-button {
         color: #675d59;
+        font-family: 'Open Sans';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
         background: #fff;
         border: 1px solid #675d59;
+        border-radius: 8px;
+        padding: 12px 32px;
       }
     }
 
@@ -327,6 +341,39 @@
 }
 
 @media (max-width: 1133px) {
+  .doctor-profile-appointment-tab-container {
+    .doctor-profile-appointment-tab-inner-container {
+      .doctor-profile-appointment-tab-right-container {
+        .doctor-profile-appointment-tab-list-container {
+          display: flex;
+          justify-content: initial;
+          flex-wrap: wrap;
+          flex: 1 0 50%;
+          height: 110px;
+
+          .doctor-profile-appointment-tab-icon-and-await {
+            .doctor-profile-appointment-tab-await {
+              padding: 0;
+            }
+          }
+
+          .doctor-profile-appointment-tab-tag-container {
+            margin-top: 0.3rem;
+            margin-left: -0.5rem;
+            order: 2;
+
+            &:not(
+                :has(.doctor-profile-appointment-tab-tag-1):has(
+                    .doctor-profile-appointment-tab-tag-2
+                  )
+              ) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 744px) {

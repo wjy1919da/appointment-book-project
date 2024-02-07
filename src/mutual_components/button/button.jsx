@@ -1,8 +1,5 @@
 import React from 'react';
 
-// scss
-import './community-post-button.scss';
-
 const FormButton = ({
   buttonName,
   onClick,
@@ -13,7 +10,7 @@ const FormButton = ({
   return (
     <button
       type='submit'
-      className={`create-post-button ${className}`}
+      className={className}
       onClick={onClick}
     >
       {icon && rotateIcon && (

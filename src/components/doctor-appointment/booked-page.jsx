@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import Button from '../components-posts/community-post-button/community-post-button';
+import FormButton from '../../mutual_components/button/button';
 
 // scss
 import './booked-page.scss';
@@ -60,8 +60,8 @@ const BookedPage = () => {
         </div>
 
         <div className='doctor-appointment-button-container'>
-          <Button buttonName='Home' className='doctor-appointment-home-button' />
-          <Button
+          <FormButton buttonName='Home' className='doctor-appointment-home-button' />
+          <FormButton
             buttonName='My Appointment'
             icon={Arrow}
             // rotateIcon={true}
