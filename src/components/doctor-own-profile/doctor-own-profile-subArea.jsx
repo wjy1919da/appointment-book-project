@@ -25,6 +25,15 @@ const DoctorProfileSubArea = () => {
     hasNextPage: userLikedPostHasNextPage,
   } = useGetUserLikededPost();
   const { hash } = useLocation();
+  const doctorProfileBreakPoints = {
+    default: 4,
+    2500: 4,
+    2047: 4,
+    1700: 4,
+    1024: 4,
+    767: 3,
+    430: 2,
+  };
 
   useEffect(() => {
     const cleanHash = hash.replace("#", "");
@@ -82,6 +91,7 @@ const DoctorProfileSubArea = () => {
             isLoading={postsIsLoading}
             error={postsError}
             download={false}
+            breakPoints={doctorProfileBreakPoints}
           />
         )}
         {activeTab === "Likes" && (
@@ -92,6 +102,7 @@ const DoctorProfileSubArea = () => {
             fetchNextPage={userLikedPostFetchNextPage}
             hasNextPage={userLikedPostHasNextPage}
             download={false}
+            breakPoints={doctorProfileBreakPoints}
           />
         )}
       </div>

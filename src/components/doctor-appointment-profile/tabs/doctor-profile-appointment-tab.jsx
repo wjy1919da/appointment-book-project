@@ -3,9 +3,11 @@ import Calendar from 'react-calendar';
 
 // components
 import Button from '../../components-posts/community-post-button/community-post-button';
-// dummy data
-import { appointmentData } from '../data/appointmentData';
-// slots decription data
+import AppointmentDetail from '../../user-appointment/appointment-detail';
+import DarkenConfirmationModal from '../../chakra-modal/chakra-modal';
+
+// data
+import { appointmentData as initialAppointmentData } from '../data/appointmentData';
 // import { slotsDescriptionData } from "../data/slotsDescriptionData";
 
 // scss
@@ -13,14 +15,26 @@ import './doctor-profile-appointment-tab.scss';
 import '../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss';
 import 'react-calendar/dist/Calendar.css';
 
-const DoctorAppointmentProfileAppointmentTab = () => {
-  const [date, setDate] = useState(new Date());
+// images
+import xIcon from '../../../assets/user/xIcon.svg';
 
-  const handleChange = (newDate) => {
+function isToday(date) {
+  return new Date().toDateString() === date.toDateString();
+}
+
+const DoctorAppointmentProfileAppointmentTab = () => {
+  const [date, setDate] = useState(new Date()); // react-calendar date
+  const [isPopupOpen, setPopupOpen] = useState(false); // pop up
+  const [isModalOpen, setModalOpen] = useState(false); // secondary confirmation modal
+  const [appointmentData, setAppointmentData] = useState(
+    initialAppointmentData
+  ); // appointment list data
+
+  const handleChangeDate = (newDate) => {
     setDate(newDate);
   };
 
-  const tileClassName = ({ date, view }) => {
+  const tileClassName = ({ date }) => {
     const isToday =
       date.getDate() === new Date().getDate() &&
       date.getMonth() === new Date().getMonth() &&
@@ -29,21 +43,108 @@ const DoctorAppointmentProfileAppointmentTab = () => {
     return isToday ? 'today-tile' : '';
   };
 
+  // change the week day format to two letters
   const formatShortWeekday = (locale, date) => {
+    // date = new Date();
     const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     return weekdays[date.getDay()];
   };
 
+  // pop up
+  const handleClickList = (e) => {
+    if (
+      e.target.classList.contains('doctor-profile-appointment-tab-list-active')
+    ) {
+      setPopupOpen(true);
+    }
+  };
+
+  // pop up close
+  const handleClickPopupClose = () => {
+    setPopupOpen(false);
+  };
+
+  // toggle open/close slots button, open modal when click on confirm button
+  const handleClickSlotsAndModal = (index) => {
+    setPopupOpen(false);
+    setAppointmentData((prevData) => {
+      const updatedSlots = prevData.map((slot, i) => {
+        if (i === index) {
+          return {
+            ...slot,
+            status:
+              slot.status === 'Open Slot'
+                ? 'Close Slot'
+                : slot.status === 'Close Slot'
+                ? 'Open Slot'
+                : slot.status,
+          };
+        }
+        return slot;
+      });
+      return updatedSlots;
+    });
+
+    const currentItem = appointmentData[index];
+
+    if (currentItem.status === 'Confirm') {
+      setModalOpen(true);
+    }
+  };
+
   return (
     <div className='doctor-profile-appointment-tab-container'>
+      {/* pop up */}
+      {isPopupOpen && (
+        <div className='doctor-profile-appointment-tab-darkened-container'>
+          <div
+            className='doctor-profile-appointment-tab-darkened'
+            onClick={(e) => handleClickList(e)}
+          ></div>
+          <div className='doctor-profile-appointment-tab-popup-container'>
+            <div
+              className='doctor-profile-appointment-tab-close-icon-container'
+              onClick={handleClickPopupClose}
+            >
+              <img
+                src={xIcon}
+                className='doctor-profile-appointment-tab-close-icon'
+                alt='Close-Icon'
+              />
+            </div>
+            {/* confirmed */}
+            <AppointmentDetail className='doctor-profile-appointment-tab-button' />
+            {/* not confirmed */}
+            {/* <AppointmentDetail type={1} className='doctor-profile-appointment-tab-button' /> */}
+          </div>
+        </div>
+      )}
+
+      {/* darken secondary confirmation modal pop up */}
+      <DarkenConfirmationModal
+        title='Secondary Confirmation?'
+        cancelButtonText='Cancel'
+        approveButtonText='Confirm'
+        // approveCallback={}
+        isModalOpen={isModalOpen}
+        closeModalFunc={() => setModalOpen(false)}
+      />
+
       <div className='doctor-profile-appointment-tab-inner-container'>
         <div className='doctor-profile-appointment-tab-left-container'>
           <Calendar
-            onChange={handleChange}
+            onChange={handleChangeDate}
             value={date}
             locale='en-GB'
             formatShortWeekday={formatShortWeekday}
             tileClassName={tileClassName}
+            tileContent={({ date, view }) => {
+              if (view === 'month') {
+                if (isToday(date)) {
+                  return <div className='is-today'></div>;
+                }
+              }
+            }}
           />
           <div className='doctor-profile-appointment-tab-button-container'>
             <Button
@@ -99,6 +200,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     ? 'doctor-profile-appointment-tab-list-active'
                     : 'doctor-profile-appointment-tab-list-disabled'
                 }`}
+                onClick={(e) => handleClickList(e)}
               >
                 <span
                   className={`doctor-profile-appointment-tab-time ${
@@ -152,7 +254,7 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                     </span>
                   )}
                 </div>
-                <span
+                <button
                   className={`${
                     item.status === 'Open Slot'
                       ? 'doctor-profile-appointment-tab-status-open-slot'
@@ -168,12 +270,14 @@ const DoctorAppointmentProfileAppointmentTab = () => {
                       ? 'doctor-profile-appointment-tab-status-confirm'
                       : ''
                   }`}
+                  onClick={() => handleClickSlotsAndModal(index)}
                 >
+                  {/* status with icon */}
                   <span className='doctor-profile-appointment-tab-status-container'>
                     {item.icon && <img src={item.icon} alt='Icon' />}
                     {item.status}
                   </span>
-                </span>
+                </button>
               </div>
             ))}
           </div>

@@ -6,9 +6,9 @@ import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
 import defaultAvatar from "../../assets/post/user-profile-avatar.png";
-import ProfileMessage from "../../components/profile-message/profile-message.component";
-import { useGetSendbirdUserInfo } from "../../hooks/useGetSendbirdUserInfo.js";
-//src/hooks/useGetSendbirdUserInfo.js
+import UserIcon from "../../assets/user/user.svg";
+
+import useTimer from "../../hooks/useTimer";
 import {
   Modal,
   ModalOverlay,
@@ -66,11 +66,11 @@ const HeaderUser = () => {
     <div className="header-login">
       {!userInfo.token && (
         <div
-          onClick={() => togglePopup(true, "accountType")} //signUp //gender//accountType
+          onClick={() => togglePopup(true, "accountType")} //signUp //gender //accountType
           className="header-login-default"
         >
           <img
-            src={loginIcon}
+            src={UserIcon}
             alt="login"
             className="header-login-default-icon"
           ></img>

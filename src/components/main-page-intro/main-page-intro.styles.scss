@@ -1,58 +1,220 @@
 // base
+
+//Hoang added this one, testing
+.main-page-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0%;
+  margin-top: 0%;
+  width: 100%;
+  height: 800px;
+
+  @media(min-width:1134px){
 .main-page-title {
   padding-top: 8rem;
-  font-size: 60px;
+  font-size: 48px;
   font-weight: 700;
-  width: 55%;
+  width: 50%;
+  //width: 55%;
 }
 .main-title-container {
-  width: 90%;
+  width: 95%; //just added
+  //width: 90%;
   margin: auto;
 }
 .main-page-subtitle {
+  padding-top: 2rem; //just added
   font-weight: 600;
   font-size: 21px;
+  width: 480px; //just added
+  height:58px;
 }
 .main-top-row {
   display: flex;
   justify-content: right;
-  padding-bottom: 4rem;
+  padding-right: 0rem;  //just added
+  
+  padding-top:1rem;
+  padding-bottom: 0rem;
+  width: 52.6%;  //length of the bullet
 }
 .main-top-img-container {
-  width: 50%;
-  height: 25rem;
-  right: 0px;
+  width: 85%;
+  // height: 25rem;
+  height: 472px;
+  right: -90%;
+  bottom: 2rem;  //just added, me
   background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
   border-radius: 1000px 0px 0px 1000px;
   position: relative;
   // overflow: hidden;
+
+  // width: 50%;
+  //       height: 100%;
+  //       right: 0px;
+  //       background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
+  //       border-radius: 1000px 0px 0px 1000px;
+  //       position: relative;
 }
 .main-doctor-img-container {
   position: absolute;
-  right: 25%;
-  bottom: -3px;
-  width: 19rem;
+  right: 12%;
+  bottom: -307.2px;
+  // width: 25rem;
+  height: 900px;
 }
 .main-doctor-img {
-  width: 100%;
+  width: 362px;
+  height: 596px;
 }
 .main-top-container {
+  width: 100%;
   background: linear-gradient(
     180deg,
     #fff2ed 24.48%,
     rgba(255, 248, 244, 0) 100%
   );
+  
+}
 }
 
-@media (max-width: 768px) {
-  // tablet
+@media (max-width: 1134px) {
+  .main-page-title {
+    padding-top: 6rem;
+    padding-left:1rem;
+    font-size: 48px;
+    font-weight: 700;
+    width: 60%;
+    //width: 55%;
+  }
+  .main-title-container {
+    width: 96%; //just added
+    //width: 90%;
+    margin: auto;
+  }
+  .main-page-subtitle {
+    padding-top: 2.5rem; //just added
+    padding-left:1rem;
+    font-weight: 600;
+    font-size: 21px;
+    width: 414px; //just added
+    height:84px;
+  }
+  .main-top-row {
+    display: flex;
+    justify-content: right;
+    padding-right: 0rem;  //just added
+    padding-bottom: 0rem;
+    width: 66.6%;  //length of the bullet
+  }
+  .main-top-img-container {
+    // width: 50%;
+    width: 692px; //just added
+    // height: 25rem;
+    height: 472px;  //just added
+    
+    right: 0px;
+    left: 50%; //just added
+    top: -35px;  //just added
+    background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
+    border-radius: 1000px 0px 0px 1000px;
+    position: relative;
+    // overflow: hidden;
+  }
+  .main-doctor-img-container {
+    position: absolute;
+    right: 18%;
+    top:-122px;
+    // width: 25rem;
+    height: 900px;
+  }
+  .main-doctor-img {
+    width: 362px;
+    height: 596px;
+  }
+  .main-top-container {
+    width:100%;
+    background: linear-gradient(
+      180deg,
+      #fff2ed 24.48%,
+      rgba(255, 248, 244, 0) 100%
+    );
+  }
 }
 
-@media (max-width: 576px) {
-  // phone
+@media (max-width: 745px) {
+  .main-page-title {
+    padding-top: 8rem;
+    padding-left:2rem;
+    font-size: 48px;
+    font-weight: 700;
+    width: 60%;
+    //width: 55%;
+    
+  }
+  .main-title-container {
+    width: 150%; //just added
+    //width: 90%;
+    margin: auto;
+  }
+  .main-page-subtitle {
+    padding-top: 2.5rem; //just added
+    padding-left:2rem;
+    font-weight: 600;
+    font-size: 21px;
+    width: 414px; //just added
+    height:84px;
+  }
+  .main-top-row {
+    display: flex;
+    justify-content: right;
+    padding-right: 0rem;  //just added
+    padding-bottom: 0rem;
+    padding-top:8rem;
+    width: 102%;  //length of the bullet
+  }
+  .main-top-img-container {
+    width: 449px; //just added
+    height: 283px;  //just added
+    right: 0px;
+    left: -1.75%; //just added
+    top: -110px;  //just added
+    background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
+    border-radius: 1000px 0px 0px 1000px;
+    position: relative;
+    // overflow: hidden;
+  }
+  .main-doctor-img-container {
+    position: absolute;
+    right: 28%;
+    top:-49px;
+    // width: 25rem;
+    height: 900px;
+  }
+  .main-doctor-img {
+    width: 189.06px;
+    height: 333.13px;
+  }
+  .main-top-container {
+    width:100%;
+    background: linear-gradient(
+      180deg,
+      #fff2ed 24.48%,
+      rgba(255, 248, 244, 0) 100%
+    );
+  }
 }
+
+// @media (max-width: 768px) {
+//   // tablet
+// }
+
+// @media (max-width: 576px) {
+//   // phone
+// }
 
 .main-text {
   font-family: "Open Sans";
   color: #352c29;
+}
 }

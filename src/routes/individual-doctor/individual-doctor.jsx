@@ -16,7 +16,6 @@ import appointmentCalendar from "../../assets/doctor/calendar.png";
 // components
 import DoctorProfile from "../../components/component-individual-doctor/doctor-profile/doctor-profile";
 import DoctorAbout from "../../components/component-individual-doctor/doctor-about/doctor-about.component";
-import UserProfileDoctorPostGrid from "../../components/user-profile-doctor-post-grid/user-profile-doctor-post-grid";
 import LogInAccessPopUp from "../../components/log-in-access-popup/log-in-access-popup.jsx";
 import { Spinner } from "@chakra-ui/react";
 import DoctorPostGrid from "../../components/community-post-grid/community-post-grid.component.jsx";
@@ -99,7 +98,15 @@ const IndividualDoctor = () => {
   const { nickname } = data?.nickname || {};
   const [activeTab, setActiveTab] = useState(0);
   const tabs = ["About", "Posts", "Likes"];
-  const [initialChannelUrl, setInitialChannelUrl] = useState("");
+  const doctorProfileBreakPoints = {
+    default: 4,
+    2500: 4,
+    2047: 4,
+    1700: 4,
+    1024: 4,
+    767: 3,
+    430: 2,
+  };
 
   useEffect(() => {
     setMemberId(encodedMemberId);
@@ -182,7 +189,6 @@ const IndividualDoctor = () => {
       {activeTab === 0 && <DoctorAbout encodedMemberId={encodedMemberId} />}
       {activeTab === 1 && (
         <div className="individual-doctor-posts">
-          {/* <UserProfileDoctorPostGrid /> */}
           <DoctorPostGrid
             data={postData}
             isLoading={postIsLoading}
@@ -190,6 +196,7 @@ const IndividualDoctor = () => {
             fetchNextPage={postFetchNextPage}
             hasNextPage={postHasNextPage}
             download={false}
+            breakPoints={doctorProfileBreakPoints}
           />
         </div>
       )}
@@ -358,7 +365,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   const navigate = useNavigate();
 
   const handleGoToAppointmentPageNow = () => {
-    navigate("/doctor-appointment-1");
+    navigate(`/createAppointment/${data?.memberId}`);
   };
 
   return (
@@ -492,6 +499,13 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
             </div>
           </div>
           <div className="indv-doctor-info-row indv-fifth-row">
+            <button
+              type="button"
+              className="indv-button indv-consultation-button"
+              onClick={handleGoToAppointmentPageNow}
+            >
+              Book a Consultation with Me!
+            </button>
             {isUserFollowing ? (
               <button
                 type="button"
@@ -510,10 +524,9 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               </button>
             )}
             {/* UNCOMMENT FOR 2.0 RELEASE (WHEN API IS IMPLEMENTED) */}
-            {/* <button type='button' className='indv-button indv-consultation-button'>Book a Consultation with Me!</button> */}
           </div>
           {/* this is dummu button to navigate to doctor appointment page for demo */}
-          <button onClick={handleGoToAppointmentPageNow}>Dummy</button>
+          {/* <button onClick={handleGoToAppointmentPageNow}>Dummy</button> */}
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ const DocotorOwnMain = () => {
       <div className='section container'>
         <DocotorOwnBasic />
       </div>
-      <div className='section-container'>
+      <div className='section container'>
         <DoctorProfileSubArea />
       </div>
     </div>
