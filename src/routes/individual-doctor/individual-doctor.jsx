@@ -92,6 +92,7 @@ const IndividualDoctor = () => {
     hasNextPage: postHasNextPage,
   } = useGetDoctorPost();
   // Retrieve the channel
+  const [initialChannelUrl, setInitialChannelUrl] = useState(null);
   const { mutate: createOrRetrieveChannel, data: channelData } =
     useCreateOrRetrieveChannel();
   // console.log("doctor post data", postData, postIsLoading);

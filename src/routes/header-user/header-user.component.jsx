@@ -7,7 +7,10 @@ import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
 import defaultAvatar from "../../assets/post/user-profile-avatar.png";
 import UserIcon from "../../assets/user/user.svg";
-
+import { useGetSendbirdUserInfo } from "../../hooks/useGetSendbirdUserInfo.js";
+//src/hooks/useGetSendbirdUserInfo.js
+import ProfileMessage from "../../components/profile-message/profile-message.component";
+//src/components/profile-message/profile-message.component.jsx
 import useTimer from "../../hooks/useTimer";
 import {
   Modal,
