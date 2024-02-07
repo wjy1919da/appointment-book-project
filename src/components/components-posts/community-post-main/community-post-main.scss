@@ -78,53 +78,6 @@
       top: 275px;
     }
   }
-  @media (max-width: 375px) {
-    .post-main-container-wrapper {
-      width: 100%;
-
-      h6 {
-        font-size: 30px;
-      }
-
-      h1 {
-        font-size: 25px;
-        margin-top: 50px; 
-        left: 123px;
-        white-space: normal;
-        width: 80%;
-      }  
-      
-    }
-  
-    .post-main-container {
-      width: 100%; 
-    }
-
-    .post-main-shape {
-      width: 80%;
-      padding: 0 20px;
-      top: 240px;
-    }
-    .occaecat {
-
-    }
-    .lorem {
-
-    }
-    .eiusmod {
-
-    }
-    .post-main-photograph {
-      width: 80%;
-      left: 65px;
-      height: 250px;
-    }
-    .photo-girl {
-      width: 180px;
-      left: 97px;
-      top: 210px;
-    }
-  }
 }
 .post-main-shape {
   position: absolute;
@@ -355,6 +308,102 @@ h6 {
     display: flex;
     justify-content: center;
     text-align: center;
+  }
+}
+
+@media (max-width: 375px) {
+
+  h1.post-main-contents {
+    position: absolute;
+    top: 60px;
+    font-size: 25px;
+    left: 2px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .community-post-header-filter-container {
+    position: absolute;
+    top: 1120px !important; 
+  }
+  
+  h6.h6val {
+    position: absolute;
+    top: 140px;
+    left: 10px;
+    font-size: 18px;
+    width: 97%;
+  }
+  .post-main-photograph-caption{
+    font-size: 8px;
+    top: 250px;
+    left: 95px;
+  }
+  .post-main-photograph-like {
+    font-size: 10px;
+    top: 265px;
+    left: 110px;
+  }
+  img.heart-icon {
+    width: 12px;
+    top: 265px;
+    left: 95px;
+
+  }
+  img.photo-2 {
+    width: 100px;
+    height: 100px;
+    top: 155px;
+  }
+  img.photo-1 {
+    width: 150px;
+    height: 150px;
+    top: 190px;
+    left: 55px;
+  }
+  .post-main-link-button {
+    position: absolute;
+    top: 450px;
+    width: 285px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .arrow-right-icon {
+    width: 13px;
+  }
+  .post-main-shape {
+    width: 80%;
+    height: 5%;
+    padding: 0 20px;
+    top: 200px;
+  }
+  .occaecat {
+
+  }
+  .lorem {
+
+  }
+  .eiusmod {
+    left: 10px;
+    width:35%;
+  }
+  .post-main-photograph {
+    width: 80%;
+    left: 65px;
+    height: 235px;
+    top: 50px;
+  }
+  .photo-girl {
+    width: 180px;
+    left: 97px;
+    top: 60px;
+  }
+  button.mobile-search-button {
+    position: absolute;
+    right: 2px;
+    top: -60px;
+    width: 10px;
   }
 }
 

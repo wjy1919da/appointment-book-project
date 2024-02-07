@@ -45,7 +45,7 @@ const PostPageMain = () => {
               Top Makeup Trends for Spring 2023
             </p>
             <div className="post-main-likes-container">
-              <img src={Heart} alt="Heart-Icon" />
+              <img src={Heart} alt="Heart-Icon" className="heart-icon" />
               <p className="post-main-photograph-like">1.8k</p>
             </div>
           </div>
@@ -54,7 +54,7 @@ const PostPageMain = () => {
             <h1 className="post-main-contents">
               Join a community of beauty and empowerment
             </h1>
-            <h6>
+            <h6 className="h6val">
               Charm Life lets you share your cosmetic experience with others and
               stay on-trend
             </h6>
