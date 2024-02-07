@@ -1,7 +1,7 @@
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import SignupAndLoginButton from "./signup-and-login-button.component";
 
-const APPID = "897928238550865";
+const APPID = "302901895399050";
 const FacebookLoginBtnWrap = (props) => {
     return (
         // custom render function

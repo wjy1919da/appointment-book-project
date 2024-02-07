@@ -14,12 +14,13 @@
     linear-gradient(180deg, #fff2ed 24.48%, rgba(255, 248, 244, 0) 100%)
   );
   height: 1063px;
+
 }
 
 .post-main-container {
   margin-top: 18rem;
 
-  @media (max-width: 744px) {
+  @media (max-width: 744px) and (min-width: 376px){
     .post-main-link-button {
       margin-top: 425px;
       width: 500px;
@@ -75,6 +76,53 @@
     }
     .photo-2 {
       top: 275px;
+    }
+  }
+  @media (max-width: 375px) {
+    .post-main-container-wrapper {
+      width: 100%;
+
+      h6 {
+        font-size: 30px;
+      }
+
+      h1 {
+        font-size: 25px;
+        margin-top: 50px; 
+        left: 123px;
+        white-space: normal;
+        width: 80%;
+      }  
+      
+    }
+  
+    .post-main-container {
+      width: 100%; 
+    }
+
+    .post-main-shape {
+      width: 80%;
+      padding: 0 20px;
+      top: 240px;
+    }
+    .occaecat {
+
+    }
+    .lorem {
+
+    }
+    .eiusmod {
+
+    }
+    .post-main-photograph {
+      width: 80%;
+      left: 65px;
+      height: 250px;
+    }
+    .photo-girl {
+      width: 180px;
+      left: 97px;
+      top: 210px;
     }
   }
 }
