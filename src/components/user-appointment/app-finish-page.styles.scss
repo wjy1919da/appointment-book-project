@@ -2,21 +2,40 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap:50px;
+    // gap:50px;
     align-items: center; // this assumes you want it centered in the viewport
-    padding-bottom: 10rem;
-    padding-top: 5rem;
+    padding: 4rem 6rem;
     position: relative;
+    width: 100%;
+}
+.app-finish-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .app-finish-title-text {
     font-family: Open Sans;
-    font-size: 34px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 600;
+    color: #352C29;
+    text-align: center;
+    margin-bottom: 0;
+}
+.app-finish-header-text {
+    font-size: 40px;
+    font-weight: 600;
+    color: #F48C8A;
+    padding-bottom: 1rem;
 }
 .app-finish-doctor-avatar-container {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
+    box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.1);
+    border-radius: 50%;
 }
 .app-finish-doctor-avatar {
     width: 100%;
@@ -24,21 +43,23 @@
 }
 .app-finish-doctor-profile {
     display: flex;
-    gap:30px;
+    column-gap: 4rem;
     align-items: center; // to vertically align the image and text list
+    justify-content: center;
     // other styles for the doctor profile if any
+    width: 100%;
 }
 .app-finish-text-list
 {
     display: flex;
     text-align: left;
-    gap:10px;
     flex-direction: column;
 }
 .app-finish-text-name {
     font-family: Open Sans;
     font-size: 40px;
     font-weight: 600;
+    padding-bottom: 1rem;
 }
 .app-finish-text-date {
     font-family: Open Sans;
@@ -54,9 +75,33 @@
 {
     margin-top: 50px;
 }
-.app-finish-button
+.app-finish-buttons-container
 {
-    position: absolute;
-    bottom: 4rem;
-    right: 8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 1rem;
+    padding-top: 2.5rem;
+}
+.app-finish-button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 8px;
+}
+.app-finish-home-button {
+    color: #F48C8A;
+    border: 1px solid #F48C8A;
+}
+.app-finish-appointments-button {
+    color: #FBFCFF;
+    background: linear-gradient(to right, #F48C8A, #F0A484);
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+.app-finish-button-arrow {
+    transform: scaleX(-1);
+    width: 1rem;
+    height: 1rem;
 }

@@ -5,13 +5,9 @@ import { useLocation } from "react-router-dom";
 import "./user-profile-subArea.styles.scss";
 
 // components
-// import UserProfilePost from "../user-profile-post-area/user-profile-post-area";
 import UserProfileReview from "../user-profile-review-area/user-profile-review-area";
-import UserProfileLike from "../user-profile-like/user-profile-like";
 import DoctorPostGrid from "../community-post-grid/community-post-grid.component";
 
-// import DoctorPostGrid from '../components-posts/community-post-grid/doctor-post-grid.component';
-// import CreatePostOfUser from '../create-post/create-post';
 // Hooks
 import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
 import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
@@ -50,6 +46,15 @@ const UserProfileSubArea = () => {
       setActiveTab(cleanHash);
     }
   }, [hash]);
+  const userProfileBreakPoints = {
+    default: 4,
+    2500: 4,
+    2047: 4,
+    1700: 4,
+    1024: 4,
+    767: 3,
+    430: 2,
+  };
 
   return (
     <div className="user-profile-subArea-container">
@@ -100,6 +105,7 @@ const UserProfileSubArea = () => {
             fetchNextPage={userLikedPostFetchNextPage}
             hasNextPage={userLikedPostHasNextPage}
             download={false}
+            breakPoints={userProfileBreakPoints}
           />
         )}
         {activeTab === "Posts" && (
@@ -111,20 +117,11 @@ const UserProfileSubArea = () => {
             fetchNextPage={userPostedPostFetchNextPage}
             hasNextPage={userPostedPostHasNextPage}
             download={false}
+            breakPoints={userProfileBreakPoints}
           />
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
       </div>
-      {/* <div className='bottom-rendering'>
-        {activeTab === 'Posts' && (
-          <UserProfilePost
-            showCreatePost={showCreatePost}
-            setShowCreatePost={setShowCreatePost}
-          />
-        )}
-        {activeTab === 'Like' && <UserProfileLike />}
-        {activeTab === 'Reviews' && <UserProfileReview />}
-      </div> */}
     </div>
   );
 };

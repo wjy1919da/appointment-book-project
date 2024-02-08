@@ -30,6 +30,7 @@ import ChakraLoadingModal from "../chakra-modal/chakra-loading-modal";
 import userInfoQueryStore from "../../userStore";
 import { da } from "date-fns/locale";
 
+
 const UniversalProfileEdit = () => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState(0);
@@ -301,47 +302,13 @@ const UniversalProfileEdit = () => {
     /*
         Steps for verification:
         1. (conditional) If the user is trying to change their password, check that the provided 'current password' is correct. If not, we do not save any data
-        2. (conditional) If the user is trying to change their email, call verifyEmail. If the email is not valid, we will not save anything. If it is valid, somehow wait until the user has clicked 'verify' before proceeding. 
-        */
-    // if (email) {
-    //     console.log('testing verification!');
-    //     const verifyEmail = async () => {
-    //         let userRole = localStorage.getItem('accountType') === "1" ? 'USER' : 'DOCTOR';
-    //         const isEmailValid = await editFuncs.verifyEmailForChange(email, userRole);  // checks to see if this new email is already in use or not
-    //         if (!isEmailValid) {  // USE DIFFERENT ERROR HANDLING HERE!
-    //             console.log('Unable to use this email, please use a different email.');
-    //         }
-    //     }
-    //     await verifyEmail();
-    // }
-
-    // if (oldPassword && newPassword) {
-    //     console.log('attempting to change password...');
-    //     const changePassword = async () => {
-    //         try {
-    //             const data = {'currentPassword': oldPassword, 'newPassword': newPassword, 'confirmNewPassword': newPassword};
-    //             // console.log('attempting to send password data as: ', data);
-    //             const res = await editFuncs.setUserData(data);
-    //             // console.log('res returned as: ', res);
-    //             return true;
-    //         } catch (err) {
-    //             if (err.message === 'Incorrect password, please try again.') {
-    //                 setOldPasswordError('Incorrect password, please try again.');
-    //                 return false;
-    //             }
-    //             // console.log('ERR is: ', err);
-    //         }
-    //     }
-    //     if (!await changePassword()) {
-    //         setIsLoadingModalOpen(false);
-    //         return;
-    //     }
-    // }
+        2. (conditional) If the user is trying to change their email, call verifyEmail. If the email is not valid, we will not save anything. If it is valid, somehow wait until the user has clicked 'verify' before proceeding.
+    */
     const data = {};
-
-    if (name && name !== originalInformation.name) {
-      data.nickname = name;
-    }
+    data.nickname = name;
+    // if (name && name !== originalInformation.name) {
+    //   data.nickname = name;
+    // }
     if (bio && bio !== originalInformation.bio) {
       data.bio = bio;
     }
@@ -354,16 +321,23 @@ const UniversalProfileEdit = () => {
     if (phoneNumber && phoneNumber !== originalInformation.phoneNumber) {
       data.mobile = phoneNumber;
     }
-    if (interestSelections !== originalInformation.interests) {
-      // console.log('HERE YAY!: ', originalInformation.interests);
-      // console.log('2nd!!: ', interestSelections);
-      const holder = [];
-      interestSelections.forEach((item) =>
+    // Moved the below section to OUTSIDE an if statement bc API returns error if interested is not submitted
+    const holder = [];
+    interestSelections.forEach((item) =>
         holder.push(proceduresIdObj[item.procedureTitle])
       );
       // console.log('holder is: ', holder);
-      data.interested = holder;
-    }
+    data.interested = holder;
+    // if (interestSelections !== originalInformation.interests) {
+    //   // console.log('HERE YAY!: ', originalInformation.interests);
+    //   // console.log('2nd!!: ', interestSelections);
+    //   const holder = [];
+    //   interestSelections.forEach((item) =>
+    //     holder.push(proceduresIdObj[item.procedureTitle])
+    //   );
+    //   // console.log('holder is: ', holder);
+    //   data.interested = holder;
+    // }
     if (imageLink && imageLink !== originalInformation.image) {
       data.img = imageLink;
     }
@@ -379,7 +353,7 @@ const UniversalProfileEdit = () => {
           setChangesSaved(true);
         }
       } catch (err) {
-        console.log("Could not change edit profile page...");
+        // console.log("Could not change edit profile page...");
         setErrorSubmitting(true);
       } finally {
         setIsLoadingModalOpen(false);
@@ -453,6 +427,7 @@ const UniversalProfileEdit = () => {
         approveButtonText={"Save Changes"}
         openLoadingModal={() => setIsLoadingModalOpen(true)}
         closeLoadingModal={() => setIsLoadingModalOpen(false)}
+        interested={interestSelections}
       />
       <ChakraEmailModal
         isModalOpen={isEmailModalOpen}
@@ -461,6 +436,7 @@ const UniversalProfileEdit = () => {
         approveButtonText={"Save Changes"}
         openLoadingModal={() => setIsLoadingModalOpen(true)}
         closeLoadingModal={() => setIsLoadingModalOpen(false)}
+        interests={interestSelections}
       />
       <div className="univ-edit-top-row-container">
         <div className="univ-edit-top-row">
@@ -547,12 +523,6 @@ const UniversalProfileEdit = () => {
                     style={{ display: "none" }}
                     onChange={handleFileSelection}
                   />
-                  {/* <div
-                                        className="univ-edit-profile-upload-div"
-                                        
-                                        
-                                    >
-                                    </div> */}
                   <img
                     src={
                       imageLink
@@ -580,6 +550,7 @@ const UniversalProfileEdit = () => {
                     </h4>
                     <div className="univ-edit-info-form-gender-radio-container">
                       <div className="univ-edit-info-form-gender-radio">
+                      <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="female"
@@ -589,11 +560,11 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(2)}
                           defaultChecked={gender === 2 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
                           Female
                         </label>
                       </div>
                       <div className="univ-edit-info-form-gender-radio">
+                        <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="male"
@@ -603,11 +574,11 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(1)}
                           defaultChecked={gender === 1 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
                           Male
                         </label>
                       </div>
                       <div className="univ-edit-info-form-gender-radio">
+                        <label className="univ-edit-info-form-gender-radio-label">
                         <input
                           type="radio"
                           id="other"
@@ -617,8 +588,7 @@ const UniversalProfileEdit = () => {
                           onClick={() => setGender(3)}
                           defaultChecked={gender === 3 ? "checked" : ""}
                         />
-                        <label className="univ-edit-info-form-gender-radio-label">
-                          Other
+                          <span>Other</span>
                         </label>
                       </div>
                     </div>
@@ -640,7 +610,7 @@ const UniversalProfileEdit = () => {
                     placeholder={"mm/dd/yyyy"}
                     label={"Birthday"}
                     possibleError={birthdayError}
-                    errorMessage={"Invalid date, please enter a valid date."}
+                    errorMessage={"Invalid date, please enter a valid date. (mm/dd/yyyy)"}
                   />
                 </div>
                 <div className="univ-edit-info-form-email-container">
@@ -737,7 +707,7 @@ const UniversalProfileEdit = () => {
   );
 };
 
-const UniversalInfoFormInput = ({
+export const UniversalInfoFormInput = ({
   onChange,
   stateVariable,
   placeholder,
@@ -904,6 +874,7 @@ const ChakraPasswordModal = ({
   closeModalFunc,
   openLoadingModal,
   closeLoadingModal,
+  interested,
 }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [oldPasswordError, setOldPasswordError] = useState(false);
@@ -949,10 +920,12 @@ const ChakraPasswordModal = ({
   const handlePasswordFormSubmission = async () => {
     // console.log('attempting to submit the password form!');
     // setIsLoadingModalOpen(true);
+    // need to include 'interested' for API reasons. Fails if not included
     const obj = {
       currentPassword: oldPassword,
       newPassword: newPassword,
       confirmNewPassword: newPasswordRepeated,
+      interested: interested,
     };
     try {
       const res = await editFuncs.setUserData(obj);

@@ -1,12 +1,4 @@
-/* css reset */
-/* css reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.post-main-container-wrapper {
+.community-post-main-container {
   display: flex;
   justify-content: flex-end;
   background: var(
@@ -264,27 +256,30 @@
     font-weight: 600;
     line-height: normal;
   }
-  .post-main-link-button {
-    width: calc(100% - 15px);
-    padding: 35px 50px;
+  // create button
+  .community-post-main-create-button-container {
     display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-}
-h6 {
-  margin: 0px auto;
-  width: 430px;
-}
+    justify-content: flex-end;
+    margin-top: 150px;
 
-.post-main-contents {
-  color: #000;
-  font-family: Open Sans;
-  font-size: 46px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 630px;
+    .community-post-main-create-button {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #fbfcff;
+      font-family: Open Sans;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: normal;
+      background: var(
+        --new-gradient,
+        linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+      );
+      border-radius: 1000px 0px 0px 1000px;
+      padding: 36px 120px;
+      // padding: 16px 50px;
+    }
+  }
 }
 
 @media (max-width: 1133px) {

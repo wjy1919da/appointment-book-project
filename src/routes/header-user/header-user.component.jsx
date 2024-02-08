@@ -6,6 +6,7 @@ import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
 import defaultAvatar from "../../assets/post/user-profile-avatar.png";
+import UserIcon from '../../assets/user/user.svg';
 
 import useTimer from "../../hooks/useTimer";
 import {
@@ -61,11 +62,15 @@ const HeaderUser = () => {
     <div className="header-login">
       {!userInfo.token && (
         <div
+<<<<<<< HEAD
           onClick={() => togglePopup(true, "accountType")} //signUp //gender
+=======
+          onClick={() => togglePopup(true, "accountType")} //signUp //gender //accountType
+>>>>>>> AWS-frontend-dev
           className="header-login-default"
         >
           <img
-            src={loginIcon}
+            src={UserIcon}
             alt="login"
             className="header-login-default-icon"
           ></img>

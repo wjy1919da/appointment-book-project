@@ -1,0 +1,27 @@
+.doctor-profile-appointment-main-container {
+  padding: 0 50px;
+  padding-top: 150px;
+
+  .doctor-profile-appointment-main-title-button-container {
+    .doctor-profile-appointment-main-title-button-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .doctor-profile-appointment-main-title {
+      color: #000;
+      font-family: Open Sans;
+      font-size: 34px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+}
+
+@media (max-width: 1133px) {
+}
+
+@media (max-width: 744px) {
+}

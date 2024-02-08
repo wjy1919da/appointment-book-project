@@ -24,6 +24,11 @@
   font-size: 18px;
 }
 
+.indv-doctor-voucher-card-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
 .indv-specialization-title {
   font-weight: 600;
   font-size: 24px;
@@ -70,9 +75,9 @@
 }
 
 .indv-highlight-cases-container {
-  border: 1px solid #f48c8a;
-  border-radius: 8px;
-  padding: 2.5rem;
+  // border: 1px solid #f48c8a;
+  // border-radius: 8px;
+  // padding: 2.5rem;
   width: 100%;
 }
 
@@ -107,6 +112,7 @@
 
 .highlight-cases-title {
   color: #352c29;
+  font-size: 24px !important;
   font-weight: 600;
   font-size: 22px;
 }
@@ -158,6 +164,7 @@
 
 .indv-customer-review-container {
   padding-top: 2rem;
+  padding-bottom: 7rem;
   width: 100%;
 }
 
@@ -166,7 +173,19 @@
   font-weight: 600;
 }
 
+@media (max-width: 1133px) {
+}
+
 @media (max-width: 744px) {
+  .indv-doctor-voucher-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .indv-highlight-cases-container {
+    padding: 30px;
+  }
   .specialization-tabs-container {
     column-gap: 2rem;
     justify-content: space-around;
@@ -188,11 +207,5 @@
   }
   .highlight-cases-no-posts-text {
     font-size: 22px;
-  }
-}
-
-@media (max-width: 744px) {
-  .indv-highlight-cases-container {
-    padding: 30px;
   }
 }

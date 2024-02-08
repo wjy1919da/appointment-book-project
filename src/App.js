@@ -19,6 +19,7 @@ import Doctor from "./routes/doctor/doctor.component";
 import DocotorOwnMain from "./components/doctor-own-profile/doctor-own-profile-main";
 import DoctorPost from "./routes/community/community.component";
 import UserAppointmentMain from "./components/user-appointment/user-appointment-main.jsx";
+import CreateAppointment from "./routes/create-appointment/create-appointment";
 import IndividualDoctor from "./routes/individual-doctor/individual-doctor";
 import Download from "./routes/download/download.component";
 import HealthCheck from "./routes/health-check/health-check.component";
@@ -36,7 +37,7 @@ import DoctorAppointmentPage3 from "./components/doctor-appointment/doctor-appoi
 import DoctorAppointmentPage4 from "./components/doctor-appointment/doctor-appointment-page-4";
 import BookedPage from "./components/doctor-appointment/booked-page";
 // doctor profile appointment components
-import DoctorAppointmentProfilePage from "./components/doctor-appointment-profile/doctor-appointment-profile";
+import DoctorAppointmentProfilePage from "./components/doctor-appointment-profile/doctor-profile-appointment-main";
 
 import UserProfileSubArea from "./components/user-profile-subArea/user-profile-subArea.jsx";
 import UserProfileEdit from "./components/user-profile-edit/user-profile-edit.jsx";
@@ -57,6 +58,7 @@ import UniversalProfileEdit from "./components/universal-profile-edit/universal-
 import DoctorVerificationPage from "./components/doctor-verification-page/doctor-verification-page.component";
 
 import DoctorVerificationMainPage from "./components/doctor-verification-page/doctor-verification-main-page";
+import SignInForm from "./components/sign-in-form/sign-in-form.component";
 
 const App = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
@@ -90,6 +92,7 @@ const App = () => {
               {/* <Route path='procedure/breast' element={<BreastProcedure />} /> */}
               {/* <Route path='procedure/body' element={<BodyProcedure />} /> */}
               <Route path="procedure/:name" element={<SubProcedure />} />
+              <Route path="sign-in" element={<SignInForm />} />
               <Route
                 path="/procedureMobile"
                 element={isMobile ? <DoctorProcudreMobile /> : <Download />}
@@ -163,8 +166,17 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="createAppointment/:doctorId"
+                element={
+                  <PrivateRoute>
+                    <CreateAppointment />
+                  </PrivateRoute>
+                }
+              />
 
               <Route path="download" element={<Download />} />
+
               {/* <Route path="create-post" element={<CreatePostOfUser />} /> */}
               {/* <Route path="/posts/create" element={<CreatePostPage />} /> */}
 

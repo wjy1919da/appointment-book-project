@@ -1,26 +1,27 @@
-import { useNavigate } from "react-router-dom";
-
-// components
-import PostPageTitle from "../../community-post-main-title/community-post-main-title";
+import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 // scss
-import "./community-post-main.scss";
+import './community-post-main.scss';
 
 // image
-import ArrowRight from "../../../assets/post/iconoir_arrow-right.svg";
-import PhotoGirl from "../../../assets/post/pic.png";
-import Photo from "../../../assets/post/decoration-post-1.png";
-import Heart from "../../../assets/post/heart_like.svg";
-import userInfoQueryStore from "../../../userStore";
+import ArrowRight from '../../../assets/post/iconoir_arrow-right.svg';
+import GirlPhotoMain from '../../../assets/post/girl_photo_main.png';
+import userInfoQueryStore from '../../../userStore';
+import PinkBackgroundComponent from '../../../mutual_components/pink_background/pink_background';
+
 const PostPageMain = () => {
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
+  const isIpadScreen = useMediaQuery({ query: '(max-width: 1133px)' });
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 744px)' });
+
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
-      togglePopup(true, "accountType");
+      togglePopup(true, 'accountType');
     } else {
-      navigate("/posts/create-post");
+      navigate('/posts/create-post');
     }
   };
   return (
@@ -50,31 +51,73 @@ const PostPageMain = () => {
             </div>
           </div>
 
-          <div className="post-main-inner-container">
-            <h1 className="post-main-contents">
-              Join a community of beauty and empowerment
+      {/* right container */}
+      <div className='community-post-main-right-container'>
+        {isIpadScreen ? (
+          ''
+        ) : (
+          <>
+            <h1 className='community-post-main-title'>
+              Join a community of beauty
+              <br />
+              and empowerment
+            </h1>
+            <h6 className='community-post-main-sub-title'>
+              Charm Life lets you share your cosmetic experience with
+              <br />
+              others and stay on-trend
+            </h6>
+          </>
+        )}
+        {isIpadScreen && (
+          <>
+            <h1 className='community-post-main-title'>
+              Join a community
+              <br />
+              of beauty and
+              <br />
+              empowerment
             </h1>
             <h6 className="h6val">
               Charm Life lets you share your cosmetic experience with others and
               stay on-trend
             </h6>
-            <div className="post-main-link">
-              <button
-                className="post-main-link-button"
-                onClick={handleCreatePostClick}
-              >
-                Creating a post{" "}
-                <img
-                  src={ArrowRight}
-                  alt="ArrowRight"
-                  className="arrow-right-icon"
-                />
-              </button>
-            </div>
+          </>
+        )}
+        {isSmallScreen ? (
+          ''
+        ) : (
+          <div className='community-post-main-create-button-container'>
+            <button
+              className='community-post-main-create-button'
+              onClick={handleCreatePostClick}
+            >
+              Creating a post
+              <img
+                src={ArrowRight}
+                alt='ArrowRight'
+                className='arrow-right-icon'
+              />
+            </button>
           </div>
-        </div>
+        )}
       </div>
-      {/* <PostPageTitle /> */}
+
+      {isSmallScreen && (
+        <div className='community-post-main-create-button-container'>
+          <button
+            className='community-post-main-create-button'
+            onClick={handleCreatePostClick}
+          >
+            Creating a post
+            <img
+              src={ArrowRight}
+              alt='ArrowRight'
+              className='arrow-right-icon'
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
