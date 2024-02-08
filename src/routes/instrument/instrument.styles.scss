@@ -9,110 +9,119 @@
         margin: auto;
     }
 
-    @media (min-width: 736px) { // desktop
-        .instrument-page-title {
-            padding-top: 8rem;
-            font-size: 60px;
-            font-weight: 700;
-            width: 55%;
-        }
-        .instrument-title-container {
-            width: 90%;
-            margin: auto;
-        }
-        .instrument-page-subtitle {
-            font-weight: 600;
-            font-size: 21px;
-        }
-        .instrument-top-row {
-            display: flex;
-            justify-content: right;
-            padding-bottom: 4rem;
-        }
-        .instrument-top-img-container {
-            width:50%;
-            height: 25rem;
-            right:0px;
-            background: linear-gradient(115deg, #F48C8A 60%, #F0A484);
-            border-radius: 1000px 0px 0px 1000px;
-            position: relative; 
-            // overflow: hidden;
-        }
-        .instrument-doctor-img-container {
-            position: absolute;
-            right: 25%;
-            bottom: -3px;
-            width: 19rem;
-        }
-        .instrument-doctor-img {
-            width: 100%;
-        }
-        .instrument-body-title {
-            padding-top: 4rem;
-            padding-bottom: 2rem;
-            font-size: 48px;
-            font-weight: 700;
-        }
-        .instrument-card {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-        .instrument-display-container {
-            background: white;
-            border-radius: 12px;
-            width: 100%;
-            margin: auto;
-            box-shadow: 2px 4px 16px #675D591A;
-        }
-        .instrument-display {
-            padding-top: 6rem;
-            padding-bottom: 4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50%;
-            margin: auto;
-        }
-        .instrument-display-img-container {
-            width: 32rem;
-        }
-        .instrument-display-img {
-            width: 100%;
-        }
-        .instrument-display-info-container {
-            padding-top: 2rem;
-            color: #0D0D0D;
-            text-align: center;
-        }
-        .instrument-display-heading {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .instrument-display-subheading-container {
-            padding-top: 1rem;
-            width: 85%;
-            margin: auto;
-        }
-        .instrument-display-subheading {
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .instrument-display-subimage-container {
-            display: flex;
-            justify-content: center;
-            width: 30rem;
-            margin: auto;
-        }
-        .instrument-display-subimage {
-            width: 100%;
-        }
-        .instrument-learn-more-link-container {
-            padding: 4rem 0;
-        }
-        .instrument-link {
-            font-weight: 800;
-        }
+    .instrument-page-title {
+        padding-top: 8rem;
+        font-size: 60px;
+        font-weight: 700;
+        width: 55%;
+    }
+    .instrument-title-container {
+        width: 90%;
+        margin: auto;
+    }
+    .instrument-page-subtitle {
+        font-weight: 600;
+        font-size: 21px;
+    }
+    .instrument-top-row {
+        display: flex;
+        justify-content: right;
+        padding-bottom: 4rem;
+    }
+    .instrument-top-img-container {
+        width:50%;
+        height: 25rem;
+        right:0px;
+        background: linear-gradient(115deg, #F48C8A 60%, #F0A484);
+        border-radius: 1000px 0px 0px 1000px;
+        position: relative; 
+        // overflow: hidden;
+    }
+    .instrument-doctor-img-container {
+        position: absolute;
+        right: 25%;
+        bottom: -3px;
+        width: 19rem;
+    }
+    .instrument-doctor-img {
+        width: 100%;
+    }
+    .instrument-body-title {
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+        font-size: 48px;
+        font-weight: 700;
+    }
+    .instrument-card {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+    .instrument-display-container {
+        background: white;
+        border-radius: 12px;
+        width: 100%;
+        margin: auto;
+        box-shadow: 2px 4px 16px #675D591A;
+    }
+    .instrument-display {
+        // padding-top: 6rem;
+        // padding-bottom: 4rem;
+        padding: 6rem 0 4rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .instrument-display-img-container {
+        width: 32rem;
+    }
+    .instrument-display-img {
+        width: 100%;
+    }
+    .instrument-display-info-container {
+        padding-top: 2rem;
+        color: #0D0D0D;
+        text-align: center;
+        width: 85%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .instrument-display-heading {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .instrument-display-subheading-container {
+        padding-top: 1rem;
+        width: 55%;
+        margin: auto;
+    }
+    .instrument-display-subheading {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .instrument-display-subimage-container {
+        display: flex;
+        justify-content: center;
+        width: 35rem;
+        margin: auto;
+        padding-top: 2rem;
+    }
+    .instrument-display-subimage {
+        width: 100%;
+    }
+    .instrument-learn-more-link-container {
+        padding: 4rem 0;
+    }
+    .instrument-link {
+        font-weight: 600;
+    }
+
+    @media (max-width: 744px) {
+        // .instrument-display {
+        //     width: 85%;
+        // }
+    }
         // .instrument-title {
         //     font-size: 43px;
         //     font-weight: 600;
@@ -131,27 +140,17 @@
         //     border-radius: 3px;
         //     margin: 15px auto 60px;
         // }
-    }
 
     @media (max-width: 768px) { // tablet
-        // .instrument-title {
-        //     font-size: 35px;
-        //     font-weight: 500;
-        //     color: #333333;
-        //     line-height: 50px;
-        //     margin: 122px auto 0;
-        //     text-align: center;
-        // }
-    
-        // .instrument-divider {
-        //     width: 10%;
-        //     height: 4px;
-        //     background: #3397B9;
-        //     opacity: 1;
-        //     border-color: #3397B9;
-        //     border-radius: 3px;
-        //     margin: 15px auto 60px;
-        // }
+        .instrument-display-img-container {
+            width: 22rem;
+        }
+        .instrument-display-subheading-container {
+            width: 75%;
+        }
+        .instrument-display-subimage-container {
+            width: 27rem;
+        }
     }
 
     @media (max-width: 576px) { // phone
@@ -173,6 +172,39 @@
         //     border-radius: 3px;
         //     margin: 5px auto 40px;
         // }
+    }
+
+    @media (max-width: 530px) {
+        .instrument-display-subimage-container {
+            width: 100%;
+            padding-top: 1rem;
+        }
+    }
+
+    @media (max-width: 376px) {
+        .instrument-body-title {
+            padding-top: 1rem;
+            font-size: 24px;
+        }
+        .instrument-display {
+            padding-top: 3rem;
+        }
+        .instrument-display-img-container {
+            width: 20rem;
+        }
+        .instrument-display-heading {
+            font-size: 14px;
+        }
+        .instrument-display-subheading-container {
+            width: 100%;
+        }
+        .instrument-display-subimage-container {
+            width: 100%;
+            padding-top: 1rem;
+        }
+        .instrument-learn-more-link-container {
+            padding: 4rem 0 2rem 0;
+        }
     }
 
     .instrument-grid-container {

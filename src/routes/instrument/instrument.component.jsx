@@ -13,7 +13,7 @@ const Instrument = () => {
     // useLayoutEffect(() => {
     //     window.scrollTo(0, 0);
     // });
-    const isMobile = useMediaQuery({ query: `(max-width:744px)` });
+    const isMobile = useMediaQuery({ query: `(max-width:530px)` });
     
     console.log(instrumentJSONData);
     // const thermageObj = instrumentJSONData[0];
@@ -21,42 +21,20 @@ const Instrument = () => {
     return (
         <div className='instrument-container animate__animated animate__fadeIn'>
             <div>
-                {/* {isMobile ? 
-                (
-                    'Mobile Component here!'
-                ) : 
-                (   <> */}
-                        {/* <div className='instrument-top-container'>
-                            <div className='instrument-title-container'>
-                                <h2 className='instrument-text instrument-page-title'>Discover our most up-to-date instruments</h2>
-                            </div>
-                            <div className='instrument-title-container instrument-subtitle-container'>
-                                <h4 className='instrument-text instrument-page-subtitle'>CharmLife helps you discover our instruments.</h4>
-                            </div>
-                            <div className='instrument-top-row'>
-                                <div className='instrument-top-img-container animate__animated animate__slideInUp'>
-                                    <div className='instrument-doctor-img-container'>
-                                        <img src={InstrumentDoctor} alt='Doctor' className='instrument-doctor-img'/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        <MainPageIntro 
-                            title="Discover Our most up-to-date instruments"
-                            description="Charm Life helps you discover our instruments." />
-                            
-                        <div className='instrument-body-container'>
-                            <div className='instrument-body-title-container'>
-                                <h2 className='instrument-text instrument-body-title'>Our Instruments</h2>
-                            </div>
-                            {instrumentJSONData.map((obj, index) => (
-                                <div className='instrument-card' key={index}>
-                                    <InstrumentCard instrumentObj={obj} />
-                                </div>
-                            ))}
+                <MainPageIntro 
+                    title="Discover Our most up-to-date instruments"
+                    description="Charm Life helps you discover our instruments." />
+                    
+                <div className='instrument-body-container'>
+                    <div className='instrument-body-title-container'>
+                        <h2 className='instrument-text instrument-body-title'>Our Instruments</h2>
+                    </div>
+                    {instrumentJSONData.map((obj, index) => (
+                        <div className='instrument-card' key={index}>
+                            <InstrumentCard instrumentObj={obj} isMobile={isMobile} />
                         </div>
-                    {/* </>
-                )} */}
+                    ))}
+                </div>
             </div>
             {/* <img className='instrument-pic' src={InstrumentPic} alt='instrument' />
             <div className='slide-in-animation'>
@@ -73,7 +51,7 @@ const Instrument = () => {
     )
 }
 
-const InstrumentCard = ({instrumentObj}) => {
+const InstrumentCard = ({instrumentObj, isMobile}) => {
     return (
         <div className='instrument-display-container'>
             <div className='instrument-display'>
@@ -89,7 +67,7 @@ const InstrumentCard = ({instrumentObj}) => {
                     </div>
                     {instrumentObj?.hasSubImage &&
                     <div className='instrument-display-subimage-container'>
-                        <img src={require(`../../assets/instrument/${instrumentObj?.name}ProcessIcon.png`)} alt='instrument subimage' className='instrument-display-subimage' />
+                        {!isMobile ? <img src={require(`../../assets/instrument/${instrumentObj?.name}ProcessIcon.svg`)} alt='instrument subimage' className='instrument-display-subimage' /> : <img src={require(`../../assets/instrument/${instrumentObj?.name}ProcessIconMobile.svg`)} alt='instrument subimage' className='instrument-display-subimage' />}
                     </div>}
                     <div className='instrument-learn-more-link-container'>
                         <Link to={`/instrument/${instrumentObj?.name}`} className='instrument-link'>Click to Learn More</Link>
