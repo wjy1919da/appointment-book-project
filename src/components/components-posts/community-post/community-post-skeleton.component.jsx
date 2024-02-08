@@ -5,7 +5,7 @@ import {
   SkeletonText,
   SkeletonCircle,
 } from "@chakra-ui/react";
-import heartIcon from "../../../assets/post/heart.png";
+import heartIcon from "../../../assets/post/heart.svg";
 import "./community-post.styles.scss";
 // import Comm
 const CommunityPostSkeleton = () => {

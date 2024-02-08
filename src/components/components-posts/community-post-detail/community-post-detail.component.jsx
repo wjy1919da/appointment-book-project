@@ -6,7 +6,7 @@ import './community-post-detail.styles.scss';
 import CommunityPostDetailPopUPSkeleton from '../community-post-detail-pop-up/community-post-detail-popup-skeleton';
 
 // images
-import CloseButton from '../../../assets/post/pop-up-close-button.png';
+import CloseButton from '../../../assets/post/close-button.svg';
 
 const PostDetail = ({ show, onHide, isMobile }) => {
   const { data, error, isLoading } = usePostDetail();
