@@ -556,7 +556,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                     <div className='i'>
                       <img
                         src={ChatIcon}
-                        style={{ width: '20px' }}
+                        style={{ width: '24px' }}
                         alt='chat'
                       />
                     </div>
