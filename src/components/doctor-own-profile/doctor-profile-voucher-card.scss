@@ -1,13 +1,23 @@
 .doctor-own-voucher-card-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   gap: 30px;
-  width: 470px;
-  height: 190px;
-  flex-shrink: 0;
-  border-radius: 4.899px;
   background: var(--White, #fbfcff);
+  border-radius: 4.899px;
   box-shadow: 0px 2px 8px lightgray;
+  margin-bottom: 16px;
+  padding: 40px 0;
+  padding-left: 20px;
+  padding-right: 40px;
+  width: calc(50% - 16px);
+  min-height: 250px;
+
+  .doctor-own-voucher-inner-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .voucher-card-avartar {
     padding-left: 20px;
     justify-content: center;
@@ -15,29 +25,53 @@
     gap: 20px;
     display: flex;
     flex-direction: column;
+
+    .voucher-card-image {
+      width: 136px;
+      height: 136px;
+    }
   }
+
+  .voucher-card-procedure-name {
+    color: #352c29;
+    font-family: 'Open Sans';
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
   .voucher-card-info {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2rem;
+    margin-left: 1.5rem;
   }
 }
 .voucher-card-price {
   display: flex;
   justify-content: space-between;
-}
-.voucher-card-original-price {
-  color: var(--text-1-footer, #352c29);
-  font-family: Open Sans;
-  font-size: 12.86px;
+  color: #675d59;
+  font-family: 'Open Sans';
+  font-size: 18px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
-  text-decoration: line-through;
 }
+
+// .voucher-card-original-price {
+//   color: var(--text-1-footer, #352c29);
+//   font-family: Open Sans;
+//   font-size: 12.86px;
+//   font-style: normal;
+//   font-weight: 600;
+//   line-height: normal;
+//   text-decoration: line-through;
+// }
+
 .voucher-card-promotion {
-  font-family: Open Sans;
-  font-size: 24px;
+  font-family: 'Open Sans';
+  font-size: 34px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -154,26 +188,140 @@
   align-items: center;
 }
 
-@media (max-width: 1133px) {
+// voucher buttons
+.mid-voucher-card-button-container {
+  display: none;
+}
+
+.voucher-card-button-container {
+  display: flex;
+  gap: 1rem;
+
+  // mutual button styles
+  .voucher-card-first-button,
+  .voucher-card-second-button {
+    color: #fbfcff;
+    text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+    font-family: 'Open Sans';
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 8px;
+    padding: 12px 32px;
+    height: 54px;
+  }
+
+  .voucher-card-first-button {
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+  }
+
+  .voucher-card-second-button {
+    background: var(--text-2-button, #675d59);
+  }
+}
+
+@media (max-width: 1423px) {
   .doctor-own-voucher-card-container {
-    padding: 0 40px;
-    width: 470px;
-    height: 280px;
+    .voucher-card-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .voucher-card-procedure-name {
+      font-size: 14px;
+      width: 136px;
+    }
+
+    .voucher-card-button-container {
+      display: none;
+    }
+
+    .mid-voucher-card-button-container {
+      display: block;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      // mutual button styles
+      .mid-voucher-card-first-button,
+      .mid-voucher-card-second-button {
+        color: #fbfcff;
+        text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+        font-family: 'Open Sans';
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border-radius: 8px;
+        padding: 12px 32px;
+        height: 54px;
+      }
+
+      .mid-voucher-card-first-button {
+        background: var(
+          --new-gradient,
+          linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+        );
+      }
+
+      .mid-voucher-card-second-button {
+        background: var(--text-2-button, #675d59);
+      }
+    }
   }
 }
 
 @media (max-width: 744px) {
   .doctor-own-voucher-card-container {
-    padding: 0;
-    width: 470px;
-    height: 190px;
+    padding-right: 4rem;
+    width: 100%;
+
+    .mid-voucher-card-button-container {
+      display: none;
+    }
+
+    .voucher-card-button-container {
+      display: block;
+      display: flex;
+    }
   }
 }
 
 @media (max-width: 430px) {
   .doctor-own-voucher-card-container {
     padding: 0 20px;
+    padding-right: 40px;
     width: 100%;
-    height: 190px;
+    min-height: 180px;
+
+    .voucher-card-avartar {
+      .voucher-card-image {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    .voucher-card-promotion {
+      font-size: 20px;
+    }
+
+    .voucher-card-procedure-name {
+      text-align: center;
+      width: 60px;
+    }
+
+    .voucher-card-button-container {
+      .voucher-card-first-button,
+      .voucher-card-second-button {
+        font-size: 14px;
+        padding: 0;
+        width: 6rem;
+        height: 35px;
+      }
+    }
   }
 }
