@@ -1,5 +1,5 @@
 import './user-appointment-main.style.scss'
-import arrowLeft from '../../assets/user/arrow-left.png'
+import arrowLeft from '../../assets/user/arrow-left-icon.svg'
 import UserAppoinmentSection1 from './user-appointment-section1';
 import AppInfoQueryStore from '../../appointmentStore.ts'
 import { useNavigate } from 'react-router-dom';

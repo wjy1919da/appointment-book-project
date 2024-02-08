@@ -4,7 +4,7 @@ import './app-payment-failed-page.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AppInfoQueryStore from '../../appointmentStore.ts'
-import arrowLeft from '../../assets/user/arrow-left.png';
+import arrowLeft from '../../assets/user/arrow-left-icon.svg';
 import ChakraUserAppointmentModal from '../chakra-modal/chakra-user-appointment-modal';
 const AppointmentPaymentFailed = ({appointmentObj}) => {
     const navigate = useNavigate();
