@@ -39,9 +39,13 @@
       .reviewer-Name {
         padding-right: 0.2rem;
         color: #352c29;
+        font-family: 'Open Sans';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
       }
       .verified-symbol {
-        // margin-left: 20px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -50,9 +54,6 @@
       }
     }
     .review-date {
-      //flex: none;
-      order: 2;
-      flex-grow: 0;
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -60,12 +61,12 @@
       margin-left: auto;
       align-items: right;
       width: fit-content;
-      // height: 26px;
-      color: #a5a6a8;
-      font-weight: 400;
+      color: 675D59;
+      font-family: 'Open Sans';
       font-size: 14px;
-      //left:700px;
-      //position: absolute;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
     .reviewer-text {
       font-size: 18px;
@@ -74,8 +75,7 @@
   }
 }
 
-// Phone
-@media (max-width: 768px) {
+@media (max-width: 744px) {
   .doctor-review-card-container {
     box-sizing: border-box;
     display: flex;
@@ -98,25 +98,34 @@
         display: flex;
         align-items: center;
         gap: 16px;
-        font-family: 'Lora';
+        color: #352c29;
+        font-family: 'Open Sans';
+        font-size: 18px;
         font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 160%;
+        font-weight: 400;
+        line-height: normal;
         height: 40px;
 
         .reviewer-info-div {
           display: flex;
-          // flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .doctor-review-card-container {
+    .reviewer-information-date {
+      .reviewer-information {
+        font-size: 14px;
+
+        .reviewer-Name {
+          font-size: 14px;
         }
 
-        .verified-symbol {
-          // margin-left: 20px;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          color: #a5a6a8;
+        .review-date {
+          font-size: 12px;
         }
       }
     }

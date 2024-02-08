@@ -1,6 +1,6 @@
 import React from 'react';
 import './doctor-review-card.styles.scss';
-import VerificationStatusGray from '../../../assets/doctor/doctor-verification-status-gray.svg';
+import VerificationStatus from '../../../assets/doctor/doctor-verification-status.svg';
 import verifiedIcon from '../../../assets/doctor/verified-Icon.png';
 import StarRate from '../../starRate/starRate';
 import { reverseEasing } from 'framer-motion';
@@ -41,7 +41,7 @@ const DoctorReview = ({ profileImage, name, starRate, reviewText, date }) => {
             <span className='reviewer-Name'>{name}</span>
             <span className='verified-symbol'>
               <img
-                src={VerificationStatusGray}
+                src={VerificationStatus}
                 style={{ height: '20px', width: '20px' }}
               ></img>
               {/* <span className="verified-Text">verified customer</span> */}
