@@ -589,8 +589,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                 </div>
               </div>
 
-              <div className='mob-indv-doctor-details-wrap'>
-                <div className='mob-indv-doctor-details-container'>
+              <div className='mob-indv-doctor-details-container'>
                   <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
                     <img
                       src={locationIcon}
@@ -614,7 +613,6 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                         Specialization in {convertTitle(data?.name[0])}
                       </span>
                     )}
-                  </div>
                 </div>
 
                 <div className='mob-indv-doctor-details-container'>
