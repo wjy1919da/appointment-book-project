@@ -1,5 +1,82 @@
-.doctor-review-card-container
-{
+.doctor-review-card-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 24px;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 2rem;
+
+  .reviewer-information-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .reviewer-information {
+      height: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 16px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 160%;
+
+      .reviewer-info-div {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .reviewer-Name {
+        padding-right: 0.2rem;
+        color: #352c29;
+      }
+      .verified-symbol {
+        // margin-left: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #a5a6a8;
+      }
+    }
+    .review-date {
+      //flex: none;
+      order: 2;
+      flex-grow: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      margin-left: auto;
+      align-items: right;
+      width: fit-content;
+      // height: 26px;
+      color: #a5a6a8;
+      font-weight: 400;
+      font-size: 14px;
+      //left:700px;
+      //position: absolute;
+    }
+    .reviewer-text {
+      font-size: 18px;
+      color: #352c29;
+    }
+  }
+}
+
+// Phone
+@media (max-width: 768px) {
+  .doctor-review-card-container {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -7,141 +84,41 @@
     padding-top: 24px;
     gap: 12px;
     width: 100%;
-    padding-bottom: 2rem;
+    height: 199px;
+    border-bottom: 1px solid #e2e3e7;
 
-    .reviewer-information-date
-    {
+    .reviewer-information-date {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+
+      .reviewer-information {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
-        width: 100%;
-        .reviewer-information
-        {
-            height: 40px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            gap:16px;
-            flex: none;
-            order: 0;
-            flex-grow: 0;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Lora';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 160%;
+        gap: 16px;
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+        height: 40px;
 
-            .reviewer-info-div {
-                display: flex;
-                flex-direction: row;
-            }
+        .reviewer-info-div {
+          display: flex;
+          // flex-direction: column;
+        }
 
-            .reviewer-Name {
-                padding-right: 1.5rem;
-                color: #352C29;
-            }
-            .verified-symbol
-            {
-                // margin-left: 20px;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                color: #A5A6A8;
-            }
+        .verified-symbol {
+          // margin-left: 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          color: #a5a6a8;
         }
-        .review-date{
-            //flex: none;
-            order: 2;
-            flex-grow: 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            align-items: center;
-            margin-left: auto;
-            align-items: right;
-            width: fit-content;
-            // height: 26px;
-            color: #A5A6A8;
-            font-weight: 400;
-            font-size: 14px;
-            //left:700px;
-            //position: absolute;
-
-        }
-        .reviewer-text {
-            font-size: 18px;
-            color: #352C29;
-        }
+      }
     }
-}
-
-// Phone
-@media (max-width: 768px) {
-
-    .doctor-review-card-container
-    {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 24px;
-        gap: 12px;
-        width: 100%;
-        height: 199px;
-        border-bottom: 1px solid #E2E3E7;
-
-        .reviewer-information-date
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: flex-start;
-            width: 100%;
-            position: relative;
-
-            .reviewer-information
-            {
-                height: 40px;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                gap:16px;
-                flex: none;
-                order: 0;
-                flex-grow: 0;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Lora';
-                font-style: normal;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 160%;
-
-                .reviewer-info-div {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .verified-symbol
-                {
-                    // margin-left: 20px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                    color: #A5A6A8;
-                }
-            }
-
-            .review-date{
-                position: absolute;
-                top: -10px;
-                left: 280px;
-            }
-        }
-    }
+  }
 }
