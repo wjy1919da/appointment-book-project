@@ -1,260 +1,60 @@
 .community-post-main-container {
   display: flex;
-  justify-content: flex-end;
-  background: var(
-    --background-gradient-color,
-    linear-gradient(180deg, #fff2ed 24.48%, rgba(255, 248, 244, 0) 100%)
-  );
-  height: 1063px;
+  width: 100%;
+  height: 800px;
 
-}
+  // pink background
+  .community-post-main-pink-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 0px 1000px 1000px 0px;
+    background: var(
+      --new-gradient,
+      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+    );
+    width: 547px;
+    height: 403px;
+  }
 
-.post-main-container {
-  margin-top: 18rem;
-
-  @media (max-width: 744px) and (min-width: 376px){
-    .post-main-link-button {
-      margin-top: 425px;
-      width: 500px;
-    }
-    .post-main-shape {
-      top: 350px;
-    }
-    .occaecat {
-      margin-top: -120px;
-    }
-    .adipiscing {
-      margin-top: -120px;
-    }
-    .lorem {
-      margin-top: -150px;
-    }
-    .eiusmod {
-      bottom: -200px;
-      right: -90px;
-    }
-    h1 {
+  .community-post-main-left-container {
+    .community-post-main-girl-image {
       position: relative;
-      top: -260px;
-      left: -220px;
-      margin: 0;
-    }
-    h6 {
-      position: relative;
-      top: -250px;
-      left: -220px;
-      margin: 0;
-    }
-    .excepteur {
-      bottom: -325px;
-    }
-    .photo-girl {
-      margin-top: -120px;
-    }
-    .post-main-photograph-caption {
-      top: 480px;
-    }
-    .post-main-photograph-like {
-      top: 515px;
-    }
-    .post-main-likes-container img {
-      top: 515px;
-    }
-    .post-main-photograph {
-      margin-top: -120px;
-    }
-    .photo-1 {
-      top: 350px;
-    }
-    .photo-2 {
-      top: 275px;
+      top: 165px;
+      left: 110px;
+      width: 679px;
+      // height: 697px;
     }
   }
-}
-.post-main-shape {
-  position: absolute;
-  top: 64px;
-  left: -10px;
-  z-index: 0;
-  border-radius: 0px 1000px 1000px 0px;
-  background: var(
-    --new-gradient,
-    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-  );
-  width: 630px;
-  height: 300px;
-}
-.post-main-link {
-  display: flex;
-  justify-content: flex-end;
-}
 
-.post-main-link-button {
-  background: var(
-    --new-gradient,
-    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-  );
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  color: #fff;
-  font-family: Open Sans;
-  // font-size: 34px;
-  font-size: 23px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  border-radius: 1000px 0px 0px 1000px;
-  // border-radius: 0px 1000px 1000px 0px;
-  margin-top: 100px;
-  padding: 16px 50px;
-}
-.wrapper {
-  position: relative;
-}
+  .community-post-main-right-container {
+    margin-top: 17rem;
+    width: 60%;
 
-.post-main-photograph {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-shrink: 0;
-  position: absolute;
-  top: 200px;
-  left: 140px;
-  z-index: 50;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 16px 40px 0px rgba(32, 32, 33, 0.2),
-    0px 8px 16px 0px rgba(32, 32, 33, 0.1),
-    0px 0px 40px 0px rgba(255, 164, 163, 0.1);
-  height: 480px;
-  width: 400px;
-  padding: 20px;
-}
+    // join a community...
+    .community-post-main-title {
+      position: relative;
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 46px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      margin-left: -20px;
+    }
 
-.occaecat,
-.adipiscing,
-.lorem,
-.eiusmod,
-.excepteur {
-  position: absolute;
-  color: var(--text-2-button, #675d59);
-  font-family: Open Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding: 2px 12px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  background: var(--White, #fbfcff);
-  box-shadow: 0px 4px 16px 0px rgba(32, 32, 33, 0.08),
-    0px 2px 4px 0px rgba(32, 32, 33, 0.04),
-    0px 0px 16px 0px rgba(255, 164, 163, 0.1);
-}
-
-.occaecat {
-  top: 140px;
-  left: 130px;
-}
-
-.adipiscing {
-  top: 160px;
-  right: 80px;
-}
-
-.lorem {
-  top: 380px;
-  left: 76px;
-  z-index: 0;
-}
-
-.eiusmod {
-  bottom: -300px;
-  right: -110px;
-}
-
-.excepteur {
-  bottom: -470px;
-  right: 100px;
-}
-
-.post-main-photograph-caption {
-  position: absolute;
-  left: 160px;
-  bottom: -340px;
-  z-index: 100;
-  font-family: Open Sans;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.post-main-likes-container img {
-  position: absolute;
-  left: 160px;
-  bottom: -360px;
-  z-index: 100;
-}
-
-.post-main-photograph-like {
-  position: absolute;
-  left: 186px;
-  bottom: -375px;
-  z-index: 100;
-  color: var(--text-2-button, #675d59);
-  font-family: Open Sans;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-}
-
-.photo-girl {
-  position: absolute;
-  top: 220px;
-  left: 160px;
-  z-index: 50;
-}
-
-.photo-1 {
-  position: absolute;
-  left: 70px;
-  bottom: -500px;
-  z-index: 0;
-}
-
-.photo-2 {
-  position: absolute;
-  right: -60px;
-  bottom: -280px;
-  z-index: 0;
-  width: 200px;
-  height: 200px;
-}
-.post-main-contents {
-  color: #000;
-  font-family: Open Sans;
-  font-size: 46px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 630px;
-}
-@media (max-width: 1133px) {
-  .post-main-contents {
-    padding-left: 13px;
-    width: 430px;
-    margin-right: 30px;
-  }
-  h6 {
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+    // charm life lets you share...
+    .community-post-main-sub-title {
+      color: #352c29;
+      font-family: Open Sans;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-top: 30px;
+      margin-left: 110px;
+    }
   }
   // create button
   .community-post-main-create-button-container {
@@ -283,131 +83,120 @@
 }
 
 @media (max-width: 1133px) {
-  .post-main-contents {
-    padding-left: 13px;
-    width: 430px;
-    margin-right: 30px;
-  }
+  .community-post-main-container {
+    // height: 700px;
 
-  h6 {
-    font-family: Open Sans;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
+    .commynity-post-main-pink-background {
+      width: 550px;
+      height: 347px;
+    }
 
-  .post-main-link-button {
-    width: calc(100% - 15px);
-    padding: 35px 50px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    .community-post-main-left-container {
+      .community-post-main-girl-image {
+        top: 160px;
+        left: 70px;
+        width: 530px;
+      }
+    }
+
+    .community-post-main-right-container {
+      margin-top: 15rem;
+
+      .community-post-main-title {
+        margin-left: 120px;
+      }
+    }
+
+    // .community-post-main-create-button-container {
+    //   .community-post-main-create-button {
+    //   }
+    // }
   }
 }
 
+@media (max-width: 744px) {
+  .community-post-main-container {
+    flex-direction: column-reverse;
+    height: 1200px;
+
+    .community-post-main-pink-background {
+      top: 420px;
+      width: 582px;
+      height: 291px;
+    }
+
+    .community-post-main-left-container {
+      .community-post-main-girl-image {
+        top: -200px;
+        left: 70px;
+        width: 530px;
+      }
+    }
+
+    .community-post-main-right-container {
+      width: 600px;
+      left: -80px;
+      position: absolute;
+      top: -140px;
+      margin-top: 15rem;
+
+      .community-post-main-title {
+        margin-left: 120px;
+      }
+    }
+
+    .community-post-main-create-button-container {
+      position: absolute;
+      top: 550px;
+      right: 0;
+
+      .community-post-main-create-button {
+        margin-top: 340px;
+      }
+    }
+  }
+}
 @media (max-width: 375px) {
-
-  h1.post-main-contents {
-    position: absolute;
-    top: 60px;
-    font-size: 25px;
-    left: 2px;
-    width: 100%;
-    margin: 0;
+  .community-post-main-container {
+    height: 850px;
   }
-
-  .community-post-header-filter-container {
-    position: absolute;
-    top: 1120px !important; 
+  div.community-post-header-filter-container {
+    top: 900px;
   }
-  
-  h6.h6val {
-    position: absolute;
-    top: 140px;
-    left: 10px;
-    font-size: 18px;
-    width: 97%;
+  .header-container {
+    width: 105%;
   }
-  .post-main-photograph-caption{
-    font-size: 8px;
-    top: 250px;
-    left: 95px;
+  .doctor-post-outer-title {
+    top: -15px !important;
   }
-  .post-main-photograph-like {
-    font-size: 10px;
-    top: 265px;
-    left: 110px;
+  .community-post-main-title {
+    margin-left: 110px !important;
+    font-size: 24px !important;
   }
-  img.heart-icon {
-    width: 12px;
-    top: 265px;
-    left: 95px;
+  .community-post-main-sub-title{
+    width: 70%;
+    font-size: 18px !important;
+    margin-left: 100px !important;
 
   }
-  img.photo-2 {
-    width: 100px;
-    height: 100px;
-    top: 155px;
+  .pink-background-1 {
+    top: 290px !important;
+    width: 70% !important;
+    height: 5% !important;
   }
-  img.photo-1 {
-    width: 150px;
-    height: 150px;
-    top: 190px;
-    left: 55px;
+  .community-post-main-create-button-container {
+    top: 250px !important;
   }
-  .post-main-link-button {
-    position: absolute;
-    top: 450px;
-    width: 285px;
-    height: 50px;
-    font-size: 20px;
-    font-weight: normal;
+  .community-post-main-create-button {
+    width: 250px;
+    height: 65px;
+    font-weight: normal !important;
+    font-size: 20px !important;
+    margin-top: 320px !important;
   }
-  .arrow-right-icon {
-    width: 13px;
-  }
-  .post-main-shape {
-    width: 80%;
-    height: 5%;
-    padding: 0 20px;
-    top: 200px;
-  }
-  .occaecat {
-
-  }
-  .lorem {
-
-  }
-  .eiusmod {
-    left: 10px;
-    width:35%;
-  }
-  .post-main-photograph {
-    width: 80%;
-    left: 65px;
-    height: 235px;
-    top: 50px;
-  }
-  .photo-girl {
-    width: 180px;
-    left: 97px;
-    top: 60px;
-  }
-  button.mobile-search-button {
-    position: absolute;
-    right: 2px;
-    top: -60px;
-    width: 10px;
+  .community-post-main-girl-image {
+    top: -150px !important;
+    left: 30px !important;
   }
 }
 
-.community-posts {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background-color: #f0f0f0;
-  padding: 20px;
-}
