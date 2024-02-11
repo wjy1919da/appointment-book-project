@@ -16,6 +16,7 @@ const PostPageMain = () => {
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isIpadScreen = useMediaQuery({ query: '(max-width: 1133px)' });
   const isSmallScreen = useMediaQuery({ query: '(max-width: 744px)' });
+  const screen375 = useMediaQuery({ query: '(max-width: 375px)' });
 
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
@@ -38,7 +39,7 @@ const PostPageMain = () => {
 
       {/* right container */}
       <div className='community-post-main-right-container'>
-        {isIpadScreen ? (
+        {isIpadScreen || screen375 ? (
           ''
         ) : (
           <>
@@ -54,13 +55,27 @@ const PostPageMain = () => {
             </h6>
           </>
         )}
-        {isIpadScreen && (
+        {isIpadScreen && !screen375 ? (
           <>
             <h1 className='community-post-main-title'>
               Join a community
               <br />
               of beauty and
               <br />
+              empowerment
+            </h1>
+            <h6 className='community-post-main-sub-title'>
+              Charm Life lets you share your cosmetic
+              <br />
+              experience with others and stay on-trend
+            </h6>
+          </>
+        ): null} 
+        {screen375 && (
+          <>
+            <h1 className='community-post-main-title'>
+              Join a community
+              of beauty and
               empowerment
             </h1>
             <h6 className='community-post-main-sub-title'>

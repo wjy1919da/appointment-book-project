@@ -15,6 +15,7 @@ import SearchIcon from "../../../assets/post/search_icon.svg";
 
 const PostSearchBox = ({
   value,
+  isScreen375,
   handleSearch,
   isMobile,
   handleResponsiveButtonClick,
@@ -32,7 +33,10 @@ const PostSearchBox = ({
             border: "1px solid #675D59",
             borderRadius: "8px",
             padding: "7px",
-            width: "60px",
+            position: isScreen375 ? "absolute" : "static",
+            width: isScreen375 ? "40px" : "60px",
+            top: isScreen375 ? "-520px" : "auto", 
+            right: isScreen375 ? "-15px" : "auto",
           }}
           onClick={handleResponsiveButtonClick}
         >
