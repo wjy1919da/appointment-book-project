@@ -7,7 +7,7 @@ import { useDoctorAddProfile } from "../../hooks/useDoctorAddProfile";
 import DoctorVerifiedSubmitted from "./dotcor-verification-submmitted-page";
 import HomeButtonPink from "../home-button-pink/home-button-pink";
 import DoctorOwnProfileEditButton from "../doctor-own-profile/doctor-own-profile-edit-button";
-import postMoreIcon from "../../assets/post/create-post-icon.png";
+import postMoreIcon from "../../assets/post/create-post-icon.svg";
 import "./doctor-verification-page.styles.scss";
 import doctorInfoQueryStore from "../../doctorStore";
 import userInfoQueryStore from "../../userStore";

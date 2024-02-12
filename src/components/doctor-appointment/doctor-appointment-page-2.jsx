@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import Button from '../components-posts/community-post-button/community-post-button';
+import FormButton from '../../mutual_components/button/button';
 import AppEditDetail from '../user-appointment/app-edit-detail';
 
 // scss

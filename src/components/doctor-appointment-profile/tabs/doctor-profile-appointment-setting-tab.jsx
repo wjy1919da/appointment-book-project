@@ -6,8 +6,6 @@ import { useState } from 'react';
 
 // scss
 import './doctor-profile-appointment-setting-tab.scss';
-import '../doctor-profile-appointment-components/doctor-profile-appointment-calendar.scss';
-// import 'react-calendar/dist/Calendar.css';
 
 // images
 import VideoIcon from '../../../assets/doctor/video-call-icon.svg';

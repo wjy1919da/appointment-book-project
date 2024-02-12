@@ -1,7 +1,7 @@
 .indv-doctor-about-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .indv-vouchers-big-container {
@@ -15,25 +15,29 @@
 .vouchers-container {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 2rem;
+  gap: 2rem;
   padding-top: 1rem;
-  column-gap: 2rem;
 }
 
 .indv-no-vouchers-title {
   font-size: 18px;
 }
 
+.indv-doctor-voucher-card-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
 .indv-specialization-title {
-  font-weight: 600;
   font-size: 24px;
+  font-weight: 600;
 }
 
 .indv-specialization-big-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 2rem 0;
+  width: 100%;
 }
 
 .specialization-tabs-container {
@@ -50,15 +54,15 @@
 }
 
 .indv-procedure-icon-img-container {
-  width: 8rem;
   border-radius: 50%;
   box-shadow: 1px 2px 24px lightgray;
+  width: 8rem;
 }
 
 .indv-procedure-icon-img {
-  width: 100%;
   border-radius: 50%;
   padding: 1rem;
+  width: 100%;
 }
 
 .indv-procedure-icon-title-container {
@@ -70,63 +74,47 @@
 }
 
 .indv-highlight-cases-container {
-  border: 1px solid #f48c8a;
-  border-radius: 8px;
-  padding: 2.5rem;
   width: 100%;
 }
 
 .highlight-cases-top-row {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
 .highlight-cases-arrows-container {
   display: flex;
-  column-gap: 2rem;
-  width: 50%;
-  justify-content: flex-end;
+  gap: 2rem;
 }
 
+// both arrow icons size
 .highlight-cases-arrow-container {
-  width: 1.5rem;
-}
-
-.highlight-cases-arrow {
-  width: 100%;
   cursor: pointer;
+  width: 1.5rem;
 }
 
 .highlight-cases-forward-arrow {
   transform: scaleX(-1);
 }
 
-.highlight-cases-title-container {
-  width: 50%;
-}
-
 .highlight-cases-title {
   color: #352c29;
+  font-size: 24px;
   font-weight: 600;
-  font-size: 22px;
 }
 
 .highlight-cases-cases-container {
-  // width: 95%;
-  min-height: 24rem;
-  margin: auto;
-  padding-top: 1.5rem;
   display: flex;
   justify-content: center;
-}
-
-.highlight-cases-container-space-around {
-  justify-content: space-between;
+  margin: auto;
+  padding-top: 1.5rem;
+  min-height: 24rem;
 }
 
 .highlight-cases-highlights-container {
   width: 30%;
-  // max-height: 18rem;
 }
 
 .highlight-cases-no-posts-text-container {
@@ -144,10 +132,10 @@
 }
 
 .indv-highlight-case-container {
-  width: 30%;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  width: 30%;
 }
 
 .indv-highlight-thumbnail-container {
@@ -158,6 +146,7 @@
 
 .indv-customer-review-container {
   padding-top: 2rem;
+  padding-bottom: 7rem;
   width: 100%;
 }
 
@@ -166,33 +155,56 @@
   font-weight: 600;
 }
 
+@media (max-width: 1133px) {
+}
+
 @media (max-width: 744px) {
-  .specialization-tabs-container {
-    column-gap: 2rem;
-    justify-content: space-around;
+  .indv-doctor-voucher-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
+
+  .indv-highlight-cases-container {
+    padding: 30px;
+  }
+
+  .specialization-tabs-container {
+    justify-content: space-around;
+    column-gap: 2rem;
+  }
+
   .indv-procedure-icon-container {
     max-width: 8rem;
   }
+
   .indv-procedure-icon-img-container {
     width: 7rem;
   }
+
   .indv-procedure-icon-title {
     text-align: center;
   }
+
   .indv-highlight-cases-container {
     padding: 0rem;
   }
+
   .highlight-cases-highlights-container {
     width: 50%;
   }
+
   .highlight-cases-no-posts-text {
     font-size: 22px;
   }
 }
 
-@media (max-width: 744px) {
-  .indv-highlight-cases-container {
-    padding: 30px;
+@media (max-width: 375px) {
+  .highlight-cases-title {
+    font-size: 18px;
+  }
+
+  .highlight-cases-arrow-container {
+    width: 16px;
   }
 }

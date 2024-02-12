@@ -28,7 +28,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.3);
+  box-shadow: 2px 4px 16px rgba($color: #675d59, $alpha: 0.3);
 }
 
 .indv-doctor-info-sub-container {
@@ -50,10 +50,11 @@
 }
 
 .indv-top-row-right-side {
-  width: 50%;
   display: flex;
   justify-content: flex-end;
-  column-gap: 1rem;
+  align-items: center;
+  gap: 1rem;
+  width: 50%;
 }
 
 .indv-doctor-info-icon-container {
@@ -61,7 +62,7 @@
 }
 
 .indv-doctor-name {
-  color: #352C29;
+  color: #352c29;
   font-weight: 700;
 }
 
@@ -72,7 +73,7 @@
 }
 
 .indv-edit-profile-button {
-  background-color: #675D59;
+  background-color: #675d59;
   color: white;
   border-radius: 8px;
   padding: 12px 40px;
@@ -84,19 +85,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #F48C8A;
+  border: 2px solid #f48c8a;
   border-radius: 8px;
   padding: 10px 22px;
   cursor: pointer;
 }
 
 .indv-second-row {
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .indv-doctor-description {
+  color: #352c29;
   font-size: 18px;
-  color: black;
 }
 
 .indv-third-row {
@@ -105,14 +106,20 @@
   font-weight: 600;
 }
 
+.indv-posts-total-container,
+.indv-followers-total-container,
+.indv-following-total-container {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .gray-text-container {
-  color: #A5A6A8
+  color: #352c29;
 }
 
 .indv-fourth-row {
   padding-top: 2rem;
-  justify-content: space-between;
-  column-gap: 5%;
+  column-gap: 1rem;
 }
 
 .indv-doctor-info-subrow {
@@ -122,7 +129,7 @@
 }
 
 .indv-doctor-info {
-  color: #675D59;
+  color: #675d59;
   font-size: 14px;
 }
 
@@ -134,31 +141,29 @@
 // }
 
 .indv-button {
-  color: #FBFCFF;
+  color: #fbfcff;
+  font-size: 22px;
   font-weight: 600;
-  background: linear-gradient(to right,#F48C8A, #F0A484);
+  background: linear-gradient(to right, #f48c8a, #f0a484);
   padding: 0.75rem 0;
   border-radius: 8px;
 }
 
 .indv-unfollow-button {
-  color: #F48C8A;
+  color: #675d59;
   font-weight: 600;
-  background: linear-gradient(#FBFCFF, #FBFCFF) padding-box,
-              linear-gradient(to right, #F48C8A, #F0A484) border-box;
+  background: #fbfcff;
   padding: 0.55rem 0;
   border-radius: 8px;
-  border: 2px solid transparent;
-  width: 12%;
+  border: 2px solid #675d59;
 }
 
 .indv-consultation-button {
-  width: 40%;
+  width: 300px;
 }
 
-.indv-follow-button,
-.indv-unfollow-button {
-  width: 15%;
+.indv-follow-button {
+  background: #675d59;
 }
 
 .indv-fifth-row {
@@ -177,16 +182,16 @@
 .indv-doctor-navbar-item {
   font-size: 16px;
   font-weight: 600;
-  color: #675D59;
+  color: #675d59;
   cursor: pointer;
 }
 
 .indv-active {
   padding-bottom: 0.25rem;
-  color: #352C29;
-  background: linear-gradient(90deg, #FFA4A3 0%, #FAB25E 100%) no-repeat;
-  background-size: 100% 3px;  /* Make the background only 4px high */
-  background-position: bottom;  /* Position the background at the bottom, like a border */
+  color: #352c29;
+  background: linear-gradient(90deg, #ffa4a3 0%, #fab25e 100%) no-repeat;
+  background-size: 100% 3px; /* Make the background only 4px high */
+  background-position: bottom; /* Position the background at the bottom, like a border */
 }
 
 @media (max-width: 1133px) {
@@ -197,7 +202,6 @@
   .indv-fourth-row {
     justify-content: normal;
     flex-wrap: wrap;
-    column-gap: 2%;
   }
 
   .indv-follow-button,
@@ -214,8 +218,8 @@
 
   .indv-doctor-profile-picture-container {
     margin-bottom: 3rem;
-    width: 22rem;
-    height: 22rem;
+    width: 312px;
+    height: 312px;
   }
 
   .indv-top-row-left-side {
@@ -234,6 +238,7 @@
   .indv-doctor-info-container {
     flex-direction: column;
     align-items: center;
+    margin-top: 3rem !important;
   }
 
   .indv-doctor-info-sub-container {
@@ -244,10 +249,102 @@
   .indv-fourth-row {
     justify-content: normal;
     flex-wrap: wrap;
-    column-gap: 2%;
   }
 }
 
+@media (max-width: 430px) {
+  .mob-indv-container {
+    margin-right: auto;
+  }
+
+  .mob-indv-doctor-name-right-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mob-indv-doctor-profile-container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .mob-indv-doctor-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .indv-doctor-profile-picture {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mob-contact-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding-top: 0.4rem;
+  }
+
+  .mob-indv-doctor-info-container {
+    margin-top: 1rem;
+    margin-right: auto;
+  }
+
+  .mob-indv-doctor-description {
+    margin-bottom: 0;
+  }
+
+  .indv-third-row {
+    margin: 1rem 0;
+  }
+
+  .indv-posts-total-container,
+  .indv-followers-total-container,
+  .indv-following-total-container {
+    font-size: 18px;
+  }
+
+  .mob-indv-doctor-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    color: #675d59;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .indv-fifth-row {
+    column-gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .indv-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fbfcff;
+    text-shadow: 0px 2px 2px rgba(48, 48, 48, 0.1);
+    font-family: 'Open Sans';
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 8px 12px;
+    height: 36px;
+  }
+
+  .indv-consultation-button {
+    width: 160px;
+  }
+
+  .indv-unfollow-button {
+    font-size: 13px;
+    padding: 0;
+  }
+}
 
 // .individual-doctor-container {
 //   margin-top: 126px;

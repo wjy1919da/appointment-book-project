@@ -3,7 +3,7 @@ import usePostQueryStore from '../../../postStore.ts';
 import { nanoid } from 'nanoid';
 
 // components
-import FormButton from '../community-post-button/community-post-button';
+import FormButton from '../../../mutual_components/button/button';
 
 // hook
 import { useApiRequestPostFilter } from '../../../hooks/useApiRequestPostFilter';
