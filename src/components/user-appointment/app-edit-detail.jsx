@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 
 import React, { useState } from 'react';
 import AppInfoQueryStore from '../../appointmentStore.ts'
-import doctorAvatar from '../../assets/user/doctor-profile-image.png'
+import doctorAvatar from '../../assets/user/doctor-profile-image.svg'
 import locationIcon from '../../assets/user/locationIcon.png'
 import badgeIcon from '../../assets/user/badgeIconSVG.svg'
 import glassesIcon from '../../assets/user/glassesIconSVG.svg'

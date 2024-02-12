@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 // images
 import BubblesIcon from "../../../assets/post/bubbles_icon.svg";
-import heartIcon from "../../../assets/post/heart.png";
+import heartIcon from "../../../assets/post/heart.svg";
 
 // scss
 import "./community-post-detail-pop-up.styles.scss";

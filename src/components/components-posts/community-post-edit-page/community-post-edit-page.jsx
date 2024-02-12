@@ -31,10 +31,10 @@ import { useApiRequestPost } from '../../../hooks/useApiEditPost'; // Create pos
 import './community-post-edit-page.scss';
 
 // images
-import createPostIcon from '../../../assets/post/create-post-icon.png';
+import createPostIcon from '../../../assets/post/create-post-icon.svg';
 import Arrow from '../../../assets/post/iconoir_arrow-right.svg';
 import Trash from '../../../assets/post/trash_icon.svg';
-import DeleteButton from '../../../assets/post/thumbnail_delete.png';
+import DeleteButton from '../../../assets/post/thumbnail-delete-icon.svg';
 
 const EditPostPage = () => {
   const location = useLocation();

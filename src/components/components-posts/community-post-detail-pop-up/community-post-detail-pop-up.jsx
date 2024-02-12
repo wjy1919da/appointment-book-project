@@ -44,8 +44,8 @@ import './community-post-detail-pop-up.styles.scss';
 // images
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
-import heartIcon from '../../../assets/post/heart.png';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+import heartIcon from '../../../assets/post/heart.svg';
+import heartIconFilled from '../../../assets/post/heart-filled-icon.svg';
 import SendIcon from '../../../assets/post/send_icon.svg';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';

@@ -20,8 +20,8 @@ import "./community-post.styles.scss";
 // images
 import defaultImage from "../../../assets/post/default_image.png";
 import LockIcon from "../../../assets/post/lock_icon.svg";
-import heartIcon from "../../../assets/post/heart.png";
-import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import heartIcon from "../../../assets/post/heart.svg";
+import heartIconFilled from "../../../assets/post/heart-filled-icon.svg";
 import userInfoQueryStore from "../../../userStore";
 
 const CommunityPost = ({

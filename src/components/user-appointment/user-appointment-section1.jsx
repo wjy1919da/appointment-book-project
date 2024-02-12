@@ -1,5 +1,5 @@
 import './user-appointment-section1.style.scss'
-import arrowLeft from '../../assets/user/arrow-left.png';
+import arrowLeft from '../../assets/user/arrow-left-icon.svg';
 import xIcon from '../../assets/user/xIcon.svg';
 import tiltedHamburger from '../../assets/user/tiltedHamburger.svg';
 import reverseClock from '../../assets/user/reverseClock.svg';
