@@ -33,6 +33,19 @@ import APIClient from "../../services/api-client.js";
 import { useNavigate } from "react-router-dom";
 import { retrieveUserFollowList } from "../../hooks/useAuth.js";
 import { useGetDoctorPost } from "../../hooks/useApiRequestPostFilter.js";
+import ProfileMessage from "../../components/profile-message/profile-message.component.jsx";
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
+import { useCreateOrRetrieveChannel } from "../../hooks/useCreateOrRetrieveChannel.js";
+//src/hooks/useCreateOrRetrieveChannel.js
 
 // scss
 import "./individual-doctor.styles.scss";
@@ -72,7 +85,7 @@ const IndividualDoctor = () => {
     fetchNextPage: postFetchNextPage,
     hasNextPage: postHasNextPage,
   } = useGetDoctorPost();
-  console.log("doctor post data", postData, postIsLoading);
+  // console.log("doctor post data", postData, postIsLoading);
   const { nickname } = data?.nickname || {};
   const [activeTab, setActiveTab] = useState(0);
   const tabs = ["About", "Posts", "Likes"];
@@ -85,6 +98,9 @@ const IndividualDoctor = () => {
     767: 3,
     430: 2,
   };
+  const [initialChannelUrl, setInitialChannelUrl] = useState("");
+  const { data: channelData, mutate: createOrRetrieveChannel } =
+    useCreateOrRetrieveChannel();
 
   useEffect(() => {
     setMemberId(encodedMemberId);
