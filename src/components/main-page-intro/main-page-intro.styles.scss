@@ -202,74 +202,77 @@
   }
 }
 
-@media (max-width: 376px) {
-  .main-title-container {
-    width: 90%;
-  }
-  .main-page-title {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 24px;
-    padding-left: 0;
-  }
-  .main-page-subtitle {
-    padding-left: 0;
-    text-align: center;
-    padding-top: 1rem;
-  }
-  .main-top-img-container {
-    left: 20px;
-  }
-}
-
-// @media (max-width: 768px) {
-//   // tablet
+// @media (max-width: 376px) {
+//   .main-title-container {
+//     width: 90%;
+//   }
+//   .main-page-title {
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//     font-size: 24px;
+//     padding-left: 0;
+//   }
+//   .main-page-subtitle {
+//     padding-left: 0;
+//     text-align: center;
+//     padding-top: 1rem;
+//   }
+//   .main-top-img-container {
+//     left: 20px;
+//   }
 // }
 
-// @media (max-width: 576px) {
-//   // phone
-// }
+// // @media (max-width: 768px) {
+// //   // tablet
+// // }
 
-.main-text {
-  font-family: "Open Sans";
-  color: #352c29;
-}
+// // @media (max-width: 576px) {
+// //   // phone
+// // }
+
+// .main-text {
+//   font-family: "Open Sans";
+//   color: #352c29;
+// }
 
 @media (max-width: 743px) {
   .main-page-title {
-    padding-top: 8rem;
-    padding-left: 2rem;
+    padding-top: 120px;
+    // padding-left: 0px;
     font-size: 24px;
     font-weight: 700;
     width: 100%;
+    text-align: left;
   }
   .main-page-subtitle {
+    padding-top: 10px; //just added
+    padding-left: 0px;
     width: auto;
     height: auto;
     padding-top: 0;
     padding-left: 0;
+    color: #352c29;
+    text-align: left;
+
+    /* MOBILE TYPE/body2 */
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
   .main-title-container {
-    // width: 150%; //just added
-    //width: 90%;
     margin: auto;
+    padding-left: 16px;
+    padding-right: 16px;
   }
-  .main-page-subtitle {
-    padding-top: 2.5rem; //just added
-    padding-left: 2rem;
-    font-weight: 600;
-    font-size: 21px;
-    // width: 414px; //just added
-    // height: 84px;
-  }
+
   .main-top-row {
     display: flex;
-    // justify-content: right;
-    // padding-right: 0rem; //just added
-    // padding-bottom: 0rem;
-    padding-top: 8rem;
+
+    padding-top: 12rem;
     justify-content: flex-end; /* Align children to the right */
     align-items: center; /* Optional: Align children vertically */
     width: 100%; /* Ensure it spans the full width of its parent */
@@ -277,7 +280,7 @@
     // width: 102%; //length of the bullet
   }
   .main-top-img-container {
-    width: 449px; //just added
+    // width: 449px; //just added
     height: 283px; //just added
     right: 0px;
     left: -1.75%; //just added
