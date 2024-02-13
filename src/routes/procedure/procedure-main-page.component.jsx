@@ -123,7 +123,7 @@ const ProcedureMainPage = () => {
       <div className="procedure-main-content-container">
         <div className="procedure-main-title-container">
           <div className="procedure-main-header-title">
-            Our Cosmetic Procedures
+            Other Cosmetic Procedures
           </div>
           {/* <div ref={containerRef} className=''>
             <PostSearchBox

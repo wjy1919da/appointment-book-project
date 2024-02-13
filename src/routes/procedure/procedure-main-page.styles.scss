@@ -3,16 +3,17 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 60px; /* 左右内边距 100px，上下 0 */
+  padding: 0 60px;
   gap: 52px;
+  background: linear-gradient(180deg, #fff3ec 0%, #fff 100%);
 }
 
 .procedure-main-title-container {
   display: flex;
-  justify-content: space-between; /* 使用 space-between 使子元素分布在两端 */
-  align-items: center; /* 垂直居中 */
+  justify-content: space-between;
+  align-items: center;
   flex-direction: row;
-  //width: 100%; /* 容器宽度受限于父元素的 padding */
+  //width: 100%;
   margin-bottom: 24px;
   gap: 24px;
   //margin-left: 24px;
