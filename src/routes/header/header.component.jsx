@@ -55,6 +55,12 @@ const Header = () => {
     setNavBar((prev) => !prev);
   };
 
+  const handleNavCloseButton = () => {
+    if (isMobile) {
+      setNavBar(false);
+    }
+  };
+
   return (
     <nav>
       <div className='header-container'>
@@ -110,7 +116,11 @@ const Header = () => {
           <ul className='header-nav-items-ul'>
             {navItems.map((item) => (
               <li key={item.id} className='header-nav-items-li'>
-                <Link className={`header-nav-link ${item.active}`} to={item.to}>
+                <Link
+                  className={`header-nav-link ${item.active}`}
+                  to={item.to}
+                  onClick={handleNavCloseButton}
+                >
                   {item.menu}
                 </Link>
               </li>
