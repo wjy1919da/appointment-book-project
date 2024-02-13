@@ -179,6 +179,9 @@
             width: 100%;
             padding-top: 1rem;
         }
+        .instrument-display-img-container {
+            width: 20rem;
+        }
     }
 
     @media (max-width: 376px) {
@@ -190,7 +193,7 @@
             padding-top: 3rem;
         }
         .instrument-display-img-container {
-            width: 20rem;
+            width: 16rem;
         }
         .instrument-display-heading {
             font-size: 14px;

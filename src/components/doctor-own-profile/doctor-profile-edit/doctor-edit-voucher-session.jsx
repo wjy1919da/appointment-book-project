@@ -1,7 +1,7 @@
 import React from "react";
 import './doctor-edit-voucher-session.styles.scss';
 import deteleIcon from '../../../assets/user/deleteIcon.png'
-import procedureImg from '../../../assets/procedure/Facelift.png'
+import procedureImg from '../../../assets/procedure/facelift.svg'
 const DoctorEditVoucherSession = () => {
     return (
       <div className="doctor-edit-voucher-session">

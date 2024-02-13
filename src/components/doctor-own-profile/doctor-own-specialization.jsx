@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import '../components-home/home-instruments/home-instruments.styles.scss';
-import InstrumentImage from '../../assets/procedure/Chin-Implants.png';
+import InstrumentImage from '../../assets/procedure/chin_implants.svg';
 // import { Box, SimpleGrid, Image } from '@chakra-ui/react';
 
 // scss
