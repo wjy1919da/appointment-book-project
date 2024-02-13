@@ -22,6 +22,7 @@ const Header = () => {
   const location = useLocation();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const iPhoneScreen = useMediaQuery({ query: `(max-width: 430px)` });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isPopupOpen = userInfo.popupState !== 'closed';
@@ -106,14 +107,16 @@ const Header = () => {
                 height: '20px',
               }}
             />
-            <img
-              src={HamburgerIcon}
-              alt='login'
-              style={{
-                width: '25px',
-                height: '25px',
-              }}
-            />
+            {iPhoneScreen && (
+              <img
+                src={HamburgerIcon}
+                alt='login'
+                style={{
+                  width: '25px',
+                  height: '25px',
+                }}
+              />
+            )}
           </div>
         )}
       </div>
