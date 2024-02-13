@@ -16,6 +16,7 @@ import './header.styles.scss';
 import UserIcon from '../../assets/user/user.svg';
 import ChatIcon from '../../assets/post/bubbles_icon.svg';
 import Logo from '../../assets/home/logo.png';
+import HamburgerIcon from '../../assets/home/hamburger.svg';
 
 const Header = () => {
   const location = useLocation();
@@ -96,7 +97,7 @@ const Header = () => {
                 width: '24px',
                 height: '24px',
               }}
-            ></img>
+            />
             <img
               src={ChatIcon}
               alt='login'
@@ -104,7 +105,15 @@ const Header = () => {
                 width: '20px',
                 height: '20px',
               }}
-            ></img>
+            />
+            <img
+              src={HamburgerIcon}
+              alt='login'
+              style={{
+                width: '20px',
+                height: '20px',
+              }}
+            />
           </div>
         )}
       </div>
@@ -114,7 +123,7 @@ const Header = () => {
 
 export default Header;
 
-//* * * previous codes are here
+// * * * previous codes are here
 // import { Outlet, Link, useLocation } from 'react-router-dom';
 // import { Fragment } from 'react';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
