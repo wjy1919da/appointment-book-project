@@ -110,8 +110,8 @@ const Header = () => {
               src={HamburgerIcon}
               alt='login'
               style={{
-                width: '20px',
-                height: '20px',
+                width: '25px',
+                height: '25px',
               }}
             />
           </div>
