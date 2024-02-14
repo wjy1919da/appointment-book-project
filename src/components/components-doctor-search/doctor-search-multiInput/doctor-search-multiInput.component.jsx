@@ -7,6 +7,7 @@ import DoctorSearchPopup from '../doctor-search-popup/doctor-search-popup.compon
 import searchReducer from '../../../reducer/searchReducer.ts';
 // import VerticalDivider from './doctor-search-divider.component'
 import SearchIcon from '../../../assets/doctor/doctor-search-button-icon.png';
+import SearchIconBlack from '../../../assets/doctor/doctor-search-button-icon-black.png';
 // import FormInput from '../../form-input/form-input.component.jsx';
 // import CloseButton from '../../../assets/post/pop-up-close-button.png';
 import './doctor-search-multiput-dropDown.styles.scss'
@@ -28,11 +29,14 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     const [isFieldModalOpen, setIsFieldModalOpen] = useState(false);
     const [dropdownLocations, setDropdownLocations] = useState([]);
     const [dropdownProcedures, setDropdownProcedures] = useState([]);
-    const isMobile = useMediaQuery({ query: `(max-width: 1024px)` }); 
-    const isPhone = useMediaQuery({ query: `(max-width: 767px)` });
-    const isIpad = useMediaQuery({query: `(min-width: 768px) and (max-width:1024px)` });
-    const searchButtonWidth = isIpad ? '257px' : (isPhone ? '150px' : 'defaultWidth');
-    const searchButtonHeight = isIpad ? '52px' : (isPhone ? '40px' : 'defaultWidth');
+
+    const isMobile = useMediaQuery({ query: `(max-width: 1132.99px)` }); 
+    const isPhone = useMediaQuery({ query: `(max-width: 743.50px)` });
+    const isIpad = useMediaQuery({query: `(min-width: 744px) and (max-width:1132.99px)` });
+    //const testBigger1133 = useMediaQuery({query: `(min-width: 1133px) and (max-width: 1440px)` });
+
+    const searchButtonWidth = isIpad ? '88px' : (isPhone ? '88px' : 'defaultWidth');
+    const searchButtonHeight = isIpad ? '54px' : (isPhone ? '54px' : 'defaultWidth');
     useEffect(() => {
         const body = {
             pageReq: 0
@@ -126,95 +130,198 @@ const DoctorSearchMultiInput = ({searchCallback}) => {
     return (
         <div>
             {isMobile?(
-                <div className="doctor-search-mobile-multiInput-container">
-                    <div className='doctor-search-multiInput-button'>
-                    <Dropdown>
-                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            {/* ZIP,city or state */}
-                            {doctorQuery.location || 'ZIP,city or state'}
-                        </Dropdown.Toggle>
+                <>
+                {isPhone&&(                
+                    <div className='doctor-multiInput-container'> {/* Hoang reuses source code below for this isMobile version to match with UI design*/}
+                        <form className='doctor-input-form'>
 
-                        <Dropdown.Menu  className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px',marginTop:'-10px'}}> */}
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginTop:'-10px'}}>
-                                <Form.Control 
-                                    type="input" 
-                                    placeholder="search..." 
-                                    ref = {locationRef}
-                                    value = {doctorQuery.location || ''}
-                                    onChange = {(event) => setLocation(event.target.value)}
-                                />
-                            </Form.Group>
-                            {/* {topLocations.map((item, index) => (
-                                    <Button 
-                                        key={index}
-                                        className="search-location-button mb-3"  
-                                        variant="outline-primary"
-                                        onClick={() => handleDropdownLocationClick(item)}
-                                    >
-                                        {item}
-                                    </Button>
-                                ))} */}
-                            </Form>
-                        </Dropdown.Menu>
-                        </Dropdown>
+                            <div className='doctor-input-form-first-row' style={{color:'555',display:'flex',padding:'0px 8px 0px 8px',border:'1px solid currentColor',borderRadius:'4px'}}>
+                                    <input 
+                                        type='search'
+                                        placeholder='Text' 
+                                        name='doctor' 
+                                        onChange={(event) => setDoctorName(event.target.value)} 
+                                        className='doctor-input-for-multiInput doctor-name-input' 
+                                        style={{border:'none',background:'#FFFCFB',margin:'0',padding:'0px 8px',fontSize:'14px',color:'inherit','::placeholder':{color:'#88888A'}}}
+                                        />
+                                         
+                                    <button type='submit' 
+                                            onClick={handleSubmit} 
+                                            className='doctor-search-button-multiInput'
+                                            style={{textIndent:'-999px',overflow:'hidden',padding:'0',margin:'0',':hover':{opacity:'1'}}}>
+                                                <img src={SearchIconBlack} alt='search'/>
+                                    </button>
+                            </div>
 
-                        <Dropdown>
-                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                           {doctorQuery.field || 'Specialization'}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
-                               <Form.Control 
-                                    type="input" 
-                                    placeholder="search..." 
-                                    ref = {specializationRef}
-                                    value={doctorQuery.field || ''}
-                                    onChange = {(event) => setField(event.target.value)}
-                                />
-                            </Form.Group>
-                            </Form>
-                        </Dropdown.Menu>
-                        </Dropdown>
-
-                        <Dropdown>
-                        <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
-                            {doctorQuery.doctorName || 'Doctor Name'}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className='search-doctor-dropDown-menu'>
-                            <Form className="p-4">
-                            {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
-                            <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
-                                <Form.Control 
-                                    type="input" 
-                                    placeholder="search..." 
-                                    ref = {doctorNameRef}
-                                    value={doctorQuery.doctorName || ''}
-                                    onChange = {(event) => setDoctorName(event.target.value)} 
-                                />
-                            </Form.Group>
-                            </Form>
-                        </Dropdown.Menu>
-                        </Dropdown>
-                        {/* <button className='doctor-search-button' 
-                                style={{
-                                    width:'150px',
-                                    marginLeft:'-1px'
-                                    }}
-                                onClick = {handleOnClick}
-                                >
-                            <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
-                            Search
-                        </button> */}
-                        <HomeButton title='Search' onClick ={handleOnClick}  isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
-                        {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
+                            <div className='doctor-input-form-second-row' >
+                                <div className='location-input-container' style={{color:'555',display:'flex',padding:'0px 10px 0px 12px',border:'1px solid currentColor',borderRadius:'4px'}}>  
+                                    <input placeholder='Zip or City, State' 
+                                        name='location' 
+                                        onChange={(event) => setLocation(event.target.value)}
+                                        onClick={() => toggleLocationModal()}  // clicking the input will open and close the modal
+                                        onBlur={() => closeLocationModal()}  // moving focus away from the input will close the modal
+                                        value={doctorQuery?.location}
+                                        className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
+                                    <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                        {dropdownLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
+                                            return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
+                                        })}
+                                    </div> 
+                                </div>
+                                <div className='field-input-container' style={{color:'555',display:'flex',padding:'0px 10px 0px 12px',border:'1px solid currentColor',borderRadius:'4px'}}>
+                                    <input placeholder='Specializations' 
+                                        name='specialization' 
+                                        onChange={(event) => setField(event.target.value)}
+                                        onClick={() => toggleFieldModal()} 
+                                        onBlur={() => closeFieldModal()}
+                                        value={doctorQuery?.field}
+                                        className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
+                                    <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                        {dropdownProcedures.map((procedureObj, index) => {
+                                            return <span className='procedure-dropdown-row-container'>
+                                                <ProcedureRow key={index+100} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
+                                            </span>
+                                        })}
+                                    </div>
+                                </div>
+                            </div>                          
+                        </form>
                     </div>
+                    )}
+                {isIpad&&(
+
+                // <div className="doctor-search-mobile-multiInput-container">
+                //     <div className='doctor-search-multiInput-button'>
+                //         <Dropdown>
+                //         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                //             {/* ZIP,city or state */}
+                //             {doctorQuery.location || 'ZIP,city or state'}
+                //         </Dropdown.Toggle>
+
+                //         <Dropdown.Menu  className='search-doctor-dropDown-menu'>
+                //             <Form className="p-4">
+                //             {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px',marginTop:'-10px'}}> */}
+                //             <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginTop:'-10px'}}>
+                //                 <Form.Control 
+                //                     type="input" 
+                //                     placeholder="search..." 
+                //                     ref = {locationRef}
+                //                     value = {doctorQuery.location || ''}
+                //                     onChange = {(event) => setLocation(event.target.value)}
+                //                 />
+                //             </Form.Group>
+                //             {/* {topLocations.map((item, index) => (
+                //                     <Button 
+                //                         key={index}
+                //                         className="search-location-button mb-3"  
+                //                         variant="outline-primary"
+                //                         onClick={() => handleDropdownLocationClick(item)}
+                //                     >
+                //                         {item}
+                //                     </Button>
+                //                 ))} */}
+                //             </Form>
+                //         </Dropdown.Menu>
+                //         </Dropdown>
+
+                //         <Dropdown>
+                //         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                //            {doctorQuery.field || 'Specialization'}
+                //         </Dropdown.Toggle>
+
+                //         <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                //             <Form className="p-4">
+                //             {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
+                //             <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
+                //                <Form.Control 
+                //                     type="input" 
+                //                     placeholder="search..." 
+                //                     ref = {specializationRef}
+                //                     value={doctorQuery.field || ''}
+                //                     onChange = {(event) => setField(event.target.value)}
+                //                 />
+                //             </Form.Group>
+                //             </Form>
+                //         </Dropdown.Menu>
+                //         </Dropdown>
+
+                //         <Dropdown>
+                //         <Dropdown.Toggle className="custom-button" id="dropdownMenuButton" data-bs-auto-close="outside">
+                //             {doctorQuery.doctorName || 'Doctor Name'}
+                //         </Dropdown.Toggle>
+
+                //         <Dropdown.Menu className='search-doctor-dropDown-menu'>
+                //             <Form className="p-4">
+                //             {/* <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%', marginLeft:'-10px'}}> */}
+                //             <Form.Group className="mb-3" controlId="exampleDropdownFormEmail2" style={{width:'100%'}}>
+                //                 <Form.Control 
+                //                     type="input" 
+                //                     placeholder="search..." 
+                //                     ref = {doctorNameRef}
+                //                     value={doctorQuery.doctorName || ''}
+                //                     onChange = {(event) => setDoctorName(event.target.value)} 
+                //                 />
+                //             </Form.Group>
+                //             </Form>
+                //         </Dropdown.Menu>
+                //         </Dropdown>
+                //         {/* <button className='doctor-search-button' 
+                //                 style={{
+                //                     width:'150px',
+                //                     marginLeft:'-1px'
+                //                     }}
+                //                 onClick = {handleOnClick}
+                //                 >
+                //             <img src={SearchIcon} className='doctor-search-icon' alt='search'/>
+                //             Search
+                //         </button> */}
+                //         <HomeButton onClick ={handleOnClick}  isIcon={SearchIcon} width={searchButtonWidth} height={searchButtonHeight}/>
+                //         {IsModalOpen && <DoctorSearchPopup show={IsModalOpen} onHide={()=>setIsModelOpen(false)} isMobile={isMobile}/>}
+                //     </div>
+                // </div>
+                
+                <div className='doctor-multiInput-container'> {/* Hoang reuses source code below for this isMobile version to match with UI design*/}
+                    <form className='doctor-input-form'>
+                        <span className='location-input-container' >  
+                            <input placeholder='City, State' 
+                                name='location' 
+                                onChange={(event) => setLocation(event.target.value)}
+                                onClick={() => toggleLocationModal()}  // clicking the input will open and close the modal
+                                onBlur={() => closeLocationModal()}  // moving focus away from the input will close the modal
+                                value={doctorQuery?.location}
+                                className='doctor-input-for-multiInput doctor-location-input' />  {/*Location input */}
+                            <div className={`location-dropdown dropdown-container ${isLocationModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {dropdownLocations.filter((location) => { return location.toUpperCase().includes(doctorQuery.location.toUpperCase())}).map((item, index) => {
+                                    return <div className='location-dropdown-selection' key={index} onClick={() => handleDropdownLocationClick(item)} >{item}</div>
+                                })}
+                            </div>
+                        </span>
+                        <span className='field-input-container'>
+                            <input placeholder='Specialization' 
+                                name='specialization' 
+                                onChange={(event) => setField(event.target.value)}
+                                onClick={() => toggleFieldModal()} 
+                                onBlur={() => closeFieldModal()}
+                                value={doctorQuery?.field}
+                                className='doctor-input-for-multiInput doctor-field-input' />  {/*Specialization input */}
+                            <div className={`dropdown-container field-dropdown ${isFieldModalOpen ? 'dropdown-open' : 'dropdown-closed'}`} >
+                                {dropdownProcedures.map((procedureObj, index) => {
+                                    return <span className='procedure-dropdown-row-container'>
+                                        <ProcedureRow key={index+100} procedureObj={procedureObj} onClick={proceduresGetInfo}/>
+                                    </span>
+                                })}
+                            </div>
+                        </span>
+                        <input placeholder='Doctor' 
+                            name='doctor' 
+                            onChange={(event) => setDoctorName(event.target.value)} 
+                            className='doctor-input-for-multiInput doctor-name-input' />  {/*Doctor's Name input */}
+                        
+                        <button type='submit' onClick={handleSubmit} className='doctor-search-button-multiInput'><img src={SearchIcon} alt='search'/></button>
+                    </form>
                 </div>
+                    )}
+                </>
             ):(  
                 <div className='doctor-multiInput-container'> {/* I did not touch the mobile version above. Once the UI team completes the wireframe for it I can come back to this page */}
                     <form className='doctor-input-form'>
