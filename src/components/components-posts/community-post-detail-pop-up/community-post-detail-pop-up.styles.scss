@@ -564,6 +564,13 @@
   //     }
   //   }
   // }
+
+  .fade,
+  .modal-backdrop,
+  .show {
+    width: 100%;
+    min-height: 300vh;
+  }
 }
 
 @media (max-width: 375px) {
