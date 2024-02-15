@@ -8,34 +8,35 @@ import CommunityPostDetailPopUPSkeleton from '../community-post-detail-pop-up/co
 // images
 import CloseButton from '../../../assets/post/close-button.svg';
 
-const PostDetail = ({ show, onHide, isMobile }) => {
+const PostDetail = ({ show, onHide, isMobile, iPhoneScreen }) => {
   const { data, error, isLoading } = usePostDetail();
   // console.log("post detail", postTitle);
   // let isLoading = true;
   return (
-    <div>
+    <>
       <div className='modal-parent-container'>
-        <Modal
-          dialogClassName='close-button-modal'
-          show={show}
-          onHide={onHide}
-          size='xl'
-          aria-labelledby='example-custom-modal-styling-title'
-        >
-          <div className='modal-content-centering-wrapper'>
-            <div className='modal-content first-modal-content'>
-              {/* x button */}
-              <div
-                className='modal-content-close-button-container'
-                onClick={onHide}
-              >
-                {/* <button className='close-button' onClick={onHide}> */}
-                <img src={CloseButton} alt='Icon-Close-Button' />
+        {!iPhoneScreen && (
+          <Modal
+            dialogClassName='close-button-modal'
+            show={show}
+            onHide={onHide}
+            size='xl'
+            aria-labelledby='example-custom-modal-styling-title'
+          >
+            <div className='modal-content-centering-wrapper'>
+              <div className='modal-content first-modal-content'>
+                {/* x button */}
+                <div
+                  className='modal-content-close-button-container'
+                  onClick={onHide}
+                >
+                  {/* <button className='close-button' onClick={onHide}> */}
+                  <img src={CloseButton} alt='Icon-Close-Button' />
+                </div>
               </div>
-              {/* </button> */}
             </div>
-          </div>
-        </Modal>
+          </Modal>
+        )}
       </div>
 
       {isMobile ? (
@@ -47,7 +48,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
               onHide={onHide}
               size='xl'
               aria-labelledby='example-custom-modal-styling-title'
-              style={{ marginTop: '20px' }}
+              style={!iPhoneScreen ? { marginTop: '20px' } : {}}
             >
               <div className='modal-content-main-container'>
                 {isLoading ? (
@@ -64,6 +65,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
                       collectCount={data.data.collectCount}
                       comments={data.data.comments}
                       isLiked={data.data.isLike}
+                      onHide={onHide}
                     />
                   )
                 )}
@@ -99,7 +101,7 @@ const PostDetail = ({ show, onHide, isMobile }) => {
           )}
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 export default PostDetail;
