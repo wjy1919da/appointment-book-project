@@ -65,7 +65,7 @@ const CommunityPostDetailPopUP = ({
   isPrivate,
   isHighlight,
   isLiked,
-  onHide
+  onHide,
 }) => {
   // like count
   const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
@@ -345,13 +345,15 @@ const CommunityPostDetailPopUP = ({
             onMouseLeave={() => setShowArrows(false)}
           >
             {/* dark left arrow */}
-            <img
-              src={DarkLeftArrowIcon}
-              alt='Icon'
-              className='popup-dark-left-arrow-icon'
-              style={{ width: '24px', height: '24px' }}
-              onClick={onHide}
-            />
+            {iPhoneScreen && (
+              <img
+                src={DarkLeftArrowIcon}
+                alt='Icon'
+                className='popup-dark-left-arrow-icon'
+                style={{ width: '24px', height: '24px' }}
+                onClick={onHide}
+              />
+            )}
             {currentImageIndex > 0 && showArrows && (
               <FontAwesomeIcon
                 className='arrow-icon arrow-left'
