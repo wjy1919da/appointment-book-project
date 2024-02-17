@@ -68,8 +68,8 @@ const AppEditDetail = ({appointmentObj, isNewApp}) => {
                 <div style={{display:'flex',flexDirection:'column'}}>
                 <div className='app-edit-main-section'>
                     <div className='app-edit-calendar-description-container'>
-                        <h3 className='app-edit-calendar-description calendar-description-1'>Next, please select the date and time that is best for you.</h3>
-                        <h3 className='app-edit-calendar-description calendar-description-2'>Our verified doctors will contact you during this time.</h3>
+                        <h3 className='app-edit-calendar-description calendar-description-1'>Next, please select the date and time that is best for you. Our verified doctors will contact you during this time.</h3>
+                        <h3 className='app-edit-calendar-description calendar-description-2'></h3>
                     </div>
                     <div className='app-edit-calendar-section-container'>
                         <div className='app-edit-calendar-section'>

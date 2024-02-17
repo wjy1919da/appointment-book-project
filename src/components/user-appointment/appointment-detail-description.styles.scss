@@ -3,6 +3,11 @@
     // width: 80rem;
 }
 
+.user-appointment-description-scrollable-section {
+    display: flex;
+    flex-direction: column;
+}
+
 .user-appointment-description-form-title {
     padding-right: 14rem;
     padding-bottom: 1rem;
@@ -229,4 +234,43 @@
 
 .app-invisible-button {
     visibility: hidden;
+}
+
+@media (max-width: 1134px) {
+    // .user-appointment-description-main-container {
+        
+    // }
+    .user-appointment-description-scrollable-section {
+        overflow: auto;
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+        max-height: 30rem;
+    }
+    .user-appointment-description-form-title {
+        padding-right: 3rem;
+    }
+    .user-appointment-description-form-top-row {
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    .user-appointment-edit-info-form-gender-container {
+        width: 100%;
+    }
+    .user-appointment-description-form-birthday-container {
+        width: 100%;
+    }
+    .user-appointment-description-form-add-photo {
+        width: 96px;
+        height: 80px;
+    }
+    .app-description-photo-container {
+        width: 96px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 745px) {
+    .user-appointment-description-form-title {
+        font-size: 21px;
+    }
 }

@@ -5,3 +5,12 @@
 .app-cancel-finish-title-text {
     padding-bottom: 2rem;
 }
+
+@media (max-width: 1134px) {
+    .app-cancel-finish-main-container {
+        padding: 4.5rem 4.5rem;
+    }
+    .app-cancel-finish-title-text {
+        font-size: 32px;
+    }
+}

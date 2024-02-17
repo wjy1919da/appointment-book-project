@@ -85,7 +85,7 @@
 // }
 .app-edit-calendar-description-container {
   padding-bottom: 2rem;
-  padding-right: 15rem;
+  // padding-right: 15rem;
 }
 .app-edit-calendar-description {
   font-size: 22px;
@@ -258,4 +258,33 @@
     border-bottom-right-radius: 6px;
     // background: #d4a713;
     color: white;
+  }
+
+  @media (max-width: 1134px) {
+    .app-edit-calendar-section {
+      width: 24rem;
+      height: 22rem;
+      margin-right: 2rem;
+    }
+    .app-edit-time-button {
+      width: 180px;
+      height: 40px;
+    }
+    .app-edit-calendar-description {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 1025px) {
+    .app-edit-calendar-section-container {
+      flex-direction: column;
+      row-gap: 2rem;
+      align-items: center;
+    }
+    .app-edit-time-section {
+      max-height: 10rem;
+    }
+    .app-edit-time-section {
+      width: 90%;
+    }
   }

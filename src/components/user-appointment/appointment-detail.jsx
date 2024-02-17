@@ -41,6 +41,7 @@ const AppointmentDetail = ({
 
   return (
     <div className='appointment-detail-main-container'>
+      <div className='appointment-detail-main-scrollable-section'>
       <div className='appointment-top-info-container'>
         <div className='app-doctor-info-section'>
           <div className='app-doctor-avatar-container'>
@@ -225,6 +226,7 @@ const AppointmentDetail = ({
         {/* <Link className='app-edit-button' onClick={() => {
                 console.log("Link clicked");
                 togglePopup(true, 'appointmentDescription')}}>Edit</Link> */}
+      </div>
       </div>
       <div className='app-details-record-section'>
         <span className='app-details-record'>
