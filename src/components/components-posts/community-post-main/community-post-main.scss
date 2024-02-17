@@ -114,7 +114,7 @@
     .community-post-main-create-button {
       font-size: 18px !important;
     }
-  } 
+  }
 }
 
 @media (max-width: 1133px) {
@@ -202,7 +202,9 @@
     }
 
     .community-post-main-right-container {
-      width: 100%;
+      top: -160px;
+      left: -90px;
+      // width: 100%;
     }
 
     div.community-post-header-filter-container {
@@ -220,27 +222,40 @@
     }
     .community-post-main-sub-title {
       width: 70%;
-      font-size: 18px !important;
-      margin-left: 100px !important;
+      // font-size: 18px !important;
+      // margin-left: 100px !important;
     }
     .pink-background-1 {
-      top: 290px !important;
-      width: 70% !important;
-      height: 5% !important;
+      top: 220px !important;
+      // top: 290px !important;
+      width: 249px !important;
+      height: 142px !important;
+      // height: 5% !important;
     }
     .community-post-main-create-button-container {
       top: 250px !important;
     }
     .community-post-main-create-button {
-      width: 250px;
-      height: 65px;
+      justify-content: center !important;
+      padding: 10px 0 !important;
+      width: 250px !important;
+      height: 65px !important;
       font-weight: normal !important;
-      font-size: 20px !important;
-      margin-top: 320px !important;
+      font-size: 18px !important;
+      margin-top: 140px !important;
+      font-family: 'Open Sans';
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600 !important;
+      line-height: normal;
+    }
+    .arrow-right-icon {
+      width: 16px;
+      height: 16px;
     }
     .community-post-main-girl-image {
-      top: -150px !important;
-      left: 30px !important;
+      top: -335px !important;
+      left: 60px !important;
     }
   }
 }
