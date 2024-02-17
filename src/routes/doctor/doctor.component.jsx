@@ -16,7 +16,10 @@ const Doctor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 1023px)` });
+  const isIphone = useMediaQuery({ query: `(max-width: 743.50px)` });
+  const isBetween744And1132px = useMediaQuery({ query: '(min-width: 744px) and (max-width: 1132px)' });
+  const isGreater1133px = useMediaQuery({ query: `(min-width: 1133px)` });
   const searchLocations = [];
   const navigate = useNavigate();
   // useEffect(() => {
@@ -101,34 +104,70 @@ const Doctor = () => {
   return (
     <div className="doctor-container animate__animated animate__fadeIn">
       <div>
+        
         <div className="doctor-search-outer-container">
           <div className="gradient-background">
+
             <div className="doctor-search-header-container">
               <div className="doctor-search-header-title-container">
                 <h1 className="doctor-upper-title">
-                  Find the Right Doctor At Your Fingertip
+                  Find the Right Doctor at Your Fingertip
                 </h1>
               </div>
-              <div className="doctor-search-header-pic-container animate__animated animate__slideInUp">
-                <img
-                  src={DoctorImg}
-                  alt="Doctor Search Background"
-                  className="doctor-search-header-pic"
-                />
-              </div>
+              {isGreater1133px&&
+                <div className="doctor-search-header-pic-container animate__animated animate__slideInUp">
+                  <img
+                    src={DoctorImg}
+                    alt="Doctor Search Background"
+                    className="doctor-search-header-pic"
+                  />
+                </div>}
             </div>
-            <div className="doctor-intro-container">
+
+            <div className="doctor-intro-container ">
               <IntroDoctor isMobile={isMobile} />
+              {isBetween744And1132px&&
+                <div className="doctor-search-header-pic-container animate__animated animate__slideInUp"
+                     style={{bottom:'-300px'}}>                  
+                {/* <div> */}
+                <img
+                      src={DoctorImg}
+                      alt="Doctor Search Background"
+                      className="doctor-search-header-pic"
+                      // style={{ width: '50%', height: 'auto' }}
+                    />
+                    {/* </div> */}
+                </div>}
+              
             </div>
-            <div className="doctor-search-search-bar-container">
-              <h2 className="doctor-search-title">Find your doctors</h2>
-              {isLoading && <DoctorSearchLoadingBar />}
-              <div className="doctor-search-container">
+
+            {isIphone&&
+            <div className="doctor-intro-container" style={{width:'200%',marginTop:'50px'}}>
+              <div className="doctor-search-header-pic-container animate__animated animate__slideInUp"
+                     style={{bottom:'0px'}}>                  
+                {/* <div> */}
+                <img
+                      src={DoctorImg}
+                      alt="Doctor Search Background"
+                      className="doctor-search-header-pic"
+                      // style={{ width: '50%', height: 'auto' }}
+                    />
+                    {/* </div> */}
+                </div>
+            </div>
+                }
+            <div className="doctor-search-search-bar-container ">
+              <h2 className="doctor-search-title">Find Your Doctors</h2>
+
+              {/* {isLoading && <DoctorSearchLoadingBar />}  */}
+
+              <div className="doctor-search-container ">
                 <DoctorSearchMultiInput
                   searchCallback={retrieveSearchResults}
                 />
               </div>
             </div>
+
           </div>
           {noResults && (
             <span className="doctor-search-no-results">
@@ -145,6 +184,7 @@ const Doctor = () => {
                 ))}
           </div>
         </div>
+
       </div>
     </div>
   );
