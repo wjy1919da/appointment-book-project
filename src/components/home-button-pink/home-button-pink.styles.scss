@@ -7,4 +7,11 @@
   gap: 10px;
   border-radius: 8px;
   background: linear-gradient(90deg, #f48c8a 0%, #f0a484 100%);
+  height: 46px;
+}
+@media (max-width: 767px) {
+  .home-button-pink {
+    padding: 12px 20px;
+    width: 170px;
+  }
 }

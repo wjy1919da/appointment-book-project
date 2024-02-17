@@ -9,11 +9,11 @@ const Home = () => {
   return (
     <div className="home-component-container">
       <HomeIndex />
-      {/* <HomeDoctorPage/> */}
-      {/* <HomePost /> */}
-      {/* <HomeRecommande /> */}
-      {/* <HomeInstruments /> */}
-      {/* <HomeDoctors /> */}
+      <HomeDoctorPage />
+      <HomePost />
+      <HomeRecommande />
+      <HomeInstruments />
+      <HomeDoctors />
     </div>
   );
 };

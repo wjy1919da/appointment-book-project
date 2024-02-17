@@ -2,12 +2,11 @@ import { useState } from "react";
 import "./home-index.styles.scss";
 import VectorPink from "../../../assets/home/Vector-pink.png";
 import HomeButtonPink from "../../home-button-pink/home-button-pink";
-import HomeMobileSubText from "../home-text-mobile/home-mobile-subText.component";
+
 import Modal from "react-bootstrap/Modal";
 import videoUrl from "../../../assets/home/App-Demo-V10.mp4";
 import HomePic from "../../../assets/home/home-pic1.png";
-import HomePicIpad from "../../../assets/home/5-ipad.png";
-import HomePicMobile from "../../../assets/home/5.png";
+
 import { useMediaQuery } from "react-responsive";
 const HomeIndex = () => {
   const [show, setShow] = useState(false);
@@ -42,22 +41,16 @@ const HomeIndex = () => {
             </div>
           </div>
           {/* )} */}
-          {/* {isMobile && (
-            <div className="home-mobile-text-container">
-              <HomeMobileSubText
-                title="Charm"
-                content="Charm is a thriving community that embraces the diversity of beauty and offers a seamless experience for all beauty enthusiasts."
-              ></HomeMobileSubText>
-            </div>
-          )} */}
           <div className="home-title-buttons">
             {/* <button type="button" className=' button home-title-button1' >Start Charm life</button> */}
             {/* {!isMobile && ( */}
             <HomeButtonPink
               height="46px"
-              title="Start Charm life"
+              title="Try Charm APP"
               href="/download"
+              width={isMobile ? { width: "170px" } : {}}
             />
+
             <button
               type="button"
               onClick={handleShow}

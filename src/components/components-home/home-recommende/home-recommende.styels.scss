@@ -1,43 +1,40 @@
 .home-recommande-container {
-    padding: 0 30px 60px 30px;
+  padding: 0 30px 0px 30px;
 
-    .home-recommande-title
-    {
-        color: var(--text-1-footer, #352C29);
-        /* NEW TYPE/NEW sub heading */
-        font-family: Open Sans;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-    }
-    .home-recommande-sub-area
-    {
-        display: flex;
-    }
-    .home-recommande-sub-area-left {
-        flex: 1;
-    }
-    .home-recommande-procedureCard
-    {
-        margin-top: 50px;
-        // margin-left: 100px;
-    }
-    .watch-video-link
-    {
-        color: var(--text-1-footer, #352C29);
-        text-align: center;
-        /* Interactive 1 */
-        font-family: Open Sans;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 100%; 
-        border-bottom: 1px solid var(--text-1-footer, #352C29);
-    }
+  .home-recommande-title {
+    color: var(--text-1-footer, #352c29);
+    /* NEW TYPE/NEW sub heading */
+    font-family: Open Sans;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .home-recommande-sub-area {
+    display: flex;
+  }
+  .home-recommande-sub-area-left {
+    flex: 1;
+  }
+  .home-recommande-procedureCard {
+    margin-top: 0px;
+  }
+  .watch-video-link {
+    color: var(--text-1-footer, #352c29);
+    text-align: center;
+    /* Interactive 1 */
+    font-family: Open Sans;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    border-bottom: 1px solid var(--text-1-footer, #352c29);
+  }
 }
-@media(max-width: 767px){
-    .home-recommande-procedureCard {
-        display: none;
-    }
+@media (max-width: 767px) {
+  .home-recommande-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 }

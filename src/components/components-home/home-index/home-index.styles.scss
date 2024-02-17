@@ -9,12 +9,11 @@
 }
 .home {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  margin-bottom: 150px;
+  // margin-bottom: 150px;
   margin-top: 64px;
 }
 
@@ -22,6 +21,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  // display: block;
 }
 
 .home-mobile-app-container {
@@ -29,7 +29,7 @@
 }
 
 .home-mobile-intro-pic-container {
-  width: 65vw;
+  width: 45vw;
 }
 
 .home-pic {
@@ -79,7 +79,7 @@
   }
   .home-title-buttons {
     //position: absolute;
-    margin-top: 10px;
+    // margin-top: 10px;
     flex: none;
     order: 3;
     flex-grow: 0;
@@ -87,16 +87,17 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    gap: 48px;
+
+    // gap: 48px;
     //left: 0px;
     //top: 600px;
-    padding: 8px 40px;
+    // padding: 8px 40px;
 
     .home-title-button1 {
       font-family: "Open Sans";
       font-style: normal;
       font-weight: 600;
-      font-size: 22px;
+      // font-size: 22px;
       line-height: 140%;
       color: #ffffff;
       // width: 238px;
@@ -106,7 +107,7 @@
     }
     .home-title-button2 {
       // width: 270px;
-      height: 56px;
+      // height: 56px;
       //width: 15vw;
       //height: 5vw;
       border-radius: 8px;
@@ -121,26 +122,14 @@
       color: var(--new-gradient, #f48c8a);
       display: flex;
       flex-direction: row;
-      gap: 15px;
+      // gap: 15px;
 
       .button-text {
         position: relative;
-        margin-top: 10px;
-        padding-right: 10px;
         // bottom: 25px;
         // left: 15px;
         //bottom: 2.5vw;
         //left: 1.5vw;
-      }
-      .button-image {
-        width: 20px; /* Adjust the width and height as needed */
-        //width:2vw;
-        height: 20px;
-        margin-top: 15px;
-        margin-left: 20px;
-        border-radius: 0;
-        //margin-top: 1.5vw;
-        //margin-left: 2vw;
       }
     }
   }
@@ -181,8 +170,13 @@
   font-weight: 700;
   line-height: normal;
 }
-
-// }
+@media (min-width: 1440px) {
+}
+@media (min-width: 1133px) and (max-width: 1440px) {
+  .home-title-button2 {
+    padding: 12px 40px;
+  }
+}
 
 /* Styles for tablets like iPads here */
 @media (min-width: 768px) and (max-width: 1132px) {
@@ -304,15 +298,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    // background-color: white;
     position: relative;
-    // top: 64px;
   }
   .home-mobile-intro-container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    // height: 500px;
+  }
+  .home-mobile-intro-pic-container {
+    width: 65vw;
   }
 
   .home-pic {
@@ -325,64 +319,42 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 20px 0px 0px 15px;
-    // gap: 10px;
   }
   .home-title-inner-container {
     padding: 16px 0px 0px 0px;
-    // width: 50vw;
-    margin-top: 150px;
-    width: 80vw;
+    margin-top: 60vw;
+    max-width: 35vw;
   }
 
   .home-title-text {
-    // text-align: left;
-    // font-style: normal;
-    // font-weight: 700;
     font-size: 35px;
-    // line-height: 135%;
-    // color: #000000;
-    // flex: none;
-    // flex-grow: 0;
+    width: 80vw;
   }
   .home-title-subText {
-    // width: 48vw;
-    // height: 116px;
     margin-left: 0px;
-
-    .ptext {
-      font-family: "Lora";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 160%;
-      color: #000000;
-    }
+    width: 90vw;
   }
   .home-title-buttons {
-    // padding: 8px 0px;
-    margin-left: -40px;
+    gap: 16px;
   }
 
   .home-title-button1 {
     font-size: 18px;
   }
   .home-title-button2 {
-    font-size: 18px;
+    width: 160px;
+    gap: 10px;
+    height: 46px;
+
+    .button-image {
+      width: 15px;
+      height: 15px;
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+    .button-text {
+      font-size: 15px;
+      margin-top: 10px;
+    }
   }
-
-  //   // .button-text {
-  //   //   position: relative;
-  //   //   bottom: 25px;
-  //   //   left: 15px;
-  //   // }
-  //   .button-image {
-  //     width: 20px; /* Adjust the width and height as needed */
-  //     height: 20px;
-  //     margin-top: 15px;
-  //     margin-left: 20px;
-  //     border-radius: 0;
-  //   }
-  // }
 }
-
-// 通用
