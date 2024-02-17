@@ -20,6 +20,7 @@ import { useApiRequestPostFilter } from "../../hooks/useApiRequestPostFilter";
 
 const Community = () => {
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const screen375 = useMediaQuery({query: `(max-width: 375px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -217,6 +218,7 @@ const Community = () => {
                   onClick={handleShowContainer}
                   handleSearch={handleSearch}
                   isMobile={isMobile}
+                  isScreen375 = {screen375}
                   handleResponsiveButtonClick={handleResponsiveButtonClick}
                   isInputVisible={isInputVisible}
                   onKeyPress={handleKeyPress}

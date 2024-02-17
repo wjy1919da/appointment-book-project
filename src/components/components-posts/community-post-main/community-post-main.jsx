@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-// components
-// import PostPageTitle from "../../community-post-main-title/community-post-main-title";
-
 // scss
 import './community-post-main.scss';
 
@@ -11,6 +8,7 @@ import './community-post-main.scss';
 import ArrowRight from '../../../assets/post/iconoir_arrow-right.svg';
 import GirlPhotoMain from '../../../assets/post/girl_photo_main.png';
 import userInfoQueryStore from '../../../userStore';
+import PinkBackgroundComponent from '../../../mutual_components/pink_background/pink_background';
 
 const PostPageMain = () => {
   const navigate = useNavigate();
@@ -18,19 +16,20 @@ const PostPageMain = () => {
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isIpadScreen = useMediaQuery({ query: '(max-width: 1133px)' });
   const isSmallScreen = useMediaQuery({ query: '(max-width: 744px)' });
+  const screen375 = useMediaQuery({ query: '(max-width: 375px)' });
 
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
       togglePopup(true, 'accountType');
     } else {
-      navigate("/posts/create-post");
+      navigate('/posts/create-post');
     }
   };
   return (
     <div className='community-post-main-container'>
       {/* left container */}
       <div className='community-post-main-left-container'>
-        <div className='community-post-main-pink-background'></div>
+        <PinkBackgroundComponent renderBothBackgrounds={false} />
         <img
           src={GirlPhotoMain}
           alt='Image'
@@ -40,7 +39,7 @@ const PostPageMain = () => {
 
       {/* right container */}
       <div className='community-post-main-right-container'>
-        {isIpadScreen ? (
+        {isIpadScreen || screen375 ? (
           ''
         ) : (
           <>
@@ -56,13 +55,27 @@ const PostPageMain = () => {
             </h6>
           </>
         )}
-        {isIpadScreen && (
+        {isIpadScreen && !screen375 ? (
           <>
             <h1 className='community-post-main-title'>
               Join a community
               <br />
               of beauty and
               <br />
+              empowerment
+            </h1>
+            <h6 className='community-post-main-sub-title'>
+              Charm Life lets you share your cosmetic
+              <br />
+              experience with others and stay on-trend
+            </h6>
+          </>
+        ): null} 
+        {screen375 && (
+          <>
+            <h1 className='community-post-main-title'>
+              Join a community
+              of beauty and
               empowerment
             </h1>
             <h6 className='community-post-main-sub-title'>
@@ -80,7 +93,7 @@ const PostPageMain = () => {
               className='community-post-main-create-button'
               onClick={handleCreatePostClick}
             >
-              Creating a post
+              <span className='create-post-text'>Creating a post</span>
               <img
                 src={ArrowRight}
                 alt='ArrowRight'

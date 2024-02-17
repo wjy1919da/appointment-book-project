@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import './appointment-detail.styles.scss';
 import { Link } from 'react-router-dom';
 import AppInfoQueryStore from '../../appointmentStore.ts';
-import doctorAvatar from '../../assets/user/doctor-profile-image.png';
+import doctorAvatar from '../../assets/user/doctor-profile-image.svg';
 import locationIcon from '../../assets/user/locationIcon.png';
 import badgeIcon from '../../assets/user/badgeIcon.png';
 import glassesIcon from '../../assets/user/glassesIcon.png';

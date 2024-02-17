@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import arrowLeft from "../../../assets/user/doctor-arrow-left.png";
 import arrowRight from "../../../assets/user/doctor-arrow-right.png";
 import "./doctor-edit-profile-highLight.styles.scss";
-import creatPostIcon from "../../../assets/post/create-post-icon.png";
+import creatPostIcon from "../../../assets/post/create-post-icon.svg";
 import useUploadImg from "../../../hooks/useUploadImg";
 const DoctorEditHightLightSession = () => {
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });

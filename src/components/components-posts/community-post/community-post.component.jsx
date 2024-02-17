@@ -20,8 +20,8 @@ import "./community-post.styles.scss";
 // images
 import defaultImage from "../../../assets/post/default_image.png";
 import LockIcon from "../../../assets/post/lock_icon.svg";
-import heartIcon from "../../../assets/post/heart.png";
-import heartIconFilled from "../../../assets/post/heart-fill-Icon.png";
+import heartIcon from "../../../assets/post/heart.svg";
+import heartIconFilled from "../../../assets/post/heart-filled-icon.svg";
 import userInfoQueryStore from "../../../userStore";
 
 const CommunityPost = ({
@@ -50,6 +50,7 @@ const CommunityPost = ({
   // const [displayImage, setDisplayImage] = useState(imageURL);
 
   // likes
+  // useEffect to update state when props (liked and likes) change
   const [isHeartLiked, setIsHeartLiked] = useState(liked);
   const [countLikes, setCountLikes] = useState(likes);
   useEffect(() => {
@@ -88,6 +89,7 @@ const CommunityPost = ({
     apiLikeMutate({ postId: id });
     // setIsLike(!isHeartLiked);
 
+    // count up function in ternary conditional
     setIsHeartLiked((prev) => {
       const newCountLikes = prev ? countLikes - 1 : countLikes + 1;
       setCountLikes(newCountLikes);

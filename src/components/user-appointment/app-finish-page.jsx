@@ -2,7 +2,7 @@ import DoctorProfile from '../../assets/doctor/doctor-profile-image.png'
 import './app-finish-page.styles.scss';
 import './appointment-detail.styles.scss';
 import { useNavigate } from 'react-router-dom';
-import arrowLeft from '../../assets/user/arrow-left.png';
+import arrowLeft from '../../assets/user/arrow-left-icon.svg';
 const AppointmentFinish = ({appointmentObj, changesSaved}) => {
     const navigate = useNavigate();
     return (

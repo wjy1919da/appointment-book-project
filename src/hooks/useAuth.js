@@ -95,6 +95,19 @@ export function useSocialLogin() {
   );
 }
 
+export function useAppleLogin() {
+  const apiClient = new APIClient("/login/social");
+  const fetchAppleSignIn = async (appleIdToken) => {
+    const res = await apiClient.post({
+      appleIdToken,
+    });
+    return res.data;
+  }
+  return useMutation((credentials) =>
+    fetchAppleSignIn(credentials.appleIdToken)
+  );
+}
+
 export function useUserOtpRegister() {
   const apiClient = new APIClient("/register/phone/send-otp");
   const fetchUserOtpRegister = async (phoneNumber) => {
