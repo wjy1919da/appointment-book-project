@@ -1,7 +1,7 @@
 .community-post-main-container {
   display: flex;
   width: 100%;
-  min-height: 700px;
+  min-height: 650px;
 
   // pink background
   .community-post-main-pink-background {
@@ -158,8 +158,6 @@
 
 @media (max-width: 375px) {
   .community-post-main-container {
-    height: 850px;
-
     .community-post-main-left-container {
       .community-post-main-girl-image {
         width: 158px;
@@ -189,6 +187,7 @@
       margin-left: 110px !important;
       width: 345px !important;
     }
+
     .community-post-main-sub-title {
       font-size: 16px !important;
       margin-top: 15px !important;
@@ -213,11 +212,7 @@
       font-weight: normal !important;
       font-size: 18px !important;
       margin-top: 140px !important;
-      font-family: 'Open Sans';
-      font-size: 18px;
-      font-style: normal;
       font-weight: 600 !important;
-      line-height: normal;
     }
 
     .arrow-right-icon {
@@ -228,7 +223,7 @@
     .community-post-main-girl-image {
       width: 297px !important;
       height: 304px !important;
-      top: -320px !important;
+      top: -120px !important;
       left: 50px !important;
     }
   }

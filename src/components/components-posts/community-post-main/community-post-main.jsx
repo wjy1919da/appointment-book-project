@@ -25,6 +25,7 @@ const PostPageMain = () => {
       navigate('/posts/create-post');
     }
   };
+
   return (
     <div className='community-post-main-container'>
       {/* left container */}
@@ -70,13 +71,11 @@ const PostPageMain = () => {
               experience with others and stay on-trend
             </h6>
           </>
-        ): null} 
+        ) : null}
         {screen375 && (
           <>
             <h1 className='community-post-main-title'>
-              Join a community
-              of beauty and
-              empowerment
+              Join a community of beauty and empowerment
             </h1>
             <h6 className='community-post-main-sub-title'>
               Charm Life lets you share your cosmetic

@@ -51,9 +51,10 @@
 // }
 
 // mobile (based on iphones)
-@media (max-width: 430px) {
+@media (max-width: 375px) {
   .community-post-search-box-container {
-    top: 1150px;
+    top: 575px;
+    right: 15px;
   }
 
   .community-post-search-box-input {
