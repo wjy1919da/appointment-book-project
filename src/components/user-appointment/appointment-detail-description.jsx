@@ -104,6 +104,7 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
         <div className='user-appointment-description-main-container'>
             <div className='user-appointment-description-form-container'>
                 <form className='user-appointment-description-form' id='appointment-form' name='appointment-form' onSubmit={handleMainFormSubmission}>
+                    <div className='user-appointment-description-scrollable-section'>
                     <h3 className='user-appointment-description-form-title'>Please fill out the following information regarding your details.</h3>
                     <div className='user-appointment-description-form-top-row'>
                         <div className="user-appointment-edit-info-form-gender-container">
@@ -112,6 +113,7 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
                             </h4>
                             <div className="univ-edit-info-form-gender-radio-container">
                                 <div className="univ-edit-info-form-gender-radio">
+                                    <label className="univ-edit-info-form-gender-radio-label">
                                     <input
                                     type="radio"
                                     id="female"
@@ -121,11 +123,12 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
                                     onClick={() => setGender(2)}
                                     defaultChecked={gender === 2 ? "checked" : ""}
                                     />
-                                    <label className="univ-edit-info-form-gender-radio-label">
+                                    
                                     Female
                                     </label>
                                 </div>
                                 <div className="univ-edit-info-form-gender-radio">
+                                    <label className="univ-edit-info-form-gender-radio-label">
                                     <input
                                     type="radio"
                                     id="male"
@@ -135,11 +138,12 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
                                     onClick={() => setGender(1)}
                                     defaultChecked={gender === 1 ? "checked" : ""}
                                     />
-                                    <label className="univ-edit-info-form-gender-radio-label">
+                                    
                                     Male
                                     </label>
                                 </div>
                                 <div className="univ-edit-info-form-gender-radio">
+                                    <label className="univ-edit-info-form-gender-radio-label">
                                     <input
                                     type="radio"
                                     id="other"
@@ -149,7 +153,7 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
                                     onClick={() => setGender(3)}
                                     defaultChecked={gender === 3 ? "checked" : ""}
                                     />
-                                    <label className="univ-edit-info-form-gender-radio-label">
+                                    
                                     Other
                                     </label>
                                 </div>
@@ -264,9 +268,10 @@ const AppDetailDescription = ({appointmentObj, isNewApp}) => {
                             )})}
                         </div>
                     </div>
+                    </div>
                     {!isNewApp && <div className='user-appointment-description-form-bottom-row'>
+                        <button className='app-ending-cancel-button' onClick={(e) => handleCancelAppointment(e)} >Cancel</button>
                         <button className='app-ending-reschedule-button' onClick={() => togglePopup(true, 'EditAppointment')} >Reschedule</button>
-                        <button className='app-ending-cancel-button' onClick={(e) => handleCancelAppointment(e)} >Cancel Appointment</button>
                         <button className='app-doctor-ending-join-consultation-button' onClick={(e) => handleSaveChanges(e)}>Save Changes</button>
                     </div>}
                 </form>

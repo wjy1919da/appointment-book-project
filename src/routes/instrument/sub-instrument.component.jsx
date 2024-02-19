@@ -242,9 +242,9 @@ const SubInstrument = () => {
                </div>
                }
            </div>
-           {isMobile&&<div className='instrument-card-mobile-container'>
+           {/* {isMobile&&<div className='instrument-card-mobile-container'>
                <ProcedureCard cardInfo={cardInfo}/>
-           </div>}
+           </div>} */}
            {subcategories[0] &&
            <div className='instrument-sub-text'>
                <div className='sub-instrument-what' id='consider'>
