@@ -14,9 +14,10 @@ const PostPageMain = () => {
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const isIpadScreen = useMediaQuery({ query: '(max-width: 1133px)' });
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 744px)' });
-  const screen375 = useMediaQuery({ query: '(max-width: 375px)' });
+  const isIpadScreen = useMediaQuery({ query: '(max-width: 1132.50px)' });
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 743.50px)' });
+  const screen375 = useMediaQuery({ query: '(max-width: 374.50px)' });
+  const screen1440 = useMediaQuery({ query: '(max-width: 1439.5px)' });
 
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
@@ -40,9 +41,13 @@ const PostPageMain = () => {
 
       {/* right container */}
       <div className='community-post-main-right-container'>
-        {isIpadScreen || screen375 ? (
+        {isIpadScreen || screen375 ? 
+          //under 1133px print nothing
+        (
           ''
-        ) : (
+        ) :
+          //over 1133px
+          (
           <>
             <h1 className='community-post-main-title'>
               Join a community of beauty
@@ -56,9 +61,13 @@ const PostPageMain = () => {
             </h6>
           </>
         )}
-        {isIpadScreen && !screen375 ? (
+
+        {/* {isIpadScreen && !screen375 ?  */}
+        {isSmallScreen && !screen375?             
+          //from greater than 375px to 744px  
+        (
           <>
-            <h1 className='community-post-main-title'>
+            {/* <h1 className='community-post-main-title'>
               Join a community
               <br />
               of beauty and
@@ -69,9 +78,47 @@ const PostPageMain = () => {
               Charm Life lets you share your cosmetic
               <br />
               experience with others and stay on-trend
+            </h6> */}
+            <h1 className='community-post-main-title'>
+              Join a community of beauty and empowerment
+            </h1>
+            <h6 className='community-post-main-sub-title'>
+              Charm Life lets you share your cosmetic
+              <br />
+              experience with others and stay on-trend
             </h6>
           </>
         ) : null}
+        {isIpadScreen && !isSmallScreen?             
+          //from greater than 744px to 1133px  
+          (
+            <>
+              {/* <h1 className='community-post-main-title'>
+                Join a community
+                <br />
+                of beauty and
+                <br />
+                empowerment
+              </h1>
+              <h6 className='community-post-main-sub-title'>
+                Charm Life lets you share your cosmetic
+                <br />
+                experience with others and stay on-trend
+              </h6> */}
+              <h1 className='community-post-main-title'>
+                Join a community 
+                <br/>
+                of beauty and 
+                <br/>
+                empowerment
+              </h1>
+              <h6 className='community-post-main-sub-title'>
+                Charm Life lets you share your cosmetic
+                <br />
+                experience with others and stay on-trend
+              </h6>
+            </>
+          ) : null}
         {screen375 && (
           <>
             <h1 className='community-post-main-title'>

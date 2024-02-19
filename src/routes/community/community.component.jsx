@@ -269,6 +269,7 @@ const Community = () => {
              /> */}
             </div>
           </div>
+          
           {/* <div> */}
           {isLoading && <DoctorSearchLoadingBar />}
           <DoctorPostGrid
