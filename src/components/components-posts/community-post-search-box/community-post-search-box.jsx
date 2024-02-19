@@ -12,8 +12,12 @@ import "./community-post-search-box.scss";
 
 // images
 import SearchIcon from "../../../assets/post/search_icon.svg";
+import { useMediaQuery } from 'react-responsive';
 
-const PostSearchBox = ({
+const PostSearchBox = (
+  
+  {
+  
   value,
   isScreen375,
   handleSearch,
@@ -22,9 +26,10 @@ const PostSearchBox = ({
   isInputVisible,
   ...otherProps
 }) => {
+  const below1133 = useMediaQuery({ query: `(max-width: 1132.5px)` });
   return (
     <div className="community-post-search-box-container">
-      {isMobile && !isInputVisible && (
+      {below1133 && !isInputVisible && (
         <button
           type="button"
           className="mobile-search-button"
@@ -34,9 +39,10 @@ const PostSearchBox = ({
             borderRadius: "8px",
             padding: "7px",
             position: isScreen375 ? "absolute" : "static",
-            width: isScreen375 ? "40px" : "60px",
+            width: isScreen375 ? "40px" : "88px",
+            height: isScreen375? "auto" : "54px",
             top: isScreen375 ? "-520px" : "auto", 
-            right: isScreen375 ? "-15px" : "auto",
+            right: isScreen375 ? "-15px" : "15px",
           }}
           onClick={handleResponsiveButtonClick}
         >
@@ -48,7 +54,7 @@ const PostSearchBox = ({
           />
         </button>
       )}
-      {(isInputVisible || !isMobile) && (
+      {(isInputVisible || !below1133) && (
         <div className="search-input-container">
           <input
             type="text"

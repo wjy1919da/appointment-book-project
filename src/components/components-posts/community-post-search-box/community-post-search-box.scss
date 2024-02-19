@@ -23,19 +23,36 @@
   margin: 45px 0 0 -10px;
 }
 
-@media (max-width: 1133px) {
+@media (max-width: 1132.5px) {
+  .search-input-container {
+    width: 95%;
+    background: #ffffff;
+    outline: 1px solid #675d59;
+    border-radius: 6px;
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: -10px;
+  }
   .community-post-search-box-input {
-    width: 350px !important;
+    width: 90% !important;
+  }
+  .mobile-search-button {
+    margin-left: auto;
+    margin-right: 2vw;
+    height: 100%;
+  }
+  .community-post-search-box-icon {
+    align-self: center;
   }
 }
 
-@media (max-width: 744px) {
+@media (max-width: 743.5px) {
   .community-post-search-box-container {
-    // position: absolute;
-    // top: 1175px;
-    // right: 30px;
-    // z-index: 100;
-    // margin-top: 80px;
+    position: absolute;
+    top: 148vw;
+    right: 5vw;
+    z-index: 100;
+    margin-top: 22vw;
   }
 }
 

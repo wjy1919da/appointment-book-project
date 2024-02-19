@@ -226,14 +226,17 @@
 }
 
 // screen 1133px and below
-@media (max-width: 1133px) {
+@media (max-width: 1132.5px) {
   .doctor-post-header-container {
     justify-content: space-between;
-    padding: 20px 33px;
+    padding: 430px 20px 50px 31px;
+    //padding-top:450px;
+    height: 112px;
   }
   .community-post-header-filter-container {
     justify-content: flex-end;
-    margin-left: 0;
+    margin-right: 15px;
+    gap: 16px;
   }
 
   .doctor-post-header-button-container {
@@ -241,7 +244,7 @@
     gap: 15px;
   }
   .doctor-post-outer-title {
-    font-size: 28px;
+    font-size: 40px;
     margin-top: -40px;
   }
 
@@ -254,50 +257,85 @@
 }
 
 // screen 744px and below
-@media (max-width: 744px) {
-  .doctor-post-outer-container {
-    padding: 0 20px;
-  }
+// @media (max-width: 744px) {
+//   .doctor-post-outer-container {
+//     padding: 0 20px;
+//   }
 
+//   .doctor-post-header-container {
+//     // flex-direction: column;
+//     align-items: center;
+//     padding: 10px;
+//     height: auto;
+//   }
+
+//   .doctor-post-header-button-container {
+//     margin: 0;
+//   }
+
+//   .post-search-box-position-container {
+//     margin-top: 10px;
+//   }
+
+//   .doctor-post-outer-title {
+//     position: relative;
+//     margin-top: -55px;
+//     z-index: 1;
+//   }
+
+//   .community-post-header-filter-container {
+//     margin-top: 10px;
+//   }
+
+//   // .postby {
+//   //   margin-bottom: 10px;
+//   //   margin-left: 0;
+//   // }
+// }
+@media (max-width: 743.5px) {
+  // post by member, doctor buttons
+  .community-post-header-filter-container {
+    position: absolute;
+    top: 180vw;
+    right: 12px;
+    z-index: 100;
+    gap: 6px;
+  }
+  .doctor-post-outer-title {
+    left: -16px;
+    top: -20px;
+    font-size: 5.35vw;
+    font-weight: 700;
+    line-height: 27.24px;
+  }
+  .doctor-post-outer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    //margin-top: 64px;
+    width: 100%;
+    top: -200px;
+  }
   .doctor-post-header-container {
     // flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     height: auto;
+    margin-top: -25vw;
+    top: 200px;
   }
-
-  .doctor-post-header-button-container {
-    margin: 0;
-  }
-
-  .post-search-box-position-container {
-    margin-top: 10px;
-  }
-
-  .doctor-post-outer-title {
-    position: relative;
-    margin-top: -55px;
-    z-index: 1;
-  }
-
-  .community-post-header-filter-container {
-    margin-top: 10px;
-  }
-
-  // .postby {
-  //   margin-bottom: 10px;
-  //   margin-left: 0;
-  // }
 }
 
-@media (max-width: 603px) {
-  // .community-post-header-filter-container {
-  //   position: absolute;
-  //   top: 1190px;
-  //   right: 30px;
-  //   z-index: 100;
-  // }
-}
+//HT
+// @media (max-width: 603px) {
+//   .community-post-header-filter-container {
+//     position: absolute;
+//     top: 1190px;
+//     right: 30px;
+//     z-index: 100;
+//   }
+// }
 
 // @media (max-width: 586px) {
 //   .doctor-post-outer-title {
@@ -321,4 +359,3 @@
     font-weight: bold;
   }
 }
-
