@@ -19,7 +19,7 @@ import "./community.styles.scss";
 import { useApiRequestPostFilter } from "../../hooks/useApiRequestPostFilter";
 
 const Community = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 743.5px)` });
   // const screen375 = useMediaQuery({query: `(max-width: 375px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
@@ -269,7 +269,7 @@ const Community = () => {
              /> */}
             </div>
           </div>
-          
+
           {/* <div> */}
           {isLoading && <DoctorSearchLoadingBar />}
           <DoctorPostGrid
