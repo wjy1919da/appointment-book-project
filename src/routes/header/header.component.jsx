@@ -2,80 +2,132 @@ import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import userInfoQueryStore from '../../userStore.ts';
+import { nanoid } from 'nanoid';
 import HeaderUser from '../header-user/header-user.component';
 import SignupPopup3 from '../../components/components-signup-and-login/signup-and-login-popup/signup-popup3.component';
-import './header.styles.scss';
-// import ArrowIcon from '../../assets/home/arrow-icon.png';
-// import menuBar from '../../assets/home/menu-bar.png';
-// import { Fragment } from 'react';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-// import { Button, Dropdown, Form } from 'react-bootstrap';
-// import DropdownMenu from '../../components/dropdown-menu/dropdown-menu';
-
-// images
+// import './header.styles.scss';
+import './header.component.scss';
 import UserIcon from '../../assets/user/user.svg';
 import ChatIcon from '../../assets/post/bubbles_icon.svg';
 import Logo from '../../assets/home/logo.png';
+import HamburgerIcon from '../../assets/home/hamburger.svg';
 
 const Header = () => {
   const location = useLocation();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const iPhoneScreen = useMediaQuery({ query: `(max-width: 430px)` });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [navbar, setNavBar] = useState(false);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isPopupOpen = userInfo.popupState !== 'closed';
-  // const loginIcon = require('../../assets/home/login-user.png');
+
+  // nav items data
+  const navItems = [
+    {
+      id: nanoid(),
+      menu: 'Doctors',
+      to: '/doctor',
+      active: location.pathname === '/doctor' ? 'active-link' : '',
+    },
+    {
+      id: nanoid(),
+      menu: 'Posts',
+      to: '/posts',
+      active: location.pathname === '/posts' ? 'active-link' : '',
+    },
+    {
+      id: nanoid(),
+      menu: 'Procedure',
+      to: '/procedure',
+      active: location.pathname.startsWith('/procedure') ? 'active-link' : '',
+    },
+    {
+      id: nanoid(),
+      menu: 'Instruments',
+      to: '/instrument',
+      active: location.pathname === '/instrument' ? 'active-link' : '',
+    },
+  ];
+
+  const handleNavButton = () => {
+    console.log('clicked');
+    setNavBar((prev) => !prev);
+  };
+
+  const handleNavCloseButton = () => {
+    if (isMobile) {
+      setNavBar(false);
+    }
+  };
 
   return (
-    <div className='header-container'>
-      <div className='header-inner-container'>
-        <div className='header-logo-and-nav-container'>
-          <div className='header-logo-container'>
-            <Link className='header-logo-container' to='/'>
-              <img className='logo' src={Logo} alt='logo' />
-              <span className='logo-title'>Charm</span>
-            </Link>
-          </div>
-          <div className='header-nav-container'>
-            <Link
-              className={`header-nav header-nav-link ${
-                location.pathname === '/doctor' ? 'active-link' : ''
-              }`}
-              to='/doctor'
-              title='Doctors'
-            >
-              Doctors
-            </Link>
-            <Link
-              className={`header-nav header-nav-link ${
-                location.pathname === '/posts' ? 'active-link' : ''
-              }`}
-              to='/posts'
-              title='Posts'
-            >
-              Posts
-            </Link>
-            <Link
-              className={`header-nav-link ${
-                location.pathname.startsWith('/procedure') ? 'active-link' : ''
-              }`}
-              to='/procedure'
-              title='Procedure'
-            >
-              Procedure
-            </Link>
-            <Link
-              className={`header-nav header-nav-link ${
-                location.pathname === '/instrument' ? 'active-link' : ''
-              }`}
-              to='/instrument'
-              title='Instruments'
-            >
-              Instruments
-            </Link>
-          </div>
+    <nav>
+      <div className='header-container'>
+        <div className='header-inner-container'>
+          <Link to='./'>
+            <img
+              src={Logo}
+              alt='Logo'
+              width='40'
+              style={{ marginLeft: '1rem' }}
+            />
+          </Link>
+          {/* mobile nav button */}
+          {isMobile && (
+            <div className='header-icon-container'>
+              <img
+                src={UserIcon}
+                alt='login'
+                style={{
+                  width: '24px',
+                  height: '24px',
+                }}
+              />
+              <img
+                src={ChatIcon}
+                alt='login'
+                style={{
+                  width: '20px',
+                  height: '20px',
+                }}
+              />
+              <button onClick={handleNavButton}>
+                <img
+                  src={HamburgerIcon}
+                  alt='login'
+                  style={{
+                    marginRight: '1rem',
+                    width: '25px',
+                    height: '25px',
+                  }}
+                />
+              </button>
+            </div>
+          )}
         </div>
-        {!isMobile ? (
+        {/* nav items */}
+        <div
+          className='header-nav-items-container'
+          style={{
+            display: isMobile ? (navbar ? 'block' : 'none') : 'block',
+          }}
+        >
+          <ul className='header-nav-items-ul'>
+            {navItems.map((item) => (
+              <li key={item.id} className='header-nav-items-li'>
+                <Link
+                  className={`header-nav-link ${item.active}`}
+                  to={item.to}
+                  onClick={handleNavCloseButton}
+                >
+                  {item.menu}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {!isMobile && (
           <>
             <HeaderUser />
             {isPopupOpen && (
@@ -87,34 +139,15 @@ const Header = () => {
               />
             )}
           </>
-        ) : (
-          <div className='header-login-icon-container'>
-            <img
-              src={UserIcon}
-              alt='login'
-              style={{
-                width: '24px',
-                height: '24px',
-              }}
-            ></img>
-            <img
-              src={ChatIcon}
-              alt='login'
-              style={{
-                width: '20px',
-                height: '20px',
-              }}
-            ></img>
-          </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
 export default Header;
 
-//* * * previous codes are here
+// * * * previous codes are here
 // import { Outlet, Link, useLocation } from 'react-router-dom';
 // import { Fragment } from 'react';
 // import NavDropdown from 'react-bootstrap/NavDropdown';

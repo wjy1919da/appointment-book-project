@@ -45,8 +45,8 @@
   // x icon
   .modal-content-close-button-container {
     position: absolute;
-    top: -3.5rem;
-    right: -4rem;
+    top: -2.5rem;
+    right: -3.5rem;
     color: white;
     background-color: transparent;
     cursor: pointer;
@@ -75,5 +75,13 @@
 @media (max-width: 744px) {
   .modal-content-main-container {
     border: none;
+  }
+}
+
+@media (max-width: 375px) {
+  .modal-content {
+    // position: relative;
+    // top: -0.5rem;
+    width: 100%;
   }
 }
