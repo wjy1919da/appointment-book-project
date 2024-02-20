@@ -233,20 +233,26 @@
 
 @media (max-width: 1133px) {
   .doctor-post-header-container {
-    // justify-content: space-between;
-    // padding: 430px 20px 50px 31px;
-    //padding-top:450px;
+    margin-top: 2rem;
+    padding: 0 6rem;
     height: 112px;
   }
   .community-post-header-filter-container {
     justify-content: flex-end;
-    margin-right: 15px;
+    // margin-right: 15px;
     gap: 16px;
   }
 
   .doctor-post-header-button-container {
     flex-direction: column;
     gap: 1.5rem;
+  }
+
+  .doctor-post-title-and-search-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .doctor-post-outer-title {
