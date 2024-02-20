@@ -14,10 +14,9 @@ const PostPageMain = () => {
   const navigate = useNavigate();
   const userInfo = userInfoQueryStore((state) => state.userInfo);
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
-  const isIpadScreen = useMediaQuery({ query: '(max-width: 1132.50px)' });
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 743.50px)' });
-  const screen375 = useMediaQuery({ query: '(max-width: 374.50px)' });
-  const screen1440 = useMediaQuery({ query: '(max-width: 1439.5px)' });
+  const screen1133 = useMediaQuery({ query: '(max-width: 1133px)' });
+  const screen744 = useMediaQuery({ query: '(max-width: 744px)' });
+  const screen375 = useMediaQuery({ query: '(max-width: 375px)' });
 
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
@@ -41,13 +40,11 @@ const PostPageMain = () => {
 
       {/* right container */}
       <div className='community-post-main-right-container'>
-        {isIpadScreen || screen375 ? 
+        {screen1133 || screen375 ? (
           //under 1133px print nothing
-        (
           ''
-        ) :
+        ) : (
           //over 1133px
-          (
           <>
             <h1 className='community-post-main-title'>
               Join a community of beauty
@@ -63,11 +60,10 @@ const PostPageMain = () => {
         )}
 
         {/* {isIpadScreen && !screen375 ?  */}
-        {isSmallScreen && !screen375?             
-          //from greater than 375px to 744px  
-        (
+        {screen744 && !screen375 ? (
+          //from greater than 375px to 744px
           <>
-            {/* <h1 className='community-post-main-title'>
+            <h1 className='community-post-main-title'>
               Join a community
               <br />
               of beauty and
@@ -78,34 +74,33 @@ const PostPageMain = () => {
               Charm Life lets you share your cosmetic
               <br />
               experience with others and stay on-trend
-            </h6> */}
-            <h1 className='community-post-main-title'>
+            </h6>
+            {/* <h1 className='community-post-main-title'>
               Join a community of beauty and empowerment
             </h1>
             <h6 className='community-post-main-sub-title'>
               Charm Life lets you share your cosmetic
               <br />
               experience with others and stay on-trend
-            </h6>
+            </h6> */}
           </>
         ) : null}
-        {isIpadScreen && !isSmallScreen?             
-          //from greater than 744px to 1133px  
-          (
-            <>
-              {/* <h1 className='community-post-main-title'>
-                Join a community
-                <br />
-                of beauty and
-                <br />
-                empowerment
-              </h1>
-              <h6 className='community-post-main-sub-title'>
-                Charm Life lets you share your cosmetic
-                <br />
-                experience with others and stay on-trend
-              </h6> */}
-              <h1 className='community-post-main-title'>
+        {screen1133 && !screen744 ? (
+          //from greater than 744px to 1133px
+          <>
+            <h1 className='community-post-main-title'>
+              Join a community
+              <br />
+              of beauty and
+              <br />
+              empowerment
+            </h1>
+            <h6 className='community-post-main-sub-title'>
+              Charm Life lets you share your cosmetic
+              <br />
+              experience with others and stay on-trend
+            </h6>
+            {/* <h1 className='community-post-main-title'>
                 Join a community 
                 <br/>
                 of beauty and 
@@ -116,9 +111,9 @@ const PostPageMain = () => {
                 Charm Life lets you share your cosmetic
                 <br />
                 experience with others and stay on-trend
-              </h6>
-            </>
-          ) : null}
+              </h6> */}
+          </>
+        ) : null}
         {screen375 && (
           <>
             <h1 className='community-post-main-title'>
@@ -131,7 +126,7 @@ const PostPageMain = () => {
             </h6>
           </>
         )}
-        {isSmallScreen ? (
+        {screen744 ? (
           ''
         ) : (
           <div className='community-post-main-create-button-container'>
@@ -150,7 +145,7 @@ const PostPageMain = () => {
         )}
       </div>
 
-      {isSmallScreen && (
+      {screen744 && (
         <div className='community-post-main-create-button-container'>
           <button
             className='community-post-main-create-button'

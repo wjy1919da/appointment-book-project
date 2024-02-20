@@ -26,24 +26,24 @@ const PostSearchBox = (
   isInputVisible,
   ...otherProps
 }) => {
-  const below1133 = useMediaQuery({ query: `(max-width: 1132.5px)` });
+  const below1133 = useMediaQuery({ query: `(max-width: 1133px)` });
   return (
     <div className="community-post-search-box-container">
       {below1133 && !isInputVisible && (
         <button
           type="button"
           className="mobile-search-button"
-          style={{
-            display: "flex",
-            border: "1px solid #675D59",
-            borderRadius: "8px",
-            padding: "7px",
-            position: isScreen375 ? "absolute" : "static",
-            width: isScreen375 ? "40px" : "88px",
-            height: isScreen375? "auto" : "54px",
-            top: isScreen375 ? "-520px" : "auto", 
-            right: isScreen375 ? "-15px" : "15px",
-          }}
+          // style={{
+          //   display: "flex",
+          //   border: "1px solid #675D59",
+          //   borderRadius: "8px",
+          //   padding: "7px",
+          //   position: isScreen375 ? "absolute" : "static",
+          //   width: isScreen375 ? "40px" : "88px",
+          //   height: isScreen375? "auto" : "54px",
+          //   top: isScreen375 ? "-520px" : "auto", 
+          //   right: isScreen375 ? "-15px" : "15px",
+          // }}
           onClick={handleResponsiveButtonClick}
         >
           <img

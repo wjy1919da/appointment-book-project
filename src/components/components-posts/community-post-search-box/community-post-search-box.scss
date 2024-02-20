@@ -23,9 +23,9 @@
   margin: 45px 0 0 -10px;
 }
 
-@media (max-width: 1132.5px) {
+@media (max-width: 1133px) {
   .search-input-container {
-    width: 95%;
+    // width: 95%;
     background: #ffffff;
     outline: 1px solid #675d59;
     border-radius: 6px;
@@ -37,6 +37,9 @@
     width: 90% !important;
   }
   .mobile-search-button {
+    border-radius: 8px;
+    border: 2px solid #675d59;
+    padding: 12px 32px;
     margin-left: auto;
     margin-right: 2vw;
     height: 100%;
@@ -46,13 +49,14 @@
   }
 }
 
-@media (max-width: 743.5px) {
+@media (max-width: 744px) {
   .community-post-search-box-container {
-    position: absolute;
-    top: 148vw;
-    right: 5vw;
-    z-index: 100;
-    margin-top: 22vw;
+    // position: absolute;
+    // top: 148vw;
+    // right: 5vw;
+    // z-index: 100;
+    // margin-top: 3rem;
+    // margin-top: 22vw;
   }
 }
 
