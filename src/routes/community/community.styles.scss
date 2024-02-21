@@ -148,7 +148,7 @@
 .postby {
   color: #352c29;
   font-family: Open Sans;
-  font-size: 24px;
+  // font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -214,8 +214,13 @@
 //   font-weight: 600;
 //   line-height: 100%;
 // }
+@media (min-width: 1441px) {
+  .postby {
+    font-size: 24px;
+  }
+}
 
-@media (min-width: 1134px) and (max-width: 1290px) {
+@media (min-width: 1134px) and (max-width: 1440px) {
   .community-post-header-filter-container {
     gap: 10px;
   }
@@ -227,6 +232,9 @@
 
   .community-post-header-filter-container {
     margin-left: auto;
+  }
+  .postby {
+    font-size: 24px;
   }
 }
 
@@ -297,6 +305,9 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+  }
+  .postby {
+    font-size: 16px;
   }
 }
 
