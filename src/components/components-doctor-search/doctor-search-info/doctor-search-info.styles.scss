@@ -1,9 +1,11 @@
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 744px) and (max-width: 1132.99px) {
   .intro-doctor-container-mobile {
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
+    padding-left: 10%;
+    
     .intro-card-mobile {
       width: 100%;
       // margin:10px;
@@ -13,45 +15,59 @@
       gap: 20px;
 
       .intro-card-title-mobile {
-        font-style: normal;
+        font-style: Normal;
         font-weight: 700;
-        font-size: 40px;
-        line-height: 54px;
+        font-size: 34px;
+        line-height: 46.3px;
         width: 100%;
+        height:46px;
         text-align: center;
       }
       img {
-        width: 84px;
-        height: 84px;
+       padding-left:0;
+        width: 64px;
+        height: 64px;
       }
       .intro-card-text-mobile {
         font-style: normal;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 38.4px;
-        width: 90%;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24.51px;
+        width: 100%;
       }
     }
   }
 }
-@media (max-width: 767px) {
+@media (min-width: 375px) and (max-width: 743.50px) {
   .intro-doctor-container-mobile {
     display: flex;
     flex-direction: column;
     justify-content: left;
 
     .intro-card-mobile {
-      width: 100%;
+      width: 240%;
       // margin:10px;
       justify-content: center;
-
       .intro-card-title-mobile {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 40px;
-        line-height: 54px;
-        width: 100%;
-        text-align: center;
+        height: 30px;
+        width:150%;
+        display:flex;
+        gap:8px;
+        margin-left: 4%;
+        
+        .intro-card-title-mobile-text{ 
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 27.24px;
+          //width: 150%;
+          text-align: center;
+          }
+        img {
+          //margin-top: 20px;
+          width: 24px;
+          height: 24px;
+        }
       }
       .intro-card-img-text-mobile {
         justify-content: center;
@@ -59,50 +75,52 @@
         margin-top: 15px;
         display: flex;
         gap: 30px;
-        img {
-          margin-top: 20px;
-          width: 64px;
-          height: 64px;
-          margin-bottom: 10px;
-        }
+        // img {
+        //   margin-top: 20px;
+        //   width: 24px;
+        //   height: 24px;
+        //   margin-bottom: 10px;
+        // }
       }
       .intro-card-text-mobile {
         font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 25px;
-        width: 60%;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19.07px;
+        width: 500%;
+        margin-left: 4%;
       }
     }
   }
 }
-.intro-doctor-container {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  margin: 20px auto;
+@media (min-width: 1133px) {
+  .intro-doctor-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 20px auto;
 
-  .intro-card {
-    width: 30%;
-    // margin: 50px;
+    .intro-card {
+      width: 30%;
+      // margin: 50px;
 
-    img {
-      width: 64px;
-      margin-bottom: 15px;
+      img {
+        width: 64px;
+        margin-bottom: 15px;
+      }
+
+      .intro-card-title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 135%;
+      }
+
+      .intro-card-text {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+      }
     }
-
-    .intro-card-title {
-      font-style: normal;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 135%;
-    }
-
-    .intro-card-text {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 160%;
-    }
-  }
-}
+}}

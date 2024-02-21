@@ -2,7 +2,7 @@ import React from 'react';
 import './doctor-profile-interest-category-area.styles.scss';
 import { useGetProcedureCategories } from '../../../hooks/useGetProcedures';
 import { Link } from 'react-router-dom';
-import imageSrc from '../../../assets/procedure/Facelift.png'; // Imported image
+import imageSrc from '../../../assets/procedure/facelift.svg'; // Imported image
 const ProcedureItem = ({ categoryName }) => {
   const [isSelected, setIsSelected] = React.useState(false);
 

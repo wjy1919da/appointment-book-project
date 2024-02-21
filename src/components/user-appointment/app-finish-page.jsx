@@ -2,15 +2,15 @@ import DoctorProfile from '../../assets/doctor/doctor-profile-image.png'
 import './app-finish-page.styles.scss';
 import './appointment-detail.styles.scss';
 import { useNavigate } from 'react-router-dom';
-import arrowLeft from '../../assets/user/arrow-left.png';
+import arrowLeft from '../../assets/user/arrow-left-icon.svg';
 const AppointmentFinish = ({appointmentObj, changesSaved}) => {
     const navigate = useNavigate();
     return (
         <div className='app-finish-main-container'>
             <div className='app-finish-title-container'>
                 <h2 className='app-finish-header-text'>{changesSaved ? 'Changes Saved' : 'Reschedule Pending'}</h2>
-                <p className='app-finish-title-text'>Please allow the doctor some time to confirm your changes.</p>
-                <p className='app-finish-title-text'>We will notify you once it is confirmed. We appreciate your time!</p>
+                <p className='app-finish-title-text'>Please allow the doctor some time to confirm your changes. We will notify you once it is confirmed. We appreciate your time!</p>
+                <p className='app-finish-title-text'></p>
             </div>
             <div className='app-finish-doctor-profile'>
                 <div className='app-finish-doctor-avatar-container'>

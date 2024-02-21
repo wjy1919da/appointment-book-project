@@ -20,7 +20,7 @@ import '../doctor-search-multiInput/doctor-search-multiput-dropDown.styles.scss'
 import { useMemo } from 'react';
 import HomeButton from '../../home-button/home-button.component.jsx';
 import { useMediaQuery } from 'react-responsive';
-import CloseButton from '../../../assets/post/pop-up-close-button.png';
+import CloseButton from '../../../assets/post/close-button.svg';
 import HomeSpinner from '../../home-spinner/home-spinner.component';
 // const mergeDoctorsByNickname = (pages) => {
 //     const mergedDoctors = {};

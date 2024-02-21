@@ -4,6 +4,10 @@
     flex-direction: column;
     padding: 2.5rem 3.5rem;
 }
+.appointment-detail-main-scrollable-section {
+    display: flex;
+    flex-direction: column;
+}
 .appointment-top-info-container
 {
     display: flex;
@@ -23,7 +27,7 @@
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.15);
+    // box-shadow: 2px 4px 16px rgba($color: #675D59, $alpha: 0.15);
 }
 .app-doctor-avatar {
     width: 100%;
@@ -261,4 +265,44 @@
     border-radius: 8px;
     font-size: 16px;
     padding: 10px 26px;
+}
+
+@media (max-width: 1134px) {
+    .appointment-detail-main-container {
+        max-height: 36rem;
+    }
+    .appointment-detail-main-scrollable-section {
+        overflow: auto;
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+    }
+    .app-doctor-info-section {
+        gap: 20px;
+        width: 90%;
+    }
+    .app-doctor-name {
+        font-size: 24px;
+    }
+    .app-doctor-detail-text {
+        font-size: 14px;
+    }
+    .app-doctor-ending-edit-button {
+        padding: 10px 22px;
+    }
+}
+
+@media (max-width: 745px) {
+    .app-doctor-avatar-container {
+        width: 100px;
+        height: 100px;
+    }
+    .app-doctor-name {
+        font-size: 20px;
+    }
+    .app-doctor-ending-section {
+        padding-top: 0;
+    }
+    .app-doctor-ending-join-consultation-button {
+        padding: 12px 20px;
+    }
 }

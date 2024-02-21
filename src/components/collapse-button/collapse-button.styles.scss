@@ -1,13 +1,12 @@
 .section-1,
-  .section-2,
-  .section-3 {
-    display: flex;
-    margin-bottom: 25px;
-    color: var(--text-1-footer, #352c29);
-    font-family: Open Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    //margin: 25px 100px 0 100px;
+.section-2,
+.section-3 {
+  display: flex;
+  margin-bottom: 25px;
+  color: var(--text-1-footer, #352c29);
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

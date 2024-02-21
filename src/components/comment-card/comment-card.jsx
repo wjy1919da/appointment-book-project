@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import React from "react";
 import { useToast } from "@chakra-ui/react";
 import usePostQueryStore from "../../postStore.ts";
+
 // hooks
 import { useGetCommentLikesPost } from "../../hooks/useInteractPosts.js";
 
@@ -10,13 +11,11 @@ import "./comment-card.styles.scss";
 import "../components-posts/community-post-detail-pop-up/community-post-detail-pop-up.styles.scss";
 
 // images
-
-import heartIcon from "../../assets/post/heart.png";
-import heartIconFilled from "../../assets/post/heart-fill-Icon.png";
-import SendIcon from "../../assets/post/send_icon.svg";
+import heartIcon from "../../assets/post/heart.svg";
+import heartIconFilled from "../../assets/post/heart-filled-icon.svg";
 import PlayIcon from "../../assets/post/Play.svg";
+import SendIcon from "../../assets/post/send_icon.svg";
 
-// import commentIcon from '../../assets/post/chat_bubble.png';
 import {
   Accordion,
   AccordionItem,

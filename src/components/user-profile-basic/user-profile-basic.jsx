@@ -6,8 +6,8 @@ import "../components-posts/community-post/community-post.styles.scss";
 import { useNavigate } from "react-router-dom";
 
 // images
-import UserProfilePicture from "../../assets/post/user_profile_pic.png";
-import BookingIcon from '../../assets/post/booking-icon.png';
+import UserProfilePicture from "../../assets/post/user-profile-picture.svg";
+import BookingIcon from '../../assets/post/booking-icon.svg';
 
 // components
 import HomeButton from "../home-button/home-button.component";

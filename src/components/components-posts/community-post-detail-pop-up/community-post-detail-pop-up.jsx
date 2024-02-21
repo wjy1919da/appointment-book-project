@@ -44,12 +44,13 @@ import './community-post-detail-pop-up.styles.scss';
 // images
 import BubblesIcon from '../../../assets/post/bubbles_icon.svg';
 import ShareIcon from '../../../assets/post/share_icon.svg';
-import heartIcon from '../../../assets/post/heart.png';
-import heartIconFilled from '../../../assets/post/heart-fill-Icon.png';
+import heartIcon from '../../../assets/post/heart.svg';
+import heartIconFilled from '../../../assets/post/heart-filled-icon.svg';
 import SendIcon from '../../../assets/post/send_icon.svg';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DarkLeftArrowIcon from '../../../assets/post/left-arrorw-dark.svg';
 // import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const CommunityPostDetailPopUP = ({
@@ -64,6 +65,7 @@ const CommunityPostDetailPopUP = ({
   isPrivate,
   isHighlight,
   isLiked,
+  onHide,
 }) => {
   // like count
   const [popupLikeCount, setPopupLikeCount] = useState(likeCount || 0);
@@ -81,6 +83,7 @@ const CommunityPostDetailPopUP = ({
   const togglePopup = userInfoQueryStore((state) => state.togglePopup);
   const isMobile = useMediaQuery({ query: '(max-width: 744px)' });
   // const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+  const iPhoneScreen = useMediaQuery({ query: '(max-width: 375px)' });
   const navigate = useNavigate();
   const setIsPrivate = usePostQueryStore((state) => state.setIsPrivate);
   const setIsHighlight = usePostQueryStore((state) => state.setIsHighlight);
@@ -341,6 +344,16 @@ const CommunityPostDetailPopUP = ({
             onMouseEnter={() => setShowArrows(true)}
             onMouseLeave={() => setShowArrows(false)}
           >
+            {/* dark left arrow */}
+            {iPhoneScreen && (
+              <img
+                src={DarkLeftArrowIcon}
+                alt='Icon'
+                className='popup-dark-left-arrow-icon'
+                style={{ width: '24px', height: '24px' }}
+                onClick={onHide}
+              />
+            )}
             {currentImageIndex > 0 && showArrows && (
               <FontAwesomeIcon
                 className='arrow-icon arrow-left'
@@ -416,7 +429,7 @@ const CommunityPostDetailPopUP = ({
           </div>
         </>
         {/* )} */}
-        {isMobile && <img src={picture} ref={imageRef}></img>}
+        {/* {isMobile && <img src={picture} ref={imageRef}></img>} */}
       </div>
       <div className='postdetail-popUp-right-container'>
         <div className='detail-top-content'>

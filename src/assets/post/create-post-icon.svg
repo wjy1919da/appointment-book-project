@@ -1,0 +1,14 @@
+<svg width="91" height="91" viewBox="0 0 91 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="iconoir:cancel" clip-path="url(#clip0_6108_32555)">
+<path id="Vector" d="M45.257 65.0255L45.257 45.2529L65.0296 45.2529M45.257 25.4803L45.2551 45.2548L25.4844 45.2529" stroke="url(#paint0_linear_6108_32555)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_6108_32555" x1="35.3707" y1="55.1392" x2="55.1433" y2="35.3666" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFA4A3"/>
+<stop offset="1" stop-color="#FAB25E"/>
+</linearGradient>
+<clipPath id="clip0_6108_32555">
+<rect width="64" height="64" fill="white" transform="translate(0 45.2549) rotate(-45)"/>
+</clipPath>
+</defs>
+</svg>

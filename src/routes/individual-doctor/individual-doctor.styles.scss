@@ -304,19 +304,16 @@
     font-size: 18px;
   }
 
-  .mob-indv-doctor-details-wrap {
+  .mob-indv-doctor-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
     color: #675d59;
     font-family: 'Open Sans';
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-  }
-
-  .mob-indv-doctor-details-container {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.1rem;
   }
 
   .indv-fifth-row {
@@ -341,7 +338,6 @@
 
   .indv-consultation-button {
     width: 160px;
-    
   }
 
   .indv-unfollow-button {
