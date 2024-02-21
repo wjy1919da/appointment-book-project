@@ -230,7 +230,7 @@
   }
 }
 
-@media (max-width: 1133px) {
+@media (max-width: 1133px) and (min-width: 745px) {
   .doctor-post-header-container {
     justify-content: space-between;
     padding: 430px 20px 50px 31px;
@@ -354,19 +354,19 @@
 // }
 
 // mobile (based on iphones)
-@media (max-width: 375px) {
-  // post by member, doctor buttons
-  .community-post-header-filter-container {
-    // position: absolute;
-    // top: 695px;
-    // right: 12px;
-    // z-index: 100;
-    // gap: 6px;
-  }
-  .doctor-post-outer-title {
-    left: -16px;
-    top: -20px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-}
+// @media (max-width: 375px) {
+//   // post by member, doctor buttons
+//   .community-post-header-filter-container {
+//     // position: absolute;
+//     // top: 695px;
+//     // right: 12px;
+//     // z-index: 100;
+//     // gap: 6px;
+//   }
+//   .doctor-post-outer-title {
+//     left: -16px;
+//     top: -20px;
+//     font-size: 20px;
+//     font-weight: bold;
+//   }
+// }

@@ -21,16 +21,16 @@
   .community-post-main-left-container {
     .community-post-main-girl-image {
       position: relative;
-      top: 165px;
-      left: 110px;
-      width: 679px;
+      // top: 165px;
+      // left: 110px;
+      // width: 679px;
       // height: 697px;
     }
   }
 
   .community-post-main-right-container {
-    margin-top: 17rem;
-    width: 60%;
+    // margin-top: 17rem;
+    // width: 60%;
 
     // join a community...
     .community-post-main-title {
@@ -82,34 +82,220 @@
     }
   }
 }
+@media (min-width: 1134px) {
+  .community-post-main-container .community-post-main-right-container {
+    margin-top: 17rem;
+    width: 60%;
+  }
+  .community-post-main-container
+    .community-post-main-left-container
+    .community-post-main-girl-image {
+    top: 165px;
+    left: 110px;
+    width: 679px;
+    height: 697px;
+  }
+}
 
-@media (max-width: 1133px) {
+// @media (max-width: 1133px) and (min-width: 744px) {
+//   .community-post-main-container {
+//     // height: 700px;
+
+//     .commynity-post-main-pink-background {
+//       width: 550px;
+//       height: 347px;
+//     }
+
+//     .community-post-main-left-container {
+//       .community-post-main-girl-image {
+//         top: 160px;
+//         left: 70px;
+//         width: 530px;
+//       }
+//     }
+
+//     .community-post-main-right-container {
+//       margin-top: 15rem;
+//       width: 60%;
+
+//       .community-post-main-title {
+//         margin-left: 120px;
+//       }
+//     }
+//   }
+// }
+
+@media (min-width: 744px) and (max-width: 1133px) {
   .community-post-main-container {
-    // height: 700px;
+    flex-direction: column-reverse;
 
-    .commynity-post-main-pink-background {
-      width: 550px;
-      height: 347px;
+    .pink-background-1 {
+      top: 25rem;
+      width: 582px;
+      height: 291px;
     }
 
     .community-post-main-left-container {
       .community-post-main-girl-image {
-        top: 160px;
-        left: 70px;
+        top: 1.5rem;
+        left: 6rem;
         width: 530px;
+        height: 544px;
       }
     }
 
     .community-post-main-right-container {
-      margin-top: 15rem;
-
+      width: 100%;
+      margin-top: 400px;
       .community-post-main-title {
-        margin-left: 120px;
+        margin-top: -18rem;
+        margin-left: 3rem;
+        width: 100%;
+      }
+
+      .community-post-main-sub-title {
+        margin-left: 3rem;
+        width: 100%;
+      }
+    }
+
+    .community-post-main-create-button-container {
+      .community-post-main-create-button {
+        position: absolute;
+        top: 62rem;
       }
     }
   }
 }
+@media (max-width: 743px) {
+  .community-post-main-container .community-post-main-right-container {
+    margin-top: 64px;
+    width: 100%;
+  }
+  .community-post-main-container {
+    min-height: 0px;
+    gap: 10px;
+  }
+  .community-post-main-left-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
 
+  .community-post-main-container
+    .community-post-main-left-container
+    .community-post-main-girl-image {
+    width: 80vw;
+    position: relative;
+  }
+
+  .community-post-main-container
+    .community-post-main-right-container
+    .community-post-main-sub-title {
+    font-size: 3.6vw;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 10px;
+  }
+  .community-post-main-container
+    .community-post-main-right-container
+    .community-post-main-title {
+    font-size: 6.4vw;
+    margin-left: 0px;
+    padding: 10px;
+  }
+  .community-post-main-container {
+    flex-direction: column-reverse;
+
+    .pink-background-1 {
+      top: 0.1em;
+      height: 191px;
+      width: 70vw;
+    }
+
+    .community-post-main-create-button-container {
+      margin-top: 0px;
+      .community-post-main-create-button {
+        position: relative;
+        width: 60vw;
+        font-size: 18px;
+        height: 52px;
+      }
+    }
+  }
+}
+// @media (max-width: 375px) {
+//   .community-post-main-container {
+//     .community-post-main-left-container {
+//       .community-post-main-girl-image {
+//         width: 158px;
+//         height: 164px;
+//       }
+//     }
+
+//     .community-post-main-right-container {
+//       top: -160px;
+//       left: -90px;
+//     }
+
+//     div.community-post-header-filter-container {
+//       top: 900px;
+//     }
+
+//     .header-container {
+//       width: 105%;
+//     }
+
+//     .doctor-post-outer-title {
+//       top: -15px !important;
+//     }
+
+//     .community-post-main-title {
+//       font-size: 24px !important;
+//       margin-left: 110px !important;
+//       width: 345px !important;
+//     }
+
+//     .community-post-main-sub-title {
+//       font-size: 16px !important;
+//       margin-top: 15px !important;
+//       width: 345px !important;
+//     }
+
+//     // .pink-background-1 {
+//     //   top: 220px !important;
+//     //   width: 249px !important;
+//     //   height: 142px !important;
+//     // }
+
+//     .community-post-main-create-button-container {
+//       top: 250px !important;
+//     }
+
+//     .community-post-main-create-button {
+//       justify-content: center !important;
+//       padding: 10px 0 !important;
+//       width: 250px !important;
+//       height: 65px !important;
+//       font-weight: normal !important;
+//       font-size: 18px !important;
+//       margin-top: 140px !important;
+//       font-weight: 600 !important;
+//     }
+
+//     .arrow-right-icon {
+//       width: 16px;
+//       height: 16px;
+//     }
+
+//     .community-post-main-girl-image {
+//       width: 297px !important;
+//       height: 304px !important;
+//       top: -120px !important;
+//       left: 50px !important;
+//     }
+//   }
+// }
 // @media (max-width: 1133px) {
 //   .community-post-main-container {
 //     flex-direction: column-reverse;
@@ -482,117 +668,3 @@
 //     transform: translateY(52vw);
 //   }
 // }
-
-@media (max-width: 744px) {
-  .community-post-main-container {
-    flex-direction: column-reverse;
-
-    .pink-background-1 {
-      top: 25rem;
-      width: 582px;
-      height: 291px;
-    }
-
-    .community-post-main-left-container {
-      .community-post-main-girl-image {
-        top: 1.5rem;
-        left: 6rem;
-        width: 530px;
-        height: 544px;
-      }
-    }
-
-    .community-post-main-right-container {
-      .community-post-main-title {
-        margin-top: -18rem;
-        margin-left: 3rem;
-        width: 100%;
-      }
-
-      .community-post-main-sub-title {
-        margin-left: 3rem;
-        width: 100%;
-      }
-    }
-
-    .community-post-main-create-button-container {
-      .community-post-main-create-button {
-        position: absolute;
-        top: 62rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 375px) {
-  .community-post-main-container {
-    .community-post-main-left-container {
-      .community-post-main-girl-image {
-        width: 158px;
-        height: 164px;
-      }
-    }
-
-    .community-post-main-right-container {
-      top: -160px;
-      left: -90px;
-    }
-
-    div.community-post-header-filter-container {
-      top: 900px;
-    }
-
-    .header-container {
-      width: 105%;
-    }
-
-    .doctor-post-outer-title {
-      top: -15px !important;
-    }
-
-    .community-post-main-title {
-      font-size: 24px !important;
-      margin-left: 110px !important;
-      width: 345px !important;
-    }
-
-    .community-post-main-sub-title {
-      font-size: 16px !important;
-      margin-top: 15px !important;
-      width: 345px !important;
-    }
-
-    // .pink-background-1 {
-    //   top: 220px !important;
-    //   width: 249px !important;
-    //   height: 142px !important;
-    // }
-
-    .community-post-main-create-button-container {
-      top: 250px !important;
-    }
-
-    .community-post-main-create-button {
-      justify-content: center !important;
-      padding: 10px 0 !important;
-      width: 250px !important;
-      height: 65px !important;
-      font-weight: normal !important;
-      font-size: 18px !important;
-      margin-top: 140px !important;
-      font-weight: 600 !important;
-    }
-
-    .arrow-right-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .community-post-main-girl-image {
-      width: 297px !important;
-      height: 304px !important;
-      top: -120px !important;
-      left: 50px !important;
-    }
-  }
-}
