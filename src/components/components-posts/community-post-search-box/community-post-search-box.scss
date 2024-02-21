@@ -8,7 +8,7 @@
   border: none;
   outline: none;
   padding: 0 6px;
-  width: 500px;
+  // width: 500px;
 }
 
 .search-input-container {
@@ -34,7 +34,7 @@
     margin-bottom: -10px;
   }
   .community-post-search-box-input {
-    width: 90% !important;
+    width: 90%;
   }
   .mobile-search-button {
     border-radius: 8px;
@@ -50,13 +50,8 @@
 }
 
 @media (max-width: 744px) {
-  .community-post-search-box-container {
-    // position: absolute;
-    // top: 148vw;
-    // right: 5vw;
-    // z-index: 100;
-    // margin-top: 3rem;
-    // margin-top: 22vw;
+  .community-post-search-box-input {
+    width: 80%;
   }
 }
 
