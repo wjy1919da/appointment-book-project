@@ -19,9 +19,9 @@ const PostPageMain = () => {
   // const screen375 = useMediaQuery({ query: "(max-width: 743px)" });
   const desktopScreen = useMediaQuery({ query: "(min-width: 1133px)" });
   const ipadScreen = useMediaQuery({
-    query: "(max-width: 1133px) and (min-width: 745px)",
+    query: "(max-width: 1133px) and (min-width: 744px)",
   });
-  const mobileScreen = useMediaQuery({ query: "(max-width: 744px)" });
+  const mobileScreen = useMediaQuery({ query: "(max-width: 743px)" });
   const handleCreatePostClick = () => {
     if (!userInfo.token) {
       togglePopup(true, "accountType");
