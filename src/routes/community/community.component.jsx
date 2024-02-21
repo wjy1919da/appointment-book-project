@@ -226,7 +226,6 @@ const Community = () => {
                   {/* 1.0 version do not need dropdown */}
                   {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
                 </div>
-              </div>
 
               <div className="community-post-header-filter-container">
                 <span className="postby">Post By</span>

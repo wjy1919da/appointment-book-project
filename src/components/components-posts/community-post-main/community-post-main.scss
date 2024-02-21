@@ -61,10 +61,11 @@
   .community-post-main-create-button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 150px;
+    margin-top: 12rem;
 
     .community-post-main-create-button {
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 30px;
       color: #fbfcff;
@@ -77,7 +78,9 @@
         linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
       );
       border-radius: 1000px 0px 0px 1000px;
-      padding: 36px 120px;
+      width: 32rem;
+      height: 7rem;
+      // padding: 36px 120px;
       // padding: 16px 50px;
     }
   }
@@ -129,24 +132,23 @@
   .community-post-main-container {
     flex-direction: column-reverse;
 
-    .pink-background-1 {
-      top: 25rem;
-      width: 582px;
-      height: 291px;
-    }
+    // .community-post-main-pink-background {
+    //   width: 550px;
+    //   height: 347px;
+    // }
 
     .community-post-main-left-container {
       .community-post-main-girl-image {
-        top: 1.5rem;
-        left: 6rem;
+        top: 110px;
+        left: 40px;
         width: 530px;
         height: 544px;
       }
     }
 
     .community-post-main-right-container {
-      width: 100%;
-      margin-top: 400px;
+      margin-top: 12rem;
+
       .community-post-main-title {
         margin-top: -18rem;
         margin-left: 3rem;
@@ -163,6 +165,16 @@
       .community-post-main-create-button {
         position: absolute;
         top: 62rem;
+      }
+    }
+
+    .community-post-main-create-button-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 5rem;
+
+      .community-post-main-create-button {
+        // padding: 8%;
       }
     }
   }
