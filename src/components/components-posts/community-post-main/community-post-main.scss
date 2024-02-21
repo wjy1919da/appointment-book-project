@@ -131,6 +131,7 @@
 @media (min-width: 744px) and (max-width: 1133px) {
   .community-post-main-container {
     flex-direction: column-reverse;
+    margin-top: 120px;
 
     // .community-post-main-pink-background {
     //   width: 550px;
@@ -164,7 +165,8 @@
     .community-post-main-create-button-container {
       .community-post-main-create-button {
         position: absolute;
-        top: 62rem;
+        // top: 62rem;
+        top: 65rem;
       }
     }
 
@@ -181,7 +183,7 @@
 }
 @media (max-width: 743px) {
   .community-post-main-container .community-post-main-right-container {
-    margin-top: 64px;
+    // margin-top: 64px;
     width: 100%;
   }
   .community-post-main-container {
