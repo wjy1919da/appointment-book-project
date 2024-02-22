@@ -17,7 +17,7 @@ const PostPageMain = () => {
   // const screen1133 = useMediaQuery({ query: "(max-width: 1133px)" });
   // const screen744 = useMediaQuery({ query: "(max-width: 744px)" });
   // const screen375 = useMediaQuery({ query: "(max-width: 743px)" });
-  const desktopScreen = useMediaQuery({ query: "(min-width: 1133px)" });
+  const desktopScreen = useMediaQuery({ query: "(min-width: 1134px)" });
   const ipadScreen = useMediaQuery({
     query: "(max-width: 1133px) and (min-width: 744px)",
   });
