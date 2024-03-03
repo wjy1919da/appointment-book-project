@@ -1,7 +1,22 @@
-@media (min-width: 1024px) {
+.home-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-text-title {
+  font-style: normal;
+  font-weight: 700;
+
+  color: #000000;
+}
+
+.home-text-content {
+  font-style: normal;
+
+  color: #000000;
+}
+@media (min-width: 1134px) {
   .home-text-container {
-    //width: 560px;
-    //height: 200px;
     width: 56vw;
     height: 20vw;
   }
@@ -31,10 +46,10 @@
     color: #000000;
   }
 }
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1133px) and (min-width: 745px) {
   .home-text-container {
-    width: 560px;
-    height: 200px;
+    // width: 560px;
+    // height: 200px;
   }
 
   .home-text-title {
@@ -45,12 +60,9 @@
     line-height: 135%;
     text-align: center;
     color: #000000;
-    padding: 20px;
   }
 
   .home-text-content {
-    width: 560px;
-    height: 87px;
     font-family: "Lora";
     font-style: normal;
     font-weight: 500;
@@ -60,32 +72,25 @@
     color: #000000;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 744px) {
   .home-text-container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+
     align-items: flex-start;
     gap: 10px;
   }
 
   .home-text-title {
-    color: #352c29;
-
     font-family: "Open Sans";
     font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
+
     line-height: normal;
   }
 
   .home-text-content {
-    color: #352c29;
-
-    /* MOBILE TYPE/body2 */
     font-family: "Open Sans";
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: normal;
   }

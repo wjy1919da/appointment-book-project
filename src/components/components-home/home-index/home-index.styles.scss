@@ -14,7 +14,7 @@
   justify-content: space-between;
   position: relative;
   // margin-bottom: 150px;
-  margin-top: 64px;
+  // margin-top: 64px;
 }
 
 .home-mobile-intro-container {
@@ -251,8 +251,8 @@
     }
   }
   .home-title-buttons {
-    // padding: 8px 0px;
-    margin-left: -40px;
+    width: 80vw;
+    gap: 16px;
   }
 
   .home-title-button1 {
@@ -267,32 +267,11 @@
     background: #352c29;
     border-radius: 8px;
   }
-  // .home-title-button2 {
-  //   // width: 270px;
-  //   height: 54px;
-  //   // background-color: white;
-  //   border-radius: 8px;
-  //   font-family: "Open Sans";
-  //   font-style: normal;
-  //   font-weight: 600;
-  //   font-size: 22px;
-  //   line-height: 140%;
-  //   margin-right: 10px;
-  //   border: 2px solid #352c29;
-
-  //   // .button-text {
-  //   //   position: relative;
-  //   //   bottom: 25px;
-  //   //   left: 15px;
-  //   // }
-  //   .button-image {
-  //     width: 20px; /* Adjust the width and height as needed */
-  //     height: 20px;
-  //     margin-top: 15px;
-  //     margin-left: 20px;
-  //     border-radius: 0;
-  //   }
-  // }
+  .home-title-container .home-title-buttons .home-title-button2 {
+    font-size: 16px;
+    padding: 10px 40px;
+    gap: 5px;
+  }
 }
 
 /* Styles for tablets like iPhone here */
