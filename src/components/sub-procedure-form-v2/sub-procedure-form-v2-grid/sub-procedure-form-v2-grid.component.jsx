@@ -7,7 +7,7 @@ const SubProcedureFormV2Grid = (props) => {
 
         // Use item[title] directly as the URL for the image
         let imgSrc = item[title];
-
+        console.log('imgSrc: ', imgSrc);
         // If title or imgSrc is empty, render an empty div
         if (!title || !imgSrc) {
             return <div className='sub-procedure-form-v2-grid-card v2-none' key={index}></div>;

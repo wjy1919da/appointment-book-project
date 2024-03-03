@@ -1,8 +1,9 @@
 // import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import HomeButtonPink from '../home-button-pink/home-button-pink';
+import procedureItem from '../../assets/procedure/chin_implants.svg';
 import { useMediaQuery } from 'react-responsive';
 import Button from '../../mutual_components/button/button';
-import procedureItem from '../../assets/procedure/Chin-Implants.png';
 import backArrow from '../../assets/doctor/left_back.png';
 import './doctor-profile-voucher-card.scss';
 

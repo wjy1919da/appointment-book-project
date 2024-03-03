@@ -19,7 +19,8 @@ import "./community.styles.scss";
 import { useApiRequestPostFilter } from "../../hooks/useApiRequestPostFilter";
 
 const Community = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
+  const isMobile = useMediaQuery({ query: `(max-width: 743.5px)` });
+  // const screen375 = useMediaQuery({query: `(max-width: 375px)` });
   const setPostBy = usePostQueryStore((state) => state.setPostBy);
   const postQuery = usePostQueryStore((state) => state.postQuery);
   const [isPostDropDownOpen, setIsPostDropDownOpen] = useState(false);
@@ -199,56 +200,61 @@ const Community = () => {
 
         <div className="doctor-post-outer-container">
           <div className="doctor-post-header-container">
-            <h1
-              className="doctor-post-outer-title"
-              style={{ opacity: isDoctorTitleVisible ? 1 : 0.7 }}
-            >
-              Community Posts
-            </h1>
-
-            <div className="doctor-post-header-button-container">
-              <div
-                className="post-search-box-position-container"
-                ref={postContainerRef}
+            <div className="doctor-post-title-and-search-box">
+              <h1
+                className="doctor-post-outer-title"
+                style={{ opacity: isDoctorTitleVisible ? 1 : 0.7 }}
               >
-                <PostSearchBox
-                  value={postQuery.tempSearchParam}
-                  onChange={handleInputChange}
-                  onClick={handleShowContainer}
-                  handleSearch={handleSearch}
-                  isMobile={isMobile}
-                  handleResponsiveButtonClick={handleResponsiveButtonClick}
-                  isInputVisible={isInputVisible}
-                  onKeyPress={handleKeyPress}
-                />
-                {/* 1.0 version do not need dropdown */}
-                {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
-              </div>
+                Community Posts
+              </h1>
 
-              <div className="community-post-header-filter-container">
-                <span className="postby">Post By</span>
-                <button
-                  // className={`filter-button-member ${
-                  className={`filter-button ${
-                    postQuery.postBy.includes("user")
-                      ? "filter-button-selected"
-                      : ""
-                  }`}
-                  onClick={() => handleOnClick("user")}
-                >
-                  Member
-                </button>
-                <button
-                  // className={`filter-button-doctor ${
-                  className={`filter-button ${
-                    postQuery.postBy.includes("doctor")
-                      ? "filter-button-selected"
-                      : ""
-                  }`}
-                  onClick={() => handleOnClick("doctor")}
-                >
-                  Doctor
-                </button>
+              <div className="doctor-post-header-button-container">
+                <div className="search-box-and-filter-container">
+                  <div
+                    className="post-search-box-position-container"
+                    ref={postContainerRef}
+                  >
+                    <PostSearchBox
+                      value={postQuery.tempSearchParam}
+                      onChange={handleInputChange}
+                      onClick={handleShowContainer}
+                      handleSearch={handleSearch}
+                      isMobile={isMobile}
+                      // isScreen375 = {screen375}
+                      handleResponsiveButtonClick={handleResponsiveButtonClick}
+                      isInputVisible={isInputVisible}
+                      onKeyPress={handleKeyPress}
+                    />
+                    {/* 1.0 version do not need dropdown */}
+                    {/* {isPostDropDownOpen && <PostSearchBoxDropDown />} */}
+                  </div>
+                </div>
+
+                <div className="community-post-header-filter-container">
+                  <span className="postby">Post By</span>
+                  <button
+                    // className={`filter-button-member ${
+                    className={`filter-button ${
+                      postQuery.postBy.includes("user")
+                        ? "filter-button-selected"
+                        : ""
+                    }`}
+                    onClick={() => handleOnClick("user")}
+                  >
+                    Member
+                  </button>
+                  <button
+                    // className={`filter-button-doctor ${
+                    className={`filter-button ${
+                      postQuery.postBy.includes("doctor")
+                        ? "filter-button-selected"
+                        : ""
+                    }`}
+                    onClick={() => handleOnClick("doctor")}
+                  >
+                    Doctor
+                  </button>
+                </div>
               </div>
 
               {/* <PostDropDown
@@ -267,6 +273,7 @@ const Community = () => {
              /> */}
             </div>
           </div>
+
           {/* <div> */}
           {isLoading && <DoctorSearchLoadingBar />}
           <DoctorPostGrid

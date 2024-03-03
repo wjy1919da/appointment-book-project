@@ -1,27 +1,27 @@
 .pink-background-1 {
-    position: absolute;
-    top: -30px;
-    left: 0;
-    z-index: 0;
-    border-radius: 0 236px 236px 0;
-    background: var(
-      --new-gradient,
-      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-    );
-    width: 450px;
-    height: 370px;
-  }
+  position: absolute;
+  top: -30px;
+  left: 0;
+  z-index: 0;
+  border-radius: 0 236px 236px 0;
+  background: var(
+    --new-gradient,
+    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+  );
+  width: 450px;
+  height: 370px;
+}
 
-  .pink-background-2 {
-    position: absolute;
-    top: 650px;
-    right: 0;
-    z-index: 1;
-    border-radius: 236px 0 0 236px;
-    background: var(
-      --new-gradient,
-      linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
-    );
-    width: 400px;
-    height: 400px;
-  }
+.pink-background-2 {
+  position: absolute;
+  top: 650px;
+  right: 0;
+  z-index: 1;
+  border-radius: 236px 0 0 236px;
+  background: var(
+    --new-gradient,
+    linear-gradient(90deg, #f48c8a 0%, #f0a484 100%)
+  );
+  width: 400px;
+  height: 400px;
+}

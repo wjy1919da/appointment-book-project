@@ -47,6 +47,7 @@ const DoctorPostGrid = ({
   // const flatData = [];
   const isMobile = useMediaQuery({ query: `(max-width: 744px)` });
   // const isMobile = useMediaQuery({ query: `(max-width: 1024px)` });
+  const iPhoneScreen = useMediaQuery({ query: `(max-width: 375px)` });
   const [gutterwidth, setGutterWidth] = useState("");
   const isMobileOrAbout = isMobile;
   // console.log("flatData", flatData);
@@ -173,6 +174,7 @@ const DoctorPostGrid = ({
             navigate(-1);
           }}
           isMobile={isMobile}
+          iPhoneScreen={iPhoneScreen}
         />
       )}
     </div>

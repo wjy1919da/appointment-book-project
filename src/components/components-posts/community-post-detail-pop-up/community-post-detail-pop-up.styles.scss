@@ -559,9 +559,48 @@
   //       display: none;
   //     }
 
-  //     .input-blank.focus {
+  //     .input-blank.focus {yarn
   //       display: none;
   //     }
   //   }
   // }
+
+  .fade,
+  .modal-backdrop,
+  .show {
+    width: 100%;
+    min-height: 300vh;
+  }
+}
+
+@media (max-width: 375px) {
+  .post-detail-popUp-container {
+    border-radius: initial;
+    height: 100vh;
+
+    .postdetail-popUp-left-container {
+      img {
+        border-radius: initial;
+      }
+    }
+
+    .post-detail-image-wrapper {
+      position: relative;
+
+      .popup-dark-left-arrow-icon {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+      }
+    }
+  }
+
+  .post-detail-popUp-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
 }

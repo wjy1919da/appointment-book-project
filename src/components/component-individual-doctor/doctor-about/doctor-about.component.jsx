@@ -244,6 +244,7 @@ const DoctorAbout = ({ encodedMemberId }) => {
 
 const SpecializationIcon = ({ specialization }) => {
   const imgUrl = specialization.content;
+  console.log('imgUrl is: ', imgUrl);
   const title = convertTitle(specialization.title);
   return (
     <div className='indv-procedure-icon-container'>

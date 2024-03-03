@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import InstrumentPic from '../../assets/instrument/instrument-pic.jpg';
+// import InstrumentPic from '../../assets/instrument/instrument-pic.jpg';
 import HomeTitle from '../../components/home-title/home-title.component';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
@@ -56,7 +56,7 @@ const InstrumentCard = ({instrumentObj, isMobile}) => {
         <div className='instrument-display-container'>
             <div className='instrument-display'>
                 <div className='instrument-display-img-container'>
-                    <img src={require(`../../assets/instrument/${instrumentObj?.name}Logo.png`)} alt='instrument logo' className='instrument-display-img' />
+                    <img src={require(`../../assets/instrument/${instrumentObj?.name}.svg`)} alt='instrument logo' className='instrument-display-img' />
                 </div>
                 <div className='instrument-display-info-container'>
                     <div className='instrument-display-heading-container'>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+// import React, { useState, useEffect, useRef } from 'react';
 // import usePostQueryStore from '../../../postStore.ts';
 // import useProcedureQueryStore from '../../../procedureStore';
 // import { useNavigate } from 'react-router-dom';
@@ -8,55 +8,64 @@ import React, { useState, useEffect, useRef } from "react";
 // import ProcedureSearchDropDown from '../../procedure-search-dropdown/procedure-search-dropdown.component';
 
 // scss
-import "./community-post-search-box.scss";
+import './community-post-search-box.scss';
 
 // images
-import SearchIcon from "../../../assets/post/search_icon.svg";
+import SearchIcon from '../../../assets/post/search_icon.svg';
+import { useMediaQuery } from 'react-responsive';
 
 const PostSearchBox = ({
   value,
+  isScreen375,
   handleSearch,
   isMobile,
   handleResponsiveButtonClick,
   isInputVisible,
   ...otherProps
 }) => {
+  const below744 = useMediaQuery({ query: `(max-width: 744px)` });
+
   return (
-    <div className="community-post-search-box-container">
-      {isMobile && !isInputVisible && (
+    <div className='community-post-search-box-container'>
+      {below744 && !isInputVisible && (
         <button
-          type="button"
-          className="mobile-search-button"
-          style={{
-            display: "flex",
-            border: "1px solid #675D59",
-            borderRadius: "8px",
-            padding: "7px",
-            width: "60px",
-          }}
+          type='button'
+          className='mobile-search-button'
+          // style={{
+          //   display: "flex",
+          //   border: "1px solid #675D59",
+          //   borderRadius: "8px",
+          //   padding: "7px",
+          //   position: isScreen375 ? "absolute" : "static",
+          //   width: isScreen375 ? "40px" : "88px",
+          //   height: isScreen375? "auto" : "54px",
+          //   top: isScreen375 ? "-520px" : "auto",
+          //   right: isScreen375 ? "-15px" : "15px",
+          // }}
           onClick={handleResponsiveButtonClick}
         >
           <img
             src={SearchIcon}
-            alt="Image-Search-Icon"
-            className="community-post-search-box-icon"
-            style={{ display: "block", margin: "0 auto" }}
+            alt='Image-Search-Icon'
+            className='community-post-search-box-icon'
+            style={{ display: 'block', margin: '0 auto' }}
           />
         </button>
       )}
-      {(isInputVisible || !isMobile) && (
-        <div className="search-input-container">
+
+      {(isInputVisible || !below744) && (
+        <div className='search-input-container'>
           <input
-            type="text"
+            type='text'
             value={value}
             {...otherProps}
-            className="community-post-search-box-input"
+            className='community-post-search-box-input'
           />
-          <button type="button" onClick={handleSearch}>
+          <button type='button' onClick={handleSearch}>
             <img
               src={SearchIcon}
-              alt="Image-Search-Icon"
-              className="community-post-search-box-icon"
+              alt='Image-Search-Icon'
+              className='community-post-search-box-icon'
             />
           </button>
         </div>
