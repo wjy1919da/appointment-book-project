@@ -15,6 +15,7 @@ const HomeRecommande = () => {
   return (
     <div className="home-recommande-container">
       <HomeText title="Recommended Cosmetic Procedures" />
+
       <div className="recommendation-inner-container">
         <div className="home-recommande-procedureCard">
           <ProcedureCard cardInfo={cardInfo[0]} />
@@ -23,10 +24,14 @@ const HomeRecommande = () => {
           <HomeText
             title="Facial Rejuvenation"
             content="Various means to restore a youthful appearance to an aging face A high-safety procedure that helps patients regain their best youthful appearance by removing excess or sagging skin, smoothing deep folds, and lifting and tightening deep facial tissues."
+            titleFontSize="20px"
+            contentFontSize="15px"
           />
           <HomeText
             title="What is Facial Rejuvenation?"
             content="Various means to restore a youthful appearance to an aging face. A high-safety procedure that helps patients regain their best youthful appearance by removing excess or sagging skin, smoothing deep folds, and lifting and tightening deep facial tissues."
+            titleFontSize="20px"
+            contentFontSize="15px"
           />
           <div>
             <HomeLink title="Watch Video" />

@@ -42,9 +42,11 @@
   .recommendation-inner-container {
     flex-direction: row-reverse;
     justify-content: space-between;
+    margin-top: 24px;
   }
   .recommendation-text-container {
     width: 60%;
+    gap: 24px;
   }
 }
 

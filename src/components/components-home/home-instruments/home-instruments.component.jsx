@@ -15,13 +15,22 @@ const formatTitle = (title) => {
     .join(" ");
 };
 const HomeInstruments = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 576px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 743px)" });
   const isIpad = useMediaQuery({
-    query: "(min-width: 576px) and (max-width: 1023px)",
+    query: "(min-width: 744px) and (max-width: 1132px)",
   });
+  const isDesktop = useMediaQuery({ query: "(min-width: 1133px)" });
   const isMobileOrIpad = isMobile || isIpad;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInstrument, setSelectedInstrument] = useState(false);
+  let columns;
+  if (isMobile) {
+    columns = 3;
+  } else if (isIpad) {
+    columns = 5;
+  } else if (isDesktop) {
+    columns = 6;
+  }
   const procedures_names_mobile = [
     "botox_injections",
     "breast_augmentation",
@@ -131,13 +140,12 @@ const HomeInstruments = () => {
       {/* procedures */}
       <div className="home-instrument-container">
         <HomeSection5Titles
-          //   isInstruments={false}
           title="Popular Cosmetic Procedures"
           type="Procedures"
         />
         <SimpleGrid
           style={{ marginTop: "10px", width: "95vw" }}
-          columns={isMobileOrIpad ? 3 : 7}
+          columns={columns}
           spacing={5}
         >
           {proceduresGrid}
@@ -145,15 +153,11 @@ const HomeInstruments = () => {
       </div>
       {/* instruments */}
       <div className="home-instrument-container">
-        <HomeSection5Titles
-          //   isInstruments={true}
-          title="Featured Instruments"
-          type="Instruments"
-        />
+        <HomeSection5Titles title="Featured Instruments" type="Instruments" />
         <div>
           <SimpleGrid
             style={{ marginTop: "10px", marginBottom: "10px", width: "95vw" }}
-            columns={isMobileOrIpad ? 2 : 4}
+            columns={isMobile ? 2 : 4}
             spacing={8}
           >
             {instrumentsGrid}
