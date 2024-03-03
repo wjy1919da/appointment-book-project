@@ -10,6 +10,7 @@
   // flex-direction: row;
   // margin-bottom: 150px;
   .home-doctor-page-container {
+    display: flex;
     flex-direction: column;
 
     .home-doctor-page-text {
@@ -315,15 +316,19 @@
   }
   .Home-doctor-page .home-doctor-page-container {
     width: 50%;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
   }
 
   .doctor-page-img {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    //top: 3vh;
-    // margin-top: -300px;
+    margin-top: 24px;
   }
+
   .doctor-page-name-card {
     position: absolute;
     display: flex;
@@ -424,6 +429,6 @@
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
-    padding: 0 20px;
+    // padding: 0 20px;
   }
 }

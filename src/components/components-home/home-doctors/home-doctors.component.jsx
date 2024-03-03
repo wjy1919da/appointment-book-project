@@ -45,7 +45,6 @@ const HomeDoctors = () => {
 
   return (
     <div className="home-doctors-container">
-      {/* {!isMobile && ( */}
       <Fragment>
         <div className="home-doctors-background">
           <div className="home-doctor-apple-section">

@@ -31,10 +31,35 @@
     border-bottom: 1px solid var(--text-1-footer, #352c29);
   }
 }
-@media (max-width: 767px) {
+.recommendation-inner-container {
+  display: flex;
+}
+.recommendation-text-container {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 744px) {
+  .recommendation-inner-container {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  .recommendation-text-container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 743px) {
   .home-recommande-container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 12px;
+  }
+  .recommendation-inner-container {
+    gap: 16px;
+
+    flex-direction: column;
+  }
+  .recommendation-text-container {
+    gap: 16px;
   }
 }

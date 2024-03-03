@@ -4,6 +4,7 @@
 }
 
 .home-text-title {
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
 
@@ -11,6 +12,7 @@
 }
 
 .home-text-content {
+  font-family: "Lora";
   font-style: normal;
 
   color: #000000;
@@ -22,7 +24,7 @@
   }
 
   .home-text-title {
-    font-family: "Playfair Display";
+    // font-family: "Playfair Display";
     font-style: normal;
     font-weight: 700;
     font-size: 6vw;
@@ -53,22 +55,14 @@
   }
 
   .home-text-title {
-    font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 54px;
-    line-height: 135%;
-    text-align: center;
-    color: #000000;
+    font-size: 35px;
+    line-height: normal;
   }
 
   .home-text-content {
-    font-family: "Lora";
-    font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 160%;
-    text-align: center;
     color: #000000;
   }
 }

@@ -10,26 +10,20 @@ const HomeDoctorPage = () => {
     query: `(min-width: 768px) and (max-width: 1023px)`,
   });
   return (
-    <div>
-      <div className="Home-doctor-page">
-        <div className="home-doctor-page-pic animate__animated animate__slideInUp">
-          <img
-            src={DoctorImg}
-            alt="doctorImg"
-            className="doctor-page-img"
-          ></img>
-        </div>
-        <div className="home-doctor-page-container">
-          <HomeText
-            title="Our Doctor"
-            content="Our platform collaborates with top professionals and institutions
+    <div className="Home-doctor-page">
+      <div className="home-doctor-page-pic animate__animated animate__slideInUp">
+        <img src={DoctorImg} alt="doctorImg" className="doctor-page-img" />
+      </div>
+      <div className="home-doctor-page-container">
+        <HomeText
+          title="Our Doctor"
+          content="Our platform collaborates with top professionals and institutions
             to provide you with expert advice and support. Consult with our
             trusted partners about surgery procedures, coupons, and more."
-          />
+        />
+        <div className="home-doctor-button-container">
+          <HomeButtonPink title="Consult a doctor" />
         </div>
-      </div>
-      <div className="home-doctor-button-container">
-        <HomeButtonPink title="Consult a doctor" />
       </div>
     </div>
   );

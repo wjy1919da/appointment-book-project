@@ -81,7 +81,7 @@
 //     }
 // }
 
-@media (min-width: 1024px) {
+@media (min-width: 1133px) {
   .home-section-container {
     position: relative;
     //top: 260vw;
@@ -151,7 +151,7 @@
 //         border-top: 1px solid #E2E3E7;
 //     }
 // }
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 745px) and (max-width: 1132px) {
   .home-section-container {
     position: relative;
     //top: 260vw;
@@ -186,7 +186,7 @@
     margin: 0 auto;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 743px) {
   .home-instrument-container {
     display: flex;
     flex-direction: column;

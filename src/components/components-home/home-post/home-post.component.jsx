@@ -24,7 +24,6 @@ const HomePost = () => {
           <img src={HomePostPic} alt="postPic" className="post-pic" />
         </div>
       </div>
-
       <div className="home-post-container">
         <HomeText
           title="Share Your Posts"
@@ -33,9 +32,9 @@ const HomePost = () => {
         and explore others' posts. Know the market and stay on-trend.
         Discover exceptional savings and exclusive offers."
         />
-      </div>
-      <div className="home-post-button-container">
-        <HomeButtonPink title="View more posts" />
+        <div className="home-post-button-container">
+          <HomeButtonPink title="View more posts" />
+        </div>
       </div>
     </div>
   );

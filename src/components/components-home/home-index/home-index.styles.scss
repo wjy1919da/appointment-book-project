@@ -197,12 +197,7 @@
     flex-direction: row;
     height: 500px;
   }
-  // .home-mobile-intro-pic-container {
-  //   width: 65vw;
-  //   flex: 0;
-  //   display: flex;
-  //   order: 1; // 新增
-  // }
+
   .home-pic {
     position: absolute;
     width: 45vw;
@@ -227,14 +222,7 @@
   }
 
   .home-title-text {
-    // text-align: left;
-    // font-style: normal;
-    // font-weight: 700;
-    font-size: 35px;
-    // line-height: 135%;
-    // color: #000000;
-    // flex: none;
-    // flex-grow: 0;
+    font-size: 40px;
   }
   .home-title-subText {
     width: 48vw;
