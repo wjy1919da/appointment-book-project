@@ -2,15 +2,15 @@
 .home-doctors-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  // flex-direction: column;
+  // align-items: center;
   position: relative;
 }
 .home-doctors-background {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  // width: 100%;
 }
 .home-doctor-apple-section {
   width: 100%;
@@ -28,11 +28,9 @@
   }
 }
 .phone-image-background {
-  width: 70vw;
-  height: 70vw;
-  background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
   border-radius: 50%;
-  display: flex;
+
+  background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
 }
 
 .home-doctor-apple-screen {
@@ -142,6 +140,7 @@
     //width:100%;
     align-items: center;
     gap: 10px;
+
     //margin-top: 60px;
     //margin-left: -170px;
   }
@@ -177,26 +176,31 @@
 
 // }
 // ipad
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 745px) and (max-width: 1132px) {
   .home-doctors-container {
-    //top: 2350px;
-    display: flex;
     flex-direction: row;
-    //justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    margin-bottom: 80px;
+    margin-top: 96px;
+    margin-bottom: 96px;
   }
   .home-doctors-background {
-    transform: scale(0.8);
-    background-size: 100% 100%;
-    width: 100%;
-    height: 95vw;
-    padding: 80px 0px;
-    background-repeat: no-repeat;
+    width: 50vw;
+  }
+  .home-doctor-apple-link-container {
+    width: 35vw;
+    height: 15vw;
+  }
+  .home-doctor-apple-link-section .home-doctor-apple-link-textArea {
+    margin-left: -80px;
+  }
+  .home-doctor-apple-link-section .home-doctor-apple-link-subArea1 {
+    width: 30vw;
+    height: 30vw;
+  }
+  .phone-image-background {
+    width: 35vw;
+    height: 35vw;
+    margin-left: -20vw;
     display: flex;
-    flex-direction: column;
     align-items: center;
   }
   .home-doctor-download-container {
@@ -205,44 +209,17 @@
     gap: 24px;
   }
   .home-doctor-apple-section {
-    width: 40vw;
-    height: 90px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    margin-left: -4.5vw;
-    //padding: 50px;
-    //box-sizing: border-box;
-    position: relative;
   }
-  .home-doctor-video {
-    position: absolute;
-    right: 6%;
-    left: 6%;
-    top: 3.5vw;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .home-doctor-apple-screen {
-    display: flex;
-    align-items: center;
-    height: 896px;
-    background: #fbfcff;
-  }
-  .phone-screen {
-    border-radius: 40px;
-    position: absolute;
-    top: 80px;
-    left: 50px;
+  .home-doctor-video video {
+    height: 325px;
+    margin-top: -60px;
+    margin-left: 80px;
   }
   .phone-image {
-    position: absolute;
-    top: 0;
-    left: 0;
     z-index: 2;
-    pointer-events: none;
-    width: 110vh;
+    margin-left: 20vw;
+    margin-top: -12vw;
+    height: 380px;
   }
   .home-doctors-text {
     // display: flex;
@@ -272,7 +249,11 @@
     }
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 743px) {
+  .home-doctors-container {
+    flex-direction: column;
+    align-items: center;
+  }
   .home-doctor-download-container {
     display: flex;
     flex-direction: column;
@@ -330,11 +311,15 @@
 
   .home-doctors-background {
     flex-direction: column;
+    width: 100%;
   }
   .phone-image-background {
     justify-content: center;
     align-items: center;
     position: relative;
+    width: 70vw;
+    height: 70vw;
+    display: flex;
   }
   .phone-image {
     width: 48.8vw;

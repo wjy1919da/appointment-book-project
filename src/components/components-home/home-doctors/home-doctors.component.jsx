@@ -59,7 +59,7 @@ const HomeDoctors = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="home-doctor-download-container">
           <div className="home-doctor-apple-link-section">
             <div className="home-doctor-apple-link-container">
               <div className="home-doctor-apple-link-subArea1"></div>
