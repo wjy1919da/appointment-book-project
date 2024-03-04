@@ -22,7 +22,7 @@ const HomeDoctorPage = () => {
             trusted partners about surgery procedures, coupons, and more."
         />
         <div className="home-doctor-button-container">
-          <HomeButtonPink title="Consult a doctor" />
+          <HomeButtonPink title="Consult a doctor" href="/doctor" />
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ const HomePost = () => {
         Discover exceptional savings and exclusive offers."
         />
         <div className="home-post-button-container">
-          <HomeButtonPink title="View more posts" />
+          <HomeButtonPink title="View more posts" href="/posts" />
         </div>
       </div>
     </div>
