@@ -8,3 +8,10 @@
   display: flex;
   flex-direction: column;
 }
+@media (min-width: 1441px) {
+  .home-component-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

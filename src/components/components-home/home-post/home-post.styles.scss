@@ -20,7 +20,8 @@
   width: 50vw;
   position: relative; /* Add this line */
   flex-direction: row;
-  justify-content: flex-end;
+
+  justify-content: flex-start;
   align-items: center; /* Center vertically if needed */
 }
 .home-post-container {
@@ -51,10 +52,6 @@
     flex-grow: 0;
   }
   .home-post-subText {
-    //left:800px;
-    //width: 460px;
-    //height: 145px;
-    //flex: none;
     order: 1;
     flex-grow: 0;
     margin-top: 30px;
@@ -90,35 +87,74 @@
     }
   }
 }
-
-//Style for web
-@media (min-width: 1133px) {
+@media (min-width: 1441px) {
   .Home-post {
     flex-direction: row-reverse;
+    max-width: 1440px;
+    width: 100%;
+    justify-content: center;
   }
   .home-mobile-share-pic-container {
     display: block;
   }
 
   .home-post-pic {
-    width: 50vw;
-    height: 50vw;
+    width: 600px;
+    height: 600px;
     position: relative;
     border-radius: 50%;
-    margin-right: -10vw;
+    margin-right: -100px;
     .post-pic {
-      width: 345px;
-      height: 414px;
+      width: 500px;
+      //   height: 414px;
       overflow: hidden;
       z-index: 1;
     }
+  }
+  .home-post-inner-container {
+    justify-content: flex-start;
   }
 
   .home-post-container {
     justify-content: center;
     align-items: flex-start;
-    padding: 0px 16px;
+    padding: 0px 56px;
     gap: 24px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1133px) and (max-width: 1440px) {
+  .Home-post {
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+  .home-mobile-share-pic-container {
+    display: block;
+  }
+
+  .home-post-pic {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    border-radius: 50%;
+    margin-right: -100px;
+    .post-pic {
+      width: 500px;
+      overflow: hidden;
+      z-index: 1;
+    }
+  }
+  .home-post-inner-container {
+    justify-content: flex-start;
+  }
+
+  .home-post-container {
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 56px;
+    gap: 24px;
+    width: 50%;
   }
 }
 // Style for extra large screen

@@ -20,6 +20,7 @@ const HomeInstruments = () => {
     query: "(min-width: 744px) and (max-width: 1132px)",
   });
   const isDesktop = useMediaQuery({ query: "(min-width: 1133px)" });
+  const isExtraLarge = useMediaQuery({ query: "(min-width: 1441px)" });
   const isMobileOrIpad = isMobile || isIpad;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInstrument, setSelectedInstrument] = useState(false);
@@ -144,7 +145,7 @@ const HomeInstruments = () => {
           type="Procedures"
         />
         <SimpleGrid
-          style={{ marginTop: "10px", width: "95vw" }}
+          style={{ marginTop: "10px", width: isExtraLarge ? "1440px" : "95vw" }}
           columns={columns}
           spacing={5}
         >
@@ -156,7 +157,11 @@ const HomeInstruments = () => {
         <HomeSection5Titles title="Featured Instruments" type="Instruments" />
         <div>
           <SimpleGrid
-            style={{ marginTop: "10px", marginBottom: "10px", width: "95vw" }}
+            style={{
+              marginTop: "10px",
+              marginBottom: "10px",
+              width: isExtraLarge ? "1440px" : "95vw",
+            }}
             columns={isMobile ? 2 : 4}
             spacing={8}
           >

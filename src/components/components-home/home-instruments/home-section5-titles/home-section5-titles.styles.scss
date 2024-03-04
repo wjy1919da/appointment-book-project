@@ -11,45 +11,14 @@
 }
 @media (min-width: 1133px) {
   .home-section5-titles-container {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    padding: 0px 3vw;
-    //gap: 30vw;
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-    // margin-bottom: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .home-section5-title-heading3 {
-    /* Popular Cosmetic Procedures */
-    //width: 549px;;
-    //width: 50vw;
-    height: 54px;
-    /* Heading 3 */
-    font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 135%;
-    /* identical to box height, or 54px */
-    display: flex;
-    //align-items: center;
-    color: #000000;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    padding: 0px 20px;
+    margin-bottom: 20px;
   }
 
-  .home-mobile-procedure-grid {
-    display: block;
-  }
-  .home-mobile-procedure-link {
-    display: block;
+  .home-grid-title {
+    font-size: 30px;
   }
 }
 @media (max-width: 1132px) and (min-width: 744px) {
