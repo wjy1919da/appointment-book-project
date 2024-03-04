@@ -47,65 +47,46 @@ const HomeDoctors = () => {
   }, []);
 
   return (
-    <div className="home-doctors-container">
-      <Fragment>
-        <div className="home-doctors-background">
-          <div className="home-doctor-apple-section">
-            <div className="phone-image-background">
-              <img className="phone-image" src={PhoneImage} alt="Phone" />
-            </div>
-            <div className="home-doctor-video">
-              <video ref={videoRef} src={videoURL} controls autoPlay muted />
-            </div>
-          </div>
-        </div>
-        <div className="home-doctor-download-container">
-          <div className="home-doctor-apple-link-section">
-            <div className="home-doctor-apple-link-container">
-              <div className="home-doctor-apple-link-subArea1"></div>
-              <div className="home-doctor-apple-link-left-area">
-                <div className="home-doctor-apple-link-textArea">
-                  <span className="apple-link-text1">Try Charm</span>
-                  <span className="apple-link-text2">Scan to download</span>
-                </div>
-                <div className="home-doctor-left-area-arrow">
-                  <img src={arrowLeft}></img>
+    <div className="home-doctors-outer-container">
+      <div className="home-doctors-container">
+        <Fragment>
+          <div className="home-doctors-background">
+            <div className="home-doctor-apple-section">
+              <div className="phone-image-background">
+                <div className="phone-image-container">
+                  <img className="phone-image" src={PhoneImage} alt="Phone" />
+                  <div className="home-doctor-video">
+                    <video
+                      ref={videoRef}
+                      src={videoURL}
+                      controls
+                      autoPlay
+                      muted
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="home-doctor-apple-link-subArea2"></div>
             </div>
           </div>
-          <div className="home-doctor-apple-link-signUp-area">
-            <Link
-              className="signUp-link"
-              onClick={() => {
-                //console.log('Doctor button clicked');
-                //setAccountType(0);
-                let newType = userInfo.accountType === 2 ? null : 2;
-                localStorage.setItem("accountType", newType);
-                setAccountType(newType);
-                togglePopup(true, "sendVerifyEmail");
-              }}
-            >
-              Sign up as a Doctor
-            </Link>
-            <Link
-              className="signUp-link"
-              onClick={() => {
-                // console.log('Member button clicked');
-                //setAccountType(0);
-                let newType = userInfo.accountType === 1 ? null : 1;
-                localStorage.setItem("accountType", newType);
-                setAccountType(newType);
-                togglePopup(true, "sendVerifyEmail");
-              }}
-            >
-              Sign up as a member
-            </Link>
+          <div className="home-doctor-download-container">
+            <div className="home-doctor-apple-link-section">
+              <div className="home-doctor-apple-link-container">
+                <div className="home-doctor-apple-link-subArea1"></div>
+                <div className="home-doctor-apple-link-left-area">
+                  <div className="home-doctor-apple-link-textArea">
+                    <span className="apple-link-text1">Try Charm</span>
+                    <span className="apple-link-text2">Scan to download</span>
+                  </div>
+                  <div className="home-doctor-left-area-arrow">
+                    <img src={arrowLeft}></img>
+                  </div>
+                </div>
+                <div className="home-doctor-apple-link-subArea2"></div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* <div className='home-doctors-text'>
+          {/* <div className='home-doctors-text'>
                     <HomeText 
                         title="Community" 
                         content={`Our app is a welcoming community of beauty lovers like you.
@@ -115,8 +96,37 @@ const HomeDoctors = () => {
                         <HomeButton height="56px" title="Download App" href = "/download"/>
                     </div>
             </div> */}
-      </Fragment>
-      {/* )} */}
+        </Fragment>
+        {/* )} */}
+      </div>
+      <div className="home-doctor-apple-link-signUp-area">
+        <Link
+          className="signUp-link"
+          onClick={() => {
+            //console.log('Doctor button clicked');
+            //setAccountType(0);
+            let newType = userInfo.accountType === 2 ? null : 2;
+            localStorage.setItem("accountType", newType);
+            setAccountType(newType);
+            togglePopup(true, "sendVerifyEmail");
+          }}
+        >
+          Sign up as a Doctor
+        </Link>
+        <Link
+          className="signUp-link"
+          onClick={() => {
+            // console.log('Member button clicked');
+            //setAccountType(0);
+            let newType = userInfo.accountType === 1 ? null : 1;
+            localStorage.setItem("accountType", newType);
+            setAccountType(newType);
+            togglePopup(true, "sendVerifyEmail");
+          }}
+        >
+          Sign up as a member
+        </Link>
+      </div>
     </div>
   );
 };
