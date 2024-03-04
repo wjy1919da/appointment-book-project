@@ -17,38 +17,7 @@
 
   color: #000000;
 }
-@media (min-width: 1134px) {
-  .home-text-container {
-    width: 56vw;
-    height: 20vw;
-  }
-
-  .home-text-title {
-    // font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 6vw;
-    line-height: 135%;
-    text-align: center;
-    color: #000000;
-    padding: 20px;
-  }
-
-  .home-text-content {
-    //width: 560px;
-    //height: 87px;
-    width: 56vw;
-    height: 8.7vw;
-    font-family: "Lora";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 2vw;
-    line-height: 160%;
-    text-align: center;
-    color: #000000;
-  }
-}
-@media (max-width: 1133px) and (min-width: 745px) {
+@media (min-width: 1133px) {
   .home-text-container {
     // width: 560px;
     // height: 200px;
@@ -66,7 +35,25 @@
     color: #000000;
   }
 }
-@media (max-width: 744px) {
+@media (max-width: 1132px) and (min-width: 744px) {
+  .home-text-container {
+    // width: 560px;
+    // height: 200px;
+  }
+
+  .home-text-title {
+    font-size: 35px;
+    line-height: normal;
+  }
+
+  .home-text-content {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    color: #000000;
+  }
+}
+@media (max-width: 743px) {
   .home-text-container {
     width: 100%;
 

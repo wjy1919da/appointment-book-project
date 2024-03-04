@@ -173,11 +173,82 @@
 @media (min-width: 1440px) {
 }
 @media (min-width: 1133px) and (max-width: 1440px) {
-  .home-title-button2 {
-    // padding: 12px 40px;
-    // width: 150px;
-    height: 56px;
-    padding: 8px 40px;
+  .home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // background-color: white;
+    position: relative;
+    // top: 64px;
+  }
+  .home-mobile-intro-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+  }
+
+  .home-pic {
+    position: absolute;
+    width: 45vw;
+    height: auto;
+    right: 0;
+    top: 0;
+    //background: url('../../assets/home/home-pic1.png');
+    border-radius: 0px 0px 0px 1000px;
+  }
+  .home-title-container {
+    width: 30vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0px 0px 45px;
+    // gap: 10px;
+  }
+  .home-title-inner-container {
+    padding: 16px 0px 0px 0px;
+    width: 45vw;
+  }
+
+  .home-title-text {
+    font-size: 40px;
+  }
+  .home-title-subText {
+    width: 48vw;
+    // height: 116px;
+    margin-left: 0px;
+
+    .ptext {
+      font-family: "Lora";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 160%;
+      color: #000000;
+    }
+  }
+  .home-title-buttons {
+    width: 80vw;
+    gap: 16px;
+  }
+
+  .home-title-button1 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 140%;
+    color: #ffffff;
+    // width: 238px;
+    height: 54px;
+    background: #352c29;
+    border-radius: 8px;
+  }
+  .home-title-container .home-title-buttons .home-title-button2 {
+    font-size: 16px;
+    padding: 10px 40px;
+    gap: 5px;
   }
 }
 
