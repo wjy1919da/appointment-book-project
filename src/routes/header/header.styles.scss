@@ -27,7 +27,7 @@
 
         .logo-title {
           color: #352c29;
-          font-family: 'Open Sans';
+          font-family: "Open Sans";
           font-size: 24px;
           font-style: normal;
           font-weight: 700;
@@ -39,7 +39,7 @@
         display: flex;
         gap: 40px;
         color: #675d59;
-        font-family: 'Open Sans';
+        font-family: "Open Sans";
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -90,7 +90,7 @@
 }
 
 .active-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;

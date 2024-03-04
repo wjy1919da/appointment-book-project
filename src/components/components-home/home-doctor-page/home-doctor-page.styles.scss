@@ -1,332 +1,286 @@
+.Home-doctor-page {
+  width: 100%;
 
-@media(min-width: 1024px){
-    .Home-doctor-page {
-        width: 100%;
-        position: relative;
-        // width: 1440px;
-        // height: 800px;
-        left: 0px;
-        // top: 30px;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        margin-bottom: 150px;
-        .home-doctor-page-container
-        {
-            object-fit: cover;
-            order:0;
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            // top: 0;
-            // left:0;
-            width: 50%;
-            //background: linear-gradient(180deg, #FFF2ED 24.48%, rgba(255, 248, 244, 0.00) 100%);
-            // margin-top: 200px;
-            // margin-right: 80px;
-            // margin-left: 100px;
-            align-items: center;
-            justify-content: center;
-            padding: 50px;
-            .home-doctor-page-text
-            {
-                //width:560px;
-                //height: 64px;
-                .home-doctor-page-text1{
-                    
-                    font-family: 'Playfair Display';
-                    font-style: normal;
-                    font-weight: 700;
-                    //font-size: 52px;
-                    font-size: 5vw;
-                    line-height: 100%;
-                    /* identical to box height, or 64px */
-                    display: flex;
-                    align-items: center;
-                    color: #000000;
-            }
-            flex: none;
-            order: 0;
-            align-self: stretch;
-            flex-grow: 0;
-        }
-        .home-doctor-page-subText
-        {
-                //width: 560px;
-                //height: 145px;
-                flex: none;
-                order: 1;
-                flex-grow: 0;
-                margin-top: 30px;
-                .doctor-page-post-Text
-                {
-                    font-family: 'Lora';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 2vw;
-                    line-height: 160%;
-                    color: #000000;
-                }     
-        }
-        .home-doctor-page-link
-        {
-            // width: 400px;
-            // height: 35px;
-            // left:800px;
-            flex: none;
-            order: 2;
-            flex-grow: 0;
-            display: flex;
-            flex-direction: row;
-            margin-top: 30px;
-            .underline-link
-            {
-                //width: 201px;
-                //height: 35px;
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 25px;
-                line-height: 160%;
-                /* or 35px */
-                color: #352C29;
-            }
-         }
-        }
-        .home-doctor-page-pic
-        {
-            order: 1;
-            width: 40vw;
-            //height:650px;
-            height: 55vw;
-            // left:0;
-            // top: 6%;
-            // bottom: 0%;
-            position: relative;
-            background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
-            border-radius: 1000px 0px 0px 1000px;
-    
-            .doctor-page-img
-            {
-                position: absolute;
-                //width: 498px;
-                //height: 720px;
-                width: 30vw;
-                height: auto;
-                margin-left: 10vw;
-                top: 3vw;  
-                border: none;
-                // background-image: url('../../assets/home/doctor-img.png');
-                // mask-image: linear-gradient(to top, transparent, black);
-               
-                
-            }
-    
-    
-            .doctor-page-name-card
-            {
-                position:absolute;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 8px 80px 8px 16px;
-                gap: 3px;
-                position: absolute;
-                //width: 416px;
-                //height: 149px;
-                width: 27vw;
-                height:12vw;
-                background-color: #FEFFFF;
-                right: 0px;
-                margin-top: 37vw;
-                //top: 660px;
-                //background: rgba(254, 255, 255, 0.2);
-                border-radius: 8px;
-                justify-content: center;
-                .starRatePart{
-                    display: flex;
-                    flex-direction: row;
-                    gap:10px;
-                    margin-top:-10px;
-                }
-            }
-            
-        }
-        //////
-    }
-    // for mobile doctor card
-    .card-title{
-        color: #000;
-        /* Boby 1 */
-        font-family: Lora;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; /* 35.2px */
-    }
-    .card-content{
-        color: #000;
-        font-family: PingFang HK;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; /* 28.8px */
-    }
-    .home-mobile-share-link{
-        display: block;
-    }
+  display: flex;
 
-}
-// Ipad
-@media (min-width: 768px) and (max-width: 1023px){
-    .Home-doctor-page {
-        width: 100%;
-        margin-top: 100px;
-        margin-bottom: 50px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        margin-bottom: 50px;
-    }
-    .home-doctor-page-pic {
-        order: 1;
-        width: 50vw;
-        height: 534px;
-        position: relative;
-        background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
-        border-radius: 1000px 0px 0px 1000px;
-        .doctor-page-img {
-            position: relative;
-            width: 553px;
-            height: 553px;
-            //top: 3vh;
-           // margin-top: -300px;
-        }
-        .doctor-page-name-card {
-            position:absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 2vh 4vw 1vh 2vw;
-            gap: 1vh;
-            position: absolute;
-            width: 320px;
-            height: 160px;
-            right: 0;
-            top: 400px;
-            //background: rgba(254, 255, 255, 0.2);
-            border-radius: 1vw;
-            background-color: #FBFCFF;
-            .starRatePart{
-                display: flex;
-                flex-direction: row;
-                gap: 1vw;
-                margin-top: -1vh;
-            }
-        }   
-    }
-    .home-doctor-page-container{
-        left:0;
-        position: absolute;
-        align-items: flex-start;
-        padding:0px 36px;
-        gap: 10px;
-    }
-}
-@media(max-width:767px){
-    .Home-doctor-page{
-        width: 100%;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    .home-doctor-page-pic{
-        width: 146px;
-        height:307px;
-        right:0;
-        position: relative;
-        background: linear-gradient(146.24deg, #FAB25E 0%, #FFA4A3 58.43%);
-        border-radius: 1000px 0px 0px 1000px;
-    }
-    .doctor-page-img{
-        width: 220px;
-        height: 220px;
-        position: absolute;
-        top: 720px;
-        right: 0; 
-    }
-    .doctor-page-name-card{
-        position: absolute;
-        top:940px;
-        left: 60%;
-        display: flex;
-        width: 146px;
-        height: 104px;
-        padding: 8px 0px 8px 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        flex-shrink: 0;
-        border-radius: 8px;
-        background: #FBFCFF; 
-    }
-    .starRatePart{
-        display: flex;
-        flex-direction: row;
-        margin-top: -15px;
-    }
-    .card-title{
-        color: #000;
-        font-family: Lora;
-        font-size: 12px;
+  .home-doctor-page-container {
+    display: flex;
+    flex-direction: column;
+
+    .home-doctor-page-text {
+      .home-doctor-page-text1 {
+        font-family: "Playfair Display";
         font-style: normal;
-        font-weight: 500;
-        line-height: 160%; 
+        font-weight: 700;
+        //font-size: 52px;
+        font-size: 5vw;
+        line-height: 100%;
+        /* identical to box height, or 64px */
+        display: flex;
+        align-items: center;
+        color: #000000;
+      }
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
     }
-    .card-content{
-        color: #000;
-        font-family: Lora;
-        font-size: 10px;
+    .home-doctor-page-subText {
+      //width: 560px;
+      //height: 145px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      margin-top: 30px;
+      .doctor-page-post-Text {
+        font-family: "Lora";
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
+        font-size: 2vw;
         line-height: 160%;
+        color: #000000;
+      }
     }
-    .home-doctor-page-container{
-        left:0;
-        position: absolute;
-        align-items: flex-start;
-        padding:0px 20px;
-        gap: 10px;
-    }
-    .home-doctor-page-text{
-        display: none;
-    }
-    .home-doctor-page-text1{
-        display: none;
-    }
-    .home-doctor-page-subText{
-        display: none;
-    }
-    .doctor-page-post-Text{
-        display: none;
-    }
-    .home-doctor-page-link{
-        display: none;
-    }
-    // For the mobile version(576px)
-    .home-mobile-share-link{
-        color: #000;
-        /* Interactive 3 */
-        font-family: Open Sans;
-        font-size: 16px;
+    .home-doctor-page-link {
+      // width: 400px;
+      // height: 35px;
+      // left:800px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+      display: flex;
+      flex-direction: row;
+      margin-top: 30px;
+      .underline-link {
+        //width: 201px;
+        //height: 35px;
+        font-family: "Open Sans";
         font-style: normal;
         font-weight: 600;
-        line-height: 100%;
+        font-size: 25px;
+        line-height: 160%;
+        /* or 35px */
+        color: #352c29;
+      }
     }
-    .doctor-page-name-card {
-        display: none;
+  }
+  .home-doctor-page-pic {
+    background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
+    .doctor-page-img {
     }
-    
+
+    // .doctor-page-name-card {
+    //   position: absolute;
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: flex-start;
+    //   padding: 8px 80px 8px 16px;
+    //   gap: 3px;
+    //   position: absolute;
+    //   //width: 416px;
+    //   //height: 149px;
+    //   width: 27vw;
+    //   height: 12vw;
+    //   background-color: #feffff;
+    //   right: 0px;
+    //   margin-top: 37vw;
+    //   //top: 660px;
+    //   //background: rgba(254, 255, 255, 0.2);
+    //   border-radius: 8px;
+    //   justify-content: center;
+    //   .starRatePart {
+    //     display: flex;
+    //     flex-direction: row;
+    //     gap: 10px;
+    //     margin-top: -10px;
+    //   }
+    // }
+  }
+  //////
+}
+// // for mobile doctor card
+// .card-title {
+//   color: #000;
+//   /* Boby 1 */
+//   font-family: Lora;
+//   font-size: 22px;
+//   font-style: normal;
+//   font-weight: 500;
+//   line-height: 160%; /* 35.2px */
+// }
+// .card-content {
+//   color: #000;
+//   font-family: PingFang HK;
+//   font-size: 18px;
+//   font-style: normal;
+//   font-weight: 500;
+//   line-height: 160%; /* 28.8px */
+// }
+// .home-mobile-share-link {
+//   display: block;
+// }
+@media (min-width: 1441px) {
+  .Home-doctor-page {
+    width: 1440px;
+    flex-direction: row;
+  }
+  .Home-doctor-page .home-doctor-page-pic {
+    order: 0;
+    width: 600px;
+    height: 600px;
+    margin-left: -100px;
+    border-radius: 50%;
+  }
+  .Home-doctor-page .home-doctor-page-container {
+    width: 50%;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
+  }
+
+  .doctor-page-img {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin-top: 24px;
+  }
+}
+@media (min-width: 1133px) and (max-width: 1440px) {
+  .Home-doctor-page {
+    flex-direction: row;
+  }
+
+  .Home-doctor-page .home-doctor-page-pic {
+    order: 0;
+    // width: 50vw;
+    // height: 50vw;
+    width: 600px;
+    width: 600px;
+    margin-left: -100px;
+    border-radius: 50%;
+  }
+  .Home-doctor-page .home-doctor-page-container {
+    width: 50%;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
+  }
+
+  .doctor-page-img {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin-top: 24px;
+  }
+}
+// Ipad
+@media (min-width: 744px) and (max-width: 1132px) {
+  .Home-doctor-page {
+    flex-direction: row;
+  }
+
+  .Home-doctor-page .home-doctor-page-pic {
+    order: 0;
+    width: 65vw;
+    height: 65vw;
+    margin-left: -10vw;
+    // background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
+    border-radius: 50%;
+  }
+  .Home-doctor-page .home-doctor-page-container {
+    width: 50%;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
+  }
+
+  .doctor-page-img {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin-top: 24px;
+  }
 }
 
+@media (max-width: 743px) {
+  .Home-doctor-page {
+    // width: 100%;
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .home-doctor-page-pic {
+    width: 70vw;
+    height: 70vw;
+    background: linear-gradient(146.24deg, #fab25e 0%, #ffa4a3 58.43%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  .doctor-page-img {
+    width: 60vw;
+    height: 60vw;
+    margin-top: 45px;
+  }
+  .doctor-page-name-card {
+    display: flex;
+    width: 146px;
+    height: 104px;
+    padding: 8px 0px 8px 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #fbfcff;
+  }
+  .starRatePart {
+    display: flex;
+    flex-direction: row;
+    margin-top: -15px;
+  }
+  .card-title {
+    color: #000;
+    font-family: Lora;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+  }
+  .card-content {
+    color: #000;
+    font-family: Lora;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+  }
+  .home-doctor-page-container {
+    display: flex;
+    // flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 20px;
+    gap: 10px;
+  }
+
+  // For the mobile version(576px)
+  .home-mobile-share-link {
+    color: #000;
+    /* Interactive 3 */
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+  }
+  .home-doctor-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    // padding: 0 20px;
+  }
+}

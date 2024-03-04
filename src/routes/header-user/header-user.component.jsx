@@ -6,8 +6,11 @@ import { useGetUserInfo } from "../../hooks/useAuth";
 import userInfoQueryStore from "../../userStore.ts";
 import { useRef, useEffect } from "react";
 import defaultAvatar from "../../assets/post/user-profile-avatar.png";
-import UserIcon from '../../assets/user/user.svg';
-
+import UserIcon from "../../assets/user/user.svg";
+import { useGetSendbirdUserInfo } from "../../hooks/useGetSendbirdUserInfo.js";
+//src/hooks/useGetSendbirdUserInfo.js
+import ProfileMessage from "../../components/profile-message/profile-message.component";
+//src/components/profile-message/profile-message.component.jsx
 import useTimer from "../../hooks/useTimer";
 import {
   Modal,
@@ -45,11 +48,15 @@ const HeaderUser = () => {
     removeToken();
     modalDisclosure.onClose(); // Close the logout modal
   };
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const modalDisclosure = useDisclosure();
   const menuDisclosure = useDisclosure();
+  const inboxDisclosure = useDisclosure();
   // Fetch user info
   const { data, isLoading, isError, error } = useGetUserInfo();
+  // Fetch sendbird token
+  const { data: sendbirdInfo } = useGetSendbirdUserInfo();
+  // console.log("sendbirdInfo", sendbirdInfo, "userInfo:::", userInfo);
   const toggle = () => {
     if (menuDisclosure.isOpen) {
       menuDisclosure.onClose();
@@ -127,6 +134,9 @@ const HeaderUser = () => {
                 </Link>
               </MenuItem>
             )}
+            <MenuItem>
+              <div onClick={inboxDisclosure.onOpen}>Inbox</div>
+            </MenuItem>
           </MenuGroup>
           <MenuDivider />
           <MenuGroup>
@@ -151,6 +161,24 @@ const HeaderUser = () => {
             <Button colorScheme="orange" onClick={handleLogOutClick}>
               Log out
             </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        onClose={inboxDisclosure.onClose}
+        isOpen={inboxDisclosure.isOpen}
+        size="xl"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent width="1200px" maxW="1400px">
+          <ModalHeader>Inbox</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <ProfileMessage isConversion={false} />
+          </ModalBody>
+          <ModalFooter>
+            {/* <Button onClick={inboxDisclosure.onClose}>Close</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

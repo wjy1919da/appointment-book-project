@@ -3,12 +3,13 @@ import "./doctor-own-profile-verification-session.styles.scss";
 import { Button, Dropdown, Form } from "react-bootstrap";
 import UploadIcon from "../../../assets/doctor/Upload.png";
 import DoctorVerification from "../../doctor-signUp-process/doctor-verification";
-import useUploadFile from "../../../hooks/useUploadFile";
+import useUploadImg from "../../../hooks/useUploadImg";
 import CloseButton from "../../../assets/doctor/doctor-verification-close-Icon.png";
 
 const DoctorEditVerificationSession = () => {
   const options = ["Doctor Profile", "Option 2", "Option 3"];
   const defaultOption = options[0];
+  const verificationFileSize = 8 * 1024 * 1024; // 8MB
   const {
     selectedFiles,
     handleFileSelection,
@@ -21,7 +22,10 @@ const DoctorEditVerificationSession = () => {
     handleUpload,
     uploadingFiles,
     removeUploadedFile,
-  } = useUploadFile();
+  } = useUploadImg({
+    fileSize: verificationFileSize,
+    bucketName: process.env.REACT_APP_VERIFICATION_BUCKET,
+  });
   const fileInputRef = useRef(null);
   const handleBrowseFiles = () => {
     fileInputRef.current.click();

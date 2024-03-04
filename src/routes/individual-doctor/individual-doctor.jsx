@@ -1,50 +1,64 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-import useDoctorQueryStore from '../../store.ts';
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import useDoctorQueryStore from "../../store.ts";
 
 //images
-import glassIcon from '../../assets/user/glasses-badge-icon.svg';
-import mailIcon from '../../assets/user/email-icon.svg';
-import phoneIcon from '../../assets/user/call-icon.svg';
-import stripedGlobeIcon from '../../assets/user/web-icon.svg';
-import badgeIcon from '../../assets/user/verified-badge-icon.svg';
-import locationIcon from '../../assets/user/location-icon.svg';
-import gradIcon from '../../assets/user/grad-badge-icon.svg';
-import verifiedBadge from '../../assets/doctor/Group.png';
-import certified from '../../assets/user/certified-badge-icon.svg';
-import ChatIcon from '../../assets/user/chat-icon.svg';
+import glassIcon from "../../assets/user/glasses-badge-icon.svg";
+import mailIcon from "../../assets/user/email-icon.svg";
+import phoneIcon from "../../assets/user/call-icon.svg";
+import stripedGlobeIcon from "../../assets/user/web-icon.svg";
+import badgeIcon from "../../assets/user/verified-badge-icon.svg";
+import locationIcon from "../../assets/user/location-icon.svg";
+import gradIcon from "../../assets/user/grad-badge-icon.svg";
+import verifiedBadge from "../../assets/doctor/Group.png";
+import certified from "../../assets/user/certified-badge-icon.svg";
+import ChatIcon from "../../assets/user/chat-icon.svg";
 // import appointmentCalendar from '../../assets/doctor/calendar.png';
 
 // components
-import DoctorProfile from '../../components/component-individual-doctor/doctor-profile/doctor-profile';
-import DoctorAbout from '../../components/component-individual-doctor/doctor-about/doctor-about.component';
-import LogInAccessPopUp from '../../components/log-in-access-popup/log-in-access-popup.jsx';
-import { Spinner } from '@chakra-ui/react';
-import userInfoQueryStore from '../../userStore.ts';
-import DoctorPostGrid from '../../components/community-post-grid/community-post-grid.component.jsx';
+import DoctorProfile from "../../components/component-individual-doctor/doctor-profile/doctor-profile";
+import DoctorAbout from "../../components/component-individual-doctor/doctor-about/doctor-about.component";
+import LogInAccessPopUp from "../../components/log-in-access-popup/log-in-access-popup.jsx";
+import { Spinner } from "@chakra-ui/react";
+import userInfoQueryStore from "../../userStore.ts";
+import DoctorPostGrid from "../../components/community-post-grid/community-post-grid.component.jsx";
 
 // hook
-import { useGetDoctorInfo } from '../../hooks/useGetIndividualDoctor.js';
-import { useGetDoctorAbout } from '../../hooks/useGetIndividualDoctor';
-import { useGetDoctorReviews } from '../../hooks/useGetIndividualDoctor';
-import { useFollowUser } from '../../hooks/useFollow.js';
-import APIClient from '../../services/api-client.js';
-import { useNavigate } from 'react-router-dom';
-import { retrieveUserFollowList } from '../../hooks/useAuth.js';
-import { useGetDoctorPost } from '../../hooks/useApiRequestPostFilter.js';
+import { useGetDoctorInfo } from "../../hooks/useGetIndividualDoctor.js";
+import { useGetDoctorAbout } from "../../hooks/useGetIndividualDoctor";
+import { useGetDoctorReviews } from "../../hooks/useGetIndividualDoctor";
+import { useFollowUser } from "../../hooks/useFollow.js";
+import APIClient from "../../services/api-client.js";
+import { useNavigate } from "react-router-dom";
+import { retrieveUserFollowList } from "../../hooks/useAuth.js";
+import { useGetDoctorPost } from "../../hooks/useApiRequestPostFilter.js";
+import ProfileMessage from "../../components/profile-message/profile-message.component.jsx";
+import {
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
+import { useCreateOrRetrieveChannel } from "../../hooks/useCreateOrRetrieveChannel.js";
+//src/hooks/useCreateOrRetrieveChannel.js
 
 // scss
-import './individual-doctor.styles.scss';
+import "./individual-doctor.styles.scss";
 
 const IndividualDoctor = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const inboxDisclosure = useDisclosure();
   const { encodedMemberId } = useParams();
   const navigate = useNavigate();
   const doctorQuery = useDoctorQueryStore((state) => state.doctorQuery);
+  const userInfo = userInfoQueryStore((state) => state.userInfo);
   const setMemberId = useDoctorQueryStore((state) => state.setMemberId);
   const setNickName = useDoctorQueryStore((state) => state.setNickName);
   const { data, error, isLoading } = useGetDoctorInfo();
@@ -71,10 +85,10 @@ const IndividualDoctor = () => {
     fetchNextPage: postFetchNextPage,
     hasNextPage: postHasNextPage,
   } = useGetDoctorPost();
-  console.log('doctor post data', postData, postIsLoading);
+  // console.log("doctor post data", postData, postIsLoading);
   const { nickname } = data?.nickname || {};
   const [activeTab, setActiveTab] = useState(0);
-  const tabs = ['About', 'Posts', 'Likes'];
+  const tabs = ["About", "Posts", "Likes"];
   const doctorProfileBreakPoints = {
     default: 4,
     2500: 4,
@@ -84,30 +98,43 @@ const IndividualDoctor = () => {
     767: 3,
     430: 2,
   };
+  const [initialChannelUrl, setInitialChannelUrl] = useState("");
+  const { data: channelData, mutate: createOrRetrieveChannel } =
+    useCreateOrRetrieveChannel();
 
   useEffect(() => {
     setMemberId(encodedMemberId);
-    if (data) {
+    if (data && data.nickname) {
       setNickName(data.nickname);
+      createOrRetrieveChannel({
+        receiverId: encodedMemberId,
+        nickName: data.nickname,
+      });
     }
   }, [encodedMemberId, data]);
 
+  useEffect(() => {
+    if (channelData && channelData.channel_url) {
+      setInitialChannelUrl(channelData.channel_url);
+    }
+  }, [channelData]);
+
   if (isLoading || isLoading2 || isLoading3) {
     return (
-      <div className='chakra-spinner-container'>
+      <div className="chakra-spinner-container">
         <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
         />
       </div>
     );
   }
 
   if (error || error2 || error3) {
-    navigate('../*');
+    navigate("../*");
   }
 
   // console.log('Doctor Data is: ', data);
@@ -119,18 +146,18 @@ const IndividualDoctor = () => {
   };
 
   return (
-    <div className='indv-doctor-page-container'>
+    <div className="indv-doctor-page-container">
       <DoctorProfileInfo
         data={data}
         data3={data3}
         encodedMemberId={encodedMemberId}
       />
 
-      <div className='indv-doctor-navbar'>
+      <div className="indv-doctor-navbar">
         <div
           onClick={() => selectTab(0)}
           className={`indv-doctor-navbar-item ${
-            activeTab === 0 ? 'indv-active' : ''
+            activeTab === 0 ? "indv-active" : ""
           }`}
         >
           About
@@ -138,7 +165,7 @@ const IndividualDoctor = () => {
         <div
           onClick={() => selectTab(1)}
           className={`indv-doctor-navbar-item ${
-            activeTab === 1 ? 'indv-active' : ''
+            activeTab === 1 ? "indv-active" : ""
           }`}
         >
           Posts
@@ -146,7 +173,7 @@ const IndividualDoctor = () => {
         <div
           onClick={() => selectTab(2)}
           className={`indv-doctor-navbar-item ${
-            activeTab === 2 ? 'indv-active' : ''
+            activeTab === 2 ? "indv-active" : ""
           }`}
         >
           Like
@@ -154,7 +181,7 @@ const IndividualDoctor = () => {
       </div>
       {activeTab === 0 && <DoctorAbout encodedMemberId={encodedMemberId} />}
       {activeTab === 1 && (
-        <div className='individual-doctor-posts'>
+        <div className="individual-doctor-posts">
           <DoctorPostGrid
             data={postData}
             isLoading={postIsLoading}
@@ -166,6 +193,29 @@ const IndividualDoctor = () => {
           />
         </div>
       )}
+      <Modal
+        onClose={inboxDisclosure.onClose}
+        isOpen={inboxDisclosure.isOpen}
+        size="xl"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent width="1200px" maxW="1400px">
+          <ModalHeader>Inbox</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {initialChannelUrl && (
+              <ProfileMessage
+                isConversion={true}
+                initialChannelUrl={initialChannelUrl}
+              />
+            )}
+          </ModalBody>
+          <ModalFooter>
+            {/* <Button onClick={inboxDisclosure.onClose}>Close</Button> */}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 
@@ -216,7 +266,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   // console.log('data3 is: ', data3);
 
   // const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
-  const iPhoneScreen = useMediaQuery({ query: '(max-width: 430px)' });
+  const iPhoneScreen = useMediaQuery({ query: "(max-width: 430px)" });
   const [isUserFollowing, setIsUserFollowing] = useState(false);
   const [followers, setFollowers] = useState(
     data3?.pages[0]?.data?.data?.followers
@@ -231,7 +281,7 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
     // console.log('data1 is: ', data);
     // console.log('data3 is: ', data3);
     // setFollowers(data3?.pages[0]?.data?.data.followers);
-    let followArray = localStorage.getItem('charmFollowedUsers');
+    let followArray = localStorage.getItem("charmFollowedUsers");
     if (followArray !== null) {
       followArray = JSON.parse(followArray);
       if (followArray.includes(Number(encodedMemberId))) {
@@ -244,8 +294,8 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
   // console.log('Result of follow is: ', result);
 
   const followUser = (userId) => {
-    console.log('attempting to follow this doctor');
-    const apiClient = new APIClient('/user_action/actions/follow');
+    console.log("attempting to follow this doctor");
+    const apiClient = new APIClient("/user_action/actions/follow");
     const fetchFollowUser = async () => {
       try {
         const res = await apiClient.post({
@@ -253,47 +303,47 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
         });
         setIsUserFollowing(true);
         setFollowers(followers + 1);
-        let followArray = localStorage.getItem('charmFollowedUsers');
+        let followArray = localStorage.getItem("charmFollowedUsers");
         followArray = JSON.parse(followArray);
         followArray.push(userId);
-        localStorage.setItem('charmFollowedUsers', JSON.stringify(followArray));
+        localStorage.setItem("charmFollowedUsers", JSON.stringify(followArray));
         return res.data;
       } catch (err) {
         if (err?.response?.status === 403) {
           // if the user tries to follow without logging in
-          togglePopUp(true, 'accountType');
+          togglePopUp(true, "accountType");
           // setIsLoginPopupOpen(true);
         }
-        console.log('Error trying to follow target: ', err.response.status);
+        console.log("Error trying to follow target: ", err.response.status);
       }
     };
     fetchFollowUser();
   };
 
   const unfollowUser = (userId) => {
-    console.log('attempting to unfollow this doctor');
-    const apiClient = new APIClient('/user_action/actions/unfollow');
+    console.log("attempting to unfollow this doctor");
+    const apiClient = new APIClient("/user_action/actions/unfollow");
     const fetchUnfollowUser = async () => {
       try {
         const res = await apiClient.post({
           userId: userId,
         });
-        console.log('Res returned as: ', res);
+        console.log("Res returned as: ", res);
         setIsUserFollowing(false);
         setFollowers(followers - 1);
-        let followArray = localStorage.getItem('charmFollowedUsers');
+        let followArray = localStorage.getItem("charmFollowedUsers");
         followArray = JSON.parse(followArray);
         const index = followArray.indexOf(userId);
         followArray.splice(index, 1);
-        localStorage.setItem('charmFollowedUsers', JSON.stringify(followArray));
+        localStorage.setItem("charmFollowedUsers", JSON.stringify(followArray));
         return res.data;
       } catch (err) {
         if (err?.response?.status === 403) {
           // if the user tries to follow without logging in
-          togglePopUp(true, 'accountType');
+          togglePopUp(true, "accountType");
           // setIsLoginPopupOpen(true);
         }
-        console.log('Error trying to follow target: ', err.response.status);
+        console.log("Error trying to follow target: ", err.response.status);
       }
     };
     fetchUnfollowUser();
@@ -314,66 +364,66 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
 
   return (
     <>
-      <div className='indv-doctor-info-container'>
+      <div className="indv-doctor-info-container">
         {/* profile picture */}
         {!iPhoneScreen ? (
           <>
-            <div className='indv-doctor-profile-picture-container'>
+            <div className="indv-doctor-profile-picture-container">
               <img
-                className='indv-doctor-profile-picture'
+                className="indv-doctor-profile-picture"
                 src={data?.img}
-                alt='Doctor'
+                alt="Doctor"
               />
             </div>
-            <div className='indv-doctor-info-sub-container'>
-              <div className='indv-doctor-info-row indv-top-row'>
+            <div className="indv-doctor-info-sub-container">
+              <div className="indv-doctor-info-row indv-top-row">
                 {/* doctor user name + verified icon */}
-                <div className='indv-top-row-left-side'>
+                <div className="indv-top-row-left-side">
                   {/* doctor user name */}
-                  <div className='indv-doctor-name-container'>
+                  <div className="indv-doctor-name-container">
                     {data?.nickname ? (
-                      <h2 className='indv-doctor-name'>Dr. {data.nickname}</h2>
+                      <h2 className="indv-doctor-name">Dr. {data.nickname}</h2>
                     ) : (
-                      <h2 className='indv-doctor-name'>Doctor</h2>
+                      <h2 className="indv-doctor-name">Doctor</h2>
                     )}
                   </div>
                   {/* verified icon */}
-                  <div className='indv-doctor-verified-container'>
+                  <div className="indv-doctor-verified-container">
                     <img
-                      className='indv-doctor-verified-badge'
+                      className="indv-doctor-verified-badge"
                       src={verifiedBadge}
-                      alt='verified'
+                      alt="verified"
                     />
                   </div>
                 </div>
                 {/* contact icons */}
-                <div className='indv-top-row-right-side'>
-                  <div className='indv-doctor-info-icon-container'>
+                <div className="indv-top-row-right-side">
+                  <div className="indv-doctor-info-icon-container">
                     <img
                       src={stripedGlobeIcon}
-                      className='indv-doctor-info-icon'
-                      alt='globe'
+                      className="indv-doctor-info-icon"
+                      alt="globe"
                     />
                   </div>
-                  <div className='indv-doctor-info-icon-container'>
+                  <div className="indv-doctor-info-icon-container">
                     <img
                       src={mailIcon}
-                      className='indv-doctor-info-icon'
-                      alt='email'
+                      className="indv-doctor-info-icon"
+                      alt="email"
                     />
                   </div>
-                  <div className='indv-doctor-info-icon-container'>
+                  <div className="indv-doctor-info-icon-container">
                     <img
                       src={phoneIcon}
-                      className='indv-doctor-info-icon'
-                      alt='phone'
+                      className="indv-doctor-info-icon"
+                      alt="phone"
                     />
                   </div>
-                  <div className='indv-doctor-info-icon-container'>
+                  <div className="indv-doctor-info-icon-container">
                     <img
                       src={ChatIcon}
-                      className='indv-doctor-info-icon'
-                      alt='chat'
+                      className="indv-doctor-info-icon"
+                      alt="chat"
                     />
                   </div>
                   {/* <div className='indv-appointment-management-container' >
@@ -382,106 +432,106 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                 </div>
               </div>
 
-              <div className='indv-doctor-info-row indv-second-row'>
-                <div className='indv-doctor-description-container'>
+              <div className="indv-doctor-info-row indv-second-row">
+                <div className="indv-doctor-description-container">
                   {data?.miaoshu ? (
-                    <p className='indv-doctor-description'>{data.miaoshu}</p>
+                    <p className="indv-doctor-description">{data.miaoshu}</p>
                   ) : (
-                    <p className='indv-doctor-description'>Cosmetic Doctor</p>
+                    <p className="indv-doctor-description">Cosmetic Doctor</p>
                   )}
                 </div>
               </div>
-              <div className='indv-doctor-info-row indv-third-row'>
-                <div className='indv-posts-total-container'>
+              <div className="indv-doctor-info-row indv-third-row">
+                <div className="indv-posts-total-container">
                   {postNumber}
-                  <span className='gray-text-container'>posts</span>
+                  <span className="gray-text-container">posts</span>
                 </div>
-                <div className='indv-followers-total-container'>
+                <div className="indv-followers-total-container">
                   {followers}
-                  <span className='gray-text-container'>followers</span>
+                  <span className="gray-text-container">followers</span>
                 </div>
-                <div className='indv-following-total-container'>
+                <div className="indv-following-total-container">
                   {followings}
-                  <span className='gray-text-container'>following</span>
+                  <span className="gray-text-container">following</span>
                 </div>
               </div>
-              <div className='indv-doctor-info-row indv-fourth-row'>
-                <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
-                  <img src={locationIcon} alt='location' />
+              <div className="indv-doctor-info-row indv-fourth-row">
+                <div className="indv-doctor-city-state-container indv-doctor-info-subrow">
+                  <img src={locationIcon} alt="location" />
                   {data?.address && (
-                    <span className='indv-doctor-city-state indv-doctor-info'>
+                    <span className="indv-doctor-city-state indv-doctor-info">
                       {data?.address}
                     </span>
                   )}
                 </div>
-                <div className='indv-doctor-specialization-container indv-doctor-info-subrow'>
+                <div className="indv-doctor-specialization-container indv-doctor-info-subrow">
                   <img
                     src={glassIcon}
-                    className='specialization-img'
-                    alt='specialization'
+                    className="specialization-img"
+                    alt="specialization"
                   />
                   {data?.name?.length > 0 && (
-                    <span className='indv-doctor-specialization indv-doctor-info'>
+                    <span className="indv-doctor-specialization indv-doctor-info">
                       Specialization in {convertTitle(data?.name[0])}
                     </span>
                   )}
                 </div>
-                <div className='indv-doctor-verification-container indv-doctor-info-subrow'>
+                <div className="indv-doctor-verification-container indv-doctor-info-subrow">
                   <img
                     src={badgeIcon}
-                    className='verification-img'
-                    alt='verification'
+                    className="verification-img"
+                    alt="verification"
                   />
-                  <span className='indv-doctor-specialization indv-doctor-info'>
+                  <span className="indv-doctor-specialization indv-doctor-info">
                     Verified by CharmLife
                   </span>
                 </div>
-                <div className='indv-doctor-graduation-container indv-doctor-info-subrow'>
+                <div className="indv-doctor-graduation-container indv-doctor-info-subrow">
                   <img
                     src={gradIcon}
-                    className='graduation-img'
-                    alt='graduation cap'
+                    className="graduation-img"
+                    alt="graduation cap"
                   />
                   {data?.school && (
-                    <span className='indv-doctor-graduation indv-doctor-info'>
+                    <span className="indv-doctor-graduation indv-doctor-info">
                       {data.school}
                     </span>
                   )}
                 </div>
-                <div className='indv-doctor-certification-container indv-doctor-info-subrow'>
+                <div className="indv-doctor-certification-container indv-doctor-info-subrow">
                   <img
                     src={certified}
-                    className='certification-img'
-                    alt='graduation cap'
+                    className="certification-img"
+                    alt="graduation cap"
                   />
-                  <span className='indv-doctor-certification indv-doctor-info'>
+                  <span className="indv-doctor-certification indv-doctor-info">
                     Board Certified
                   </span>
                 </div>
               </div>
-              <div className='indv-doctor-info-row indv-fifth-row'>
+              <div className="indv-doctor-info-row indv-fifth-row">
                 <button
-                  type='button'
-                  className='indv-button indv-consultation-button'
+                  type="button"
+                  className="indv-button indv-consultation-button"
                   onClick={handleGoToAppointmentPageNow}
                 >
                   Book a Consultation
                 </button>
                 {isUserFollowing ? (
                   <button
-                    type='button'
+                    type="button"
                     onClick={() => unfollowUser(data?.memberId)}
-                    className='indv-button indv-unfollow-button'
-                    style={{ width: '10rem' }}
+                    className="indv-button indv-unfollow-button"
+                    style={{ width: "10rem" }}
                   >
                     Following
                   </button>
                 ) : (
                   <button
-                    type='button'
+                    type="button"
                     onClick={() => followUser(data?.memberId)}
-                    className='indv-button indv-follow-button'
-                    style={{ width: '8rem' }}
+                    className="indv-button indv-follow-button"
+                    style={{ width: "8rem" }}
                   >
                     Follow
                   </button>
@@ -494,26 +544,26 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
           </>
         ) : (
           <>
-            <div className='mob-indv-container'>
+            <div className="mob-indv-container">
               {/* doctor profile picture */}
-              <div className='mob-indv-doctor-profile-container'>
+              <div className="mob-indv-doctor-profile-container">
                 <div>
                   <img
-                    className='indv-doctor-profile-picture'
+                    className="indv-doctor-profile-picture"
                     src={data?.img}
-                    alt='Doctor'
+                    alt="Doctor"
                   />
                 </div>
-                <div className='mob-indv-doctor-name-right-container'>
-                  <div className='mob-indv-doctor-name-container'>
+                <div className="mob-indv-doctor-name-right-container">
+                  <div className="mob-indv-doctor-name-container">
                     {/* user name */}
                     <div>
                       {data?.nickname ? (
-                        <h2 className='indv-doctor-name'>
+                        <h2 className="indv-doctor-name">
                           Dr. {data.nickname}
                         </h2>
                       ) : (
-                        <h2 className='indv-doctor-name'>Doctor</h2>
+                        <h2 className="indv-doctor-name">Doctor</h2>
                       )}
                     </div>
                     {/* verified icon */}
@@ -521,43 +571,43 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
                       <img
                         src={verifiedBadge}
                         style={{
-                          marginTop: '-5px',
-                          width: '20px',
-                          height: '20px',
+                          marginTop: "-5px",
+                          width: "20px",
+                          height: "20px",
                         }}
-                        alt='verified'
+                        alt="verified"
                       />
                     </div>
                   </div>
 
                   {/* contact icons */}
-                  <div className='mob-contact-icon-container'>
-                    <div className=''>
+                  <div className="mob-contact-icon-container">
+                    <div className="">
                       <img
                         src={stripedGlobeIcon}
-                        style={{ width: '24px' }}
-                        alt='globe'
+                        style={{ width: "24px" }}
+                        alt="globe"
                       />
                     </div>
-                    <div className=''>
+                    <div className="">
                       <img
                         src={mailIcon}
-                        style={{ width: '24px' }}
-                        alt='email'
+                        style={{ width: "24px" }}
+                        alt="email"
                       />
                     </div>
-                    <div className=''>
+                    <div className="">
                       <img
                         src={phoneIcon}
-                        style={{ width: '24px' }}
-                        alt='phone'
+                        style={{ width: "24px" }}
+                        alt="phone"
                       />
                     </div>
-                    <div className='i'>
+                    <div className="i">
                       <img
                         src={ChatIcon}
-                        style={{ width: '24px' }}
-                        alt='chat'
+                        style={{ width: "24px" }}
+                        alt="chat"
                       />
                     </div>
                   </div>
@@ -565,116 +615,116 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
               </div>
             </div>
 
-            <div className='mob-indv-doctor-info-container'>
+            <div className="mob-indv-doctor-info-container">
               <div>
                 {data?.miaoshu ? (
-                  <p className='mob-indv-doctor-description'>{data.miaoshu}</p>
+                  <p className="mob-indv-doctor-description">{data.miaoshu}</p>
                 ) : (
-                  <p className='mob-indv-doctor-description'>Cosmetic Doctor</p>
+                  <p className="mob-indv-doctor-description">Cosmetic Doctor</p>
                 )}
               </div>
 
-              <div className='indv-doctor-info-row indv-third-row'>
-                <div className='indv-posts-total-container'>
+              <div className="indv-doctor-info-row indv-third-row">
+                <div className="indv-posts-total-container">
                   {postNumber}
-                  <span className='gray-text-container'>posts</span>
+                  <span className="gray-text-container">posts</span>
                 </div>
-                <div className='indv-followers-total-container'>
+                <div className="indv-followers-total-container">
                   {followers}
-                  <span className='gray-text-container'>followers</span>
+                  <span className="gray-text-container">followers</span>
                 </div>
-                <div className='indv-following-total-container'>
+                <div className="indv-following-total-container">
                   {followings}
-                  <span className='gray-text-container'>following</span>
+                  <span className="gray-text-container">following</span>
                 </div>
               </div>
 
-              <div className='mob-indv-doctor-details-container'>
-                  <div className='indv-doctor-city-state-container indv-doctor-info-subrow'>
-                    <img
-                      src={locationIcon}
-                      className='location-img'
-                      alt='location'
-                    />
-                    {data?.address && (
-                      <span className='indv-doctor-city-state indv-doctor-info'>
-                        {data?.address}
-                      </span>
-                    )}
-                  </div>
-                  <div className='indv-doctor-specialization-container indv-doctor-info-subrow'>
-                    <img
-                      src={glassIcon}
-                      className='specialization-img'
-                      alt='specialization'
-                    />
-                    {data?.name?.length > 0 && (
-                      <span className='indv-doctor-specialization indv-doctor-info'>
-                        Specialization in {convertTitle(data?.name[0])}
-                      </span>
-                    )}
+              <div className="mob-indv-doctor-details-container">
+                <div className="indv-doctor-city-state-container indv-doctor-info-subrow">
+                  <img
+                    src={locationIcon}
+                    className="location-img"
+                    alt="location"
+                  />
+                  {data?.address && (
+                    <span className="indv-doctor-city-state indv-doctor-info">
+                      {data?.address}
+                    </span>
+                  )}
+                </div>
+                <div className="indv-doctor-specialization-container indv-doctor-info-subrow">
+                  <img
+                    src={glassIcon}
+                    className="specialization-img"
+                    alt="specialization"
+                  />
+                  {data?.name?.length > 0 && (
+                    <span className="indv-doctor-specialization indv-doctor-info">
+                      Specialization in {convertTitle(data?.name[0])}
+                    </span>
+                  )}
                 </div>
 
-                <div className='mob-indv-doctor-details-container'>
-                  <div className='indv-doctor-verification-container indv-doctor-info-subrow'>
+                <div className="mob-indv-doctor-details-container">
+                  <div className="indv-doctor-verification-container indv-doctor-info-subrow">
                     <img
                       src={badgeIcon}
-                      className='verification-img'
-                      alt='verification'
+                      className="verification-img"
+                      alt="verification"
                     />
-                    <span className='indv-doctor-specialization indv-doctor-info'>
+                    <span className="indv-doctor-specialization indv-doctor-info">
                       Verified by CharmLife
                     </span>
                   </div>
-                  <div className='indv-doctor-graduation-container indv-doctor-info-subrow'>
+                  <div className="indv-doctor-graduation-container indv-doctor-info-subrow">
                     <img
                       src={gradIcon}
-                      className='graduation-img'
-                      alt='graduation cap'
+                      className="graduation-img"
+                      alt="graduation cap"
                     />
                     {data?.school && (
-                      <span className='indv-doctor-graduation indv-doctor-info'>
+                      <span className="indv-doctor-graduation indv-doctor-info">
                         {data.school}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className='indv-doctor-certification-container indv-doctor-info-subrow'>
+                <div className="indv-doctor-certification-container indv-doctor-info-subrow">
                   <img
                     src={certified}
-                    className='certification-img'
-                    alt='graduation cap'
+                    className="certification-img"
+                    alt="graduation cap"
                   />
-                  <span className='indv-doctor-certification indv-doctor-info'>
+                  <span className="indv-doctor-certification indv-doctor-info">
                     Board Certified
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className='indv-doctor-info-row indv-fifth-row'>
+            <div className="indv-doctor-info-row indv-fifth-row">
               <button
-                type='button'
-                className='indv-button indv-consultation-button'
+                type="button"
+                className="indv-button indv-consultation-button"
                 onClick={handleGoToAppointmentPageNow}
               >
                 Book a Consultation
               </button>
               {isUserFollowing ? (
                 <button
-                  type='button'
+                  type="button"
                   onClick={() => unfollowUser(data?.memberId)}
-                  className='indv-unfollow-button'
+                  className="indv-unfollow-button"
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
-                  type='button'
+                  type="button"
                   onClick={() => followUser(data?.memberId)}
-                  className='indv-button indv-follow-button'
-                  style={{ width: '7rem' }}
+                  className="indv-button indv-follow-button"
+                  style={{ width: "7rem" }}
                 >
                   Follow
                 </button>
@@ -688,11 +738,11 @@ const DoctorProfileInfo = ({ data, data3, encodedMemberId }) => {
 };
 
 const convertTitle = (string) => {
-  const splitItem = string.split('_');
+  const splitItem = string.split("_");
   const upperCased = splitItem.map(
     (word) => word.charAt(0).toUpperCase() + word.slice(1)
   );
-  const procedureTitle = upperCased.join(' ');
+  const procedureTitle = upperCased.join(" ");
   return procedureTitle;
 };
 

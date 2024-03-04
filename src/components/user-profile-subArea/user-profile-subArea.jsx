@@ -13,6 +13,7 @@ import { useGetUserPostedPost } from "../../hooks/useApiRequestPostFilter";
 import { useGetUserLikededPost } from "../../hooks/useApiRequestPostFilter";
 
 import Doctor from "../../routes/doctor/doctor.component";
+import ProfileMessage from "../profile-message/profile-message.component";
 
 const UserProfileSubArea = () => {
   const [activeTab, setActiveTab] = useState("Likes");
@@ -40,8 +41,7 @@ const UserProfileSubArea = () => {
     if (
       cleanHash === "Likes" ||
       cleanHash === "Posts" ||
-      cleanHash === "Doctors" ||
-      cleanHash === "Inbox"
+      cleanHash === "Doctors"
     ) {
       setActiveTab(cleanHash);
     }
@@ -87,14 +87,14 @@ const UserProfileSubArea = () => {
             Doctors
           </a>
         </div>
-        <div
+        {/* <div
           onClick={() => setActiveTab("Inbox")}
           className={`item ${activeTab === "Inbox" ? "active" : ""}`}
         >
           <a href="#Inbox" className="nav-tab-inbox">
             Inbox
           </a>
-        </div>
+        </div> */}
       </div>
       <div className="bottom-rendering">
         {activeTab === "Likes" && (
@@ -109,7 +109,6 @@ const UserProfileSubArea = () => {
           />
         )}
         {activeTab === "Posts" && (
-          // <UserProfilePost />
           <DoctorPostGrid
             data={userPostedPost}
             error={userPostedPostError}
@@ -121,6 +120,7 @@ const UserProfileSubArea = () => {
           />
         )}
         {activeTab === "Doctors" && <UserProfileReview />}
+        {/* {activeTab === "Inbox" && <ProfileMessage />} */}
       </div>
     </div>
   );

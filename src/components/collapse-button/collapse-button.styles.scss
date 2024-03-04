@@ -9,4 +9,12 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  //margin: 25px 100px 0 100px;
+}
+@media (max-width: 743px) {
+  .section-1,
+  .section-2,
+  .section-3 {
+    font-size: 18px;
+  }
 }

@@ -1,63 +1,78 @@
-@media(min-width:1024px){
-    .home-text-container {
-        //width: 560px;
-        //height: 200px;
-        width: 56vw;
-        height: 20vw;
-    }
-    
-    .home-text-title {
-        font-family: 'Playfair Display';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 6vw;
-        line-height: 135%;
-        text-align: center;
-        color: #000000;
-        padding:20px;
-    }
-    
-    .home-text-content {
-        //width: 560px;
-        //height: 87px;
-        width: 56vw;
-        height: 8.7vw;
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 2vw;
-        line-height: 160%;
-        text-align: center;
-        color: #000000;
-    }
-}
-@media (max-width:1023px) {
-    .home-text-container {
-        width: 560px;
-        height: 200px;
-    }
-    
-    .home-text-title {
-        font-family: 'Playfair Display';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 54px;
-        line-height: 135%;
-        text-align: center;
-        color: #000000;
-        padding:20px;
-    }
-    
-    .home-text-content {
-        width: 560px;
-        height: 87px;
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 160%;
-        text-align: center;
-        color: #000000;
-    }
+.home-text-container {
+  display: flex;
+  flex-direction: column;
 }
 
+.home-text-title {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+
+  color: #000000;
+}
+
+.home-text-content {
+  font-family: "Lora";
+  font-style: normal;
+
+  color: #000000;
+}
+@media (min-width: 1133px) {
+  .home-text-container {
+    // width: 560px;
+    // height: 200px;
+  }
+
+  .home-text-title {
+    font-size: 35px;
+    line-height: normal;
+  }
+
+  .home-text-content {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    color: #000000;
+  }
+}
+@media (max-width: 1132px) and (min-width: 744px) {
+  .home-text-container {
+    // width: 560px;
+    // height: 200px;
+  }
+
+  .home-text-title {
+    font-size: 35px;
+    line-height: normal;
+  }
+
+  .home-text-content {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    color: #000000;
+  }
+}
+@media (max-width: 743px) {
+  .home-text-container {
+    width: 100%;
+
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .home-text-title {
+    font-family: "Open Sans";
+    font-size: 20px;
+
+    line-height: normal;
+  }
+
+  .home-text-content {
+    font-family: "Open Sans";
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+  }
+}

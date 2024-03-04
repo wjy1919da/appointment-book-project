@@ -2,7 +2,11 @@ import { useState, useRef } from "react";
 import { uploadImgToS3 } from "../services/s3-client.js";
 import { useToast } from "@chakra-ui/react";
 
-const useUploadImg = () => {
+const useUploadImg = ({
+  fileSize = 0,
+  bucketName = process.env.REACT_APP_IMG_BUCKET_NAME,
+} = {}) => {
+  // console.log("fileSize", fileSize);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState([]);
@@ -33,6 +37,7 @@ const useUploadImg = () => {
   };
 
   const handleFileSelection = async (event) => {
+    // get files from input and transform into array
     const newFiles = Array.from(event.target.files);
     if (uploadingFiles.length + newFiles.length > 3) {
       toast({
@@ -54,11 +59,15 @@ const useUploadImg = () => {
     const uploadPromises = newFiles.map((file) => {
       // const controller = new AbortController();
       // uploadControllers.current.set(file, controller);
-      return uploadImgToS3(file);
+      return uploadImgToS3({
+        file: file,
+        maxFileSize: fileSize,
+        bucketName: bucketName,
+      });
     });
 
     toast.promise(
-      Promise.all(uploadPromises),
+      Promise.allSettled(uploadPromises),
       {
         success: { title: "image uploaded" },
         error: { title: "image upload failed", description: "Something wrong" },
@@ -71,35 +80,23 @@ const useUploadImg = () => {
       }
     );
 
-    try {
-      await Promise.all(
-        newFiles.map(async (file) => {
-          try {
-            const result = await uploadImgToS3(file);
-            if (result.success) {
-              setUploadedFiles((prevFiles) => [...prevFiles, result.location]);
-            } else {
-              setIsError(true);
-              // console.log("error uploading file", result.message);
-            }
-          } catch (err) {
-            setIsError(true);
-            // console.log("error uploading file", err);
-          } finally {
-            setUploadingFiles((prevUploadingFiles) =>
-              prevUploadingFiles.filter(
-                (uploadingFile) => uploadingFile !== file
-              )
-            );
-          }
-        })
+    // Handling the results of Promise.allSettled
+    const results = await Promise.allSettled(uploadPromises);
+    results.forEach((result, index) => {
+      if (result.status === "fulfilled" && result.value.success) {
+        // spread
+        setUploadedFiles((prevFiles) => [...prevFiles, result.value.location]);
+      } else {
+        setIsError(true);
+      }
+      // Removing the file from uploadingFiles regardless of the outcome
+      setUploadingFiles((prevUploadingFiles) =>
+        prevUploadingFiles.filter(
+          (uploadingFile) => uploadingFile !== newFiles[index]
+        )
       );
-    } catch (err) {
-      setIsError(true);
-      // console.log("error uploading files", err);
-    } finally {
-      setIsLoading(false);
-    }
+    });
+    setIsLoading(false);
   };
 
   return {

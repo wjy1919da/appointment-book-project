@@ -31,7 +31,6 @@ const DoctorPostGrid = ({
   const hasData = data?.pages?.some(
     (page) => page.data && page.data.length > 0
   );
-  const [originalPath, setOriginalPath] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -77,12 +76,10 @@ const DoctorPostGrid = ({
     setIsPrivate(isPrivate);
     setIsLike(isLike);
     setIsHighlight(highlightStatus);
-    setOriginalPath(location.pathname);
 
     const normalizedPathname = location.pathname.endsWith("/")
       ? location.pathname.slice(0, -1)
       : location.pathname;
-
     const newPath = `${normalizedPathname}/${ID}`;
     navigate(newPath);
   };
@@ -174,7 +171,7 @@ const DoctorPostGrid = ({
           show={IsModalOpen}
           onHide={() => {
             setIsModelOpen(false);
-            navigate(originalPath);
+            navigate(-1);
           }}
           isMobile={isMobile}
           iPhoneScreen={iPhoneScreen}

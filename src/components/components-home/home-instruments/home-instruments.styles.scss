@@ -1,208 +1,142 @@
+@media (min-width: 1441px) {
+  .home-section-container {
+    width: 1440px;
+    position: relative;
 
+    box-sizing: border-box;
 
-// @media(min-width: 1200px){
-//     .home-section-container{
-//         position: absolute;
-//         top: 300vw;
-//         transform: scale(0.9);
-//         //margin-top: -350px;
-//         box-sizing: border-box;
-//         /* Auto layout */
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         padding: 80px 0px;
-//         // gap: 80px;
-//         width: 100%;
-//         height: 870px;
-//         border-top: 1px solid #E2E3E7;
-//     }
-    
-//     .home-instrument-container{
-//         display: flex;
-//         flex-direction: column;
-//         align-items: flex-start;
-//         padding: 0px;
-//         gap: 40px;
-//         width: 100%;
-//         height: 291px;
-//         flex: none;
-//         order: 1;
-//         align-self: stretch;
-//         flex-grow: 0;
-//         margin-bottom: 20px;
-//     }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-//     .home-instrument{
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         padding: 10px;
-//         gap: 8px;
-    
-//         flex: none;
-//         order: 0;
-//         flex-grow: 0;
-//     }
-//     .home-instrument-pic{
-//          //border-radius: 100%; // 圆角
-//          height: 160px;
-//          align-self: stretch;
-//          margin: 0 auto;
-//     }
-//     .home-instrument-grid{
-//         display: flex;
-//         margin: auto;
-//         flex-direction: row;
-//         justify-content: space-around; 
-        
-//         grid-gap: 40px;
-//         flex: none;
-//         order: 1;
-//         align-self: stretch;
-//         flex-grow: 0;
-//     }
-//     .home-procedure{
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         padding: 10px;
-//         gap: 8px;
-    
-//         flex: none;
-//         order: 0;
-//         flex-grow: 0;
-//     }
-//     .home-procedure-pic{
-//         border-radius: 100%; // 圆角
-//         // width: 70px;
-//         // height: 70px; 
-//         height: 160px;
-//         width: 160px; 
-//         margin: 0 auto;
-//     }
-// }
+    margin-bottom: 50px;
+  }
+  .home-instrument-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .home-instrument-pic {
+    width: 200px;
+    margin: 0 auto;
+  }
+  .home-procedure-pic {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 100%;
+  }
+  .title {
+    margin-top: 10px;
+    font-family: "Lora";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
 
-@media (min-width: 1024px){
-    .home-section-container{
-        position: relative;
-        //top: 260vw;
-        //transform: scale(0.9);
-        //margin-top: -350px;
-        box-sizing: border-box;
-        /* Auto layout */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        //padding: 80px 0px;
-        // gap: 80px;
-        width: 100%;
-        //height: 870px;
-        // border-top: 1px solid #E2E3E7;
-        //margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    .home-instrument-container{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-    .home-instrument-pic{
-        width: 15vw;
-        margin: 0 auto;
-        //border-radius: 100%;
-       // box-shadow: 0px 0px 5px #888888;
-    }
-    .home-procedure-pic{
-        border-radius: 100%; // 圆角
-        width: 10vw;
-        height: 10vw;  
-        margin: 0 auto;
-        border-radius: 100%;
-        //box-shadow: 0px 0px 5px #888888;
-    }
-    .title{
-        margin-top: 10px;
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 160%;
-        /* identical to box height, or 29px */
-        text-align: center;
-        color: #000000;
-    }
+    text-align: center;
+    color: #000000;
+  }
 }
-// @media(min-width: 1300px){
-//     .home-section-container{
-//         position: relative;
-//         //top: 260vw;
-//         //transform: scale(0.9);
-//         //margin-top: -350px;
-//         box-sizing: border-box;
-//         /* Auto layout */
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         //padding: 80px 0px;
-//         // gap: 80px;
-//         width: 100%;
-//         //height: 870px;
-//         border-top: 1px solid #E2E3E7;
-//     }
-// }
-@media (min-width: 768px) and (max-width: 1023px){
-    .home-section-container{
-        position: relative;
-        //top: 260vw;
-        //transform: scale(0.9);
-        //margin-top: -350px;
-        box-sizing: border-box;
-        /* Auto layout */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        //padding: 80px 0px;
-        // gap: 80px;
-        width: 100%;
-        //height: 870px;
-        // border-top: 1px solid #E2E3E7;
-    }
-    .home-instrument-container{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .home-instrument-pic{
-        width: 15vw;
-        margin: 0 auto;
-    }
-    .home-procedure-pic{
-        border-radius: 100%; // 圆角
-        width: 70px;
-        height: 70px;  
-        margin: 0 auto;
-    }
+@media (min-width: 1133px) and (max-width: 1440px) {
+  .home-section-container {
+    position: relative;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 50px;
+  }
+  .home-instrument-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .home-instrument-pic {
+    width: 15vw;
+    margin: 0 auto;
+  }
+  .home-procedure-pic {
+    border-radius: 100%; // 圆角
+    width: 10vw;
+    height: 10vw;
+    margin: 0 auto;
+    border-radius: 100%;
+    //box-shadow: 0px 0px 5px #888888;
+  }
+  .title {
+    margin-top: 10px;
+    font-family: "Lora";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    /* identical to box height, or 29px */
+    text-align: center;
+    color: #000000;
+  }
 }
-@media(max-width:767px){
-    .home-instrument-container{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .home-instrument-pic{
-        width: 75px;
-        margin: 0 auto;
-    }
-    .home-procedure-pic{
-        border-radius: 100%; // 圆角
-        width: 10vw;
-        height: 10vw;  
-        margin: 0 auto;
-    }
+
+@media (min-width: 745px) and (max-width: 1132px) {
+  .home-section-container {
+    position: relative;
+    //top: 260vw;
+    //transform: scale(0.9);
+    //margin-top: -350px;
+    box-sizing: border-box;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //padding: 80px 0px;
+    // gap: 80px;
+    width: 100%;
+    //height: 870px;
+    // border-top: 1px solid #E2E3E7;
+  }
+  .home-instrument-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .home-instrument-pic {
+    width: 15vw;
+    margin: 0 auto;
+  }
+  .home-procedure-pic {
+    border-radius: 100%; // 圆角
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 743px) {
+  .home-instrument-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .home-instrument-pic {
+    width: 35vw;
+    margin: 0 auto;
+  }
+  .home-procedure-pic {
+    border-radius: 100%; // 圆角
+    width: 20vw;
+    height: 20vw;
+    margin: 0 auto;
+  }
 }

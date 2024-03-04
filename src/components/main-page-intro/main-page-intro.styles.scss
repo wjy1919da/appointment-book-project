@@ -3,13 +3,14 @@
 //Hoang added this one, testing
 .main-page-header-container {
   display: flex;
-  justify-content: space-between;
-  padding-left: 0%;
+  // justify-content: space-between;
+  justify-content: center;
+  // padding-left: 0%;
   margin-top: 0%;
   width: 100%;
-  // height: 800px;
+  background: linear-gradient(180deg, #fff3ec 0%, #fff 100%);
+}
 
-  @media(min-width:1134px){
 .main-page-title {
   padding-top: 8rem;
   font-size: 48px;
@@ -27,23 +28,23 @@
   font-weight: 600;
   font-size: 21px;
   width: 480px; //just added
-  height:58px;
+  height: 58px;
 }
 .main-top-row {
   display: flex;
   justify-content: right;
-  padding-right: 0rem;  //just added
-  
-  padding-top:1rem;
+  padding-right: 0rem; //just added
+
+  padding-top: 1rem;
   padding-bottom: 0rem;
-  width: 52.6%;  //length of the bullet
+  width: 52.6%; //length of the bullet
 }
 .main-top-img-container {
   width: 85%;
   // height: 25rem;
   height: 472px;
   right: -90%;
-  bottom: 2rem;  //just added, me
+  bottom: 2rem; //just added, me
   background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
   border-radius: 1000px 0px 0px 1000px;
   position: relative;
@@ -68,20 +69,14 @@
   height: 596px;
 }
 .main-top-container {
-  width: 100%;
-  background: linear-gradient(
-    180deg,
-    #fff2ed 24.48%,
-    rgba(255, 248, 244, 0) 100%
-  );
-  
-}
+  width: 1440px;
+  justify-content: center;
 }
 
-@media (max-width: 1134px) {
+@media (max-width: 1439px) and (min-width: 1133px) {
   .main-page-title {
     padding-top: 6rem;
-    padding-left:1rem;
+    padding-left: 1rem;
     font-size: 48px;
     font-weight: 700;
     width: 60%;
@@ -97,28 +92,28 @@
   }
   .main-page-subtitle {
     padding-top: 2.5rem; //just added
-    padding-left:1rem;
+    padding-left: 1rem;
     font-weight: 600;
     font-size: 21px;
     width: 414px; //just added
-    height:84px;
+    height: 84px;
   }
   .main-top-row {
     display: flex;
     justify-content: right;
-    padding-right: 0rem;  //just added
+    padding-right: 0rem; //just added
     padding-bottom: 0rem;
-    width: 66.6%;  //length of the bullet
+    width: 66.6%; //length of the bullet
   }
   .main-top-img-container {
     // width: 50%;
     width: 692px; //just added
     // height: 25rem;
-    height: 372px;  //just added
-    
+    height: 372px; //just added
+
     right: 0px;
     left: 50%; //just added
-    top: -35px;  //just added
+    top: -35px; //just added
     background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
     border-radius: 1000px 0px 0px 1000px;
     position: relative;
@@ -127,7 +122,7 @@
   .main-doctor-img-container {
     position: absolute;
     right: 18%;
-    top:-122px;
+    top: -122px;
     // width: 25rem;
     height: 900px;
   }
@@ -136,24 +131,23 @@
     height: 496px;
   }
   .main-top-container {
-    width:100%;
-    background: linear-gradient(
-      180deg,
-      #fff2ed 24.48%,
-      rgba(255, 248, 244, 0) 100%
-    );
+    width: 100%;
+    // background: linear-gradient(
+    //   180deg,
+    //   #fff2ed 24.48%,
+    //   rgba(255, 248, 244, 0) 100%
+    // );
   }
 }
 
-@media (max-width: 745px) {
+@media (max-width: 1132px) and (min-width: 744px) {
   .main-page-title {
     padding-top: 8rem;
-    padding-left:2rem;
+    padding-left: 2rem;
     font-size: 48px;
     font-weight: 700;
     width: 85%;
     //width: 55%;
-    
   }
   .main-title-container {
     width: 100%; //just added
@@ -162,26 +156,26 @@
   }
   .main-page-subtitle {
     padding-top: 2.5rem; //just added
-    padding-left:2rem;
+    padding-left: 2rem;
     font-weight: 600;
     font-size: 21px;
     width: 100%; //just added
-    height:84px;
+    height: 84px;
   }
   .main-top-row {
     display: flex;
     justify-content: right;
-    padding-right: 0rem;  //just added
+    padding-right: 0rem; //just added
     padding-bottom: 0rem;
-    padding-top:8rem;
-    width: 100%;  //length of the bullet
+    padding-top: 8rem;
+    width: 100%; //length of the bullet
   }
   .main-top-img-container {
     width: 449px; //just added
-    height: 283px;  //just added
+    height: 283px; //just added
     right: 0px;
     left: 0; //just added
-    top: -110px;  //just added
+    top: -110px; //just added
     background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
     border-radius: 1000px 0px 0px 1000px;
     position: relative;
@@ -190,7 +184,7 @@
   .main-doctor-img-container {
     position: absolute;
     right: 28%;
-    top:-49px;
+    top: -49px;
     // width: 25rem;
     height: 900px;
   }
@@ -199,47 +193,123 @@
     height: 333.13px;
   }
   .main-top-container {
-    width:100%;
-    background: linear-gradient(
-      180deg,
-      #fff2ed 24.48%,
-      rgba(255, 248, 244, 0) 100%
-    );
+    width: 744px;
+    // background: linear-gradient(
+    //   180deg,
+    //   #fff2ed 24.48%,
+    //   rgba(255, 248, 244, 0) 100%
+    // );
   }
 }
 
-@media (max-width: 376px) {
-  .main-title-container {
-    width: 90%;
-  }
+// @media (max-width: 376px) {
+//   .main-title-container {
+//     width: 90%;
+//   }
+//   .main-page-title {
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//     font-size: 24px;
+//     padding-left: 0;
+//   }
+//   .main-page-subtitle {
+//     padding-left: 0;
+//     text-align: center;
+//     padding-top: 1rem;
+//   }
+//   .main-top-img-container {
+//     left: 20px;
+//   }
+// }
+
+// // @media (max-width: 768px) {
+// //   // tablet
+// // }
+
+// // @media (max-width: 576px) {
+// //   // phone
+// // }
+
+// .main-text {
+//   font-family: "Open Sans";
+//   color: #352c29;
+// }
+
+@media (max-width: 743px) {
   .main-page-title {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      font-size: 24px;
-      padding-left: 0;
+    padding-top: 120px;
+    // padding-left: 0px;
+    font-size: 24px;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
   }
   .main-page-subtitle {
+    padding-top: 10px; //just added
+    padding-left: 0px;
+    width: auto;
+    height: auto;
+    padding-top: 0;
     padding-left: 0;
-    text-align: center;
-    padding-top: 1rem;
+    color: #352c29;
+    text-align: left;
+
+    /* MOBILE TYPE/body2 */
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .main-title-container {
+    margin: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .main-top-row {
+    display: flex;
+
+    padding-top: 12rem;
+    justify-content: flex-end; /* Align children to the right */
+    align-items: center; /* Optional: Align children vertically */
+    width: 100%; /* Ensure it spans the full width of its parent */
+
+    // width: 102%; //length of the bullet
   }
   .main-top-img-container {
-    left: 20px
+    // width: 449px; //just added
+    height: 283px; //just added
+    right: 0px;
+    left: -1.75%; //just added
+    top: -110px; //just added
+    background: linear-gradient(115deg, #f48c8a 60%, #f0a484);
+    border-radius: 1000px 0px 0px 1000px;
+    position: relative;
+    // overflow: hidden;
   }
-}
+  .main-doctor-img-container {
+    position: absolute;
+    right: 28%;
+    top: -49px;
+    // width: 25rem;
+    height: 900px;
+  }
+  .main-doctor-img {
+    width: 189.06px;
+    height: 333.13px;
+  }
+  .main-top-container {
+    width: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-// @media (max-width: 768px) {
-//   // tablet
-// }
-
-// @media (max-width: 576px) {
-//   // phone
-// }
-
-.main-text {
-  font-family: "Open Sans";
-  color: #352c29;
-}
+  .main-text {
+    font-family: "Open Sans";
+    color: #352c29;
+  }
 }

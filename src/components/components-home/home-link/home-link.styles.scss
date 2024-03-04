@@ -1,14 +1,20 @@
-@media(min-width: 1024px){
-    .home-link
-{
-    color:white;
-    display: inline-flex;
-    padding: 12px 40px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    background:  linear-gradient(90deg, #F48C8A 0%, #F0A484 100%);
+// .home-link {
+//   color: white;
+//   display: inline-flex;
+//   padding: 12px 40px;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
+//   border-radius: 8px;
+//   background: linear-gradient(90deg, #f48c8a 0%, #f0a484 100%);
+// }
+.home-link {
+  color: #352c29;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: underline;
 }
-}
-

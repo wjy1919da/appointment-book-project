@@ -1,5 +1,5 @@
 import "./doctor.styles.scss";
-import DoctorImg from "../../assets/home/doctor_mobile.svg"; // we need better naming for this image file, not intuitive
+import DoctorImg from "../../assets/home/home_doctor.svg"; // we need better naming for this image file, not intuitive
 import IntroDoctor from "../../components/components-doctor-search/doctor-search-info/doctor-search-info.component";
 import DoctorSearchMultiInput from "../../components/components-doctor-search/doctor-search-multiInput/doctor-search-multiInput.component";
 import DoctorSearchCard from "../../components/doctor-search-card/doctor-search-card.component";

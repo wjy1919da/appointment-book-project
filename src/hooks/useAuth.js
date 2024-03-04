@@ -255,7 +255,7 @@ export function useGetUserInfo() {
   };
 
   return useQuery(
-    ["getUserInfo", userInfo.token, userInfo.trigger],
+    ["getUserInfo", userInfo.trigger, userInfo.token],
     fetchGetUserInfo,
     {
       retry: 1,
